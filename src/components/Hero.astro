@@ -1,0 +1,130 @@
+---
+// src/components/Hero.astro
+---
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      AI isn’t your customer experience problem. <br />
+      <span>Adoption is.</span>
+    </h1>
+    
+    <p class="hero-subtitle">
+      Most customer-facing AI initiatives fail because of implementation, trust, and measurement—not the model. We translate complex stakeholder needs and CRM data into high-performing, human-adopted workflows. 
+    </p>
+    
+    <div class="hero-actions">
+      <a href="/apply" class="btn-primary">Apply for a Fit Assessment</a>
+      <a href="/framework" class="btn-secondary">The Adoption Framework</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* --- DESIGN TOKENS (Spectrum 2 Specifications - Minimal & Premium) --- */
+  .hero-section {
+    width: 100%;
+    padding: 100px 24px;
+    background-color: var(--spectrum-background-layer-1, #ffffff);
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 32px;
+  }
+
+  /* --- TYPOGRAPHY (Bold, Authoritative, Minimal) --- */
+  .hero-title {
+    font-family: adobe-clean, sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--spectrum-heading-color, CanvasText);
+    letter-spacing: -0.03em;
+  }
+
+  .hero-title span {
+    color: var(--spectrum-global-color-accent, #0265dc);
+  }
+
+  .hero-subtitle {
+    font-family: adobe-clean, sans-serif;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--spectrum-body-color, #333333);
+    max-width: 750px;
+    letter-spacing: -0.01em;
+  }
+
+  /* --- ACTIONS (Premium Consultative Vibe) --- */
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+  }
+
+  .btn-primary, .btn-secondary {
+    font-family: adobe-clean, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-primary {
+    background-color: var(--spectrum-global-color-accent, #0265dc);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(2, 101, 220, 0.15);
+  }
+
+  .btn-primary:hover {
+    background-color: #014da3;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--spectrum-heading-color, CanvasText);
+    border: 2px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 30%);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-color: rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 60%);
+  }
+
+  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 64px 16px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      text-align: left;
+      padding: 14px 24px;
+    }
+  }
+</style>

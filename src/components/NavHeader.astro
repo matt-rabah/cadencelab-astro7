@@ -1,0 +1,109 @@
+---
+// src/components/NavHeader.astro
+---
+<header class="nav-header">
+  <div class="nav-container">
+    <!-- Brand / Logo -->
+    <a href="/" class="brand-logo">
+      Cadence<span>Lab</span>
+    </a>
+
+    <!-- Navigation Architecture -->
+    <nav class="nav-menu">
+      <a href="/work" class="nav-link">Work</a>
+      <a href="/services" class="nav-link">Services</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/contact" class="nav-link btn-accent">Get in Touch</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* --- DESIGN TOKENS (Referencing Spectrum 2 Specifications) --- */
+  .nav-header {
+    width: 100%;
+    background-color: var(--spectrum-background-layer-1, #ffffff);
+    border-bottom: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 15%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Desktop Scale Spacing Token */
+    padding: 16px 24px; 
+  }
+
+  /* --- BRANDING --- */
+  .brand-logo {
+    font-family: adobe-clean, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--spectrum-heading-color, CanvasText);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-logo span {
+    color: var(--spectrum-global-color-accent, #0265dc);
+    font-weight: 400;
+  }
+
+  /* --- MENU --- */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    /* Spectrum Desktop layout gap token */
+    gap: 32px; 
+  }
+
+  .nav-link {
+    font-family: adobe-clean, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--spectrum-body-color, #4b4b4b);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--spectrum-global-color-accent, #0265dc);
+  }
+
+  /* Call-to-action Button styled with Spectrum 2 accent rules */
+  .btn-accent {
+    background-color: var(--spectrum-global-color-accent, #0265dc);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .btn-accent:hover {
+    background-color: #014da3;
+    color: #ffffff;
+  }
+
+  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
+  @media (max-width: 768px) {
+    .nav-container {
+      /* Mobile Spacing Scale Token expands for easier touch targets */
+      padding: 20px 16px; 
+    }
+
+    .nav-menu {
+      /* Mobile spacing rules shift from rows to stacking grids */
+      gap: 20px;
+    }
+
+    /* We hide the less vital links on mobile layout to keep it single-tree clean */
+    .nav-link:not(.btn-accent) {
+      display: none;
+    }
+  }
+</style>
