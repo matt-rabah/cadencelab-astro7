@@ -1,28 +1,17 @@
 ---
 // src/layouts/Layout.astro
-import '@react-spectrum/s2/page.css'; // Boots Spectrum 2 baseline layout styles
+import '@react-spectrum/s2/page.css'; // Boots Spectrum 2 CSS Cascade Layers
 ---
-
-<!doctype html>
-<!-- data-background="base" triggers the adaptive dark/light Spectrum sheet tokens -->
-<html
-  lang="en"
-  data-background="base">
+<!DOCTYPE html>
+<!-- data-background="base" triggers Spectrum's adaptive theme sheets -->
+<html lang="en" data-background="base">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
-    />
-    <title>Adobe Spectrum 2 Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>CadenceLab Workspace</title>
   </head>
   <body>
-    <!-- Astro 7 slots your pages directly here -->
     <slot />
   </body>
 </html>
