@@ -1,86 +1,39 @@
 ---
-// src/layouts/Layout.astro
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-const { 
-  title = "CadenceLab | Enterprise CX Architecture", 
-  description = "Architecting workflow adoption, trust, and alignment frameworks for enterprise customer experience automation." 
-} = Astro.props;
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import NavHeader from '../components/NavHeader.astro';
+import Hero from '../components/Hero.astro';
+import Approach from '../components/Approach.astro';
+import Framework from '../components/Framework.astro'; // Fix #2: Imported missing component
+import FitCriteria from '../components/FitCriteria.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    
-    <title>{title}</title>
-    <meta name="description" content={description} />
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
 
-<style is:global>
-  /* --- THE ULTRA-CLEAN ENTERPRISE RESET --- */
-  
-  /* 1. Force consistent hardware box scaling across all engines */
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+<Layout title="CadenceLab | Enterprise CX Architecture">
+  <NavHeader />
 
-  /* 2. Sanitize the base document canvas */
-  html, 
-  body {
+  <main class="page-canvas">
+    <Hero />
+    <Approach />
+
+    <div id="framework">
+      <Framework />
+    </div>
+
+    <FitCriteria />
+    <ContactCTA />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Fix #1: 'is:global' has been entirely purged to avoid fighting Layout.astro. */
+  /* This style block is now safely scoped strictly to this page shell container. */
+  .page-canvas {
     width: 100%;
-    min-height: 100vh;
-    background-color: #ffffff; /* Explicit pristine canvas background */
-    color: #1e242c; /* Uniform corporate ink tone */
-    
-    /* ⚡️ OPTIMIZED TYPOGRAPHY ENGINE (astro-font integration hook)
-      Swapped out the local stack for your new Graphik variable baseline.
-      The standard font fallbacks remain safely behind it if loading cycles stagger.
-    */
-    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-    
-    /* Sub-pixel font smoothing for crisper typography scales */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    
-    overflow-x: hidden; /* Hard block against layout horizontal breaks */
-  }
-
-  /* 3. Ensure the core layout structural tree behaves predictably */
-  body {
     display: flex;
     flex-direction: column;
-    line-height: 1.5;
-  }
-
-  /* 4. Sanitize operational elements */
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  button, input, select, textarea {
-    font-family: inherit;
-  }
-
-  /* 💡 CENTRAL HEADLINE OVERRIDES
-    Globally maps default heading elements to your corporate Tiempos Headline cuts 
-    so you don't have to manually restyle basic tags across your other components.
-  */
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif-heading, Georgia, serif);
-    font-weight: 700;
-    color: #000000; /* Crisp contrasting true black headings standard in modern tech layouts */
   }
 </style>
