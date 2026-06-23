@@ -46,12 +46,107 @@
       <!-- Bottom Tier: Navigation Links & Sales CTA -->
       <div class="bottom-tier">
         <nav class="primary-menu" aria-label="Primary navigation">
-          <a href="/fit-check" class="menu-link active-link">Fit Check</a>
-          <a href="/workflows" class="menu-link">Workflows</a>
-          <a href="/solutions" class="menu-link">Solutions</a>
-          <a href="/ai-tooling" class="menu-link">AI Tooling</a>
-          <a href="/governance" class="menu-link">Governance</a>
-          <a href="/advisory" class="menu-link">Advisory</a>
+          
+          <!-- Fit Check Link (Direct Path) -->
+          <div class="nav-item">
+            <a href="/fit-check" class="menu-link">Fit Check</a>
+          </div>
+
+          <!-- Mega Menu 1: Workflows -->
+          <div class="nav-item has-mega">
+            <button class="menu-trigger-btn">Workflows</button>
+            <div class="mega-menu-dropdown">
+              <div class="mega-menu-inner">
+                <div class="mega-column featured">
+                  <span class="column-tag">Operational Focus</span>
+                  <h3>Workflow Architecture</h3>
+                  <p>How we engineer un-compromised human utilization loops around enterprise automated customer service environments.</p>
+                  <a href="/workflows" class="column-cta">Explore Framework &rarr;</a>
+                </div>
+                <div class="mega-column">
+                  <h4>Core Core Workflows</h4>
+                  <ul>
+                    <li><a href="/workflows/salesforce">Salesforce Data Tracing</a></li>
+                    <li><a href="/workflows/cross-functional">Cross-Functional Hand-offs</a></li>
+                    <li><a href="/workflows/escalation">SLA Escalation Mapping</a></li>
+                    <li><a href="/workflows/agent-routing">AI-to-Human Live Routing</a></li>
+                  </ul>
+                </div>
+                <div class="mega-column">
+                  <h4>Integration Ecosystems</h4>
+                  <ul>
+                    <li><a href="/workflows/legacy">Legacy Core Consolidation</a></li>
+                    <li><a href="/workflows/omnichannel">Omnichannel State Syncing</a></li>
+                    <li><a href="/workflows/telephony">Contact Center Telecom Pipes</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mega Menu 2: Solutions -->
+          <div class="nav-item has-mega">
+            <button class="menu-trigger-btn">Solutions</button>
+            <div class="mega-menu-dropdown">
+              <div class="mega-menu-inner">
+                <div class="mega-column featured">
+                  <span class="column-tag">Advisory Playbooks</span>
+                  <h3>Targeted Engagements</h3>
+                  <p>Rigorous multi-stage systems alignment built exclusively to neutralize systemic implementation friction points.</p>
+                  <a href="/solutions" class="column-cta">View All Solutions &rarr;</a>
+                </div>
+                <div class="mega-column">
+                  <h4>By Corporate Friction</h4>
+                  <ul>
+                    <li><a href="/solutions/adoption-fatigue">User Adoption Fatigue</a></li>
+                    <li><a href="/solutions/dirty-data">Siloed & Dirty CRM Pipelines</a></li>
+                    <li><a href="/solutions/misalignment">Executive Misalignment</a></li>
+                  </ul>
+                </div>
+                <div class="mega-column">
+                  <h4>By Scale & Scope</h4>
+                  <ul>
+                    <li><a href="/solutions/enterprise">Global Enterprise Architecture</a></li>
+                    <li><a href="/solutions/mid-market">High-Growth Consolidation</a></li>
+                    <li><a href="/solutions/governance">Regulated Market Compliance</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mega Menu 3: AI Tooling -->
+          <div class="nav-item has-mega">
+            <button class="menu-trigger-btn">AI Tooling</button>
+            <div class="mega-menu-dropdown">
+              <div class="mega-menu-inner">
+                <div class="mega-column featured">
+                  <span class="column-tag">System Safety</span>
+                  <h3>Model Orchestration</h3>
+                  <p>Overseeing safe real-time execution environments without compromising operational velocity or accuracy matrices.</p>
+                  <a href="/ai-tooling" class="column-cta">System Capabilities &rarr;</a>
+                </div>
+                <div class="mega-column">
+                  <h4>Governance Systems</h4>
+                  <ul>
+                    <li><a href="/ai-tooling/prompt-guard">Automated Prompt Firewalls</a></li>
+                    <li><a href="/ai-tooling/hallucination">Hallucination Variance Tracing</a></li>
+                    <li><a href="/ai-tooling/compliance">PII Scrubbing Nodes</a></li>
+                  </ul>
+                </div>
+                <div class="mega-column">
+                  <h4>Human-in-the-Loop</h4>
+                  <ul>
+                    <li><a href="/ai-tooling/co-pilot">Agent Co-Pilot Enhancements</a></li>
+                    <li><a href="/ai-tooling/feedback">Behavioral Feedback Pipelines</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-item"><a href="/governance" class="menu-link">Governance</a></div>
+          <div class="nav-item"><a href="/advisory" class="menu-link">Advisory</a></div>
         </nav>
 
         <div class="cta-zone">
@@ -114,7 +209,7 @@
 </script>
 
 <style>
-  /* --- PURE STANDARD CSS SCOPING (No external frameworks required) --- */
+  /* --- ENTERPRISE BASE MULTI-TIER RESETS --- */
   .gh-header {
     width: 100%;
     position: sticky;
@@ -125,11 +220,10 @@
     border-bottom: 1px solid #cbd6e2;
   }
 
-  /* --- DESKTOP ENGINE GRID --- */
   .desktop-nav {
     display: grid;
     grid-template-columns: 195px 1fr;
-    max-width: 1512px;
+    max-width: 100%; /* Spans full width edge-to-edge */
     margin: 0 auto;
     height: 105px;
   }
@@ -138,7 +232,7 @@
     display: flex;
     align-items: center;
     padding-left: 32px;
-    border-r: 1px solid #f5f8fa;
+    border-right: 1px solid #f5f8fa;
   }
 
   .brand-logo {
@@ -161,13 +255,13 @@
     justify-content: space-between;
   }
 
-  /* TOP TIER UTILITIES */
+  /* --- TOP TIER ARCHITECTURE --- */
   .top-tier {
     height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 32px;
     border-bottom: 1px solid #f5f8fa;
   }
 
@@ -237,12 +331,9 @@
     color: inherit;
     font-size: inherit;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
   }
 
-  /* BOTTOM TIER PRIMARY NAV */
+  /* --- BOTTOM TIER NAV MATRIX --- */
   .bottom-tier {
     height: 49px;
     display: flex;
@@ -253,19 +344,33 @@
   .primary-menu {
     display: flex;
     padding-left: 16px;
+    height: 100%;
   }
 
-  .menu-link {
+  .nav-item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .menu-link, .menu-trigger-btn {
     padding: 0 20px;
     font-size: 13px;
     font-weight: 600;
     color: #1e242c;
     text-decoration: none;
     letter-spacing: 0.02em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
     transition: color 0.15s ease;
   }
 
-  .menu-link:hover {
+  .menu-link:hover, .menu-trigger-btn:hover {
     color: #1a73e2;
   }
 
@@ -287,7 +392,120 @@
     background-color: #155ec2;
   }
 
-  /* --- RESPONSIVE ENGINE (Hides Desktop, Activates Mobile) --- */
+  /* --- ⚡️ FULL-WIDTH MEGA DROPDOWN ENGINE ⚡️ --- */
+  .has-mega {
+    /* DO NOT use position: relative here—it breaks full-width expansion constraints */
+    position: static; 
+  }
+
+  .mega-menu-dropdown {
+    position: absolute;
+    top: 105px; /* Safely snaps right below the bottom header seam boundary */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #cbd6e2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    display: none; /* Hide by default */
+    z-index: 1000;
+    border-top: 1px solid #f5f8fa;
+  }
+
+  /* Core Hover State Pipeline */
+  .has-mega:hover .mega-menu-dropdown {
+    display: block;
+  }
+
+  .has-mega:hover .menu-trigger-btn {
+    color: #1a73e2;
+    border-bottom: 2px solid #1a73e2;
+  }
+
+  /* Centered Content Container Grid Matrix */
+  .mega-menu-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: grid;
+    grid-template-columns: 1.2fr repeat(2, 1fr);
+    gap: 48px;
+  }
+
+  /* Dropdown Column Typography Scales */
+  .mega-column h4 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #576579;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .mega-column ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mega-column ul a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e242c;
+    transition: color 0.15s ease;
+  }
+
+  .mega-column ul a:hover {
+    color: #1a73e2;
+  }
+
+  /* Premium Featured Callout Sidebar Panel */
+  .mega-column.featured {
+    background-color: #f5f8fa;
+    padding: 24px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .column-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #cbd6e2;
+    color: #1e242c;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .featured h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: -0.02em;
+  }
+
+  .featured p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #576579;
+  }
+
+  .column-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a73e2;
+    margin-top: 4px;
+  }
+
+  .column-cta:hover {
+    text-decoration: underline;
+  }
+
+  /* --- RESPONSIVE MOBILE HANDLES --- */
   .mobile-nav, .mobile-drawer {
     display: none;
   }
@@ -335,7 +553,6 @@
       border-radius: 2px;
     }
 
-    /* DROPDOWN DRAWER SETUP */
     .mobile-drawer {
       position: absolute;
       top: 56px;
