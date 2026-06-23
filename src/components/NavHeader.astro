@@ -1,153 +1,103 @@
 ---
 // src/components/NavHeader.astro
 ---
-<header class="gh-header gh-header--monotype sticky top-0 w-full bg-white text-[#1e242c] font-sans border-b border-[#cbd6e2] z-[999] transition-all duration-200">
-  <!-- Desktop / High-Resolution Architecture (>896px Breakpoint) -->
-  <div class="hidden lg:grid grid-cols-[195px_1fr] h-[105px] w-full max-w-[1512px] mx-auto">
+<header class="gh-header">
+  <!-- Desktop Layout (Matches Monotype Spec) -->
+  <div class="desktop-nav">
     
     <!-- Left branding zone -->
-    <div class="flex flex-col justify-center border-r border-[#f5f8fa]">
-      <div class="pl-8">
-        <a href="/" class="font-serif text-[26px] font-black tracking-tight text-black no-underline select-none" title="Go to Homepage">
-          Cadence<span class="text-[#1a73e2] font-sans font-light">Lab</span>
-        </a>
-      </div>
+    <div class="brand-zone">
+      <a href="/" class="brand-logo" title="Go to Homepage">
+        Cadence<span class="logo-accent">Lab</span>
+      </a>
     </div>
 
-    <!-- Right structural utility canvas -->
-    <div class="flex flex-col justify-between">
+    <!-- Right utility canvas -->
+    <div class="utility-canvas">
       
-      <!-- Top Tier: Search Core & Global Governance Links -->
-      <div class="h-14 flex items-center justify-between px-6 border-b border-[#f5f8fa]">
-        
-        <!-- Algolia-style search context engine wrapper -->
-        <div class="w-full max-w-[412px]">
-          <form action="/search" method="get" class="relative w-full">
-            <div class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none opacity-40">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input 
-              id="edit-search" 
-              class="w-full h-9 pl-11 pr-6 py-2 bg-[#f5f8fa] border border-transparent rounded-sm text-[13px] placeholder-[#576579] focus:bg-white focus:border-[#1a73e2] outline-none transition-all duration-150" 
-              type="text" 
-              placeholder="Find solutions (i.e., workflows, automation, data)" 
-              name="search" 
-            />
-          </form>
+      <!-- Top Tier: Search Core & Global Links -->
+      <div class="top-tier">
+        <div class="search-wrapper">
+          <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </span>
+          <input 
+            id="edit-search" 
+            class="search-input" 
+            type="text" 
+            placeholder="Find solutions (i.e., workflows, automation, data)" 
+            name="search" 
+          />
         </div>
 
-        <!-- Meta governance routes -->
-        <div class="flex items-center gap-6 text-[13.8px] text-[#576579] font-medium">
-          <nav role="navigation" aria-label="Mini Menu">
-            <a href="/support" class="hover:text-[#1a73e2] transition-colors duration-150">Support</a>
-          </nav>
-          
-          <div class="h-4 w-[1px] bg-[#cbd6e2]"></div>
-          
-          <!-- Dropdown Language Target -->
-          <div class="cursor-pointer hover:text-[#1a73e2] font-semibold text-xs tracking-wider transition-colors duration-150">
-            EN
-          </div>
-
-          <!-- Client CRM portal portal entry point -->
-          <div class="product-login-dropdown">
-            <button class="flex items-center gap-1 hover:text-[#1a73e2] focus:outline-none transition-colors duration-150" role="button">
-              Login
-              <svg class="w-2 h-2 opacity-60" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 21l-12-18h24z"/>
-              </svg>
-            </button>
-          </div>
+        <div class="meta-links">
+          <a href="/support" class="meta-link">Support</a>
+          <span class="meta-divider">|</span>
+          <span class="lang-selector">EN</span>
+          <button class="login-button">
+            Login
+            <span class="arrow-icon"></span>
+          </button>
         </div>
-
       </div>
 
-      <!-- Bottom Tier: Functional Navigation Elements & Sales Call to Action -->
-      <div class="h-[49px] grid grid-cols-[1fr_auto] items-center">
-        <nav class="flex items-center justify-start pl-4 h-full" aria-label="Primary navigation">
-          <div class="px-5 text-[13px] font-semibold tracking-wide text-[#1e242c] hover:text-[#1a73e2] transition-colors duration-150">
-            <a href="/fit-check">Fit Check</a>
-          </div>
-          <div class="px-5 text-[13px] font-semibold tracking-wide text-[#1e242c] hover:text-[#1a73e2] cursor-pointer transition-colors duration-150">
-            Workflows
-          </div>
-          <div class="px-5 text-[13px] font-semibold tracking-wide text-[#1e242c] hover:text-[#1a73e2] cursor-pointer transition-colors duration-150">
-            Solutions
-          </div>
-          <div class="px-5 text-[13px] font-semibold tracking-wide text-[#1e242c] hover:text-[#1a73e2] cursor-pointer transition-colors duration-150">
-            AI Tooling
-          </div>
-          <div class="px-5 text-[13px] font-semibold tracking-wide text-[#1e242c] hover:text-[#1a73e2] cursor-pointer transition-colors duration-150">
-            Governance
-          </div>
-          <div class="px-5 text-[13px] font-semibold tracking-wide text-[#1e242c] hover:text-[#1a73e2] cursor-pointer transition-colors duration-150">
-            Advisory
-          </div>
+      <!-- Bottom Tier: Navigation Links & Sales CTA -->
+      <div class="bottom-tier">
+        <nav class="primary-menu" aria-label="Primary navigation">
+          <a href="/fit-check" class="menu-link active-link">Fit Check</a>
+          <a href="/workflows" class="menu-link">Workflows</a>
+          <a href="/solutions" class="menu-link">Solutions</a>
+          <a href="/ai-tooling" class="menu-link">AI Tooling</a>
+          <a href="/governance" class="menu-link">Governance</a>
+          <a href="/advisory" class="menu-link">Advisory</a>
         </nav>
 
-        <!-- Dynamic High-Ticket Anchor CTA -->
-        <div class="h-full">
-          <a href="/contact" class="flex items-center justify-center h-full px-12 bg-[#1a73e2] hover:bg-[#155ec2] text-white text-[13.8px] font-medium tracking-wide no-underline transition-colors duration-150" title="Speak to sales">
-            Speak to sales
-          </a>
+        <div class="cta-zone">
+          <a href="/contact" class="sales-cta" title="Speak to sales">Speak to sales</a>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- Mobile Responsiveness Architecture (<=896px Mobile/Tablet Window viewports) -->
-  <div class="lg:hidden flex items-center justify-between h-14 px-6 w-full">
-    
-    <!-- Hamburger interface icon element toggle frame links -->
-    <div class="flex items-center gap-4">
-      <button id="mobile-menu-trigger" class="flex items-center justify-center w-6 h-6 focus:outline-none" aria-label="Toggle navigation menu">
-        <svg class="w-6 h-6 text-[#1e242c]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+  <!-- Mobile Layout -->
+  <div class="mobile-nav">
+    <div class="mobile-left">
+      <button id="mobile-menu-trigger" class="hamburger-btn" aria-label="Toggle navigation menu">
+        <svg class="hamburger-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-
-      <a href="/" class="font-serif text-[21px] font-black tracking-tight text-black no-underline">
-        Cadence<span class="text-[#1a73e2] font-sans font-light">Lab</span>
+      <a href="/" class="brand-logo mobile-logo">
+        Cadence<span>Lab</span>
       </a>
     </div>
 
-    <!-- Right mobile layout action node buttons -->
-    <div class="flex items-center gap-4">
-      <button class="w-5 h-5 opacity-70 focus:outline-none" aria-label="Search mobile layer">
-        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </button>
-
-      <a href="/fit-check" class="text-xs font-bold uppercase tracking-wider bg-[#1a73e2] text-white px-3 py-1.5 rounded-sm">
-        Fit Check
-      </a>
+    <div class="mobile-right">
+      <a href="/fit-check" class="mobile-fit-btn">Fit Check</a>
     </div>
-
   </div>
 
-  <!-- Mobile Slideout Overlay Navigation Drawer Context -->
-  <div id="mobile-navigation-drawer" class="hidden absolute top-14 left-0 w-full bg-white border-b border-[#cbd6e2] shadow-xl flex-col z-[998] lg:hidden animate-fade-in">
-    <nav class="flex flex-col py-4 font-semibold text-sm text-[#1e242c] divide-y divide-[#f5f8fa]">
-      <a href="/fit-check" class="px-8 py-3.5 hover:bg-[#f5f8fa]">Fit Check</a>
-      <a href="/workflows" class="px-8 py-3.5 hover:bg-[#f5f8fa]">Workflows</a>
-      <a href="/solutions" class="px-8 py-3.5 hover:bg-[#f5f8fa]">Solutions</a>
-      <a href="/ai-tooling" class="px-8 py-3.5 hover:bg-[#f5f8fa]">AI Tooling</a>
-      <a href="/governance" class="px-8 py-3.5 hover:bg-[#f5f8fa]">Governance</a>
-      <a href="/advisory" class="px-8 py-3.5 hover:bg-[#f5f8fa]">Advisory</a>
-      <div class="p-4 bg-[#f5f8fa] flex gap-4 justify-around text-xs font-bold uppercase tracking-widest text-[#576579]">
+  <!-- Mobile Dropdown Drawer -->
+  <div id="mobile-navigation-drawer" class="mobile-drawer hidden">
+    <nav class="drawer-menu">
+      <a href="/fit-check">Fit Check</a>
+      <a href="/workflows">Workflows</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/ai-tooling">AI Tooling</a>
+      <a href="/governance">Governance</a>
+      <a href="/advisory">Advisory</a>
+      <div class="drawer-footer">
         <a href="/support">Support</a>
-        <a href="/login" class="text-[#1a73e2]">Client Login</a>
+        <a href="/login" class="drawer-login">Client Login</a>
       </div>
     </nav>
   </div>
 </header>
 
 <script>
-  // Simple functional native execution loop context hook managing viewport drawer state changes
   const menuBtn = document.getElementById('mobile-menu-trigger');
   const drawer = document.getElementById('mobile-navigation-drawer');
 
@@ -155,27 +105,279 @@
     menuBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       drawer.classList.toggle('hidden');
-      drawer.classList.toggle('flex');
     });
 
-    // Close the navigation matrix automatically if the workspace target captures outer layer clicks
     document.addEventListener('click', () => {
-      if (!drawer.classList.contains('hidden')) {
-        drawer.classList.add('hidden');
-        drawer.classList.remove('flex');
-      }
+      drawer.classList.add('hidden');
     });
   }
 </script>
 
 <style>
-  /* Seamless modern micro drop animations tailored directly for Astro runtime engine environments */
-  .animate-fade-in {
-    animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* --- PURE STANDARD CSS SCOPING (No external frameworks required) --- */
+  .gh-header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #ffffff;
+    color: #1e242c;
+    border-bottom: 1px solid #cbd6e2;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* --- DESKTOP ENGINE GRID --- */
+  .desktop-nav {
+    display: grid;
+    grid-template-columns: 195px 1fr;
+    max-width: 1512px;
+    margin: 0 auto;
+    height: 105px;
+  }
+
+  .brand-zone {
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+    border-r: 1px solid #f5f8fa;
+  }
+
+  .brand-logo {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #000000;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+
+  .logo-accent {
+    color: #1a73e2;
+    font-weight: 300;
+  }
+
+  .utility-canvas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* TOP TIER UTILITIES */
+  .top-tier {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid #f5f8fa;
+  }
+
+  .search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 412px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    opacity: 0.4;
+  }
+
+  .search-input {
+    width: 100%;
+    height: 36px;
+    padding: 0 16px 0 42px;
+    background-color: #f5f8fa;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.15s ease;
+  }
+
+  .search-input:focus {
+    background-color: #ffffff;
+    border-color: #1a73e2;
+  }
+
+  .meta-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13.5px;
+    color: #576579;
+  }
+
+  .meta-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .meta-link:hover, .lang-selector:hover {
+    color: #1a73e2;
+  }
+
+  .meta-divider {
+    color: #cbd6e2;
+    user-select: none;
+  }
+
+  .lang-selector {
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .login-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* BOTTOM TIER PRIMARY NAV */
+  .bottom-tier {
+    height: 49px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .primary-menu {
+    display: flex;
+    padding-left: 16px;
+  }
+
+  .menu-link {
+    padding: 0 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e242c;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease;
+  }
+
+  .menu-link:hover {
+    color: #1a73e2;
+  }
+
+  .sales-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 49px;
+    padding: 0 48px;
+    background-color: #1a73e2;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .sales-cta:hover {
+    background-color: #155ec2;
+  }
+
+  /* --- RESPONSIVE ENGINE (Hides Desktop, Activates Mobile) --- */
+  .mobile-nav, .mobile-drawer {
+    display: none;
+  }
+
+  @media (max-width: 950px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 56px;
+      padding: 0 24px;
+    }
+
+    .mobile-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hamburger-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .hamburger-svg {
+      width: 24px;
+      height: 24px;
+      color: #1e242c;
+    }
+
+    .mobile-fit-btn {
+      background-color: #1a73e2;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 2px;
+    }
+
+    /* DROPDOWN DRAWER SETUP */
+    .mobile-drawer {
+      position: absolute;
+      top: 56px;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-bottom: 1px solid #cbd6e2;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .mobile-drawer.hidden {
+      display: none;
+    }
+
+    .drawer-menu {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-menu a {
+      padding: 14px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e242c;
+      text-decoration: none;
+      border-bottom: 1px solid #f5f8fa;
+    }
+
+    .drawer-footer {
+      background-color: #f5f8fa;
+      display: flex;
+      justify-content: space-around;
+      padding: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .drawer-login {
+      color: #1a73e2 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
   }
 </style>
