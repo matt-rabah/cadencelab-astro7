@@ -1,5 +1,10 @@
 ---
 // src/components/NavHeader.astro
+import { Image } from 'astro:assets';
+
+// Import your raw assets directly into the component metadata tree
+import logoDarkText from '../assets/cadencelab-logo-color-lt.png';
+import logoLightText from '../assets/cadencelab-logo-color-dk.png';
 ---
 <header class="gh-header">
   <!-- Desktop Layout -->
@@ -7,8 +12,15 @@
     
     <!-- Left branding zone -->
     <div class="brand-zone">
-      <a href="/" class="brand-logo" title="Go to Homepage">
-        Cadence<span class="logo-accent">Lab</span>
+      <a href="/" class="brand-logo-container" title="Go to Homepage">
+        <!-- Astro optimizes the PNG automatically, transforming it into a high-density asset -->
+        <Image 
+          src={logoDarkText} 
+          alt="CadenceLab Logo" 
+          height={28} 
+          quality="max"
+          class="desktop-brand-logo"
+        />
       </a>
     </div>
 
@@ -46,17 +58,12 @@
       <!-- Bottom Tier: Navigation Links & Sales CTA -->
       <div class="bottom-tier">
         <nav class="primary-menu" aria-label="Primary navigation">
-          
-          <!-- Fit Check Link (Direct Path) -->
-          <div class="nav-item">
-            <a href="/fit-check" class="menu-link">Fit Check</a>
-          </div>
+          <div class="nav-item"><a href="/fit-check" class="menu-link">Fit Check</a></div>
 
           <!-- Mega Menu 1: Workflows -->
           <div class="nav-item has-mega">
             <button class="menu-trigger-btn">
               Workflows
-              <!-- Vector mapping mimicking expand_more_light@3x.png geometry -->
               <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
@@ -94,7 +101,6 @@
           <div class="nav-item has-mega">
             <button class="menu-trigger-btn">
               Solutions
-              <!-- Vector mapping mimicking expand_more_light@3x.png geometry -->
               <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
@@ -131,7 +137,6 @@
           <div class="nav-item has-mega">
             <button class="menu-trigger-btn">
               AI Tooling
-              <!-- Vector mapping mimicking expand_more_light@3x.png geometry -->
               <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
@@ -183,8 +188,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      <a href="/" class="brand-logo mobile-logo">
-        Cadence<span>Lab</span>
+      <a href="/" class="mobile-brand-logo-container">
+        <Image src={logoDarkText} alt="CadenceLab Logo" height={22} quality="max" />
       </a>
     </div>
 
@@ -227,7 +232,7 @@
 </script>
 
 <style>
-  /* --- BASE MULTI-TIER SYSTEM CONFIGS --- */
+  /* --- BASE NAV ARCHITECTURE --- */
   .gh-header {
     width: 100%;
     position: sticky;
@@ -253,18 +258,15 @@
     border-right: 1px solid #f5f8fa;
   }
 
-  .brand-logo {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 24px;
-    font-weight: 900;
-    color: #000000;
+  .brand-logo-container, .mobile-brand-logo-container {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: -0.03em;
   }
 
-  .logo-accent {
-    color: #1a73e2;
-    font-weight: 300;
+  .desktop-brand-logo {
+    width: auto; /* Lets the aspect ratio preserve natively based on height scale */
+    object-fit: contain;
   }
 
   .utility-canvas {
@@ -384,7 +386,7 @@
     height: 100%;
     display: inline-flex;
     align-items: center;
-    gap: 6px; /* Dynamic padding buffer zone spacing the chevron cleanly */
+    gap: 6px; 
     font-family: inherit;
     transition: color 0.15s ease;
   }
@@ -411,15 +413,14 @@
     background-color: #155ec2;
   }
 
-  /* --- MICRO INDUSTRIAL CHEVRON SYSTEM CONTROLS --- */
   .expand-icon {
     width: 10px;
     height: 10px;
-    color: #576579; /* Refined dark slate gray neutral baseline default weight */
+    color: #576579; 
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
   }
 
-  /* --- FULL-WIDTH MEGA DROPDOWN ENGINE --- */
+  /* --- MEGA DROPDOWN STYLING --- */
   .has-mega {
     position: static; 
   }
@@ -437,7 +438,6 @@
     border-top: 1px solid #f5f8fa;
   }
 
-  /* Trigger state transitions when user pointer hits the item target tree zone */
   .has-mega:hover .mega-menu-dropdown {
     display: block;
   }
@@ -446,10 +446,9 @@
     color: #1a73e2;
   }
 
-  /* Hover State: Smoothly sync chevron color shift and flip transformation */
   .has-mega:hover .expand-icon {
-    color: #1a73e2; /* Seamless transition straight into the corporate blue accent */
-    transform: rotate(180deg); /* Micro interaction proves layout fluid agility */
+    color: #1a73e2; 
+    transform: rotate(180deg); 
   }
 
   .mega-menu-inner {
