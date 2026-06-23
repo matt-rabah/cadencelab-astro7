@@ -1,39 +1,168 @@
 ---
-// src/pages/index.astro
-import Layout from '../layouts/Layout.astro';
-import NavHeader from '../components/NavHeader.astro';
-import Hero from '../components/Hero.astro';
-import Approach from '../components/Approach.astro';
-import Framework from '../components/Framework.astro'; // Fix #2: Imported missing component
-import FitCriteria from '../components/FitCriteria.astro';
-import ContactCTA from '../components/ContactCTA.astro';
-import Footer from '../components/Footer.astro';
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'CadenceLab | Enterprise CX Architecture',
+  description = 'Enterprise customer experience architecture for workflow adoption, system integration trust, and cross-functional measurement layers.'
+} = Astro.props;
 ---
 
-<Layout title="CadenceLab | Enterprise CX Architecture">
-  <NavHeader />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
 
-  <main class="page-canvas">
-    <Hero />
-    <Approach />
+<style is:global>
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/Tiempos/tiempos-text-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
 
-    <div id="framework">
-      <Framework />
-    </div>
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/Tiempos/tiempos-text-regular-italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
 
-    <FitCriteria />
-    <ContactCTA />
-  </main>
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/Tiempos/tiempos-text-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
 
-  <Footer />
-</Layout>
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/Tiempos/tiempos-text-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
 
-<style>
-  /* Fix #1: 'is:global' has been entirely purged to avoid fighting Layout.astro. */
-  /* This style block is now safely scoped strictly to this page shell container. */
-  .page-canvas {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  @font-face {
+    font-family: 'Tiempos Headline';
+    src: url('/fonts/Tiempos/tiempos-headline-light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Tiempos Fine';
+    src: url('/fonts/Tiempos/tiempos-fine-light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/Graphik/graphik-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/Graphik/graphik-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/Graphik/graphik-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/Graphik/graphik-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --font-serif-text: 'Tiempos Text', Georgia, serif;
+    --font-serif-heading: 'Tiempos Headline', Georgia, serif;
+    --font-serif-fine: 'Tiempos Fine', Georgia, serif;
+    --font-sans: 'Graphik', adobe-clean, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sans-cond: 'Graphik', adobe-clean, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sans-compact: 'Graphik', adobe-clean, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sans-xxcond: 'Graphik', adobe-clean, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color-scheme: light;
+    font-family: var(--font-sans);
+    background: #f4f5f7;
+    color: #1e242c;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    min-height: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background: #f4f5f7;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
   }
 </style>
