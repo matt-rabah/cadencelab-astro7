@@ -3,7 +3,7 @@
 ---
 <header class="nav-header">
   <div class="nav-container">
-    <!-- Brand / Logo (Stark monochrome typography) -->
+    <!-- Brand / Logo (Premium deep ink-charcoal) -->
     <a href="/" class="brand-logo">
       Cadence<span>Lab</span>
     </a>
@@ -19,20 +19,23 @@
 </header>
 
 <style>
-  /* --- DESIGN TOKENS (Inspired by The Futur Minimalist Floating Blur) --- */
+  /* --- PREMIUM GALLERY PALETTE (No Stark Black/White) --- */
   .nav-header {
     width: 100%;
-    /* Semi-transparent white to let background colors bleed through */
-    background-color: rgba(255, 255, 255, 0.8); 
-    
-    /* The core scroll-blur effect */
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px); 
-    
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
     z-index: 1000;
+    
+    /* Luxury translucent alabaster chalk tint */
+    background-color: rgba(252, 252, 249, 0.75); 
+    
+    /* High-performance hardware accelerated blur */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); 
+    
+    /* Soft architectural shadow defines the floating elevation plane */
+    box-shadow: 0 8px 32px 0 rgba(22, 22, 22, 0.04);
+    border-bottom: 1px solid rgba(22, 22, 22, 0.03);
   }
 
   .nav-container {
@@ -41,18 +44,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px; /* Slightly more spacious padding scale */
+    padding: 20px 24px;
   }
 
-  /* --- BRANDING (Stark & Heavy) --- */
+  /* --- BRANDING (Ink-Charcoal Emphasis) --- */
   .brand-logo {
     font-family: adobe-clean, sans-serif;
     font-size: 22px;
-    font-weight: 900; /* Ultra-bold emphasis */
-    color: #000000; /* Crisp pure black */
+    font-weight: 900;
+    color: #161616; /* Deep ink-charcoal replaces harsh pure black */
     text-decoration: none;
     letter-spacing: -0.04em;
-    text-transform: uppercase; /* Lean into industrial typography */
+    text-transform: uppercase;
   }
 
   .brand-logo span {
@@ -71,29 +74,28 @@
     font-family: adobe-clean, sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: #000000;
+    color: #161616;
     text-decoration: none;
     letter-spacing: -0.01em;
     transition: opacity 0.15s ease-in-out;
   }
 
   .nav-link:hover {
-    opacity: 0.6; /* Clean minimalist fade on hover rather than changing colors */
+    opacity: 0.5;
   }
 
   /* Premium Call-to-action wrapper */
   .btn-accent {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #161616;
+    color: #fcfcf9;
     padding: 10px 20px;
     border-radius: 4px;
     font-weight: 600;
-    transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
   }
 
   .btn-accent:hover {
-    background-color: #222222;
-    opacity: 1;
+    opacity: 0.8;
   }
 
   /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
@@ -107,7 +109,7 @@
     }
 
     .nav-link:not(.btn-accent) {
-      display: none; /* Safely hides secondary links on mobile viewports */
+      display: none;
     }
   }
 </style>
