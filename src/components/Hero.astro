@@ -4,7 +4,8 @@
 <section class="hero-section">
   <div class="hero-content">
     <h1 class="hero-title">
-      <p>AI isn't your customer experience problem. <span style="color: blue;">Adoption is.</span></p>
+      AI isn’t your customer experience problem. <br />
+      <span>Adoption is.</span>
     </h1>
     
     <p class="hero-subtitle">
@@ -12,29 +13,29 @@
     </p>
     
     <div class="hero-actions">
-      <a href="/apply" class="btn-primary">Apply for a Fit Assessment</a>
-      <a href="/framework" class="btn-secondary">The Adoption Framework</a>
+      <a href="/fit-check" class="btn-primary">Start a Fit Check</a>
+      <a href="#framework" class="btn-secondary">The Adoption Framework</a>
     </div>
   </div>
 </section>
 
 <style>
-  /* --- DESIGN TOKENS (Spectrum 2 Specifications - Minimal & Premium) --- */
+  /* --- DESIGN TOKENS (Premium Gallery Palette Consistency) --- */
   .hero-section {
     width: 100%;
-    padding: 100px 24px;
+    padding: 120px 24px;
     background-color: var(--spectrum-background-layer-1, #ffffff);
     display: flex;
-    justify-content: left;
-    align-items: left;
-    text-align: left;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .hero-content {
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     gap: 32px;
   }
 
@@ -42,9 +43,9 @@
   .hero-title {
     font-family: adobe-clean, sans-serif;
     font-size: 56px;
-    font-weight: 800;
-    line-height: 1.1;
-    color: var(--spectrum-heading-color, CanvasText);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #161616; /* Premium deep ink-charcoal */
     letter-spacing: -0.03em;
   }
 
@@ -56,7 +57,7 @@
     font-family: adobe-clean, sans-serif;
     font-size: 20px;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #333333);
+    color: var(--spectrum-body-color, #4b4b4b);
     max-width: 750px;
     letter-spacing: -0.01em;
   }
@@ -75,39 +76,39 @@
     text-decoration: none;
     padding: 16px 32px;
     border-radius: 4px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.15s ease-in-out;
   }
 
   .btn-primary {
-    background-color: var(--spectrum-global-color-accent, #0265dc);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(2, 101, 220, 0.15);
+    background-color: #161616;
+    color: #fcfcf9; /* Alabaster chalk text */
+    box-shadow: 0 4px 12px rgba(22, 22, 22, 0.08);
   }
 
   .btn-primary:hover {
-    background-color: #014da3;
+    opacity: 0.9;
     transform: translateY(-1px);
   }
 
   .btn-secondary {
     background-color: transparent;
-    color: var(--spectrum-heading-color, CanvasText);
-    border: 2px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 30%);
+    color: #161616;
+    border: 2px solid rgba(22, 22, 22, 0.15);
   }
 
   .btn-secondary:hover {
-    background-color: rgba(0, 0, 0, 0.02);
-    border-color: rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 60%);
+    background-color: rgba(22, 22, 22, 0.02);
+    border-color: rgba(22, 22, 22, 0.4);
   }
 
   /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
   @media (max-width: 768px) {
     .hero-section {
-      padding: 64px 16px;
+      padding: 80px 16px;
     }
 
     .hero-title {
-      font-size: 36px;
+      font-size: 38px;
     }
 
     .hero-subtitle {
@@ -122,7 +123,7 @@
 
     .btn-primary, .btn-secondary {
       width: 100%;
-      text-align: left;
+      text-align: center;
       padding: 14px 24px;
     }
   }
