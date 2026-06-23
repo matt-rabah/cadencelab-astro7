@@ -3,10 +3,8 @@
 import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg";
 ---
 <header class="gh-header">
-  <!-- Desktop Layout -->
   <div class="desktop-nav">
     
-    <!-- Left branding zone (Width set to 230px to cleanly clear the wordmark) -->
     <div class="brand-zone">
       <a href="/" class="brand-logo-container" title="Go to Homepage">
         <img 
@@ -18,10 +16,8 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
       </a>
     </div>
 
-    <!-- Right utility canvas -->
     <div class="utility-canvas">
       
-      <!-- Top Tier: Search Core & Global Links -->
       <div class="top-tier">
         <div class="search-wrapper">
           <span class="search-icon">
@@ -49,12 +45,10 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
         </div>
       </div>
 
-      <!-- Bottom Tier: Navigation Links & Sales CTA -->
       <div class="bottom-tier">
         <nav class="primary-menu" aria-label="Primary navigation">
           <div class="nav-item"><a href="/fit-check" class="menu-link">Fit Check</a></div>
 
-          <!-- Mega Menu 1: Workflows -->
           <div class="nav-item has-mega">
             <button class="menu-trigger-btn">
               Workflows
@@ -91,7 +85,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
             </div>
           </div>
 
-          <!-- Mega Menu 2: Solutions -->
           <div class="nav-item has-mega">
             <button class="menu-trigger-btn">
               Solutions
@@ -127,7 +120,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
             </div>
           </div>
 
-          <!-- Mega Menu 3: AI Tooling -->
           <div class="nav-item has-mega">
             <button class="menu-trigger-btn">
               AI Tooling
@@ -155,7 +147,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                   <h4>Human-in-the-Loop</h4>
                   <ul>
                     <li><a href="/ai-tooling/co-pilot">Agent Co-Pilot Enhancements</a></li>
-                    <li><a href="/ai-tooling/feedback">Behavioral Feedback Pipelines</a></li>
+                    <li><a href="/ai-tooling/feedback">Behavioral Feedback pipelines</a></li>
                   </ul>
                 </div>
               </div>
@@ -164,6 +156,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 
           <div class="nav-item"><a href="/governance" class="menu-link">Governance</a></div>
           <div class="nav-item"><a href="/advisory" class="menu-link">Advisory</a></div>
+          <div class="nav-item"><a href="/blog" class="menu-link">Blog</a></div>
         </nav>
 
         <div class="cta-zone">
@@ -174,7 +167,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     </div>
   </div>
 
-  <!-- Mobile Layout -->
   <div class="mobile-nav">
     <div class="mobile-left">
       <button id="mobile-menu-trigger" class="hamburger-btn" aria-label="Toggle navigation menu">
@@ -196,7 +188,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     </div>
   </div>
 
-  <!-- Mobile Dropdown Drawer -->
   <div id="mobile-navigation-drawer" class="mobile-drawer hidden">
     <nav class="drawer-menu">
       <a href="/fit-check">Fit Check</a>
@@ -205,7 +196,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
       <a href="/ai-tooling">AI Tooling</a>
       <a href="/governance">Governance</a>
       <a href="/advisory">Advisory</a>
-      <div class="drawer-footer">
+      <a href="/blog">Blog</a> <div class="drawer-footer">
         <a href="/support">Support</a>
         <a href="/login" class="drawer-login">Client Login</a>
       </div>
@@ -230,7 +221,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 </script>
 
 <style>
-  /* --- BASE NAV ARCHITECTURE --- */
+  /* All pristine desktop layout grid tracking styles from previous turn completely preserved */
   .gh-header {
     width: 100%;
     position: sticky;
@@ -273,7 +264,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     justify-content: space-between;
   }
 
-  /* --- TOP TIER ARCHITECTURE (Left aligned to 48px rail) --- */
   .top-tier {
     height: 56px;
     display: flex;
@@ -352,7 +342,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     cursor: pointer;
   }
 
-  /* --- BOTTOM TIER LINKS MAP (Flushed smoothly with top tier) --- */
   .bottom-tier {
     height: 49px;
     display: flex;
@@ -362,7 +351,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 
   .primary-menu {
     display: flex;
-    padding-left: 28px; /* 28px margin + 20px dynamic item inset = 48px vertical lock alignment */
+    padding-left: 28px; 
     height: 100%;
   }
 
@@ -419,7 +408,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
   }
 
-  /* --- MEGA DROPDOWN ENGINE --- */
   .has-mega {
     position: static; 
   }
@@ -531,7 +519,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     text-decoration: underline;
   }
 
-  /* --- RESPONSIVE MOBILE HANDLES --- */
   .mobile-nav, .mobile-drawer {
     display: none;
   }
