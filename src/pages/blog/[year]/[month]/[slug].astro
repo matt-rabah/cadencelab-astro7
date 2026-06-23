@@ -8,12 +8,12 @@ import Footer from '../../../../components/Footer.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  
+
   return posts.map((post) => {
     const postDate = new Date(post.data.date);
     const year = postDate.getFullYear().toString();
     const month = String(postDate.getMonth() + 1).padStart(2, '0');
-    
+
     // Strip any file extension that may leak out from post.id.
     const cleanId = post.id.replace(/\.(md|mdx)$/, '');
     const slug = cleanId.split('/').pop();
@@ -40,11 +40,13 @@ if (!post || !post.data) {
 const { Content } = await render(post);
 
 // Bulletproof Date Normalization Engine
-const publishedDate = post.data.date instanceof Date ? post.data.date : new Date(post.data.date);
+const publishedDate =
+  post.data.date instanceof Date ? post.data.date : new Date(post.data.date);
 const isValidDate = !isNaN(publishedDate.getTime());
 
-const formattedDate = isValidDate 
-  ? publishedDate.toLocaleDateString('en-US', {
+const formattedDate =
+  isValidDate ?
+    publishedDate.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -55,7 +57,9 @@ const formattedDate = isValidDate
 const isoDate = isValidDate ? publishedDate.toISOString().slice(0, 10) : '';
 ---
 
-<Layout title={`${post.data.title} | CadenceLab Insights`} description={post.data.subtitle}>
+<Layout
+  title={`${post.data.title} | CadenceLab Insights`}
+  description={post.data.subtitle}>
   <NavHeader />
 
   <article class="article-canvas">
@@ -67,7 +71,7 @@ const isoDate = isValidDate ? publishedDate.toISOString().slice(0, 10) : '';
         <span class="meta-separator">•</span>
         <span>{post.data.readTime}</span>
       </div>
-      
+
       <h1 class="article-main-title">{post.data.title}</h1>
       <p class="article-lead-abstract">{post.data.subtitle}</p>
     </header>
@@ -197,7 +201,7 @@ const isoDate = isValidDate ? publishedDate.toISOString().slice(0, 10) : '';
   }
 
   .article-body-stream :global(li)::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 10px;
