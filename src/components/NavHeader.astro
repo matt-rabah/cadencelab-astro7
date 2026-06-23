@@ -1,18 +1,17 @@
 ---
 // src/components/NavHeader.astro
-// Clean Slate: Old PNG imports and 'astro:assets' have been completely removed
+import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg";
 ---
 <header class="gh-header">
   <!-- Desktop Layout -->
   <div class="desktop-nav">
     
-    <!-- Left branding zone -->
+    <!-- Left branding zone (Width set to 230px to cleanly clear the wordmark) -->
     <div class="brand-zone">
       <a href="/" class="brand-logo-container" title="Go to Homepage">
-        <!-- Natively references your public folder file with zero build lag -->
         <img 
-          src="/assets/cadencelab-logo-color-bk.svg" 
-          alt="CadenceLab Logo" 
+          src={cadenceLogo.src ?? cadenceLogo}
+          alt="CadenceLab" 
           height="26" 
           class="desktop-brand-logo"
         />
@@ -184,7 +183,11 @@
         </svg>
       </button>
       <a href="/" class="mobile-brand-logo-container">
-        <img src="/assets/cadencelab-logo-color-bk.svg" alt="CadenceLab Logo" height="22" />
+        <img 
+          src={cadenceLogo.src ?? cadenceLogo}
+          alt="CadenceLab" 
+          height="22" 
+        />
       </a>
     </div>
 
@@ -227,7 +230,7 @@
 </script>
 
 <style>
-  /* All existing layout rules, grid structures, alignments, and chevron animations are completely preserved */
+  /* --- BASE NAV ARCHITECTURE --- */
   .gh-header {
     width: 100%;
     position: sticky;
@@ -270,6 +273,7 @@
     justify-content: space-between;
   }
 
+  /* --- TOP TIER ARCHITECTURE (Left aligned to 48px rail) --- */
   .top-tier {
     height: 56px;
     display: flex;
@@ -348,6 +352,7 @@
     cursor: pointer;
   }
 
+  /* --- BOTTOM TIER LINKS MAP (Flushed smoothly with top tier) --- */
   .bottom-tier {
     height: 49px;
     display: flex;
@@ -357,7 +362,7 @@
 
   .primary-menu {
     display: flex;
-    padding-left: 28px; 
+    padding-left: 28px; /* 28px margin + 20px dynamic item inset = 48px vertical lock alignment */
     height: 100%;
   }
 
@@ -414,6 +419,7 @@
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
   }
 
+  /* --- MEGA DROPDOWN ENGINE --- */
   .has-mega {
     position: static; 
   }
@@ -525,6 +531,7 @@
     text-decoration: underline;
   }
 
+  /* --- RESPONSIVE MOBILE HANDLES --- */
   .mobile-nav, .mobile-drawer {
     display: none;
   }
