@@ -3,30 +3,36 @@
 ---
 <header class="nav-header">
   <div class="nav-container">
-    <!-- Brand / Logo -->
+    <!-- Brand / Logo (Stark monochrome typography) -->
     <a href="/" class="brand-logo">
       Cadence<span>Lab</span>
     </a>
 
-    <!-- Navigation Architecture -->
+    <!-- Navigation Menu -->
     <nav class="nav-menu">
       <a href="/work" class="nav-link">Work</a>
       <a href="/services" class="nav-link">Services</a>
       <a href="/about" class="nav-link">About</a>
-      <a href="/contact" class="nav-link btn-accent">Get in Touch</a>
+      <a href="/apply" class="nav-link btn-accent">Apply</a>
     </nav>
   </div>
 </header>
 
 <style>
-  /* --- DESIGN TOKENS (Referencing Spectrum 2 Specifications) --- */
+  /* --- DESIGN TOKENS (Inspired by The Futur Minimalist Floating Blur) --- */
   .nav-header {
     width: 100%;
-    background-color: var(--spectrum-background-layer-1, #ffffff);
-    border-bottom: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 15%);
+    /* Semi-transparent white to let background colors bleed through */
+    background-color: rgba(255, 255, 255, 0.8); 
+    
+    /* The core scroll-blur effect */
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px); 
+    
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
   }
 
   .nav-container {
@@ -35,75 +41,73 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Desktop Scale Spacing Token */
-    padding: 16px 24px; 
+    padding: 20px 24px; /* Slightly more spacious padding scale */
   }
 
-  /* --- BRANDING --- */
+  /* --- BRANDING (Stark & Heavy) --- */
   .brand-logo {
     font-family: adobe-clean, sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--spectrum-heading-color, CanvasText);
+    font-size: 22px;
+    font-weight: 900; /* Ultra-bold emphasis */
+    color: #000000; /* Crisp pure black */
     text-decoration: none;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
+    text-transform: uppercase; /* Lean into industrial typography */
   }
 
   .brand-logo span {
     color: var(--spectrum-global-color-accent, #0265dc);
-    font-weight: 400;
+    font-weight: 300;
   }
 
-  /* --- MENU --- */
+  /* --- NAV MENU --- */
   .nav-menu {
     display: flex;
     align-items: center;
-    /* Spectrum Desktop layout gap token */
-    gap: 32px; 
+    gap: 40px; 
   }
 
   .nav-link {
     font-family: adobe-clean, sans-serif;
     font-size: 14px;
-    font-weight: 500;
-    color: var(--spectrum-body-color, #4b4b4b);
+    font-weight: 600;
+    color: #000000;
     text-decoration: none;
-    transition: color 0.2s ease;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s ease-in-out;
   }
 
   .nav-link:hover {
-    color: var(--spectrum-global-color-accent, #0265dc);
+    opacity: 0.6; /* Clean minimalist fade on hover rather than changing colors */
   }
 
-  /* Call-to-action Button styled with Spectrum 2 accent rules */
+  /* Premium Call-to-action wrapper */
   .btn-accent {
-    background-color: var(--spectrum-global-color-accent, #0265dc);
+    background-color: #000000;
     color: #ffffff;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 4px;
     font-weight: 600;
+    transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
   }
 
   .btn-accent:hover {
-    background-color: #014da3;
-    color: #ffffff;
+    background-color: #222222;
+    opacity: 1;
   }
 
   /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
   @media (max-width: 768px) {
     .nav-container {
-      /* Mobile Spacing Scale Token expands for easier touch targets */
-      padding: 20px 16px; 
+      padding: 16px; 
     }
 
     .nav-menu {
-      /* Mobile spacing rules shift from rows to stacking grids */
-      gap: 20px;
+      gap: 24px;
     }
 
-    /* We hide the less vital links on mobile layout to keep it single-tree clean */
     .nav-link:not(.btn-accent) {
-      display: none;
+      display: none; /* Safely hides secondary links on mobile viewports */
     }
   }
 </style>
