@@ -1,9 +1,10 @@
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod'; // ✨ Fix: Pull z from its dedicated modern home
 import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }), //
   schema: z.object({
     title: z.string(),
     subtitle: z.string(),
