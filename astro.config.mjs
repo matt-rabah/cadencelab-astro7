@@ -67,15 +67,23 @@ export default defineConfig({
     storyblok({
       accessToken: env.STORYBLOK_TOKEN,
       components: {
-        // This maps your Storyblok content blueprints to your actual Astro components
         page: "storyblok/Page",
         hero: "components/Hero",
         approach: "components/Approach",
         framework: "components/Framework",
       },
       apiOptions: {
-        region: 'us', // Switch to 'eu' if your Storyblok account space was initialized in Europe
+        region: 'us',
       }
     })
-  ]
+  ],
+
+  // ⚡️ VITE ENGINE CUSTOMIZATIONS (Fixes the Astro 7 compiler dependency issue)
+  vite: {
+    ssr: {
+      // Prevents Vite from treating astro-font as an external package, 
+      // forcing it to compile the .astro files correctly inside node_modules.
+      noExternal: ['astro-font']
+    }
+  }
 });
