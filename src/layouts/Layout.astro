@@ -37,7 +37,7 @@ const {
     width: 100%;
     min-height: 100vh;
     background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.85); /* Premium soft ink-charcoal instead of raw harsh black */
+    color: rgba(0, 0, 0, 0.85); /* Premium soft ink-charcoal */
     font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -54,22 +54,22 @@ const {
     text-decoration: none;
   }
 
-  /* --- 👑 THE EXPORTED EDITORIAL TYPOGRAPHY RULES --- */
+  /* --- 👑 PROPORTIONALLY SCALED EDITORIAL TYPOGRAPHY (0.90x Engine) --- */
 
-  /* H1: Ultra-bold Primary Title Node */
+  /* H1: Primary Title Node (Scaled Max down from 90.4px to 81.36px) */
   h1, .display-h1 {
     font-family: var(--font-sans), sans-serif;
     font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: -0.04em;
-    transform: translateX(-0.06em); /* Perfect edge margin tracking */
+    line-height: 1.0; /* Preserved tight block execution */
+    letter-spacing: -0.04em; /* Preserved tracking ratio */
+    transform: translateX(-0.06em); /* Preserved optical margin alignment */
     margin: 0;
     
-    /* Fluid calculation curve: Glides between 300px and 1440px viewports */
-    font-size: calc(33.0526px + 3.98246vw);
+    /* Scaled fluid curve formula: 33.05px baseline down to 29.74px */
+    font-size: calc(29.7473px + 3.5842vw);
   }
 
-  /* H2: Secondary Heading Matrix */
+  /* H2: Secondary Heading Matrix (Scaled Max down from 63.96px to 57.56px) */
   h2, .display-h2 {
     font-family: var(--font-sans), sans-serif;
     font-weight: 600;
@@ -78,10 +78,11 @@ const {
     transform: translateX(-0.06em);
     margin: 2px 0 12px 0;
     
-    font-size: calc(23.5768px + 2.80439vw);
+    /* Scaled fluid curve formula: 23.57px baseline down to 21.21px */
+    font-size: calc(21.2191px + 2.5239vw);
   }
 
-  /* H3: Accordion Headers & Feature Group Dividers */
+  /* H3: Section Headings & Card Titles (Scaled Max down from 45px to 40.5px) */
   h3, .display-h3 {
     font-family: var(--font-sans), sans-serif;
     font-weight: 600;
@@ -90,10 +91,11 @@ const {
     transform: translateX(-0.06em);
     margin: 0;
     
-    font-size: calc(18.4737px + 1.84211vw);
+    /* Scaled fluid curve formula: 18.47px baseline down to 16.62px */
+    font-size: calc(16.6263px + 1.6579vw);
   }
 
-  /* H5 / H6: Small Sub-headings, Footers, and Category Group Tags */
+  /* H5 / H6: Small Sub-headings, Footers, and Category Group Tags (Scaled Max from 20px to 18px) */
   h5, .display-h5, h6, .display-h6 {
     font-family: var(--font-sans), sans-serif;
     line-height: 1.2;
@@ -103,32 +105,32 @@ const {
   h5, .display-h5 {
     font-weight: 600;
     letter-spacing: -0.02em;
-    font-size: calc(14.9474px + 0.35088vw);
+    font-size: calc(13.4527px + 0.3158vw);
   }
 
   h6, .display-h6 {
     font-weight: 400;
     letter-spacing: 0em;
-    font-size: calc(14.9474px + 0.35088vw);
+    font-size: calc(13.4527px + 0.3158vw);
   }
 
-  /* P: Deep Reading Editorial Paragraph Copy Block */
+  /* P: Sweet Spot Mid-Scale Editorial Paragraph Copy Block (Scaled from 20px to 18px) */
   p, .body-copy {
-    font-family: var(--font-serif-text), Georgia, serif; /* Enforces the reading serif loop */
-    font-size: 20px;
-    font-weight: 300; /* Crisp, elegant ultra-light weight */
-    line-height: 1.55; /* Open spacing reduces cognitive loading */
+    font-family: var(--font-serif-text), Georgia, serif;
+    font-size: 18px; 
+    font-weight: 300; /* Maintains clean, luxury editorial lightness */
+    line-height: 1.55; /* Proportional line spacing computes to 27.9px */
     letter-spacing: normal;
     margin: 8px 0 20px 0;
     color: rgba(0, 0, 0, 0.85);
   }
 
-  /* Cap the maximum sizes securely once the viewport hits standard 1440px desktop width */
+  /* Rigidly locks maximum sizes the second the viewport strikes the 1440px desktop width barrier */
   @media screen and (min-width: 1440px) {
-    h1, .display-h1 { font-size: 90.4px !important; }
-    h2, .display-h2 { font-size: 63.96px !important; }
-    h3, .display-h3 { font-size: 45px !important; }
-    h5, .display-h5 { font-size: 20px !important; }
-    h6, .display-h6 { font-size: 20px !important; }
+    h1, .display-h1 { font-size: 81.36px !important; }
+    h2, .display-h2 { font-size: 57.56px !important; }
+    h3, .display-h3 { font-size: 40.50px !important; }
+    h5, .display-h5 { font-size: 18.00px !important; }
+    h6, .display-h6 { font-size: 18.00px !important; }
   }
 </style>
