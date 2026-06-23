@@ -26,7 +26,106 @@ const {
 </html>
 
 <style is:global>
-  /* --- SANITIZED SYSTEM BASELINE RESET --- */
+  /* --- 📦 NATIVE SYSTEM FONT-FACE LOADERS --- */
+
+  /* 1. GRAPHIK SANS VARIANTS (Core Utility UI & Structural Headers) */
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/graphik/graphik-normal/graphik-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/graphik/graphik-normal/graphik-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/graphik/graphik-normal/graphik-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Graphik';
+    src: url('/fonts/graphik/graphik-normal/graphik-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Graphik Condensed';
+    src: url('/fonts/graphik/graphik-condensed/graphik-condensed-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* 2. TIEMPOS SERIF VARIANTS (Premium Editorial Scales) */
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/tiempos/tiempos-text/tiempos-text-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/tiempos/tiempos-text/tiempos-text-regular-italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/tiempos/tiempos-text/tiempos-text-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/tiempos/tiempos-text/tiempos-text-medium-italic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tiempos Text';
+    src: url('/fonts/tiempos/tiempos-text/tiempos-text-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tiempos Headline';
+    src: url('/fonts/tiempos/tiempos-headline/tiempos-headline-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Tiempos Fine';
+    src: url('/fonts/tiempos/tiempos-fine/tiempos-fine-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* --- 🎛️ CENTRAL DESIGN SYSTEM TOKENS --- */
+  :root {
+    --font-sans: 'Graphik', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans-cond: 'Graphik Condensed', sans-serif;
+    --font-serif-text: 'Tiempos Text', Georgia, serif;
+    --font-serif-heading: 'Tiempos Headline', Georgia, serif;
+    --font-serif-fine: 'Tiempos Fine', Georgia, serif;
+  }
+
+  /* --- GLOBAL RESET MATRIX --- */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -37,8 +136,8 @@ const {
     width: 100%;
     min-height: 100vh;
     background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.85); /* Premium soft ink-charcoal */
-    font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+    color: rgba(0, 0, 0, 0.85); /* Soft premium corporate charcoal */
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -54,50 +153,39 @@ const {
     text-decoration: none;
   }
 
-  /* --- 👑 PROPORTIONALLY SCALED EDITORIAL TYPOGRAPHY (0.90x Engine) --- */
-
-  /* H1: Primary Title Node (Scaled Max down from 90.4px to 81.36px) */
+  /* --- 👑 PROPORTIONALLY SCALED TYPOGRAPHY SCALES (0.90x Multiplier) --- */
   h1, .display-h1 {
-    font-family: var(--font-sans), sans-serif;
+    font-family: var(--font-sans);
     font-weight: 700;
-    line-height: 1.0; /* Preserved tight block execution */
-    letter-spacing: -0.04em; /* Preserved tracking ratio */
-    transform: translateX(-0.06em); /* Preserved optical margin alignment */
+    line-height: 1.0; /* Tight editorial block text alignment */
+    letter-spacing: -0.04em; /* Premium density tracking */
+    transform: translateX(-0.06em); /* Left edge alignment correction */
     margin: 0;
-    
-    /* Scaled fluid curve formula: 33.05px baseline down to 29.74px */
     font-size: calc(29.7473px + 3.5842vw);
   }
 
-  /* H2: Secondary Heading Matrix (Scaled Max down from 63.96px to 57.56px) */
   h2, .display-h2 {
-    font-family: var(--font-sans), sans-serif;
+    font-family: var(--font-sans);
     font-weight: 600;
     line-height: 1.0;
     letter-spacing: -0.04em;
     transform: translateX(-0.06em);
     margin: 2px 0 12px 0;
-    
-    /* Scaled fluid curve formula: 23.57px baseline down to 21.21px */
     font-size: calc(21.2191px + 2.5239vw);
   }
 
-  /* H3: Section Headings & Card Titles (Scaled Max down from 45px to 40.5px) */
   h3, .display-h3 {
-    font-family: var(--font-sans), sans-serif;
+    font-family: var(--font-sans);
     font-weight: 600;
     line-height: 1.05;
     letter-spacing: -0.035em;
     transform: translateX(-0.06em);
     margin: 0;
-    
-    /* Scaled fluid curve formula: 18.47px baseline down to 16.62px */
     font-size: calc(16.6263px + 1.6579vw);
   }
 
-  /* H5 / H6: Small Sub-headings, Footers, and Category Group Tags (Scaled Max from 20px to 18px) */
   h5, .display-h5, h6, .display-h6 {
-    font-family: var(--font-sans), sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.2;
     margin: 0;
   }
@@ -114,18 +202,17 @@ const {
     font-size: calc(13.4527px + 0.3158vw);
   }
 
-  /* P: Sweet Spot Mid-Scale Editorial Paragraph Copy Block (Scaled from 20px to 18px) */
   p, .body-copy {
-    font-family: var(--font-serif-text), Georgia, serif;
-    font-size: 18px; 
-    font-weight: 300; /* Maintains clean, luxury editorial lightness */
-    line-height: 1.55; /* Proportional line spacing computes to 27.9px */
+    font-family: var(--font-serif-text);
+    font-size: 18px; /* Perfectly balanced mid-scale body copy */
+    font-weight: 300; /* Luxury editorial light weight text execution */
+    line-height: 1.55; /* Open spacing minimizes visual clutter */
     letter-spacing: normal;
     margin: 8px 0 20px 0;
     color: rgba(0, 0, 0, 0.85);
   }
 
-  /* Rigidly locks maximum sizes the second the viewport strikes the 1440px desktop width barrier */
+  /* Securely lock scaling targets at the desktop layout boundary (1440px) */
   @media screen and (min-width: 1440px) {
     h1, .display-h1 { font-size: 81.36px !important; }
     h2, .display-h2 { font-size: 57.56px !important; }
