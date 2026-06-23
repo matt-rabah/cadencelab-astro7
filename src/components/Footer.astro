@@ -1,176 +1,211 @@
 ---
 // src/components/Footer.astro
-const currentYear = new Date().getFullYear();
 ---
-<footer class="footer">
+<footer class="gh-footer-zone">
   <div class="footer-container">
     
-    <!-- Column 1: Brand Manifesto -->
-    <div class="footer-brand">
-      <a href="/" class="footer-logo">
-        Cadence<span>Lab</span>
-      </a>
-      <p class="brand-description">
-        Architecting workflow adoption, trust, and alignment frameworks for enterprise customer experience automation.
-      </p>
+    <div class="footer-top-grid">
+      
+      <div class="footer-brand-column">
+        <a href="/" class="footer-logo-link" title="Return to Homepage">
+          <img 
+            src="/assets/cadencelab-wordmark_cadencelab-logo-color-lt.svg" 
+            alt="CadenceLab" 
+            height="26" 
+            class="footer-brand-logo"
+          />
+        </a>
+        <p class="footer-abstract">
+          Architecting workflow adoption, system integration trust, and cross-functional measurement layers for enterprise customer experience ecosystems.
+        </p>
+      </div>
+
+      <div class="footer-links-column">
+        <h4>Workflows</h4>
+        <nav aria-label="Footer Workflows Navigation">
+          <a href="/workflows/salesforce">Salesforce Tracing</a>
+          <a href="/workflows/cross-functional">Cross-Functional Links</a>
+          <a href="/workflows/escalation">SLA Escalation Maps</a>
+          <a href="/workflows/agent-routing">AI-to-Human Routing</a>
+        </nav>
+      </div>
+
+      <div class="footer-links-column">
+        <h4>Solutions</h4>
+        <nav aria-label="Footer Solutions Navigation">
+          <a href="/solutions/adoption-fatigue">User Adoption Fatigue</a>
+          <a href="/solutions/dirty-data">Siloed & Dirty CRM Pipelines</a>
+          <a href="/solutions/misalignment">Executive Misalignment</a>
+          <a href="/solutions/enterprise">Enterprise Frameworks</a>
+        </nav>
+      </div>
+
+      <div class="footer-links-column">
+        <h4>AI Tooling</h4>
+        <nav aria-label="Footer AI Tooling Navigation">
+          <a href="/ai-tooling/prompt-guard">Prompt Firewalls</a>
+          <a href="/ai-tooling/hallucination">Variance Tracing</a>
+          <a href="/ai-tooling/compliance">PII Scrubbing Nodes</a>
+          <a href="/ai-tooling/co-pilot">Agent Co-Pilots</a>
+        </nav>
+      </div>
+
     </div>
 
-    <!-- Column 2: Advisory Navigation -->
-    <div class="footer-links">
-      <span class="links-title">Advisory</span>
-      <ul>
-        <li><a href="/framework">The Framework</a></li>
-        <li><a href="/approach">Core Approach</a></li>
-        <li><a href="/apply">Fit Assessment</a></li>
-      </ul>
+    <div class="footer-bottom-tier">
+      <div class="legal-left">
+        <span>&copy; {new Date().getFullYear()} CadenceLab. All rights reserved.</span>
+      </div>
+      <div class="legal-right">
+        <a href="/privacy">Privacy Policy</a>
+        <span class="legal-divider">•</span>
+        <a href="/terms">Terms of Service</a>
+        <span class="legal-divider">•</span>
+        <a href="/governance">System Governance</a>
+      </div>
     </div>
 
-    <!-- Column 3: Corporate Trust / Legal (Crucial for Google SEO) -->
-    <div class="footer-links">
-      <span class="links-title">Governance</span>
-      <ul>
-        <li><a href="/privacy">Privacy Policy</a></li>
-        <li><a href="/terms">Terms of Engagement</a></li>
-        <li><a href="/disclosures">System Disclosures</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- Bottom Legal Strip -->
-  <div class="footer-bottom">
-    <div class="bottom-container">
-      <p class="copyright">
-        &copy; {currentYear} CadenceLab. All rights reserved.
-      </p>
-      <p class="attribution">
-        Engineered for precision and enterprise accessibility.
-      </p>
-    </div>
   </div>
 </footer>
 
 <style>
-  /* --- DESIGN TOKENS (Inspired by The Futur + Spectrum 2 High-Contrast Dark) --- */
-  .footer {
+  /* --- ENTERPRISE DARK MODE FOOTER FRAMEWORK --- */
+  .gh-footer-zone {
     width: 100%;
-    background-color: #000000; /* True black baseline matching Chris Do's branding */
-    color: #ffffff;
-    padding: 80px 24px 0 24px;
-    border-top: 1px solid #222222;
+    background-color: #000000; /* Crisp true black canvas foundation */
+    color: #cbd6e2; /* Clear, legible slate gray typography scale */
+    padding: 80px 24px 40px 24px;
+    border-top: 1px solid #1e242c;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr repeat(2, 1fr);
-    gap: 64px;
-    padding-bottom: 64px;
-  }
-
-  /* --- BRANDING --- */
-  .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 360px;
+    gap: 64px;
   }
 
-  .footer-logo {
-    font-family: adobe-clean, sans-serif;
-    font-size: 24px;
-    font-weight: 800;
-    color: #ffffff;
-    text-decoration: none;
-    letter-spacing: -0.02em;
+  /* --- TOP GRID COLUMN LAYOUT --- */
+  .footer-top-grid {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 48px;
   }
 
-  .footer-logo span {
-    color: var(--spectrum-global-color-accent, #0265dc);
-    font-weight: 400;
-  }
-
-  .brand-description {
-    font-family: adobe-clean, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #8e8e8e; /* Muted slate gray for secondary hierarchy */
-  }
-
-  /* --- LINK COLUMNS --- */
-  .footer-links {
+  .footer-brand-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  .links-title {
-    font-family: adobe-clean, sans-serif;
+  .footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-brand-logo {
+    width: auto;
+    object-fit: contain;
+  }
+
+  .footer-abstract {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #88a0ba; /* Muted corporate descriptive tone */
+    max-width: 320px;
+  }
+
+  /* --- LINK DIRECTORIES --- */
+  .footer-links-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-links-column h4 {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #ffffff;
-    letter-spacing: 0.1em;
+    color: #ffffff; /* High contrast indicator heads */
+    letter-spacing: 0.08em;
   }
 
-  .footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .footer-links-column nav {
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
 
-  .footer-links a {
-    font-family: adobe-clean, sans-serif;
-    font-size: 14px;
-    color: #8e8e8e;
+  .footer-links-column a {
+    font-size: 13.5px;
+    color: #cbd6e2;
     text-decoration: none;
-    transition: color 0.15s ease-in-out;
+    transition: color 0.15s ease;
+    align-self: flex-start;
   }
 
-  .footer-links a:hover {
-    color: #ffffff; /* Crisp white hover states matching premium web expectations */
+  .footer-links-column a:hover {
+    color: #1a73e2; /* Shifts cleanly to your primary signature brand blue on mouse focus */
   }
 
-  /* --- BOTTOM LEGAL STRIP --- */
-  .footer-bottom {
-    border-top: 1px solid #222222;
-    padding: 32px 0;
-  }
-
-  .bottom-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  /* --- BOTTOM COMPLIANCE TIER --- */
+  .footer-bottom-tier {
+    border-top: 1px solid #1e242c;
+    padding-top: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 12.5px;
+    color: #576579;
   }
 
-  .copyright, .attribution {
-    font-family: adobe-clean, sans-serif;
-    font-size: 12px;
-    color: #666666;
+  .legal-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
-  @media (max-width: 768px) {
-    .footer {
-      padding: 48px 16px 0 16px;
+  .legal-right a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .legal-right a:hover {
+    color: #ffffff;
+  }
+
+  .legal-divider {
+    user-select: none;
+    color: #1e242c;
+  }
+
+  /* --- 📱 RESPONSIVE MEDIA ADAPTATION LAYER --- */
+  @media (max-width: 850px) {
+    .gh-footer-zone {
+      padding: 60px 24px 32px 24px;
     }
 
-    .footer-container {
-      grid-template-columns: 1fr; /* Collapses safely to stack layouts cleanly on mobile */
+    .footer-top-grid {
+      grid-template-columns: 1fr;
       gap: 40px;
-      padding-bottom: 40px;
     }
 
-    .bottom-container {
+    .footer-abstract {
+      max-width: 100%;
+    }
+
+    .footer-bottom-tier {
       flex-direction: column;
       align-items: flex-start;
-      gap: 8px;
+      gap: 16px;
+    }
+
+    .legal-right {
+      flex-wrap: wrap;
+      gap: 8px 12px;
     }
   }
 </style>
