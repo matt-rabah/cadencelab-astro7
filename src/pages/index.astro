@@ -9,15 +9,38 @@ import ContactCTA from '../components/ContactCTA.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
+<Layout title="CadenceLab | Enterprise CX Architecture">
+  <!-- The multi-tier navigation now spans edge-to-edge -->
   <NavHeader />
   
-  <main style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column;">
+  <!-- Removed the max-width restriction so component backgrounds stretch full-width -->
+  <main class="page-canvas">
     <Hero />
     <Approach />
     <FitCriteria />
     <ContactCTA />
   </main>
 
+  <!-- The true-black footer stretches edge-to-edge natively -->
   <Footer />
 </Layout>
+
+<style is:global>
+  /* --- GLOBAL OVERRIDES --- */
+  /* This completely purges the default Astro template's dark theme backgrounds */
+  html, 
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff !important; /* Forces a pristine enterprise canvas */
+    color: #1e242c;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden; /* Prevents unwanted horizontal structural shaking */
+  }
+
+  .page-canvas {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
