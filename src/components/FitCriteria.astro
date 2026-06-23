@@ -1,0 +1,170 @@
+---
+// src/components/FitCriteria.astro
+---
+<section class="criteria-section">
+  <div class="criteria-container">
+    
+    <div class="criteria-intro">
+      <h2 class="criteria-heading">Engagement Framework: Screening for Fit</h2>
+      <p class="criteria-lead">
+        We do not accept every engagement. AI integration within enterprise customer experience is fundamentally an operational risk, not a software purchase. We screen potential partners against strict operational baselines to guarantee measurable execution.
+      </p>
+    </div>
+
+    <div class="criteria-split">
+      <!-- Who We Partner With -->
+      <div class="criteria-block alignment-positive">
+        <h3>Minimum Requirements for Engagement</h3>
+        <ul class="criteria-list">
+          <li>
+            <strong>Complex Legacy Infrastructures:</strong> Organizations managing multi-layered stakeholder environments where customer-facing friction directly impacts retention.
+          </li>
+          <li>
+            <strong>Data Maturity Baseline:</strong> Businesses with established Salesforce or enterprise CRM data structures ready to be translated into automated workflows.
+          </li>
+          <li>
+            <strong>Executive Mandate:</strong> Leadership teams who recognize that AI success is an adoption and trust problem, requiring cross-functional authority to execute.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Who We Do Not Serve -->
+      <div class="criteria-block alignment-negative">
+        <h3>Out of Scope Environments</h3>
+        <ul class="criteria-list">
+          <li>
+            <strong>"Plug-and-Play" Expectations:</strong> We do not serve organizations looking for surface-level API wrappers or immediate, un-measured automation patches.
+          </li>
+          <li>
+            <strong>Siloed Technical Projects:</strong> Engagements treated strictly as isolated IT tasks without active frontline workflow adoption strategy are rejected.
+          </li>
+          <li>
+            <strong>Commodity Procurement:</strong> Our pricing reflects systemic operational outcomes, not line-item development hours.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* --- DESIGN TOKENS (Spectrum 2 Elegant & Minimalist Scale) --- */
+  .criteria-section {
+    width: 100%;
+    padding: 100px 24px;
+    background-color: var(--spectrum-background-layer-2, #f5f5f5);
+    border-top: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
+  }
+
+  .criteria-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .criteria-intro {
+    max-width: 800px;
+  }
+
+  .criteria-heading {
+    font-family: adobe-clean, sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--spectrum-heading-color, CanvasText);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .criteria-lead {
+    font-family: adobe-clean, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--spectrum-body-color, #4b4b4b);
+  }
+
+  /* --- SPLIT LAYOUT --- */
+  .criteria-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .criteria-block {
+    background-color: var(--spectrum-background-layer-1, #ffffff);
+    padding: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
+  }
+
+  .criteria-block h3 {
+    font-family: adobe-clean, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  .alignment-positive h3 {
+    color: var(--spectrum-global-color-accent, #0265dc);
+  }
+
+  .alignment-negative h3 {
+    color: var(--spectrum-heading-color, CanvasText);
+  }
+
+  .criteria-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .criteria-list li {
+    font-family: adobe-clean, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--spectrum-body-color, #4b4b4b);
+    position: relative;
+    padding-left: 20px;
+  }
+
+  /* Custom minimal list indicators mapping to Spectrum aesthetics */
+  .criteria-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 50%);
+  }
+
+  .alignment-positive .criteria-list li::before {
+    color: var(--spectrum-global-color-accent, #0265dc);
+  }
+
+  /* --- 📱 RESPONSIVE MEDIA QUERIES --- */
+  @media (max-width: 900px) {
+    .criteria-split {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .criteria-section {
+      padding: 64px 16px;
+    }
+
+    .criteria-heading {
+      font-size: 28px;
+    }
+
+    .criteria-block {
+      padding: 24px;
+    }
+  }
+</style>
