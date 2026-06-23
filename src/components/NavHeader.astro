@@ -1,17 +1,18 @@
 ---
 // src/components/NavHeader.astro
-import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.svg";
+// Clean Slate: Old PNG imports and 'astro:assets' have been completely removed
 ---
 <header class="gh-header">
   <!-- Desktop Layout -->
   <div class="desktop-nav">
     
-    <!-- Left branding zone (Width set to 230px to cleanly clear the wordmark) -->
+    <!-- Left branding zone -->
     <div class="brand-zone">
       <a href="/" class="brand-logo-container" title="Go to Homepage">
+        <!-- Natively referencs your public folder file with zero build lag -->
         <img 
-          src={cadenceLogo.src ?? cadenceLogo}
-          alt="CadenceLab" 
+          src="/assets/cadencelab-logo-color-bk.svg" 
+          alt="CadenceLab Logo" 
           height="26" 
           class="desktop-brand-logo"
         />
@@ -183,11 +184,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
         </svg>
       </button>
       <a href="/" class="mobile-brand-logo-container">
-        <img 
-          src={cadenceLogo.src ?? cadenceLogo}
-          alt="CadenceLab" 
-          height="22" 
-        />
+        <img src="/assets/cadencelab-logo-color-bk.svg" alt="CadenceLab Logo" height="22" />
       </a>
     </div>
 
@@ -230,13 +227,13 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
 </script>
 
 <style>
-  /* --- BASE NAV ARCHITECTURE --- */
+  /* All existing layout rules, grid structures, alignments, and chevron animations are completely preserved */
   .gh-header {
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 999;
-    background-color: #f4f5f7;
+    background-color: #ffffff;
     color: #1e242c;
     border-bottom: 1px solid #cbd6e2;
   }
@@ -253,7 +250,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     display: flex;
     align-items: center;
     padding-left: 32px;
-    border-right: 1px solid #f4f5f7;
+    border-right: 1px solid #f5f8fa;
   }
 
   .brand-logo-container, .mobile-brand-logo-container {
@@ -273,7 +270,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     justify-content: space-between;
   }
 
-  /* --- TOP TIER ARCHITECTURE (Left aligned to 48px rail) --- */
   .top-tier {
     height: 56px;
     display: flex;
@@ -281,7 +277,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     justify-content: space-between;
     padding-left: 48px; 
     padding-right: 32px;
-    border-bottom: 1px solid #f4f5f7;
+    border-bottom: 1px solid #f5f8fa;
   }
 
   .search-wrapper {
@@ -314,7 +310,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
 
   .search-input:focus {
     background-color: #ffffff;
-    border-color: #1823C9;
+    border-color: #1a73e2;
   }
 
   .meta-links {
@@ -331,11 +327,11 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
   }
 
   .meta-link:hover, .lang-selector:hover {
-    color: #1823C9;
+    color: #1a73e2;
   }
 
   .meta-divider {
-    color: #f4f5f7;
+    color: #cbd6e2;
     user-select: none;
   }
 
@@ -352,7 +348,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     cursor: pointer;
   }
 
-  /* --- BOTTOM TIER LINKS MAP (Flushed smoothly with top tier) --- */
   .bottom-tier {
     height: 49px;
     display: flex;
@@ -362,7 +357,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
 
   .primary-menu {
     display: flex;
-    padding-left: 28px; /* 28px margin + 20px dynamic item inset = 48px vertical lock alignment */
+    padding-left: 28px; 
     height: 100%;
   }
 
@@ -401,7 +396,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     height: 49px;
     padding: 0 48px;
     background-color: #1a73e2;
-    color: #f4f5f7;
+    color: #ffffff;
     font-size: 13.5px;
     font-weight: 500;
     text-decoration: none;
@@ -419,7 +414,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
   }
 
-  /* --- MEGA DROPDOWN ENGINE --- */
   .has-mega {
     position: static; 
   }
@@ -429,12 +423,12 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     top: 105px; 
     left: 0;
     width: 100%;
-    background-color: #f4f5f7;
-    border-bottom: 1px solid #f4f5f7;
+    background-color: #ffffff;
+    border-bottom: 1px solid #cbd6e2;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
     display: none; 
     z-index: 1000;
-    border-top: 1px solid #f4f5f7;
+    border-top: 1px solid #f5f8fa;
   }
 
   .has-mega:hover .mega-menu-dropdown {
@@ -442,11 +436,11 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
   }
 
   .has-mega:hover .menu-trigger-btn {
-    color: #1823C9;
+    color: #1a73e2;
   }
 
   .has-mega:hover .expand-icon {
-    color: #1823C9; 
+    color: #1a73e2; 
     transform: rotate(180deg); 
   }
 
@@ -531,7 +525,6 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-color-dk.
     text-decoration: underline;
   }
 
-  /* --- RESPONSIVE MOBILE HANDLES --- */
   .mobile-nav, .mobile-drawer {
     display: none;
   }
