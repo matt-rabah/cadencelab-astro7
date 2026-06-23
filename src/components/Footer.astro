@@ -1,0 +1,176 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Column 1: Brand Manifesto -->
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        Cadence<span>Lab</span>
+      </a>
+      <p class="brand-description">
+        Architecting workflow adoption, trust, and alignment frameworks for enterprise customer experience automation.
+      </p>
+    </div>
+
+    <!-- Column 2: Advisory Navigation -->
+    <div class="footer-links">
+      <span class="links-title">Advisory</span>
+      <ul>
+        <li><a href="/framework">The Framework</a></li>
+        <li><a href="/approach">Core Approach</a></li>
+        <li><a href="/apply">Fit Assessment</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Corporate Trust / Legal (Crucial for Google SEO) -->
+    <div class="footer-links">
+      <span class="links-title">Governance</span>
+      <ul>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms of Engagement</a></li>
+        <li><a href="/disclosures">System Disclosures</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom Legal Strip -->
+  <div class="footer-bottom">
+    <div class="bottom-container">
+      <p class="copyright">
+        &copy; {currentYear} CadenceLab. All rights reserved.
+      </p>
+      <p class="attribution">
+        Engineered for precision and enterprise accessibility.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* --- DESIGN TOKENS (Inspired by The Futur + Spectrum 2 High-Contrast Dark) --- */
+  .footer {
+    width: 100%;
+    background-color: #000000; /* True black baseline matching Chris Do's branding */
+    color: #ffffff;
+    padding: 80px 24px 0 24px;
+    border-top: 1px solid #222222;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr repeat(2, 1fr);
+    gap: 64px;
+    padding-bottom: 64px;
+  }
+
+  /* --- BRANDING --- */
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 360px;
+  }
+
+  .footer-logo {
+    font-family: adobe-clean, sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-logo span {
+    color: var(--spectrum-global-color-accent, #0265dc);
+    font-weight: 400;
+  }
+
+  .brand-description {
+    font-family: adobe-clean, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #8e8e8e; /* Muted slate gray for secondary hierarchy */
+  }
+
+  /* --- LINK COLUMNS --- */
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .links-title {
+    font-family: adobe-clean, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    font-family: adobe-clean, sans-serif;
+    font-size: 14px;
+    color: #8e8e8e;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .footer-links a:hover {
+    color: #ffffff; /* Crisp white hover states matching premium web expectations */
+  }
+
+  /* --- BOTTOM LEGAL STRIP --- */
+  .footer-bottom {
+    border-top: 1px solid #222222;
+    padding: 32px 0;
+  }
+
+  .bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .copyright, .attribution {
+    font-family: adobe-clean, sans-serif;
+    font-size: 12px;
+    color: #666666;
+  }
+
+  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 48px 16px 0 16px;
+    }
+
+    .footer-container {
+      grid-template-columns: 1fr; /* Collapses safely to stack layouts cleanly on mobile */
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+
+    .bottom-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+</style>
