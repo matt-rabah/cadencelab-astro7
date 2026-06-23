@@ -14,51 +14,112 @@ import Footer from '../components/Footer.astro';
         <span class="form-tag">Phase 1: Alignment</span>
         <h1 class="form-heading">The CX Fit Check</h1>
         <p class="form-subheading">
-          Before we discuss advisory timelines or investment, we must evaluate your structural readiness. Complete this baseline profile to determine if your enterprise environment matches our deployment framework.
+          Before we discuss advisory timelines or investment, we must evaluate
+          your structural readiness. Complete this baseline profile to determine
+          if your enterprise environment matches our deployment framework.
         </p>
       </header>
 
-      <form class="assessment-form" method="POST" action="/thanks">
-        
+      <form
+        class="assessment-form"
+        method="POST"
+        action="/thanks">
         <!-- Section 1: Environmental Complexity -->
         <fieldset class="form-section">
           <legend>01. Technical & Operational Complexity</legend>
-          
+
           <div class="input-group">
-            <label for="environment-type">Describe the current state of your legacy CX infrastructure.</label>
-            <select id="environment-type" name="environment-type" required>
-              <option value="" disabled selected>Select an operational baseline...</option>
-              <option value="fractured">Highly fractured (Multiple disconnected legacy systems)</option>
-              <option value="transitioning">In transition (Migrating or attempting to unify tools)</option>
-              <option value="modern-silo">Modern but siloed (Tools are active, but cross-functional teams don't utilize them)</option>
+            <label for="environment-type"
+              >Describe the current state of your legacy CX infrastructure.</label
+            >
+            <select
+              id="environment-type"
+              name="environment-type"
+              required>
+              <option
+                value=""
+                disabled
+                selected
+                >Select an operational baseline...</option
+              >
+              <option value="fractured"
+                >Highly fractured (Multiple disconnected legacy systems)</option
+              >
+              <option value="transitioning"
+                >In transition (Migrating or attempting to unify tools)</option
+              >
+              <option value="modern-silo"
+                >Modern but siloed (Tools are active, but cross-functional teams
+                don't utilize them)</option
+              >
             </select>
           </div>
 
           <div class="input-group">
-            <label for="bottleneck">What is your primary system point of failure right now?</label>
-            <textarea id="bottleneck" name="bottleneck" rows="3" placeholder="e.g., Staff is bypassing our new AI routing tool; data isn't clean..." required></textarea>
+            <label for="bottleneck"
+              >What is your primary system point of failure right now?</label
+            >
+            <textarea
+              id="bottleneck"
+              name="bottleneck"
+              rows="3"
+              placeholder="e.g., Staff is bypassing our new AI routing tool; data isn't clean..."
+              required
+            ></textarea>
           </div>
         </fieldset>
 
         <!-- Section 2: Data & Executive Governance -->
         <fieldset class="form-section">
           <legend>02. Data Architecture & Authority</legend>
-          
+
           <div class="input-group">
-            <label for="crm-status">What is the baseline maturity of your Salesforce / CRM data?</label>
-            <select id="crm-status" name="crm-status" required>
-              <option value="" disabled selected>Select data status...</option>
-              <option value="mature">Established architecture (Traced to retention metrics)</option>
-              <option value="dirty">Active data collection, but lacks clear workflow tracing</option>
-              <option value="undeployed">Basic logging only (Data exists but is underutilized)</option>
+            <label for="crm-status"
+              >What is the baseline maturity of your Salesforce / CRM data?</label
+            >
+            <select
+              id="crm-status"
+              name="crm-status"
+              required>
+              <option
+                value=""
+                disabled
+                selected
+                >Select data status...</option
+              >
+              <option value="mature"
+                >Established architecture (Traced to retention metrics)</option
+              >
+              <option value="dirty"
+                >Active data collection, but lacks clear workflow tracing</option
+              >
+              <option value="undeployed"
+                >Basic logging only (Data exists but is underutilized)</option
+              >
             </select>
           </div>
 
           <div class="input-group">
-            <label for="mandate">Do you currently have an explicit cross-functional mandate from leadership to execute workflow changes?</label>
+            <label for="mandate"
+              >Do you currently have an explicit cross-functional mandate from
+              leadership to execute workflow changes?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="mandate" value="yes" required /> Yes, we have active executive backing.</label>
-              <label><input type="radio" name="mandate" value="no" /> No, we are currently trying to build internal buy-in.</label>
+              <label
+                ><input
+                  type="radio"
+                  name="mandate"
+                  value="yes"
+                  required
+                /> Yes, we have active executive backing.</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="mandate"
+                  value="no"
+                /> No, we are currently trying to build internal buy-in.</label
+              >
             </div>
           </div>
         </fieldset>
@@ -66,25 +127,44 @@ import Footer from '../components/Footer.astro';
         <!-- Section 3: Professional Profile -->
         <fieldset class="form-section">
           <legend>03. Stakeholder Profile</legend>
-          
+
           <div class="grid-inputs">
             <div class="input-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+              />
             </div>
             <div class="input-group">
               <label for="email">Corporate Email</label>
-              <input type="email" id="email" name="email" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+              />
             </div>
           </div>
 
           <div class="input-group">
             <label for="org">Organization</label>
-            <input type="text" id="org" name="org" required />
+            <input
+              type="text"
+              id="org"
+              name="org"
+              required
+            />
           </div>
         </fieldset>
 
-        <button type="submit" class="btn-submit">Submit Baseline Profile for Review</button>
+        <button
+          type="submit"
+          class="btn-submit"
+          >Submit Baseline Profile for Review</button
+        >
       </form>
     </div>
   </main>
@@ -185,8 +265,8 @@ import Footer from '../components/Footer.astro';
   }
 
   /* Premium inputs utilizing minimalist architectural scaling */
-  input[type="text"],
-  input[type="email"],
+  input[type='text'],
+  input[type='email'],
   select,
   textarea {
     font-family: adobe-clean, sans-serif;
@@ -200,7 +280,9 @@ import Footer from '../components/Footer.astro';
     transition: border-color 0.2s ease;
   }
 
-  input:focus, select:focus, textarea:focus {
+  input:focus,
+  select:focus,
+  textarea:focus {
     border-color: var(--spectrum-global-color-accent, #0265dc);
     background-color: var(--spectrum-background-layer-1, #ffffff);
   }
@@ -251,7 +333,7 @@ import Footer from '../components/Footer.astro';
     .grid-inputs {
       grid-template-columns: 1fr;
     }
-    
+
     .form-heading {
       font-size: 34px;
     }
