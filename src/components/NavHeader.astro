@@ -1,23 +1,19 @@
 ---
 // src/components/NavHeader.astro
-import { Image } from 'astro:assets';
-
-// Import your raw assets directly into the component metadata tree
-import logoDarkText from '../assets/cadencelab-logo-color-bk.png';
-import logoLightText from '../assets/cadencelab-logo-color-lt.png';
+// Clean Slate: Old PNG imports and 'astro:assets' have been completely removed
 ---
 <header class="gh-header">
   <!-- Desktop Layout -->
   <div class="desktop-nav">
     
-    <!-- Left branding zone (Expanded column width for wide wordmarks) -->
+    <!-- Left branding zone -->
     <div class="brand-zone">
       <a href="/" class="brand-logo-container" title="Go to Homepage">
-        <Image 
-          src={logoDarkText} 
+        <!-- Natively references your public folder file with zero build lag -->
+        <img 
+          src="/cadencelab-logo-color-bk.svg" 
           alt="CadenceLab Logo" 
-          height={26} 
-          quality="max"
+          height="26" 
           class="desktop-brand-logo"
         />
       </a>
@@ -57,11 +53,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
       <!-- Bottom Tier: Navigation Links & Sales CTA -->
       <div class="bottom-tier">
         <nav class="primary-menu" aria-label="Primary navigation">
-          
-          <!-- Fit Check Link (Direct Path) -->
-          <div class="nav-item">
-            <a href="/fit-check" class="menu-link">Fit Check</a>
-          </div>
+          <div class="nav-item"><a href="/fit-check" class="menu-link">Fit Check</a></div>
 
           <!-- Mega Menu 1: Workflows -->
           <div class="nav-item has-mega">
@@ -192,7 +184,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
         </svg>
       </button>
       <a href="/" class="mobile-brand-logo-container">
-        <Image src={logoDarkText} alt="CadenceLab Logo" height={22} quality="max" />
+        <img src="/cadencelab-logo-color-bk.svg" alt="CadenceLab Logo" height="22" />
       </a>
     </div>
 
@@ -235,7 +227,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
 </script>
 
 <style>
-  /* --- BASE NAV ARCHITECTURE --- */
+  /* All existing layout rules, grid structures, alignments, and chevron animations are completely preserved */
   .gh-header {
     width: 100%;
     position: sticky;
@@ -248,7 +240,6 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
 
   .desktop-nav {
     display: grid;
-    /* Expanded column layout grid frame to handle the wide wordmark geometry safely */
     grid-template-columns: 230px 1fr;
     max-width: 100%;
     margin: 0 auto;
@@ -279,13 +270,12 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
     justify-content: space-between;
   }
 
-  /* --- TOP TIER ARCHITECTURE --- */
   .top-tier {
     height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 48px; /* Shifted right onto the unified grid line */
+    padding-left: 48px; 
     padding-right: 32px;
     border-bottom: 1px solid #f5f8fa;
   }
@@ -358,7 +348,6 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
     cursor: pointer;
   }
 
-  /* --- BOTTOM TIER LINKS MAP --- */
   .bottom-tier {
     height: 49px;
     display: flex;
@@ -368,8 +357,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
 
   .primary-menu {
     display: flex;
-    /* Aligns the actual typography start line perfectly beneath the search box boundary edge */
-    padding-left: 28px; /* 28px canvas wrapper offset + 20px dynamic item inset = 48px match! */
+    padding-left: 28px; 
     height: 100%;
   }
 
@@ -380,7 +368,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
   }
 
   .menu-link, .menu-trigger-btn {
-    padding: 0 20px; /* Each link box provides a balanced internal click target */
+    padding: 0 20px; 
     font-size: 13px;
     font-weight: 600;
     color: #1e242c;
@@ -426,7 +414,6 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
   }
 
-  /* --- MEGA DROPDOWN STYLING --- */
   .has-mega {
     position: static; 
   }
@@ -538,7 +525,6 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
     text-decoration: underline;
   }
 
-  /* --- RESPONSIVE MOBILE HANDLES --- */
   .mobile-nav, .mobile-drawer {
     display: none;
   }
