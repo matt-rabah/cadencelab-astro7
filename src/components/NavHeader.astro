@@ -10,14 +10,13 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
   <!-- Desktop Layout -->
   <div class="desktop-nav">
     
-    <!-- Left branding zone -->
+    <!-- Left branding zone (Expanded column width for wide wordmarks) -->
     <div class="brand-zone">
       <a href="/" class="brand-logo-container" title="Go to Homepage">
-        <!-- Astro optimizes the PNG automatically, transforming it into a high-density asset -->
         <Image 
           src={logoDarkText} 
           alt="CadenceLab Logo" 
-          height={28} 
+          height={26} 
           quality="max"
           class="desktop-brand-logo"
         />
@@ -58,7 +57,11 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
       <!-- Bottom Tier: Navigation Links & Sales CTA -->
       <div class="bottom-tier">
         <nav class="primary-menu" aria-label="Primary navigation">
-          <div class="nav-item"><a href="/fit-check" class="menu-link">Fit Check</a></div>
+          
+          <!-- Fit Check Link (Direct Path) -->
+          <div class="nav-item">
+            <a href="/fit-check" class="menu-link">Fit Check</a>
+          </div>
 
           <!-- Mega Menu 1: Workflows -->
           <div class="nav-item has-mega">
@@ -245,7 +248,8 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
 
   .desktop-nav {
     display: grid;
-    grid-template-columns: 195px 1fr;
+    /* Expanded column layout grid frame to handle the wide wordmark geometry safely */
+    grid-template-columns: 230px 1fr;
     max-width: 100%;
     margin: 0 auto;
     height: 105px;
@@ -265,7 +269,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
   }
 
   .desktop-brand-logo {
-    width: auto; /* Lets the aspect ratio preserve natively based on height scale */
+    width: auto;
     object-fit: contain;
   }
 
@@ -281,7 +285,8 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 32px;
+    padding-left: 48px; /* Shifted right onto the unified grid line */
+    padding-right: 32px;
     border-bottom: 1px solid #f5f8fa;
   }
 
@@ -363,7 +368,8 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
 
   .primary-menu {
     display: flex;
-    padding-left: 16px;
+    /* Aligns the actual typography start line perfectly beneath the search box boundary edge */
+    padding-left: 28px; /* 28px canvas wrapper offset + 20px dynamic item inset = 48px match! */
     height: 100%;
   }
 
@@ -374,7 +380,7 @@ import logoLightText from '../assets/cadencelab-logo-color-lt.png';
   }
 
   .menu-link, .menu-trigger-btn {
-    padding: 0 20px;
+    padding: 0 20px; /* Each link box provides a balanced internal click target */
     font-size: 13px;
     font-weight: 600;
     color: #1e242c;
