@@ -1,87 +1,71 @@
 ---
 // src/components/Hero.astro
 ---
-
 <section class="hero-section">
   <div class="hero-content">
     <h1 class="hero-title">
-      <p>
-        AI isn't your customer experience problem.<span style="color: blue;"> Adoption is.</span>
-      </p>
+      AI isn’t your customer experience problem. <br />
+      <span class="highlight-accent">Adoption is.</span>
     </h1>
-
+    
     <p class="hero-subtitle">
-      Most customer-facing AI initiatives fail because of implementation, trust, and measurement—not the model. We translate complex stakeholder needs and CRM data into high-performing, human-adopted workflows.
+      Most customer-facing AI initiatives fail because of implementation, trust, and measurement—not the model. We translate complex stakeholder needs and CRM data into high-performing, human-adopted workflows. 
     </p>
-
+    
     <div class="hero-actions">
-      <a
-        href="/fit-check"
-        class="btn-primary"
-        >Start a Fit Check</a
-      >
-      <a
-        href="#framework"
-        class="btn-secondary"
-        >The Adoption Framework</a
-      >
+      <a href="/fit-check" class="btn-primary">Start a Fit Check</a>
+      <a href="#framework" class="btn-secondary">The Adoption Framework</a>
     </div>
   </div>
 </section>
 
 <style>
-  /* --- DESIGN TOKENS (Premium Gallery Palette Consistency) --- */
   .hero-section {
     width: 100%;
     padding: 120px 24px;
-    background-color: var(--spectrum-background-layer-1, #ffffff);
+    background-color: #ffffff;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: flex-start;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .hero-content {
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 32px;
   }
 
-  /* --- TYPOGRAPHY (Bold, Authoritative, Minimal) --- */
   .hero-title {
-    font-family: adobe-clean, sans-serif;
     font-size: 56px;
     font-weight: 900;
     line-height: 1.15;
-    color: #161616; /* Premium deep ink-charcoal */
+    color: #161616;
     letter-spacing: -0.03em;
   }
 
-  .hero-title span {
-    color: var(--spectrum-global-color-accent, #0265dc);
+  /* Fix #3: Dynamically references central brand token while maintaining automatic fallbacks */
+  .highlight-accent {
+    color: var(--color-accent, #1a73e2);
   }
 
   .hero-subtitle {
-    font-family: adobe-clean, sans-serif;
     font-size: 20px;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
+    color: #4b4b4b;
     max-width: 750px;
     letter-spacing: -0.01em;
   }
 
-  /* --- ACTIONS (Premium Consultative Vibe) --- */
   .hero-actions {
     display: flex;
     gap: 20px;
     margin-top: 12px;
   }
 
-  .btn-primary,
-  .btn-secondary {
-    font-family: adobe-clean, sans-serif;
+  .btn-primary, .btn-secondary {
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
@@ -92,7 +76,7 @@
 
   .btn-primary {
     background-color: #161616;
-    color: #fcfcf9; /* Alabaster chalk text */
+    color: #fcfcf9;
     box-shadow: 0 4px 12px rgba(22, 22, 22, 0.08);
   }
 
@@ -112,7 +96,6 @@
     border-color: rgba(22, 22, 22, 0.4);
   }
 
-  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
   @media (max-width: 768px) {
     .hero-section {
       padding: 80px 16px;
@@ -132,8 +115,7 @@
       gap: 16px;
     }
 
-    .btn-primary,
-    .btn-secondary {
+    .btn-primary, .btn-secondary {
       width: 100%;
       text-align: center;
       padding: 14px 24px;
