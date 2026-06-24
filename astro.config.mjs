@@ -20,5 +20,12 @@ export default defineConfig({
         region: 'us',
       }
     })
-  ]
+  ],
+  vite: {
+    resolve: {
+      alias: {
+        'astro/runtime/client/dev-toolbar/ui-library/icons.js': 'astro/client/dev-toolbar/ui-library/icons.js'
+      }
+    }
+  }
 });
