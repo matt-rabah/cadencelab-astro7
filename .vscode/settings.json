@@ -1,0 +1,4 @@
+{
+    "astro.content-intellisense": true,
+    "astro.updateImportsOnFileMove.enabled": true
+}
