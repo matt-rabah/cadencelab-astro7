@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "build": "tinacms build && astro build",
+    "build": "tinacms build --local --skip-cloud-checks && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -16,6 +16,7 @@
     "@astrojs/node": "^11.0.0",
     "@astrojs/react": "^6.0.0",
     "@react-spectrum/s2": "^1.5.0",
+    "@tailwindcss/typography": "^0.5.20",
     "@tinacms/astro": "^0.5.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
