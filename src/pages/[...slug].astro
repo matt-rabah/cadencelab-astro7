@@ -1,7 +1,8 @@
 ---
 // src/pages/[...slug].astro
-import { useStoryblokApi } from '@storyblok/astro';
-import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import { client } from '../../tina/__generated__/client';
+import TinaMarkdown from '@tinacms/astro/TinaMarkdown.astro';
+import { tinaField } from '@tinacms/astro/tina-field';
 import Layout from '../layouts/Layout.astro';
 import NavHeader from '../components/NavHeader.astro';
 import Footer from '../components/Footer.astro';
@@ -52,19 +53,18 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-let story = null;
-let storyblokError = null;
+let page = null;
+let tinaError = null;
 
-// Try to fetch from Storyblok CMS if configured
+// Try to fetch from Tina CMS if configured
 try {
-  const storyblokApi = useStoryblokApi();
-  const response = await storyblokApi.get(
-    `cdn/stories/${slug === undefined ? 'home' : slug}`,
-    { version: 'draft' }
-  );
-  story = response.data.story;
+  const relativePath = `${slug || 'home'}.md`;
+  const response = await client.queries.page({
+    relativePath: relativePath
+  });
+  page = response.data.page;
 } catch (e) {
-  storyblokError = e;
+  tinaError = e;
 }
 
 // Map slug to readable title and details for beautiful mock display
@@ -246,15 +246,33 @@ const meta = slugMeta[slug] || defaultMeta;
 <Layout title={`${meta.title} | CadenceLab`} description={meta.subtitle}>
   <NavHeader />
 
-  {story ? (
-    <StoryblokComponent blok={story.content} />
+  {page ? (
+    <main class="page-canvas">
+      <div class="content-container">
+        <div class="status-indicator">
+          <span class="preview-badge">TinaCMS: Online</span>
+        </div>
+        
+        <div class="hero-block">
+          <span class="category-tag" data-tina-field={tinaField(page, 'category')}>{page.category}</span>
+          <h1 class="main-title" data-tina-field={tinaField(page, 'title')}>{page.title}</h1>
+          <p class="subtitle-text" data-tina-field={tinaField(page, 'subtitle')}>{page.subtitle}</p>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="body-content" data-tina-field={tinaField(page, 'body')}>
+          <TinaMarkdown content={page.body} />
+        </div>
+      </div>
+    </main>
   ) : (
     <main class="page-canvas">
       <div class="content-container">
         <div class="status-indicator">
           <span class="preview-badge">System Preview</span>
-          {storyblokError && (
-            <span class="cms-badge">Storyblok: Offline</span>
+          {tinaError && (
+            <span class="cms-badge">TinaCMS: Offline</span>
           )}
         </div>
         
@@ -270,7 +288,7 @@ const meta = slugMeta[slug] || defaultMeta;
           <p>{meta.body}</p>
           <div class="blueprint-card">
             <h3>Technical Blueprint Overview</h3>
-            <p>Our advisory practice implements this component under rigorous architectural standards. In a live production engagement, this page displays active content, client dashboards, and system alignment schemas managed directly through our Storyblok CMS integrations.</p>
+            <p>Our advisory practice implements this component under rigorous architectural standards. In a live production engagement, this page displays active content, client dashboards, and system alignment schemas managed directly through our TinaCMS integrations.</p>
             <div class="interactive-sandbox">
               <div class="terminal-header">
                 <span class="term-dot red"></span>
@@ -283,7 +301,7 @@ const meta = slugMeta[slug] || defaultMeta;
 [SYSTEM INFO] Initiating diagnostic trace for route "/${slug}"...
 [OK] Resolving static parameters
 [OK] Rendering template context
-[WARNING] Storyblok API token is offline (draft mode bypassed)
+[WARNING] TinaCMS API is offline (local mode bypassed)
 [INFO] Serving local fallback component tree (Status: 200 OK)`}</code>
               </pre>
             </div>
