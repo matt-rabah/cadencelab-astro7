@@ -7,6 +7,6 @@
     "jsxImportSource": "react",
     "skipLibCheck": true,
     "allowJs": true,
-    "types": ["astro/clien"]
+    "types": ["astro/client"]
   }
 }
