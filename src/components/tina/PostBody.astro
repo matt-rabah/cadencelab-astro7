@@ -6,7 +6,7 @@ import { sanitizeHref } from '@tinacms/astro/sanitize';
 import type { PostQuery } from '../../../tina/__generated__/types';
 
 interface Props {
-  data?: PostQuery['post'] | null;
+  data?: any;
 }
 const { data } = Astro.props;
 ---
