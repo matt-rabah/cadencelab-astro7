@@ -33,12 +33,10 @@ export default defineConfig({
         format: "md",
         ui: {
           router: ({ document }: { document: any }) => {
-            if (document._sys.filename === 'hello-world') {
-              return '/tinacms-demo';
-            }
+            // FIX: Using UTC date variants to prevent local timezones from shifting your post folders backward
             const date = new Date(document.data?.date || new Date());
-            const year = date.getFullYear().toString();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getUTCFullYear().toString();
+            const month = String(date.getUTCMonth() + 1).padStart(2, '0');
             const slug = document._sys.filename;
             return `/blog/${year}/${month}/${slug}`;
           },
@@ -86,7 +84,7 @@ export default defineConfig({
       {
         name: "page",
         label: "Pages",
-        path: "src/content/pages", // <-- FIXED: Added "src/" prefix so Tina looks in your Astro source directory
+        path: "src/content/pages",
         format: "md",
         ui: {
           router: ({ document }) => {
