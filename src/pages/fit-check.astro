@@ -4,17 +4,19 @@ import Layout from "../layouts/Layout.astro";
 import NavHeader from "../components/NavHeader.astro";
 import Footer from "../components/Footer.astro";
 
-// Fetch the data file created for TinaCMS
+// Fetch the page content data file handled by TinaCMS
 import { getEntry } from "astro:content";
 const pageData = await getEntry("page", "fit-check");
 
+// TYPE GUARD: If the file is missing or not indexed yet, stop the build with a clear warning
 if (!pageData) {
   throw new Error(
-    "Could not find content for page 'fit-check'. Please verify that 'src/content/pages/fit-check.md' exists.",
+    "Content entry not found for 'src/content/pages/fit-check.md'. " +
+      "Please make sure this file exists and contains valid frontmatter.",
   );
 }
 
-// Extract the editable values
+// TypeScript now knows pageData is 100% defined, so this line runs error-free
 const { title, subtitle, category } = pageData.data;
 ---
 
