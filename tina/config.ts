@@ -33,12 +33,14 @@ export default defineConfig({
         format: "md",
         ui: {
           router: ({ document }: { document: any }) => {
-            // FIX: Using UTC date variants to prevent local timezones from shifting your post folders backward
-            const date = new Date(document.data?.date || new Date());
+            // FIX: Tina stores frontmatter fields inside _values, not data
+            const date = new Date(document._values?.date || new Date());
             const year = date.getUTCFullYear().toString();
             const month = String(date.getUTCMonth() + 1).padStart(2, '0');
             const slug = document._sys.filename;
-            return `/blog/${year}/${month}/${slug}`;
+
+            // Added trailing slash to match Astro's native dev mode route resolution
+            return `/blog/${year}/${month}/${slug}/`;
           },
         },
         fields: [
