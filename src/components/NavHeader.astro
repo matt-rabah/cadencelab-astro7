@@ -1,5 +1,4 @@
 ---
-// src/components/NavHeader.astro
 import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg";
 ---
 <header class="gh-header">
@@ -198,7 +197,8 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
       <a href="/ai-tooling">AI Tooling</a>
       <a href="/governance">Governance</a>
       <a href="/advisory">Advisory</a>
-      <a href="/blog">Blog</a> <div class="drawer-footer">
+      <a href="/blog">Blog</a> 
+      <div class="drawer-footer">
         <a href="/support">Support</a>
         <a href="/login" class="drawer-login">Client Login</a>
       </div>
@@ -207,23 +207,25 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 </header>
 
 <script>
-  const menuBtn = document.getElementById('mobile-menu-trigger');
-  const drawer = document.getElementById('mobile-navigation-drawer');
+  const initializeMenu = () => {
+    const menuBtn = document.getElementById('mobile-menu-trigger');
+    const drawer = document.getElementById('mobile-navigation-drawer');
 
-  if (menuBtn && drawer) {
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      drawer.classList.toggle('hidden');
-    });
+    if (menuBtn && drawer) {
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        drawer.classList.toggle('hidden');
+      });
 
-    document.addEventListener('click', () => {
-      drawer.classList.add('hidden');
-    });
-  }
+      document.addEventListener('click', () => {
+        drawer.classList.add('hidden');
+      });
+    }
+  };
+  initializeMenu();
 </script>
 
 <style>
-  /* All pristine desktop layout grid tracking styles from previous turn completely preserved */
   .gh-header {
     width: 100%;
     position: sticky;
@@ -231,22 +233,25 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     z-index: 999;
     background-color: #ffffff;
     color: #1e242c;
-    border-bottom: 1px solid #cbd6e2;
+    border-bottom: 0.0625rem solid #cbd6e2;
+    font-family: var(--font-graphik), -apple-system, sans-serif;
+    font-feature-settings: "ss05" 1, "calt" 1, "kern" 1;
+    -webkit-font-smoothing: antialiased;
   }
 
   .desktop-nav {
     display: grid;
-    grid-template-columns: 230px 1fr;
+    grid-template-columns: 14.375rem 1fr;
     max-width: 100%;
     margin: 0 auto;
-    height: 105px;
+    min-height: 6.5625rem;
   }
 
   .brand-zone {
     display: flex;
     align-items: center;
-    padding-left: 32px;
-    border-right: 1px solid #f5f8fa;
+    padding-left: 2rem;
+    border-right: 0.0625rem solid #f5f8fa;
   }
 
   .brand-logo-container, .mobile-brand-logo-container {
@@ -267,39 +272,40 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
   }
 
   .top-tier {
-    height: 56px;
+    height: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 48px; 
-    padding-right: 32px;
-    border-bottom: 1px solid #f5f8fa;
+    padding-left: 3rem; 
+    padding-right: 2rem;
+    border-bottom: 0.0625rem solid #f5f8fa;
   }
 
   .search-wrapper {
     position: relative;
     width: 100%;
-    max-width: 412px;
+    max-width: 25.75rem;
   }
 
   .search-icon {
     position: absolute;
-    left: 14px;
+    left: 0.875rem;
     top: 50%;
     transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
+    width: 1rem;
+    height: 1rem;
     opacity: 0.4;
   }
 
   .search-input {
     width: 100%;
-    height: 36px;
-    padding: 0 16px 0 42px;
+    height: 2.25rem;
+    padding: 0 1rem 0 2.625rem;
     background-color: #f5f8fa;
-    border: 1px solid transparent;
-    border-radius: 2px;
-    font-size: 13px;
+    border: 0.0625rem solid transparent;
+    border-radius: 0.125rem;
+    font-size: 0.8125rem;
+    font-family: var(--font-graphik), sans-serif;
     outline: none;
     transition: all 0.15s ease;
   }
@@ -312,9 +318,10 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
   .meta-links {
     display: flex;
     align-items: center;
-    gap: 20px;
-    font-size: 13.5px;
+    gap: 1.25rem;
+    font-size: 0.84375rem;
     color: #576579;
+    letter-spacing: 0.01em;
   }
 
   .meta-link {
@@ -341,11 +348,13 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     border: none;
     color: inherit;
     font-size: inherit;
+    font-family: inherit;
+    font-weight: 500;
     cursor: pointer;
   }
 
   .bottom-tier {
-    height: 49px;
+    height: 3.0625rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -353,7 +362,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 
   .primary-menu {
     display: flex;
-    padding-left: 28px; 
+    padding-left: 1.75rem; 
     height: 100%;
   }
 
@@ -364,8 +373,8 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
   }
 
   .menu-link, .menu-trigger-btn {
-    padding: 0 20px; 
-    font-size: 13px;
+    padding: 0 1.25rem; 
+    font-size: 0.8125rem;
     font-weight: 600;
     color: #1e242c;
     text-decoration: none;
@@ -376,8 +385,8 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     height: 100%;
     display: inline-flex;
     align-items: center;
-    gap: 6px; 
-    font-family: inherit;
+    gap: 0.375rem; 
+    font-family: var(--font-graphik), sans-serif;
     transition: color 0.15s ease;
   }
 
@@ -389,13 +398,14 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 49px;
-    padding: 0 48px;
+    height: 3.0625rem;
+    padding: 0 3rem;
     background-color: #1a73e2;
     color: #ffffff;
-    font-size: 13.5px;
-    font-weight: 500;
+    font-size: 0.84375rem;
+    font-weight: 600;
     text-decoration: none;
+    letter-spacing: 0.01em;
     transition: background-color 0.15s ease;
   }
 
@@ -404,8 +414,8 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
   }
 
   .expand-icon {
-    width: 10px;
-    height: 10px;
+    width: 0.625rem;
+    height: 0.625rem;
     color: #576579; 
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
   }
@@ -416,15 +426,15 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 
   .mega-menu-dropdown {
     position: absolute;
-    top: 105px; 
+    top: 6.5625rem; 
     left: 0;
     width: 100%;
     background-color: #ffffff;
-    border-bottom: 1px solid #cbd6e2;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    border-bottom: 0.0625rem solid #cbd6e2;
+    box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.06);
     display: none; 
     z-index: 1000;
-    border-top: 1px solid #f5f8fa;
+    border-top: 0.0625rem solid #f5f8fa;
   }
 
   .has-mega:hover .mega-menu-dropdown {
@@ -441,34 +451,36 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
   }
 
   .mega-menu-inner {
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 2.5rem 1.5rem;
     display: grid;
     grid-template-columns: 1.2fr repeat(2, 1fr);
-    gap: 48px;
+    gap: 3rem;
   }
 
   .mega-column h4 {
-    font-size: 11px;
+    font-family: var(--font-graphik-xx-condensed), sans-serif;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     color: #576579;
     letter-spacing: 0.08em;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   .mega-column ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem;
   }
 
   .mega-column ul a {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
     color: #1e242c;
+    text-decoration: none;
     transition: color 0.15s ease;
   }
 
@@ -478,43 +490,48 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
 
   .mega-column.featured {
     background-color: #f5f8fa;
-    padding: 24px;
-    border-radius: 4px;
+    padding: 1.5rem;
+    border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 0.75rem;
   }
 
   .column-tag {
-    font-size: 10px;
+    font-family: var(--font-graphik-xx-condensed), sans-serif;
+    font-size: 0.6875rem;
     font-weight: 700;
     text-transform: uppercase;
     background-color: #cbd6e2;
     color: #1e242c;
-    padding: 2px 6px;
-    border-radius: 2px;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.125rem;
     letter-spacing: 0.05em;
   }
 
   .featured h3 {
-    font-size: 18px;
-    font-weight: 800;
+    font-family: var(--font-tiempos-headline), serif;
+    font-size: 1.25rem;
+    font-weight: 500;
     color: #000000;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
 
   .featured p {
-    font-size: 13px;
-    line-height: 1.5;
+    font-family: var(--font-tiempos-text), serif;
+    font-size: 0.84375rem;
+    line-height: 1.55;
     color: #576579;
   }
 
   .column-cta {
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 600;
     color: #1a73e2;
-    margin-top: 4px;
+    margin-top: 0.25rem;
+    text-decoration: none;
   }
 
   .column-cta:hover {
@@ -525,7 +542,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     display: none;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 59.375rem) { /* 950px */
     .desktop-nav {
       display: none;
     }
@@ -534,14 +551,14 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 56px;
-      padding: 0 24px;
+      height: 3.5rem;
+      padding: 0 1.5rem;
     }
 
     .mobile-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 1rem;
     }
 
     .hamburger-btn {
@@ -552,30 +569,31 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     }
 
     .hamburger-svg {
-      width: 24px;
-      height: 24px;
+      width: 1.5rem;
+      height: 1.5rem;
       color: #1e242c;
     }
 
     .mobile-fit-btn {
       background-color: #1a73e2;
       color: #ffffff;
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 2px;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.125rem;
+      letter-spacing: 0.02em;
     }
 
     .mobile-drawer {
       position: absolute;
-      top: 56px;
+      top: 3.5rem;
       left: 0;
       width: 100%;
       background-color: #ffffff;
-      border-bottom: 1px solid #cbd6e2;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      border-bottom: 0.0625rem solid #cbd6e2;
+      box-shadow: 0 0.625rem 1.5rem rgba(0,0,0,0.05);
     }
 
     .mobile-drawer.hidden {
@@ -588,22 +606,23 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     }
 
     .drawer-menu a {
-      padding: 14px 32px;
-      font-size: 14px;
+      padding: 0.875rem 2rem;
+      font-size: 0.875rem;
       font-weight: 600;
       color: #1e242c;
       text-decoration: none;
-      border-bottom: 1px solid #f5f8fa;
+      border-bottom: 0.0625rem solid #f5f8fa;
     }
 
     .drawer-footer {
       background-color: #f5f8fa;
       display: flex;
       justify-content: space-around;
-      padding: 16px;
-      font-size: 12px;
+      padding: 1rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .drawer-login {

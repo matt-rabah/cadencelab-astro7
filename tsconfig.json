@@ -6,6 +6,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "skipLibCheck": true,
-    "allowJs": true
+    "allowJs": true,
+    "types": []
   }
 }
