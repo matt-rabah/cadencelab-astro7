@@ -32,11 +32,11 @@ export default defineConfig({
         path: "src/content/blog",
         format: "md",
         ui: {
-          router: ({ document }) => {
+          router: ({ document }: { document: any }) => {
             if (document._sys.filename === 'hello-world') {
               return '/tinacms-demo';
             }
-            const date = new Date(document.data.date || new Date());
+            const date = new Date(document.data?.date || new Date());
             const year = date.getFullYear().toString();
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const slug = document._sys.filename;
