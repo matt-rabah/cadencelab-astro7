@@ -1,5 +1,9 @@
 ---
 title: The fastest way to build content-driven Astro sites
+subtitle: TinaCMS + Astro Integration Demo
+date: 2026-06-26
+readTime: 5 min read
+category: Demo
 eyebrow: TinaCMS + Astro
 ctaPrimary:
   label: Start editing
