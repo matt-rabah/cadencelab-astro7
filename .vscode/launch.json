@@ -2,6 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Run astro-ls",
+      "runtimeExecutable": "astro-ls",
+      "cwd": "${workspaceFolder}",
+      "args": []
+    },
+    {
       "command": "npm start",
       "name": "Run npm start",
       "request": "launch",
@@ -13,9 +21,7 @@
       "name": " Run tinacms build",
       "runtimeExecutable": "tinacms",
       "cwd": "${workspaceFolder}",
-      "args": [
-        "build"
-      ]
+      "args": ["build"]
     },
     {
       "type": "node",
@@ -32,9 +38,7 @@
       "name": "Run astro dev",
       "runtimeExecutable": "astro",
       "cwd": "${workspaceFolder}",
-      "args": [
-        "dev"
-      ]
+      "args": ["dev"]
     }
   ]
 }
