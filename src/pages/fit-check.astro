@@ -4,16 +4,17 @@ import Layout from "../layouts/Layout.astro";
 import NavHeader from "../components/NavHeader.astro";
 import Footer from "../components/Footer.astro";
 
-// 1. Fetch the data file we just created
+// Fetch the data file created for TinaCMS
 import { getEntry } from "astro:content";
 const pageData = await getEntry("page", "fit-check");
 
-// 2. Extract the editable values
 if (!pageData) {
   throw new Error(
-    "Could not find content entry 'fit-check' in 'page' collection.",
+    "Could not find content for page 'fit-check'. Please verify that 'src/content/pages/fit-check.md' exists.",
   );
 }
+
+// Extract the editable values
 const { title, subtitle, category } = pageData.data;
 ---
 
@@ -23,7 +24,6 @@ const { title, subtitle, category } = pageData.data;
   <main class="fit-check-page">
     <div class="form-container">
       <header class="form-header">
-        <!-- 3. Use the dynamic variables here instead of raw text -->
         <span class="form-tag">{category}</span>
         <h1 class="form-heading">{title}</h1>
         <p class="form-subheading">{subtitle}</p>
@@ -140,7 +140,7 @@ const { title, subtitle, category } = pageData.data;
 </Layout>
 
 <style>
-  /* Keep all your existing CSS exactly the same here */
+  /* --- DESIGN TOKENS (Premium Palette Consistency) --- */
   .fit-check-page {
     width: 100%;
     background-color: var(--spectrum-background-layer-1, #f4f5f7);
@@ -148,6 +148,7 @@ const { title, subtitle, category } = pageData.data;
     display: flex;
     justify-content: center;
   }
+
   .form-container {
     width: 100%;
     max-width: 700px;
@@ -155,13 +156,20 @@ const { title, subtitle, category } = pageData.data;
     flex-direction: column;
     gap: 48px;
   }
+
+  /* --- HEADER --- */
   .form-header {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
+
   .form-tag {
-    font-family: adobe-clean, sans-serif;
+    font-family:
+      "National 2",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 11px;
     font-weight: 700;
     color: var(--spectrum-global-color-accent, #0265dc);
@@ -170,7 +178,11 @@ const { title, subtitle, category } = pageData.data;
   }
 
   .form-heading {
-    font-family: adobe-clean, sans-serif;
+    font-family:
+      "Söhne",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 44px;
     font-weight: 900;
     color: #161616;
@@ -178,12 +190,13 @@ const { title, subtitle, category } = pageData.data;
   }
 
   .form-subheading {
-    font-family: adobe-clean, sans-serif;
+    font-family: "Tiempos", Georgia, serif;
     font-size: 16px;
     line-height: 1.6;
     color: var(--spectrum-body-color, #4b4b4b);
   }
 
+  /* --- FORM ELEMENTS --- */
   .assessment-form {
     display: flex;
     flex-direction: column;
@@ -198,8 +211,13 @@ const { title, subtitle, category } = pageData.data;
     flex-direction: column;
     gap: 24px;
   }
+
   .form-section legend {
-    font-family: adobe-clean, sans-serif;
+    font-family:
+      "Söhne",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -218,17 +236,26 @@ const { title, subtitle, category } = pageData.data;
   }
 
   .input-group label {
-    font-family: adobe-clean, sans-serif;
+    font-family:
+      "National 2",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 15px;
     font-weight: 600;
     color: #161616;
     line-height: 1.4;
   }
+
   input[type="text"],
   input[type="email"],
   select,
   textarea {
-    font-family: adobe-clean, sans-serif;
+    font-family:
+      "National 2",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 15px;
     padding: 14px;
     background-color: var(--spectrum-background-layer-2, #f4f5f7);
@@ -238,23 +265,27 @@ const { title, subtitle, category } = pageData.data;
     outline: none;
     transition: border-color 0.2s ease;
   }
+
   input:focus,
   select:focus,
   textarea:focus {
     border-color: var(--spectrum-global-color-accent, #1823c9);
     background-color: var(--spectrum-background-layer-1, #f4f5f7);
   }
+
   .grid-inputs {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
+
   .radio-group {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-top: 4px;
   }
+
   .radio-group label {
     font-weight: 400;
     display: flex;
@@ -262,8 +293,14 @@ const { title, subtitle, category } = pageData.data;
     gap: 10px;
     cursor: pointer;
   }
+
+  /* --- SUBMIT --- */
   .btn-submit {
-    font-family: adobe-clean, sans-serif;
+    font-family:
+      "Söhne",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     font-size: 16px;
     font-weight: 600;
     background-color: #161616;
@@ -276,10 +313,12 @@ const { title, subtitle, category } = pageData.data;
     text-align: center;
     margin-top: 16px;
   }
+
   .btn-submit:hover {
     opacity: 0.9;
   }
 
+  /* --- 📱 RESPONSIVE --- */
   @media (max-width: 600px) {
     .grid-inputs {
       grid-template-columns: 1fr;
