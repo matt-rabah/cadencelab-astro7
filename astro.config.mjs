@@ -4,32 +4,34 @@ import astroFont from "astro-font";
 export default defineConfig({
   integrations: [
     astroFont([
+      // ==========================================
+      // SANS SERIF: Graphik Family
+      // ==========================================
       {
         name: "Graphik",
         src: [
-          // CRITICAL: Only preload regular for immediate UI/navigation rendering
           {
             style: "normal",
             weight: "400",
-            path: "./public/fonts/graphik-regular.woff2",
+            path: "./public/fonts/Graphik/graphik-regular.woff2",
             preload: true,
           },
           {
             style: "normal",
             weight: "500",
-            path: "./public/fonts/graphik-medium.woff2",
+            path: "./public/fonts/Graphik/graphik-medium.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "600",
-            path: "./public/fonts/graphik-semibold.woff2",
+            path: "./public/fonts/Graphik/graphik-semibold.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "700",
-            path: "./public/fonts/graphik-bold.woff2",
+            path: "./public/fonts/Graphik/graphik-bold.woff2",
             preload: false,
           },
         ],
@@ -43,13 +45,13 @@ export default defineConfig({
           {
             style: "normal",
             weight: "400",
-            path: "./public/fonts/graphik-compact-regular.woff2",
+            path: "./public/fonts/Graphik/graphik-compact-regular.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "700",
-            path: "./public/fonts/graphik-compact-bold.woff2",
+            path: "./public/fonts/Graphik/graphik-compact-bold.woff2",
             preload: false,
           },
         ],
@@ -63,19 +65,19 @@ export default defineConfig({
           {
             style: "normal",
             weight: "400",
-            path: "./public/fonts/graphik-xx-condensed-regular.woff2",
+            path: "./public/fonts/Graphik/GraphikXXCond-Regular.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "500",
-            path: "./public/fonts/graphik-xx-condensed-medium.woff2",
+            path: "./public/fonts/Graphik/GraphikXXCond-Medium.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "700",
-            path: "./public/fonts/graphik-xx-condensed-bold.woff2",
+            path: "./public/fonts/Graphik/GraphikXXCond-Bold.woff2",
             preload: false,
           },
         ],
@@ -83,38 +85,41 @@ export default defineConfig({
         fallback: "sans-serif",
         cssVariable: "font-graphik-xx-condensed",
       },
+
+      // ==========================================
+      // SERIF: Tiempos Family
+      // ==========================================
       {
         name: "Tiempos Text",
         src: [
-          // CRITICAL: Preload the regular weight for body copy readability paths
           {
             style: "normal",
             weight: "400",
-            path: "./public/fonts/tiempos-text-regular.woff2",
+            path: "./public/fonts/Tiempos/tiempos-text-regular.woff2",
             preload: true,
           },
           {
             style: "italic",
             weight: "400",
-            path: "./public/fonts/tiempos-text-regular-italic.woff2",
+            path: "./public/fonts/Tiempos/tiempos-text-regular-italic.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "500",
-            path: "./public/fonts/tiempos-text-medium.woff2",
+            path: "./public/fonts/Tiempos/tiempos-text-medium.woff2",
             preload: false,
           },
           {
             style: "italic",
             weight: "500",
-            path: "./public/fonts/tiempos-text-medium-italic.woff2",
+            path: "./public/fonts/Tiempos/tiempos-text-medium-italic.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "600",
-            path: "./public/fonts/tiempos-text-semibold.woff2",
+            path: "./public/fonts/Tiempos/tiempos-text-semibold.woff2",
             preload: false,
           },
         ],
@@ -128,13 +133,13 @@ export default defineConfig({
           {
             style: "normal",
             weight: "300",
-            path: "./public/fonts/tiempos-headline-light.woff2",
+            path: "./public/fonts/Tiempos/tiempos-headline-light.woff2",
             preload: false,
           },
           {
             style: "italic",
             weight: "300",
-            path: "./public/fonts/tiempos-headline-light-italic.woff",
+            path: "./public/fonts/Tiempos/tiempos-headline-light-italic.woff",
             preload: false,
           },
         ],
@@ -145,17 +150,16 @@ export default defineConfig({
       {
         name: "Tiempos Fine",
         src: [
-          // If Tiempos Fine Light is always used in your Hero H1 above the fold, change preload to true here
           {
             style: "normal",
             weight: "300",
-            path: "./public/fonts/tiempos-fine-light.woff2",
+            path: "./public/fonts/Tiempos/tiempos-fine-light.woff2",
             preload: true,
           },
           {
             style: "italic",
             weight: "300",
-            path: "./public/fonts/tiempos-fine-light-italic.woff2",
+            path: "./public/fonts/Tiempos/tiempos-fine-light-italic.woff2",
             preload: false,
           },
         ],
