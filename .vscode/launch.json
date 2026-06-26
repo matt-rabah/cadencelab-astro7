@@ -4,6 +4,14 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Run astro-check",
+      "runtimeExecutable": "astro-check",
+      "cwd": "${workspaceFolder}",
+      "args": []
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Run astro-ls",
       "runtimeExecutable": "astro-ls",
       "cwd": "${workspaceFolder}",
