@@ -1,8 +1,20 @@
 ---
 // src/pages/fit-check.astro
-import Layout from '../layouts/Layout.astro';
-import NavHeader from '../components/NavHeader.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import NavHeader from "../components/NavHeader.astro";
+import Footer from "../components/Footer.astro";
+
+// 1. Fetch the data file we just created
+import { getEntry } from "astro:content";
+const pageData = await getEntry("page", "fit-check");
+
+// 2. Extract the editable values
+if (!pageData) {
+  throw new Error(
+    "Could not find content entry 'fit-check' in 'page' collection.",
+  );
+}
+const { title, subtitle, category } = pageData.data;
 ---
 
 <Layout>
@@ -11,19 +23,13 @@ import Footer from '../components/Footer.astro';
   <main class="fit-check-page">
     <div class="form-container">
       <header class="form-header">
-        <span class="form-tag">Phase 1: Alignment</span>
-        <h1 class="form-heading">The CX Fit Check</h1>
-        <p class="form-subheading">
-          Before we discuss advisory timelines or investment, we must evaluate
-          your structural readiness. Complete this baseline profile to determine
-          if your enterprise environment matches our deployment framework.
-        </p>
+        <!-- 3. Use the dynamic variables here instead of raw text -->
+        <span class="form-tag">{category}</span>
+        <h1 class="form-heading">{title}</h1>
+        <p class="form-subheading">{subtitle}</p>
       </header>
 
-      <form
-        class="assessment-form"
-        method="POST"
-        action="/thanks">
+      <form class="assessment-form" method="POST" action="/thanks">
         <!-- Section 1: Environmental Complexity -->
         <fieldset class="form-section">
           <legend>01. Technical & Operational Complexity</legend>
@@ -32,14 +38,8 @@ import Footer from '../components/Footer.astro';
             <label for="environment-type"
               >Describe the current state of your legacy CX infrastructure.</label
             >
-            <select
-              id="environment-type"
-              name="environment-type"
-              required>
-              <option
-                value=""
-                disabled
-                selected
+            <select id="environment-type" name="environment-type" required>
+              <option value="" disabled selected
                 >Select an operational baseline...</option
               >
               <option value="fractured"
@@ -64,8 +64,7 @@ import Footer from '../components/Footer.astro';
               name="bottleneck"
               rows="3"
               placeholder="e.g., Staff is bypassing our new AI routing tool; data isn't clean..."
-              required
-            ></textarea>
+              required></textarea>
           </div>
         </fieldset>
 
@@ -77,16 +76,8 @@ import Footer from '../components/Footer.astro';
             <label for="crm-status"
               >What is the baseline maturity of your Salesforce / CRM data?</label
             >
-            <select
-              id="crm-status"
-              name="crm-status"
-              required>
-              <option
-                value=""
-                disabled
-                selected
-                >Select data status...</option
-              >
+            <select id="crm-status" name="crm-status" required>
+              <option value="" disabled selected>Select data status...</option>
               <option value="mature"
                 >Established architecture (Traced to retention metrics)</option
               >
@@ -106,19 +97,12 @@ import Footer from '../components/Footer.astro';
             >
             <div class="radio-group">
               <label
-                ><input
-                  type="radio"
-                  name="mandate"
-                  value="yes"
-                  required
-                /> Yes, we have active executive backing.</label
+                ><input type="radio" name="mandate" value="yes" required /> Yes, we
+                have active executive backing.</label
               >
               <label
-                ><input
-                  type="radio"
-                  name="mandate"
-                  value="no"
-                /> No, we are currently trying to build internal buy-in.</label
+                ><input type="radio" name="mandate" value="no" /> No, we are currently
+                trying to build internal buy-in.</label
               >
             </div>
           </div>
@@ -131,38 +115,21 @@ import Footer from '../components/Footer.astro';
           <div class="grid-inputs">
             <div class="input-group">
               <label for="name">Your Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-              />
+              <input type="text" id="name" name="name" required />
             </div>
             <div class="input-group">
               <label for="email">Corporate Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
+              <input type="email" id="email" name="email" required />
             </div>
           </div>
 
           <div class="input-group">
             <label for="org">Organization</label>
-            <input
-              type="text"
-              id="org"
-              name="org"
-              required
-            />
+            <input type="text" id="org" name="org" required />
           </div>
         </fieldset>
 
-        <button
-          type="submit"
-          class="btn-submit"
+        <button type="submit" class="btn-submit"
           >Submit Baseline Profile for Review</button
         >
       </form>
@@ -173,7 +140,7 @@ import Footer from '../components/Footer.astro';
 </Layout>
 
 <style>
-  /* --- DESIGN TOKENS (Premium Gallery Palette Consistency) --- */
+  /* Keep all your existing CSS exactly the same here */
   .fit-check-page {
     width: 100%;
     background-color: var(--spectrum-background-layer-1, #f4f5f7);
@@ -181,7 +148,6 @@ import Footer from '../components/Footer.astro';
     display: flex;
     justify-content: center;
   }
-
   .form-container {
     width: 100%;
     max-width: 700px;
@@ -189,14 +155,11 @@ import Footer from '../components/Footer.astro';
     flex-direction: column;
     gap: 48px;
   }
-
-  /* --- HEADER --- */
   .form-header {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
-
   .form-tag {
     font-family: adobe-clean, sans-serif;
     font-size: 11px;
@@ -221,7 +184,6 @@ import Footer from '../components/Footer.astro';
     color: var(--spectrum-body-color, #4b4b4b);
   }
 
-  /* --- FORM ELEMENTS --- */
   .assessment-form {
     display: flex;
     flex-direction: column;
@@ -236,7 +198,6 @@ import Footer from '../components/Footer.astro';
     flex-direction: column;
     gap: 24px;
   }
-
   .form-section legend {
     font-family: adobe-clean, sans-serif;
     font-size: 14px;
@@ -263,10 +224,8 @@ import Footer from '../components/Footer.astro';
     color: #161616;
     line-height: 1.4;
   }
-
-  /* Premium inputs utilizing minimalist architectural scaling */
-  input[type='text'],
-  input[type='email'],
+  input[type="text"],
+  input[type="email"],
   select,
   textarea {
     font-family: adobe-clean, sans-serif;
@@ -279,27 +238,23 @@ import Footer from '../components/Footer.astro';
     outline: none;
     transition: border-color 0.2s ease;
   }
-
   input:focus,
   select:focus,
   textarea:focus {
-    border-color: var(--spectrum-global-color-accent, #1823C9);
+    border-color: var(--spectrum-global-color-accent, #1823c9);
     background-color: var(--spectrum-background-layer-1, #f4f5f7);
   }
-
   .grid-inputs {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
-
   .radio-group {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-top: 4px;
   }
-
   .radio-group label {
     font-weight: 400;
     display: flex;
@@ -307,8 +262,6 @@ import Footer from '../components/Footer.astro';
     gap: 10px;
     cursor: pointer;
   }
-
-  /* --- SUBMIT --- */
   .btn-submit {
     font-family: adobe-clean, sans-serif;
     font-size: 16px;
@@ -323,7 +276,6 @@ import Footer from '../components/Footer.astro';
     text-align: center;
     margin-top: 16px;
   }
-
   .btn-submit:hover {
     opacity: 0.9;
   }
