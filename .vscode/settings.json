@@ -1,4 +1,5 @@
 {
-    "astro.content-intellisense": true,
-    "astro.updateImportsOnFileMove.enabled": true
+  "astro.content-intellisense": true,
+  "astro.updateImportsOnFileMove.enabled": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
