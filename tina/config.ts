@@ -86,7 +86,7 @@ export default defineConfig({
       {
         name: "page",
         label: "Pages",
-        path: "content/pages",
+        path: "src/content/pages", // <-- FIXED: Added "src/" prefix so Tina looks in your Astro source directory
         format: "md",
         ui: {
           router: ({ document }) => {
