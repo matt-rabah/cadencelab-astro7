@@ -32,7 +32,7 @@
     "fsevents@2.3.3": true
   },
   "devDependencies": {
-    "@tinacms/cli": "^2.5.1",
+    "tinacms/cli": "^2.5.1",
     "typescript": "^7.0.1-rc"
   }
 }
