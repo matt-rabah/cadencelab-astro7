@@ -1,0 +1,27 @@
+@layer base {
+
+    /* 1. Universal layout protection against text blowouts */
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    span {
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    /* 2. Global activation of your ss05 round punctuation choice */
+    .font-graphik,
+    .font-graphik-compact,
+    .font-graphik-condensed {
+        font-feature-settings: "ss05" 1, "calt" 1, "kern" 1;
+    }
+
+    /* 3. Tiempos Text performance optimization */
+    .font-tiempos-text {
+        font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+        font-variant-numeric: oldstyle-nums;
+        text-rendering: optimizeLegibility;
+    }
+}
