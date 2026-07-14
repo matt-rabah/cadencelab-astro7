@@ -7,8 +7,8 @@ dist/
 # dependencies
 node_modules/
 
-# Tina generated files
-tina/__generated__/
+# Tina cache only
+tina/__generated__/.cache/
 
 # logs
 npm-debug.log*
@@ -29,3 +29,13 @@ pnpm-debug.log*
 
 # local editor history
 .history/
+
+# VS Code local workspace state
+.vscode/*.log
+
+# test and coverage output
+coverage/
+
+# temporary files
+*.tmp
+*.temp
