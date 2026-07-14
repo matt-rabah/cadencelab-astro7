@@ -3,25 +3,24 @@
 // Correctly importing the asset from src/assets to prevent build errors
 import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-lt.svg";
 ---
-
 <footer class="gh-footer-zone">
   <div class="footer-container">
+    
     <div class="footer-top-grid">
+      
       <div class="footer-brand-column">
         <a href="/" class="footer-logo-link" title="Return to Homepage">
-          <img
-            src={logoLightText.src ?? logoLightText}
-            alt="CadenceLab"
-            height="26"
+          <img 
+            src={logoLightText.src ?? logoLightText} 
+            alt="CadenceLab" 
+            height="26" 
             width="133"
             loading="lazy"
             class="footer-brand-logo"
           />
         </a>
         <p class="footer-abstract">
-          Architecting workflow adoption, system integration trust, and
-          cross-functional measurement layers for enterprise customer experience
-          ecosystems.
+          Architecting workflow adoption, system integration trust, and cross-functional measurement layers for enterprise customer experience ecosystems.
         </p>
       </div>
 
@@ -54,13 +53,12 @@ import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-l
           <a href="/ai-tooling/co-pilot">Agent Co-Pilots</a>
         </nav>
       </div>
+
     </div>
 
     <div class="footer-bottom-tier">
       <div class="legal-left">
-        <span
-          >&copy; {new Date().getFullYear()} CadenceLab. All rights reserved.</span
-        >
+        <span>&copy; {new Date().getFullYear()} CadenceLab. All rights reserved.</span>
       </div>
       <div class="legal-right">
         <a href="/privacy">Privacy Policy</a>
@@ -70,6 +68,7 @@ import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-l
         <a href="/governance">System Governance</a>
       </div>
     </div>
+
   </div>
 </footer>
 
@@ -78,11 +77,10 @@ import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-l
   .gh-footer-zone {
     width: 100%;
     background-color: #000000 !important; /* Forces the deep ink-black theme backdrop */
-    color: #cbd6e2;
+    color: #cbd6e2; 
     padding: 80px 24px 40px 24px;
     border-top: 1px solid #1e242c;
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   .footer-container {
@@ -119,7 +117,7 @@ import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-l
   .footer-abstract {
     font-size: 13.5px;
     line-height: 1.6;
-    color: #88a0ba;
+    color: #88a0ba; 
     max-width: 320px;
   }
 
@@ -134,7 +132,7 @@ import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-l
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #ffffff; 
     letter-spacing: 0.08em;
   }
 
@@ -153,7 +151,7 @@ import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-l
   }
 
   .footer-links-column a:hover {
-    color: #1a73e2;
+    color: #1a73e2; 
   }
 
   /* --- BOTTOM COMPLIANCE TIER --- */

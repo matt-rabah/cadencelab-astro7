@@ -1,9 +1,7 @@
+// tina/config.ts
 import { defineConfig } from "tinacms";
-
-// Branch configuration for Tina Cloud/Git integration
-const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
-
-export default defineConfig({
+var branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
+var config_default = defineConfig({
   branch,
   clientId:
     process.env.TINA_CLIENT_ID || "0322f8bd-f97c-4ef3-a3d6-013ce0f824fc",
@@ -37,14 +35,13 @@ export default defineConfig({
         path: "src/content/blog",
         format: "md",
         ui: {
-          router: ({ document }: { document: any }) => {
-            // FIX: Tina stores frontmatter fields inside _values, not data
-            const date = new Date(document._values?.date || new Date());
+          router: ({ document }) => {
+            const date = new Date(
+              document._values?.date || /* @__PURE__ */ new Date(),
+            );
             const year = date.getUTCFullYear().toString();
             const month = String(date.getUTCMonth() + 1).padStart(2, "0");
             const slug = document._sys.filename;
-
-            // Added trailing slash to match Astro's native dev mode route resolution
             return `/blog/${year}/${month}/${slug}/`;
           },
         },
@@ -132,3 +129,4 @@ export default defineConfig({
     ],
   },
 });
+export { config_default as default };

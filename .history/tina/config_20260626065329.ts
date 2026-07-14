@@ -5,11 +5,8 @@ const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
   branch,
-  clientId:
-    process.env.TINA_CLIENT_ID || "0322f8bd-f97c-4ef3-a3d6-013ce0f824fc",
-  token:
-    process.env.TINA_READ_ONLY_TOKEN ||
-    "79c07460d61d4534d4e576c7bf8eb9917ed00cae",
+  clientId: process.env.TINA_CLIENT_ID || "0322f8bd-f97c-4ef3-a3d6-013ce0f824fc",
+  token: process.env.TINA_READ_ONLY_TOKEN || "79c07460d61d4534d4e576c7bf8eb9917ed00cae",
   build: {
     publicFolder: "public",
     outputFolder: "admin",
@@ -22,9 +19,7 @@ export default defineConfig({
   },
   search: {
     tina: {
-      indexerToken:
-        process.env.TINA_SEARCH_TOKEN ||
-        "12b5c178c053f337637f653ccfd16a3af6510701",
+      indexerToken: process.env.TINA_SEARCH_TOKEN || "12b5c178c053f337637f653ccfd16a3af6510701",
       stopwordLanguages: ["eng"],
     },
     indexBatchSize: 100,
@@ -41,7 +36,7 @@ export default defineConfig({
             // FIX: Tina stores frontmatter fields inside _values, not data
             const date = new Date(document._values?.date || new Date());
             const year = date.getUTCFullYear().toString();
-            const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+            const month = String(date.getUTCMonth() + 1).padStart(2, '0');
             const slug = document._sys.filename;
 
             // Added trailing slash to match Astro's native dev mode route resolution
@@ -95,7 +90,7 @@ export default defineConfig({
         format: "md",
         ui: {
           router: ({ document }) => {
-            if (document._sys.filename === "home") {
+            if (document._sys.filename === 'home') {
               return `/`;
             }
             return `/${document._sys.filename}`;

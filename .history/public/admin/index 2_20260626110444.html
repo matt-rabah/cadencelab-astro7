@@ -1,24 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/admin/assets/favicon-eb31bc17.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TinaCMS</title>
-    <script
-      type="module"
-      crossorigin
-      src="/admin/assets/index-a21b20f3.js"
-    ></script>
-    <link rel="stylesheet" href="/admin/assets/index-71ca28d0.css" />
+    <script type="module" crossorigin src="/admin/assets/index-a21b20f3.js"></script>
+    <link rel="stylesheet" href="/admin/assets/index-71ca28d0.css">
   </head>
   <body class="tina-tailwind">
     <div id="root"></div>
     <script>
       function handleLoadError() {
-        console.error("Failed to load assets");
+        console.error('Failed to load assets')
         // Assets have failed to load
-        document.getElementById("root").innerHTML =
+        document.getElementById('root').innerHTML =
           '<style type="text/css">\
         #no-assets-placeholder body {\
           font-family: sans-serif;\
@@ -59,16 +55,17 @@
           <p>\
             Please visit <a href="https://tina.io/docs/r/FAQ/#13-how-do-i-resolve-failed-loading-tinacms-assets-error">this doc</a> for help.\
           </p>\
-        </div>';
+        </div>'
       }
 
       // Check if #root has childen after 2 seconds
       // If not, we assume that the assets have failed to load
       setTimeout(() => {
-        if (!document.getElementById("root").children.length) {
-          handleLoadError();
+        if (!document.getElementById('root').children.length) {
+          handleLoadError()
         }
-      }, 2000);
+      }, 2000)
     </script>
+    
   </body>
 </html>
