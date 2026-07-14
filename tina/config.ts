@@ -8,7 +8,7 @@ const branch =
   "main";
 
 const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
-const token = process.env.TINA_READ_ONLY_TOKEN;
+const readOnlyToken = process.env.TINA_READ_ONLY_TOKEN;
 const searchToken = process.env.TINA_SEARCH_TOKEN;
 
 if (!clientId) {
@@ -17,16 +17,15 @@ if (!clientId) {
   );
 }
 
-if (!token) {
-  throw new Error(
-    "Missing TINA_READ_ONLY_TOKEN environment variable",
-  );
-}
-
 export default defineConfig({
   branch,
   clientId,
-  token,
+
+  /*
+   * Server-side only. This value is intentionally unavailable inside the
+   * browser-based Tina admin bundle, so only include it when it exists.
+   */
+  ...(readOnlyToken ? { token: readOnlyToken } : {}),
 
   build: {
     publicFolder: "public",
@@ -40,6 +39,10 @@ export default defineConfig({
     },
   },
 
+  /*
+   * Search indexing is optional during local development. Only configure it
+   * when the server-side search token is available.
+   */
   ...(searchToken
     ? {
         search: {
@@ -62,12 +65,10 @@ export default defineConfig({
 
         ui: {
           router: ({ document }) => {
-            // `document.values` may not exist on the typed Document; cast to any to access when available
-            // Use a safe any-cast for older/newer Document shapes where `get` may not be typed
-            const rawDate = (document as any).values?.date ?? (document as any).get?.("date");
+            const rawDate = document._values?.date;
             const date = rawDate ? new Date(rawDate) : new Date();
 
-            const year = date.getUTCFullYear().toString();
+            const year = String(date.getUTCFullYear());
             const month = String(date.getUTCMonth() + 1).padStart(2, "0");
             const slug = document._sys.filename;
 
