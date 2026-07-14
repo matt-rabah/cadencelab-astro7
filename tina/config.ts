@@ -7,6 +7,14 @@ const branch =
   process.env.GITHUB_REF_NAME ??
   "main";
 
+const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
+const readOnlyToken = process.env.TINA_READ_ONLY_TOKEN;
+const searchToken = process.env.TINA_SEARCH_TOKEN;
+
+if (!clientId) {
+  throw new Error(
+    "Missing NEXT_PUBLIC_TINA_CLIENT_ID environment variable",
+  );
 const clientId = process.env.TINA_CLIENT_ID;
 const token = process.env.TINA_READ_ONLY_TOKEN;
 const searchToken = process.env.TINA_SEARCH_TOKEN;
@@ -22,6 +30,8 @@ if (!token) {
 export default defineConfig({
   branch,
   clientId,
+
+  ...(readOnlyToken ? { token: readOnlyToken } : {}),
   token,
 
   build: {
@@ -59,6 +69,21 @@ export default defineConfig({
         ui: {
           router: ({ document }) => {
             const rawDate = (document as any)._values?.date;
+            const slug = document._sys.filename;
+
+            if (!rawDate) {
+              return "/blog/";
+            }
+
+            const date = new Date(rawDate);
+
+            if (Number.isNaN(date.getTime())) {
+              return "/blog/";
+            }
+
+            const year = String(date.getUTCFullYear());
+            const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+
             const date = rawDate ? new Date(rawDate) : new Date();
 
             const year = date.getUTCFullYear().toString();
