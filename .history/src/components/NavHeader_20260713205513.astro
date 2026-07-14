@@ -94,21 +94,19 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                   <h4>Core Workflows</h4>
                   <ul>
                     <li>
-                      <a href="/workflows/salesforce">Salesforce Data Tracing</a
-                      >
+                      <a href="/workflows/salesforce"
+                        >Salesforce Data Tracing</a>
                     </li>
                     <li>
                       <a href="/workflows/cross-functional"
-                        >Cross-Functional Hand-offs</a
-                      >
+                        >Cross-Functional Hand-offs</a>
                     </li>
                     <li>
                       <a href="/workflows/escalation">SLA Escalation Mapping</a>
                     </li>
                     <li>
                       <a href="/workflows/agent-routing"
-                        >AI-to-Human Live Routing</a
-                      >
+                        >AI-to-Human Live Routing</a>
                     </li>
                   </ul>
                 </div>
@@ -120,13 +118,11 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                     </li>
                     <li>
                       <a href="/workflows/omnichannel"
-                        >Omnichannel State Syncing</a
-                      >
+                        >Omnichannel State Syncing</a>
                     </li>
                     <li>
                       <a href="/workflows/telephony"
-                        >Contact Center Telecom Pipes</a
-                      >
+                        >Contact Center Telecom Pipes</a>
                     </li>
                   </ul>
                 </div>
@@ -169,18 +165,15 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                   <ul>
                     <li>
                       <a href="/solutions/adoption-fatigue"
-                        >User Adoption Fatigue</a
-                      >
+                        >User Adoption Fatigue</a>
                     </li>
                     <li>
                       <a href="/solutions/dirty-data"
-                        >Siloed & Dirty CRM Pipelines</a
-                      >
+                        >Siloed & Dirty CRM Pipelines</a>
                     </li>
                     <li>
                       <a href="/solutions/misalignment"
-                        >Executive Misalignment</a
-                      >
+                        >Executive Misalignment</a>
                     </li>
                   </ul>
                 </div>
@@ -189,18 +182,15 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                   <ul>
                     <li>
                       <a href="/solutions/enterprise"
-                        >Global Enterprise Architecture</a
-                      >
+                        >Global Enterprise Architecture</a>
                     </li>
                     <li>
                       <a href="/solutions/mid-market"
-                        >High-Growth Consolidation</a
-                      >
+                        >High-Growth Consolidation</a>
                     </li>
                     <li>
                       <a href="/solutions/governance"
-                        >Regulated Market Compliance</a
-                      >
+                        >Regulated Market Compliance</a>
                     </li>
                   </ul>
                 </div>
@@ -243,13 +233,11 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                   <ul>
                     <li>
                       <a href="/ai-tooling/prompt-guard"
-                        >Automated Prompt Firewalls</a
-                      >
+                        >Automated Prompt Firewalls</a>
                     </li>
                     <li>
                       <a href="/ai-tooling/hallucination"
-                        >Hallucination Variance Tracing</a
-                      >
+                        >Hallucination Variance Tracing</a>
                     </li>
                     <li>
                       <a href="/ai-tooling/compliance">PII Scrubbing Nodes</a>
@@ -261,13 +249,11 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
                   <ul>
                     <li>
                       <a href="/ai-tooling/co-pilot"
-                        >Agent Co-Pilot Enhancements</a
-                      >
+                        >Agent Co-Pilot Enhancements</a>
                     </li>
                     <li>
                       <a href="/ai-tooling/feedback"
-                        >Behavioral Feedback pipelines</a
-                      >
+                        >Behavioral Feedback pipelines</a>
                     </li>
                   </ul>
                 </div>
@@ -358,7 +344,7 @@ import cadenceLogo from "../assets/cadencelab-wordmark_cadencelab-logo-black.svg
     const drawer = document.getElementById("mobile-navigation-drawer");
 
     if (menuBtn && drawer) {
-      const setDrawerState = (isOpen: boolean) => {
+        const setDrawerState = (isOpen: boolean) => {
         drawer.classList.toggle("hidden", !isOpen);
         drawer.setAttribute("aria-hidden", String(!isOpen));
         menuBtn.setAttribute("aria-expanded", String(isOpen));

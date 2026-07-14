@@ -1,16 +1,21 @@
 ---
 // src/components/Hero.astro
 ---
+
 <section class="hero-section">
   <div class="hero-content">
     <h1 class="hero-title">
-      AI isn't your customer experience problem. <span class="highlight-accent">Adoption is.</span>
+      AI isn't your customer experience problem. <span class="highlight-accent"
+        >Adoption is.</span
+      >
     </h1>
-    
+
     <p class="hero-subtitle">
-      Most customer-facing AI initiatives fail because of implementation, trust, and measurement—not the model. We translate complex stakeholder needs and CRM data into high-performing, human-adopted workflows. 
+      Most customer-facing AI initiatives fail because of implementation, trust,
+      and measurement—not the model. We translate complex stakeholder needs and
+      CRM data into high-performing, human-adopted workflows.
     </p>
-    
+
     <div class="hero-actions">
       <a href="/fit-check" class="btn-primary">Start a Fit Check</a>
       <a href="#framework" class="btn-secondary">The Adoption Framework</a>
@@ -24,16 +29,16 @@
     padding: 120px 24px;
     background-color: #ffffff;
     display: flex;
-    justify-content: flex;
-    align-items: flex;
-    text-align: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .hero-content {
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: flex;
+    align-items: flex-start;
     gap: 32px;
   }
 
@@ -47,7 +52,7 @@
 
   /* Fix #3: Dynamically references central brand token while maintaining automatic fallbacks */
   .highlight-accent {
-    color: var(--color-accent, #1823C9);
+    color: var(--color-accent, #1823c9);
   }
 
   .hero-subtitle {
@@ -62,10 +67,11 @@
     display: flex;
     gap: 20px;
     margin-top: 12px;
-    margin-left:24px;
+    margin-left: 24px;
   }
 
-  .btn-primary, .btn-secondary {
+  .btn-primary,
+  .btn-secondary {
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
@@ -115,7 +121,8 @@
       gap: 16px;
     }
 
-    .btn-primary, .btn-secondary {
+    .btn-primary,
+    .btn-secondary {
       width: 100%;
       text-align: center;
       padding: 14px 24px;
