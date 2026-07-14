@@ -10,7 +10,7 @@ In the rush to deploy generative orchestration layers and automated customer ser
 
 When cross-functional platform hand-offs demand excessive cognitive friction from customer support agents or sales specialists, a silent system failure occurs. We define this phenomenon as *User Adoption Fatigue*, the compounding psychological drop-off that occurs when system automation creates more validation overhead for humans than it resolves.
 
-## The Symmetrical Disconnection of Un-Adopted Workflows
+## The Disconnect of Un-Adopted Workflows
 
 Most automation architectures look elegant in a clean-room technical specification. A customer service event fires; a prompt firewall scratches the PII payload; an LLM queries a legacy core API and drafts a response; a human agent verifies the output and clicks send.
 
