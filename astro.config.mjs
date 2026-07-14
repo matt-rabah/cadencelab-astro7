@@ -2,15 +2,10 @@ import { defineConfig } from "astro/config";
 import { astroFont } from "astro-font/integration";
 import tina from "@tinacms/astro/integration";
 import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
-import node from "@astrojs/node";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "static",
-
-  adapter: node({
-    mode: "standalone",
-  }),
 
   integrations: [
     tina(),

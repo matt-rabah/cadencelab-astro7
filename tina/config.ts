@@ -1,25 +1,29 @@
 import { defineConfig } from "tinacms";
 
 const branch =
+  process.env.CF_PAGES_BRANCH ??
   process.env.HEAD ??
   process.env.VERCEL_GIT_COMMIT_REF ??
   process.env.GITHUB_HEAD_REF ??
   process.env.GITHUB_REF_NAME ??
   "main";
 
-// Keep compatibility with older env var names so local/static builds don't fail
 const clientId =
-  process.env.NEXT_PUBLIC_TINA_CLIENT_ID ?? process.env.TINA_CLIENT_ID;
+  process.env.NEXT_PUBLIC_TINA_CLIENT_ID ??
+  process.env.TINA_CLIENT_ID;
+
 const readOnlyToken = process.env.TINA_READ_ONLY_TOKEN;
 const searchToken = process.env.TINA_SEARCH_TOKEN;
-
-// Do not throw when clientId is missing — allow unauthenticated local/static builds
 
 export default defineConfig({
   branch,
   clientId,
 
-  ...(readOnlyToken ? { token: readOnlyToken } : {}),
+  ...(readOnlyToken
+    ? {
+        token: readOnlyToken,
+      }
+    : {}),
 
   build: {
     publicFolder: "public",
