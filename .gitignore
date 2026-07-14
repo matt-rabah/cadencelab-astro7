@@ -1,11 +1,14 @@
 # build output
 dist/
 
-# generated types
+# generated Astro files
 .astro/
 
 # dependencies
 node_modules/
+
+# Tina generated files
+tina/__generated__/
 
 # logs
 npm-debug.log*
@@ -15,13 +18,14 @@ pnpm-debug.log*
 
 # environment variables
 .env
-.env.production
+.env.*
+!.env.example
 
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# JetBrains settings
 .idea/
 
-node_modules
-tina/__generated__
+# local editor history
+.history/

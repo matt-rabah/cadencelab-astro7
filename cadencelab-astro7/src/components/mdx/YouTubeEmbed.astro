@@ -1,0 +1,28 @@
+---
+import YouTubeFacade from '../ui/YouTubeFacade.astro';
+
+interface Props {
+  videoId: string;
+}
+
+const { videoId } = Astro.props;
+
+/**
+ * Accept a bare ID, an ID with a share suffix (`?si=...`), or a full
+ * YouTube URL — and always emit a clean `<id>` so a pasted value never
+ * produces a malformed embed URL.
+ */
+function extractId(input: string): string {
+  if (!input) return "";
+  const urlMatch = input.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/);
+  if (urlMatch) return urlMatch[1];
+  return input.split(/[?&/]/)[0];
+}
+
+const id = extractId(videoId);
+---
+{id && (
+  <div class="relative aspect-video w-full overflow-hidden rounded-xl">
+    <YouTubeFacade id={id} />
+  </div>
+)}
