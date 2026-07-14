@@ -1,34 +1,53 @@
 import { defineConfig } from "tinacms";
 
-// Branch configuration for Tina Cloud/Git integration
-const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
+const branch =
+  process.env.HEAD ??
+  process.env.VERCEL_GIT_COMMIT_REF ??
+  process.env.GITHUB_HEAD_REF ??
+  process.env.GITHUB_REF_NAME ??
+  "main";
+
+const clientId = process.env.TINA_CLIENT_ID;
+const token = process.env.TINA_READ_ONLY_TOKEN;
+const searchToken = process.env.TINA_SEARCH_TOKEN;
+
+if (!clientId) {
+  throw new Error("Missing TINA_CLIENT_ID environment variable");
+}
+
+if (!token) {
+  throw new Error("Missing TINA_READ_ONLY_TOKEN environment variable");
+}
 
 export default defineConfig({
   branch,
-  clientId:
-    process.env.TINA_CLIENT_ID || "0322f8bd-f97c-4ef3-a3d6-013ce0f824fc",
-  token:
-    process.env.TINA_READ_ONLY_TOKEN ||
-    "79c07460d61d4534d4e576c7bf8eb9917ed00cae",
+  clientId,
+  token,
+
   build: {
     publicFolder: "public",
     outputFolder: "admin",
   },
+
   media: {
     tina: {
       mediaRoot: "uploads",
       publicFolder: "public",
     },
   },
-  search: {
-    tina: {
-      indexerToken:
-        process.env.TINA_SEARCH_TOKEN ||
-        "12b5c178c053f337637f653ccfd16a3af6510701",
-      stopwordLanguages: ["eng"],
-    },
-    indexBatchSize: 100,
-  },
+
+  ...(searchToken
+    ? {
+        search: {
+          tina: {
+            indexerToken: searchToken,
+            stopwordLanguages: ["eng"],
+          },
+          indexBatchSize: 100,
+        },
+      }
+    : {}),
+
   schema: {
     collections: [
       {
@@ -36,18 +55,20 @@ export default defineConfig({
         label: "Blog Posts",
         path: "src/content/blog",
         format: "md",
+
         ui: {
-          router: ({ document }: { document: any }) => {
-            // FIX: Tina stores frontmatter fields inside _values, not data
-            const date = new Date(document._values?.date || new Date());
+          router: ({ document }) => {
+            const rawDate = (document as any)._values?.date;
+            const date = rawDate ? new Date(rawDate) : new Date();
+
             const year = date.getUTCFullYear().toString();
             const month = String(date.getUTCMonth() + 1).padStart(2, "0");
             const slug = document._sys.filename;
 
-            // Added trailing slash to match Astro's native dev mode route resolution
             return `/blog/${year}/${month}/${slug}/`;
           },
         },
+
         fields: [
           {
             type: "string",
@@ -88,19 +109,25 @@ export default defineConfig({
           },
         ],
       },
+
       {
         name: "page",
         label: "Pages",
         path: "src/content/pages",
         format: "md",
+
         ui: {
           router: ({ document }) => {
-            if (document._sys.filename === "home") {
-              return `/`;
+            const slug = document._sys.filename;
+
+            if (slug === "home") {
+              return "/";
             }
-            return `/${document._sys.filename}`;
+
+            return `/${slug}/`;
           },
         },
+
         fields: [
           {
             type: "string",
