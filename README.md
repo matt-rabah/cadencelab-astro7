@@ -12,18 +12,85 @@ Inside of your Astro project, you'll see the following folders and files:
 
 ```text
 /
+cadencelab-astro7/
+├── .vscode/
+│   └── settings.json
+│
 ├── public/
+│   ├── admin/
+│   │   └── index.html
+│   ├── fonts/
+│   │   ├── graphik/
+│   │   └── tiempos/
+│   ├── uploads/
 │   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+│
+├── src/
+│   ├── assets/
+│   │   └── ...
+│   │
+│   ├── components/
+│   │   ├── common/
+│   │   ├── blog/
+│   │   ├── NavHeader.astro
+│   │   ├── Footer.astro
+│   │   └── ...
+│   │
+│   ├── content/
+│   │   ├── blog/
+│   │   │   ├── adoption-fatigue.md
+│   │   │   └── hello-world.md
+│   │   │
+│   │   └── pages/
+│   │       └── ...
+│   │
+│   ├── layouts/
+│   │   └── Layout.astro
+│   │
+│   ├── lib/
+│   │   └── tina/
+│   │       ├── data.ts
+│   │       └── islands.ts
+│   │
+│   ├── pages/
+│   │   ├── blog/
+│   │   │   ├── index.astro
+│   │   │   └── [year]/
+│   │   │       └── [month]/
+│   │   │           └── [slug].astro
+│   │   │
+│   │   ├── tina-island/
+│   │   │   └── [name].ts
+│   │   │
+│   │   ├── [...slug].astro
+│   │   ├── fit-check.astro
+│   │   ├── index.astro
+│   │   └── thanks.astro
+│   │
+│   ├── styles/
+│   │   ├── global.css
+│   │   └── ...
+│   │
+│   └── content.config.ts
+│
+├── tina/
+│   ├── __generated__/
+│   │   ├── client.ts
+│   │   └── types.ts
+│   ├── config.ts
+│   └── tina-lock.json
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── AGENTS.md
+├── astro.config.mjs
+├── CLAUDE.md
+├── package-lock.json
+├── package.json
+├── README.md
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
 To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
