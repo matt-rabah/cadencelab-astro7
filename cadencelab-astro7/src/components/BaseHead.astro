@@ -1,0 +1,72 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+---
+
+<script is:inline>
+	(function () {
+		function isDark() {
+			try {
+				const stored = localStorage.getItem('theme');
+				return stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+			} catch (e) {
+				return false;
+			}
+		}
+		function apply() {
+			document.documentElement.classList.toggle('dark', isDark());
+		}
+		apply();
+		// ClientRouter swaps in the SSR'd <html> (no .dark) on navigation,
+		// so re-apply the persisted theme after each swap, before paint.
+		document.addEventListener('astro:after-swap', apply);
+	})();
+</script>
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Tina Cloud rewrites media URLs to assets.tina.io in production; warm the connection. -->
+<link rel="preconnect" href="https://assets.tina.io" crossorigin />
+<link rel="dns-prefetch" href="https://assets.tina.io" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- TinaCMS visual editing is wired by the tina() integration in astro.config.mjs; its middleware only touches edit-mode responses, so there's nothing to add here. -->
+
+<ClientRouter />

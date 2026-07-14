@@ -1,0 +1,44 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+import Section from '../ui/Section.astro';
+import YouTubeFacade from '../ui/YouTubeFacade.astro';
+import type { VideoBlock } from '../../lib/data';
+
+interface Props { data: VideoBlock }
+
+const { data } = Astro.props;
+
+function parse(url = '') {
+	const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]+)/);
+	if (yt) return { type: 'youtube' as const, id: yt[1] };
+	const vimeo = url.match(/vimeo\.com\/(\d+)/);
+	if (vimeo) return { type: 'embed' as const, src: `https://player.vimeo.com/video/${vimeo[1]}` };
+	return url ? { type: 'embed' as const, src: url } : null;
+}
+const video = data.url ? parse(data.url) : null;
+
+// YouTube plays via a click-to-load facade. `loop` needs `playlist=<id>` to work.
+let ytParams = '';
+if (video?.type === 'youtube' && data.loop) {
+	ytParams = `&loop=1&playlist=${video.id}`;
+}
+
+// Non-YouTube embeds keep the lazy iframe with their autoplay/loop params.
+let embedSrc: string | null = null;
+if (video?.type === 'embed') {
+	const params = new URLSearchParams();
+	if (data.autoPlay) { params.set('autoplay', '1'); params.set('mute', '1'); }
+	if (data.loop) params.set('loop', '1');
+	const qs = params.toString();
+	embedSrc = qs ? `${video.src}?${qs}` : video.src;
+}
+---
+{video && (
+	<Section>
+		<div data-tina-field={tinaField(data, 'url')} class="relative mx-auto aspect-video w-full max-w-5xl overflow-hidden rounded-2xl border">
+			{video.type === 'youtube'
+				? <YouTubeFacade id={video.id} params={ytParams} />
+				: <iframe class="absolute inset-0 h-full w-full" src={embedSrc} title="Video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
+		</div>
+	</Section>
+)}

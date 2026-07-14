@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getConfig, listBlogs } from '../../lib/data';
+
+const posts = await listBlogs();
+const config = (await getConfig()).data?.config ?? null;
+---
+
+<Base
+	title={config?.seo?.title ?? 'Blog'}
+	description={config?.seo?.description ?? 'Welcome to my website!'}
+>
+	<main class="mx-auto max-w-5xl px-6 py-12">
+		<h1 class="mb-8 text-4xl font-semibold tracking-tight">Blog</h1>
+		<ul class="grid list-none gap-6 p-0 sm:grid-cols-2">
+			{posts.map((post) => (
+				<li>
+					<a href={`/blog/${post._sys.filename}/`} class="group block overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow hover:shadow-md">
+						{post.heroImage && (
+							<img width={720} height={360} src={post.heroImage} alt={post.title ?? ''} class="aspect-video w-full object-cover" />
+						)}
+						<div class="p-6">
+							<h2 class="font-semibold group-hover:underline">{post.title}</h2>
+							{post.pubDate && (
+								<p class="mt-1 text-sm text-muted-foreground">
+									<FormattedDate date={new Date(post.pubDate)} />
+								</p>
+							)}
+						</div>
+					</a>
+				</li>
+			))}
+		</ul>
+	</main>
+</Base>

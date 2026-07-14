@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@plugin '@tailwindcss/typography';
+
+/* Drive the dark: variant from the .dark class (toggled by ThemeToggle),
+   not the prefers-color-scheme media query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Metric-matched Arial fallback so the Inter swap doesn't reflow text (CLS). */
+@font-face {
+	font-family: 'Inter Fallback';
+	src: local('Arial');
+	ascent-override: 90.44%;
+	descent-override: 22.52%;
+	line-gap-override: 0%;
+	size-adjust: 107.12%;
+}
+
+@theme inline {
+	--font-sans: 'Inter Variable', 'Inter Fallback', system-ui, sans-serif;
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+}
+
+:root {
+	--radius: 0.625rem;
+	--background: oklch(0.99 0.004 285);
+	--foreground: oklch(0.20 0.03 285);
+	--card: oklch(1 0.002 285);
+	--card-foreground: oklch(0.20 0.03 285);
+	--popover: oklch(1 0.002 285);
+	--popover-foreground: oklch(0.20 0.03 285);
+	--primary: oklch(0.57 0.198 37);
+	--primary-foreground: oklch(0.99 0.005 285);
+	--secondary: oklch(0.96 0.01 285);
+	--secondary-foreground: oklch(0.30 0.04 285);
+	--muted: oklch(0.96 0.01 285);
+	--muted-foreground: oklch(0.48 0.03 285);
+	--accent: oklch(0.95 0.02 285);
+	--accent-foreground: oklch(0.30 0.05 285);
+	--destructive: oklch(0.577 0.245 27.325);
+	--border: oklch(0.90 0.012 285);
+	--input: oklch(0.90 0.012 285);
+	--ring: oklch(0.57 0.198 37);
+	--chart-1: oklch(0.646 0.222 41.116);
+	--chart-2: oklch(0.6 0.118 184.704);
+	--chart-3: oklch(0.398 0.07 227.392);
+	--chart-4: oklch(0.828 0.189 84.429);
+	--chart-5: oklch(0.769 0.188 70.08);
+}
+
+.dark {
+	--background: oklch(0.16 0.02 285);
+	--foreground: oklch(0.95 0.012 285);
+	--card: oklch(0.21 0.025 285);
+	--card-foreground: oklch(0.95 0.012 285);
+	--popover: oklch(0.21 0.025 285);
+	--popover-foreground: oklch(0.95 0.012 285);
+	--primary: oklch(0.70 0.18 40);
+	--primary-foreground: oklch(0.16 0.02 285);
+	--secondary: oklch(0.26 0.03 285);
+	--secondary-foreground: oklch(0.95 0.012 285);
+	--muted: oklch(0.26 0.03 285);
+	--muted-foreground: oklch(0.72 0.03 285);
+	--accent: oklch(0.28 0.04 285);
+	--accent-foreground: oklch(0.95 0.012 285);
+	--destructive: oklch(0.70 0.19 22);
+	--border: oklch(0.95 0.01 285 / 12%);
+	--input: oklch(0.95 0.01 285 / 15%);
+	--ring: oklch(0.70 0.18 40);
+}
+
+@layer base {
+	* {
+		border-color: var(--border);
+	}
+	body {
+		background-color: var(--background);
+		color: var(--foreground);
+		font-family: var(--font-sans);
+		margin: 0;
+		padding-top: 5rem;
+	}
+	.bg-default {
+		background-color: var(--background);
+	}
+}
+
+/* Prose (blog body) follows the theme tokens so it inverts in dark mode and
+   keeps the indigo tint, rather than the plugin's default zero-chroma grays.
+   Unlayered so it overrides the typography plugin's layered variables. */
+.prose {
+	--tw-prose-body: var(--foreground);
+	--tw-prose-headings: var(--foreground);
+	--tw-prose-lead: var(--muted-foreground);
+	--tw-prose-links: var(--primary);
+	--tw-prose-bold: var(--foreground);
+	--tw-prose-counters: var(--muted-foreground);
+	--tw-prose-bullets: var(--muted-foreground);
+	--tw-prose-hr: var(--border);
+	--tw-prose-quotes: var(--foreground);
+	--tw-prose-quote-borders: var(--border);
+	--tw-prose-captions: var(--muted-foreground);
+	--tw-prose-kbd: var(--foreground);
+	--tw-prose-code: var(--foreground);
+	--tw-prose-pre-code: var(--secondary-foreground);
+	--tw-prose-pre-bg: var(--muted);
+	--tw-prose-th-borders: var(--border);
+	--tw-prose-td-borders: var(--border);
+}
+
+@keyframes twinkle {
+	0%, 100% { opacity: 0.25; }
+	50% { opacity: 0.9; }
+}
+@media (prefers-reduced-motion: no-preference) {
+	.star-twinkle { animation: twinkle var(--twinkle-dur, 4s) ease-in-out infinite; animation-delay: var(--d, 0s); }
+}
