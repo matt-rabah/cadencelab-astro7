@@ -73,19 +73,19 @@ export default defineConfig({
           {
             style: "normal",
             weight: "400",
-            path: "./public/fonts/Graphik/GraphikXXCond-Regular.woff2",
+            path: "./public/fonts/Graphik/graphik-xx-condensed-regular.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "500",
-            path: "./public/fonts/Graphik/GraphikXXCond-Medium.woff2",
+            path: "./public/fonts/Graphik/graphik-xx-condensed-medium.woff2",
             preload: false,
           },
           {
             style: "normal",
             weight: "700",
-            path: "./public/fonts/Graphik/GraphikXXCond-Bold.woff2",
+            path: "./public/fonts/Graphik/graphik-xx-condensed-bold.woff2",
             preload: false,
           },
         ],
