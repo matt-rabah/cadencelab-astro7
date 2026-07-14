@@ -64,7 +64,7 @@ const footerSections: FooterSection[] = [
   },
   {
     title: "AI tooling",
-    id: "footer-ai-heading",
+    id: "footer-ai-tooling-heading",
     links: [
       {
         label: "Prompt firewalls",
@@ -101,11 +101,8 @@ const legalLinks: FooterLink[] = [
   },
 ];
 
-/**
- * Normalizes paths so "/about" and "/about/" are treated as equivalent.
- */
 const normalizePath = (path: string): string => {
-  if (path === "/") return path;
+  if (path === "/") return "/";
   return path.endsWith("/") ? path : `${path}/`;
 };
 
@@ -116,7 +113,7 @@ const isCurrentPage = (href: string): boolean =>
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-primary">
-      <section class="footer-brand" aria-labelledby="footer-brand-description">
+      <div class="footer-brand">
         <a
           href="/"
           class="footer-logo-link"
@@ -134,14 +131,14 @@ const isCurrentPage = (href: string): boolean =>
           />
         </a>
 
-        <p id="footer-brand-description" class="footer-description">
+        <p class="footer-description">
           Architecting workflow adoption, system integration trust, and
           cross-functional measurement systems for enterprise customer
           experience.
         </p>
-      </section>
+      </div>
 
-      <div class="footer-directory">
+      <nav class="footer-directory" aria-label="Footer navigation">
         {
           footerSections.map((section) => (
             <section class="footer-section" aria-labelledby={section.id}>
@@ -149,26 +146,24 @@ const isCurrentPage = (href: string): boolean =>
                 {section.title}
               </h2>
 
-              <nav aria-labelledby={section.id}>
-                <ul class="footer-link-list">
-                  {section.links.map((link) => (
-                    <li>
-                      <a
-                        href={link.href}
-                        aria-current={
-                          isCurrentPage(link.href) ? "page" : undefined
-                        }
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+              <ul class="footer-link-list">
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      aria-current={
+                        isCurrentPage(link.href) ? "page" : undefined
+                      }
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </section>
           ))
         }
-      </div>
+      </nav>
     </div>
 
     <div class="footer-secondary">
@@ -177,7 +172,7 @@ const isCurrentPage = (href: string): boolean =>
         <span>All rights reserved.</span>
       </p>
 
-      <nav class="legal-navigation" aria-label="Legal">
+      <nav class="footer-legal" aria-label="Legal">
         <ul class="legal-link-list">
           {
             legalLinks.map((link) => (
@@ -198,36 +193,30 @@ const isCurrentPage = (href: string): boolean =>
 </footer>
 
 <style>
-  /*
-   * Mobile-first footer
-   *
-   * This component uses the global Graphik font when available and falls
-   * back to a standard system sans-serif stack.
-   */
-
   .site-footer {
     --footer-background: #000;
+    --footer-heading-color: #fff;
     --footer-text: #cbd6e2;
-    --footer-muted: #9aaabd;
-    --footer-subtle: #8997a9;
-    --footer-heading: #fff;
+    --footer-muted: #93a3b5;
+    --footer-subtle: #7c8999;
     --footer-border: #252b33;
     --footer-accent: #4fd34a;
     --footer-focus: #fff;
 
     width: 100%;
-    padding: clamp(3.5rem, 8vw, 5rem) clamp(1.25rem, 5vw, 3rem)
-      clamp(2rem, 5vw, 2.5rem);
+    padding: clamp(3.5rem, 7vw, 5rem) clamp(1.25rem, 4vw, 3rem)
+      clamp(2rem, 4vw, 2.5rem);
+
     border-top: 1px solid var(--footer-border);
     background: var(--footer-background);
     color: var(--footer-text);
-    font-family:
-      var(--font-sans, "Graphik"),
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Arial,
-      sans-serif;
+
+    /*
+     * Force the footer to use Graphik throughout.
+     * Tiempos remains available elsewhere for editorial content.
+     */
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
+    font-synthesis: none;
   }
 
   .footer-container {
@@ -235,13 +224,9 @@ const isCurrentPage = (href: string): boolean =>
     margin-inline: auto;
   }
 
-  /*
-   * Primary footer region
-   */
-
   .footer-primary {
     display: grid;
-    gap: 3rem;
+    gap: clamp(3rem, 6vw, 5rem);
   }
 
   .footer-brand {
@@ -253,7 +238,8 @@ const isCurrentPage = (href: string): boolean =>
     align-items: center;
     width: fit-content;
     min-height: 2.75rem;
-    border-radius: 0.125rem;
+    color: inherit;
+    text-decoration: none;
   }
 
   .footer-logo {
@@ -264,18 +250,16 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   .footer-description {
-    max-width: 38rem;
-    margin: 1.25rem 0 0;
+    max-width: 34rem;
+    margin: 1.125rem 0 0;
     color: var(--footer-muted);
-    font-size: clamp(0.875rem, 0.84rem + 0.12vw, 0.9375rem);
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
+    font-size: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
     font-weight: 400;
-    line-height: 1.65;
+    line-height: 1.6;
+    letter-spacing: 0;
     text-wrap: pretty;
   }
-
-  /*
-   * Navigation directory
-   */
 
   .footer-directory {
     display: grid;
@@ -287,14 +271,26 @@ const isCurrentPage = (href: string): boolean =>
     min-width: 0;
   }
 
-  .footer-heading {
-    margin: 0 0 0.875rem;
-    color: var(--footer-heading);
+  /*
+   * These explicit declarations override the global h2 typography.
+   * The element remains an h2 semantically, but it is styled as a compact
+   * navigation label.
+   */
+  .site-footer .footer-heading {
+    max-width: none;
+    margin: 0 0 1rem;
+    padding: 0;
+
+    color: var(--footer-heading-color);
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.75rem;
+    font-style: normal;
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.3;
     letter-spacing: 0.075em;
+    text-align: left;
     text-transform: uppercase;
+    text-wrap: nowrap;
   }
 
   .footer-link-list,
@@ -309,22 +305,29 @@ const isCurrentPage = (href: string): boolean =>
     gap: 0.125rem;
   }
 
+  .footer-link-list li {
+    margin: 0;
+    padding: 0;
+  }
+
   .footer-link-list a {
     display: flex;
     align-items: center;
-    min-height: 2.75rem;
     width: fit-content;
     max-width: 100%;
-    padding-block: 0.375rem;
+    min-height: 2.75rem;
+    padding-block: 0.35rem;
+
     color: var(--footer-text);
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.45;
+    letter-spacing: 0;
     text-decoration: none;
     text-wrap: pretty;
-    transition:
-      color 150ms ease,
-      text-decoration-color 150ms ease;
+
+    transition: color 150ms ease;
   }
 
   .footer-link-list a:hover {
@@ -335,7 +338,7 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   .footer-link-list a[aria-current="page"] {
-    color: var(--footer-heading);
+    color: var(--footer-heading-color);
     font-weight: 600;
     text-decoration: underline;
     text-decoration-color: var(--footer-accent);
@@ -343,13 +346,9 @@ const isCurrentPage = (href: string): boolean =>
     text-underline-offset: 0.25em;
   }
 
-  /*
-   * Copyright and legal region
-   */
-
   .footer-secondary {
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
     margin-top: clamp(3rem, 7vw, 4rem);
     padding-top: 1.75rem;
     border-top: 1px solid var(--footer-border);
@@ -360,8 +359,11 @@ const isCurrentPage = (href: string): boolean =>
     flex-wrap: wrap;
     gap: 0.25rem 0.4rem;
     margin: 0;
+
     color: var(--footer-subtle);
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.8125rem;
+    font-weight: 400;
     line-height: 1.5;
   }
 
@@ -369,46 +371,47 @@ const isCurrentPage = (href: string): boolean =>
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0;
   }
 
   .legal-link-list li {
     display: inline-flex;
     align-items: center;
+    margin: 0;
   }
 
   .legal-link-list li:not(:last-child)::after {
     content: "";
+    flex: 0 0 auto;
     width: 0.1875rem;
     height: 0.1875rem;
     margin-inline: 0.75rem;
     border-radius: 50%;
     background: var(--footer-subtle);
-    opacity: 0.65;
+    opacity: 0.7;
   }
 
   .legal-link-list a {
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
+
     color: var(--footer-subtle);
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.8125rem;
+    font-weight: 400;
     line-height: 1.4;
     text-decoration: none;
+
     transition: color 150ms ease;
   }
 
   .legal-link-list a:hover,
   .legal-link-list a[aria-current="page"] {
-    color: var(--footer-heading);
+    color: var(--footer-heading-color);
     text-decoration: underline;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.22em;
   }
-
-  /*
-   * Keyboard accessibility
-   */
 
   .site-footer a:focus-visible {
     outline: 2px solid var(--footer-focus);
@@ -418,7 +421,6 @@ const isCurrentPage = (href: string): boolean =>
   /*
    * Tablet
    */
-
   @media (min-width: 40rem) {
     .footer-directory {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -436,7 +438,7 @@ const isCurrentPage = (href: string): boolean =>
       gap: 2rem;
     }
 
-    .legal-navigation {
+    .footer-legal {
       justify-self: end;
     }
 
@@ -448,10 +450,9 @@ const isCurrentPage = (href: string): boolean =>
   /*
    * Desktop
    */
-
   @media (min-width: 64rem) {
     .footer-primary {
-      grid-template-columns: minmax(16rem, 1.25fr) minmax(0, 2.75fr);
+      grid-template-columns: minmax(16rem, 1.15fr) minmax(0, 2.85fr);
       gap: clamp(4rem, 7vw, 7rem);
       align-items: start;
     }
@@ -470,24 +471,20 @@ const isCurrentPage = (href: string): boolean =>
     }
   }
 
-  /*
-   * Very wide screens
-   */
-
-  @media (min-width: 90rem) {
-    .site-footer {
-      padding-inline: 4rem;
-    }
-  }
-
-  /*
-   * Remove nonessential animation when requested by the user.
-   */
-
   @media (prefers-reduced-motion: reduce) {
     .footer-link-list a,
     .legal-link-list a {
       transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .site-footer {
+      border-top-color: CanvasText;
+    }
+
+    .footer-secondary {
+      border-top-color: CanvasText;
     }
   }
 </style>
