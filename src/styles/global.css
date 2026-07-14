@@ -1,36 +1,952 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@config "../../tailwind.config.js";
+/* src/styles/global.css */
 
-@layer base {
+/* ==========================================================================
+   1. Design tokens
+   ========================================================================== */
 
-    /* Route styling parameters into your typography families */
-    .font-graphik,
-    .font-graphik-compact,
-    .font-graphik-condensed {
-        font-feature-settings: "ss05" 1, "calt" 1, "kern" 1;
-        text-rendering: optimizeLegibility;
-    }
+:root {
+  /* Typography */
+  --font-sans:
+    "Graphik", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 
-    .font-tiempos-text {
-        font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
-        font-variant-numeric: oldstyle-nums;
-        text-rendering: optimizeLegibility;
-    }
+  --font-serif:
+    "Tiempos Text", "Source Serif 4", Georgia, "Times New Roman", serif;
 
-    /* Structural guardrails protecting layout shifting metrics */
-    h1,
-    h2,
-    h3,
-    h4,
-    p,
-    span,
-    button {
-        overflow-wrap: break-word;
-        hyphens: auto;
-    }
+  /* Brand colors */
+  --color-ink: #010302;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f5f7f5;
+  --color-accent: #4fd34a;
+  --color-link: #1823c9;
 
-    body {
-        @apply font-tiempos-text text-fluid-body leading-editorial text-slate-950 bg-white antialiased;
-    }
+  /* Text colors */
+  --color-text: #010302;
+  --color-text-muted: #555b58;
+  --color-text-subtle: #727975;
+  --color-text-inverse: #ffffff;
+
+  /* Interface colors */
+  --color-border: #d9ddda;
+  --color-border-strong: #aeb5b0;
+  --color-focus: #1823c9;
+  --color-error: #b42318;
+  --color-success: #16794a;
+
+  /* Layout */
+  --page-gutter: clamp(1.25rem, 4vw, 3rem);
+  --container-page: 80rem;
+  --container-wide: 90rem;
+  --container-header: 56rem;
+  --container-copy: 66ch;
+  --container-copy-narrow: 58ch;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Borders and radii */
+  --border-width: 1px;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgb(1 3 2 / 6%), 0 1px 3px rgb(1 3 2 / 8%);
+
+  --shadow-md: 0 4px 12px rgb(1 3 2 / 8%), 0 2px 4px rgb(1 3 2 / 6%);
+
+  /* Interaction */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 3px;
+  --transition-fast: 150ms ease;
+  --transition-standard: 220ms ease;
+
+  /* Shared layout behavior */
+  --header-offset: 6rem;
+}
+
+/* ==========================================================================
+   2. Font declarations
+   Replace paths only if your existing font filenames differ.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Graphik";
+  src: url("/fonts/Graphik/graphik-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Graphik";
+  src: url("/fonts/Graphik/graphik-semibold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Graphik";
+  src: url("/fonts/Graphik/graphik-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/Tiempos/tiempos-text-regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/Tiempos/tiempos-text-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   3. CSS reset and document defaults
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  color-scheme: light;
+  scroll-padding-top: var(--header-offset);
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  hanging-punctuation: first last;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-wrap: break-word;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+svg {
+  overflow: visible;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
+textarea {
+  resize: vertical;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 45%, white);
+  color: var(--color-ink);
+}
+
+/* ==========================================================================
+   4. Global typography
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 1.75rem + 3.2vw, 5rem);
+  font-weight: 700;
+  line-height: 0.99;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+h5,
+h6 {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+p,
+li,
+dd,
+dt,
+figcaption {
+  text-wrap: pretty;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+sup,
+sub {
+  position: relative;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* ==========================================================================
+   5. Links and interactive states
+   ========================================================================== */
+
+a {
+  color: var(--color-link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition:
+    color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--color-link) 78%, black);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+a[aria-current="page"] {
+  font-weight: 600;
+}
+
+button,
+input,
+textarea,
+select,
+summary {
+  border-radius: var(--radius-sm);
+}
+
+button {
+  border: 0;
+}
+
+/* ==========================================================================
+   6. Accessible utility styles
+   ========================================================================== */
+
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--transition-fast);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ==========================================================================
+   7. Shared layout containers
+   ========================================================================== */
+
+.page-container {
+  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+  margin-inline: auto;
+}
+
+.wide-container {
+  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-wide));
+  margin-inline: auto;
+}
+
+.header-container {
+  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-header));
+  margin-inline: auto;
+}
+
+.copy-container {
+  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-copy));
+  margin-inline: auto;
+}
+
+.copy-container-narrow {
+  width: min(
+    calc(100% - (2 * var(--page-gutter))),
+    var(--container-copy-narrow)
+  );
+  margin-inline: auto;
+}
+
+.full-bleed {
+  width: 100%;
+}
+
+.section {
+  padding-block: clamp(3rem, 8vw, 7rem);
+}
+
+.section-compact {
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+}
+
+/* ==========================================================================
+   8. Shared buttons
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.75rem 1.125rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button-primary {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-text-inverse);
+}
+
+.button-primary:hover {
+  border-color: color-mix(in srgb, var(--color-ink) 85%, white);
+  background: color-mix(in srgb, var(--color-ink) 85%, white);
+  color: var(--color-text-inverse);
+}
+
+.button-secondary {
+  border-color: var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.button-secondary:hover {
+  background: var(--color-ink);
+  color: var(--color-text-inverse);
+}
+
+.button-accent {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.button-accent:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 86%, black);
+  background: color-mix(in srgb, var(--color-accent) 86%, black);
+  color: var(--color-ink);
+}
+
+.button-text {
+  min-height: 2.75rem;
+  padding-inline: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+.button-text:hover {
+  color: color-mix(in srgb, var(--color-link) 78%, black);
+}
+
+.button[aria-disabled="true"],
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   9. Forms
+   ========================================================================== */
+
+.form-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-label {
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.form-help {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.form-error {
+  color: var(--color-error);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+textarea {
+  min-height: 8rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-subtle);
+  opacity: 1;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--color-text-muted);
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  padding: 0;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   10. Rich-text and article content
+   ========================================================================== */
+
+.prose {
+  width: min(100%, var(--container-copy));
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  line-height: 1.62;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose :where(h2, h3, h4, h5, h6) {
+  font-family: var(--font-sans);
+  scroll-margin-top: var(--header-offset);
+}
+
+.prose h2 {
+  max-width: 30ch;
+  margin-top: 2.5em;
+  margin-bottom: 0.65em;
+}
+
+.prose h3 {
+  max-width: 36ch;
+  margin-top: 2em;
+  margin-bottom: 0.55em;
+}
+
+.prose h4 {
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose figure,
+.prose pre,
+.prose table {
+  margin-bottom: 1.25em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.35em;
+}
+
+.prose li + li {
+  margin-top: 0.45em;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid currentColor;
+  font-size: 1.075em;
+}
+
+.prose hr {
+  width: 100%;
+  margin-block: 3rem;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.prose figure {
+  margin-inline: 0;
+}
+
+.prose figcaption {
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: #111;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.prose code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+.prose :not(pre) > code {
+  padding: 0.12em 0.3em;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-subtle);
+}
+
+.prose table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  background: var(--color-surface-subtle);
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   11. Media and embeds
+   ========================================================================== */
+
+.media-frame {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-subtle);
+}
+
+.media-frame img,
+.media-frame video,
+.media-frame iframe {
+  width: 100%;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-square {
+  aspect-ratio: 1;
+}
+
+.embed-responsive {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.embed-responsive iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ==========================================================================
+   12. Status and feedback
+   ========================================================================== */
+
+.status-message {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.status-message-success {
+  border-color: color-mix(in srgb, var(--color-success) 45%, white);
+  background: color-mix(in srgb, var(--color-success) 8%, white);
+  color: var(--color-success);
+}
+
+.status-message-error {
+  border-color: color-mix(in srgb, var(--color-error) 45%, white);
+  background: color-mix(in srgb, var(--color-error) 8%, white);
+  color: var(--color-error);
+}
+
+/* ==========================================================================
+   13. Responsive adjustments
+   ========================================================================== */
+
+@media (max-width: 40rem) {
+  :root {
+    --header-offset: 5rem;
+  }
+
+  h1 {
+    max-width: 16ch;
+    line-height: 1.02;
+  }
+
+  .section {
+    padding-block: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .prose {
+    line-height: 1.65;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .button-auto-mobile {
+    width: fit-content;
+  }
+}
+
+@media (min-width: 40rem) {
+  .sm-two-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .lg-two-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg-three-column {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ==========================================================================
+   14. Print
+   ========================================================================== */
+
+@media print {
+  :root {
+    --color-text: #000;
+    --color-surface: #fff;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  header,
+  footer,
+  nav,
+  .skip-link,
+  .button,
+  [data-print-hidden] {
+    display: none !important;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+
+  img,
+  figure,
+  table,
+  blockquote {
+    break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+15. Reduced motion and forced colors
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .button {
+    border: 1px solid ButtonText;
+  }
+
+  .skip-link {
+    border-color: CanvasText;
+  }
 }
