@@ -21,10 +21,6 @@ export default defineConfig({
   branch,
   clientId,
 
-  /*
-   * Server-side only. This value is intentionally unavailable inside the
-   * browser-based Tina admin bundle, so only include it when it exists.
-   */
   ...(readOnlyToken ? { token: readOnlyToken } : {}),
 
   build: {
@@ -39,10 +35,6 @@ export default defineConfig({
     },
   },
 
-  /*
-   * Search indexing is optional during local development. Only configure it
-   * when the server-side search token is available.
-   */
   ...(searchToken
     ? {
         search: {
@@ -66,11 +58,20 @@ export default defineConfig({
         ui: {
           router: ({ document }) => {
             const rawDate = (document as any)._values?.date;
-            const date = rawDate ? new Date(rawDate) : new Date();
+            const slug = document._sys.filename;
+
+            if (!rawDate) {
+              return "/blog/";
+            }
+
+            const date = new Date(rawDate);
+
+            if (Number.isNaN(date.getTime())) {
+              return "/blog/";
+            }
 
             const year = String(date.getUTCFullYear());
             const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-            const slug = document._sys.filename;
 
             return `/blog/${year}/${month}/${slug}/`;
           },
