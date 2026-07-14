@@ -65,7 +65,7 @@ export default defineConfig({
 
         ui: {
           router: ({ document }) => {
-            const rawDate = document._values?.date;
+            const rawDate = (document as any)._values?.date;
             const date = rawDate ? new Date(rawDate) : new Date();
 
             const year = String(date.getUTCFullYear());
