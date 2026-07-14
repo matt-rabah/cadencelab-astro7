@@ -1,29 +1,128 @@
 ---
+// src/components/Footer.astro
+
 import logoLightText from "../assets/cadencelab-wordmark_cadencelab-logo-color-lt.svg";
 
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterSection {
+  title: string;
+  id: string;
+  links: FooterLink[];
+}
+
 const currentYear = new Date().getFullYear();
+const currentPath = Astro.url.pathname;
 
-const primaryLinks = [
-  { label: "Home", href: "/" },
-  // Add these only when the routes exist:
-  // { label: "About", href: "/about/" },
-  // { label: "Blog", href: "/blog/" },
-  // { label: "Contact", href: "/contact/" },
-];
-
-const externalLinks = [
+const footerSections: FooterSection[] = [
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    title: "Workflows",
+    id: "footer-workflows-heading",
+    links: [
+      {
+        label: "Salesforce tracing",
+        href: "/workflows/salesforce/",
+      },
+      {
+        label: "Cross-functional links",
+        href: "/workflows/cross-functional/",
+      },
+      {
+        label: "SLA escalation maps",
+        href: "/workflows/escalation/",
+      },
+      {
+        label: "AI-to-human routing",
+        href: "/workflows/agent-routing/",
+      },
+    ],
+  },
+  {
+    title: "Solutions",
+    id: "footer-solutions-heading",
+    links: [
+      {
+        label: "User adoption fatigue",
+        href: "/solutions/adoption-fatigue/",
+      },
+      {
+        label: "Siloed and dirty CRM pipelines",
+        href: "/solutions/dirty-data/",
+      },
+      {
+        label: "Executive misalignment",
+        href: "/solutions/misalignment/",
+      },
+      {
+        label: "Enterprise frameworks",
+        href: "/solutions/enterprise/",
+      },
+    ],
+  },
+  {
+    title: "AI tooling",
+    id: "footer-ai-heading",
+    links: [
+      {
+        label: "Prompt firewalls",
+        href: "/ai-tooling/prompt-guard/",
+      },
+      {
+        label: "Variance tracing",
+        href: "/ai-tooling/hallucination/",
+      },
+      {
+        label: "PII scrubbing nodes",
+        href: "/ai-tooling/compliance/",
+      },
+      {
+        label: "Agent copilots",
+        href: "/ai-tooling/co-pilot/",
+      },
+    ],
   },
 ];
+
+const legalLinks: FooterLink[] = [
+  {
+    label: "Privacy policy",
+    href: "/privacy/",
+  },
+  {
+    label: "Terms of service",
+    href: "/terms/",
+  },
+  {
+    label: "System governance",
+    href: "/governance/",
+  },
+];
+
+/**
+ * Normalizes paths so "/about" and "/about/" are treated as equivalent.
+ */
+const normalizePath = (path: string): string => {
+  if (path === "/") return path;
+  return path.endsWith("/") ? path : `${path}/`;
+};
+
+const isCurrentPage = (href: string): boolean =>
+  normalizePath(currentPath) === normalizePath(href);
 ---
 
 <footer class="site-footer">
   <div class="footer-container">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="/" aria-label="Cadence Lab home" class="footer-logo-link">
+    <div class="footer-primary">
+      <section class="footer-brand" aria-labelledby="footer-brand-description">
+        <a
+          href="/"
+          class="footer-logo-link"
+          aria-label="Cadence Lab home"
+          aria-current={isCurrentPage("/") ? "page" : undefined}
+        >
           <img
             src={logoLightText.src ?? logoLightText}
             alt=""
@@ -31,34 +130,62 @@ const externalLinks = [
             height="26"
             loading="lazy"
             decoding="async"
+            class="footer-logo"
           />
         </a>
 
-        <p>
+        <p id="footer-brand-description" class="footer-description">
           Architecting workflow adoption, system integration trust, and
           cross-functional measurement systems for enterprise customer
           experience.
         </p>
+      </section>
+
+      <div class="footer-directory">
+        {
+          footerSections.map((section) => (
+            <section class="footer-section" aria-labelledby={section.id}>
+              <h2 id={section.id} class="footer-heading">
+                {section.title}
+              </h2>
+
+              <nav aria-labelledby={section.id}>
+                <ul class="footer-link-list">
+                  {section.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        aria-current={
+                          isCurrentPage(link.href) ? "page" : undefined
+                        }
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </section>
+          ))
+        }
       </div>
+    </div>
 
-      <nav aria-label="Footer navigation">
-        <ul>
-          {
-            primaryLinks.map((link) => (
-              <li>
-                <a href={link.href}>{link.label}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+    <div class="footer-secondary">
+      <p class="footer-copyright">
+        <span>&copy; {currentYear} Cadence Lab.</span>
+        <span>All rights reserved.</span>
+      </p>
 
-      <nav aria-label="External links">
-        <ul>
+      <nav class="legal-navigation" aria-label="Legal">
+        <ul class="legal-link-list">
           {
-            externalLinks.map((link) => (
+            legalLinks.map((link) => (
               <li>
-                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={link.href}
+                  aria-current={isCurrentPage(link.href) ? "page" : undefined}
+                >
                   {link.label}
                 </a>
               </li>
@@ -67,9 +194,300 @@ const externalLinks = [
         </ul>
       </nav>
     </div>
-
-    <div class="footer-bottom">
-      <p>&copy; {currentYear} Cadence Lab. All rights reserved.</p>
-    </div>
   </div>
 </footer>
+
+<style>
+  /*
+   * Mobile-first footer
+   *
+   * This component uses the global Graphik font when available and falls
+   * back to a standard system sans-serif stack.
+   */
+
+  .site-footer {
+    --footer-background: #000;
+    --footer-text: #cbd6e2;
+    --footer-muted: #9aaabd;
+    --footer-subtle: #8997a9;
+    --footer-heading: #fff;
+    --footer-border: #252b33;
+    --footer-accent: #4fd34a;
+    --footer-focus: #fff;
+
+    width: 100%;
+    padding: clamp(3.5rem, 8vw, 5rem) clamp(1.25rem, 5vw, 3rem)
+      clamp(2rem, 5vw, 2.5rem);
+    border-top: 1px solid var(--footer-border);
+    background: var(--footer-background);
+    color: var(--footer-text);
+    font-family:
+      var(--font-sans, "Graphik"),
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Arial,
+      sans-serif;
+  }
+
+  .footer-container {
+    width: min(100%, 75rem);
+    margin-inline: auto;
+  }
+
+  /*
+   * Primary footer region
+   */
+
+  .footer-primary {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .footer-brand {
+    min-width: 0;
+  }
+
+  .footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 2.75rem;
+    border-radius: 0.125rem;
+  }
+
+  .footer-logo {
+    display: block;
+    width: auto;
+    height: 1.625rem;
+    object-fit: contain;
+  }
+
+  .footer-description {
+    max-width: 38rem;
+    margin: 1.25rem 0 0;
+    color: var(--footer-muted);
+    font-size: clamp(0.875rem, 0.84rem + 0.12vw, 0.9375rem);
+    font-weight: 400;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  /*
+   * Navigation directory
+   */
+
+  .footer-directory {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-section {
+    min-width: 0;
+  }
+
+  .footer-heading {
+    margin: 0 0 0.875rem;
+    color: var(--footer-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+  }
+
+  .footer-link-list,
+  .legal-link-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-link-list {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .footer-link-list a {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    width: fit-content;
+    max-width: 100%;
+    padding-block: 0.375rem;
+    color: var(--footer-text);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.45;
+    text-decoration: none;
+    text-wrap: pretty;
+    transition:
+      color 150ms ease,
+      text-decoration-color 150ms ease;
+  }
+
+  .footer-link-list a:hover {
+    color: var(--footer-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.22em;
+  }
+
+  .footer-link-list a[aria-current="page"] {
+    color: var(--footer-heading);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--footer-accent);
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.25em;
+  }
+
+  /*
+   * Copyright and legal region
+   */
+
+  .footer-secondary {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(3rem, 7vw, 4rem);
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--footer-border);
+  }
+
+  .footer-copyright {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.4rem;
+    margin: 0;
+    color: var(--footer-subtle);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .legal-link-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+  }
+
+  .legal-link-list li {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .legal-link-list li:not(:last-child)::after {
+    content: "";
+    width: 0.1875rem;
+    height: 0.1875rem;
+    margin-inline: 0.75rem;
+    border-radius: 50%;
+    background: var(--footer-subtle);
+    opacity: 0.65;
+  }
+
+  .legal-link-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--footer-subtle);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .legal-link-list a:hover,
+  .legal-link-list a[aria-current="page"] {
+    color: var(--footer-heading);
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.22em;
+  }
+
+  /*
+   * Keyboard accessibility
+   */
+
+  .site-footer a:focus-visible {
+    outline: 2px solid var(--footer-focus);
+    outline-offset: 0.25rem;
+  }
+
+  /*
+   * Tablet
+   */
+
+  @media (min-width: 40rem) {
+    .footer-directory {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 3rem;
+      row-gap: 2.75rem;
+    }
+
+    .footer-section:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .footer-secondary {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .legal-navigation {
+      justify-self: end;
+    }
+
+    .legal-link-list {
+      justify-content: flex-end;
+    }
+  }
+
+  /*
+   * Desktop
+   */
+
+  @media (min-width: 64rem) {
+    .footer-primary {
+      grid-template-columns: minmax(16rem, 1.25fr) minmax(0, 2.75fr);
+      gap: clamp(4rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .footer-description {
+      max-width: 20rem;
+    }
+
+    .footer-directory {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+
+    .footer-section:last-child {
+      grid-column: auto;
+    }
+  }
+
+  /*
+   * Very wide screens
+   */
+
+  @media (min-width: 90rem) {
+    .site-footer {
+      padding-inline: 4rem;
+    }
+  }
+
+  /*
+   * Remove nonessential animation when requested by the user.
+   */
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-link-list a,
+    .legal-link-list a {
+      transition: none;
+    }
+  }
+</style>
