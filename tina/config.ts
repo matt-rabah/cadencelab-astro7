@@ -7,16 +7,20 @@ const branch =
   process.env.GITHUB_REF_NAME ??
   "main";
 
-const clientId = process.env.TINA_CLIENT_ID;
+const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
 const token = process.env.TINA_READ_ONLY_TOKEN;
 const searchToken = process.env.TINA_SEARCH_TOKEN;
 
 if (!clientId) {
-  throw new Error("Missing TINA_CLIENT_ID environment variable");
+  throw new Error(
+    "Missing NEXT_PUBLIC_TINA_CLIENT_ID environment variable",
+  );
 }
 
 if (!token) {
-  throw new Error("Missing TINA_READ_ONLY_TOKEN environment variable");
+  throw new Error(
+    "Missing TINA_READ_ONLY_TOKEN environment variable",
+  );
 }
 
 export default defineConfig({
@@ -58,7 +62,9 @@ export default defineConfig({
 
         ui: {
           router: ({ document }) => {
-            const rawDate = (document as any)._values?.date;
+            // `document.values` may not exist on the typed Document; cast to any to access when available
+            // Use a safe any-cast for older/newer Document shapes where `get` may not be typed
+            const rawDate = (document as any).values?.date ?? (document as any).get?.("date");
             const date = rawDate ? new Date(rawDate) : new Date();
 
             const year = date.getUTCFullYear().toString();
