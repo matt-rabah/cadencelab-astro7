@@ -7,8 +7,8 @@ dist/
 # dependencies
 node_modules/
 
-# Tina cache only
-tina/__generated__/.cache/
+# Tina generated files
+tina/__generated__/
 
 # logs
 npm-debug.log*
