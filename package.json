@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "build": "tinacms build --content=local --skip-cloud-checks && astro build",
+    "build": "tinacms build --content=local --skip-cloud-checks --skip-indexing && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
