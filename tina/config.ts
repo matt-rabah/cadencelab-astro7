@@ -7,15 +7,13 @@ const branch =
   process.env.GITHUB_REF_NAME ??
   "main";
 
-const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID;
+// Keep compatibility with older env var names so local/static builds don't fail
+const clientId =
+  process.env.NEXT_PUBLIC_TINA_CLIENT_ID ?? process.env.TINA_CLIENT_ID;
 const readOnlyToken = process.env.TINA_READ_ONLY_TOKEN;
 const searchToken = process.env.TINA_SEARCH_TOKEN;
 
-if (!clientId) {
-  throw new Error(
-    "Missing NEXT_PUBLIC_TINA_CLIENT_ID environment variable",
-  );
-}
+// Do not throw when clientId is missing — allow unauthenticated local/static builds
 
 export default defineConfig({
   branch,
