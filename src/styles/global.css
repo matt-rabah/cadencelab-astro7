@@ -12,6 +12,8 @@
   --font-serif:
     "Tiempos Text", "Source Serif 4", Georgia, "Times New Roman", serif;
 
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
   /* Brand colors */
   --color-ink: #010302;
   --color-surface: #ffffff;
@@ -78,7 +80,6 @@
 
 /* ==========================================================================
    2. Font declarations
-   Replace paths only if your existing font filenames differ.
    ========================================================================== */
 
 @font-face {
@@ -86,6 +87,14 @@
   src: url("/fonts/Graphik/graphik-regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Graphik";
+  src: url("/fonts/Graphik/graphik-medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
   font-display: swap;
 }
 
@@ -115,14 +124,38 @@
 
 @font-face {
   font-family: "Tiempos Text";
-  src: url("/fonts/Tiempos/tiempos-text-italic.woff2") format("woff2");
+  src: url("/fonts/Tiempos/tiempos-text-regular-italic.woff2") format("woff2");
   font-style: italic;
   font-weight: 400;
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/Tiempos/tiempos-text-medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/Tiempos/tiempos-text-medium-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/Tiempos/tiempos-text-semibold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
 /* ==========================================================================
-   3. CSS reset and document defaults
+   3. Reset and document defaults
    ========================================================================== */
 
 *,
@@ -152,6 +185,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: 1rem;
+  font-style: normal;
   font-weight: 400;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
@@ -242,6 +276,9 @@ textarea {
 
 /* ==========================================================================
    4. Global typography
+
+   Graphik is the site default.
+   Tiempos is applied only through editorial classes such as .prose.
    ========================================================================== */
 
 h1,
@@ -250,10 +287,14 @@ h3,
 h4,
 h5,
 h6 {
+  max-width: none;
   color: var(--color-text);
   font-family: var(--font-sans);
+  font-style: normal;
   font-weight: 600;
   line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: none;
   text-wrap: balance;
 }
 
@@ -273,6 +314,7 @@ h2 {
 h3 {
   font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 h4 {
@@ -325,6 +367,37 @@ sub {
   bottom: -0.25em;
 }
 
+/*
+ * Compact UI labels.
+ *
+ * These remain sentence case. Use these for navigation groups, card labels,
+ * metadata groups, or other interface labels that should not inherit h2 sizes.
+ */
+
+.ui-label,
+.section-label,
+.eyebrow {
+  margin: 0;
+  color: inherit;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/*
+ * Optional editorial serif treatment outside a full article.
+ */
+
+.editorial-text {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
 /* ==========================================================================
    5. Links and interactive states
    ========================================================================== */
@@ -370,7 +443,7 @@ button {
 }
 
 /* ==========================================================================
-   6. Accessible utility styles
+   6. Accessible utilities
    ========================================================================== */
 
 .skip-link {
@@ -382,6 +455,7 @@ button {
   border: 2px solid var(--color-ink);
   background: var(--color-surface);
   color: var(--color-ink);
+  font-family: var(--font-sans);
   font-weight: 600;
   text-decoration: none;
   transform: translateY(-200%);
@@ -481,21 +555,24 @@ button {
 
 .button {
   display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
   min-height: 2.75rem;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: fit-content;
-  max-width: 100%;
   padding: 0.75rem 1.125rem;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
   font-size: 0.9375rem;
+  font-style: normal;
   font-weight: 600;
   line-height: 1.2;
+  letter-spacing: 0;
   text-align: center;
   text-decoration: none;
+  text-transform: none;
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
@@ -579,6 +656,7 @@ button {
 
 .form-label {
   color: var(--color-text);
+  font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.4;
@@ -586,12 +664,14 @@ button {
 
 .form-help {
   color: var(--color-text-muted);
+  font-family: var(--font-sans);
   font-size: 0.8125rem;
   line-height: 1.45;
 }
 
 .form-error {
   color: var(--color-error);
+  font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.45;
@@ -606,6 +686,7 @@ select {
   border: 1px solid var(--color-border-strong);
   background: var(--color-surface);
   color: var(--color-text);
+  font-family: var(--font-sans);
   line-height: 1.4;
 }
 
@@ -640,11 +721,15 @@ fieldset {
 
 legend {
   padding: 0;
+  font-family: var(--font-sans);
   font-weight: 600;
 }
 
 /* ==========================================================================
-   10. Rich-text and article content
+   10. Rich text and article content
+
+   Tiempos is intentionally restricted to .prose body content.
+   Article headings and interface elements remain Graphik.
    ========================================================================== */
 
 .prose {
@@ -652,6 +737,7 @@ legend {
   color: var(--color-text);
   font-family: var(--font-serif);
   font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  font-weight: 400;
   line-height: 1.62;
 }
 
@@ -659,8 +745,11 @@ legend {
   margin-top: 1.25em;
 }
 
-.prose :where(h2, h3, h4, h5, h6) {
+.prose :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-text);
   font-family: var(--font-sans);
+  font-style: normal;
+  text-transform: none;
   scroll-margin-top: var(--header-offset);
 }
 
@@ -733,13 +822,14 @@ legend {
   border-radius: var(--radius-md);
   background: #111;
   color: #fff;
+  font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.55;
   tab-size: 2;
 }
 
 .prose code {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.9em;
 }
 
@@ -816,6 +906,7 @@ legend {
   padding: 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  font-family: var(--font-sans);
   font-size: 0.9375rem;
   line-height: 1.5;
 }
@@ -923,7 +1014,7 @@ legend {
 }
 
 /* ==========================================================================
-15. Reduced motion and forced colors
+   15. Reduced motion and forced colors
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {

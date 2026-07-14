@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
 const footerSections: FooterSection[] = [
   {
     title: "Workflows",
-    id: "footer-workflows-heading",
+    id: "footer-workflows-label",
     links: [
       {
         label: "Salesforce tracing",
@@ -42,7 +42,7 @@ const footerSections: FooterSection[] = [
   },
   {
     title: "Solutions",
-    id: "footer-solutions-heading",
+    id: "footer-solutions-label",
     links: [
       {
         label: "User adoption fatigue",
@@ -64,7 +64,7 @@ const footerSections: FooterSection[] = [
   },
   {
     title: "AI tooling",
-    id: "footer-ai-tooling-heading",
+    id: "footer-ai-tooling-label",
     links: [
       {
         label: "Prompt firewalls",
@@ -138,13 +138,13 @@ const isCurrentPage = (href: string): boolean =>
         </p>
       </div>
 
-      <nav class="footer-directory" aria-label="Footer navigation">
+      <div class="footer-directory">
         {
           footerSections.map((section) => (
-            <section class="footer-section" aria-labelledby={section.id}>
-              <h2 id={section.id} class="footer-heading">
+            <nav class="footer-section" aria-labelledby={section.id}>
+              <p id={section.id} class="footer-section-label">
                 {section.title}
-              </h2>
+              </p>
 
               <ul class="footer-link-list">
                 {section.links.map((link) => (
@@ -160,10 +160,10 @@ const isCurrentPage = (href: string): boolean =>
                   </li>
                 ))}
               </ul>
-            </section>
+            </nav>
           ))
         }
-      </nav>
+      </div>
     </div>
 
     <div class="footer-secondary">
@@ -195,7 +195,7 @@ const isCurrentPage = (href: string): boolean =>
 <style>
   .site-footer {
     --footer-background: #000;
-    --footer-heading-color: #fff;
+    --footer-heading: #fff;
     --footer-text: #cbd6e2;
     --footer-muted: #93a3b5;
     --footer-subtle: #7c8999;
@@ -211,12 +211,14 @@ const isCurrentPage = (href: string): boolean =>
     background: var(--footer-background);
     color: var(--footer-text);
 
-    /*
-     * Force the footer to use Graphik throughout.
-     * Tiempos remains available elsewhere for editorial content.
-     */
     font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
+
     font-synthesis: none;
+  }
+
+  .site-footer,
+  .site-footer * {
+    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
   }
 
   .footer-container {
@@ -253,7 +255,6 @@ const isCurrentPage = (href: string): boolean =>
     max-width: 34rem;
     margin: 1.125rem 0 0;
     color: var(--footer-muted);
-    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
     font-weight: 400;
     line-height: 1.6;
@@ -271,26 +272,18 @@ const isCurrentPage = (href: string): boolean =>
     min-width: 0;
   }
 
-  /*
-   * These explicit declarations override the global h2 typography.
-   * The element remains an h2 semantically, but it is styled as a compact
-   * navigation label.
-   */
-  .site-footer .footer-heading {
-    max-width: none;
+  .footer-section-label {
     margin: 0 0 1rem;
     padding: 0;
-
-    color: var(--footer-heading-color);
-    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
-    font-size: 0.75rem;
+    color: var(--footer-heading);
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: 0.075em;
+    line-height: 1.35;
+    letter-spacing: 0;
     text-align: left;
-    text-transform: uppercase;
-    text-wrap: nowrap;
+    text-transform: none;
+    text-wrap: pretty;
   }
 
   .footer-link-list,
@@ -305,7 +298,8 @@ const isCurrentPage = (href: string): boolean =>
     gap: 0.125rem;
   }
 
-  .footer-link-list li {
+  .footer-link-list li,
+  .legal-link-list li {
     margin: 0;
     padding: 0;
   }
@@ -319,12 +313,12 @@ const isCurrentPage = (href: string): boolean =>
     padding-block: 0.35rem;
 
     color: var(--footer-text);
-    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.45;
     letter-spacing: 0;
     text-decoration: none;
+    text-transform: none;
     text-wrap: pretty;
 
     transition: color 150ms ease;
@@ -338,7 +332,7 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   .footer-link-list a[aria-current="page"] {
-    color: var(--footer-heading-color);
+    color: var(--footer-heading);
     font-weight: 600;
     text-decoration: underline;
     text-decoration-color: var(--footer-accent);
@@ -361,10 +355,10 @@ const isCurrentPage = (href: string): boolean =>
     margin: 0;
 
     color: var(--footer-subtle);
-    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.8125rem;
     font-weight: 400;
     line-height: 1.5;
+    text-transform: none;
   }
 
   .legal-link-list {
@@ -376,7 +370,6 @@ const isCurrentPage = (href: string): boolean =>
   .legal-link-list li {
     display: inline-flex;
     align-items: center;
-    margin: 0;
   }
 
   .legal-link-list li:not(:last-child)::after {
@@ -396,18 +389,18 @@ const isCurrentPage = (href: string): boolean =>
     min-height: 2.75rem;
 
     color: var(--footer-subtle);
-    font-family: var(--font-sans, "Graphik"), Arial, sans-serif;
     font-size: 0.8125rem;
     font-weight: 400;
     line-height: 1.4;
     text-decoration: none;
+    text-transform: none;
 
     transition: color 150ms ease;
   }
 
   .legal-link-list a:hover,
   .legal-link-list a[aria-current="page"] {
-    color: var(--footer-heading-color);
+    color: var(--footer-heading);
     text-decoration: underline;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.22em;
@@ -418,9 +411,6 @@ const isCurrentPage = (href: string): boolean =>
     outline-offset: 0.25rem;
   }
 
-  /*
-   * Tablet
-   */
   @media (min-width: 40rem) {
     .footer-directory {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -447,9 +437,6 @@ const isCurrentPage = (href: string): boolean =>
     }
   }
 
-  /*
-   * Desktop
-   */
   @media (min-width: 64rem) {
     .footer-primary {
       grid-template-columns: minmax(16rem, 1.15fr) minmax(0, 2.85fr);
@@ -479,12 +466,9 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   @media (forced-colors: active) {
-    .site-footer {
-      border-top-color: CanvasText;
-    }
-
+    .site-footer,
     .footer-secondary {
-      border-top-color: CanvasText;
+      border-color: CanvasText;
     }
   }
 </style>
