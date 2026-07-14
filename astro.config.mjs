@@ -1,16 +1,20 @@
 import { defineConfig } from "astro/config";
 import { astroFont } from "astro-font/integration";
 import tina from "@tinacms/astro/integration";
+import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
 import node from "@astrojs/node";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "static",
+
   adapter: node({
     mode: "standalone",
   }),
+
   integrations: [
     tina(),
+
     astroFont([
       // ==========================================
       // SANS SERIF: Graphik Family
@@ -47,6 +51,7 @@ export default defineConfig({
         fallback: "sans-serif",
         cssVariable: "font-graphik",
       },
+
       {
         name: "Graphik Compact",
         src: [
@@ -67,6 +72,7 @@ export default defineConfig({
         fallback: "sans-serif",
         cssVariable: "font-graphik-compact",
       },
+
       {
         name: "Graphik XX Condensed",
         src: [
@@ -135,6 +141,7 @@ export default defineConfig({
         fallback: "serif",
         cssVariable: "font-tiempos-text",
       },
+
       {
         name: "Tiempos Headline",
         src: [
@@ -155,6 +162,7 @@ export default defineConfig({
         fallback: "serif",
         cssVariable: "font-tiempos-headline",
       },
+
       {
         name: "Tiempos Fine",
         src: [
@@ -177,8 +185,10 @@ export default defineConfig({
       },
     ]),
   ],
+
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), tinaAdminDevRedirect()],
+
     resolve: {
       noExternal: ["astro-font"],
     },
