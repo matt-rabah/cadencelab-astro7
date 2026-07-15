@@ -59,7 +59,7 @@ export default defineConfig({
 
         ui: {
           router: ({ document }) => {
-            const rawDate = (document as any)._values?.date;
+            const rawDate = document._values?.date;
             const slug = document._sys.filename;
 
             if (!rawDate) {
@@ -138,6 +138,9 @@ export default defineConfig({
             label: "Author",
             description:
               "Defaults to Cadence Lab when no author is entered.",
+            ui: {
+              defaultValue: "Cadence Lab",
+            },
           },
           {
             type: "image",
@@ -158,6 +161,9 @@ export default defineConfig({
             label: "Draft",
             description:
               "Draft articles are excluded from the public site.",
+            ui: {
+              defaultValue: false,
+            },
           },
           {
             type: "rich-text",
@@ -227,6 +233,9 @@ export default defineConfig({
             type: "boolean",
             name: "noindex",
             label: "Exclude from search engines",
+            ui: {
+              defaultValue: false,
+            },
           },
           {
             type: "rich-text",
