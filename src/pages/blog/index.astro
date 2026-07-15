@@ -2,21 +2,53 @@
 // src/pages/blog/index.astro
 
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
 import Layout from "../../layouts/Layout.astro";
 
-const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
+type BlogPost = CollectionEntry<"blog"> & {
+  data: CollectionEntry<"blog">["data"] & {
+    date: Date;
+    title: string;
+    subtitle: string;
+    readTime: string;
+    category: string;
+    draft: boolean;
+    description?: string;
+    updatedDate?: Date;
+    image?: string;
+    imageAlt?: string;
+  };
+};
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).filter(
+  (post): post is BlogPost =>
+    typeof post.data === "object" &&
+    post.data !== null &&
+    "date" in post.data,
+).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 
 const [featuredPost, ...remainingPosts] = posts;
 
-const getPostURL = (id: string): string => {
-  const slug = id.replace(/\.(md|mdx)$/i, "").replace(/^\/+|\/+$/g, "");
+const getPostURL = (post: BlogPost): string => {
+  const year = String(post.data.date.getUTCFullYear());
+  const month = String(post.data.date.getUTCMonth() + 1).padStart(2, "0");
 
-  return `/blog/${slug}/`;
+  const slug = post.id
+    .replace(/\.(md|mdx)$/i, "")
+    .split("/")
+    .filter(Boolean)
+    .at(-1);
+
+  if (!slug) {
+    throw new Error(`Unable to determine a slug for blog entry: ${post.id}`);
+  }
+
+  return `/blog/${year}/${month}/${slug}/`;
 };
 
 const formatDate = (date: Date): string =>
@@ -27,7 +59,7 @@ const formatDate = (date: Date): string =>
     timeZone: "UTC",
   }).format(date);
 
-const getDescription = (post: (typeof posts)[number]): string =>
+const getDescription = (post: BlogPost): string =>
   post.data.description ?? post.data.subtitle;
 ---
 
@@ -76,7 +108,7 @@ const getDescription = (post: (typeof posts)[number]): string =>
                 </div>
 
                 <h2 id="featured-post-title">
-                  <a href={getPostURL(featuredPost.id)}>
+                  <a href={getPostURL(featuredPost)}>
                     {featuredPost.data.title}
                   </a>
                 </h2>
@@ -84,7 +116,7 @@ const getDescription = (post: (typeof posts)[number]): string =>
                 <p>{getDescription(featuredPost)}</p>
 
                 <a
-                  href={getPostURL(featuredPost.id)}
+                  href={getPostURL(featuredPost)}
                   class="featured-link"
                   aria-label={`Read ${featuredPost.data.title}`}
                 >
@@ -116,7 +148,7 @@ const getDescription = (post: (typeof posts)[number]): string =>
                       </div>
 
                       <h3>
-                        <a href={getPostURL(post.id)}>{post.data.title}</a>
+                        <a href={getPostURL(post)}>{post.data.title}</a>
                       </h3>
 
                       <p>{getDescription(post)}</p>
@@ -125,7 +157,7 @@ const getDescription = (post: (typeof posts)[number]): string =>
                         <span>{post.data.readTime}</span>
 
                         <a
-                          href={getPostURL(post.id)}
+                          href={getPostURL(post)}
                           aria-label={`Read ${post.data.title}`}
                         >
                           Read article

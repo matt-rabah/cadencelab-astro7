@@ -1,5 +1,3 @@
-// tina/config.ts
-
 import { defineConfig } from "tinacms";
 
 const branch =
@@ -54,15 +52,14 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
+        name: "blog",
         label: "Blog posts",
         path: "src/content/blog",
         format: "md",
 
         ui: {
           router: ({ document }) => {
-            const values = (document as any)._values;
-            const rawDate = values?.date;
+            const rawDate = (document as any)._values?.date;
             const slug = document._sys.filename;
 
             if (!rawDate) {
@@ -104,7 +101,7 @@ export default defineConfig({
             name: "description",
             label: "Search description",
             description:
-              "Optional summary used for search results and social previews. Keep it specific and concise.",
+              "Optional summary used for search results and social previews.",
             ui: {
               component: "textarea",
             },
@@ -120,7 +117,7 @@ export default defineConfig({
             name: "updatedDate",
             label: "Updated date",
             description:
-              "Add this only when the article has been meaningfully revised.",
+              "Use only when the article has been meaningfully revised.",
           },
           {
             type: "string",
@@ -145,14 +142,12 @@ export default defineConfig({
           {
             type: "image",
             name: "image",
-            label: "Social and featured image",
+            label: "Featured image",
           },
           {
             type: "string",
             name: "imageAlt",
             label: "Image alternative text",
-            description:
-              "Describe the meaningful content of the image for people who cannot see it.",
             ui: {
               component: "textarea",
             },
@@ -162,7 +157,7 @@ export default defineConfig({
             name: "draft",
             label: "Draft",
             description:
-              "Draft posts should not be included in the public blog.",
+              "Draft articles are excluded from the public site.",
           },
           {
             type: "rich-text",
@@ -218,8 +213,6 @@ export default defineConfig({
             type: "string",
             name: "description",
             label: "Search description",
-            description:
-              "Optional page description used for search results and social previews.",
             ui: {
               component: "textarea",
             },
@@ -234,8 +227,6 @@ export default defineConfig({
             type: "boolean",
             name: "noindex",
             label: "Exclude from search engines",
-            description:
-              "Enable this for unfinished, private, duplicate, or utility pages.",
           },
           {
             type: "rich-text",

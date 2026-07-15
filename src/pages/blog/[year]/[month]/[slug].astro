@@ -1,236 +1,447 @@
 ---
-// src/pages/blog/[year]/[month]/[slug].astro
-import { getCollection, render } from 'astro:content';
-import type { CollectionEntry } from 'astro:content'; // Import type for compilation safety
-import Layout from '../../../../layouts/Layout.astro';
-import NavHeader from '../../../../components/NavHeader.astro';
-import Footer from '../../../../components/Footer.astro';
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+
+type BlogPost = CollectionEntry<"blog"> extends never
+  ? any
+  : CollectionEntry<"blog">;
 
 export async function getStaticPaths() {
-  const posts = await getCollection('post');
+  const posts: BlogPost[] = await getCollection(
+    "blog" as any,
+    ({ data }: BlogPost) => !data.draft,
+  );
 
   return posts.map((post) => {
-    const postDate = new Date(post.data.date);
-    const year = postDate.getFullYear().toString();
-    const month = String(postDate.getMonth() + 1).padStart(2, '0');
+    const publishedDate = post.data.date;
 
-    // Strip any file extension that may leak out from post.id.
-    const cleanId = post.id.replace(/\.(md|mdx)$/, '');
-    const slug = cleanId.split('/').pop();
+    const year = String(publishedDate.getUTCFullYear());
+    const month = String(publishedDate.getUTCMonth() + 1).padStart(2, "0");
+
+    const slug = post.id
+      .replace(/\.(md|mdx)$/i, "")
+      .split("/")
+      .filter(Boolean)
+      .at(-1);
+
+    if (!slug) {
+      throw new Error(`Unable to determine a slug for blog entry: ${post.id}`);
+    }
 
     return {
-      params: { year, month, slug },
-      props: { post },
+      params: {
+        year,
+        month,
+        slug,
+      },
+      props: {
+        post,
+      },
     };
   });
 }
 
-// 📦 Define explicit Props interface for strict Astro 7 compiler environments
-interface Props {
-  post: CollectionEntry<'post'>;
-}
-
-const { post } = Astro.props;
-
-// 🛡️ PRE-RENDER GUARD: Prevents compiler crashes if props evaluate as empty during initial discovery passes
-if (!post || !post.data) {
-  return Astro.redirect('/404');
-}
-
+const { post } = Astro.props as { post: BlogPost };
 const { Content } = await render(post);
 
-// Bulletproof Date Normalization Engine
-const publishedDate =
-  post.data.date instanceof Date ? post.data.date : new Date(post.data.date);
-const isValidDate = !isNaN(publishedDate.getTime());
+const publishedDate = post.data.date;
+const updatedDate = post.data.updatedDate;
 
-const formattedDate =
-  isValidDate ?
-    publishedDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: 'UTC',
-    })
-  : 'Unknown Date';
+const formatDate = (date: Date): string =>
+  new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(date);
 
-const isoDate = isValidDate ? publishedDate.toISOString().slice(0, 10) : '';
+const publishedDateLabel = formatDate(publishedDate);
+
+const updatedDateLabel = updatedDate ? formatDate(updatedDate) : undefined;
+
+const publishedDateISO = publishedDate.toISOString();
+const updatedDateISO = updatedDate?.toISOString();
+
+const description = post.data.description ?? post.data.subtitle;
+
+const author = post.data.author ?? "Cadence Lab";
+const canonicalPath = Astro.url.pathname;
+
+const imageSource = post.data.image
+  ? post.data.image.startsWith("/")
+    ? post.data.image
+    : `/${post.data.image}`
+  : undefined;
+
+const imageAlt = post.data.imageAlt ?? "";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description,
+  datePublished: publishedDateISO,
+
+  ...(updatedDateISO
+    ? {
+        dateModified: updatedDateISO,
+      }
+    : {}),
+
+  author: {
+    "@type": author === "Cadence Lab" ? "Organization" : "Person",
+    name: author,
+  },
+
+  publisher: {
+    "@type": "Organization",
+    name: "Cadence Lab",
+    url: "https://cadencelab.co/",
+  },
+
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": new URL(canonicalPath, "https://cadencelab.co").href,
+  },
+
+  ...(imageSource
+    ? {
+        image: new URL(imageSource, "https://cadencelab.co").href,
+      }
+    : {}),
+};
 ---
 
 <Layout
-  title={`${post.data.title} | CadenceLab Insights`}
-  description={post.data.subtitle}>
+  title={`${post.data.title} | Cadence Lab`}
+  description={description}
+  canonicalURL={canonicalPath}
+  pageType="article"
+>
   <NavHeader />
 
-  <article class="article-canvas">
-    <header class="article-hero-header">
-      <div class="article-meta-rail">
-        <span class="meta-category">{post.data.category}</span>
-        <span class="meta-separator">•</span>
-        {isValidDate && <time datetime={isoDate}>{formattedDate}</time>}
-        <span class="meta-separator">•</span>
-        <span>{post.data.readTime}</span>
+  <main id="main-content" class="article-page">
+    <article class="article">
+      <header class="article-header">
+        <a href="/blog/" class="article-back-link">
+          <span aria-hidden="true">←</span>
+          All insights
+        </a>
+
+        <div class="article-metadata">
+          <span class="article-category">
+            {post.data.category}
+          </span>
+
+          <span aria-hidden="true">·</span>
+
+          <time datetime={publishedDateISO}>
+            {publishedDateLabel}
+          </time>
+
+          <span aria-hidden="true">·</span>
+
+          <span>{post.data.readTime}</span>
+        </div>
+
+        <h1>{post.data.title}</h1>
+
+        <p class="article-subtitle">
+          {post.data.subtitle}
+        </p>
+
+        <div class="article-byline">
+          <span>By {author}</span>
+
+          {
+            updatedDate && updatedDateISO && updatedDateLabel && (
+              <>
+                <span aria-hidden="true">·</span>
+
+                <span>
+                  Updated{" "}
+                  <time datetime={updatedDateISO}>{updatedDateLabel}</time>
+                </span>
+              </>
+            )
+          }
+        </div>
+      </header>
+
+      {
+        imageSource && (
+          <figure class="article-image">
+            <img
+              src={imageSource}
+              alt={imageAlt}
+              width="1440"
+              height="810"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </figure>
+        )
+      }
+
+      <div class="article-body prose">
+        <Content />
       </div>
 
-      <h1 class="article-main-title">{post.data.title}</h1>
-      <p class="article-lead-abstract">{post.data.subtitle}</p>
-    </header>
+      <footer class="article-footer">
+        <p>Published by Cadence Lab.</p>
 
-    <hr class="section-divider" />
-
-    <div class="article-body-stream">
-      <Content />
-    </div>
-  </article>
+        <a href="/blog/">
+          Browse more insights
+          <span aria-hidden="true">→</span>
+        </a>
+      </footer>
+    </article>
+  </main>
 
   <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 </Layout>
 
 <style>
-  .article-canvas {
+  .article-page {
     width: 100%;
-    background-color: #ffffff;
-    padding: 96px 24px;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .article {
     display: flex;
+    width: min(calc(100% - (2 * var(--page-gutter))), 72rem);
+    margin-inline: auto;
     flex-direction: column;
     align-items: center;
   }
 
-  .article-hero-header {
-    width: 100%;
-    max-width: 740px;
+  .article-header {
     display: flex;
+    width: min(100%, 52rem);
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 1.25rem;
   }
 
-  .article-meta-rail {
-    display: flex;
+  .article-back-link {
+    display: inline-flex;
+    min-height: 2.75rem;
     align-items: center;
-    gap: 12px;
+    gap: 0.4rem;
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .article-back-link:hover {
+    color: var(--color-blue);
+  }
+
+  .article-metadata,
+  .article-byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
     font-weight: 500;
-    color: #576579;
+    line-height: 1.5;
   }
 
-  .meta-category {
-    color: #1a73e2;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .article-category {
+    color: var(--color-blue);
+    font-weight: 600;
   }
 
-  .meta-separator {
-    color: #cbd6e2;
+  .article-header h1 {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2.75rem, 1.75rem + 4vw, 6rem);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
   }
 
-  .article-main-title {
-    font-family: var(--font-serif-fine), Georgia, serif !important;
-    font-weight: 700;
-    line-height: 1.05 !important;
-    letter-spacing: -0.03em !important;
-    color: #000000;
-  }
-
-  .article-lead-abstract {
-    font-family: var(--font-serif-text) !important;
-    font-size: 21px !important;
-    line-height: 1.5 !important;
-    font-weight: 400 !important;
-    color: #425b76 !important;
-    margin: 8px 0 12px 0;
-  }
-
-  .section-divider {
-    width: 100%;
-    max-width: 740px;
-    border: none;
-    border-top: 1px solid #cbd6e2;
-    margin: 40px 0;
-  }
-
-  .article-body-stream {
-    width: 100%;
-    max-width: 740px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .article-body-stream :global(p) {
-    margin-bottom: 24px;
-  }
-
-  .article-body-stream :global(h2) {
-    font-family: var(--font-sans) !important;
-    font-size: 28px !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.02em !important;
-    margin: 40px 0 20px 0;
-    color: #000000;
-  }
-
-  .article-body-stream :global(h3) {
-    font-family: var(--font-sans) !important;
-    font-size: 22px !important;
-    font-weight: 600 !important;
-    line-height: 1.3 !important;
-    letter-spacing: -0.01em !important;
-    margin: 32px 0 16px 0;
-    color: #161616;
-  }
-
-  .article-body-stream :global(ul) {
-    list-style-type: none;
-    padding-left: 16px;
-    margin-bottom: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .article-body-stream :global(li) {
-    font-family: var(--font-serif-text);
-    font-size: 18px;
+  .article-subtitle {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.125rem, 1rem + 0.45vw, 1.5rem);
     line-height: 1.55;
-    color: rgba(0, 0, 0, 0.85);
-    position: relative;
-    padding-left: 24px;
+    text-wrap: pretty;
   }
 
-  .article-body-stream :global(li)::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 6px;
-    height: 6px;
-    background-color: #1a73e2;
-    border-radius: 1px;
+  .article-image {
+    width: 100%;
+    margin: clamp(3rem, 7vw, 5rem) 0 0;
   }
 
-  .article-body-stream :global(blockquote) {
-    font-family: var(--font-serif-text);
-    font-size: 24px;
+  .article-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 42rem;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+  }
+
+  .article-body {
+    width: min(100%, 46rem);
+    margin-top: clamp(3rem, 7vw, 5rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .article-body :global(h2) {
+    margin-top: 2.75em;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(1.75rem, 1.5rem + 0.8vw, 2.375rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .article-body :global(h3) {
+    margin-top: 2.25em;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(1.375rem, 1.2rem + 0.45vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .article-body :global(p),
+  .article-body :global(li) {
+    color: var(--color-text);
+    font-family: var(--font-serif);
+    font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+    line-height: 1.75;
+  }
+
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    margin-block: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .article-body :global(li + li) {
+    margin-top: 0.75rem;
+  }
+
+  .article-body :global(blockquote) {
+    margin: 2.5rem 0;
+    padding-left: clamp(1.25rem, 3vw, 2rem);
+    border-left: 0.25rem solid var(--color-blue);
+    color: var(--color-ink);
+  }
+
+  .article-body :global(blockquote p) {
+    margin: 0;
+    font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
     font-style: italic;
-    font-weight: 400;
-    line-height: 1.4;
-    color: #1a73e2;
-    border-left: 3px solid #1a73e2;
-    padding-left: 32px;
-    margin: 40px 0;
-    max-width: 680px;
-    align-self: center;
+    line-height: 1.45;
   }
 
-  @media (max-width: 768px) {
-    .article-canvas {
-      padding: 64px 16px;
+  .article-body :global(a) {
+    color: var(--color-blue);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  .article-body :global(img) {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin-block: 2.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .article-body :global(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .article-footer {
+    display: flex;
+    width: min(100%, 46rem);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .article-footer p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .article-footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .article-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .article-back-link:focus-visible,
+  .article-footer a:focus-visible,
+  .article-body :global(a:focus-visible) {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 40rem) {
+    .article-page {
+      padding-block: 3.5rem 5rem;
     }
-    .article-lead-abstract {
-      font-size: 19px !important;
+
+    .article-header h1 {
+      max-width: none;
+      font-size: clamp(2.75rem, 13vw, 4rem);
+    }
+
+    .article-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .article-body,
+    .article-footer,
+    .article-body :global(blockquote) {
+      border-color: CanvasText;
     }
   }
 </style>
