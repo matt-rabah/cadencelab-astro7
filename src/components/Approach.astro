@@ -2,153 +2,238 @@
 // src/components/Approach.astro
 ---
 
-<section class="approach-section">
+<section class="approach" aria-labelledby="approach-title">
   <div class="approach-container">
-    <div class="approach-block">
-      <h2 class="approach-heading">The Reality of Enterprise AI</h2>
-      <div class="approach-text">
+    <div class="approach-intro">
+      <div class="approach-heading-group">
+        <p class="approach-eyebrow">Our approach</p>
+
+        <h2 id="approach-title" class="approach-title">
+          AI succeeds when the operating system around it works.
+        </h2>
+      </div>
+
+      <div class="approach-copy">
         <p>
-          Technology is rarely the bottleneck. The true point of failure lies in
-          the chasm between complex stakeholder requirements, technical
-          execution, and frontline human adoption.
+          Technology is rarely the only constraint. The harder work is aligning
+          customer needs, business priorities, data, workflows, governance, and
+          frontline behavior.
         </p>
+
         <p>
-          We don't install tools. We build behavioral and data workflows that
-          make those tools work. Every system deployment is treated as an
-          integration, trust, and measurement problem.
+          Cadence Lab does not treat AI as a standalone implementation. We
+          design the conditions that make it useful, trusted, measurable, and
+          sustainable in real customer-facing environments.
         </p>
       </div>
     </div>
 
-    <hr class="divider" />
+    <div class="approach-grid">
+      <article class="approach-item">
+        <span class="approach-number" aria-hidden="true">01</span>
 
-    <div class="capabilities-grid">
-      <div class="capability-item">
-        <h3>Complex Environments</h3>
-        <p>
-          Leading the architectural design and adoption of customer-facing AI
-          systems within deeply fractured, legacy technical ecosystems.
-        </p>
-      </div>
+        <h3>Diagnose the operating environment</h3>
 
-      <div class="capability-item">
-        <h3>Stakeholder Translation</h3>
         <p>
-          Converting abstract organizational mandates and executive goals into
-          concrete, repeatable user workflows that teams actually utilize.
+          We examine customer friction, team ownership, decision paths, legacy
+          systems, CRM data, and the constraints shaping current performance.
         </p>
-      </div>
+      </article>
 
-      <div class="capability-item">
-        <h3>CRM Data Optimization</h3>
+      <article class="approach-item">
+        <span class="approach-number" aria-hidden="true">02</span>
+
+        <h3>Translate strategy into workflows</h3>
+
         <p>
-          Transforming Salesforce and deep CRM analytics into actionable
-          insights that measurably drive up retention and improve real customer
-          outcomes.
+          We turn executive priorities and stakeholder requirements into clear,
+          repeatable processes that teams can understand and use.
         </p>
-      </div>
+      </article>
+
+      <article class="approach-item">
+        <span class="approach-number" aria-hidden="true">03</span>
+
+        <h3>Connect adoption to measurable outcomes</h3>
+
+        <p>
+          We define the behaviors, governance, data signals, and performance
+          measures needed to improve customer and business results over time.
+        </p>
+      </article>
     </div>
   </div>
 </section>
 
 <style>
-  /* --- DESIGN TOKENS (Spectrum 2 + SEO Structural Layout) --- */
-  .approach-section {
+  .approach {
     width: 100%;
-    padding: 100px 24px;
-    background-color: var(--spectrum-background-layer-1, #ffffff);
-    border-top: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
+    padding-block: clamp(4rem, 9vw, 7rem);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
   }
 
   .approach-container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
     flex-direction: column;
-    gap: 64px;
+    gap: clamp(3rem, 7vw, 5rem);
   }
 
-  /* --- MANIFESTO BLOCK (Optimized for AEO featured snippets) --- */
-  .approach-block {
+  .approach-intro {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
   }
 
-  .approach-heading {
-    font-family: adobe-clean, sans-serif;
-    font-size: 36px;
-    font-weight: 800;
-    line-height: 1.2;
-    color: var(--spectrum-heading-color, CanvasText);
-    letter-spacing: -0.02em;
-  }
-
-  .approach-text {
-    font-family: adobe-clean, sans-serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
+  .approach-heading-group {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 15%);
+  .approach-eyebrow {
     margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
-  /* --- CAPABILITIES GRID --- */
-  .capabilities-grid {
+  .approach-title {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 1.55rem + 1.8vw, 3.5rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .approach-copy {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    max-width: 42rem;
+    gap: 1.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.65;
   }
 
-  .capability-item {
+  .approach-copy p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .approach-item {
     display: flex;
+    min-width: 0;
     flex-direction: column;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
   }
 
-  .capability-item h3 {
-    font-family: adobe-clean, sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--spectrum-heading-color, CanvasText);
-    letter-spacing: -0.01em;
+  .approach-item + .approach-item {
+    border-left: 1px solid var(--color-border);
   }
 
-  .capability-item p {
-    font-family: adobe-clean, sans-serif;
-    font-size: 15px;
+  .approach-number {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .approach-item h3 {
+    max-width: 24ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .approach-item p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #666666);
+    text-wrap: pretty;
   }
 
-  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
-  @media (max-width: 900px) {
-    .approach-block {
+  @media (max-width: 56rem) {
+    .approach-intro {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 1.75rem;
     }
 
-    .capabilities-grid {
+    .approach-title {
+      max-width: 18ch;
+    }
+
+    .approach-grid {
       grid-template-columns: 1fr;
-      gap: 32px;
+    }
+
+    .approach-item + .approach-item {
+      border-top: 1px solid var(--color-border);
+      border-left: 0;
     }
   }
 
-  @media (max-width: 768px) {
-    .approach-section {
-      padding: 64px 16px;
+  @media (max-width: 40rem) {
+    .approach {
+      padding-block: clamp(3.5rem, 14vw, 5rem);
     }
 
-    .approach-heading {
-      font-size: 28px;
+    .approach-title {
+      max-width: 15ch;
+      font-size: clamp(2rem, 8vw, 2.75rem);
+    }
+
+    .approach-copy {
+      font-size: 1.0625rem;
+    }
+
+    .approach-item {
+      padding: 1.5rem 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .approach-grid,
+    .approach-item {
+      border-color: CanvasText;
     }
   }
 </style>
