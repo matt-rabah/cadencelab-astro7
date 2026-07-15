@@ -88,9 +88,7 @@
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgb(1 3 2 / 5%), 0 1px 3px rgb(1 3 2 / 7%);
-
   --shadow-md: 0 4px 12px rgb(1 3 2 / 8%), 0 2px 4px rgb(1 3 2 / 5%);
-
   --shadow-lg: 0 18px 50px rgb(1 3 2 / 10%), 0 6px 18px rgb(1 3 2 / 6%);
 
   /* Interaction */
@@ -660,26 +658,15 @@ legend {
    Tiempos Text is intentionally restricted to rendered long-form prose.
    Graphik remains the typeface for article titles, article headings, metadata,
    navigation, UI, marketing pages, forms, and all other site content.
+
+   Core editorial family, size, weight, leading, heading hierarchy, and
+   pull-quote typography are defined in typography.css.
    ========================================================================== */
 
 .prose {
   width: min(100%, var(--measure-prose));
   max-inline-size: var(--measure-prose);
   color: var(--color-text);
-  font-family: var(--ff-serif);
-  font-size: var(--fs-post-body);
-  font-weight: var(--fw-regular);
-  line-height: var(--lh-post-body);
-  font-feature-settings: normal;
-}
-
-.prose p,
-.prose li {
-  font-family: var(--ff-serif);
-  font-size: inherit;
-  font-weight: var(--fw-regular);
-  line-height: inherit;
-  font-feature-settings: normal;
 }
 
 .prose > * + * {
