@@ -11,9 +11,6 @@ export default defineConfig({
     tina(),
 
     astroFont([
-      // ==========================================
-      // SANS SERIF: Graphik Family
-      // ==========================================
       {
         name: "Graphik",
         src: [
@@ -33,7 +30,7 @@ export default defineConfig({
             style: "normal",
             weight: "600",
             path: "./public/fonts/Graphik/graphik-semibold.woff2",
-            preload: false,
+            preload: true,
           },
           {
             style: "normal",
@@ -95,9 +92,6 @@ export default defineConfig({
         cssVariable: "font-graphik-xx-condensed",
       },
 
-      // ==========================================
-      // SERIF: Tiempos Family
-      // ==========================================
       {
         name: "Tiempos Text",
         src: [
@@ -105,7 +99,7 @@ export default defineConfig({
             style: "normal",
             weight: "400",
             path: "./public/fonts/Tiempos/tiempos-text-regular.woff2",
-            preload: true,
+            preload: false,
           },
           {
             style: "italic",
@@ -165,7 +159,7 @@ export default defineConfig({
             style: "normal",
             weight: "300",
             path: "./public/fonts/Tiempos/tiempos-fine-light.woff2",
-            preload: true,
+            preload: false,
           },
           {
             style: "italic",
@@ -184,7 +178,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss(), tinaAdminDevRedirect()],
 
-    resolve: {
+    ssr: {
       noExternal: ["astro-font"],
     },
   },
