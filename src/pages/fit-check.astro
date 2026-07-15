@@ -19,6 +19,7 @@ if (!pageData) {
 const { title, subtitle, category } = pageData.data;
 
 const pageTitle = `${title} | Cadence Lab`;
+
 const pageDescription =
   subtitle ??
   "Assess whether your customer experience, CRM, and AI initiative is ready for a productive engagement.";
@@ -41,9 +42,10 @@ const pageDescription =
         <p class="fit-check-intro">{subtitle}</p>
 
         <p class="fit-check-context">
-          This assessment helps determine whether the problem, operating
-          environment, and organizational readiness support a useful next step.
-          It is not a technical audit or a commitment to engage.
+          This is not a technical audit or a sales qualification exercise. The
+          goal is to understand whether the operating problem is clear enough,
+          the conditions are workable, and a consulting engagement would
+          actually be useful.
         </p>
       </header>
 
@@ -152,7 +154,7 @@ const pageDescription =
                 Data quality or ownership is inconsistent across teams
               </option>
 
-              <option value="early"> CRM use is still developing </option>
+              <option value="early">CRM use is still developing</option>
 
               <option value="unknown">
                 We are not sure how reliable or useful the data is
@@ -347,41 +349,51 @@ const pageDescription =
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
     line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .fit-check-title {
-    max-width: 14ch;
+    max-width: 16ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2.75rem, 2rem + 3vw, 5.25rem);
-    font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
   .fit-check-intro {
-    max-width: 42rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
-    line-height: 1.55;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
   .fit-check-context {
-    max-width: 42rem;
+    max-width: var(--measure-ui);
     margin: 0;
     padding-top: 0.25rem;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
     line-height: 1.6;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -414,15 +426,18 @@ const pageDescription =
     border-bottom: 1px solid var(--color-border);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.35;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .section-number {
     color: var(--color-blue);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
+    font-feature-settings: var(--fea-tabular);
   }
 
   .input-group {
@@ -436,13 +451,15 @@ const pageDescription =
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.45;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .optional-label {
     color: var(--color-text-muted);
-    font-weight: 400;
+    font-weight: var(--fw-regular);
   }
 
   input[type="text"],
@@ -458,7 +475,10 @@ const pageDescription =
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1rem;
+    font-weight: var(--fw-regular);
     line-height: 1.5;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     transition:
       border-color var(--transition-fast),
       box-shadow var(--transition-fast),
@@ -543,8 +563,10 @@ const pageDescription =
   .radio-option span {
     font-family: var(--font-sans);
     font-size: 0.9375rem;
-    font-weight: 400;
+    font-weight: var(--fw-regular);
     line-height: 1.5;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .form-footer {
@@ -560,8 +582,11 @@ const pageDescription =
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-regular);
     line-height: 1.5;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .submit-button {
@@ -576,9 +601,11 @@ const pageDescription =
     background: var(--color-ink);
     color: var(--color-light);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: var(--fs-cta);
+    font-weight: var(--fw-medium);
     line-height: 1.2;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     cursor: pointer;
     transition:
       background-color var(--transition-fast),
@@ -606,8 +633,7 @@ const pageDescription =
     }
 
     .fit-check-title {
-      max-width: 12ch;
-      font-size: clamp(2.5rem, 11vw, 4rem);
+      max-width: 14ch;
     }
 
     .fit-check-form {
