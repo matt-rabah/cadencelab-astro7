@@ -59,7 +59,14 @@ export default defineConfig({
 
         ui: {
           router: ({ document }) => {
-            const rawDate = document._values?.date;
+            const rawDate = (
+              document as {
+                _values?: {
+                  date?: string;
+                };
+              }
+            )._values?.date;
+
             const slug = document._sys.filename;
 
             if (!rawDate) {
