@@ -1,7 +1,7 @@
 ---
 // src/components/Footer.astro
 
-import wordmark from "../assets/brand/cadencelab-wordmark-light-color.svg";
+import wordmark from "../assets/brand/cadencelab-wordmark-dark-color.svg";
 
 interface FooterLink {
   label: string;
@@ -193,14 +193,14 @@ const isCurrentPage = (href: string): boolean =>
 
 <style>
   .site-footer {
-    --footer-background: var(--color-ink, #010302);
-    --footer-heading: var(--color-light, #fcfeff);
+    --footer-background: var(--color-ink);
+    --footer-heading: var(--color-light);
     --footer-text: #cbd6e2;
     --footer-muted: #9aaabd;
     --footer-subtle: #8997a9;
     --footer-border: #252b33;
-    --footer-accent: var(--color-blue, #3565ff);
-    --footer-focus: var(--color-light, #fcfeff);
+    --footer-accent: var(--color-blue);
+    --footer-focus: var(--color-light);
 
     width: 100%;
     padding: clamp(3.5rem, 8vw, 5rem) clamp(1.25rem, 5vw, 3rem)
@@ -208,7 +208,8 @@ const isCurrentPage = (href: string): boolean =>
     border-top: 1px solid var(--footer-border);
     background: var(--footer-background);
     color: var(--footer-text);
-    font-family: var(--font-sans);
+    font-family: var(--ff-sans);
+    font-feature-settings: var(--fea-graphik);
     font-synthesis: none;
   }
 
@@ -245,9 +246,12 @@ const isCurrentPage = (href: string): boolean =>
     max-width: 34rem;
     margin: 1.125rem 0 0;
     color: var(--footer-muted);
-    font-size: clamp(0.875rem, 0.84rem + 0.12vw, 0.9375rem);
-    font-weight: 400;
-    line-height: 1.65;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -264,10 +268,12 @@ const isCurrentPage = (href: string): boolean =>
   .footer-section-label {
     margin: 0 0 0.875rem;
     color: var(--footer-heading);
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
     line-height: 1.4;
     letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-transform: none;
   }
 
@@ -291,14 +297,17 @@ const isCurrentPage = (href: string): boolean =>
     min-height: 2.75rem;
     padding-block: 0.375rem;
     color: var(--footer-text);
-    font-size: 0.875rem;
-    font-weight: 400;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
     line-height: 1.45;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
     text-wrap: pretty;
     transition:
-      color var(--transition-fast, 150ms ease),
-      text-decoration-color var(--transition-fast, 150ms ease);
+      color var(--transition-fast),
+      text-decoration-color var(--transition-fast);
   }
 
   .footer-link-list a:hover {
@@ -310,7 +319,7 @@ const isCurrentPage = (href: string): boolean =>
 
   .footer-link-list a[aria-current="page"] {
     color: var(--footer-heading);
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     text-decoration: underline;
     text-decoration-color: var(--footer-accent);
     text-decoration-thickness: 0.12em;
@@ -331,8 +340,12 @@ const isCurrentPage = (href: string): boolean =>
     gap: 0.25rem 0.4rem;
     margin: 0;
     color: var(--footer-subtle);
-    font-size: 0.8125rem;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-regular);
     line-height: 1.5;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .legal-link-list {
@@ -362,11 +375,14 @@ const isCurrentPage = (href: string): boolean =>
     align-items: center;
     min-height: 2.75rem;
     color: var(--footer-subtle);
-    font-size: 0.8125rem;
-    font-weight: 400;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-regular);
     line-height: 1.4;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
-    transition: color var(--transition-fast, 150ms ease);
+    transition: color var(--transition-fast);
   }
 
   .legal-link-list a:hover,
