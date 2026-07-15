@@ -2,181 +2,319 @@
 // src/components/ContactCTA.astro
 ---
 
-<section class="cta-section">
-  <div class="cta-container">
-    <div class="cta-card">
-      <span class="cta-tag">Engagement Intake</span>
-      <h2 class="cta-heading">Initiate a Strategic Fit Assessment</h2>
+<section class="contact-cta" aria-labelledby="contact-cta-title">
+  <div class="contact-cta-container">
+    <div class="contact-cta-card">
+      <div class="contact-cta-intro">
+        <p class="contact-cta-eyebrow">Engagement intake</p>
 
-      <p class="cta-text">
-        We limit our practice to a select number of enterprise engagements each
-        quarter. This ensures the operational depth required to translate
-        complex stakeholder architecture into un-compromised workflow adoption.
-      </p>
+        <h2 id="contact-cta-title" class="contact-cta-title">
+          Start with a practical fit assessment.
+        </h2>
 
-      <ol class="process-steps">
-        <li class="step">
-          <span class="step-num">Step 1</span>
-          <p>Submit a high-level operational baseline profile.</p>
+        <p class="contact-cta-description">
+          We begin by understanding the operating environment, the customer
+          friction you are trying to solve, and the organizational conditions
+          that could support or limit adoption.
+        </p>
+      </div>
+
+      <ol class="contact-cta-steps" aria-label="Fit assessment process">
+        <li class="contact-cta-step">
+          <span class="contact-cta-step-number" aria-hidden="true">01</span>
+
+          <div>
+            <h3>Share the operating context</h3>
+            <p>
+              Describe the customer experience problem, affected teams, current
+              systems, and the outcome you need to improve.
+            </p>
+          </div>
         </li>
-        <li class="step">
-          <span class="step-num">Step 2</span>
-          <p>Review legacy technical architecture and CRM mapping.</p>
+
+        <li class="contact-cta-step">
+          <span class="contact-cta-step-number" aria-hidden="true">02</span>
+
+          <div>
+            <h3>Review readiness and constraints</h3>
+            <p>
+              We assess workflow ownership, CRM data, stakeholder alignment,
+              adoption risk, and implementation dependencies.
+            </p>
+          </div>
         </li>
-        <li class="step">
-          <span class="step-num">Step 3</span>
-          <p>Execute a 30-minute cross-functional alignment session.</p>
+
+        <li class="contact-cta-step">
+          <span class="contact-cta-step-number" aria-hidden="true">03</span>
+
+          <div>
+            <h3>Define the right next step</h3>
+            <p>
+              You receive a direct recommendation on whether an engagement makes
+              sense and what should happen next.
+            </p>
+          </div>
         </li>
       </ol>
 
-      <div class="cta-actions">
-        <a href="/fit-check" class="btn-primary"
-          >Begin the Application Process</a
-        >
+      <div class="contact-cta-actions">
+        <a href="/fit-check/" class="contact-cta-button"> Start a fit check </a>
+
+        <a href="/contact/" class="contact-cta-text-link">
+          Contact Cadence Lab
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* --- DESIGN TOKENS (Spectrum 2 Elite Minimalist Vibe) --- */
-  .cta-section {
+  .contact-cta {
     width: 100%;
-    padding: 100px 24px;
-    background-color: var(--spectrum-background-layer-1, #ffffff);
-    border-top: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
+    padding-block: clamp(4rem, 9vw, 7rem);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
   }
 
-  .cta-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  .contact-cta-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
   }
 
-  .cta-card {
-    background-color: var(--spectrum-background-layer-1, #ffffff);
-    border: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 20%);
-    border-radius: 8px;
-    padding: 64px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
-  }
-
-  .cta-tag {
-    font-family: adobe-clean, sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--spectrum-global-color-accent, #0265dc);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-
-  .cta-heading {
-    font-family: adobe-clean, sans-serif;
-    font-size: 40px;
-    font-weight: 800;
-    line-height: 1.2;
-    color: var(--spectrum-heading-color, CanvasText);
-    letter-spacing: -0.02em;
-    max-width: 700px;
-  }
-
-  .cta-text {
-    font-family: adobe-clean, sans-serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
-    max-width: 650px;
-    margin-bottom: 16px;
-  }
-
-  /* --- MINIMAL PROCESS OVERVIEW --- */
-  .process-steps {
+  .contact-cta-card {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    width: 100%;
-    max-width: 900px;
-    text-align: left;
-    margin: 24px 0;
-    list-style: none;
-    border-top: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
-    border-bottom: 1px solid
-      rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
-    padding: 32px 0;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    padding: clamp(2rem, 6vw, 4.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+    box-shadow: var(--shadow-sm);
   }
 
-  .step {
+  .contact-cta-intro {
     display: flex;
+    max-width: 50rem;
     flex-direction: column;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .step-num {
-    font-family: adobe-clean, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 60%);
-    letter-spacing: 0.05em;
-  }
-
-  .step p {
-    font-family: adobe-clean, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--spectrum-body-color, #333333);
-  }
-
-  /* --- ACTION BUTTON --- */
-  .cta-actions {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .btn-primary {
-    font-family: adobe-clean, sans-serif;
-    font-size: 16px;
+  .contact-cta-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
     font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .contact-cta-title {
+    max-width: 17ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 1.55rem + 1.8vw, 3.5rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .contact-cta-description {
+    max-width: 45rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .contact-cta-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    list-style: none;
+  }
+
+  .contact-cta-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .contact-cta-step + .contact-cta-step {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .contact-cta-step-number {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .contact-cta-step div {
+    min-width: 0;
+  }
+
+  .contact-cta-step h3 {
+    margin: 0 0 0.75rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  .contact-cta-step p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .contact-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .contact-cta-button {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-blue);
+    border-radius: var(--radius-sm);
+    background: var(--color-blue);
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
     text-decoration: none;
-    padding: 16px 36px;
-    background-color: var(--spectrum-global-color-accent, #0265dc);
-    color: #ffffff;
-    border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(2, 101, 220, 0.15);
-    transition: all 0.2s ease-in-out;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      color var(--transition-fast),
+      transform var(--transition-fast);
   }
 
-  .btn-primary:hover {
-    background-color: #014da3;
-    transform: translateY(-1px);
+  .contact-cta-button:hover {
+    border-color: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
+    background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
+    color: var(--color-light);
+    text-decoration: none;
   }
 
-  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
-  @media (max-width: 900px) {
-    .process-steps {
+  .contact-cta-button:active {
+    transform: translateY(1px);
+  }
+
+  .contact-cta-text-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+
+  .contact-cta-text-link:hover {
+    color: var(--color-blue);
+  }
+
+  @media (max-width: 56rem) {
+    .contact-cta-steps {
       grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 24px 0;
     }
 
-    .cta-card {
-      padding: 40px 24px;
+    .contact-cta-step + .contact-cta-step {
+      border-top: 1px solid var(--color-border);
+      border-left: 0;
     }
   }
 
-  @media (max-width: 768px) {
-    .cta-heading {
-      font-size: 30px;
+  @media (max-width: 40rem) {
+    .contact-cta {
+      padding-block: clamp(3.5rem, 14vw, 5rem);
     }
 
-    .btn-primary {
+    .contact-cta-card {
+      padding: 1.5rem;
+    }
+
+    .contact-cta-title {
+      max-width: 15ch;
+      font-size: clamp(2rem, 8vw, 2.75rem);
+    }
+
+    .contact-cta-step {
+      grid-template-columns: 1fr;
+      gap: 0.625rem;
+      padding: 1.5rem 0;
+    }
+
+    .contact-cta-actions {
       width: 100%;
-      text-align: center;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .contact-cta-button,
+    .contact-cta-text-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-cta-button {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .contact-cta-card,
+    .contact-cta-steps,
+    .contact-cta-step {
+      border-color: CanvasText;
+    }
+
+    .contact-cta-button {
+      border-color: ButtonText;
     }
   }
 </style>
