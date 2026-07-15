@@ -13,9 +13,10 @@
         </h2>
 
         <p class="contact-cta-description">
-          We begin by understanding the operating environment, the customer
-          friction you are trying to solve, and the organizational conditions
-          that could support or limit adoption.
+          Most AI initiatives don't fail loudly. They fail quietly, at about
+          month four, when usage flattens and nobody's accountable for why. A
+          fit check is thirty minutes to find out whether that's where yours is
+          headed — including the honest answer that you don't need us.
         </p>
       </div>
 
@@ -25,6 +26,7 @@
 
           <div>
             <h3>Share the operating context</h3>
+
             <p>
               Describe the customer experience problem, affected teams, current
               systems, and the outcome you need to improve.
@@ -37,6 +39,7 @@
 
           <div>
             <h3>Review readiness and constraints</h3>
+
             <p>
               We assess workflow ownership, CRM data, stakeholder alignment,
               adoption risk, and implementation dependencies.
@@ -49,6 +52,7 @@
 
           <div>
             <h3>Define the right next step</h3>
+
             <p>
               You receive a direct recommendation on whether an engagement makes
               sense and what should happen next.
@@ -105,12 +109,13 @@
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--fs-eyebrow);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: none;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .contact-cta-title {
@@ -118,23 +123,26 @@
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2rem, 1.55rem + 1.8vw, 3.5rem);
+    font-size: var(--fs-h2);
     font-style: normal;
-    font-weight: 600;
-    line-height: 1.04;
-    letter-spacing: -0.03em;
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
   .contact-cta-description {
-    max-width: 45rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+    font-size: var(--fs-body-ui);
     font-style: normal;
-    font-weight: 400;
-    line-height: 1.6;
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -164,8 +172,9 @@
     color: var(--color-blue);
     font-family: var(--font-sans);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
+    font-feature-settings: var(--fea-tabular);
   }
 
   .contact-cta-step div {
@@ -176,11 +185,12 @@
     margin: 0 0 0.75rem;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: var(--fs-h4);
     font-style: normal;
-    font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.005em;
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
@@ -188,10 +198,12 @@
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: var(--fs-small);
     font-style: normal;
-    font-weight: 400;
+    font-weight: var(--fw-regular);
     line-height: 1.6;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -214,10 +226,12 @@
     background: var(--color-blue);
     color: var(--color-light);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: var(--fs-cta);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.2;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-align: center;
     text-decoration: none;
     transition:
@@ -245,8 +259,11 @@
     gap: 0.4rem;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: var(--fs-cta);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: underline;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.2em;
@@ -278,7 +295,6 @@
 
     .contact-cta-title {
       max-width: 15ch;
-      font-size: clamp(2rem, 8vw, 2.75rem);
     }
 
     .contact-cta-step {
