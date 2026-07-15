@@ -57,24 +57,26 @@
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--fs-eyebrow);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: none;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .hero-title {
-    max-width: 15ch;
+    max-width: 18ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(3rem, 1.9rem + 4.5vw, 6.5rem);
+    font-size: var(--fs-display);
     font-style: normal;
-    font-weight: 600;
-    line-height: 0.97;
-    letter-spacing: -0.04em;
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
@@ -83,15 +85,16 @@
   }
 
   .hero-subtitle {
-    max-width: 46rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    font-size: var(--fs-body-ui);
     font-style: normal;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -113,10 +116,12 @@
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: var(--fs-cta);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.2;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-align: center;
     text-decoration: none;
     transition:
@@ -171,16 +176,11 @@
     }
 
     .hero-title {
-      max-width: 12ch;
-      font-size: clamp(2.75rem, 12vw, 4.25rem);
-      line-height: 0.99;
-      letter-spacing: -0.035em;
+      max-width: 14ch;
     }
 
     .hero-subtitle {
       max-width: 36rem;
-      font-size: 1.0625rem;
-      line-height: 1.6;
     }
 
     .hero-actions {
