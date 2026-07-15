@@ -1,49 +1,69 @@
 ---
 // src/components/Framework.astro
 ---
-<section class="framework-section" id="framework">
+
+<section class="framework" aria-labelledby="framework-title">
   <div class="framework-container">
-    <div class="section-header">
-      <h2 class="section-title">The Four Friction Points of AI-Enabled CX</h2>
-      <p class="section-lead">
-        Deploying a customer-facing AI model is simple. Driving cross-functional workflow adoption and measurable customer retention is where organizations fracture. We evaluate and solve for all four vectors.
+    <div class="framework-intro">
+      <p class="framework-eyebrow">Adoption framework</p>
+
+      <h2 id="framework-title" class="framework-title">
+        Four conditions determine whether AI creates value.
+      </h2>
+
+      <p class="framework-lead">
+        A model can perform well and still fail in practice. Sustainable value
+        depends on how the technology fits the operating environment, how much
+        people trust it, whether teams adopt it, and whether outcomes can be
+        measured.
       </p>
     </div>
 
     <div class="framework-grid">
-      <!-- Pillar 1: Implementation -->
       <article class="framework-card">
-        <div class="card-num">01</div>
-        <h3 class="card-title">Smarter Implementation</h3>
-        <p class="card-text">
-          We integrate customer-facing systems within highly complex legacy environments. We map AI utilities directly to your existing operational bottlenecks, ensuring technical architecture aligns with business reality.
+        <span class="framework-number" aria-hidden="true">01</span>
+
+        <h3>Implementation</h3>
+
+        <p>
+          The system must fit existing workflows, technical constraints,
+          ownership structures, and customer experience priorities rather than
+          force a generic process onto the organization.
         </p>
       </article>
 
-      <!-- Pillar 2: Trust -->
       <article class="framework-card">
-        <div class="card-num">02</div>
-        <h3 class="card-title">Stakeholder Trust</h3>
-        <p class="card-text">
-          AI systems are abandoned when teams don't trust the output. We translate intricate stakeholder requirements into transparent safeguards, protecting brand reputation while empowering frontline agents.
+        <span class="framework-number" aria-hidden="true">02</span>
+
+        <h3>Trust</h3>
+
+        <p>
+          Teams need to understand what the system does, when to rely on it, how
+          decisions are governed, and where human judgment remains essential.
         </p>
       </article>
 
-      <!-- Pillar 3: Adoption -->
       <article class="framework-card">
-        <div class="card-num">03</div>
-        <h3 class="card-title">Workflow Adoption</h3>
-        <p class="card-text">
-          A system is only as valuable as its utilization rate. We specialize in the human side of technological transition, designing frictionless internal loops that turn reluctant staff into active system power-users.
+        <span class="framework-number" aria-hidden="true">03</span>
+
+        <h3>Adoption</h3>
+
+        <p>
+          New tools must reduce effort, support real work, and fit the behavior
+          of frontline teams. Usage is designed into the workflow rather than
+          treated as a training problem after launch.
         </p>
       </article>
 
-      <!-- Pillar 4: Measurement -->
       <article class="framework-card">
-        <div class="card-num">04</div>
-        <h3 class="card-title">CRM Measurement</h3>
-        <p class="card-text">
-          We don't measure success by API uptime. We leverage Salesforce and CRM data to trace a direct line between system interaction and concrete customer outcomes, proving real-world financial return on investment.
+        <span class="framework-number" aria-hidden="true">04</span>
+
+        <h3>Measurement</h3>
+
+        <p>
+          CRM and operational data should show whether the system improves
+          customer outcomes, team performance, service quality, retention, or
+          another defined business result.
         </p>
       </article>
     </div>
@@ -51,102 +71,140 @@
 </section>
 
 <style>
-  /* --- DESIGN TOKENS (Spectrum 2 + SEO Semantic Layout) --- */
-  .framework-section {
+  .framework {
     width: 100%;
-    padding: 100px 24px;
-    background-color: var(--spectrum-background-layer-2, #f5f5f5);
+    padding-block: clamp(4rem, 9vw, 7rem);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
   }
 
   .framework-container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
     flex-direction: column;
-    gap: 64px;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
   }
 
-  /* --- HEADER (Optimized for Answer Engine snippets) --- */
-  .section-header {
-    max-width: 800px;
+  .framework-intro {
+    display: flex;
+    max-width: 50rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .section-title {
-    font-family: adobe-clean, sans-serif;
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--spectrum-heading-color, CanvasText);
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
+  .framework-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
-  .section-lead {
-    font-family: adobe-clean, sans-serif;
-    font-size: 18px;
+  .framework-title {
+    max-width: 17ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 1.55rem + 1.8vw, 3.5rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .framework-lead {
+    max-width: 46rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+    font-style: normal;
+    font-weight: 400;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
+    text-wrap: pretty;
   }
 
-  /* --- GRID ARCHITECTURE --- */
   .framework-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
   }
 
   .framework-card {
-    background-color: var(--spectrum-background-layer-1, #ffffff);
-    padding: 40px;
-    border-radius: 6px;
-    border: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
     display: flex;
+    min-width: 0;
     flex-direction: column;
-    gap: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    align-items: flex-start;
+    gap: 1rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
   }
 
-  .card-num {
-    font-family: adobe-clean, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--spectrum-global-color-accent, #0265dc);
-    letter-spacing: 0.1em;
+  .framework-number {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
-  .card-title {
-    font-family: adobe-clean, sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--spectrum-heading-color, CanvasText);
-    letter-spacing: -0.01em;
+  .framework-card h3 {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 1.15rem + 0.35vw, 1.625rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
   }
 
-  .card-text {
-    font-family: adobe-clean, sans-serif;
-    font-size: 16px;
+  .framework-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
+    text-wrap: pretty;
   }
 
-  /* --- 📱 RESPONSIVE SINGLE-TREE MEDIA QUERIES --- */
-  @media (max-width: 900px) {
+  @media (max-width: 52rem) {
     .framework-grid {
-      grid-template-columns: 1fr; /* Flattens to single column seamlessly on mobile touch viewports */
-      gap: 24px;
+      grid-template-columns: 1fr;
     }
   }
 
-  @media (max-width: 768px) {
-    .framework-section {
-      padding: 64px 16px;
+  @media (max-width: 40rem) {
+    .framework {
+      padding-block: clamp(3.5rem, 14vw, 5rem);
     }
-    
-    .section-title {
-      font-size: 28px;
+
+    .framework-title {
+      max-width: 15ch;
+      font-size: clamp(2rem, 8vw, 2.75rem);
     }
-    
+
     .framework-card {
-      padding: 24px;
+      padding: 1.5rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .framework-card {
+      border-color: CanvasText;
     }
   }
 </style>
