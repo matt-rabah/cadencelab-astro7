@@ -505,6 +505,63 @@ const isCurrentSection = (href: string): boolean => {
     const navigationGroups =
       header.querySelectorAll<HTMLElement>(".navigation-group");
 
+    const desktopMediaQuery = window.matchMedia("(min-width: 60rem)");
+    const collapseThreshold = 96;
+    const expandDistance = 28;
+
+    let lastScrollY = window.scrollY;
+    let upwardDistance = 0;
+    let scrollFrameRequested = false;
+
+    const setDesktopHeaderState = (isCollapsed: boolean) => {
+      if (!desktopMediaQuery.matches) {
+        header.classList.remove("is-collapsed");
+        return;
+      }
+
+      header.classList.toggle("is-collapsed", isCollapsed);
+    };
+
+    const updateDesktopHeaderOnScroll = () => {
+      scrollFrameRequested = false;
+
+      if (!desktopMediaQuery.matches) {
+        setDesktopHeaderState(false);
+        lastScrollY = window.scrollY;
+        upwardDistance = 0;
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      if (currentScrollY <= collapseThreshold) {
+        setDesktopHeaderState(false);
+        upwardDistance = 0;
+      } else if (delta > 0) {
+        setDesktopHeaderState(true);
+        upwardDistance = 0;
+      } else if (delta < 0) {
+        upwardDistance += Math.abs(delta);
+
+        if (upwardDistance >= expandDistance) {
+          setDesktopHeaderState(false);
+          upwardDistance = 0;
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    const requestDesktopHeaderUpdate = () => {
+      if (scrollFrameRequested) {
+        return;
+      }
+
+      scrollFrameRequested = true;
+      window.requestAnimationFrame(updateDesktopHeaderOnScroll);
+    };
+
     const closeDesktopMenus = (exception?: HTMLElement) => {
       navigationGroups.forEach((group) => {
         if (group === exception) {
@@ -608,11 +665,25 @@ const isCurrentSection = (href: string): boolean => {
       }
     });
 
+    window.addEventListener("scroll", requestDesktopHeaderUpdate, {
+      passive: true,
+    });
+
+    desktopMediaQuery.addEventListener("change", () => {
+      setDesktopHeaderState(false);
+      lastScrollY = window.scrollY;
+      upwardDistance = 0;
+    });
+
     window.addEventListener("resize", () => {
-      if (window.matchMedia("(min-width: 60rem)").matches) {
+      if (desktopMediaQuery.matches) {
         setMobileMenuState(false);
+      } else {
+        setDesktopHeaderState(false);
       }
     });
+
+    updateDesktopHeaderOnScroll();
   };
 
   document.addEventListener("astro:page-load", initializeHeader);
@@ -621,6 +692,9 @@ const isCurrentSection = (href: string): boolean => {
 
 <style>
   .site-header {
+    --desktop-header-height: 6.5rem;
+    --desktop-primary-row-height: 3rem;
+
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -636,7 +710,8 @@ const isCurrentSection = (href: string): boolean => {
   .desktop-header {
     display: grid;
     grid-template-columns: minmax(13.5rem, 15rem) minmax(0, 1fr);
-    min-height: 6.5rem;
+    min-height: var(--desktop-header-height);
+    transition: min-height var(--transition-standard);
   }
 
   .brand-zone {
@@ -644,6 +719,9 @@ const isCurrentSection = (href: string): boolean => {
     align-items: center;
     padding-inline: clamp(1.5rem, 3vw, 2.5rem);
     border-right: 1px solid var(--color-border);
+    transition:
+      padding-inline var(--transition-standard),
+      min-height var(--transition-standard);
   }
 
   .brand-link,
@@ -658,6 +736,10 @@ const isCurrentSection = (href: string): boolean => {
   .desktop-wordmark {
     width: clamp(8.5rem, 10vw, 11.25rem);
     height: auto;
+    transform-origin: left center;
+    transition:
+      width var(--transition-standard),
+      transform var(--transition-standard);
   }
 
   .header-navigation {
@@ -669,11 +751,21 @@ const isCurrentSection = (href: string): boolean => {
   .utility-row {
     display: flex;
     min-height: 3.5rem;
+    max-height: 3.5rem;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    overflow: hidden;
     padding-inline: clamp(1.5rem, 3vw, 3rem);
     border-bottom: 1px solid var(--color-border);
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      min-height var(--transition-standard),
+      max-height var(--transition-standard),
+      opacity var(--transition-fast),
+      transform var(--transition-standard),
+      border-color var(--transition-standard);
   }
 
   .search-form {
@@ -744,7 +836,7 @@ const isCurrentSection = (href: string): boolean => {
 
   .primary-row {
     display: flex;
-    min-height: 3rem;
+    min-height: var(--desktop-primary-row-height);
     align-items: stretch;
     justify-content: space-between;
   }
@@ -830,13 +922,31 @@ const isCurrentSection = (href: string): boolean => {
 
   .mega-menu {
     position: absolute;
-    top: 6.5rem;
+    top: var(--desktop-header-height);
     left: 0;
     width: 100%;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
     background: var(--color-surface-pure);
     box-shadow: var(--shadow-lg);
+    transition: top var(--transition-standard);
+  }
+
+  .site-header.is-collapsed {
+    --desktop-header-height: var(--desktop-primary-row-height);
+  }
+
+  .site-header.is-collapsed .utility-row {
+    min-height: 0;
+    max-height: 0;
+    border-bottom-color: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.75rem);
+  }
+
+  .site-header.is-collapsed .desktop-wordmark {
+    width: clamp(7.75rem, 9vw, 9.5rem);
   }
 
   .mega-menu[hidden] {
@@ -1130,6 +1240,11 @@ const isCurrentSection = (href: string): boolean => {
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .desktop-header,
+    .brand-zone,
+    .desktop-wordmark,
+    .utility-row,
+    .mega-menu,
     .expand-icon,
     .primary-link,
     .navigation-trigger,
