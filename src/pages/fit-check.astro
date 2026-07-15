@@ -1,139 +1,318 @@
 ---
 // src/pages/fit-check.astro
-import Layout from "../layouts/Layout.astro";
-import NavHeader from "../components/NavHeader.astro";
-import Footer from "../components/Footer.astro";
 
-// Fetch the page content data file handled by TinaCMS
 import { getEntry } from "astro:content";
+
+import Footer from "../components/Footer.astro";
+import NavHeader from "../components/NavHeader.astro";
+import Layout from "../layouts/Layout.astro";
+
 const pageData = await getEntry("page", "fit-check");
 
-// TYPE GUARD: If the file is missing or not indexed yet, stop the build with a clear warning
 if (!pageData) {
   throw new Error(
     "Content entry not found for 'src/content/pages/fit-check.md'. " +
-      "Please make sure this file exists and contains valid frontmatter.",
+      "Confirm that the file exists and matches the page collection schema.",
   );
 }
 
-// TypeScript now knows pageData is 100% defined, so this line runs error-free
 const { title, subtitle, category } = pageData.data;
+
+const pageTitle = `${title} | Cadence Lab`;
+const pageDescription =
+  subtitle ??
+  "Assess whether your customer experience, CRM, and AI initiative is ready for a productive engagement.";
 ---
 
-<Layout>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalURL="/fit-check/"
+>
   <NavHeader />
 
-  <main class="fit-check-page">
-    <div class="form-container">
-      <header class="form-header">
-        <span class="form-tag">{category}</span>
-        <h1 class="form-heading">{title}</h1>
-        <p class="form-subheading">{subtitle}</p>
+  <main id="main-content" class="fit-check-page">
+    <div class="fit-check-container">
+      <header class="fit-check-header">
+        <p class="fit-check-eyebrow">{category}</p>
+
+        <h1 class="fit-check-title">{title}</h1>
+
+        <p class="fit-check-intro">{subtitle}</p>
+
+        <p class="fit-check-context">
+          This assessment helps determine whether the problem, operating
+          environment, and organizational readiness support a useful next step.
+          It is not a technical audit or a commitment to engage.
+        </p>
       </header>
 
-      <form class="assessment-form" method="POST" action="/thanks">
-        <!-- Section 1: Environmental Complexity -->
+      <form
+        class="fit-check-form"
+        method="post"
+        action="/thanks/"
+        aria-labelledby="fit-check-form-title"
+      >
+        <h2 id="fit-check-form-title" class="visually-hidden">
+          Fit assessment form
+        </h2>
+
         <fieldset class="form-section">
-          <legend>01. Technical & Operational Complexity</legend>
+          <legend>
+            <span class="section-number" aria-hidden="true">01</span>
+            Customer experience problem
+          </legend>
 
           <div class="input-group">
-            <label for="environment-type"
-              >Describe the current state of your legacy CX infrastructure.</label
-            >
-            <select id="environment-type" name="environment-type" required>
-              <option value="" disabled selected
-                >Select an operational baseline...</option
-              >
-              <option value="fractured"
-                >Highly fractured (Multiple disconnected legacy systems)</option
-              >
-              <option value="transitioning"
-                >In transition (Migrating or attempting to unify tools)</option
-              >
-              <option value="modern-silo"
-                >Modern but siloed (Tools are active, but cross-functional teams
-                don't utilize them)</option
-              >
-            </select>
+            <label for="challenge">
+              What customer experience problem are you trying to solve?
+            </label>
+
+            <textarea
+              id="challenge"
+              name="challenge"
+              rows="5"
+              autocomplete="off"
+              placeholder="Describe the customer friction, affected teams, and business impact."
+              required></textarea>
           </div>
 
           <div class="input-group">
-            <label for="bottleneck"
-              >What is your primary system point of failure right now?</label
-            >
+            <label for="impact">
+              What outcome would make this work successful?
+            </label>
+
             <textarea
-              id="bottleneck"
-              name="bottleneck"
-              rows="3"
-              placeholder="e.g., Staff is bypassing our new AI routing tool; data isn't clean..."
+              id="impact"
+              name="impact"
+              rows="4"
+              autocomplete="off"
+              placeholder="Examples: improve retention, reduce service effort, increase adoption, or strengthen measurement."
               required></textarea>
           </div>
         </fieldset>
 
-        <!-- Section 2: Data & Executive Governance -->
         <fieldset class="form-section">
-          <legend>02. Data Architecture & Authority</legend>
+          <legend>
+            <span class="section-number" aria-hidden="true">02</span>
+            Operating environment
+          </legend>
 
           <div class="input-group">
-            <label for="crm-status"
-              >What is the baseline maturity of your Salesforce / CRM data?</label
-            >
-            <select id="crm-status" name="crm-status" required>
-              <option value="" disabled selected>Select data status...</option>
-              <option value="mature"
-                >Established architecture (Traced to retention metrics)</option
-              >
-              <option value="dirty"
-                >Active data collection, but lacks clear workflow tracing</option
-              >
-              <option value="undeployed"
-                >Basic logging only (Data exists but is underutilized)</option
-              >
+            <label for="environment">
+              Which description best matches your current environment?
+            </label>
+
+            <select id="environment" name="environment" required>
+              <option value="" disabled selected>
+                Select the closest description
+              </option>
+
+              <option value="fragmented">
+                Multiple disconnected systems and inconsistent workflows
+              </option>
+
+              <option value="transitioning">
+                Systems or processes are currently being consolidated
+              </option>
+
+              <option value="modern-siloed">
+                Modern tools exist, but teams or workflows remain siloed
+              </option>
+
+              <option value="established">
+                Core systems and workflows are established but need improvement
+              </option>
+
+              <option value="uncertain">
+                We need help understanding the current state
+              </option>
             </select>
           </div>
 
           <div class="input-group">
-            <label for="mandate"
-              >Do you currently have an explicit cross-functional mandate from
-              leadership to execute workflow changes?</label
-            >
-            <div class="radio-group">
-              <label
-                ><input type="radio" name="mandate" value="yes" required /> Yes, we
-                have active executive backing.</label
-              >
-              <label
-                ><input type="radio" name="mandate" value="no" /> No, we are currently
-                trying to build internal buy-in.</label
-              >
-            </div>
+            <label for="crm">
+              What role does CRM data play in the current workflow?
+            </label>
+
+            <select id="crm" name="crm" required>
+              <option value="" disabled selected>
+                Select the closest description
+              </option>
+
+              <option value="measured">
+                CRM data is connected to workflows and performance measures
+              </option>
+
+              <option value="active-limited">
+                Data is collected, but its operational use is limited
+              </option>
+
+              <option value="fragmented">
+                Data quality or ownership is inconsistent across teams
+              </option>
+
+              <option value="early"> CRM use is still developing </option>
+
+              <option value="unknown">
+                We are not sure how reliable or useful the data is
+              </option>
+            </select>
           </div>
         </fieldset>
 
-        <!-- Section 3: Professional Profile -->
         <fieldset class="form-section">
-          <legend>03. Stakeholder Profile</legend>
+          <legend>
+            <span class="section-number" aria-hidden="true">03</span>
+            Readiness and ownership
+          </legend>
 
-          <div class="grid-inputs">
-            <div class="input-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            <div class="input-group">
-              <label for="email">Corporate Email</label>
-              <input type="email" id="email" name="email" required />
+          <div class="input-group">
+            <span class="group-label">
+              Is there an accountable leader who can support cross-functional
+              decisions?
+            </span>
+
+            <div
+              class="radio-group"
+              role="radiogroup"
+              aria-label="Accountable leadership"
+            >
+              <label class="radio-option">
+                <input type="radio" name="leadership" value="yes" required />
+                <span>Yes, an accountable sponsor is involved.</span>
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="leadership" value="developing" />
+                <span>Support exists, but ownership is still developing.</span>
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="leadership" value="no" />
+                <span>No, we are still building internal alignment.</span>
+              </label>
             </div>
           </div>
 
           <div class="input-group">
-            <label for="org">Organization</label>
-            <input type="text" id="org" name="org" required />
+            <span class="group-label">
+              Is the organization willing to change workflows, ownership, or
+              operating practices?
+            </span>
+
+            <div
+              class="radio-group"
+              role="radiogroup"
+              aria-label="Willingness to change workflows"
+            >
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="change-readiness"
+                  value="yes"
+                  required
+                />
+                <span>Yes, workflow changes are within scope.</span>
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="change-readiness" value="limited" />
+                <span>Possibly, depending on the recommendation.</span>
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="change-readiness" value="no" />
+                <span
+                  >No, the current process must remain largely unchanged.</span
+                >
+              </label>
+            </div>
           </div>
         </fieldset>
 
-        <button type="submit" class="btn-submit"
-          >Submit Baseline Profile for Review</button
-        >
+        <fieldset class="form-section">
+          <legend>
+            <span class="section-number" aria-hidden="true">04</span>
+            Contact information
+          </legend>
+
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="name">Name</label>
+
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="email">Work email</label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="organization">Organization</label>
+
+              <input
+                id="organization"
+                name="organization"
+                type="text"
+                autocomplete="organization"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="role">Role</label>
+
+              <input
+                id="role"
+                name="role"
+                type="text"
+                autocomplete="organization-title"
+              />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="additional-context">
+              Anything else we should understand?
+              <span class="optional-label">(Optional)</span>
+            </label>
+
+            <textarea
+              id="additional-context"
+              name="additional-context"
+              rows="4"
+              autocomplete="off"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="form-footer">
+          <p class="form-note">
+            Submitting this form does not create a consulting agreement. Your
+            information will be used only to review the inquiry and respond.
+          </p>
+
+          <button type="submit" class="submit-button">
+            Submit fit assessment
+          </button>
+        </div>
       </form>
     </div>
   </main>
@@ -142,192 +321,330 @@ const { title, subtitle, category } = pageData.data;
 </Layout>
 
 <style>
-  /* --- DESIGN TOKENS (Premium Palette Consistency) --- */
   .fit-check-page {
     width: 100%;
-    background-color: var(--spectrum-background-layer-1, #f4f5f7);
-    padding: 80px 24px;
-    display: flex;
-    justify-content: center;
+    padding-block: clamp(4rem, 9vw, 7rem);
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
   }
 
-  .form-container {
-    width: 100%;
-    max-width: 700px;
+  .fit-check-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), 52rem);
+    margin-inline: auto;
+    gap: clamp(3rem, 7vw, 5rem);
+  }
+
+  .fit-check-header {
     display: flex;
+    max-width: 46rem;
     flex-direction: column;
-    gap: 48px;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  /* --- HEADER --- */
-  .form-header {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  .fit-check-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
-  .form-tag {
-    font-family:
-      "National 2",
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--spectrum-global-color-accent, #0265dc);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
+  .fit-check-title {
+    max-width: 14ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2.75rem, 2rem + 3vw, 5.25rem);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
   }
 
-  .form-heading {
-    font-family:
-      "Söhne",
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 44px;
-    font-weight: 900;
-    color: #161616;
-    letter-spacing: -0.03em;
+  .fit-check-intro {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
+    line-height: 1.55;
+    text-wrap: pretty;
   }
 
-  .form-subheading {
-    font-family: "Tiempos", Georgia, serif;
-    font-size: 16px;
+  .fit-check-context {
+    max-width: 42rem;
+    margin: 0;
+    padding-top: 0.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
+    text-wrap: pretty;
   }
 
-  /* --- FORM ELEMENTS --- */
-  .assessment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  .fit-check-form {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+    box-shadow: var(--shadow-sm);
   }
 
   .form-section {
-    border: none;
-    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+    min-width: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    padding: 0;
+    border: 0;
   }
 
   .form-section legend {
-    font-family:
-      "Söhne",
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #161616;
-    letter-spacing: 0.05em;
-    border-bottom: 1px solid rgba(22, 22, 22, 0.08);
+    display: flex;
     width: 100%;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0 0 0.25rem;
+    padding: 0 0 1rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .section-number {
+    color: var(--color-blue);
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    gap: 0.625rem;
+    min-width: 0;
   }
 
-  .input-group label {
-    font-family:
-      "National 2",
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 15px;
+  .input-group label,
+  .group-label {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     font-weight: 600;
-    color: #161616;
-    line-height: 1.4;
+    line-height: 1.45;
+  }
+
+  .optional-label {
+    color: var(--color-text-muted);
+    font-weight: 400;
   }
 
   input[type="text"],
   input[type="email"],
   select,
   textarea {
-    font-family:
-      "National 2",
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 15px;
-    padding: 14px;
-    background-color: var(--spectrum-background-layer-2, #f4f5f7);
-    border: 1px solid rgba(22, 22, 22, 0.06);
-    border-radius: 4px;
-    color: #161616;
-    outline: none;
-    transition: border-color 0.2s ease;
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.8125rem 0.875rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      background-color var(--transition-fast);
   }
 
-  input:focus,
-  select:focus,
-  textarea:focus {
-    border-color: var(--spectrum-global-color-accent, #1823c9);
-    background-color: var(--spectrum-background-layer-1, #f4f5f7);
+  textarea {
+    min-height: 8rem;
+    resize: vertical;
   }
 
-  .grid-inputs {
+  select {
+    cursor: pointer;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-text-subtle);
+    opacity: 1;
+  }
+
+  input:hover,
+  select:hover,
+  textarea:hover {
+    border-color: var(--color-ink);
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-color: var(--color-focus);
+    outline: 0;
+    box-shadow: 0 0 0 var(--focus-ring-width)
+      color-mix(in srgb, var(--color-focus) 25%, transparent);
+  }
+
+  .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
   }
 
   .radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 4px;
+    display: grid;
+    gap: 0.75rem;
   }
 
-  .radio-group label {
+  .radio-option {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    padding: 0.875rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .radio-option:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  .radio-option:has(input:checked) {
+    border-color: var(--color-blue);
+    background: color-mix(
+      in srgb,
+      var(--color-blue) 5%,
+      var(--color-surface-pure)
+    );
+    color: var(--color-ink);
+  }
+
+  .radio-option input {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.2rem 0 0;
+    accent-color: var(--color-blue);
+  }
+
+  .radio-option span {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .form-footer {
     display: flex;
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
   }
 
-  /* --- SUBMIT --- */
-  .btn-submit {
-    font-family:
-      "Söhne",
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 16px;
+  .form-note {
+    max-width: 34rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .submit-button {
+    display: inline-flex;
+    min-height: 3rem;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    background: var(--color-ink);
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     font-weight: 600;
-    background-color: #161616;
-    color: #f4f5f7;
-    padding: 16px;
-    border: none;
-    border-radius: 4px;
+    line-height: 1.2;
     cursor: pointer;
-    transition: opacity 0.15s ease;
-    text-align: center;
-    margin-top: 16px;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      transform var(--transition-fast);
   }
 
-  .btn-submit:hover {
-    opacity: 0.9;
+  .submit-button:hover {
+    border-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
+    background: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
   }
 
-  /* --- 📱 RESPONSIVE --- */
-  @media (max-width: 600px) {
-    .grid-inputs {
+  .submit-button:active {
+    transform: translateY(1px);
+  }
+
+  .submit-button:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 40rem) {
+    .fit-check-page {
+      padding-block: clamp(3.5rem, 14vw, 5rem);
+    }
+
+    .fit-check-title {
+      max-width: 12ch;
+      font-size: clamp(2.5rem, 11vw, 4rem);
+    }
+
+    .fit-check-form {
+      padding: 1.25rem;
+    }
+
+    .form-grid {
       grid-template-columns: 1fr;
     }
 
-    .form-heading {
-      font-size: 34px;
+    .form-footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .submit-button {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    input,
+    select,
+    textarea,
+    .submit-button {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .fit-check-form,
+    .radio-option,
+    input,
+    select,
+    textarea,
+    .submit-button {
+      border-color: CanvasText;
     }
   }
 </style>
