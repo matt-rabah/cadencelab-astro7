@@ -2,182 +2,274 @@
 // src/components/FitCriteria.astro
 ---
 
-<section class="criteria-section">
-  <div class="criteria-container">
-    <div class="criteria-intro">
-      <h2 class="criteria-heading">Engagement Framework: Screening for Fit</h2>
-      <p class="criteria-lead">
-        We do not accept every engagement. AI integration within enterprise
-        customer experience is fundamentally an operational risk, not a software
-        purchase. We screen potential partners against strict operational
-        baselines to guarantee measurable execution.
+<section class="fit-criteria" aria-labelledby="fit-criteria-title">
+  <div class="fit-criteria-container">
+    <div class="fit-criteria-intro">
+      <p class="fit-criteria-eyebrow">Engagement fit</p>
+
+      <h2 id="fit-criteria-title" class="fit-criteria-title">
+        The work starts with operational readiness.
+      </h2>
+
+      <p class="fit-criteria-lead">
+        AI integration is not only a software decision. It affects ownership,
+        trust, frontline behavior, measurement, and customer outcomes. We look
+        for organizations prepared to address those conditions directly.
       </p>
     </div>
 
-    <div class="criteria-split">
-      <!-- Who We Partner With -->
-      <div class="criteria-block alignment-positive">
-        <h3>Minimum Requirements for Engagement</h3>
-        <ul class="criteria-list">
-          <li>
-            <strong>Complex Legacy Infrastructures:</strong> Organizations managing
-            multi-layered stakeholder environments where customer-facing friction
-            directly impacts retention.
-          </li>
-          <li>
-            <strong>Data Maturity Baseline:</strong> Businesses with established Salesforce
-            or enterprise CRM data structures ready to be translated into automated
-            workflows.
-          </li>
-          <li>
-            <strong>Executive Mandate:</strong> Leadership teams who recognize that
-            AI success is an adoption and trust problem, requiring cross-functional
-            authority to execute.
-          </li>
-        </ul>
-      </div>
+    <div class="fit-criteria-grid">
+      <article class="fit-card fit-card-positive">
+        <p class="fit-card-label">Strong fit</p>
 
-      <!-- Who We Do Not Serve -->
-      <div class="criteria-block alignment-negative">
-        <h3>Out of Scope Environments</h3>
-        <ul class="criteria-list">
+        <h3>What supports a productive engagement</h3>
+
+        <ul class="fit-list">
           <li>
-            <strong>"Plug-and-Play" Expectations:</strong> We do not serve organizations
-            looking for surface-level API wrappers or immediate, un-measured automation
-            patches.
+            <strong>Meaningful operational complexity.</strong>
+            Customer-facing friction spans teams, systems, or decision layers and
+            materially affects retention, revenue, or service quality.
           </li>
+
           <li>
-            <strong>Siloed Technical Projects:</strong> Engagements treated strictly
-            as isolated IT tasks without active frontline workflow adoption strategy
-            are rejected.
+            <strong>A usable data foundation.</strong>
+            Salesforce or another enterprise CRM contains enough reliable data to
+            diagnose patterns, trace handoffs, and measure improvement.
           </li>
+
           <li>
-            <strong>Commodity Procurement:</strong> Our pricing reflects systemic
-            operational outcomes, not line-item development hours.
+            <strong>Executive sponsorship.</strong>
+            Leadership can align business, technical, and frontline teams around shared
+            outcomes and clear decision rights.
+          </li>
+
+          <li>
+            <strong>Willingness to change workflows.</strong>
+            The organization is prepared to improve the operating model rather than
+            place new technology on top of a broken process.
           </li>
         </ul>
-      </div>
+      </article>
+
+      <article class="fit-card fit-card-limited">
+        <p class="fit-card-label">Limited fit</p>
+
+        <h3>Conditions that reduce the chance of success</h3>
+
+        <ul class="fit-list">
+          <li>
+            <strong>Plug-and-play expectations.</strong>
+            The goal is a quick automation layer without discovery, adoption planning,
+            governance, or measurable outcomes.
+          </li>
+
+          <li>
+            <strong>An isolated technical project.</strong>
+            The work is owned only by IT while frontline teams, business leaders,
+            and customer operations remain outside the process.
+          </li>
+
+          <li>
+            <strong>No accountable sponsor.</strong>
+            Teams cannot resolve conflicting priorities, assign ownership, or make
+            cross-functional workflow decisions.
+          </li>
+
+          <li>
+            <strong>Commodity procurement.</strong>
+            The engagement is evaluated only by development hours rather than operational
+            value, adoption, and customer impact.
+          </li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
 
 <style>
-  /* --- DESIGN TOKENS (Spectrum 2 Elegant & Minimalist Scale) --- */
-  .criteria-section {
+  .fit-criteria {
     width: 100%;
-    padding: 100px 24px;
-    background-color: var(--spectrum-background-layer-2, #f5f5f5);
-    border-top: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
+    padding-block: clamp(4rem, 9vw, 7rem);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
   }
 
-  .criteria-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  .fit-criteria-container {
     display: flex;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
     flex-direction: column;
-    gap: 56px;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
   }
 
-  .criteria-intro {
-    max-width: 800px;
+  .fit-criteria-intro {
+    display: flex;
+    max-width: 50rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .criteria-heading {
-    font-family: adobe-clean, sans-serif;
-    font-size: 36px;
-    font-weight: 800;
-    line-height: 1.2;
-    color: var(--spectrum-heading-color, CanvasText);
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-  }
-
-  .criteria-lead {
-    font-family: adobe-clean, sans-serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
-  }
-
-  /* --- SPLIT LAYOUT --- */
-  .criteria-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-  }
-
-  .criteria-block {
-    background-color: var(--spectrum-background-layer-1, #ffffff);
-    padding: 40px;
-    border-radius: 6px;
-    border: 1px solid rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 10%);
-  }
-
-  .criteria-block h3 {
-    font-family: adobe-clean, sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    letter-spacing: -0.01em;
-  }
-
-  .alignment-positive h3 {
-    color: var(--spectrum-global-color-accent, #0265dc);
-  }
-
-  .alignment-negative h3 {
-    color: var(--spectrum-heading-color, CanvasText);
-  }
-
-  .criteria-list {
-    list-style: none;
-    padding: 0;
+  .fit-criteria-eyebrow,
+  .fit-card-label {
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
-  .criteria-list li {
-    font-family: adobe-clean, sans-serif;
-    font-size: 15px;
+  .fit-criteria-title {
+    max-width: 18ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 1.55rem + 1.8vw, 3.5rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .fit-criteria-lead {
+    max-width: 46rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+    font-style: normal;
+    font-weight: 400;
     line-height: 1.6;
-    color: var(--spectrum-body-color, #4b4b4b);
+    text-wrap: pretty;
+  }
+
+  .fit-criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .fit-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-card-positive {
+    border-top: 0.25rem solid var(--color-blue);
+  }
+
+  .fit-card-limited {
+    border-top: 0.25rem solid var(--color-ink);
+  }
+
+  .fit-card-limited .fit-card-label {
+    color: var(--color-text-muted);
+  }
+
+  .fit-card h3 {
+    max-width: 24ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 1.15rem + 0.35vw, 1.625rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .fit-list {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fit-list li {
     position: relative;
-    padding-left: 20px;
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
+    text-wrap: pretty;
   }
 
-  /* Custom minimal list indicators mapping to Spectrum aesthetics */
-  .criteria-list li::before {
-    content: "—";
+  .fit-list li::before {
+    content: "";
     position: absolute;
+    top: 0.67em;
     left: 0;
-    color: rgba(var(--spectrum-gray-600-rgb, 108, 108, 108), 50%);
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background: var(--color-border-strong);
   }
 
-  .alignment-positive .criteria-list li::before {
-    color: var(--spectrum-global-color-accent, #0265dc);
+  .fit-card-positive .fit-list li::before {
+    background: var(--color-blue);
   }
 
-  /* --- 📱 RESPONSIVE MEDIA QUERIES --- */
-  @media (max-width: 900px) {
-    .criteria-split {
+  .fit-list strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 52rem) {
+    .fit-criteria-grid {
       grid-template-columns: 1fr;
-      gap: 32px;
+    }
+
+    .fit-card h3 {
+      max-width: 32ch;
     }
   }
 
-  @media (max-width: 768px) {
-    .criteria-section {
-      padding: 64px 16px;
+  @media (max-width: 40rem) {
+    .fit-criteria {
+      padding-block: clamp(3.5rem, 14vw, 5rem);
     }
 
-    .criteria-heading {
-      font-size: 28px;
+    .fit-criteria-title {
+      max-width: 15ch;
+      font-size: clamp(2rem, 8vw, 2.75rem);
     }
 
-    .criteria-block {
-      padding: 24px;
+    .fit-card {
+      padding: 1.5rem;
+    }
+
+    .fit-list {
+      gap: 1.125rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .fit-card,
+    .fit-card-positive,
+    .fit-card-limited {
+      border-color: CanvasText;
+    }
+
+    .fit-list li::before {
+      background: CanvasText;
     }
   }
 </style>
