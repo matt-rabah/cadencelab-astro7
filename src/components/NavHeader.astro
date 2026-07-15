@@ -331,7 +331,7 @@ const isCurrentSection = (href: string): boolean => {
 
                   <ul>
                     <li>
-                      <a href="/ai-tooling/prompt-guard/"> Prompt firewalls </a>
+                      <a href="/ai-tooling/prompt-guard/">Prompt firewalls</a>
                     </li>
 
                     <li>
@@ -341,7 +341,7 @@ const isCurrentSection = (href: string): boolean => {
                     </li>
 
                     <li>
-                      <a href="/ai-tooling/compliance/"> PII scrubbing </a>
+                      <a href="/ai-tooling/compliance/">PII scrubbing</a>
                     </li>
                   </ul>
                 </section>
@@ -351,7 +351,7 @@ const isCurrentSection = (href: string): boolean => {
 
                   <ul>
                     <li>
-                      <a href="/ai-tooling/co-pilot/"> Agent copilots </a>
+                      <a href="/ai-tooling/co-pilot/">Agent copilots</a>
                     </li>
 
                     <li>
@@ -455,7 +455,7 @@ const isCurrentSection = (href: string): boolean => {
       />
     </a>
 
-    <a href="/fit-check/" class="mobile-cta"> Fit check </a>
+    <a href="/fit-check/" class="mobile-cta">Fit check</a>
   </div>
 
   <div
@@ -628,7 +628,8 @@ const isCurrentSection = (href: string): boolean => {
     border-bottom: 1px solid var(--color-border);
     background: color-mix(in srgb, var(--color-surface) 96%, transparent);
     color: var(--color-text);
-    font-family: var(--font-sans);
+    font-family: var(--ff-sans);
+    font-feature-settings: var(--fea-graphik);
     backdrop-filter: blur(0.75rem);
   }
 
@@ -699,8 +700,12 @@ const isCurrentSection = (href: string): boolean => {
     border-radius: var(--radius-sm);
     background: var(--color-surface-subtle);
     color: var(--color-text);
-    font-size: 0.8125rem;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-regular);
     line-height: 1.3;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     transition:
       background-color var(--transition-fast),
       border-color var(--transition-fast);
@@ -725,8 +730,10 @@ const isCurrentSection = (href: string): boolean => {
 
   .utility-navigation a {
     color: var(--color-text-muted);
-    font-size: 0.8125rem;
-    font-weight: 500;
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    letter-spacing: 0;
     text-decoration: none;
   }
 
@@ -761,10 +768,12 @@ const isCurrentSection = (href: string): boolean => {
     border-radius: 0;
     background: transparent;
     color: var(--color-text);
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
     line-height: 1;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
     transition:
       background-color var(--transition-fast),
@@ -804,8 +813,12 @@ const isCurrentSection = (href: string): boolean => {
     padding-inline: clamp(1.25rem, 3vw, 3rem);
     background: var(--color-blue);
     color: var(--color-light);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
     transition: background-color var(--transition-fast);
   }
@@ -853,27 +866,36 @@ const isCurrentSection = (href: string): boolean => {
   .menu-label {
     margin: 0;
     color: var(--color-text-muted);
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: none;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .featured-column h2 {
+    max-inline-size: 24ch;
     margin: 0;
     color: var(--color-text);
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .featured-column > p:not(.menu-label) {
+    max-inline-size: 48ch;
     margin: 0;
     color: var(--color-text-muted);
-    font-size: 0.875rem;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
     line-height: 1.55;
+    letter-spacing: 0;
   }
 
   .menu-cta {
@@ -882,8 +904,11 @@ const isCurrentSection = (href: string): boolean => {
     gap: 0.4rem;
     margin-top: 0.25rem;
     color: var(--color-blue);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    letter-spacing: 0;
     text-decoration: none;
   }
 
@@ -897,7 +922,6 @@ const isCurrentSection = (href: string): boolean => {
 
   .link-column .menu-label {
     margin-bottom: 1rem;
-    color: var(--color-text-muted);
   }
 
   .link-column ul {
@@ -910,9 +934,11 @@ const isCurrentSection = (href: string): boolean => {
 
   .link-column a {
     color: var(--color-text);
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
     line-height: 1.4;
+    letter-spacing: 0;
     text-decoration: none;
   }
 
@@ -999,8 +1025,12 @@ const isCurrentSection = (href: string): boolean => {
       border-radius: var(--radius-sm);
       background: var(--color-blue);
       color: var(--color-light);
+      font-family: var(--ff-sans);
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: var(--fw-medium);
+      line-height: 1;
+      letter-spacing: 0;
+      font-feature-settings: var(--fea-graphik);
       text-decoration: none;
     }
 
@@ -1037,8 +1067,12 @@ const isCurrentSection = (href: string): boolean => {
       padding-inline: var(--page-gutter);
       border-bottom: 1px solid var(--color-border);
       color: var(--color-text);
+      font-family: var(--ff-sans);
       font-size: 0.9375rem;
-      font-weight: 600;
+      font-weight: var(--fw-medium);
+      line-height: 1.3;
+      letter-spacing: 0;
+      font-feature-settings: var(--fea-graphik);
       text-decoration: none;
     }
 
@@ -1064,8 +1098,12 @@ const isCurrentSection = (href: string): boolean => {
       border: 1px solid var(--color-border-strong);
       border-radius: var(--radius-sm);
       color: var(--color-text);
-      font-size: 0.8125rem;
-      font-weight: 600;
+      font-family: var(--ff-sans);
+      font-size: var(--fs-eyebrow);
+      font-weight: var(--fw-medium);
+      line-height: 1.3;
+      letter-spacing: 0;
+      font-feature-settings: var(--fea-graphik);
       text-decoration: none;
     }
 
