@@ -1,343 +1,159 @@
 ---
 // src/pages/[...slug].astro
-import { client } from "../../tina/__generated__/client.js";
+
 import TinaMarkdown from "@tinacms/astro";
 import { tinaField } from "@tinacms/astro/tina-field";
-import Layout from "../layouts/Layout.astro";
-import NavHeader from "../components/NavHeader.astro";
+
+import { client } from "../../tina/__generated__/client.js";
 import Footer from "../components/Footer.astro";
+import NavHeader from "../components/NavHeader.astro";
+import Layout from "../layouts/Layout.astro";
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const paths = [
-    // Workflows
-    { slug: "workflows" },
-    { slug: "workflows/salesforce" },
-    { slug: "workflows/cross-functional" },
-    { slug: "workflows/escalation" },
-    { slug: "workflows/agent-routing" },
-    { slug: "workflows/legacy" },
-    { slug: "workflows/omnichannel" },
-    { slug: "workflows/telephony" },
-
-    // Solutions
-    { slug: "solutions" },
-    { slug: "solutions/adoption-fatigue" },
-    { slug: "solutions/dirty-data" },
-    { slug: "solutions/misalignment" },
-    { slug: "solutions/enterprise" },
-    { slug: "solutions/mid-market" },
-    { slug: "solutions/governance" },
-
-    // AI Tooling
-    { slug: "ai-tooling" },
-    { slug: "ai-tooling/prompt-guard" },
-    { slug: "ai-tooling/hallucination" },
-    { slug: "ai-tooling/compliance" },
-    { slug: "ai-tooling/co-pilot" },
-    { slug: "ai-tooling/feedback" },
-
-    // Other pages
-    { slug: "governance" },
-    { slug: "advisory" },
-    { slug: "support" },
-    { slug: "contact" },
-    { slug: "privacy" },
-    { slug: "terms" },
+    "workflows",
+    "workflows/salesforce",
+    "workflows/cross-functional",
+    "workflows/escalation",
+    "workflows/agent-routing",
+    "workflows/legacy",
+    "workflows/omnichannel",
+    "workflows/telephony",
+    "solutions",
+    "solutions/adoption-fatigue",
+    "solutions/dirty-data",
+    "solutions/misalignment",
+    "solutions/enterprise",
+    "solutions/mid-market",
+    "solutions/governance",
+    "ai-tooling",
+    "ai-tooling/prompt-guard",
+    "ai-tooling/hallucination",
+    "ai-tooling/compliance",
+    "ai-tooling/co-pilot",
+    "ai-tooling/feedback",
+    "governance",
+    "advisory",
+    "support",
+    "contact",
+    "privacy",
+    "terms",
   ];
 
-  return paths.map((p) => ({
-    params: { slug: p.slug },
-    props: { slug: p.slug },
+  return paths.map((slug) => ({
+    params: { slug },
+    props: { slug },
   }));
 }
 
-const { slug } = Astro.params;
-
-let page = null;
-let tinaError = null;
-
-// Try to fetch from Tina CMS if configured
-try {
-  const relativePath = `${slug || "home"}.md`;
-  const response = await client.queries.page({
-    relativePath: relativePath,
-  });
-  page = response.data.page;
-} catch (e) {
-  tinaError = e;
+interface Props {
+  slug: string;
 }
 
-// Map slug to readable title and details for beautiful mock display
-const slugMeta: Record<
-  string,
-  { title: string; subtitle: string; body: string; category: string }
-> = {
-  workflows: {
-    title: "Workflow Architecture",
-    subtitle: "Human utilization loops around automated environments.",
-    body: "We engineer seamless handoffs and operational integration between complex automated systems and your support/sales specialists.",
-    category: "Workflows",
-  },
-  "workflows/salesforce": {
-    title: "Salesforce Data Tracing",
-    subtitle: "Real-time state and telemetry tracking.",
-    body: "Monitor data flow, verify API states, and ensure full synchronization across Salesforce pipelines under high-volume operations.",
-    category: "Workflows",
-  },
-  "workflows/cross-functional": {
-    title: "Cross-Functional Hand-offs",
-    subtitle: "Eliminating siloed communication drop-offs.",
-    body: "Connect different organizational layers with structured data flows and real-time triggers to eliminate process friction.",
-    category: "Workflows",
-  },
-  "workflows/escalation": {
-    title: "SLA Escalation Mapping",
-    subtitle: "Automated SLA enforcement pipelines.",
-    body: "Orchestrate intelligent SLA alerts and routing layers to guarantee responsiveness and resolve critical issues dynamically.",
-    category: "Workflows",
-  },
-  "workflows/agent-routing": {
-    title: "AI-to-Human Live Routing",
-    subtitle: "Intelligent support agent hand-offs.",
-    body: "Ensure customer satisfaction by routing complex, high-friction queries from automated systems to human experts instantly.",
-    category: "Workflows",
-  },
-  "workflows/legacy": {
-    title: "Legacy Core Consolidation",
-    subtitle: "Integrating modern intelligence with traditional databases.",
-    body: "Bridge the gap between modern generative models and legacy core mainframes, databases, and customer records.",
-    category: "Workflows",
-  },
-  "workflows/omnichannel": {
-    title: "Omnichannel State Syncing",
-    subtitle: "Unified context across every customer channel.",
-    body: "Maintain unified customer session state and transcript histories across telephony, chat, SMS, and web channels.",
-    category: "Workflows",
-  },
-  "workflows/telephony": {
-    title: "Contact Center Telecom Pipes",
-    subtitle: "SIP and RTC orchestration.",
-    body: "Connect real-time audio streams and telecom networks with modern AI parsing, translation, and logging middleware.",
-    category: "Workflows",
-  },
-  solutions: {
-    title: "Advisory Playbooks",
-    subtitle: "Targeted engagements built to neutralize operational friction.",
-    body: "Explore our multi-stage solutions designed to align business leaders, clean data, and scale workflows.",
-    category: "Solutions",
-  },
-  "solutions/adoption-fatigue": {
-    title: "User Adoption Fatigue",
-    subtitle: "Overcoming psychological drop-offs in automation.",
-    body: "Address the friction that support agents face when automation tools increase validation overhead, ensuring high-adoption loops.",
-    category: "Solutions",
-  },
-  "solutions/dirty-data": {
-    title: "Siloed & Dirty CRM Pipelines",
-    subtitle: "Data cleaning and state tracking.",
-    body: "Automate data validation, eliminate duplicates, and enforce clean schema parameters across your enterprise CRM.",
-    category: "Solutions",
-  },
-  "solutions/misalignment": {
-    title: "Executive Misalignment",
-    subtitle: "Structured governance for stakeholder alignment.",
-    body: "Build shared metrics, transparent KPIs, and objective reporting panels to align technical rollouts with leadership goals.",
-    category: "Solutions",
-  },
-  "solutions/enterprise": {
-    title: "Global Enterprise Architecture",
-    subtitle: "Highly scalable systems alignment.",
-    body: "Design, audit, and deploy massive customer experience networks that comply with enterprise security and availability standards.",
-    category: "Solutions",
-  },
-  "solutions/mid-market": {
-    title: "High-Growth Consolidation",
-    subtitle: "Lean operations scaling.",
-    body: "Consolidate tech stacks, lower licensing costs, and maximize human agent leverage for mid-market businesses.",
-    category: "Solutions",
-  },
-  "solutions/governance": {
-    title: "Regulated Market Compliance",
-    subtitle: "PII scrubbing and audit trails.",
-    body: "Enforce strict compliance checks, HIPAA/GDPR compatibility, and complete system logging for regulated industries.",
-    category: "Solutions",
-  },
-  "ai-tooling": {
-    title: "Model Orchestration",
-    subtitle: "Orchestrating safe generative execution environments.",
-    body: "Explore prompt security, telemetry logs, and agent enhancement tools that optimize generative models.",
-    category: "AI Tooling",
-  },
-  "ai-tooling/prompt-guard": {
-    title: "Automated Prompt Firewalls",
-    subtitle: "Low-latency prompt validation and safety.",
-    body: "Intercept prompt injection, detect jailbreaks, and sanitize inputs before they hit your core generative models.",
-    category: "AI Tooling",
-  },
-  "ai-tooling/hallucination": {
-    title: "Hallucination Variance Tracing",
-    subtitle: "Tracking drift and output consistency.",
-    body: "Log, evaluate, and trace model outputs over time to catch drift, factual inconsistencies, and response variance.",
-    category: "AI Tooling",
-  },
-  "ai-tooling/compliance": {
-    title: "PII Scrubbing Nodes",
-    subtitle: "Dynamic masking of sensitive customer data.",
-    body: "Automatically detect and mask names, SSNs, credit cards, and PII before transmitting data to external model APIs.",
-    category: "AI Tooling",
-  },
-  "ai-tooling/co-pilot": {
-    title: "Agent Co-Pilot Enhancements",
-    subtitle: "Frontline agent assistance.",
-    body: "Deliver context-aware draft responses, KB articles, and customer insights directly to the agent screen.",
-    category: "AI Tooling",
-  },
-  "ai-tooling/feedback": {
-    title: "Behavioral Feedback Pipelines",
-    subtitle: "Reinforcement learning from user correction.",
-    body: "Capture agent corrections and edits to automated output, feeding data back into model fine-tuning loops.",
-    category: "AI Tooling",
-  },
-  governance: {
-    title: "System Governance",
-    subtitle: "Enterprise compliance frameworks.",
-    body: "Review audit logging, role-based access, and model monitoring processes that secure your company operations.",
-    category: "Corporate",
-  },
-  advisory: {
-    title: "Advisory Practice",
-    subtitle: "Strategic execution and consultation.",
-    body: "We guide technical and business stakeholders through the entire lifecycle of customer experience digital transformation.",
-    category: "Corporate",
-  },
-  support: {
-    title: "Operational Support",
-    subtitle: "24/7 architecture support and monitoring.",
-    body: "Enterprise-grade SLA support and systems monitoring to ensure your integration pipelines remain healthy.",
-    category: "Corporate",
-  },
-  contact: {
-    title: "Speak to Sales",
-    subtitle: "Initiate your practice engagement.",
-    body: "Get in touch with our team to discuss project requirements, timelines, and technical scoping.",
-    category: "Corporate",
-  },
-  privacy: {
-    title: "Privacy Policy",
-    subtitle: "How we manage and protect data.",
-    body: "We adhere to strict data privacy, zero retention models, and client security standards.",
-    category: "Legal",
-  },
-  terms: {
-    title: "Terms of Service",
-    subtitle: "Operational agreements and SLAs.",
-    body: "Review the contractual baselines and service level agreements that govern our corporate consulting engagements.",
-    category: "Legal",
-  },
-};
+const { slug } = Astro.props as Props;
 
-const defaultMeta = {
-  title: slug,
-  subtitle: "CadenceLab Insights & Research",
-  body: "This section is currently undergoing structural preview alignment.",
-  category: "Overview",
-};
+let page: {
+  title?: string | null;
+  subtitle?: string | null;
+  category?: string | null;
+  body?: unknown;
+} | null = null;
 
-const meta = slugMeta[slug] || defaultMeta;
+try {
+  const response = await client.queries.page({
+    relativePath: `${slug}.md`,
+  });
+
+  page = response.data.page;
+} catch {
+  page = null;
+}
+
+const segment = slug.split("/").filter(Boolean).at(-1) ?? "page";
+
+const fallbackTitle = segment
+  .split("-")
+  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(" ");
+
+const title = page?.title?.trim() || fallbackTitle;
+
+const description =
+  page?.subtitle?.trim() ||
+  "This Cadence Lab page is being prepared and is not yet available.";
+
+const canonicalURL = `/${slug}/`;
 ---
 
-<Layout title={`${meta.title} | CadenceLab`} description={meta.subtitle}>
+<Layout
+  title={`${title} | Cadence Lab`}
+  description={description}
+  canonicalURL={canonicalURL}
+  noindex={!page}
+>
   <NavHeader />
 
   {
     page ? (
-      <main class="page-canvas">
-        <div class="content-container">
-          <div class="status-indicator">
-            <span class="preview-badge">TinaCMS: Online</span>
-          </div>
+      <main id="main-content" class="content-page">
+        <article class="content-container">
+          <header class="content-header">
+            {page.category && (
+              <p
+                class="content-eyebrow"
+                data-tina-field={tinaField(page, "category")}
+              >
+                {page.category}
+              </p>
+            )}
 
-          <div class="hero-block">
-            <span
-              class="category-tag"
-              data-tina-field={tinaField(page, "category")}
+            <h1
+              class="content-title"
+              data-tina-field={tinaField(page, "title")}
             >
-              {page.category}
-            </span>
-            <h1 class="main-title" data-tina-field={tinaField(page, "title")}>
               {page.title}
             </h1>
-            <p
-              class="subtitle-text"
-              data-tina-field={tinaField(page, "subtitle")}
+
+            {page.subtitle && (
+              <p
+                class="content-subtitle"
+                data-tina-field={tinaField(page, "subtitle")}
+              >
+                {page.subtitle}
+              </p>
+            )}
+          </header>
+
+          {page.body && (
+            <div
+              class="content-body prose"
+              data-tina-field={tinaField(page, "body")}
             >
-              {page.subtitle}
-            </p>
-          </div>
-
-          <hr class="divider" />
-
-          <div class="body-content" data-tina-field={tinaField(page, "body")}>
-            <TinaMarkdown content={page.body} />
-          </div>
-        </div>
+              <TinaMarkdown content={page.body} />
+            </div>
+          )}
+        </article>
       </main>
     ) : (
-      <main class="page-canvas">
-        <div class="content-container">
-          <div class="status-indicator">
-            <span class="preview-badge">System Preview</span>
-            {tinaError && <span class="cms-badge">TinaCMS: Offline</span>}
-          </div>
+      <main id="main-content" class="missing-page">
+        <div class="missing-container">
+          <p class="missing-eyebrow">Page in progress</p>
 
-          <div class="hero-block">
-            <span class="category-tag">{meta.category}</span>
-            <h1 class="main-title">{meta.title}</h1>
-            <p class="subtitle-text">{meta.subtitle}</p>
-          </div>
+          <h1>{fallbackTitle}</h1>
 
-          <hr class="divider" />
+          <p>
+            This page is part of the planned Cadence Lab site, but its final
+            content has not been published yet.
+          </p>
 
-          <div class="body-content">
-            <p>{meta.body}</p>
-            <div class="blueprint-card">
-              <h3>Technical Blueprint Overview</h3>
-              <p>
-                Our advisory practice implements this component under rigorous
-                architectural standards. In a live production engagement, this
-                page displays active content, client dashboards, and system
-                alignment schemas managed directly through our TinaCMS
-                integrations.
-              </p>
-              <div class="interactive-sandbox">
-                <div class="terminal-header">
-                  <span class="term-dot red" />
-                  <span class="term-dot yellow" />
-                  <span class="term-dot green" />
-                  <span class="term-title">
-                    cadencelab-shell --target={slug}
-                  </span>
-                </div>
-                <pre class="terminal-body" tabindex="0">
-                  <code>{`$ cadence-cli trace --path=/${slug}
-[SYSTEM INFO] Initiating diagnostic trace for route "/${slug}"...
-[OK] Resolving static parameters
-[OK] Rendering template context
-[WARNING] TinaCMS API is offline (local mode bypassed)
-[INFO] Serving local fallback component tree (Status: 200 OK)`}</code>
-                </pre>
-              </div>
-            </div>
-          </div>
+          <div class="missing-actions">
+            <a href="/" class="primary-link">
+              Return to the home page
+            </a>
 
-          <div class="action-block">
-            <h3>Ready to evaluate your system readiness?</h3>
-            <p>
-              Complete the CX Fit Check to determine alignment with our
-              deployment framework.
-            </p>
-            <a href="/fit-check" class="btn-cta">
-              Start Fit Check alignment &rarr;
+            <a href="/contact/" class="secondary-link">
+              Contact Cadence Lab
+              <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -349,234 +165,187 @@ const meta = slugMeta[slug] || defaultMeta;
 </Layout>
 
 <style>
-  .page-canvas {
+  .content-page,
+  .missing-page {
     width: 100%;
-    background-color: #ffffff;
-    padding: 96px 24px;
-    display: flex;
-    justify-content: center;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .content-container,
+  .missing-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), 48rem);
+    margin-inline: auto;
   }
 
   .content-container {
-    width: 100%;
-    max-width: 800px;
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .content-header,
+  .missing-container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    align-items: flex-start;
   }
 
-  .status-indicator {
-    display: flex;
-    gap: 12px;
+  .content-header {
+    gap: 1rem;
   }
 
-  .preview-badge,
-  .cms-badge {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
-
-  .preview-badge {
-    background-color: rgba(26, 115, 226, 0.1);
-    color: #1a73e2;
-  }
-
-  .cms-badge {
-    background-color: #f5f8fa;
-    color: #576579;
-    border: 1px solid #cbd6e2;
-  }
-
-  .hero-block {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .category-tag {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #1a73e2;
-  }
-
-  .main-title {
+  .content-eyebrow,
+  .missing-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 48px;
-    font-weight: 800;
-    line-height: 1.1;
-    color: #000000;
-    letter-spacing: -0.03em;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
-  .subtitle-text {
-    font-family: var(--font-serif-text);
-    font-size: 20px;
-    line-height: 1.5;
-    color: #425b76;
+  .content-title,
+  .missing-container h1 {
+    max-width: 15ch;
     margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2.75rem, 2rem + 3vw, 5.25rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid #cbd6e2;
-    margin: 10px 0;
-  }
-
-  .body-content {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .body-content p {
-    font-family: var(--font-serif-text);
-    font-size: 18px;
+  .content-subtitle,
+  .missing-container > p:not(.missing-eyebrow) {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    font-style: normal;
+    font-weight: 400;
     line-height: 1.6;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0;
+    text-wrap: pretty;
   }
 
-  .blueprint-card {
-    background-color: #f5f8fa;
-    border: 1px solid #cbd6e2;
-    border-radius: 4px;
-    padding: 32px;
+  .content-body {
+    padding-top: clamp(2rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .missing-container {
+    max-width: 44rem;
+    gap: 1.25rem;
+  }
+
+  .missing-actions {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .blueprint-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: #000000;
-    margin: 0;
-  }
-
-  .blueprint-card p {
-    font-size: 14.5px;
-    line-height: 1.5;
-    color: #576579;
-  }
-
-  .interactive-sandbox {
-    margin-top: 12px;
-    background-color: #000000;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .terminal-header {
-    background-color: #1e242c;
-    padding: 10px 16px;
-    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
+    gap: 1rem 1.5rem;
+    margin-top: 1rem;
   }
 
-  .term-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .term-dot.red {
-    background-color: #ff5f56;
-  }
-  .term-dot.yellow {
-    background-color: #ffbd2e;
-  }
-  .term-dot.green {
-    background-color: #27c93f;
-  }
-
-  .term-title {
-    margin-left: 10px;
-    font-size: 11px;
-    font-family: ui-monospace, monospace;
-    color: #cbd6e2;
-  }
-
-  .terminal-body {
-    padding: 16px;
-    margin: 0;
-    overflow-x: auto;
-  }
-
-  .terminal-body code {
-    font-family: ui-monospace, Monaco, monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    color: #27c93f;
-  }
-
-  .action-block {
-    background-color: #ffffff;
-    border: 1px solid #1a73e2;
-    border-left: 4px solid #1a73e2;
-    border-radius: 4px;
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .action-block h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #000000;
-    margin: 0;
-  }
-
-  .action-block p {
-    font-family: var(--font-serif-text);
-    font-size: 15px;
-    line-height: 1.5;
-    color: #576579;
-    margin: 0;
-  }
-
-  .btn-cta {
+  .primary-link {
     display: inline-flex;
-    align-self: flex-start;
+    width: fit-content;
+    min-height: 3rem;
     align-items: center;
     justify-content: center;
-    background-color: #1a73e2;
-    color: #ffffff;
-    font-size: 14.5px;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    background: var(--color-ink);
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     font-weight: 600;
-    padding: 12px 24px;
-    border-radius: 4px;
+    line-height: 1.2;
+    text-align: center;
     text-decoration: none;
-    transition: background-color 0.15s ease;
-    margin-top: 8px;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      transform var(--transition-fast);
   }
 
-  .btn-cta:hover {
-    background-color: #155ec2;
+  .primary-link:hover {
+    border-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
+    background: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
+    color: var(--color-light);
+    text-decoration: none;
   }
 
-  @media (max-width: 768px) {
-    .page-canvas {
-      padding: 64px 16px;
+  .primary-link:active {
+    transform: translateY(1px);
+  }
+
+  .secondary-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+
+  .secondary-link:hover {
+    color: var(--color-blue);
+  }
+
+  .primary-link:focus-visible,
+  .secondary-link:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 40rem) {
+    .content-page,
+    .missing-page {
+      padding-block: clamp(3.5rem, 14vw, 5rem);
     }
 
-    .main-title {
-      font-size: 36px;
+    .content-title,
+    .missing-container h1 {
+      max-width: 12ch;
+      font-size: clamp(2.5rem, 11vw, 4rem);
     }
 
-    .blueprint-card {
-      padding: 20px;
-    }
-
-    .btn-cta {
+    .missing-actions {
       width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .primary-link,
+    .secondary-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .primary-link {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .content-body,
+    .primary-link {
+      border-color: CanvasText;
     }
   }
 </style>
