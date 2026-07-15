@@ -6,15 +6,10 @@ import Footer from "../../../../components/Footer.astro";
 import NavHeader from "../../../../components/NavHeader.astro";
 import Layout from "../../../../layouts/Layout.astro";
 
-type BlogPost = CollectionEntry<"blog"> extends never
-  ? any
-  : CollectionEntry<"blog">;
+type BlogPost = CollectionEntry<"blog">;
 
 export async function getStaticPaths() {
-  const posts: BlogPost[] = await getCollection(
-    "blog" as any,
-    ({ data }: BlogPost) => !data.draft,
-  );
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
 
   return posts.map((post) => {
     const publishedDate = post.data.date;
@@ -239,8 +234,11 @@ const articleSchema = {
     gap: 0.4rem;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
   }
 
@@ -256,35 +254,46 @@ const articleSchema = {
     gap: 0.5rem;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
     line-height: 1.5;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .article-metadata time,
+  .article-byline time {
+    font-feature-settings: var(--fea-tabular);
   }
 
   .article-category {
     color: var(--color-blue);
-    font-weight: 600;
+    font-weight: var(--fw-medium);
   }
 
   .article-header h1 {
-    max-width: 16ch;
+    max-width: 18ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2.75rem, 1.75rem + 4vw, 6rem);
-    font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
+    font-size: var(--fs-post-title);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-post-title);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
   .article-subtitle {
-    max-width: 42rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.125rem, 1rem + 0.45vw, 1.5rem);
-    line-height: 1.55;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -303,7 +312,7 @@ const articleSchema = {
   }
 
   .article-body {
-    width: min(100%, 46rem);
+    width: min(100%, var(--measure-prose));
     margin-top: clamp(3rem, 7vw, 5rem);
     padding-top: clamp(2.5rem, 5vw, 4rem);
     border-top: 1px solid var(--color-border);
@@ -313,10 +322,11 @@ const articleSchema = {
     margin-top: 2.75em;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(1.75rem, 1.5rem + 0.8vw, 2.375rem);
-    font-weight: 600;
-    line-height: 1.12;
-    letter-spacing: -0.03em;
+    font-size: var(--fs-post-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
@@ -324,18 +334,20 @@ const articleSchema = {
     margin-top: 2.25em;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(1.375rem, 1.2rem + 0.45vw, 1.75rem);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: var(--fs-post-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-feature-settings: var(--fea-graphik);
   }
 
   .article-body :global(p),
   .article-body :global(li) {
     color: var(--color-text);
-    font-family: var(--font-serif);
-    font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
-    line-height: 1.75;
+    font-family: var(--ff-serif);
+    font-size: var(--fs-post-body);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-post-body);
   }
 
   .article-body :global(ul),
@@ -357,8 +369,10 @@ const articleSchema = {
 
   .article-body :global(blockquote p) {
     margin: 0;
-    font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+    font-family: var(--ff-serif-display);
+    font-size: var(--fs-pullquote);
     font-style: italic;
+    font-weight: var(--fw-display-light);
     line-height: 1.45;
   }
 
@@ -384,7 +398,7 @@ const articleSchema = {
 
   .article-footer {
     display: flex;
-    width: min(100%, 46rem);
+    width: min(100%, var(--measure-prose));
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
@@ -392,8 +406,11 @@ const articleSchema = {
     padding-top: 2rem;
     border-top: 1px solid var(--color-border);
     font-family: var(--font-sans);
-    font-size: 0.875rem;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
     line-height: 1.5;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .article-footer p {
@@ -406,7 +423,7 @@ const articleSchema = {
     align-items: center;
     gap: 0.35rem;
     color: var(--color-blue);
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     text-decoration: none;
   }
 
@@ -428,7 +445,6 @@ const articleSchema = {
 
     .article-header h1 {
       max-width: none;
-      font-size: clamp(2.75rem, 13vw, 4rem);
     }
 
     .article-footer {
