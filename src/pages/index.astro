@@ -24,13 +24,9 @@ import Layout from "../layouts/Layout.astro";
 
     <Approach />
 
-    <section
-      id="framework"
-      class="framework-section"
-      aria-label="Adoption framework"
-    >
+    <div id="framework" class="framework-anchor">
       <Framework />
-    </section>
+    </div>
 
     <FitCriteria />
 
@@ -47,8 +43,8 @@ import Layout from "../layouts/Layout.astro";
     flex-direction: column;
   }
 
-  .framework-section {
+  .framework-anchor {
     width: 100%;
-    scroll-margin-top: 6rem;
+    scroll-margin-top: var(--header-offset);
   }
 </style>
