@@ -2,36 +2,125 @@
 // src/components/ResponsiveHero.astro
 ---
 
-<article class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="flex flex-col space-y-6">
-    <span
-      class="font-graphik-condensed text-fluid-meta font-bold tracking-expanded uppercase text-indigo-600 truncate"
-    >
-      Core Web Vitals Optimization Deployment.
-    </span>
+<section class="responsive-hero" aria-labelledby="responsive-hero-title">
+  <div class="responsive-hero-container">
+    <div class="responsive-hero-content">
+      <p class="responsive-hero-eyebrow">Customer experience operations</p>
 
-    <h1
-      class="font-tiempos-fine text-fluid-display font-light tracking-display leading-display text-slate-950"
-    >
-      Balancing design elegance with absolute execution.
-    </h1>
+      <h1 id="responsive-hero-title" class="responsive-hero-title">
+        Design systems people can actually use.
+      </h1>
 
-    <p
-      class="font-graphik text-fluid-subhead font-medium tracking-normal leading-subhead text-slate-700"
-    >
-      Fluid type scaling handles your layout constraints dynamically. No rigid
-      pixel breakpoints, no layout shifts, just clean performance parameters.
-    </p>
-
-    <div
-      class="font-tiempos-text text-fluid-body leading-editorial text-slate-800 space-y-6 max-w-2xl"
-    >
-      <p>
-        Continuous reading layouts demand tracking balance. By pairing a
-        high-level system fallback configuration with fluid math rules, your
-        mobile page components render instantaneously without forcing layout
-        rewrites.
+      <p class="responsive-hero-lead">
+        Cadence Lab connects customer experience strategy, CRM data, workflow
+        design, and responsible AI implementation into practical operating
+        systems.
       </p>
+
+      <div class="responsive-hero-body">
+        <p>
+          The goal is not to add more technology. It is to reduce friction,
+          clarify ownership, improve adoption, and make performance measurable
+          across teams.
+        </p>
+      </div>
     </div>
   </div>
-</article>
+</section>
+
+<style>
+  .responsive-hero {
+    width: 100%;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .responsive-hero-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .responsive-hero-content {
+    display: flex;
+    max-width: 58rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .responsive-hero-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .responsive-hero-title {
+    max-width: 13ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: clamp(2.75rem, 1.75rem + 4vw, 6rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .responsive-hero-lead {
+    max-width: 44rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+
+  .responsive-hero-body {
+    max-width: 42rem;
+    padding-top: 0.25rem;
+    color: var(--color-text);
+    font-family: var(--font-serif);
+    font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  .responsive-hero-body p {
+    margin: 0;
+  }
+
+  @media (max-width: 40rem) {
+    .responsive-hero {
+      padding-block: clamp(3.5rem, 16vw, 5.5rem);
+    }
+
+    .responsive-hero-title {
+      max-width: 12ch;
+      font-size: clamp(2.5rem, 11vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+    }
+
+    .responsive-hero-lead {
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+
+    .responsive-hero-body {
+      font-size: 1.0625rem;
+      line-height: 1.65;
+    }
+  }
+</style>
