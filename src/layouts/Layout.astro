@@ -31,7 +31,8 @@ const canonical = canonicalURL
   ? new URL(canonicalURL, siteURL)
   : new URL(Astro.url.pathname, siteURL);
 
-const socialImage = new URL(image, siteURL);
+const canonicalHref = canonical.toString();
+const socialImage = new URL(image, siteURL).toString();
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -54,13 +55,6 @@ const organizationSchema = {
 
     <meta name="generator" content={Astro.generator} />
 
-    <!--
-      Astro 7 Fonts API
-
-      Graphik is the primary site and interface family, so preload it.
-      Tiempos families remain available for editorial article body copy
-      and selective editorial accents without forcing unnecessary preload.
-    -->
     <Font cssVariable="--font-graphik" preload />
     <Font cssVariable="--font-tiempos-text" />
     <Font cssVariable="--font-tiempos-headline" />
@@ -69,9 +63,12 @@ const organizationSchema = {
 
     <meta name="description" content={description} />
 
-    {noindex && <meta name="robots" content="noindex, nofollow, noarchive" />}
+    <meta
+      name="robots"
+      content={noindex ? "noindex, nofollow, noarchive" : "index, follow"}
+    />
 
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={canonicalHref} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -93,7 +90,7 @@ const organizationSchema = {
     <meta property="og:type" content={pageType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={canonicalHref} />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:alt" content={imageAlt} />
 
@@ -110,7 +107,7 @@ const organizationSchema = {
   </head>
 
   <body>
-    <a class="skip-link" href="#main-content"> Skip to main content </a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <slot />
   </body>
