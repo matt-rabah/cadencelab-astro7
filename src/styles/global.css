@@ -1,17 +1,17 @@
 /* src/styles/global.css */
 
+@import "./typography.css";
+
 /* ==========================================================================
    1. Design tokens
    ========================================================================== */
 
 :root {
-  /* Typography */
-  --font-sans:
-    "Graphik", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-
-  --font-serif:
-    "Tiempos Text", "Source Serif 4", Georgia, "Times New Roman", serif;
-
+  /* Compatibility aliases for existing components.
+     These map old project variables onto the centralized type system. */
+  --font-sans: var(--ff-sans);
+  --font-serif: var(--ff-serif);
+  --font-serif-display: var(--ff-serif-display);
   --font-mono:
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
@@ -95,91 +95,7 @@
 }
 
 /* ==========================================================================
-   2. Font declarations
-   ========================================================================== */
-
-@font-face {
-  font-family: "Graphik";
-  src: url("/fonts/Graphik/graphik-regular.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Graphik";
-  src: url("/fonts/Graphik/graphik-medium.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Graphik";
-  src: url("/fonts/Graphik/graphik-semibold.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Graphik";
-  src: url("/fonts/Graphik/graphik-bold.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Graphik Condensed";
-  src: url("/fonts/Graphik/graphik-xx-condensed-medium.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("/fonts/Tiempos/tiempos-text-regular.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("/fonts/Tiempos/tiempos-text-regular-italic.woff2") format("woff2");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("/fonts/Tiempos/tiempos-text-medium.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("/fonts/Tiempos/tiempos-text-medium-italic.woff2") format("woff2");
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("/fonts/Tiempos/tiempos-text-semibold.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-
-/* ==========================================================================
-   3. Reset and document defaults
+   2. Reset and document defaults
    ========================================================================== */
 
 *,
@@ -192,8 +108,6 @@ html {
   min-width: 20rem;
   color-scheme: light;
   scroll-padding-top: var(--header-offset);
-  text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
   hanging-punctuation: first last;
 }
 
@@ -207,15 +121,6 @@ body {
   overflow-x: hidden;
   overflow-wrap: break-word;
   background: var(--color-surface);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body,
@@ -268,7 +173,6 @@ textarea,
 select {
   margin: 0;
   color: inherit;
-  font: inherit;
 }
 
 button,
@@ -300,54 +204,23 @@ textarea {
 }
 
 /* ==========================================================================
-   4. Global typography
+   3. Supplemental typography behavior
+
+   Core type scale, families, weights, tracking, prose typography, OpenType
+   features, and responsive type behavior live in typography.css.
    ========================================================================== */
 
-h1,
-h2,
-h3,
-h4,
 h5,
 h6 {
-  max-width: none;
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: 0;
-  text-transform: none;
-  text-wrap: balance;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 1.75rem + 3.2vw, 5rem);
-  font-weight: 700;
-  line-height: 0.99;
-  letter-spacing: -0.025em;
-}
-
-h2 {
-  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-}
-
-h3 {
-  font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-h4 {
-  font-size: 1.125rem;
-  line-height: 1.3;
-}
-
-h5,
-h6 {
+  max-inline-size: var(--measure-heading);
+  color: var(--color-ink);
+  font-family: var(--ff-sans);
   font-size: 1rem;
+  font-style: normal;
+  font-weight: var(--fw-medium);
   line-height: 1.4;
+  font-feature-settings: var(--fea-graphik);
+  text-wrap: balance;
 }
 
 p,
@@ -360,7 +233,7 @@ figcaption {
 
 strong,
 b {
-  font-weight: 600;
+  font-weight: var(--fw-medium);
 }
 
 em,
@@ -369,7 +242,7 @@ i {
 }
 
 small {
-  font-size: 0.8125rem;
+  font-size: var(--fs-small);
   line-height: 1.45;
 }
 
@@ -390,31 +263,32 @@ sub {
 }
 
 /*
- * Compact interface labels remain sentence case.
+ * Sentence-case interface labels that are not true eyebrows.
+ * Use .eyebrow from typography.css for the uppercase editorial role.
  */
 
 .ui-label,
-.section-label,
-.eyebrow {
+.section-label {
   margin: 0;
   color: inherit;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-eyebrow);
   font-style: normal;
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h4);
   letter-spacing: 0;
+  font-feature-settings: var(--fea-graphik);
   text-transform: none;
 }
 
 .editorial-text {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.6;
+  font-family: var(--ff-serif);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-post-body);
 }
 
 /* ==========================================================================
-   5. Links and interactive states
+   4. Links and interactive states
    ========================================================================== */
 
 a {
@@ -442,7 +316,7 @@ summary:focus-visible,
 }
 
 a[aria-current="page"] {
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 button,
@@ -458,7 +332,7 @@ button {
 }
 
 /* ==========================================================================
-   6. Accessible utilities
+   5. Accessible utilities
    ========================================================================== */
 
 .skip-link {
@@ -470,8 +344,9 @@ button {
   border: 2px solid var(--color-ink);
   background: var(--color-light);
   color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-semibold);
+  font-feature-settings: var(--fea-graphik);
   text-decoration: none;
   transform: translateY(-200%);
   transition: transform var(--transition-fast);
@@ -507,7 +382,7 @@ button {
 }
 
 /* ==========================================================================
-   7. Shared layout containers
+   6. Shared layout containers
    ========================================================================== */
 
 .page-container {
@@ -566,7 +441,7 @@ button {
 }
 
 /* ==========================================================================
-   8. Shared buttons
+   7. Shared buttons
    ========================================================================== */
 
 .button {
@@ -580,12 +455,13 @@ button {
   padding: 0.75rem 1.125rem;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-cta);
   font-style: normal;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: var(--fw-medium);
+  line-height: 1;
   letter-spacing: 0;
+  font-feature-settings: var(--fea-graphik);
   text-align: center;
   text-decoration: none;
   text-transform: none;
@@ -674,7 +550,7 @@ button {
 }
 
 /* ==========================================================================
-   9. Forms
+   8. Forms
    ========================================================================== */
 
 .form-field {
@@ -684,25 +560,28 @@ button {
 
 .form-label {
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--ff-sans);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: var(--fw-medium);
   line-height: 1.4;
+  font-feature-settings: var(--fea-graphik);
 }
 
 .form-help {
   color: var(--color-text-muted);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-eyebrow);
   line-height: 1.45;
+  font-feature-settings: var(--fea-graphik);
 }
 
 .form-error {
   color: var(--color-error);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
   line-height: 1.45;
+  font-feature-settings: var(--fea-graphik);
 }
 
 input,
@@ -714,7 +593,6 @@ select {
   border: 1px solid var(--color-border-strong);
   background: var(--color-surface-pure);
   color: var(--color-text);
-  font-family: var(--font-sans);
   line-height: 1.4;
 }
 
@@ -749,24 +627,21 @@ fieldset {
 
 legend {
   padding: 0;
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-medium);
+  font-feature-settings: var(--fea-graphik);
 }
 
 /* ==========================================================================
-   10. Rich text and article content
+   9. Rich text structure
 
-   Graphik remains the site and interface font.
-   Tiempos is restricted to editorial body content.
+   Typography for .prose is centralized in typography.css.
+   These rules provide only document structure and content-specific treatment.
    ========================================================================== */
 
 .prose {
-  width: min(100%, var(--container-copy));
+  width: min(100%, var(--measure-prose));
   color: var(--color-text);
-  font-family: var(--font-serif);
-  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  font-weight: 400;
-  line-height: 1.62;
 }
 
 .prose > * + * {
@@ -774,58 +649,20 @@ legend {
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) {
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  font-style: normal;
-  text-transform: none;
   scroll-margin-top: var(--header-offset);
 }
 
-.prose h2 {
-  max-width: 30ch;
-  margin-top: 2.5em;
-  margin-bottom: 0.65em;
-}
-
-.prose h3 {
-  max-width: 36ch;
-  margin-top: 2em;
-  margin-bottom: 0.55em;
-}
-
 .prose h4 {
-  margin-top: 1.75em;
-  margin-bottom: 0.5em;
-}
-
-.prose p,
-.prose ul,
-.prose ol,
-.prose blockquote,
-.prose figure,
-.prose pre,
-.prose table {
-  margin-bottom: 1.25em;
+  margin-block: 1.75em 0.5em;
 }
 
 .prose ul,
 .prose ol {
-  padding-left: 1.35em;
+  padding-inline-start: 1.35em;
 }
 
 .prose li + li {
   margin-top: 0.45em;
-}
-
-.prose a {
-  color: var(--color-link);
-}
-
-.prose blockquote {
-  margin-inline: 0;
-  padding-left: 1.25rem;
-  border-left: 2px solid var(--color-blue);
-  font-size: 1.075em;
 }
 
 .prose hr {
@@ -839,12 +676,10 @@ legend {
   margin-inline: 0;
 }
 
-.prose figcaption {
-  margin-top: 0.75rem;
-  color: var(--color-text-muted);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  line-height: 1.45;
+.prose img,
+.prose video {
+  max-width: 100%;
+  height: auto;
 }
 
 .prose pre {
@@ -855,7 +690,7 @@ legend {
   background: var(--color-ink);
   color: var(--color-light);
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: var(--fs-small);
   line-height: 1.55;
   tab-size: 2;
 }
@@ -889,12 +724,11 @@ legend {
 
 .prose th {
   background: var(--color-surface-subtle);
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: var(--fw-medium);
 }
 
 /* ==========================================================================
-   11. Media and embeds
+   10. Media and embeds
    ========================================================================== */
 
 .media-frame {
@@ -931,16 +765,17 @@ legend {
 }
 
 /* ==========================================================================
-   12. Status and feedback
+   11. Status and feedback
    ========================================================================== */
 
 .status-message {
   padding: 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  font-family: var(--font-sans);
+  font-family: var(--ff-sans);
   font-size: 0.9375rem;
   line-height: 1.5;
+  font-feature-settings: var(--fea-graphik);
 }
 
 .status-message-success {
@@ -949,17 +784,13 @@ legend {
     var(--color-success) 45%,
     var(--color-light)
   );
-
   background: color-mix(in srgb, var(--color-success) 8%, var(--color-light));
-
   color: var(--color-success);
 }
 
 .status-message-error {
   border-color: color-mix(in srgb, var(--color-error) 45%, var(--color-light));
-
   background: color-mix(in srgb, var(--color-error) 8%, var(--color-light));
-
   color: var(--color-error);
 }
 
@@ -969,14 +800,12 @@ legend {
     var(--color-warning) 45%,
     var(--color-light)
   );
-
   background: color-mix(in srgb, var(--color-warning) 8%, var(--color-light));
-
   color: var(--color-warning);
 }
 
 /* ==========================================================================
-   13. Responsive adjustments
+   12. Responsive adjustments
    ========================================================================== */
 
 @media (max-width: 40rem) {
@@ -984,17 +813,8 @@ legend {
     --header-offset: 5rem;
   }
 
-  h1 {
-    max-width: 16ch;
-    line-height: 1.02;
-  }
-
   .section {
     padding-block: clamp(2.5rem, 10vw, 4rem);
-  }
-
-  .prose {
-    line-height: 1.65;
   }
 
   .button {
@@ -1023,7 +843,7 @@ legend {
 }
 
 /* ==========================================================================
-   14. Print
+   13. Print
    ========================================================================== */
 
 @media print {
@@ -1066,7 +886,7 @@ legend {
 }
 
 /* ==========================================================================
-   15. Reduced motion and forced colors
+   14. Reduced motion and forced colors
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
