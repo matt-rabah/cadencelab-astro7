@@ -23,14 +23,14 @@ type BlogPost = CollectionEntry<"blog"> & {
   };
 };
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).filter(
-  (post): post is BlogPost =>
-    typeof post.data === "object" &&
-    post.data !== null &&
-    "date" in post.data,
-).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-);
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .filter(
+    (post): post is BlogPost =>
+      typeof post.data === "object" &&
+      post.data !== null &&
+      "date" in post.data,
+  )
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const [featuredPost, ...remainingPosts] = posts;
 
@@ -219,30 +219,37 @@ const getDescription = (post: BlogPost): string =>
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 600;
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
     line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .blog-header h1 {
-    max-width: 14ch;
+    max-width: 17ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(3rem, 2rem + 4vw, 6rem);
-    font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
   .blog-introduction {
-    max-width: 46rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
-    line-height: 1.6;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -268,23 +275,30 @@ const getDescription = (post: BlogPost): string =>
     color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .post-metadata span:first-child {
     color: var(--color-blue);
-    font-weight: 600;
+    font-weight: var(--fw-medium);
+  }
+
+  .post-metadata time {
+    font-feature-settings: var(--fea-tabular);
   }
 
   .featured-post h2 {
     max-width: 20ch;
     margin: 0;
-    font-family: var(--font-serif);
-    font-size: clamp(2.25rem, 1.5rem + 3vw, 5rem);
-    font-weight: 400;
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+    font-family: var(--font-sans);
+    font-size: var(--fs-post-title);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-post-title);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
@@ -298,12 +312,15 @@ const getDescription = (post: BlogPost): string =>
   }
 
   .featured-post > p {
-    max-width: 47rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
-    font-family: var(--font-serif);
-    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
-    line-height: 1.65;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -314,8 +331,11 @@ const getDescription = (post: BlogPost): string =>
     gap: 0.4rem;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: var(--fs-cta);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-decoration: underline;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.2em;
@@ -342,18 +362,22 @@ const getDescription = (post: BlogPost): string =>
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2rem, 1.6rem + 1.5vw, 3rem);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
   }
 
   .archive-heading p {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .post-grid {
@@ -378,11 +402,12 @@ const getDescription = (post: BlogPost): string =>
 
   .post-card h3 {
     margin: 0;
-    font-family: var(--font-serif);
-    font-size: clamp(1.375rem, 1.2rem + 0.5vw, 1.75rem);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
@@ -398,9 +423,12 @@ const getDescription = (post: BlogPost): string =>
   .post-card > p {
     margin: 0;
     color: var(--color-text-muted);
-    font-family: var(--font-serif);
-    font-size: 0.9375rem;
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
     line-height: 1.6;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -415,7 +443,10 @@ const getDescription = (post: BlogPost): string =>
     color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: 0.75rem;
+    font-weight: var(--fw-regular);
     line-height: 1.4;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .post-card-footer a {
@@ -423,7 +454,7 @@ const getDescription = (post: BlogPost): string =>
     align-items: center;
     gap: 0.3rem;
     color: var(--color-blue);
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     text-decoration: none;
   }
 
@@ -445,18 +476,22 @@ const getDescription = (post: BlogPost): string =>
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
   }
 
   .empty-state p {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .return-link {
@@ -465,8 +500,11 @@ const getDescription = (post: BlogPost): string =>
     align-items: center;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: var(--fs-cta);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .featured-post a:focus-visible,
@@ -496,13 +534,11 @@ const getDescription = (post: BlogPost): string =>
     }
 
     .blog-header h1 {
-      max-width: 12ch;
-      font-size: clamp(2.75rem, 12vw, 4.25rem);
+      max-width: 14ch;
     }
 
     .featured-post h2 {
       max-width: 18ch;
-      font-size: clamp(2.25rem, 10vw, 3.5rem);
     }
 
     .post-grid {
