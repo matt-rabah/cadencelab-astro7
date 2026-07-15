@@ -1,251 +1,105 @@
 ---
 // src/layouts/Layout.astro
+
+import "../styles/global.css";
+
 interface Props {
   title?: string;
   description?: string;
+  canonicalURL?: URL | string;
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+  pageType?: "website" | "article";
 }
 
 const {
-  title = "CadenceLab | Enterprise CX Architecture",
-  description = "Architecting workflow adoption, trust, and alignment frameworks for enterprise customer experience automation.",
+  title = "Cadence Lab | Customer experience systems and AI adoption",
+  description = "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
+  canonicalURL,
+  image = "/og/cadencelab-default.png",
+  imageAlt = "Cadence Lab",
+  noindex = false,
+  pageType = "website",
 } = Astro.props;
+
+const siteName = "Cadence Lab";
+const siteURL = Astro.site ?? new URL("https://cadencelab.co");
+
+const canonical = canonicalURL
+  ? new URL(canonicalURL, siteURL)
+  : new URL(Astro.url.pathname, siteURL);
+
+const socialImage = new URL(image, siteURL);
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: siteURL.toString(),
+  logo: new URL(
+    "/brand/cadencelab-wordmark-dark-color.svg",
+    siteURL,
+  ).toString(),
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
+
     <meta name="description" content={description} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow, noarchive" />}
+
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta
+      name="theme-color"
+      content="#FCFEFF"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <meta
+      name="theme-color"
+      content="#010302"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:type" content={pageType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema)}
+    />
   </head>
+
   <body>
+    <a class="skip-link" href="#main-content"> Skip to main content </a>
+
     <slot />
   </body>
 </html>
-
-<style is:global>
-  /* --- 📦 NATIVE SYSTEM FONT-FACE LOADERS --- */
-
-  /* 1. GRAPHIK SANS VARIANTS (Core Utility UI & Structural Headers) */
-  @font-face {
-    font-family: "Graphik";
-    src: url("/fonts/Graphik/graphik-regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Graphik";
-    src: url("/fonts/Graphik/graphik-medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Graphik";
-    src: url("/fonts/Graphik/graphik-semibold.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Graphik";
-    src: url("/fonts/Graphik/graphik-bold.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Graphik Condensed";
-    src: url("/fonts/Graphik/graphik-xx-condensed-medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* 2. TIEMPOS SERIF VARIANTS (Premium Editorial Scales) */
-  @font-face {
-    font-family: "Tiempos Text";
-    src: url("/fonts/Tiempos/tiempos-text-regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Tiempos Text";
-    src: url("/fonts/Tiempos/tiempos-text-regular-italic.woff2") format("woff2");
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Tiempos Text";
-    src: url("/fonts/Tiempos/tiempos-text-medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Tiempos Text";
-    src: url("/fonts/Tiempos/tiempos-text-medium-italic.woff2") format("woff2");
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Tiempos Text";
-    src: url("/fonts/Tiempos/tiempos-text-semibold.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Tiempos Headline";
-    src: url("/fonts/Tiempos/tiempos-headline-light.woff2") format("woff2");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Tiempos Fine";
-    src: url("/fonts/Tiempos/tiempos-fine-light.woff2") format("woff2");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* --- 🎛️ CENTRAL DESIGN SYSTEM TOKENS --- */
-  :root {
-    --font-sans: "Graphik", -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-sans-cond: "Graphik Condensed", sans-serif;
-    --font-serif-text: "Tiempos Text", Georgia, serif;
-    --font-serif-heading: "Tiempos Headline", Georgia, serif;
-    --font-serif-fine: "Tiempos Fine", Georgia, serif;
-  }
-
-  /* --- GLOBAL RESET MATRIX --- */
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html,
-  body {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.85); /* Soft premium corporate charcoal */
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* --- 👑 PROPORTIONALLY SCALED TYPOGRAPHY SCALES (0.90x Multiplier) --- */
-  h1,
-  .display-h1 {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    line-height: 1; /* Tight editorial block text alignment */
-    letter-spacing: -0.04em; /* Premium density tracking */
-    transform: translateX(-0.06em); /* Left edge alignment correction */
-    margin: 0;
-    font-size: calc(29.7473px + 3.5842vw);
-  }
-
-  h2,
-  .display-h2 {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    transform: translateX(-0.06em);
-    margin: 2px 0 12px 0;
-    font-size: calc(21.2191px + 2.5239vw);
-  }
-
-  h3,
-  .display-h3 {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-    transform: translateX(-0.06em);
-    margin: 0;
-    font-size: calc(16.6263px + 1.6579vw);
-  }
-
-  h5,
-  .display-h5,
-  h6,
-  .display-h6 {
-    font-family: var(--font-sans);
-    line-height: 1.2;
-    margin: 0;
-  }
-
-  h5,
-  .display-h5 {
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    font-size: calc(13.4527px + 0.3158vw);
-  }
-
-  h6,
-  .display-h6 {
-    font-weight: 400;
-    letter-spacing: 0em;
-    font-size: calc(13.4527px + 0.3158vw);
-  }
-
-  p,
-  .body-copy {
-    font-family: var(--font-serif-text);
-    font-size: 18px; /* Perfectly balanced mid-scale body copy */
-    font-weight: 300; /* Luxury editorial light weight text execution */
-    line-height: 1.55; /* Open spacing minimizes visual clutter */
-    letter-spacing: normal;
-    margin: 8px 0 20px 0;
-    color: rgba(0, 0, 0, 0.85);
-  }
-
-  /* Securely lock scaling targets at the desktop layout boundary (1440px) */
-  @media screen and (min-width: 1440px) {
-    h1,
-    .display-h1 {
-      font-size: 81.36px !important;
-    }
-    h2,
-    .display-h2 {
-      font-size: 57.56px !important;
-    }
-    h3,
-    .display-h3 {
-      font-size: 40.5px !important;
-    }
-    h5,
-    .display-h5 {
-      font-size: 18px !important;
-    }
-    h6,
-    .display-h6 {
-      font-size: 18px !important;
-    }
-  }
-</style>
