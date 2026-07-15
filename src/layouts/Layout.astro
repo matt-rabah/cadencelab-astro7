@@ -1,6 +1,7 @@
 ---
 // src/layouts/Layout.astro
 
+import { Font } from "astro:assets";
 import "../styles/global.css";
 
 interface Props {
@@ -52,6 +53,17 @@ const organizationSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta name="generator" content={Astro.generator} />
+
+    <!--
+      Astro 7 Fonts API
+
+      Graphik is the primary site and interface family, so preload it.
+      Tiempos families remain available for editorial article body copy
+      and selective editorial accents without forcing unnecessary preload.
+    -->
+    <Font cssVariable="--font-graphik" preload />
+    <Font cssVariable="--font-tiempos-text" />
+    <Font cssVariable="--font-tiempos-headline" />
 
     <title>{title}</title>
 
