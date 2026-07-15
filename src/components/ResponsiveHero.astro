@@ -53,48 +53,53 @@
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--fs-eyebrow);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: none;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .responsive-hero-title {
-    max-width: 13ch;
+    max-width: 17ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2.75rem, 1.75rem + 4vw, 6rem);
+    font-size: var(--fs-display);
     font-style: normal;
-    font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
   .responsive-hero-lead {
-    max-width: 44rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
+    font-size: var(--fs-body-ui);
     font-style: normal;
-    font-weight: 400;
-    line-height: 1.55;
-    letter-spacing: -0.01em;
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
   .responsive-hero-body {
-    max-width: 42rem;
+    max-width: var(--measure-ui);
     padding-top: 0.25rem;
     color: var(--color-text);
-    font-family: var(--font-serif);
-    font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
-    font-weight: 400;
-    line-height: 1.65;
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
   .responsive-hero-body p {
@@ -107,20 +112,7 @@
     }
 
     .responsive-hero-title {
-      max-width: 12ch;
-      font-size: clamp(2.5rem, 11vw, 4rem);
-      line-height: 1;
-      letter-spacing: -0.035em;
-    }
-
-    .responsive-hero-lead {
-      font-size: 1.0625rem;
-      line-height: 1.6;
-    }
-
-    .responsive-hero-body {
-      font-size: 1.0625rem;
-      line-height: 1.65;
+      max-width: 15ch;
     }
   }
 </style>
