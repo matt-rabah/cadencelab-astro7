@@ -99,12 +99,13 @@
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--fs-eyebrow);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: none;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
   .framework-title {
@@ -112,23 +113,26 @@
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2rem, 1.55rem + 1.8vw, 3.5rem);
+    font-size: var(--fs-h2);
     font-style: normal;
-    font-weight: 600;
-    line-height: 1.04;
-    letter-spacing: -0.03em;
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
   .framework-lead {
-    max-width: 46rem;
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+    font-size: var(--fs-body-ui);
     font-style: normal;
-    font-weight: 400;
-    line-height: 1.6;
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -155,29 +159,33 @@
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
+    font-feature-settings: var(--fea-tabular);
   }
 
   .framework-card h3 {
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(1.25rem, 1.15rem + 0.35vw, 1.625rem);
+    font-size: var(--fs-h3);
     font-style: normal;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-feature-settings: var(--fea-graphik);
   }
 
   .framework-card p {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: var(--fs-small);
     font-style: normal;
-    font-weight: 400;
+    font-weight: var(--fw-regular);
     line-height: 1.6;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
@@ -194,7 +202,6 @@
 
     .framework-title {
       max-width: 15ch;
-      font-size: clamp(2rem, 8vw, 2.75rem);
     }
 
     .framework-card {
