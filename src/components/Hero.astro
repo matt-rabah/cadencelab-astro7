@@ -5,7 +5,7 @@
 <section class="hero-section" aria-labelledby="hero-title">
   <div class="hero-container">
     <div class="hero-content">
-      <p class="hero-eyebrow eyebrow">Customer experience systems</p>
+      <p class="hero-eyebrow">Customer experience systems</p>
 
       <h1 id="hero-title" class="hero-title">
         AI isn't your customer experience problem.
@@ -35,7 +35,7 @@
 <style>
   .hero-section {
     width: 100%;
-    padding-block: clamp(4.5rem, 9vw, 7.5rem);
+    padding-block: clamp(5rem, 11vw, 9rem);
     background: var(--color-surface);
     color: var(--color-text);
   }
@@ -47,27 +47,34 @@
 
   .hero-content {
     display: flex;
-    max-width: 58rem;
+    max-width: 62rem;
     flex-direction: column;
     align-items: flex-start;
+    gap: clamp(1.5rem, 3vw, 2rem);
   }
 
   .hero-eyebrow {
-    margin: 0 0 var(--space-5);
+    margin: 0;
     color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .hero-title {
-    max-inline-size: 18ch;
+    max-width: 15ch;
     margin: 0;
     color: var(--color-ink);
-    font-family: var(--ff-sans);
-    font-size: var(--fs-display);
+    font-family: var(--font-sans);
+    font-size: clamp(3rem, 1.9rem + 4.5vw, 6.5rem);
     font-style: normal;
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-display);
-    letter-spacing: var(--ls-display);
-    font-feature-settings: var(--fea-graphik);
+    font-weight: 600;
+    line-height: 0.97;
+    letter-spacing: -0.04em;
     text-wrap: balance;
   }
 
@@ -76,16 +83,15 @@
   }
 
   .hero-subtitle {
-    max-inline-size: var(--measure-ui);
-    margin: var(--space-6) 0 0;
+    max-width: 46rem;
+    margin: 0;
     color: var(--color-text-muted);
-    font-family: var(--ff-sans);
-    font-size: var(--fs-body-ui);
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
     font-style: normal;
-    font-weight: var(--fw-regular);
-    line-height: var(--lh-ui);
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
     text-wrap: pretty;
   }
 
@@ -93,8 +99,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-3);
-    margin-top: var(--space-8);
+    gap: 0.875rem;
+    margin-top: 0.5rem;
   }
 
   .hero-button {
@@ -106,13 +112,11 @@
     padding: 0.875rem 1.25rem;
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
-    font-family: var(--ff-sans);
-    font-size: var(--fs-cta);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     font-style: normal;
-    font-weight: var(--fw-medium);
-    line-height: 1;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
+    font-weight: 600;
+    line-height: 1.2;
     text-align: center;
     text-decoration: none;
     transition:
@@ -163,22 +167,27 @@
 
   @media (max-width: 40rem) {
     .hero-section {
-      padding-block: clamp(3.5rem, 15vw, 5rem);
+      padding-block: clamp(4rem, 18vw, 6rem);
     }
 
     .hero-title {
-      max-inline-size: 14ch;
+      max-width: 12ch;
+      font-size: clamp(2.75rem, 12vw, 4.25rem);
+      line-height: 0.99;
+      letter-spacing: -0.035em;
     }
 
     .hero-subtitle {
-      max-inline-size: 34rem;
+      max-width: 36rem;
+      font-size: 1.0625rem;
+      line-height: 1.6;
     }
 
     .hero-actions {
       width: 100%;
       flex-direction: column;
       align-items: stretch;
-      gap: var(--space-3);
+      gap: 0.75rem;
     }
 
     .hero-button {
