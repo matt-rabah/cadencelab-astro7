@@ -9,20 +9,20 @@ const blog = defineCollection({
   }),
 
   schema: z.object({
-    title: z.string(),
-    subtitle: z.string(),
-    description: z.string().optional(),
+    title: z.string().min(1),
+    subtitle: z.string().min(1),
+    description: z.string().min(1).optional(),
 
     date: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
 
-    readTime: z.string(),
-    category: z.string(),
+    readTime: z.string().min(1),
+    category: z.string().min(1),
 
-    author: z.string().default("Cadence Lab"),
+    author: z.string().min(1).default("Cadence Lab"),
 
-    image: z.string().optional(),
-    imageAlt: z.string().optional(),
+    image: z.string().min(1).optional(),
+    imageAlt: z.string().min(1).optional(),
 
     draft: z.boolean().default(false),
   }),
@@ -35,10 +35,10 @@ const page = defineCollection({
   }),
 
   schema: z.object({
-    title: z.string(),
-    subtitle: z.string(),
-    description: z.string().optional(),
-    category: z.string(),
+    title: z.string().min(1),
+    subtitle: z.string().min(1),
+    description: z.string().min(1).optional(),
+    category: z.string().min(1),
     noindex: z.boolean().default(false),
   }),
 });
