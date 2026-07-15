@@ -1,5 +1,4 @@
-import { defineConfig } from "astro/config";
-import { astroFont } from "astro-font/integration";
+import { defineConfig, fontProviders } from "astro/config";
 import tina from "@tinacms/astro/integration";
 import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -7,179 +6,89 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   output: "static",
 
-  integrations: [
-    tina(),
-
-    astroFont([
-      {
-        name: "Graphik",
-        src: [
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Graphik",
+      cssVariable: "--font-graphik",
+      fallbacks: ["Helvetica Neue", "Arial", "sans-serif"],
+      options: {
+        variants: [
           {
+            weight: 400,
             style: "normal",
-            weight: "400",
-            path: "./public/fonts/Graphik/graphik-regular.woff2",
-            preload: true,
+            src: ["./src/assets/fonts/graphik-regular.woff2"],
           },
           {
+            weight: 500,
             style: "normal",
-            weight: "500",
-            path: "./public/fonts/Graphik/graphik-medium.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/graphik-medium.woff2"],
           },
           {
+            weight: 600,
             style: "normal",
-            weight: "600",
-            path: "./public/fonts/Graphik/graphik-semibold.woff2",
-            preload: true,
-          },
-          {
-            style: "normal",
-            weight: "700",
-            path: "./public/fonts/Graphik/graphik-bold.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/graphik-semibold.woff2"],
           },
         ],
-        display: "swap",
-        fallback: "sans-serif",
-        cssVariable: "font-graphik",
       },
+    },
 
-      {
-        name: "Graphik Compact",
-        src: [
+    {
+      provider: fontProviders.local(),
+      name: "Tiempos Text",
+      cssVariable: "--font-tiempos-text",
+      fallbacks: ["Georgia", "Times New Roman", "serif"],
+      options: {
+        variants: [
           {
+            weight: 400,
             style: "normal",
-            weight: "400",
-            path: "./public/fonts/Graphik/graphik-compact-regular.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/tiempos-text-regular.woff2"],
           },
           {
-            style: "normal",
-            weight: "700",
-            path: "./public/fonts/Graphik/graphik-compact-bold.woff2",
-            preload: false,
-          },
-        ],
-        display: "swap",
-        fallback: "sans-serif",
-        cssVariable: "font-graphik-compact",
-      },
-
-      {
-        name: "Graphik XX Condensed",
-        src: [
-          {
-            style: "normal",
-            weight: "400",
-            path: "./public/fonts/Graphik/graphik-xx-condensed-regular.woff2",
-            preload: false,
-          },
-          {
-            style: "normal",
-            weight: "500",
-            path: "./public/fonts/Graphik/graphik-xx-condensed-medium.woff2",
-            preload: false,
-          },
-          {
-            style: "normal",
-            weight: "700",
-            path: "./public/fonts/Graphik/graphik-xx-condensed-bold.woff2",
-            preload: false,
-          },
-        ],
-        display: "swap",
-        fallback: "sans-serif",
-        cssVariable: "font-graphik-xx-condensed",
-      },
-
-      {
-        name: "Tiempos Text",
-        src: [
-          {
-            style: "normal",
-            weight: "400",
-            path: "./public/fonts/Tiempos/tiempos-text-regular.woff2",
-            preload: false,
-          },
-          {
+            weight: 400,
             style: "italic",
-            weight: "400",
-            path: "./public/fonts/Tiempos/tiempos-text-regular-italic.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/tiempos-text-regular-italic.woff2"],
           },
           {
+            weight: 500,
             style: "normal",
-            weight: "500",
-            path: "./public/fonts/Tiempos/tiempos-text-medium.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/tiempos-text-medium.woff2"],
           },
           {
+            weight: 500,
             style: "italic",
-            weight: "500",
-            path: "./public/fonts/Tiempos/tiempos-text-medium-italic.woff2",
-            preload: false,
-          },
-          {
-            style: "normal",
-            weight: "600",
-            path: "./public/fonts/Tiempos/tiempos-text-semibold.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/tiempos-text-medium-italic.woff2"],
           },
         ],
-        display: "swap",
-        fallback: "serif",
-        cssVariable: "font-tiempos-text",
       },
+    },
 
-      {
-        name: "Tiempos Headline",
-        src: [
+    {
+      provider: fontProviders.local(),
+      name: "Tiempos Headline",
+      cssVariable: "--font-tiempos-headline",
+      fallbacks: ["Georgia", "Times New Roman", "serif"],
+      options: {
+        variants: [
           {
+            weight: 300,
             style: "normal",
-            weight: "300",
-            path: "./public/fonts/Tiempos/tiempos-headline-light.woff2",
-            preload: false,
+            src: ["./src/assets/fonts/tiempos-headline-light.woff2"],
           },
           {
+            weight: 300,
             style: "italic",
-            weight: "300",
-            path: "./public/fonts/Tiempos/tiempos-headline-light-italic.woff",
-            preload: false,
+            src: ["./src/assets/fonts/tiempos-headline-light-italic.woff2"],
           },
         ],
-        display: "swap",
-        fallback: "serif",
-        cssVariable: "font-tiempos-headline",
       },
-
-      {
-        name: "Tiempos Fine",
-        src: [
-          {
-            style: "normal",
-            weight: "300",
-            path: "./public/fonts/Tiempos/tiempos-fine-light.woff2",
-            preload: false,
-          },
-          {
-            style: "italic",
-            weight: "300",
-            path: "./public/fonts/Tiempos/tiempos-fine-light-italic.woff2",
-            preload: false,
-          },
-        ],
-        display: "swap",
-        fallback: "serif",
-        cssVariable: "font-tiempos-fine",
-      },
-    ]),
+    },
   ],
+
+  integrations: [tina()],
 
   vite: {
     plugins: [tailwindcss(), tinaAdminDevRedirect()],
-
-    ssr: {
-      noExternal: ["astro-font"],
-    },
   },
 });
