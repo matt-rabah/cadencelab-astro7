@@ -1,0 +1,295 @@
+/* ==========================================================================
+   cadencelab.co — Type System
+   Graphik (UI, headers) + Tiempos Text (blog body) + Tiempos Headline (accents)
+
+   Fluid scale interpolates between 375px and 1280px viewports using
+   rem-based clamp(), so browser zoom and user font-size prefs still work.
+   All sizes in rem. Line heights unitless. Tracking in em.
+   ========================================================================== */
+
+@layer type-tokens, type-base, type-prose, type-utilities;
+
+/* --------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+@layer type-tokens {
+  :root {
+    --ff-sans: var(--font-graphik);
+    --ff-serif: var(--font-tiempos-text);
+    --ff-serif-display: var(--font-tiempos-headline);
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-display-light: 300;
+
+    --fea-graphik: "ss05" 1;
+    --fea-eyebrow: "ss05" 1, "case" 1;
+    --fea-tabular: "tnum" 1;
+
+    --fs-display: clamp(2.5rem, 2.09rem + 1.77vw, 3.5rem);
+    --fs-h2: clamp(1.75rem, 1.54rem + 0.88vw, 2.25rem);
+    --fs-h3: clamp(1.3125rem, 1.24rem + 0.33vw, 1.5rem);
+    --fs-h4: clamp(1.0625rem, 1.04rem + 0.11vw, 1.125rem);
+    --fs-body-ui: clamp(1rem, 0.97rem + 0.11vw, 1.0625rem);
+    --fs-cta: 1rem;
+    --fs-eyebrow: 0.8125rem;
+    --fs-small: 0.875rem;
+
+    --fs-post-title: clamp(2rem, 1.69rem + 1.33vw, 2.75rem);
+    --fs-post-h2: clamp(1.375rem, 1.27rem + 0.44vw, 1.625rem);
+    --fs-post-h3: clamp(1.1875rem, 1.16rem + 0.11vw, 1.25rem);
+    --fs-post-body: clamp(1.125rem, 1.1rem + 0.11vw, 1.1875rem);
+    --fs-pullquote: clamp(1.5rem, 1.4rem + 0.44vw, 1.75rem);
+
+    --lh-display: 1.1;
+    --lh-h2: 1.15;
+    --lh-h3: 1.3;
+    --lh-h4: 1.4;
+    --lh-ui: 1.55;
+    --lh-post-title: 1.12;
+    --lh-post-body: 1.65;
+    --lh-tight: 1.35;
+
+    --ls-display: -0.015em;
+    --ls-h2: -0.01em;
+    --ls-h3: -0.005em;
+    --ls-eyebrow: 0.08em;
+
+    --measure-prose: 70ch;
+    --measure-ui: 60ch;
+    --measure-heading: 26ch;
+
+    --ink: #1f2328;
+    --ink-2: #40484f;
+  }
+
+  @media (max-width: 767px) {
+    :root {
+      --ls-display: -0.005em;
+      --ls-h2: -0.005em;
+      --ls-h3: 0em;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. BASE
+   -------------------------------------------------------------------------- */
+@layer type-base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    font-feature-settings: var(--fea-graphik);
+    font-kerning: normal;
+    color: var(--ink);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--ff-sans);
+    font-feature-settings: var(--fea-graphik);
+    color: var(--ink);
+    text-wrap: balance;
+    max-inline-size: var(--measure-heading);
+  }
+
+  h1 {
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  h2 {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  h3 {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  h4 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+  }
+
+  p {
+    max-inline-size: var(--measure-ui);
+    text-wrap: pretty;
+  }
+
+  :where(h1, h2, h3, h4) {
+    margin-block: 1.5em 0.5em;
+  }
+
+  :where(p) {
+    margin-block: 0 1em;
+  }
+
+  :where(h1:first-child, h2:first-child, h3:first-child) {
+    margin-block-start: 0;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font-family: var(--ff-sans);
+    font-feature-settings: var(--fea-graphik);
+    font-size: max(1rem, 1em);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. PROSE
+   -------------------------------------------------------------------------- */
+@layer type-prose {
+  .prose {
+    font-family: var(--ff-serif);
+    font-size: var(--fs-post-body);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-post-body);
+    font-feature-settings: normal;
+    max-inline-size: var(--measure-prose);
+  }
+
+  .prose p {
+    max-inline-size: none;
+    margin-block: 0 1.25em;
+    text-wrap: pretty;
+  }
+
+  .post-title {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-post-title);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-post-title);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
+    text-wrap: balance;
+  }
+
+  .prose h2 {
+    font-size: var(--fs-post-h2);
+    letter-spacing: var(--ls-h3);
+    margin-block: 1.75em 0.6em;
+  }
+
+  .prose h3 {
+    font-size: var(--fs-post-h3);
+    margin-block: 1.5em 0.5em;
+  }
+
+  .prose strong {
+    font-weight: var(--fw-medium);
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .prose a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.18em;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  }
+
+  .prose a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .prose blockquote {
+    font-family: var(--ff-serif-display);
+    font-size: var(--fs-pullquote);
+    font-weight: var(--fw-display-light);
+    font-style: italic;
+    line-height: var(--lh-tight);
+    margin-inline: 0;
+    padding-inline-start: 1.25rem;
+    border-inline-start: 2px solid currentColor;
+    hanging-punctuation: first;
+  }
+
+  .prose blockquote p {
+    margin-block-end: 0.5em;
+  }
+
+  .prose table {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-feature-settings: var(--fea-graphik), var(--fea-tabular);
+    line-height: var(--lh-h4);
+  }
+
+  .prose figcaption {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-small);
+    font-feature-settings: var(--fea-graphik);
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 480px) {
+    .prose p {
+      hyphens: auto;
+      hyphenate-limit-chars: 7 4 3;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. UTILITIES
+   -------------------------------------------------------------------------- */
+@layer type-utilities {
+  .eyebrow {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    font-feature-settings: var(--fea-eyebrow);
+    color: var(--ink-2);
+  }
+
+  .cta {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-cta);
+    font-weight: var(--fw-medium);
+    line-height: 1;
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .stat {
+    font-feature-settings: var(--fea-graphik), var(--fea-tabular);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .serif-accent {
+    font-family: var(--ff-serif-display);
+    font-weight: var(--fw-display-light);
+    letter-spacing: -0.005em;
+  }
+
+  .text-secondary {
+    color: var(--ink-2);
+  }
+}
