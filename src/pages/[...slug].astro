@@ -1,6 +1,7 @@
 ---
 // src/pages/[...slug].astro
 
+import { getCollection } from "astro:content";
 import TinaMarkdown from "@tinacms/astro";
 import { tinaField } from "@tinacms/astro/tina-field";
 
@@ -9,41 +10,29 @@ import Footer from "../components/Footer.astro";
 import NavHeader from "../components/NavHeader.astro";
 import Layout from "../layouts/Layout.astro";
 
-export function getStaticPaths() {
-  const paths = [
-    "workflows",
-    "workflows/salesforce",
-    "workflows/cross-functional",
-    "workflows/escalation",
-    "workflows/agent-routing",
-    "workflows/legacy",
-    "workflows/omnichannel",
-    "workflows/telephony",
-    "solutions",
-    "solutions/adoption-fatigue",
-    "solutions/dirty-data",
-    "solutions/misalignment",
-    "solutions/enterprise",
-    "solutions/mid-market",
-    "solutions/governance",
-    "ai-tooling",
-    "ai-tooling/prompt-guard",
-    "ai-tooling/hallucination",
-    "ai-tooling/compliance",
-    "ai-tooling/co-pilot",
-    "ai-tooling/feedback",
-    "governance",
-    "advisory",
-    "support",
-    "contact",
-    "privacy",
-    "terms",
-  ];
+export async function getStaticPaths() {
+  const pages = await getCollection("page");
 
-  return paths.map((slug) => ({
-    params: { slug },
-    props: { slug },
-  }));
+  return pages.map((entry) => {
+    const slug = entry.id
+      .replace(/\.(md|mdx)$/i, "")
+      .split("/")
+      .filter(Boolean)
+      .join("/");
+
+    if (!slug) {
+      throw new Error(`Unable to determine a slug for page entry: ${entry.id}`);
+    }
+
+    return {
+      params: {
+        slug,
+      },
+      props: {
+        slug,
+      },
+    };
+  });
 }
 
 interface Props {
@@ -52,35 +41,27 @@ interface Props {
 
 const { slug } = Astro.props as Props;
 
-let page: {
-  title?: string | null;
-  subtitle?: string | null;
-  category?: string | null;
-  body?: unknown;
-} | null = null;
+const response = await client.queries.page({
+  relativePath: `${slug}.md`,
+});
 
-try {
-  const response = await client.queries.page({
-    relativePath: `${slug}.md`,
-  });
+const page = response.data.page;
 
-  page = response.data.page;
-} catch {
-  page = null;
+if (!page) {
+  throw new Error(
+    `Unable to load Tina page content for "src/content/pages/${slug}.md".`,
+  );
 }
 
-const segment = slug.split("/").filter(Boolean).at(-1) ?? "page";
+const title = page.title?.trim();
 
-const fallbackTitle = segment
-  .split("-")
-  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(" ");
-
-const title = page?.title?.trim() || fallbackTitle;
+if (!title) {
+  throw new Error(`Page "src/content/pages/${slug}.md" is missing a title.`);
+}
 
 const description =
-  page?.subtitle?.trim() ||
-  "This Cadence Lab page is being prepared and is not yet available.";
+  page.subtitle?.trim() ||
+  "Customer experience systems, workflow design, CRM strategy, and responsible AI adoption from Cadence Lab.";
 
 const canonicalURL = `/${slug}/`;
 ---
@@ -89,262 +70,245 @@ const canonicalURL = `/${slug}/`;
   title={`${title} | Cadence Lab`}
   description={description}
   canonicalURL={canonicalURL}
-  noindex={!page}
 >
   <NavHeader />
 
-  {
-    page ? (
-      <main id="main-content" class="content-page">
-        <article class="content-container">
-          <header class="content-header">
-            {page.category && (
-              <p
-                class="content-eyebrow"
-                data-tina-field={tinaField(page, "category")}
-              >
-                {page.category}
-              </p>
-            )}
-
-            <h1
-              class="content-title"
-              data-tina-field={tinaField(page, "title")}
+  <main id="main-content" class="content-page">
+    <article class="content-container">
+      <header class="content-header">
+        {
+          page.category && (
+            <p
+              class="content-eyebrow"
+              data-tina-field={tinaField(page, "category")}
             >
-              {page.title}
-            </h1>
+              {page.category}
+            </p>
+          )
+        }
 
-            {page.subtitle && (
-              <p
-                class="content-subtitle"
-                data-tina-field={tinaField(page, "subtitle")}
-              >
-                {page.subtitle}
-              </p>
-            )}
-          </header>
+        <h1 class="content-title" data-tina-field={tinaField(page, "title")}>
+          {page.title}
+        </h1>
 
-          {page.body && (
-            <div
-              class="content-body prose"
-              data-tina-field={tinaField(page, "body")}
+        {
+          page.subtitle && (
+            <p
+              class="content-subtitle"
+              data-tina-field={tinaField(page, "subtitle")}
             >
-              <TinaMarkdown content={page.body} />
-            </div>
-          )}
-        </article>
-      </main>
-    ) : (
-      <main id="main-content" class="missing-page">
-        <div class="missing-container">
-          <p class="missing-eyebrow">Page in progress</p>
+              {page.subtitle}
+            </p>
+          )
+        }
+      </header>
 
-          <h1>{fallbackTitle}</h1>
-
-          <p>
-            This page is part of the planned Cadence Lab site, but its final
-            content has not been published yet.
-          </p>
-
-          <div class="missing-actions">
-            <a href="/" class="primary-link">
-              Return to the home page
-            </a>
-
-            <a href="/contact/" class="secondary-link">
-              Contact Cadence Lab
-              <span aria-hidden="true">→</span>
-            </a>
+      {
+        page.body && (
+          <div class="content-body" data-tina-field={tinaField(page, "body")}>
+            <TinaMarkdown content={page.body} />
           </div>
-        </div>
-      </main>
-    )
-  }
+        )
+      }
+    </article>
+  </main>
 
   <Footer />
 </Layout>
 
 <style>
-  .content-page,
-  .missing-page {
+  .content-page {
     width: 100%;
     padding-block: clamp(4rem, 10vw, 8rem);
     background: var(--color-surface);
     color: var(--color-text);
   }
 
-  .content-container,
-  .missing-container {
-    width: min(calc(100% - (2 * var(--page-gutter))), 48rem);
-    margin-inline: auto;
-  }
-
   .content-container {
     display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), 48rem);
+    margin-inline: auto;
     gap: clamp(2.5rem, 6vw, 4rem);
   }
 
-  .content-header,
-  .missing-container {
+  .content-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .content-header {
     gap: 1rem;
   }
 
-  .content-eyebrow,
-  .missing-eyebrow {
+  .content-eyebrow {
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--fs-eyebrow);
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: none;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
   }
 
-  .content-title,
-  .missing-container h1 {
-    max-width: 15ch;
+  .content-title {
+    max-width: 17ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: clamp(2.75rem, 2rem + 3vw, 5.25rem);
+    font-size: var(--fs-display);
     font-style: normal;
-    font-weight: 600;
-    line-height: 0.98;
-    letter-spacing: -0.04em;
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
     text-wrap: balance;
   }
 
-  .content-subtitle,
-  .missing-container > p:not(.missing-eyebrow) {
-    max-width: 42rem;
+  .content-subtitle {
+    max-width: var(--measure-ui);
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
-    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    font-size: var(--fs-body-ui);
     font-style: normal;
-    font-weight: 400;
-    line-height: 1.6;
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
   .content-body {
     padding-top: clamp(2rem, 5vw, 3.5rem);
     border-top: 1px solid var(--color-border);
-  }
-
-  .missing-container {
-    max-width: 44rem;
-    gap: 1.25rem;
-  }
-
-  .missing-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .primary-link {
-    display: inline-flex;
-    width: fit-content;
-    min-height: 3rem;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 1.25rem;
-    border: 1px solid var(--color-ink);
-    border-radius: var(--radius-sm);
-    background: var(--color-ink);
-    color: var(--color-light);
+    color: var(--color-text);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    line-height: 1.2;
-    text-align: center;
-    text-decoration: none;
-    transition:
-      background-color var(--transition-fast),
-      border-color var(--transition-fast),
-      transform var(--transition-fast);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
   }
 
-  .primary-link:hover {
-    border-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
-    background: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
-    color: var(--color-light);
-    text-decoration: none;
-  }
-
-  .primary-link:active {
-    transform: translateY(1px);
-  }
-
-  .secondary-link {
-    display: inline-flex;
-    min-height: 2.75rem;
-    align-items: center;
-    gap: 0.4rem;
+  .content-body :global(h2) {
+    margin-top: 2.5em;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.2em;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-feature-settings: var(--fea-graphik);
+    text-wrap: balance;
   }
 
-  .secondary-link:hover {
+  .content-body :global(h3) {
+    margin-top: 2em;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-feature-settings: var(--fea-graphik);
+    text-wrap: balance;
+  }
+
+  .content-body :global(h4) {
+    margin-top: 1.75em;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .content-body :global(p),
+  .content-body :global(li) {
+    max-width: var(--measure-ui);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-ui);
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .content-body :global(p) {
+    text-wrap: pretty;
+  }
+
+  .content-body :global(ul),
+  .content-body :global(ol) {
+    margin-block: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content-body :global(li + li) {
+    margin-top: 0.625rem;
+  }
+
+  .content-body :global(strong) {
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .content-body :global(blockquote) {
+    margin: 2.5rem 0;
+    padding-left: clamp(1.25rem, 3vw, 2rem);
+    border-left: 0.25rem solid var(--color-blue);
+    color: var(--color-ink);
+  }
+
+  .content-body :global(blockquote p) {
+    margin: 0;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+  }
+
+  .content-body :global(a) {
     color: var(--color-blue);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
   }
 
-  .primary-link:focus-visible,
-  .secondary-link:focus-visible {
+  .content-body :global(img) {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin-block: 2.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .content-body :global(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .content-body :global(a:focus-visible) {
     outline: var(--focus-ring-width) solid var(--color-focus);
     outline-offset: var(--focus-ring-offset);
   }
 
   @media (max-width: 40rem) {
-    .content-page,
-    .missing-page {
+    .content-page {
       padding-block: clamp(3.5rem, 14vw, 5rem);
     }
 
-    .content-title,
-    .missing-container h1 {
-      max-width: 12ch;
-      font-size: clamp(2.5rem, 11vw, 4rem);
-    }
-
-    .missing-actions {
-      width: 100%;
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .primary-link,
-    .secondary-link {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .primary-link {
-      transition: none;
+    .content-title {
+      max-width: 15ch;
     }
   }
 
   @media (forced-colors: active) {
     .content-body,
-    .primary-link {
+    .content-body :global(blockquote) {
       border-color: CanvasText;
     }
   }
