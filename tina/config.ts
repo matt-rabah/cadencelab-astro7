@@ -1,3 +1,5 @@
+// tina/config.ts
+
 import { defineConfig } from "tinacms";
 
 const branch =
@@ -53,13 +55,14 @@ export default defineConfig({
     collections: [
       {
         name: "post",
-        label: "Blog Posts",
+        label: "Blog posts",
         path: "src/content/blog",
         format: "md",
 
         ui: {
           router: ({ document }) => {
-            const rawDate = (document as any)._values?.date;
+            const values = (document as any)._values;
+            const rawDate = values?.date;
             const slug = document._sys.filename;
 
             if (!rawDate) {
@@ -92,24 +95,74 @@ export default defineConfig({
             name: "subtitle",
             label: "Subtitle",
             required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Search description",
+            description:
+              "Optional summary used for search results and social previews. Keep it specific and concise.",
+            ui: {
+              component: "textarea",
+            },
           },
           {
             type: "datetime",
             name: "date",
-            label: "Date",
+            label: "Publication date",
             required: true,
+          },
+          {
+            type: "datetime",
+            name: "updatedDate",
+            label: "Updated date",
+            description:
+              "Add this only when the article has been meaningfully revised.",
           },
           {
             type: "string",
             name: "readTime",
-            label: "Read Time",
+            label: "Reading time",
             required: true,
+            description: 'Example: "6 min read"',
           },
           {
             type: "string",
             name: "category",
             label: "Category",
             required: true,
+          },
+          {
+            type: "string",
+            name: "author",
+            label: "Author",
+            description:
+              "Defaults to Cadence Lab when no author is entered.",
+          },
+          {
+            type: "image",
+            name: "image",
+            label: "Social and featured image",
+          },
+          {
+            type: "string",
+            name: "imageAlt",
+            label: "Image alternative text",
+            description:
+              "Describe the meaningful content of the image for people who cannot see it.",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "boolean",
+            name: "draft",
+            label: "Draft",
+            description:
+              "Draft posts should not be included in the public blog.",
           },
           {
             type: "rich-text",
@@ -128,7 +181,13 @@ export default defineConfig({
 
         ui: {
           router: ({ document }) => {
-            const slug = document._sys.filename;
+            const breadcrumbs =
+              document._sys.breadcrumbs?.filter(Boolean) ?? [];
+
+            const slug =
+              breadcrumbs.length > 0
+                ? breadcrumbs.join("/")
+                : document._sys.filename;
 
             if (slug === "home") {
               return "/";
@@ -151,12 +210,32 @@ export default defineConfig({
             name: "subtitle",
             label: "Subtitle",
             required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Search description",
+            description:
+              "Optional page description used for search results and social previews.",
+            ui: {
+              component: "textarea",
+            },
           },
           {
             type: "string",
             name: "category",
             label: "Category",
             required: true,
+          },
+          {
+            type: "boolean",
+            name: "noindex",
+            label: "Exclude from search engines",
+            description:
+              "Enable this for unfinished, private, duplicate, or utility pages.",
           },
           {
             type: "rich-text",
