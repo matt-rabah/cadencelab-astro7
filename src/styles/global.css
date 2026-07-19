@@ -16,11 +16,12 @@
    * marketing copy into Tiempos.
    *
    * Editorial prose uses --ff-serif directly through typography.css.
+   * Produkt remains an approved future utility face, but it must not be wired
+   * until licensed webfont assets are present in the project.
    */
   --font-sans: var(--ff-sans);
   --font-serif: var(--ff-sans);
   --font-serif-display: var(--ff-serif-display);
-
   --font-mono:
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
@@ -30,25 +31,25 @@
   --color-blue: #1823c9;
   --color-green: #4fd34a;
 
-  /* Surface colors */
-  --color-surface: #fcfeff;
+  /* Semantic surfaces */
+  --color-surface: var(--color-light);
   --color-surface-pure: #ffffff;
   --color-surface-subtle: #f4f7f8;
   --color-surface-muted: #eaf0f2;
-  --color-surface-inverse: #000504;
+  --color-surface-inverse: var(--color-ink);
 
-  /* Text colors */
-  --color-text: #000504;
+  /* Semantic text */
+  --color-text: var(--color-ink);
   --color-text-muted: #6c6f6f;
-  --color-text-subtle: #6c6f6f;
-  --color-text-inverse: #fcfeff;
+  --color-text-subtle: var(--color-text-muted);
+  --color-text-inverse: var(--color-light);
   --color-text-inverse-muted: #aeb9b6;
 
   /* Brand and interaction aliases */
-  --color-accent: #1823c9;
-  --color-link: #1823c9;
-  --color-focus: #1823c9;
-  --color-positive: #4fd34a;
+  --color-accent: var(--color-blue);
+  --color-link: var(--color-blue);
+  --color-focus: var(--color-blue);
+  --color-positive: var(--color-green);
 
   /* Interface colors */
   --color-border: #d8e0df;
@@ -56,6 +57,23 @@
   --color-error: #b42318;
   --color-success: #16794a;
   --color-warning: #9a6700;
+
+  /* Status surfaces */
+  --color-error-surface: color-mix(
+    in srgb,
+    var(--color-error) 8%,
+    var(--color-light)
+  );
+  --color-success-surface: color-mix(
+    in srgb,
+    var(--color-success) 8%,
+    var(--color-light)
+  );
+  --color-warning-surface: color-mix(
+    in srgb,
+    var(--color-warning) 8%,
+    var(--color-light)
+  );
 
   /* Layout */
   --page-gutter: clamp(1.25rem, 4vw, 3rem);
@@ -79,6 +97,10 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
+  /* Shared section rhythm */
+  --section-space: clamp(3rem, 8vw, 7rem);
+  --section-space-compact: clamp(2rem, 5vw, 4rem);
+
   /* Borders and radii */
   --border-width: 1px;
   --radius-sm: 0.125rem;
@@ -86,19 +108,25 @@
   --radius-lg: 0.5rem;
   --radius-pill: 999px;
 
-  /* Shadows */
+  /*
+   * Shadows are reserved for temporary overlays or rare cases where borders
+   * and surface contrast cannot establish stacking clearly.
+   */
   --shadow-sm: 0 1px 2px rgb(0 5 4 / 5%), 0 1px 3px rgb(0 5 4 / 7%);
   --shadow-md: 0 4px 12px rgb(0 5 4 / 8%), 0 2px 4px rgb(0 5 4 / 5%);
   --shadow-lg: 0 18px 50px rgb(0 5 4 / 10%), 0 6px 18px rgb(0 5 4 / 6%);
 
   /* Interaction */
+  --control-min-size: 2.75rem;
+  --control-min-size-coarse: 3rem;
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
   --transition-fast: 150ms ease;
   --transition-standard: 220ms ease;
 
-  /* Shared layout behavior */
+  /* Shared document behavior */
   --header-offset: 6rem;
+  --z-skip-link: 1000;
 }
 
 /* ==========================================================================
@@ -112,10 +140,12 @@
 }
 
 html {
-  min-width: 20rem;
+  min-inline-size: 20rem;
   color-scheme: light;
-  scroll-padding-top: var(--header-offset);
   hanging-punctuation: first last;
+  scroll-padding-block-start: var(--header-offset);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html:focus-within {
@@ -123,9 +153,10 @@ html:focus-within {
 }
 
 body {
-  min-height: 100vh;
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-wrap: break-word;
   background: var(--color-surface);
   color: var(--color-text);
@@ -160,12 +191,12 @@ canvas,
 svg,
 iframe {
   display: block;
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 img,
 video {
-  height: auto;
+  block-size: auto;
 }
 
 svg {
@@ -267,17 +298,18 @@ sub {
 }
 
 sup {
-  top: -0.5em;
+  inset-block-start: -0.5em;
 }
 
 sub {
-  bottom: -0.25em;
+  inset-block-end: -0.25em;
 }
 
 /*
  * Sentence-case interface labels.
  *
- * True editorial eyebrows use .eyebrow from typography.css.
+ * True editorial eyebrows use .eyebrow from typography.css. Produkt may
+ * replace Graphik here only after its licensed assets are registered.
  */
 .ui-label,
 .section-label {
@@ -318,8 +350,8 @@ a {
     text-decoration-color var(--transition-fast);
 }
 
-a:hover {
-  color: color-mix(in srgb, var(--color-link) 78%, var(--color-ink));
+a[aria-current="page"] {
+  font-weight: var(--fw-semibold);
 }
 
 a:focus-visible,
@@ -328,13 +360,14 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 summary:focus-visible,
+[contenteditable="true"]:focus-visible,
 [tabindex]:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--focus-ring-offset);
 }
 
-a[aria-current="page"] {
-  font-weight: var(--fw-semibold);
+:target {
+  scroll-margin-block-start: var(--header-offset);
 }
 
 button,
@@ -349,15 +382,21 @@ button {
   border: 0;
 }
 
+@media (hover: hover) {
+  a:hover {
+    color: color-mix(in srgb, var(--color-link) 78%, var(--color-ink));
+  }
+}
+
 /* ==========================================================================
    5. Accessible utilities
    ========================================================================== */
 
 .skip-link {
   position: fixed;
-  top: var(--space-3);
-  left: var(--space-3);
-  z-index: 9999;
+  inset-block-start: var(--space-3);
+  inset-inline-start: var(--space-3);
+  z-index: var(--z-skip-link);
   padding: 0.75rem 1rem;
   border: 2px solid var(--color-ink);
   background: var(--color-light);
@@ -377,24 +416,26 @@ button {
 .visually-hidden,
 .sr-only {
   position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
   padding: 0 !important;
   margin: -1px !important;
   overflow: hidden !important;
   clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
   white-space: nowrap !important;
   border: 0 !important;
 }
 
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
   position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
   padding: 0 !important;
   margin: -1px !important;
   overflow: hidden !important;
   clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
   white-space: nowrap !important;
   border: 0 !important;
 }
@@ -404,27 +445,39 @@ button {
    ========================================================================== */
 
 .page-container {
-  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+  inline-size: min(
+    calc(100% - (2 * var(--page-gutter))),
+    var(--container-page)
+  );
   margin-inline: auto;
 }
 
 .wide-container {
-  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-wide));
+  inline-size: min(
+    calc(100% - (2 * var(--page-gutter))),
+    var(--container-wide)
+  );
   margin-inline: auto;
 }
 
 .header-container {
-  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-header));
+  inline-size: min(
+    calc(100% - (2 * var(--page-gutter))),
+    var(--container-header)
+  );
   margin-inline: auto;
 }
 
 .copy-container {
-  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-copy));
+  inline-size: min(
+    calc(100% - (2 * var(--page-gutter))),
+    var(--container-copy)
+  );
   margin-inline: auto;
 }
 
 .copy-container-narrow {
-  width: min(
+  inline-size: min(
     calc(100% - (2 * var(--page-gutter))),
     var(--container-copy-narrow)
   );
@@ -432,30 +485,33 @@ button {
 }
 
 .full-bleed {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .section {
-  padding-block: clamp(3rem, 8vw, 7rem);
+  padding-block: var(--section-space);
 }
 
 .section-compact {
-  padding-block: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--section-space-compact);
 }
 
 .stack {
   display: flex;
   flex-direction: column;
+  gap: var(--stack-space, var(--space-6));
 }
 
 .cluster {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: var(--cluster-space, var(--space-4));
 }
 
 .grid {
   display: grid;
+  gap: var(--grid-space, var(--space-6));
 }
 
 /* ==========================================================================
@@ -464,14 +520,14 @@ button {
 
 .button {
   display: inline-flex;
-  width: fit-content;
-  max-width: 100%;
-  min-height: 2.75rem;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-block-size: var(--control-min-size);
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   padding: 0.75rem 1.125rem;
-  border: 1px solid transparent;
+  border: var(--border-width) solid transparent;
   border-radius: var(--radius-sm);
   font-family: var(--ff-sans);
   font-size: var(--fs-cta);
@@ -483,6 +539,7 @@ button {
   text-align: center;
   text-decoration: none;
   text-transform: none;
+  touch-action: manipulation;
   transition:
     background-color var(--transition-fast),
     border-color var(--transition-fast),
@@ -490,11 +547,7 @@ button {
     transform var(--transition-fast);
 }
 
-.button:hover {
-  text-decoration: none;
-}
-
-.button:active {
+.button:active:not(:disabled):not([aria-disabled="true"]) {
   transform: translateY(1px);
 }
 
@@ -504,21 +557,10 @@ button {
   color: var(--color-text-inverse);
 }
 
-.button-primary:hover {
-  border-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
-  background: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
-  color: var(--color-text-inverse);
-}
-
 .button-secondary {
   border-color: var(--color-ink);
   background: transparent;
   color: var(--color-ink);
-}
-
-.button-secondary:hover {
-  background: var(--color-ink);
-  color: var(--color-text-inverse);
 }
 
 .button-accent {
@@ -527,26 +569,15 @@ button {
   color: var(--color-light);
 }
 
-.button-accent:hover {
-  border-color: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
-  background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
-  color: var(--color-light);
-}
-
+/* Reserved for explicit positive confirmation actions, not routine CTAs. */
 .button-positive {
   border-color: var(--color-green);
   background: var(--color-green);
   color: var(--color-ink);
 }
 
-.button-positive:hover {
-  border-color: color-mix(in srgb, var(--color-green) 84%, var(--color-ink));
-  background: color-mix(in srgb, var(--color-green) 84%, var(--color-ink));
-  color: var(--color-ink);
-}
-
 .button-text {
-  min-height: 2.75rem;
+  min-block-size: var(--control-min-size);
   padding-inline: 0;
   border-color: transparent;
   background: transparent;
@@ -556,15 +587,44 @@ button {
   text-underline-offset: 0.2em;
 }
 
-.button-text:hover {
-  color: color-mix(in srgb, var(--color-link) 78%, var(--color-ink));
-}
-
 .button[aria-disabled="true"],
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.55;
   pointer-events: none;
+}
+
+@media (hover: hover) {
+  .button:hover:not(:disabled):not([aria-disabled="true"]) {
+    text-decoration: none;
+  }
+
+  .button-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+    border-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
+    background: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
+    color: var(--color-text-inverse);
+  }
+
+  .button-secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+  }
+
+  .button-accent:hover:not(:disabled):not([aria-disabled="true"]) {
+    border-color: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
+    background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
+    color: var(--color-light);
+  }
+
+  .button-positive:hover:not(:disabled):not([aria-disabled="true"]) {
+    border-color: color-mix(in srgb, var(--color-green) 84%, var(--color-ink));
+    background: color-mix(in srgb, var(--color-green) 84%, var(--color-ink));
+    color: var(--color-ink);
+  }
+
+  .button-text:hover:not(:disabled):not([aria-disabled="true"]) {
+    color: color-mix(in srgb, var(--color-link) 78%, var(--color-ink));
+  }
 }
 
 /* ==========================================================================
@@ -573,7 +633,7 @@ button {
 
 .form-field {
   display: grid;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .form-label {
@@ -605,19 +665,24 @@ button {
 input,
 textarea,
 select {
-  width: 100%;
-  min-height: 2.75rem;
-  padding: 0.75rem;
-  border: 1px solid var(--color-border-strong);
+  inline-size: 100%;
+  min-block-size: var(--control-min-size);
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border-strong);
   background: var(--color-surface-pure);
   color: var(--color-text);
   font-family: var(--ff-sans);
-  font-feature-settings: var(--fea-graphik);
+  font-size: max(1rem, 1em);
   line-height: 1.4;
+  font-feature-settings: var(--fea-graphik);
+  accent-color: var(--color-accent);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 textarea {
-  min-height: 8rem;
+  min-block-size: 8rem;
 }
 
 input::placeholder,
@@ -626,20 +691,26 @@ textarea::placeholder {
   opacity: 1;
 }
 
-input:hover,
-textarea:hover,
-select:hover {
-  border-color: var(--color-text-muted);
-}
-
 input[aria-invalid="true"],
 textarea[aria-invalid="true"],
-select[aria-invalid="true"] {
+select[aria-invalid="true"],
+input:user-invalid,
+textarea:user-invalid,
+select:user-invalid {
   border-color: var(--color-error);
+  background: var(--color-error-surface);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  opacity: 1;
 }
 
 fieldset {
-  min-width: 0;
+  min-inline-size: 0;
   margin: 0;
   padding: 0;
   border: 0;
@@ -650,6 +721,14 @@ legend {
   font-family: var(--ff-sans);
   font-weight: var(--fw-medium);
   font-feature-settings: var(--fea-graphik);
+}
+
+@media (hover: hover) {
+  input:hover:not(:disabled),
+  textarea:hover:not(:disabled),
+  select:hover:not(:disabled) {
+    border-color: var(--color-text-muted);
+  }
 }
 
 /* ==========================================================================
@@ -664,13 +743,13 @@ legend {
    ========================================================================== */
 
 .prose {
-  width: min(100%, var(--measure-prose));
+  inline-size: min(100%, var(--measure-prose));
   max-inline-size: var(--measure-prose);
   color: var(--color-text);
 }
 
 .prose > * + * {
-  margin-top: 1.25em;
+  margin-block-start: 1.25em;
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) {
@@ -679,7 +758,7 @@ legend {
   font-style: normal;
   font-feature-settings: var(--fea-graphik);
   text-transform: none;
-  scroll-margin-top: var(--header-offset);
+  scroll-margin-block-start: var(--header-offset);
 }
 
 .prose h4 {
@@ -692,14 +771,14 @@ legend {
 }
 
 .prose li + li {
-  margin-top: 0.45em;
+  margin-block-start: 0.45em;
 }
 
 .prose hr {
-  width: 100%;
-  margin-block: 3rem;
+  inline-size: 100%;
+  margin-block: var(--space-12);
   border: 0;
-  border-top: 1px solid var(--color-border);
+  border-block-start: var(--border-width) solid var(--color-border);
 }
 
 .prose figure {
@@ -708,20 +787,21 @@ legend {
 
 .prose img,
 .prose video {
-  max-width: 100%;
-  height: auto;
+  max-inline-size: 100%;
+  block-size: auto;
 }
 
 .prose pre {
-  max-width: 100%;
+  max-inline-size: 100%;
   overflow-x: auto;
-  padding: 1rem;
+  padding: var(--space-4);
   border-radius: var(--radius-md);
   background: var(--color-ink);
   color: var(--color-light);
   font-family: var(--font-mono);
   font-size: var(--fs-small);
   line-height: 1.55;
+  scrollbar-gutter: stable;
   tab-size: 2;
 }
 
@@ -738,17 +818,18 @@ legend {
 
 .prose table {
   display: block;
-  width: max-content;
-  max-width: 100%;
+  inline-size: max-content;
+  max-inline-size: 100%;
   overflow-x: auto;
   border-collapse: collapse;
+  scrollbar-gutter: stable;
 }
 
 .prose th,
 .prose td {
   padding: 0.65rem 0.8rem;
-  border: 1px solid var(--color-border);
-  text-align: left;
+  border: var(--border-width) solid var(--color-border);
+  text-align: start;
   vertical-align: top;
 }
 
@@ -756,6 +837,7 @@ legend {
   background: var(--color-surface-subtle);
   font-family: var(--ff-sans);
   font-weight: var(--fw-medium);
+  text-wrap: balance;
 }
 
 /* ==========================================================================
@@ -763,7 +845,7 @@ legend {
    ========================================================================== */
 
 .media-frame {
-  overflow: hidden;
+  overflow: clip;
   border-radius: var(--radius-md);
   background: var(--color-surface-subtle);
 }
@@ -771,7 +853,7 @@ legend {
 .media-frame img,
 .media-frame video,
 .media-frame iframe {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .aspect-video {
@@ -784,14 +866,14 @@ legend {
 
 .embed-responsive {
   position: relative;
-  width: 100%;
-  overflow: hidden;
+  inline-size: 100%;
+  overflow: clip;
   aspect-ratio: 16 / 9;
 }
 
 .embed-responsive iframe {
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   border: 0;
 }
 
@@ -800,8 +882,8 @@ legend {
    ========================================================================== */
 
 .status-message {
-  padding: 1rem;
-  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
   font-family: var(--ff-sans);
   font-size: 0.9375rem;
@@ -815,13 +897,13 @@ legend {
     var(--color-success) 45%,
     var(--color-light)
   );
-  background: color-mix(in srgb, var(--color-success) 8%, var(--color-light));
+  background: var(--color-success-surface);
   color: var(--color-success);
 }
 
 .status-message-error {
   border-color: color-mix(in srgb, var(--color-error) 45%, var(--color-light));
-  background: color-mix(in srgb, var(--color-error) 8%, var(--color-light));
+  background: var(--color-error-surface);
   color: var(--color-error);
 }
 
@@ -831,29 +913,26 @@ legend {
     var(--color-warning) 45%,
     var(--color-light)
   );
-  background: color-mix(in srgb, var(--color-warning) 8%, var(--color-light));
+  background: var(--color-warning-surface);
   color: var(--color-warning);
 }
 
 /* ==========================================================================
-   12. Responsive adjustments
+   12. Responsive and input-mode adjustments
    ========================================================================== */
 
 @media (max-width: 40rem) {
   :root {
     --header-offset: 5rem;
-  }
-
-  .section {
-    padding-block: clamp(2.5rem, 10vw, 4rem);
+    --section-space: clamp(2.5rem, 10vw, 4rem);
   }
 
   .button {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .button-auto-mobile {
-    width: fit-content;
+    inline-size: fit-content;
   }
 }
 
@@ -870,6 +949,16 @@ legend {
 
   .lg-three-column {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (pointer: coarse) {
+  .button,
+  input,
+  textarea,
+  select,
+  summary {
+    min-block-size: var(--control-min-size-coarse);
   }
 }
 
@@ -917,7 +1006,7 @@ legend {
 }
 
 /* ==========================================================================
-   14. Reduced motion and forced colors
+   14. Reduced motion, contrast, and forced colors
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -935,12 +1024,39 @@ legend {
   }
 }
 
+@media (prefers-contrast: more) {
+  :root {
+    --color-border: var(--color-border-strong);
+    --focus-ring-width: 3px;
+  }
+}
+
 @media (forced-colors: active) {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  summary:focus-visible,
+  [contenteditable="true"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline-color: Highlight;
+  }
+
   .button {
-    border: 1px solid ButtonText;
+    border-color: ButtonText;
   }
 
   .skip-link {
     border-color: CanvasText;
+  }
+
+  input[aria-invalid="true"],
+  textarea[aria-invalid="true"],
+  select[aria-invalid="true"],
+  input:user-invalid,
+  textarea:user-invalid,
+  select:user-invalid {
+    border-color: Mark;
   }
 }
