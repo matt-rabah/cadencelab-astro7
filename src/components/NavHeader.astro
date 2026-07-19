@@ -1,6 +1,22 @@
 ---
 import wordmark from "../assets/brand/cadencelab-wordmark-light-color.svg";
 
+interface NavigationItem {
+  label: string;
+  href: string;
+  status?: string;
+}
+
+interface NavigationGroup {
+  label: string;
+  menuId: string;
+  eyebrow: string;
+  heading: string;
+  description: string;
+  items: NavigationItem[];
+  compact?: boolean;
+}
+
 const currentPath = Astro.url.pathname;
 
 const normalizePath = (path: string): string => {
@@ -16,58 +32,94 @@ const isCurrentSection = (href: string): boolean => {
   return normalizePath(currentPath).startsWith(normalizePath(href));
 };
 
-const productLinks = [
+const navigationGroups: NavigationGroup[] = [
   {
-    label: "Experience Foundations",
-    href: "/product/experience-foundations/",
+    label: "About",
+    menuId: "about-menu",
+    eyebrow: "About Cadence Lab",
+    heading: "Built around better experiences",
+    description:
+      "Learn more about the perspective and experience behind Cadence Lab.",
+    compact: true,
+    items: [
+      {
+        label: "Bio",
+        href: "/about/",
+        status: "Coming soon",
+      },
+    ],
   },
   {
-    label: "AI Experience",
-    href: "/product/ai-experience/",
+    label: "Product",
+    menuId: "product-menu",
+    eyebrow: "Product",
+    heading: "Build experiences that work in practice",
+    description:
+      "Explore focused experience offerings designed around the systems, moments, and decisions that shape how people interact with organizations.",
+    items: [
+      {
+        label: "Experience Foundations",
+        href: "/product/experience-foundations/",
+      },
+      {
+        label: "AI Experience",
+        href: "/product/ai-experience/",
+      },
+      {
+        label: "Digital Experiences",
+        href: "/product/digital-experiences/",
+      },
+      {
+        label: "CX on Location",
+        href: "/product/cx-on-location/",
+      },
+    ],
   },
   {
-    label: "Digital Experiences",
-    href: "/product/digital-experiences/",
+    label: "Solutions",
+    menuId: "solutions-menu",
+    eyebrow: "Solutions",
+    heading: "Start with the problem you need to solve",
+    description:
+      "Find a path based on where you operate, who owns the experience, or the outcome your organization needs to improve.",
+    items: [
+      {
+        label: "By industry",
+        href: "/solutions/industry/",
+      },
+      {
+        label: "By team",
+        href: "/solutions/team/",
+      },
+      {
+        label: "By use case",
+        href: "/solutions/use-case/",
+      },
+    ],
   },
   {
-    label: "CX on Location",
-    href: "/product/cx-on-location/",
+    label: "Free resources",
+    menuId: "resources-menu",
+    eyebrow: "Free resources",
+    heading: "Useful tools without the noise",
+    description:
+      "Practical resources for people working across customer experience, digital systems, and applied AI.",
+    compact: true,
+    items: [
+      {
+        label: "List of AI tools",
+        href: "/resources/ai-tools/",
+        status: "Coming soon",
+      },
+    ],
   },
 ];
 
-const solutionLinks = [
-  {
-    label: "By industry",
-    href: "/solutions/industry/",
-  },
-  {
-    label: "By team",
-    href: "/solutions/team/",
-  },
-  {
-    label: "By use case",
-    href: "/solutions/use-case/",
-  },
-];
-
-const aboutLinks = [
-  {
-    label: "Bio",
-    href: "/about/",
-    status: "Coming soon",
-  },
-];
-
-const resourceLinks = [
-  {
-    label: "List of AI tools",
-    href: "/resources/ai-tools/",
-    status: "Coming soon",
-  },
-];
+const groupIsCurrent = (group: NavigationGroup): boolean =>
+  group.items.some((item) => isCurrentSection(item.href));
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="desktop-header">
     <div class="brand-zone">
       <a
@@ -79,8 +131,8 @@ const resourceLinks = [
         <img
           src={wordmark.src ?? wordmark}
           alt=""
-          width="180"
-          height="35"
+          width="3000"
+          height="413"
           class="desktop-wordmark"
         />
       </a>
@@ -88,360 +140,267 @@ const resourceLinks = [
 
     <div class="header-navigation">
       <div class="utility-row">
-        <form class="search-form" role="search" action="/search/" method="get">
-          <label class="visually-hidden" for="site-search">
-            Search Cadence Lab
-          </label>
+        <search class="site-search">
+          <form class="search-form" action="/search/" method="get">
+            <label class="visually-hidden" for="desktop-site-search">
+              Search Cadence Lab
+            </label>
 
-          <svg
-            class="search-icon"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
-            ></path>
-          </svg>
+            <input
+              id="desktop-site-search"
+              class="search-input"
+              type="search"
+              name="q"
+              placeholder="Search insights and resources"
+            />
 
-          <input
-            id="site-search"
-            class="search-input"
-            type="search"
-            name="q"
-            placeholder="Search Cadence Lab"
-            autocomplete="off"
-          />
-        </form>
+            <button class="search-submit" type="submit">
+              <span class="visually-hidden">Submit search</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
+                ></path>
+              </svg>
+            </button>
+          </form>
+        </search>
 
-        <nav class="utility-navigation" aria-label="Utility navigation">
-          <a
-            href="/support/"
-            aria-current={isCurrentPage("/support/") ? "page" : undefined}
-          >
-            Support
-          </a>
-
-          <a
-            href="/contact/"
-            aria-current={isCurrentPage("/contact/") ? "page" : undefined}
-          >
-            Contact
-          </a>
+        <nav class="utility-navigation" aria-label="Utility">
+          <ul role="list">
+            <li>
+              <a
+                href="/support/"
+                aria-current={isCurrentPage("/support/") ? "page" : undefined}
+              >
+                Support
+              </a>
+            </li>
+            <li>
+              <a
+                href="/contact/"
+                aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
         </nav>
       </div>
 
       <div class="primary-row">
-        <nav class="primary-navigation" aria-label="Primary navigation">
-          <a
-            href="/fit-check/"
-            class="primary-link"
-            aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}
-          >
-            Fit Check™
-          </a>
-
-          <div class="navigation-group">
-            <button
-              class="navigation-trigger"
-              type="button"
-              aria-expanded="false"
-              aria-controls="about-menu"
-            >
-              <span>About</span>
-
-              <svg
-                class="expand-icon"
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
+        <nav class="primary-navigation" aria-label="Primary">
+          <ul class="primary-navigation-list" role="list">
+            <li>
+              <a
+                href="/fit-check/"
+                class="primary-link"
+                aria-current={
+                  isCurrentSection("/fit-check/") ? "page" : undefined
+                }
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m5 7.5 5 5 5-5"></path>
-              </svg>
-            </button>
+                Fit Check™
+              </a>
+            </li>
 
-            <div
-              id="about-menu"
-              class="mega-menu mega-menu-compact"
-              data-mega-menu
-              hidden
-            >
-              <div class="mega-menu-inner mega-menu-inner-compact">
-                <section class="featured-column">
-                  <p class="menu-label">About Cadence Lab</p>
-                  <h2>Built around better experiences</h2>
+            {
+              navigationGroups.slice(0, 3).map((group) => (
+                <li
+                  class="navigation-group"
+                  data-navigation-group
+                  data-current-section={groupIsCurrent(group) ? "true" : undefined}
+                >
+                  <button
+                    class="navigation-trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls={group.menuId}
+                  >
+                    <span>{group.label}</span>
+                    {groupIsCurrent(group) && (
+                      <span class="visually-hidden">, current section</span>
+                    )}
+                    <svg
+                      class="expand-icon"
+                      aria-hidden="true"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m5 7.5 5 5 5-5"
+                      ></path>
+                    </svg>
+                  </button>
 
-                  <p>
-                    Learn more about the perspective and experience behind
-                    Cadence Lab.
-                  </p>
-                </section>
+                  <div
+                    id={group.menuId}
+                    class:list={[
+                      "mega-menu",
+                      { "mega-menu-compact": group.compact },
+                    ]}
+                    data-mega-menu
+                    hidden
+                  >
+                    <div
+                      class:list={[
+                        "mega-menu-inner",
+                        { "mega-menu-inner-compact": group.compact },
+                      ]}
+                    >
+                      <div class="featured-column">
+                        <p class="menu-label">{group.eyebrow}</p>
+                        <p class="menu-heading">{group.heading}</p>
+                        <p class="menu-description">{group.description}</p>
+                      </div>
 
-                <section class="link-column">
-                  <p class="menu-label">About</p>
+                      <div class="link-column">
+                        <p class="menu-label">
+                          {group.compact ? group.label : `Explore ${group.label.toLowerCase()}`}
+                        </p>
 
-                  <ul class="menu-link-list">
-                    {
-                      aboutLinks.map((item) => (
-                        <li>
-                          <a
-                            href={item.href}
-                            aria-current={
-                              isCurrentSection(item.href) ? "page" : undefined
-                            }
-                          >
-                            <span class="menu-link-label">{item.label}</span>
+                        <ul
+                          class:list={[
+                            "menu-link-list",
+                            { "menu-link-grid": !group.compact },
+                          ]}
+                          role="list"
+                        >
+                          {group.items.map((item) => (
+                            <li>
+                              <a
+                                href={item.href}
+                                aria-current={
+                                  isCurrentSection(item.href)
+                                    ? "page"
+                                    : undefined
+                                }
+                              >
+                                <span class="menu-link-label">{item.label}</span>
 
-                            {item.status && (
-                              <span class="menu-status">{item.status}</span>
-                            )}
-                          </a>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </section>
-              </div>
-            </div>
-          </div>
+                                {item.status ? (
+                                  <span class="menu-status">{item.status}</span>
+                                ) : (
+                                  <svg
+                                    class="menu-link-arrow"
+                                    aria-hidden="true"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.75"
+                                  >
+                                    <path
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M4 10h11m-4-4 4 4-4 4"
+                                    ></path>
+                                  </svg>
+                                )}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
 
-          <div class="navigation-group">
-            <button
-              class="navigation-trigger"
-              type="button"
-              aria-expanded="false"
-              aria-controls="product-menu"
-            >
-              <span>Product</span>
-
-              <svg
-                class="expand-icon"
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
+            <li>
+              <a
+                href="/blog/"
+                class="primary-link"
+                aria-current={isCurrentSection("/blog/") ? "page" : undefined}
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m5 7.5 5 5 5-5"></path>
-              </svg>
-            </button>
+                Insights
+              </a>
+            </li>
 
-            <div id="product-menu" class="mega-menu" data-mega-menu hidden>
-              <div class="mega-menu-inner">
-                <section class="featured-column">
-                  <p class="menu-label">Product</p>
-                  <h2>Build experiences that work in practice</h2>
+            {
+              navigationGroups.slice(3).map((group) => (
+                <li
+                  class="navigation-group"
+                  data-navigation-group
+                  data-current-section={groupIsCurrent(group) ? "true" : undefined}
+                >
+                  <button
+                    class="navigation-trigger"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls={group.menuId}
+                  >
+                    <span>{group.label}</span>
+                    {groupIsCurrent(group) && (
+                      <span class="visually-hidden">, current section</span>
+                    )}
+                    <svg
+                      class="expand-icon"
+                      aria-hidden="true"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m5 7.5 5 5 5-5"
+                      ></path>
+                    </svg>
+                  </button>
 
-                  <p>
-                    Explore focused experience offerings designed around the
-                    systems, moments, and decisions that shape how people
-                    interact with organizations.
-                  </p>
-                </section>
+                  <div
+                    id={group.menuId}
+                    class="mega-menu mega-menu-compact"
+                    data-mega-menu
+                    hidden
+                  >
+                    <div class="mega-menu-inner mega-menu-inner-compact">
+                      <div class="featured-column">
+                        <p class="menu-label">{group.eyebrow}</p>
+                        <p class="menu-heading">{group.heading}</p>
+                        <p class="menu-description">{group.description}</p>
+                      </div>
 
-                <section class="link-column link-column-wide">
-                  <p class="menu-label">Experience solutions</p>
-
-                  <ul class="menu-link-list menu-link-grid">
-                    {
-                      productLinks.map((item) => (
-                        <li>
-                          <a
-                            href={item.href}
-                            aria-current={
-                              isCurrentSection(item.href) ? "page" : undefined
-                            }
-                          >
-                            <span class="menu-link-label">{item.label}</span>
-
-                            <svg
-                              class="menu-link-arrow"
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="1.75"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M4 10h11m-4-4 4 4-4 4"
-                              />
-                            </svg>
-                          </a>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </section>
-              </div>
-            </div>
-          </div>
-
-          <div class="navigation-group">
-            <button
-              class="navigation-trigger"
-              type="button"
-              aria-expanded="false"
-              aria-controls="solutions-menu"
-            >
-              <span>Solutions</span>
-
-              <svg
-                class="expand-icon"
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m5 7.5 5 5 5-5"></path>
-              </svg>
-            </button>
-
-            <div id="solutions-menu" class="mega-menu" data-mega-menu hidden>
-              <div class="mega-menu-inner">
-                <section class="featured-column">
-                  <p class="menu-label">Solutions</p>
-                  <h2>Start with the problem you need to solve</h2>
-
-                  <p>
-                    Find a path based on where you operate, who owns the
-                    experience, or the outcome your organization needs to
-                    improve.
-                  </p>
-                </section>
-
-                <section class="link-column link-column-wide">
-                  <p class="menu-label">Explore solutions</p>
-
-                  <ul class="menu-link-list menu-link-grid">
-                    {
-                      solutionLinks.map((item) => (
-                        <li>
-                          <a
-                            href={item.href}
-                            aria-current={
-                              isCurrentSection(item.href) ? "page" : undefined
-                            }
-                          >
-                            <span class="menu-link-label">{item.label}</span>
-
-                            <svg
-                              class="menu-link-arrow"
-                              aria-hidden="true"
-                              viewBox="0 0 20 20"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="1.75"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M4 10h11m-4-4 4 4-4 4"
-                              />
-                            </svg>
-                          </a>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </section>
-              </div>
-            </div>
-          </div>
-
-          <a
-            href="/blog/"
-            class="primary-link"
-            aria-current={isCurrentSection("/blog/") ? "page" : undefined}
-          >
-            Blog
-          </a>
-
-          <div class="navigation-group">
-            <button
-              class="navigation-trigger"
-              type="button"
-              aria-expanded="false"
-              aria-controls="resources-menu"
-            >
-              <span>Free resources</span>
-
-              <svg
-                class="expand-icon"
-                aria-hidden="true"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m5 7.5 5 5 5-5"></path>
-              </svg>
-            </button>
-
-            <div
-              id="resources-menu"
-              class="mega-menu mega-menu-compact"
-              data-mega-menu
-              hidden
-            >
-              <div class="mega-menu-inner mega-menu-inner-compact">
-                <section class="featured-column">
-                  <p class="menu-label">Free resources</p>
-                  <h2>Useful tools without the noise</h2>
-
-                  <p>
-                    Practical resources for people working across customer
-                    experience, digital systems, and applied AI.
-                  </p>
-                </section>
-
-                <section class="link-column">
-                  <p class="menu-label">Resources</p>
-
-                  <ul class="menu-link-list">
-                    {
-                      resourceLinks.map((item) => (
-                        <li>
-                          <a
-                            href={item.href}
-                            aria-current={
-                              isCurrentSection(item.href) ? "page" : undefined
-                            }
-                          >
-                            <span class="menu-link-label">{item.label}</span>
-
-                            {item.status && (
-                              <span class="menu-status">{item.status}</span>
-                            )}
-                          </a>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </section>
-              </div>
-            </div>
-          </div>
+                      <div class="link-column">
+                        <p class="menu-label">{group.label}</p>
+                        <ul class="menu-link-list" role="list">
+                          {group.items.map((item) => (
+                            <li>
+                              <a
+                                href={item.href}
+                                aria-current={
+                                  isCurrentSection(item.href)
+                                    ? "page"
+                                    : undefined
+                                }
+                              >
+                                <span class="menu-link-label">{item.label}</span>
+                                {item.status && (
+                                  <span class="menu-status">{item.status}</span>
+                                )}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
         </nav>
 
         <a
@@ -457,12 +416,12 @@ const resourceLinks = [
 
   <div class="mobile-header">
     <button
-      id="mobile-menu-trigger"
       class="mobile-menu-trigger"
       type="button"
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-navigation"
+      data-mobile-menu-trigger
     >
       <svg
         class="menu-icon menu-icon-open"
@@ -475,7 +434,8 @@ const resourceLinks = [
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"></path>
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
       </svg>
 
       <svg
@@ -484,12 +444,13 @@ const resourceLinks = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        style="display: none;"
+        stroke-width="2"
       >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="m6 6 12 12M18 6 6 18"></path>
+          d="m6 6 12 12M18 6 6 18"
+        ></path>
       </svg>
     </button>
 
@@ -502,527 +463,513 @@ const resourceLinks = [
       <img
         src={wordmark.src ?? wordmark}
         alt=""
-        width="136"
-        height="27"
+        width="3000"
+        height="413"
         class="mobile-wordmark"
       />
     </a>
 
-    <a href="/fit-check/" class="mobile-cta">Fit Check™</a>
+    <a
+      href="/fit-check/"
+      class="mobile-cta"
+      aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}
+    >
+      Fit Check™
+    </a>
   </div>
 
   <div
     id="mobile-navigation"
     class="mobile-navigation"
-    aria-hidden="true"
+    data-mobile-navigation
     hidden
+    inert
   >
-    <nav class="mobile-navigation-inner" aria-label="Mobile navigation">
-      <a
-        href="/fit-check/"
-        class="mobile-primary-link"
-        aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}
-      >
-        Fit Check™
-      </a>
+    <div class="mobile-navigation-inner">
+      <search class="mobile-search">
+        <form class="mobile-search-form" action="/search/" method="get">
+          <label class="visually-hidden" for="mobile-site-search">
+            Search Cadence Lab
+          </label>
+          <input
+            id="mobile-site-search"
+            class="mobile-search-input"
+            type="search"
+            name="q"
+            placeholder="Search insights and resources"
+          />
+          <button class="mobile-search-submit" type="submit">
+            <span class="visually-hidden">Submit search</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
+              ></path>
+            </svg>
+          </button>
+        </form>
+      </search>
 
-      <details class="mobile-navigation-group">
-        <summary>
-          <span>About</span>
+      <nav aria-label="Mobile primary">
+        <ul class="mobile-navigation-list" role="list">
+          <li>
+            <a
+              href="/fit-check/"
+              class="mobile-primary-link"
+              aria-current={
+                isCurrentSection("/fit-check/") ? "page" : undefined
+              }
+            >
+              Fit Check™
+            </a>
+          </li>
 
-          <svg
-            class="mobile-expand-icon"
-            aria-hidden="true"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5 7.5 5 5 5-5"></path>
-          </svg>
-        </summary>
-
-        <div class="mobile-submenu">
-          {
-            aboutLinks.map((item) => (
-              <a
-                href={item.href}
-                aria-current={isCurrentSection(item.href) ? "page" : undefined}
+          {navigationGroups.slice(0, 3).map((group) => (
+            <li>
+              <details
+                class="mobile-navigation-group"
+                data-current-section={groupIsCurrent(group) ? "true" : undefined}
               >
-                <span>{item.label}</span>
+                <summary>
+                  <span>{group.label}</span>
+                  {groupIsCurrent(group) && (
+                    <span class="visually-hidden">, current section</span>
+                  )}
+                  <svg
+                    class="mobile-expand-icon"
+                    aria-hidden="true"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m5 7.5 5 5 5-5"
+                    ></path>
+                  </svg>
+                </summary>
 
-                {item.status && (
-                  <span class="mobile-menu-status">{item.status}</span>
-                )}
-              </a>
-            ))
-          }
-        </div>
-      </details>
+                <ul class="mobile-submenu" role="list">
+                  {group.items.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        aria-current={
+                          isCurrentSection(item.href) ? "page" : undefined
+                        }
+                      >
+                        <span>{item.label}</span>
+                        {item.status && (
+                          <span class="mobile-menu-status">{item.status}</span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ))}
 
-      <details class="mobile-navigation-group">
-        <summary>
-          <span>Product</span>
+          <li>
+            <a
+              href="/blog/"
+              class="mobile-primary-link"
+              aria-current={isCurrentSection("/blog/") ? "page" : undefined}
+            >
+              Insights
+            </a>
+          </li>
 
-          <svg
-            class="mobile-expand-icon"
-            aria-hidden="true"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5 7.5 5 5 5-5"></path>
-          </svg>
-        </summary>
-
-        <div class="mobile-submenu">
-          {
-            productLinks.map((item) => (
-              <a
-                href={item.href}
-                aria-current={isCurrentSection(item.href) ? "page" : undefined}
+          {navigationGroups.slice(3).map((group) => (
+            <li>
+              <details
+                class="mobile-navigation-group"
+                data-current-section={groupIsCurrent(group) ? "true" : undefined}
               >
-                {item.label}
-              </a>
-            ))
-          }
-        </div>
-      </details>
+                <summary>
+                  <span>{group.label}</span>
+                  {groupIsCurrent(group) && (
+                    <span class="visually-hidden">, current section</span>
+                  )}
+                  <svg
+                    class="mobile-expand-icon"
+                    aria-hidden="true"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m5 7.5 5 5 5-5"
+                    ></path>
+                  </svg>
+                </summary>
 
-      <details class="mobile-navigation-group">
-        <summary>
-          <span>Solutions</span>
+                <ul class="mobile-submenu" role="list">
+                  {group.items.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        aria-current={
+                          isCurrentSection(item.href) ? "page" : undefined
+                        }
+                      >
+                        <span>{item.label}</span>
+                        {item.status && (
+                          <span class="mobile-menu-status">{item.status}</span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-          <svg
-            class="mobile-expand-icon"
-            aria-hidden="true"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5 7.5 5 5 5-5"></path>
-          </svg>
-        </summary>
-
-        <div class="mobile-submenu">
-          {
-            solutionLinks.map((item) => (
-              <a
-                href={item.href}
-                aria-current={isCurrentSection(item.href) ? "page" : undefined}
-              >
-                {item.label}
-              </a>
-            ))
-          }
-        </div>
-      </details>
-
-      <a
-        href="/blog/"
-        class="mobile-primary-link"
-        aria-current={isCurrentSection("/blog/") ? "page" : undefined}
-      >
-        Blog
-      </a>
-
-      <details class="mobile-navigation-group">
-        <summary>
-          <span>Free resources</span>
-
-          <svg
-            class="mobile-expand-icon"
-            aria-hidden="true"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5 7.5 5 5 5-5"></path>
-          </svg>
-        </summary>
-
-        <div class="mobile-submenu">
-          {
-            resourceLinks.map((item) => (
-              <a
-                href={item.href}
-                aria-current={isCurrentSection(item.href) ? "page" : undefined}
-              >
-                <span>{item.label}</span>
-
-                {item.status && (
-                  <span class="mobile-menu-status">{item.status}</span>
-                )}
-              </a>
-            ))
-          }
-        </div>
-      </details>
-
-      <div class="mobile-navigation-footer">
-        <a href="/support/">Support</a>
-        <a href="/contact/">Contact</a>
-      </div>
-    </nav>
+      <nav class="mobile-utility-navigation" aria-label="Mobile utility">
+        <ul role="list">
+          <li><a href="/support/">Support</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
 <script>
+  type CadenceWindow = Window & {
+    __cadenceHeaderController?: AbortController;
+    __cadenceHeaderLoader?: EventListener;
+  };
+
+  const cadenceWindow = window as CadenceWindow;
+
   const initializeHeader = () => {
-    const header = document.querySelector<HTMLElement>(".site-header");
+    cadenceWindow.__cadenceHeaderController?.abort();
 
-    if (!header || header.dataset.initialized === "true") {
-      return;
-    }
+    const controller = new AbortController();
+    cadenceWindow.__cadenceHeaderController = controller;
+    const { signal } = controller;
 
-    header.dataset.initialized = "true";
+    const header = document.querySelector<HTMLElement>("[data-site-header]");
+
+    if (!header) return;
 
     const mobileTrigger = header.querySelector<HTMLButtonElement>(
-      "#mobile-menu-trigger",
+      "[data-mobile-menu-trigger]",
     );
-
-    const mobileNavigation =
-      header.querySelector<HTMLElement>("#mobile-navigation");
-
-    const openIcon = header.querySelector<SVGElement>(".menu-icon-open");
-    const closeIcon = header.querySelector<SVGElement>(".menu-icon-close");
-
-    const navigationGroups =
-      header.querySelectorAll<HTMLElement>(".navigation-group");
-
+    const mobileNavigation = header.querySelector<HTMLElement>(
+      "[data-mobile-navigation]",
+    );
+    const navigationGroups = Array.from(
+      header.querySelectorAll<HTMLElement>("[data-navigation-group]"),
+    );
+    const mobileDetails = Array.from(
+      header.querySelectorAll<HTMLDetailsElement>(
+        ".mobile-navigation-group",
+      ),
+    );
     const desktopMediaQuery = window.matchMedia("(min-width: 60rem)");
 
-    const collapseThreshold = 96;
-    const expandDistance = 28;
+    let activeDesktopTrigger: HTMLButtonElement | null = null;
 
-    let lastScrollY = window.scrollY;
-    let upwardDistance = 0;
-    let scrollFrameRequested = false;
+    const closeDesktopMenus = (restoreFocus = false) => {
+      const triggerToRestore = activeDesktopTrigger;
 
-    const setDesktopHeaderState = (isCollapsed: boolean) => {
-      if (!desktopMediaQuery.matches) {
-        header.classList.remove("is-collapsed");
-        return;
-      }
-
-      header.classList.toggle("is-collapsed", isCollapsed);
-    };
-
-    const updateDesktopHeaderOnScroll = () => {
-      scrollFrameRequested = false;
-
-      if (!desktopMediaQuery.matches) {
-        setDesktopHeaderState(false);
-        lastScrollY = window.scrollY;
-        upwardDistance = 0;
-        return;
-      }
-
-      const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollY;
-
-      if (currentScrollY <= collapseThreshold) {
-        setDesktopHeaderState(false);
-        upwardDistance = 0;
-      } else if (delta > 0) {
-        setDesktopHeaderState(true);
-        upwardDistance = 0;
-      } else if (delta < 0) {
-        upwardDistance += Math.abs(delta);
-
-        if (upwardDistance >= expandDistance) {
-          setDesktopHeaderState(false);
-          upwardDistance = 0;
-        }
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    const requestDesktopHeaderUpdate = () => {
-      if (scrollFrameRequested) {
-        return;
-      }
-
-      scrollFrameRequested = true;
-      window.requestAnimationFrame(updateDesktopHeaderOnScroll);
-    };
-
-    const closeDesktopMenus = (exception?: HTMLElement) => {
       navigationGroups.forEach((group) => {
-        if (group === exception) {
-          return;
-        }
-
         const trigger = group.querySelector<HTMLButtonElement>(
           ".navigation-trigger",
         );
-
         const menu = group.querySelector<HTMLElement>("[data-mega-menu]");
 
         trigger?.setAttribute("aria-expanded", "false");
-
-        if (menu) {
-          menu.hidden = true;
-        }
+        if (menu) menu.hidden = true;
       });
+
+      activeDesktopTrigger = null;
+
+      if (restoreFocus) triggerToRestore?.focus();
     };
 
-    navigationGroups.forEach((group) => {
-      const trigger = group.querySelector<HTMLButtonElement>(
-        ".navigation-trigger",
-      );
-
-      const menu = group.querySelector<HTMLElement>("[data-mega-menu]");
-
-      if (!trigger || !menu) {
-        return;
-      }
-
-      trigger.addEventListener("click", (event) => {
-        event.stopPropagation();
-
-        const shouldOpen = trigger.getAttribute("aria-expanded") !== "true";
-
-        closeDesktopMenus(group);
-
-        trigger.setAttribute("aria-expanded", String(shouldOpen));
-        menu.hidden = !shouldOpen;
-      });
-
-      menu.addEventListener("click", (event) => {
-        event.stopPropagation();
-      });
-    });
-
-    const setMobileMenuState = (isOpen: boolean) => {
-      if (!mobileTrigger || !mobileNavigation) {
-        return;
-      }
+    const setMobileMenuState = (isOpen: boolean, restoreFocus = false) => {
+      if (!mobileTrigger || !mobileNavigation) return;
 
       mobileTrigger.setAttribute("aria-expanded", String(isOpen));
-
       mobileTrigger.setAttribute(
         "aria-label",
         isOpen ? "Close navigation menu" : "Open navigation menu",
       );
 
       mobileNavigation.hidden = !isOpen;
-      mobileNavigation.setAttribute("aria-hidden", String(!isOpen));
-
-      if (openIcon) {
-        openIcon.style.display = isOpen ? "none" : "";
-      }
-
-      if (closeIcon) {
-        closeIcon.style.display = !isOpen ? "none" : "";
-      }
-
+      mobileNavigation.toggleAttribute("inert", !isOpen);
       document.documentElement.classList.toggle(
         "mobile-navigation-open",
         isOpen,
       );
+
+      if (!isOpen) {
+        mobileDetails.forEach((details) => details.removeAttribute("open"));
+      }
+
+      if (restoreFocus) mobileTrigger.focus();
     };
 
-    mobileTrigger?.addEventListener("click", (event) => {
-      event.stopPropagation();
+    navigationGroups.forEach((group) => {
+      const trigger = group.querySelector<HTMLButtonElement>(
+        ".navigation-trigger",
+      );
+      const menu = group.querySelector<HTMLElement>("[data-mega-menu]");
 
-      const isOpen = mobileTrigger.getAttribute("aria-expanded") !== "true";
+      if (!trigger || !menu) return;
 
-      setMobileMenuState(isOpen);
-      closeDesktopMenus();
+      trigger.addEventListener(
+        "click",
+        () => {
+          const shouldOpen = trigger.getAttribute("aria-expanded") !== "true";
+
+          closeDesktopMenus();
+
+          if (shouldOpen) {
+            trigger.setAttribute("aria-expanded", "true");
+            menu.hidden = false;
+            activeDesktopTrigger = trigger;
+          }
+        },
+        { signal },
+      );
     });
 
-    mobileNavigation?.addEventListener("click", (event) => {
-      event.stopPropagation();
+    mobileTrigger?.addEventListener(
+      "click",
+      () => {
+        const shouldOpen =
+          mobileTrigger.getAttribute("aria-expanded") !== "true";
 
-      const target = event.target;
+        closeDesktopMenus();
+        setMobileMenuState(shouldOpen);
+      },
+      { signal },
+    );
 
-      if (target instanceof HTMLAnchorElement) {
+    mobileNavigation?.addEventListener(
+      "click",
+      (event) => {
+        if (
+          event.target instanceof Element &&
+          event.target.closest("a")
+        ) {
+          setMobileMenuState(false);
+        }
+      },
+      { signal },
+    );
+
+    document.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (!(event.target instanceof Node) || header.contains(event.target)) {
+          return;
+        }
+
+        closeDesktopMenus();
         setMobileMenuState(false);
-      }
-    });
+      },
+      { signal },
+    );
 
-    document.addEventListener("click", () => {
+    document.addEventListener(
+      "focusin",
+      (event) => {
+        if (!(event.target instanceof Node)) return;
+
+        const activeGroup = event.target.parentElement?.closest(
+          "[data-navigation-group]",
+        );
+
+        if (!activeGroup) closeDesktopMenus();
+      },
+      { signal },
+    );
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key !== "Escape") return;
+
+        if (activeDesktopTrigger) {
+          event.preventDefault();
+          closeDesktopMenus(true);
+          return;
+        }
+
+        if (mobileTrigger?.getAttribute("aria-expanded") === "true") {
+          event.preventDefault();
+          setMobileMenuState(false, true);
+        }
+      },
+      { signal },
+    );
+
+    const handleViewportChange = () => {
       closeDesktopMenus();
       setMobileMenuState(false);
-    });
+    };
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeDesktopMenus();
-        setMobileMenuState(false);
-        mobileTrigger?.focus();
-      }
+    desktopMediaQuery.addEventListener("change", handleViewportChange, {
+      signal,
     });
-
-    window.addEventListener("scroll", requestDesktopHeaderUpdate, {
-      passive: true,
-    });
-
-    desktopMediaQuery.addEventListener("change", () => {
-      setDesktopHeaderState(false);
-      lastScrollY = window.scrollY;
-      upwardDistance = 0;
-    });
-
-    window.addEventListener("resize", () => {
-      if (desktopMediaQuery.matches) {
-        setMobileMenuState(false);
-      } else {
-        setDesktopHeaderState(false);
-        closeDesktopMenus();
-      }
-    });
-
-    updateDesktopHeaderOnScroll();
   };
 
-  document.addEventListener("astro:page-load", initializeHeader);
+  if (cadenceWindow.__cadenceHeaderLoader) {
+    document.removeEventListener(
+      "astro:page-load",
+      cadenceWindow.__cadenceHeaderLoader,
+    );
+  }
+
+  const headerLoader: EventListener = () => initializeHeader();
+  cadenceWindow.__cadenceHeaderLoader = headerLoader;
+  document.addEventListener("astro:page-load", headerLoader);
   initializeHeader();
 </script>
 
 <style>
   .site-header {
     --desktop-header-height: 6.5rem;
-    --desktop-primary-row-height: 3rem;
 
     position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    border-bottom: 1px solid var(--color-border);
-    background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+    inset-block-start: 0;
+    z-index: 100;
+    inline-size: 100%;
+    border-block-end: var(--border-width) solid var(--color-border);
+    background: var(--color-surface);
     color: var(--color-text);
     font-family: var(--ff-sans);
     font-feature-settings: var(--fea-graphik);
-    backdrop-filter: blur(0.75rem);
   }
 
   .desktop-header {
     display: grid;
-    grid-template-columns: minmax(13.5rem, 15rem) minmax(0, 1fr);
-    min-height: var(--desktop-header-height);
-    transition: min-height var(--transition-standard);
+    grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
+    min-block-size: var(--desktop-header-height);
   }
 
   .brand-zone {
     display: flex;
     align-items: center;
-    padding-inline: clamp(1.5rem, 3vw, 2.5rem);
-    border-right: 1px solid var(--color-border);
-    transition:
-      padding-inline var(--transition-standard),
-      min-height var(--transition-standard);
+    padding-inline: clamp(1.25rem, 2.5vw, 2.25rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
   }
 
   .brand-link,
   .mobile-brand-link {
     display: inline-flex;
+    inline-size: fit-content;
     align-items: center;
-    width: fit-content;
     color: inherit;
     text-decoration: none;
   }
 
   .desktop-wordmark {
-    width: clamp(8.5rem, 10vw, 11.25rem);
-    height: auto;
-    transform-origin: left center;
-    transition: width var(--transition-standard);
+    inline-size: clamp(8.5rem, 10vw, 10.75rem);
+    block-size: auto;
   }
 
   .header-navigation {
     display: flex;
-    min-width: 0;
+    min-inline-size: 0;
     flex-direction: column;
   }
 
   .utility-row {
     display: flex;
-    min-height: 3.5rem;
-    max-height: 3.5rem;
+    min-block-size: 3rem;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    overflow: hidden;
-    padding-inline: clamp(1.5rem, 3vw, 3rem);
-    border-bottom: 1px solid var(--color-border);
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-      min-height var(--transition-standard),
-      max-height var(--transition-standard),
-      opacity var(--transition-fast),
-      transform var(--transition-standard),
-      border-color var(--transition-standard);
+    gap: var(--space-8);
+    padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+    border-block-end: var(--border-width) solid var(--color-border);
   }
 
-  .search-form {
+  .site-search {
+    inline-size: min(100%, 25rem);
+  }
+
+  .search-form,
+  .mobile-search-form {
     position: relative;
-    width: min(100%, 25rem);
   }
 
-  .search-icon {
-    position: absolute;
-    top: 50%;
-    left: 0.875rem;
-    width: 1rem;
-    height: 1rem;
-    color: var(--color-text-subtle);
-    pointer-events: none;
-    transform: translateY(-50%);
-  }
-
-  .search-input {
-    width: 100%;
-    min-height: 2.25rem;
-    padding: 0.5rem 1rem 0.5rem 2.625rem;
-    border: 1px solid transparent;
+  .search-input,
+  .mobile-search-input {
+    inline-size: 100%;
+    min-block-size: 2.25rem;
+    padding: 0.5rem 2.75rem 0.5rem 0.75rem;
+    border: var(--border-width) solid transparent;
     border-radius: var(--radius-sm);
     background: var(--color-surface-subtle);
     color: var(--color-text);
-    font-family: var(--ff-sans);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-regular);
+    font: inherit;
+    font-size: var(--fs-small);
     line-height: 1.3;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
     transition:
-      background-color var(--transition-fast),
-      border-color var(--transition-fast);
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
   }
 
-  .search-input:hover {
-    border-color: var(--color-border-strong);
+  .search-input::placeholder,
+  .mobile-search-input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
   }
 
-  .search-input:focus {
+  .search-submit,
+  .mobile-search-submit {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    display: inline-flex;
+    inline-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .search-submit svg,
+  .mobile-search-submit svg {
+    inline-size: 1rem;
+    block-size: 1rem;
+  }
+
+  .search-form:focus-within .search-input,
+  .mobile-search-form:focus-within .mobile-search-input {
     border-color: var(--color-blue);
     background: var(--color-surface-pure);
-    outline: 2px solid transparent;
   }
 
-  .utility-navigation {
+  .utility-navigation ul {
     display: flex;
-    flex: 0 0 auto;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
   }
 
   .utility-navigation a {
@@ -1030,47 +977,59 @@ const resourceLinks = [
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1.3;
-    letter-spacing: 0;
-    text-decoration: none;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.25em;
+    transition:
+      color var(--transition-fast),
+      text-decoration-color var(--transition-fast);
   }
 
-  .utility-navigation a:hover,
   .utility-navigation a[aria-current="page"] {
     color: var(--color-blue);
+    text-decoration-color: currentColor;
   }
 
   .primary-row {
     display: flex;
-    min-height: var(--desktop-primary-row-height);
+    min-block-size: 3.5rem;
     align-items: stretch;
     justify-content: space-between;
   }
 
   .primary-navigation {
+    min-inline-size: 0;
+  }
+
+  .primary-navigation-list {
     display: flex;
-    min-width: 0;
+    block-size: 100%;
     align-items: stretch;
-    padding-left: clamp(0.75rem, 2vw, 1.75rem);
+    margin: 0;
+    padding: 0 0 0 clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  .primary-navigation-list > li {
+    display: flex;
   }
 
   .primary-link,
   .navigation-trigger {
+    position: relative;
     display: inline-flex;
-    min-height: 3rem;
+    min-block-size: 3.5rem;
     align-items: center;
     justify-content: center;
     gap: 0.375rem;
-    padding-inline: clamp(0.7rem, 1.2vw, 1.15rem);
+    padding-inline: clamp(0.625rem, 1.15vw, 1rem);
     border: 0;
     border-radius: 0;
     background: transparent;
     color: var(--color-text);
-    font-family: var(--ff-sans);
+    font: inherit;
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
@@ -1079,23 +1038,29 @@ const resourceLinks = [
       color var(--transition-fast);
   }
 
-  .primary-link:hover,
-  .primary-link[aria-current="page"],
-  .navigation-trigger:hover,
+  .primary-link[aria-current="page"]::after,
+  .navigation-group[data-current-section="true"] > .navigation-trigger::after {
+    position: absolute;
+    inset-inline: 0.75rem;
+    inset-block-end: 0;
+    block-size: 0.125rem;
+    background: var(--color-blue);
+    content: "";
+  }
+
+  .navigation-group {
+    position: static;
+  }
+
   .navigation-trigger[aria-expanded="true"] {
     background: var(--color-surface-subtle);
     color: var(--color-blue);
   }
 
-  .navigation-group {
-    position: static;
-    display: flex;
-  }
-
   .expand-icon {
-    width: 0.6875rem;
-    height: 0.6875rem;
-    color: currentColor;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    flex: 0 0 auto;
     transition: transform var(--transition-standard);
   }
 
@@ -1105,215 +1070,153 @@ const resourceLinks = [
 
   .header-cta {
     display: inline-flex;
-    min-height: 3rem;
+    min-block-size: 3.5rem;
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    padding-inline: clamp(1.25rem, 3vw, 3rem);
+    padding-inline: clamp(1.25rem, 2.5vw, 2.5rem);
     background: var(--color-blue);
     color: var(--color-light);
-    font-family: var(--ff-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
     text-decoration: none;
     white-space: nowrap;
     transition: background-color var(--transition-fast);
   }
 
-  .header-cta:hover {
-    background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
-    color: var(--color-light);
-  }
-
   .mega-menu {
     position: absolute;
-    top: var(--desktop-header-height);
-    left: 0;
-    width: 100%;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    inset-block-start: var(--desktop-header-height);
+    inset-inline: 0;
+    inline-size: 100%;
+    border-block: var(--border-width) solid var(--color-border);
     background: var(--color-surface-pure);
-    box-shadow: var(--shadow-lg);
-    transition: top var(--transition-standard);
+    box-shadow: var(--shadow-md);
   }
 
   .mega-menu[hidden] {
     display: none;
   }
 
-  .site-header.is-collapsed {
-    --desktop-header-height: var(--desktop-primary-row-height);
-  }
-
-  .site-header.is-collapsed .utility-row {
-    min-height: 0;
-    max-height: 0;
-    border-bottom-color: transparent;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-0.75rem);
-  }
-
-  .site-header.is-collapsed .desktop-wordmark {
-    width: clamp(7.75rem, 9vw, 9.5rem);
-  }
-
   .mega-menu-inner {
     display: grid;
-    grid-template-columns:
-      minmax(17rem, 0.85fr)
-      minmax(0, 1.65fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    width: min(calc(100% - (2 * var(--page-gutter))), 75rem);
+    grid-template-columns: minmax(17rem, 0.8fr) minmax(0, 1.6fr);
+    gap: clamp(3rem, 7vw, 7rem);
+    inline-size: min(calc(100% - (2 * var(--page-gutter))), 75rem);
     margin-inline: auto;
-    padding-block: 2.75rem;
+    padding-block: clamp(2rem, 4vw, 3rem);
   }
 
   .mega-menu-inner-compact {
-    grid-template-columns:
-      minmax(17rem, 1fr)
-      minmax(15rem, 1fr);
-    max-width: 62rem;
+    grid-template-columns: minmax(17rem, 1fr) minmax(15rem, 1fr);
+    max-inline-size: 60rem;
   }
 
   .featured-column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.875rem;
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface-subtle);
+    gap: var(--space-3);
+    padding-inline-start: var(--space-5);
+    border-inline-start: 0.1875rem solid var(--color-blue);
   }
 
   .menu-label {
     margin: 0;
     color: var(--color-text-muted);
-    font-family: var(--ff-sans);
+    font-family: var(--ff-utility);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1.3;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-transform: none;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
   }
 
-  .featured-column h2 {
+  .menu-heading {
     max-inline-size: 24ch;
     margin: 0;
     color: var(--color-text);
-    font-family: var(--ff-sans);
-    font-size: var(--fs-h4);
+    font-size: var(--fs-h3);
     font-weight: var(--fw-semibold);
-    line-height: var(--lh-h4);
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    text-wrap: balance;
   }
 
-  .featured-column > p:not(.menu-label) {
+  .menu-description {
     max-inline-size: 48ch;
     margin: 0;
     color: var(--color-text-muted);
-    font-family: var(--ff-sans);
     font-size: var(--fs-small);
-    font-weight: var(--fw-regular);
-    line-height: 1.55;
-    letter-spacing: 0;
+    line-height: var(--lh-small);
+    text-wrap: pretty;
   }
 
   .link-column {
-    min-width: 0;
-    padding-block: 0.25rem;
-  }
-
-  .link-column-wide {
-    width: 100%;
+    min-inline-size: 0;
   }
 
   .link-column > .menu-label {
-    margin-bottom: 1rem;
+    margin-block-end: var(--space-4);
   }
 
   .menu-link-list {
     display: grid;
-    gap: 0.625rem;
+    gap: 0;
     margin: 0;
     padding: 0;
-    list-style: none;
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .menu-link-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
   }
 
   .menu-link-list li {
-    min-width: 0;
+    min-inline-size: 0;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .menu-link-grid li:nth-child(odd) {
+    border-inline-end: var(--border-width) solid var(--color-border);
   }
 
   .menu-link-list a {
     display: flex;
-    min-height: 3.75rem;
+    min-block-size: 4rem;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 0.875rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-pure);
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
     color: var(--color-text);
-    font-family: var(--ff-sans);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
     line-height: 1.35;
-    letter-spacing: 0;
     text-decoration: none;
     transition:
-      border-color var(--transition-fast),
       background-color var(--transition-fast),
-      color var(--transition-fast),
-      transform var(--transition-fast);
+      color var(--transition-fast);
   }
 
-  .menu-link-list a:hover,
-  .menu-link-list a:focus-visible,
   .menu-link-list a[aria-current="page"] {
-    border-color: var(--color-blue);
-    background: var(--color-surface-subtle);
+    box-shadow: inset 0.1875rem 0 var(--color-blue);
     color: var(--color-blue);
   }
 
-  .menu-link-list a:hover .menu-link-arrow,
-  .menu-link-list a:focus-visible .menu-link-arrow {
-    transform: translateX(0.2rem);
-  }
-
-  .menu-link-label {
-    min-width: 0;
-  }
-
   .menu-link-arrow {
-    width: 1rem;
-    height: 1rem;
+    inline-size: 1rem;
+    block-size: 1rem;
     flex: 0 0 auto;
     transition: transform var(--transition-fast);
   }
 
   .menu-status {
-    display: inline-flex;
     flex: 0 0 auto;
-    align-items: center;
-    padding: 0.25rem 0.45rem;
-    border-radius: 999px;
-    background: var(--color-surface-subtle);
     color: var(--color-text-muted);
     font-size: 0.6875rem;
     font-weight: var(--fw-medium);
-    line-height: 1;
+    line-height: 1.2;
   }
 
   .mobile-header,
@@ -1321,31 +1224,63 @@ const resourceLinks = [
     display: none;
   }
 
+  :global(html.mobile-navigation-open) {
+    overflow: hidden;
+  }
+
+  @media (hover: hover) {
+    .utility-navigation a:hover {
+      color: var(--color-blue);
+      text-decoration-color: currentColor;
+    }
+
+    .primary-link:hover,
+    .navigation-trigger:hover {
+      background: var(--color-surface-subtle);
+      color: var(--color-blue);
+    }
+
+    .header-cta:hover,
+    .mobile-cta:hover {
+      background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
+      color: var(--color-light);
+    }
+
+    .menu-link-list a:hover {
+      background: var(--color-surface-subtle);
+      color: var(--color-blue);
+    }
+
+    .menu-link-list a:hover .menu-link-arrow {
+      transform: translateX(0.2rem);
+    }
+  }
+
   @media (max-width: 74rem) and (min-width: 60rem) {
     .desktop-header {
-      grid-template-columns: 11rem minmax(0, 1fr);
+      grid-template-columns: 10.5rem minmax(0, 1fr);
     }
 
     .brand-zone {
-      padding-inline: 1.125rem;
+      padding-inline: var(--space-4);
     }
 
     .desktop-wordmark {
-      width: 8.5rem;
+      inline-size: 8.5rem;
     }
 
-    .primary-navigation {
-      padding-left: 0.5rem;
+    .primary-navigation-list {
+      padding-inline-start: var(--space-2);
     }
 
     .primary-link,
     .navigation-trigger {
-      padding-inline: 0.55rem;
+      padding-inline: 0.5rem;
       font-size: 0.72rem;
     }
 
     .header-cta {
-      padding-inline: 1rem;
+      padding-inline: var(--space-4);
       font-size: 0.72rem;
     }
   }
@@ -1357,17 +1292,17 @@ const resourceLinks = [
 
     .mobile-header {
       display: grid;
-      grid-template-columns: 2.75rem minmax(0, 1fr) auto;
-      min-height: 4rem;
+      grid-template-columns: var(--control-min-size) minmax(0, 1fr) auto;
+      min-block-size: 4rem;
       align-items: center;
-      gap: 1rem;
+      gap: var(--space-4);
       padding-inline: var(--page-gutter);
     }
 
     .mobile-menu-trigger {
       display: inline-flex;
-      width: 2.75rem;
-      height: 2.75rem;
+      inline-size: var(--control-min-size);
+      block-size: var(--control-min-size);
       align-items: center;
       justify-content: center;
       padding: 0;
@@ -1378,8 +1313,20 @@ const resourceLinks = [
     }
 
     .menu-icon {
-      width: 1.5rem;
-      height: 1.5rem;
+      inline-size: 1.5rem;
+      block-size: 1.5rem;
+    }
+
+    .menu-icon-close {
+      display: none;
+    }
+
+    .mobile-menu-trigger[aria-expanded="true"] .menu-icon-open {
+      display: none;
+    }
+
+    .mobile-menu-trigger[aria-expanded="true"] .menu-icon-close {
+      display: block;
     }
 
     .mobile-brand-link {
@@ -1387,46 +1334,39 @@ const resourceLinks = [
     }
 
     .mobile-wordmark {
-      width: clamp(7.5rem, 28vw, 8.5rem);
-      height: auto;
+      inline-size: clamp(7.5rem, 28vw, 8.5rem);
+      block-size: auto;
     }
 
     .mobile-cta {
       display: inline-flex;
-      min-height: 2.5rem;
+      min-block-size: 2.75rem;
       align-items: center;
       justify-content: center;
       padding-inline: 0.875rem;
-      border: 1px solid var(--color-blue);
       border-radius: var(--radius-sm);
       background: var(--color-blue);
       color: var(--color-light);
-      font-family: var(--ff-sans);
       font-size: 0.75rem;
       font-weight: var(--fw-medium);
       line-height: 1;
-      letter-spacing: 0;
-      font-feature-settings: var(--fea-graphik);
       text-decoration: none;
       white-space: nowrap;
     }
 
-    .mobile-cta:hover {
-      background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
-      color: var(--color-light);
+    .mobile-cta[aria-current="page"] {
+      outline: var(--focus-ring-width) solid var(--color-ink);
+      outline-offset: -0.25rem;
     }
 
     .mobile-navigation {
-      position: absolute;
-      top: 4rem;
-      left: 0;
-      width: 100%;
-      max-height: calc(100vh - 4rem);
+      position: fixed;
+      inset-block: 4rem 0;
+      inset-inline: 0;
       overflow-y: auto;
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
+      overscroll-behavior: contain;
+      border-block-start: var(--border-width) solid var(--color-border);
       background: var(--color-surface-pure);
-      box-shadow: var(--shadow-lg);
     }
 
     .mobile-navigation:not([hidden]) {
@@ -1435,33 +1375,55 @@ const resourceLinks = [
 
     .mobile-navigation-inner {
       display: grid;
+      min-block-size: 100%;
+      grid-template-rows: auto auto 1fr;
+    }
+
+    .mobile-search {
+      padding: var(--space-4) var(--page-gutter);
+      border-block-end: var(--border-width) solid var(--color-border);
+    }
+
+    .mobile-search-input {
+      min-block-size: var(--control-min-size);
+      border-color: var(--color-border);
+      background: var(--color-surface-pure);
+    }
+
+    .mobile-search-submit {
+      inline-size: var(--control-min-size);
+    }
+
+    .mobile-navigation-list {
+      margin: 0;
+      padding: 0;
     }
 
     .mobile-primary-link,
     .mobile-navigation-group > summary {
+      position: relative;
       display: flex;
-      min-height: 3.5rem;
+      min-block-size: 3.75rem;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: var(--space-4);
       padding-inline: var(--page-gutter);
-      border-bottom: 1px solid var(--color-border);
+      border-block-end: var(--border-width) solid var(--color-border);
       color: var(--color-text);
-      font-family: var(--ff-sans);
       font-size: 0.9375rem;
       font-weight: var(--fw-medium);
       line-height: 1.3;
-      letter-spacing: 0;
-      font-feature-settings: var(--fea-graphik);
       text-decoration: none;
     }
 
-    .mobile-primary-link:hover,
-    .mobile-primary-link:focus-visible,
-    .mobile-primary-link[aria-current="page"],
-    .mobile-navigation-group > summary:hover {
-      background: var(--color-surface-subtle);
-      color: var(--color-blue);
+    .mobile-primary-link[aria-current="page"]::before,
+    .mobile-navigation-group[data-current-section="true"] > summary::before {
+      position: absolute;
+      inset-block: 0.75rem;
+      inset-inline-start: 0;
+      inline-size: 0.1875rem;
+      background: var(--color-blue);
+      content: "";
     }
 
     .mobile-navigation-group {
@@ -1480,8 +1442,8 @@ const resourceLinks = [
     }
 
     .mobile-expand-icon {
-      width: 0.875rem;
-      height: 0.875rem;
+      inline-size: 0.875rem;
+      block-size: 0.875rem;
       flex: 0 0 auto;
       transition: transform var(--transition-standard);
     }
@@ -1496,31 +1458,27 @@ const resourceLinks = [
     }
 
     .mobile-submenu {
-      display: grid;
-      padding: 0.5rem var(--page-gutter) 0.75rem;
-      border-bottom: 1px solid var(--color-border);
+      margin: 0;
+      padding: var(--space-2) var(--page-gutter) var(--space-3);
+      border-block-end: var(--border-width) solid var(--color-border);
       background: var(--color-surface-subtle);
     }
 
     .mobile-submenu a {
       display: flex;
-      min-height: 3rem;
+      min-block-size: 3rem;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      padding: 0.65rem 0.75rem;
-      border-radius: var(--radius-sm);
+      gap: var(--space-4);
+      padding: 0.65rem var(--space-3);
       color: var(--color-text);
-      font-family: var(--ff-sans);
-      font-size: 0.875rem;
-      font-weight: var(--fw-regular);
+      font-size: var(--fs-small);
       line-height: 1.35;
       text-decoration: none;
     }
 
-    .mobile-submenu a:hover,
-    .mobile-submenu a:focus-visible,
     .mobile-submenu a[aria-current="page"] {
+      box-shadow: inset 0.1875rem 0 var(--color-blue);
       background: var(--color-surface-pure);
       color: var(--color-blue);
     }
@@ -1532,46 +1490,42 @@ const resourceLinks = [
       font-weight: var(--fw-medium);
     }
 
-    .mobile-navigation-footer {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      padding: 1rem var(--page-gutter);
+    .mobile-utility-navigation {
+      align-self: end;
+      padding: var(--space-4) var(--page-gutter);
       background: var(--color-surface-subtle);
     }
 
-    .mobile-navigation-footer a {
-      display: inline-flex;
-      min-height: 2.75rem;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-sm);
-      color: var(--color-text);
-      font-family: var(--ff-sans);
-      font-size: var(--fs-eyebrow);
-      font-weight: var(--fw-medium);
-      line-height: 1.3;
-      letter-spacing: 0;
-      font-feature-settings: var(--fea-graphik);
-      text-decoration: none;
+    .mobile-utility-navigation ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin: 0;
+      padding: 0;
     }
 
-    .mobile-navigation-footer a:hover,
-    .mobile-navigation-footer a:focus-visible {
-      border-color: var(--color-blue);
-      color: var(--color-blue);
+    .mobile-utility-navigation a {
+      display: inline-flex;
+      min-block-size: var(--control-min-size);
+      align-items: center;
+      justify-content: center;
+      border: var(--border-width) solid var(--color-border-strong);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      font-size: var(--fs-eyebrow);
+      font-weight: var(--fw-medium);
+      text-decoration: none;
     }
   }
 
   @media (max-width: 25rem) {
     .mobile-header {
-      gap: 0.625rem;
-      padding-inline: 1rem;
+      gap: var(--space-2);
+      padding-inline: var(--space-4);
     }
 
     .mobile-wordmark {
-      width: 7.25rem;
+      inline-size: 7.25rem;
     }
 
     .mobile-cta {
@@ -1580,19 +1534,32 @@ const resourceLinks = [
     }
   }
 
+  @media (hover: hover) and (max-width: 59.9375rem) {
+    .mobile-primary-link:hover,
+    .mobile-navigation-group > summary:hover,
+    .mobile-submenu a:hover {
+      background: var(--color-surface-subtle);
+      color: var(--color-blue);
+    }
+
+    .mobile-utility-navigation a:hover {
+      border-color: var(--color-blue);
+      color: var(--color-blue);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .desktop-header,
-    .brand-zone,
-    .desktop-wordmark,
-    .utility-row,
-    .mega-menu,
-    .expand-icon,
+    .search-input,
+    .mobile-search-input,
+    .utility-navigation a,
     .primary-link,
     .navigation-trigger,
+    .expand-icon,
     .header-cta,
+    .menu-link-list a,
     .menu-link-arrow,
-    .mobile-expand-icon,
-    .mobile-cta {
+    .mobile-cta,
+    .mobile-expand-icon {
       transition: none;
     }
   }
