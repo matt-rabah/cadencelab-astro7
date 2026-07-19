@@ -1,0 +1,2 @@
+# Imported agent tooling is not part of the Astro application.
+.agents/skills/** linguist-vendored
