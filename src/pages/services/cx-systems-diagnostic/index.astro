@@ -415,6 +415,7 @@ const limitedFit = [
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: var(--fea-graphik);
+    overflow-wrap: anywhere;
     text-wrap: balance;
   }
 
@@ -483,7 +484,7 @@ const limitedFit = [
 
   .breadcrumb li + li::before {
     color: var(--color-border-strong);
-    content: "/";
+    content: "/" / "";
   }
 
   .breadcrumb a {
