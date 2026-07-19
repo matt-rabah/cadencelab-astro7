@@ -1,6 +1,6 @@
 ---
 name: Cadence Lab Design System
-version: 0.1.0
+version: 0.2.0
 status: review-draft
 updated: 2026-07-19
 scope: cadencelab.co marketing, insights, and engagement-intake experiences
@@ -18,6 +18,15 @@ references:
     - Progressive
     - Airbnb
     - "Lowe's"
+standards:
+  editorial:
+    name: Google developer documentation style guide
+    url: https://developers.google.com/style
+    scope: writing, content structure, accessibility, and terminology
+  implementation:
+    name: Google HTML/CSS Style Guide
+    url: https://google.github.io/styleguide/htmlcssguide.html
+    scope: semantic markup, source formatting, naming, and CSS quality
 ---
 
 # Cadence Lab Design System
@@ -69,6 +78,159 @@ Baymard's research is used here as behavioral evidence, not as a direction to ma
 - cross-device shopping continuity becomes an equally coherent mobile and desktop decision path.
 
 Do not import merchandising density, promotional urgency, cart patterns, or retail visual conventions unless they solve a demonstrated Cadence user need.
+
+### Google writing and implementation standards
+
+The Google developer documentation style guide and Google HTML/CSS Style Guide
+provide a non-visual quality layer for this system. They do not supply brand,
+layout, component, or interaction direction. The complete topic set in the
+developer documentation guide is incorporated as a reference for editorial
+decisions, and the complete HTML/CSS guide is incorporated as a reference for
+source quality.
+
+These guides are secondary references, not web specifications. Google states
+that project-specific guidance takes precedence and that its documentation
+guide records house-style choices rather than an objective industry standard.
+Apply the following order when guidance conflicts:
+
+1. Cadence Lab brand, content strategy, design decisions, and user needs.
+2. Applicable normative requirements, including HTML specifications and WCAG.
+3. Astro, TypeScript, project tooling, and automated formatter requirements.
+4. This document's project-specific implementation rules.
+5. Google developer documentation and HTML/CSS guidance.
+6. The established style of the file being edited when it remains valid.
+
+Do not use this parameter to import Material Design, Google's visual identity,
+Google fonts, or Google component patterns. Do not weaken accessibility or
+browser behavior to satisfy a source-formatting preference.
+
+#### Editorial coverage
+
+Apply the full Google developer documentation taxonomy to all authored Cadence
+Lab content: marketing pages, navigation and interface language, product and
+service explanations, procedures, resource pages, insights, case studies,
+research, and every blog post. Cadence Lab's established voice remains the
+brand layer; Google's guide supplies the editorial consistency layer.
+
+- Write for the reader's task and lead with the information needed to decide or
+  act.
+- Prefer clear, concise, conversational language that remains professional and
+  operationally precise.
+- Use active voice and present tense. Use second person for instructions when
+  directly addressing the reader improves clarity.
+- Put conditions before instructions and keep the subject, verb, and object
+  easy to identify.
+- Use consistent terminology, capitalization, names, and formatting across
+  navigation, interface copy, documentation, and examples.
+- Define abbreviations and unfamiliar terms on first use. Remove jargon when a
+  plain, accurate alternative exists.
+- Avoid excessive claims, unsupported certainty, pre-announced capabilities,
+  and time-sensitive language that will make content age poorly.
+- Write for a global audience. Avoid idioms, slang, unnecessary humor,
+  culturally narrow references, ambiguous dates, and location-dependent
+  directional language.
+- Use inclusive, respectful, and specific language. Avoid ableist, gendered,
+  violent, or socially charged metaphors when a precise alternative exists.
+- Use sentence case for page titles and section headings unless a registered
+  name requires different capitalization.
+- Make headings unique, descriptive, and useful when read out of context.
+- Keep paragraphs focused. Put the distinguishing information early and break
+  dense material into meaningful sections.
+- Use numbered lists for sequences, bullets for non-sequential collections,
+  and description lists for name-and-value relationships.
+- Keep list items parallel in grammar, capitalization, and punctuation.
+- Use descriptive link text that explains the destination or result. Avoid
+  generic labels such as "click here" or exposing a raw URL as link text.
+- Format code, filenames, commands, placeholders, and interface labels
+  consistently with their meaning and the project content renderer.
+- Give procedures a clear purpose, prerequisites when needed, ordered steps,
+  expected results, and recovery guidance for consequential failures.
+- Use tables only for genuinely tabular relationships and provide meaningful
+  headers. Do not use tables to control layout.
+- Provide useful alternative text for informative images and empty alternative
+  text for decorative images. Provide captions, transcripts, or equivalent
+  access for time-based media when applicable.
+- Do not place essential information only in an image, diagram, color, spatial
+  position, or interaction state.
+- Prefer Markdown for ordinary structured content. Use HTML only when Markdown
+  cannot express the required semantics or behavior cleanly.
+- Treat the Google word list, punctuation guidance, formatting guidance,
+  naming guidance, and trademark guidance as fallback references when Cadence
+  Lab has not already made a project-specific decision.
+
+#### Semantic HTML parameter
+
+- Use valid HTML and elements according to their purpose. Prefer native HTML
+  over custom controls or ARIA recreations.
+- Keep one descriptive `h1` per page and maintain a logical heading hierarchy
+  without selecting heading levels for their visual size.
+- Use `header`, `nav`, `main`, `section`, `article`, `aside`, and `footer` as
+  meaningful landmarks. Label repeated navigation regions concisely.
+- Use `p` for paragraphs, lists for collections, anchors for navigation,
+  buttons for actions, and tables only for tabular data.
+- Associate form controls with persistent labels. Use `fieldset` and `legend`
+  for related choices and native constraints before custom validation.
+- Use `em` for emphasis and `strong` for importance, not merely to create
+  italic or bold presentation. Use CSS for visual treatment.
+- Use `br` only when a line break is part of the content, such as an address or
+  poem. Use paragraphs and CSS for spacing.
+- Give informative media meaningful alternatives and remove decorative media
+  from the accessibility tree.
+- Separate structure, presentation, and behavior. Component-local styles and
+  scripts are acceptable in Astro when their responsibilities remain clear and
+  their browser output stays minimal.
+- Use classes for styling and `data-*` attributes for behavior hooks. Use an
+  `id` only when a fragment target, form association, ARIA relationship, or
+  other document-level identity requires it.
+- Include explicit closing tags and document structure required by Astro even
+  where raw HTML technically permits omission.
+- Omit obsolete `type` attributes for standard CSS and JavaScript resources,
+  except where the content type carries meaning, such as JSON-LD.
+- Use HTTPS for external resources. Prefer locally controlled assets when that
+  improves privacy, reliability, or performance.
+
+#### HTML and CSS source parameter
+
+- Use UTF-8 without a byte-order mark, two-space indentation, lowercase HTML
+  elements and attributes, and no trailing whitespace.
+- Use double quotation marks for HTML and Astro attribute values.
+- Let the project formatter determine wrapping, CSS quotation marks,
+  declaration layout, and other mechanical formatting. Do not create manual
+  formatting rules that fight automated output.
+- Keep block, list, and table markup readable in source and indent nested
+  content consistently.
+- Use meaningful, purpose-based, kebab-case class names. Avoid names that encode
+  a temporary color, position, or visual appearance.
+- Avoid ID selectors, unnecessary selector qualification, excessive ancestor
+  chains, and specificity escalation.
+- Use valid CSS, design tokens, component scoping, and the natural cascade.
+  Avoid `!important`, browser-detection hacks, and unsupported proprietary
+  syntax unless a documented requirement leaves no safer option.
+- Include a leading zero for fractional values, omit units from zero where the
+  grammar permits it, and end every declaration with a semicolon.
+- Keep one selector or declaration per line when multiline formatting improves
+  reviewability, and separate rules consistently.
+- Use comments to explain purpose, constraints, or non-obvious decisions. Do
+  not narrate syntax that is already self-evident.
+- Preserve canonical design-token values even when a shorter color notation is
+  available. Consistency and searchability take precedence over byte savings.
+- Prefer readable source and minify only as a build step. Never trade semantics
+  or maintainability for insignificant source-size reductions.
+- Match valid local conventions when editing an existing file. Do not reformat
+  unrelated code as part of a focused change.
+
+#### Required review and validation
+
+For content changes, review clarity, terminology, claims, inclusivity,
+scannability, link text, headings, lists, media alternatives, and global-reader
+comprehension. For interface changes, review semantics, keyboard operation,
+focus visibility, accessible names, heading order, zoom and reflow, contrast,
+touch targets, reduced motion, and media alternatives.
+
+Run the repository's formatter or diff checks, TypeScript validation, Astro
+diagnostics, and production build. Add browser and assistive-technology testing
+in proportion to the interaction risk. A Google style preference never counts
+as validation by itself.
 
 ## Experience principles
 
