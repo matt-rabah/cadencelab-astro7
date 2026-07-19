@@ -1,11 +1,16 @@
 /* ==========================================================================
    cadencelab.co — Type System
-   Graphik (UI, headings) + Tiempos Text (blog body) + Tiempos Headline (accents)
 
-   Fluid scale interpolates between 375px and 1280px viewports using
-   rem-based clamp(), so browser zoom and user font-size preferences still work.
+   Graphik: UI, navigation, marketing headings, and marketing body copy
+   Tiempos Text: long-form editorial prose
+   Tiempos Headline: selective editorial display accents and pull quotes
+   Produkt: approved future utility role; Graphik remains the fallback until
+   licensed Produkt webfont assets are registered in astro.config.mjs
 
-   All sizes in rem. Line heights are unitless. Tracking is in em.
+   The fluid scale interpolates between compact and wide viewports with
+   rem-based clamp() values so browser zoom and user font-size preferences
+   remain effective. Sizes use rem, line heights are unitless, and tracking
+   uses em.
    ========================================================================== */
 
 @layer type-tokens, type-base, type-prose, type-utilities;
@@ -21,7 +26,14 @@
     --ff-serif: var(--font-tiempos-text);
     --ff-serif-display: var(--font-tiempos-headline);
 
-    /* Font weights */
+    /*
+     * Utility labels remain Graphik until licensed Produkt assets exist.
+     * When Produkt is registered, update only this token to adopt it across
+     * eyebrows, labels, metadata, and utility accents.
+     */
+    --ff-utility: var(--ff-sans);
+
+    /* Font weights available in the registered local font files */
     --fw-regular: 400;
     --fw-medium: 500;
     --fw-semibold: 600;
@@ -58,6 +70,7 @@
     --lh-post-title: 1.12;
     --lh-post-body: 1.65;
     --lh-tight: 1.35;
+    --lh-small: 1.45;
 
     /* Tracking */
     --ls-display: -0.015em;
@@ -69,24 +82,20 @@
     --measure-prose: 70ch;
     --measure-ui: 60ch;
     --measure-heading: 26ch;
+    --measure-post-title: 22ch;
 
     /*
-     * Typography color aliases.
-     *
-     * These resolve to the finalized brand tokens defined in global.css.
-     * Fallbacks keep this file resilient if loaded independently.
+     * Typography color aliases resolve to the finalized brand tokens in
+     * global.css. The fallbacks keep this file safe when previewed alone.
      */
-    --ink: var(--color-ink, #010302);
-    --ink-2: var(--color-text-muted, #515b59);
+    --ink: var(--color-ink, #000504);
+    --ink-2: var(--color-text-muted, #6c6f6f);
   }
 
   /*
-   * Slightly loosen display tracking on smaller screens.
-   *
-   * Large negative tracking becomes visually tighter as headings wrap into
-   * shorter lines, so mobile receives a more neutral treatment.
+   * Loosen negative tracking where headings wrap into shorter mobile lines.
    */
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375rem) {
     :root {
       --ls-display: -0.005em;
       --ls-h2: -0.005em;
@@ -113,6 +122,7 @@
     line-height: var(--lh-ui);
     font-feature-settings: var(--fea-graphik);
     font-kerning: normal;
+    font-variant-ligatures: common-ligatures contextual;
   }
 
   h1,
@@ -123,6 +133,7 @@
     color: var(--ink);
     font-family: var(--ff-sans);
     font-feature-settings: var(--fea-graphik);
+    font-kerning: normal;
     text-wrap: balance;
   }
 
@@ -178,6 +189,17 @@
     font-size: max(1rem, 1em);
     font-feature-settings: var(--fea-graphik);
   }
+
+  /*
+   * Match fallback x-height to the active local font where supported. Older
+   * browsers ignore this progressive enhancement and retain the valid font
+   * stacks supplied by Astro.
+   */
+  @supports (font-size-adjust: from-font) {
+    body {
+      font-size-adjust: from-font;
+    }
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -192,6 +214,7 @@
     font-weight: var(--fw-regular);
     line-height: var(--lh-post-body);
     font-feature-settings: normal;
+    font-kerning: normal;
   }
 
   .prose p {
@@ -201,12 +224,14 @@
   }
 
   .post-title {
+    max-inline-size: var(--measure-post-title);
     font-family: var(--ff-sans);
     font-size: var(--fs-post-title);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-post-title);
     letter-spacing: var(--ls-display);
     font-feature-settings: var(--fea-graphik);
+    font-kerning: normal;
     text-wrap: balance;
   }
 
@@ -237,13 +262,9 @@
     text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
   }
 
-  .prose a:hover {
-    text-decoration-color: currentColor;
-  }
-
   .prose blockquote {
     margin-inline: 0;
-    padding-inline-start: 1.25rem;
+    padding-inline-start: var(--space-5, 1.25rem);
     border-inline-start: 2px solid currentColor;
     font-family: var(--ff-serif-display);
     font-size: var(--fs-pullquote);
@@ -251,6 +272,7 @@
     font-weight: var(--fw-display-light);
     line-height: var(--lh-tight);
     hanging-punctuation: first;
+    text-wrap: pretty;
   }
 
   .prose blockquote p {
@@ -269,10 +291,27 @@
     color: var(--ink-2);
     font-family: var(--ff-sans);
     font-size: var(--fs-small);
+    line-height: var(--lh-small);
     font-feature-settings: var(--fea-graphik);
+    text-wrap: pretty;
   }
 
-  @media (max-width: 480px) {
+  @supports (font-size-adjust: from-font) {
+    .prose,
+    .prose blockquote,
+    .prose table,
+    .prose figcaption {
+      font-size-adjust: from-font;
+    }
+  }
+
+  @media (hover: hover) {
+    .prose a:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  @media (max-width: 30rem) {
     .prose p {
       hyphens: auto;
       hyphenate-limit-chars: 7 4 3;
@@ -287,7 +326,7 @@
 @layer type-utilities {
   .eyebrow {
     color: var(--ink-2);
-    font-family: var(--ff-sans);
+    font-family: var(--ff-utility);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: var(--lh-h4);
@@ -304,6 +343,16 @@
     font-feature-settings: var(--fea-graphik);
   }
 
+  .metadata {
+    color: var(--ink-2);
+    font-family: var(--ff-utility);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-small);
+    font-feature-settings: var(--fea-graphik), var(--fea-tabular);
+    font-variant-numeric: tabular-nums;
+  }
+
   .stat {
     font-feature-settings: var(--fea-graphik), var(--fea-tabular);
     font-variant-numeric: tabular-nums;
@@ -312,10 +361,17 @@
   .serif-accent {
     font-family: var(--ff-serif-display);
     font-weight: var(--fw-display-light);
+    line-height: var(--lh-tight);
     letter-spacing: -0.005em;
   }
 
   .text-secondary {
     color: var(--ink-2);
+  }
+
+  @supports (font-size-adjust: from-font) {
+    .serif-accent {
+      font-size-adjust: from-font;
+    }
   }
 }
