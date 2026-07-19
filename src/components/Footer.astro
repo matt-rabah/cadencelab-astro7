@@ -1,6 +1,4 @@
 ---
-// src/components/Footer.astro
-
 import wordmark from "../assets/brand/cadencelab-wordmark-dark-color.svg";
 
 interface FooterLink {
@@ -113,7 +111,7 @@ const isCurrentPage = (href: string): boolean =>
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-primary">
-      <section class="footer-brand" aria-labelledby="footer-brand-description">
+      <div class="footer-brand">
         <a
           href="/"
           class="footer-logo-link"
@@ -123,46 +121,60 @@ const isCurrentPage = (href: string): boolean =>
           <img
             src={wordmark.src ?? wordmark}
             alt=""
-            width="152"
-            height="30"
+            width="3000"
+            height="413"
             loading="lazy"
             decoding="async"
             class="footer-logo"
           />
         </a>
 
-        <p id="footer-brand-description" class="footer-description">
-          Adopting workflows, integrating systems, and creating cross-functional
-          measurement systems for enterprise customer experience.
+        <p class="footer-description">
+          Cadence Lab helps organizations improve customer experience by
+          aligning workflows, systems, teams, and applied AI.
         </p>
-      </section>
 
-      <div class="footer-directory">
-        {
-          footerSections.map((section) => (
-            <nav class="footer-section" aria-labelledby={section.id}>
-              <p id={section.id} class="footer-section-label">
-                {section.title}
-              </p>
-
-              <ul class="footer-link-list">
-                {section.links.map((link) => (
-                  <li>
-                    <a
-                      href={link.href}
-                      aria-current={
-                        isCurrentPage(link.href) ? "page" : undefined
-                      }
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))
-        }
+        <a
+          href="/contact/"
+          class="footer-contact-link"
+          aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+        >
+          <span>Start a conversation</span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M2.5 8h10"></path>
+            <path d="m8.75 4.25 3.75 3.75-3.75 3.75"></path>
+          </svg>
+        </a>
       </div>
+
+      {
+        footerSections.map((section) => (
+          <nav class="footer-section" aria-labelledby={section.id}>
+            <h2 id={section.id} class="footer-section-label">
+              {section.title}
+            </h2>
+
+            <ul class="footer-link-list">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    aria-current={isCurrentPage(link.href) ? "page" : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
     </div>
 
     <div class="footer-secondary">
@@ -195,17 +207,17 @@ const isCurrentPage = (href: string): boolean =>
   .site-footer {
     --footer-background: var(--color-ink);
     --footer-heading: var(--color-light);
-    --footer-text: #cbd6e2;
-    --footer-muted: #9aaabd;
-    --footer-subtle: #8997a9;
-    --footer-border: #252b33;
-    --footer-accent: var(--color-blue);
+    --footer-text: var(--color-text-inverse-muted);
+    --footer-muted: #98a29f;
+    --footer-subtle: #7f8986;
+    --footer-border: rgb(252 254 255 / 18%);
+    --footer-accent: var(--color-green);
     --footer-focus: var(--color-light);
 
     width: 100%;
-    padding: clamp(3.5rem, 8vw, 5rem) clamp(1.25rem, 5vw, 3rem)
-      clamp(2rem, 5vw, 2.5rem);
-    border-top: 1px solid var(--footer-border);
+    padding: clamp(3.5rem, 8vw, 6rem) var(--page-gutter)
+      clamp(2rem, 5vw, 2.75rem);
+    border-top: var(--border-width) solid var(--footer-border);
     background: var(--footer-background);
     color: var(--footer-text);
     font-family: var(--ff-sans);
@@ -214,16 +226,18 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   .footer-container {
-    width: min(100%, 75rem);
+    width: min(100%, var(--container-page));
     margin-inline: auto;
   }
 
   .footer-primary {
     display: grid;
-    gap: clamp(3rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.75rem;
   }
 
-  .footer-brand {
+  .footer-brand,
+  .footer-section {
     min-width: 0;
   }
 
@@ -231,50 +245,71 @@ const isCurrentPage = (href: string): boolean =>
     display: inline-flex;
     align-items: center;
     width: fit-content;
-    min-height: 2.75rem;
+    min-height: var(--control-min-size);
     color: inherit;
     text-decoration: none;
   }
 
   .footer-logo {
     display: block;
-    width: clamp(7.5rem, 9vw, 9.5rem);
+    width: clamp(9.5rem, 14vw, 11.25rem);
     height: auto;
   }
 
   .footer-description {
-    max-width: 34rem;
-    margin: 1.125rem 0 0;
-    color: var(--footer-muted);
-    font-family: var(--ff-sans);
+    max-width: 31rem;
+    margin: 1.25rem 0 0;
+    color: var(--footer-text);
     font-size: var(--fs-small);
     font-weight: var(--fw-regular);
     line-height: 1.6;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
   }
 
-  .footer-directory {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .footer-section {
-    min-width: 0;
-  }
-
-  .footer-section-label {
-    margin: 0 0 0.875rem;
+  .footer-contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    min-height: var(--control-min-size);
+    margin-top: 1.25rem;
     color: var(--footer-heading);
-    font-family: var(--ff-sans);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-transform: none;
+    text-decoration: underline;
+    text-decoration-color: var(--footer-accent);
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.25em;
+    transition:
+      color var(--transition-fast),
+      text-decoration-color var(--transition-fast);
+  }
+
+  .footer-contact-link svg {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    transition: translate var(--transition-fast);
+  }
+
+  .footer-contact-link:hover {
+    color: var(--footer-accent);
+  }
+
+  .footer-contact-link:hover svg {
+    translate: 0.2rem 0;
+  }
+
+  .footer-section-label {
+    margin: 0 0 1rem;
+    color: var(--footer-heading);
+    font-family: var(--ff-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
   }
 
   .footer-link-list,
@@ -294,16 +329,16 @@ const isCurrentPage = (href: string): boolean =>
     align-items: center;
     width: fit-content;
     max-width: 100%;
-    min-height: 2.75rem;
+    min-height: var(--control-min-size);
     padding-block: 0.375rem;
     color: var(--footer-text);
-    font-family: var(--ff-sans);
     font-size: var(--fs-small);
     font-weight: var(--fw-regular);
     line-height: 1.45;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.22em;
     text-wrap: pretty;
     transition:
       color var(--transition-fast),
@@ -311,27 +346,23 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   .footer-link-list a:hover {
-    color: var(--footer-accent);
-    text-decoration: underline;
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.22em;
+    color: var(--footer-heading);
+    text-decoration-color: var(--footer-accent);
   }
 
   .footer-link-list a[aria-current="page"] {
     color: var(--footer-heading);
     font-weight: var(--fw-medium);
-    text-decoration: underline;
     text-decoration-color: var(--footer-accent);
     text-decoration-thickness: 0.12em;
-    text-underline-offset: 0.25em;
   }
 
   .footer-secondary {
     display: grid;
     gap: 1.25rem;
-    margin-top: clamp(3rem, 7vw, 4rem);
-    padding-top: 1.75rem;
-    border-top: 1px solid var(--footer-border);
+    margin-top: clamp(3.25rem, 7vw, 5rem);
+    padding-top: 1.5rem;
+    border-top: var(--border-width) solid var(--footer-border);
   }
 
   .footer-copyright {
@@ -340,12 +371,9 @@ const isCurrentPage = (href: string): boolean =>
     gap: 0.25rem 0.4rem;
     margin: 0;
     color: var(--footer-subtle);
-    font-family: var(--ff-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-regular);
     line-height: 1.5;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
   }
 
   .legal-link-list {
@@ -367,45 +395,44 @@ const isCurrentPage = (href: string): boolean =>
     margin-inline: 0.75rem;
     border-radius: 50%;
     background: var(--footer-subtle);
-    opacity: 0.65;
   }
 
   .legal-link-list a {
     display: inline-flex;
     align-items: center;
-    min-height: 2.75rem;
+    min-height: var(--control-min-size);
     color: var(--footer-subtle);
-    font-family: var(--ff-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-regular);
     line-height: 1.4;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-decoration: none;
-    transition: color var(--transition-fast);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.22em;
+    transition:
+      color var(--transition-fast),
+      text-decoration-color var(--transition-fast);
   }
 
   .legal-link-list a:hover,
   .legal-link-list a[aria-current="page"] {
     color: var(--footer-heading);
-    text-decoration: underline;
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.22em;
+    text-decoration-color: var(--footer-accent);
   }
 
   .site-footer a:focus-visible {
-    outline: 2px solid var(--footer-focus);
-    outline-offset: 0.25rem;
+    outline: var(--focus-ring-width) solid var(--footer-focus);
+    outline-offset: var(--focus-ring-offset);
   }
 
   @media (min-width: 40rem) {
-    .footer-directory {
+    .footer-primary {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 3rem;
-      row-gap: 2.75rem;
+      column-gap: clamp(3rem, 7vw, 5rem);
+      row-gap: 3rem;
     }
 
-    .footer-section:last-child {
+    .footer-brand {
       grid-column: 1 / -1;
     }
 
@@ -424,37 +451,41 @@ const isCurrentPage = (href: string): boolean =>
     }
   }
 
-  @media (min-width: 64rem) {
+  @media (min-width: 70rem) {
     .footer-primary {
-      grid-template-columns: minmax(16rem, 1.15fr) minmax(0, 2.85fr);
-      gap: clamp(4rem, 7vw, 7rem);
+      grid-template-columns: minmax(17rem, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 4.5rem);
       align-items: start;
     }
 
-    .footer-description {
-      max-width: 20rem;
-    }
-
-    .footer-directory {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(2rem, 4vw, 4rem);
-    }
-
-    .footer-section:last-child {
+    .footer-brand {
       grid-column: auto;
+    }
+
+    .footer-description {
+      max-width: 22rem;
     }
   }
 
-  @media (min-width: 90rem) {
-    .site-footer {
-      padding-inline: 4rem;
+  @media (pointer: coarse) {
+    .footer-logo-link,
+    .footer-contact-link,
+    .footer-link-list a,
+    .legal-link-list a {
+      min-height: var(--control-min-size-coarse);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .footer-contact-link,
+    .footer-contact-link svg,
     .footer-link-list a,
     .legal-link-list a {
       transition: none;
+    }
+
+    .footer-contact-link:hover svg {
+      translate: none;
     }
   }
 
@@ -462,6 +493,12 @@ const isCurrentPage = (href: string): boolean =>
     .site-footer,
     .footer-secondary {
       border-color: CanvasText;
+    }
+
+    .footer-contact-link,
+    .footer-link-list a,
+    .legal-link-list a {
+      text-decoration-color: currentColor;
     }
   }
 </style>
