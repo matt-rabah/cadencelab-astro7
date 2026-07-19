@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 
 import { Font } from "astro:assets";
+
 import "../styles/global.css";
 
 interface Props {
@@ -14,11 +15,16 @@ interface Props {
   pageType?: "website" | "article";
 }
 
+const defaultTitle =
+  "Cadence Lab | Customer experience systems and AI adoption";
+const defaultDescription =
+  "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.";
+
 const {
-  title = "Cadence Lab | Customer experience systems and AI adoption",
-  description = "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
+  title = defaultTitle,
+  description = defaultDescription,
   canonicalURL,
-  image = "/og/cadencelab-default.png",
+  image,
   imageAlt = "Cadence Lab",
   noindex = false,
   pageType = "website",
@@ -26,87 +32,124 @@ const {
 
 const siteName = "Cadence Lab";
 const siteURL = Astro.site ?? new URL("https://cadencelab.co");
+const siteRoot = new URL("/", siteURL);
 
-const canonical = canonicalURL
-  ? new URL(canonicalURL, siteURL)
-  : new URL(Astro.url.pathname, siteURL);
+const resolvedTitle = title.trim() || defaultTitle;
+const resolvedDescription = description.trim() || defaultDescription;
+
+const canonical = new URL(canonicalURL ?? Astro.url.pathname, siteURL);
+canonical.search = "";
+canonical.hash = "";
 
 const canonicalHref = canonical.toString();
-const socialImage = new URL(image, siteURL).toString();
+const socialImage = image ? new URL(image, siteURL).toString() : undefined;
 
-const organizationSchema = {
+const organizationId = new URL("/#organization", siteRoot).toString();
+const websiteId = new URL("/#website", siteRoot).toString();
+
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteName,
-  url: siteURL.toString(),
-  logo: new URL(
-    "/brand/cadencelab-wordmark-dark-color.svg",
-    siteURL,
-  ).toString(),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": organizationId,
+      name: siteName,
+      url: siteRoot.toString(),
+      description: defaultDescription,
+      logo: {
+        "@type": "ImageObject",
+        url: new URL(
+          "/brand/cadencelab-wordmark-dark-color.svg",
+          siteRoot,
+        ).toString(),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: siteName,
+      url: siteRoot.toString(),
+      description: defaultDescription,
+      inLanguage: "en-US",
+      publisher: {
+        "@id": organizationId,
+      },
+    },
+  ],
 };
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light" />
 
     <Font cssVariable="--font-graphik" preload />
     <Font cssVariable="--font-tiempos-text" />
     <Font cssVariable="--font-tiempos-headline" />
 
-    <title>{title}</title>
-
-    <meta name="description" content={description} />
-
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
     <meta
       name="robots"
-      content={noindex ? "noindex, nofollow, noarchive" : "index, follow"}
+      content={
+        noindex
+          ? "noindex, nofollow"
+          : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      }
     />
 
     <link rel="canonical" href={canonicalHref} />
-
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    <meta
-      name="theme-color"
-      content="#FCFEFF"
-      media="(prefers-color-scheme: light)"
-    />
+    <meta name="theme-color" content="#fcfeff" />
 
-    <meta
-      name="theme-color"
-      content="#010302"
-      media="(prefers-color-scheme: dark)"
-    />
-
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content={pageType} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:url" content={canonicalHref} />
-    <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content={imageAlt} />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:image:alt" content={imageAlt} />
+    {
+      socialImage && (
+        <>
+          <meta property="og:image" content={socialImage} />
+          <meta property="og:image:alt" content={imageAlt} />
+        </>
+      )
+    }
+
+    <meta
+      name="twitter:card"
+      content={socialImage ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
+
+    {
+      socialImage && (
+        <>
+          <meta name="twitter:image" content={socialImage} />
+          <meta name="twitter:image:alt" content={imageAlt} />
+        </>
+      )
+    }
+
+    <slot name="head" />
 
     <script
       type="application/ld+json"
-      set:html={JSON.stringify(organizationSchema)}
+      is:inline
+      set:html={JSON.stringify(structuredData)}
     />
   </head>
 
-  <body>
+  <body data-page-type={pageType}>
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <slot />
