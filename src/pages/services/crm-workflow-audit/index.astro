@@ -1,0 +1,1012 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const diagnosticQuestions = [
+  {
+    number: "01",
+    question: "Where does the CRM stop supporting the work?",
+    explanation:
+      "Trace the actual customer workflow through records, fields, queues, handoffs, approvals, and outside tools to find where the system no longer guides coordinated action.",
+  },
+  {
+    number: "02",
+    question: "Which data and signals can teams trust?",
+    explanation:
+      "Assess whether required information is clear, current, consistently used, and connected to the decisions people are expected to make.",
+  },
+  {
+    number: "03",
+    question: "Which rules, automations, or handoffs create friction?",
+    explanation:
+      "Identify routing gaps, duplicate effort, unclear ownership, brittle automation, and process requirements that encourage teams to work around the CRM.",
+  },
+  {
+    number: "04",
+    question: "What should the organization repair first?",
+    explanation:
+      "Sequence workflow, data, ownership, reporting, and configuration changes so the CRM becomes more useful without expanding unnecessary complexity.",
+  },
+];
+
+const evidenceAreas = [
+  {
+    title: "Actual customer workflows",
+    description:
+      "How work moves from trigger to completion across sales, service, success, operations, and other teams—including steps performed outside the documented process.",
+  },
+  {
+    title: "Fields, records, and data quality",
+    description:
+      "Required inputs, definitions, duplicate or missing information, record ownership, data freshness, and whether the available context supports customer decisions.",
+  },
+  {
+    title: "Automation and routing",
+    description:
+      "Assignment rules, alerts, tasks, approvals, integrations, sequences, and other automation that shapes who acts, when they act, and what information follows the work.",
+  },
+  {
+    title: "Ownership and handoffs",
+    description:
+      "Accountabilities, queue management, escalation authority, cross-functional transfers, and places where work becomes visible without becoming owned.",
+  },
+  {
+    title: "Reporting and measurement",
+    description:
+      "Dashboards, pipeline or service measures, lifecycle reporting, operational reviews, and whether current metrics reveal decisions and outcomes or only recorded activity.",
+  },
+  {
+    title: "Adoption and workarounds",
+    description:
+      "How frontline teams interpret the system, where they duplicate effort, which spreadsheets or messages replace CRM behavior, and why established workarounds persist.",
+  },
+];
+
+const deliverables = [
+  {
+    number: "01",
+    title: "Current-state workflow map",
+    description:
+      "A shared view of the real customer workflow across roles, records, automations, systems, decisions, handoffs, and known workarounds.",
+    decision:
+      "Where the CRM supports the operating model and where the workflow breaks, duplicates effort, or loses accountability.",
+  },
+  {
+    number: "02",
+    title: "Data and adoption findings",
+    description:
+      "An evidence-based assessment of field use, data quality, signal reliability, user behavior, reporting gaps, and the reasons teams route around the system.",
+    decision:
+      "Which problems come from configuration, process design, ownership, training, incentives, or missing operating context.",
+  },
+  {
+    number: "03",
+    title: "Prioritized remediation plan",
+    description:
+      "A sequenced set of workflow, data, automation, reporting, and governance changes ranked by operating consequence and dependency.",
+    decision:
+      "What to correct first, what should wait, and which low-value complexity should be removed rather than repaired.",
+  },
+  {
+    number: "04",
+    title: "Target workflow requirements",
+    description:
+      "Clear requirements for the next useful version of the workflow, including responsibilities, decision points, signals, system behavior, and adoption conditions.",
+    decision:
+      "What the CRM must enable before implementation, automation, or platform investment expands.",
+  },
+];
+
+const strongFit = [
+  "The CRM records activity but does not reliably guide coordinated customer work.",
+  "Teams depend on spreadsheets, messages, manual reconciliation, or individual memory to complete important workflows.",
+  "A sponsor can align business, customer-facing, operational, data, and technical owners around workflow decisions.",
+  "The organization is willing to change process and ownership—not only add fields, dashboards, or automation.",
+];
+
+const limitedFit = [
+  "The request is limited to implementing a predetermined configuration with no review of the operating workflow.",
+  "The issue is one isolated technical defect with a known owner and a clearly tested fix.",
+  "Frontline users, process owners, CRM administrators, or relevant records cannot be included in the review.",
+  "Success is defined only by feature delivery, field completion, or login activity rather than useful work and customer outcomes.",
+];
+---
+
+<Layout
+  title="CRM Workflow Audit | Cadence Lab"
+  description="Find where CRM workflows, data, automation, and ownership stop supporting coordinated customer work—and determine what to repair first."
+  canonicalURL="/services/crm-workflow-audit/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="diagnostic-page" tabindex="-1">
+    <section class="diagnostic-hero" aria-labelledby="diagnostic-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/services/">Services</a></li>
+              <li aria-current="page">CRM Workflow Audit</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Diagnostic 03</p>
+          <h1 id="diagnostic-title">
+            Make the CRM guide the work—not merely record it.
+          </h1>
+          <p class="hero-lead">
+            The CRM Workflow Audit examines actual workflows, field use, data quality,
+            automation, handoffs, reporting, and frontline behavior so the system can
+            support clearer decisions and more accountable customer work.
+          </p>
+
+          <div class="hero-actions" aria-label="CRM Workflow Audit actions">
+            <a class="button button-primary" href="/fit-check/">
+              Start a fit check
+            </a>
+            <a class="button button-text" href="#questions">
+              Review the diagnostic
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="trigger-label">Recognizable trigger</p>
+          <p>
+            The CRM contains fields, notes, activity, dashboards, and automation, yet
+            teams still rely on spreadsheets, messages, and memory to move customer
+            work forward.
+          </p>
+          <p>
+            Records describe activity without reliably showing the next decision, the
+            accountable owner, or the context another team needs to act.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section
+      id="questions"
+      class="questions section-block"
+      aria-labelledby="questions-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Questions answered</p>
+            <h2 id="questions-title">
+              Turn recorded activity into a usable operating workflow.
+            </h2>
+          </div>
+          <p>
+            The audit does not begin with a feature backlog. It begins with the work teams
+            must complete and the decisions the CRM should support, then traces where
+            process, data, configuration, and ownership diverge from that need.
+          </p>
+        </div>
+
+        <ol class="question-list" role="list">
+          {
+            diagnosticQuestions.map((item) => (
+              <li>
+                <article class="question">
+                  <p class="item-number" aria-hidden="true">{item.number}</p>
+                  <div>
+                    <h3>{item.question}</h3>
+                    <p>{item.explanation}</p>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="scope section-block" aria-labelledby="scope-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Scope and evidence</p>
+            <h2 id="scope-title">
+              Examine how the CRM behaves inside the real workflow.
+            </h2>
+          </div>
+          <p>
+            The exact evidence depends on the workflow and what the organization can
+            responsibly provide. Cadence Lab compares documented process and system
+            design with actual records, behavior, handoffs, and operating decisions.
+          </p>
+        </div>
+
+        <ul class="evidence-grid" role="list">
+          {
+            evidenceAreas.map((area, index) => (
+              <li>
+                <article>
+                  <p class="item-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3>{area.title}</h3>
+                  <p>{area.description}</p>
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+
+        <aside class="scope-note" aria-labelledby="scope-note-title">
+          <h3 id="scope-note-title">Workflow before configuration</h3>
+          <p>
+            A technically valid configuration can still support the wrong process. The
+            audit separates workflow requirements from platform habits so changes are
+            justified by useful work, clear ownership, and reliable customer context.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="outputs" aria-labelledby="outputs-title">
+      <div class="page-container section-stack">
+        <div class="outputs-intro">
+          <p class="eyebrow eyebrow-inverse">Deliverables and decisions</p>
+          <h2 id="outputs-title">
+            Leave with a clearer workflow and a sequenced repair plan.
+          </h2>
+          <p>
+            The deliverables connect observed CRM behavior to operating decisions. Each
+            output clarifies where work breaks, why teams compensate, what the system
+            should enable, and which changes deserve priority.
+          </p>
+        </div>
+
+        <ol class="output-list" role="list">
+          {
+            deliverables.map((deliverable) => (
+              <li>
+                <article class="output">
+                  <div class="output-heading">
+                    <p class="output-number" aria-hidden="true">
+                      {deliverable.number}
+                    </p>
+                    <h3>{deliverable.title}</h3>
+                  </div>
+                  <p class="output-description">{deliverable.description}</p>
+                  <p class="output-decision">
+                    <span>Supports the decision</span>
+                    {deliverable.decision}
+                  </p>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="fit section-block" aria-labelledby="fit-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Engagement fit</p>
+            <h2 id="fit-title">
+              Use this audit when the CRM records work but does not reliably guide it.
+            </h2>
+          </div>
+          <p>
+            A useful audit needs access to frontline users, process owners, administrators,
+            records, and the decisions surrounding customer work. It also needs
+            permission to challenge both process and configuration assumptions.
+          </p>
+        </div>
+
+        <div class="fit-grid">
+          <article class="fit-panel fit-panel-strong">
+            <p class="fit-label">Strong fit</p>
+            <h3>Conditions that support a useful diagnosis</h3>
+            <ul role="list">
+              {strongFit.map((criterion) => <li>{criterion}</li>)}
+            </ul>
+          </article>
+
+          <article class="fit-panel">
+            <p class="fit-label fit-label-muted">Limited fit</p>
+            <h3>Conditions that point to another path</h3>
+            <ul role="list">
+              {limitedFit.map((criterion) => <li>{criterion}</li>)}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-step section-block" aria-labelledby="next-step-title">
+      <div class="page-container next-step-layout">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2 id="next-step-title">
+            Bring the workflow problem—not a predetermined feature list.
+          </h2>
+        </div>
+
+        <div class="next-step-copy">
+          <p>
+            Share the customer workflow, affected teams, current CRM behavior, known
+            workarounds, and the decision the organization needs to improve. Cadence
+            Lab will assess whether this audit is the right entry point and say
+            directly when a narrower technical fix makes more sense.
+          </p>
+
+          <dl class="next-step-details">
+            <div>
+              <dt>Useful context</dt>
+              <dd>Workflow problem, affected teams, CRM context, and accountable sponsor</dd>
+            </div>
+            <div>
+              <dt>Expected outcome</dt>
+              <dd>A direct recommendation about fit and the appropriate next step</dd>
+            </div>
+          </dl>
+
+          <div class="next-step-actions">
+            <a class="button button-accent" href="/fit-check/">
+              Start a fit check
+            </a>
+            <a class="services-link" href="/services/">
+              Compare all diagnostics
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .diagnostic-page {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .section-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 6vw, 5rem);
+  }
+
+  .eyebrow {
+    margin: 0 0 1rem;
+    color: var(--color-blue);
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  dl,
+  dd {
+    margin-block: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  h2 {
+    max-width: 19ch;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  h3 {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  .diagnostic-hero {
+    padding-block: clamp(3rem, 8vw, 6.5rem) clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.65fr);
+    gap: clamp(3rem, 10vw, 8rem);
+    align-items: end;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .breadcrumb {
+    margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.6rem;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    line-height: var(--lh-small);
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .breadcrumb li + li::before {
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-blue);
+    text-decoration-color: currentColor;
+  }
+
+  .hero-lead {
+    max-width: var(--measure-ui);
+    margin-top: 1.5rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .trigger {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-top: 0.25rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .trigger-label {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .trigger > p:not(.trigger-label) {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .trigger > p:nth-child(2) {
+    margin-top: 1rem;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .trigger > p + p {
+    margin-top: 1rem;
+  }
+
+  .questions,
+  .fit {
+    background: var(--color-surface-subtle);
+  }
+
+  .questions {
+    scroll-margin-top: var(--header-offset);
+  }
+
+  .section-intro-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.75fr);
+    gap: clamp(2rem, 8vw, 7rem);
+    align-items: end;
+  }
+
+  .section-intro-split > p,
+  .next-step-copy > p {
+    max-width: var(--measure-ui);
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .question-list,
+  .evidence-grid,
+  .output-list,
+  .fit-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .question-list {
+    border-top: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .question-list > li {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .question {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .item-number,
+  .output-number {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    font-feature-settings: var(--fea-tabular);
+  }
+
+  .question h3 {
+    max-width: 31ch;
+  }
+
+  .question div > p {
+    max-width: var(--measure-ui);
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border-strong);
+    border-left: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .evidence-grid > li {
+    min-width: 0;
+    border-right: var(--border-width) solid var(--color-border-strong);
+    border-bottom: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .evidence-grid article {
+    height: 100%;
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 0.75rem;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .scope-note {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.45fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-left: 0.25rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .scope-note p {
+    max-width: var(--measure-ui);
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .outputs {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+  }
+
+  .outputs-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.75fr);
+    gap: 1rem clamp(2rem, 8vw, 7rem);
+    align-items: end;
+  }
+
+  .outputs-intro .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .outputs h2,
+  .outputs h3 {
+    color: var(--color-text-inverse);
+  }
+
+  .outputs-intro > p:last-child {
+    max-width: var(--measure-ui);
+    color: var(--color-text-inverse-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .output-list {
+    border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+  }
+
+  .output-list > li {
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 28%);
+  }
+
+  .output {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.65fr) minmax(0, 0.9fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding-block: clamp(1.75rem, 4vw, 2.75rem);
+    align-items: start;
+  }
+
+  .output-number {
+    color: var(--color-green);
+  }
+
+  .output-heading h3 {
+    margin-top: 0.75rem;
+  }
+
+  .output-description,
+  .output-decision {
+    color: var(--color-text-inverse-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .output-decision {
+    padding-left: clamp(1rem, 3vw, 2rem);
+    border-left: var(--border-width) solid rgb(252 254 255 / 28%);
+  }
+
+  .output-decision span {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-green);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .fit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .fit-panel {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-top: 0.25rem solid var(--color-ink);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-panel-strong {
+    border-top-color: var(--color-blue);
+  }
+
+  .fit-label {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .fit-label-muted {
+    color: var(--color-text-muted);
+  }
+
+  .fit-panel h3 {
+    max-width: 27ch;
+    margin-top: 0.75rem;
+  }
+
+  .fit-panel ul {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .fit-panel li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .fit-panel li::before {
+    position: absolute;
+    top: 0.7em;
+    left: 0;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background: var(--color-border-strong);
+    content: "";
+  }
+
+  .fit-panel-strong li::before {
+    background: var(--color-blue);
+  }
+
+  .next-step-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+    gap: clamp(2.5rem, 9vw, 8rem);
+    padding: clamp(2rem, 6vw, 4rem);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-pure);
+  }
+
+  .next-step-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+
+  .next-step-details {
+    width: 100%;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .next-step-details div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.875rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .next-step-details dt {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+  }
+
+  .next-step-details dd {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+  }
+
+  .next-step-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+  }
+
+  .services-link {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    text-decoration: underline;
+    text-decoration-color: var(--color-blue);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.22em;
+  }
+
+  .services-link:hover {
+    color: var(--color-blue);
+  }
+
+  .breadcrumb a:focus-visible,
+  .services-link:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 68rem) {
+    .hero-layout,
+    .section-intro-split,
+    .outputs-intro,
+    .next-step-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .trigger {
+      max-width: 38rem;
+    }
+
+    .output {
+      grid-template-columns: minmax(12rem, 0.65fr) minmax(0, 1.35fr);
+    }
+
+    .output-decision {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 54rem) {
+    .evidence-grid,
+    .fit-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .scope-note,
+    .output {
+      grid-template-columns: 1fr;
+    }
+
+    .output-decision {
+      grid-column: 1;
+      padding-top: 1rem;
+      padding-left: 0;
+      border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .diagnostic-hero {
+      padding-block: 2.5rem clamp(3.75rem, 16vw, 5.5rem);
+    }
+
+    .hero-actions,
+    .next-step-actions {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-actions .button,
+    .next-step-actions .button,
+    .services-link {
+      width: 100%;
+    }
+
+    .question {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .evidence-grid article,
+    .fit-panel,
+    .scope-note {
+      padding: 1.5rem;
+    }
+
+    .next-step-layout {
+      padding: 1.5rem;
+    }
+
+    .next-step-details div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .breadcrumb a,
+    .services-link {
+      min-height: var(--control-min-size-coarse);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .trigger,
+    .question-list,
+    .question-list > li,
+    .evidence-grid,
+    .evidence-grid > li,
+    .scope-note,
+    .output-list,
+    .output-list > li,
+    .output-decision,
+    .fit-panel,
+    .next-step-layout,
+    .next-step-details,
+    .next-step-details div {
+      border-color: CanvasText;
+    }
+
+    .fit-panel li::before {
+      background: CanvasText;
+    }
+  }
+</style>
