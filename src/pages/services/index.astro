@@ -1,0 +1,1046 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const diagnostics = [
+  {
+    id: "cx-systems-diagnostic",
+    number: "01",
+    name: "CX Systems Diagnostic",
+    situation:
+      "The customer experience is inconsistent, but the organization cannot see where the system is breaking or which issue should be fixed first.",
+    examines:
+      "Customer and team touchpoints, handoffs, ownership, CRM signals, service rules, and the systems influencing the experience.",
+    output:
+      "A cross-functional friction map, ownership analysis, prioritized operating issues, and a practical sequence for improvement.",
+    continuation:
+      "Service-model redesign, workflow cleanup, customer-signal development, or AI-supported routing and summarization.",
+    href: "/services/cx-systems-diagnostic/",
+  },
+  {
+    id: "lifecycle-risk-review",
+    number: "02",
+    name: "Lifecycle Risk Review",
+    situation:
+      "Onboarding drifts, accounts become quiet, adoption weakens, or renewal risk becomes visible only after the useful intervention window has narrowed.",
+    examines:
+      "Lifecycle stages, risk and health signals, handoffs, escalation paths, intervention rules, and gaps in customer context.",
+    output:
+      "A lifecycle risk model, signal inventory, intervention map, and clear recommendations for earlier, more accountable action.",
+    continuation:
+      "Onboarding redesign, account-health improvements, renewal-readiness workflows, or a stronger customer-success operating rhythm.",
+    href: "/services/lifecycle-risk-review/",
+  },
+  {
+    id: "crm-workflow-audit",
+    number: "03",
+    name: "CRM Workflow Audit",
+    situation:
+      "The CRM contains fields, notes, activity, and dashboards, but teams still rely on workarounds and cannot trust it to guide coordinated customer action.",
+    examines:
+      "Workflow design, field use, data quality, segmentation, automation, handoffs, reporting, ownership, and actual frontline behavior.",
+    output:
+      "A current-state workflow map, data and adoption findings, prioritized cleanup plan, and requirements for a more usable operating system.",
+    continuation:
+      "CRM process redesign, segmentation, outreach and escalation workflows, reporting improvements, or adoption support.",
+    href: "/services/crm-workflow-audit/",
+  },
+  {
+    id: "ai-service-readiness-review",
+    number: "04",
+    name: "AI Service Readiness Review",
+    situation:
+      "The organization is considering AI for service, success, or operations before the supporting workflow and decision rules are ready.",
+    examines:
+      "Use-case fit, data dependencies, human oversight, governance, trust, workflow readiness, adoption risk, and success measures.",
+    output:
+      "A readiness decision, human-in-the-loop map, operating constraints, required guardrails, and sequenced implementation priorities.",
+    continuation:
+      "AI-assisted summaries, routing support, knowledge workflows, service visibility, or a bounded decision-support pilot.",
+    href: "/services/ai-service-readiness-review/",
+  },
+];
+
+const selectionGuide = [
+  {
+    cue: "The experience breaks across teams and systems",
+    choice: "CX Systems Diagnostic",
+    decision: "Where is friction created, and what operating change matters first?",
+    href: "#cx-systems-diagnostic",
+  },
+  {
+    cue: "Risk appears too late in the lifecycle",
+    choice: "Lifecycle Risk Review",
+    decision: "Which signals should trigger action, when, and by whom?",
+    href: "#lifecycle-risk-review",
+  },
+  {
+    cue: "The CRM records work but does not guide it",
+    choice: "CRM Workflow Audit",
+    decision: "What must change for teams to trust and use the system?",
+    href: "#crm-workflow-audit",
+  },
+  {
+    cue: "The AI proposal is ahead of operating readiness",
+    choice: "AI Service Readiness Review",
+    decision: "Is the use case ready, and what conditions must exist first?",
+    href: "#ai-service-readiness-review",
+  },
+];
+
+const workingStages = [
+  {
+    number: "01",
+    title: "Diagnose the operating reality",
+    description:
+      "Trace the customer problem through teams, systems, data, decisions, and frontline work so the source of friction becomes visible.",
+    artifact: "Current-state evidence and a bounded problem definition",
+  },
+  {
+    number: "02",
+    title: "Decide what must change",
+    description:
+      "Align the outcome, decision rights, accountable owners, operating constraints, and sequence of changes before implementation begins.",
+    artifact: "A target operating model and prioritized decision brief",
+  },
+  {
+    number: "03",
+    title: "Implement the useful next version",
+    description:
+      "Translate the recommendation into workflows, CRM requirements, handoff rules, governance, team practices, and appropriate AI support.",
+    artifact: "Usable workflow specifications and adoption requirements",
+  },
+  {
+    number: "04",
+    title: "Measure and improve",
+    description:
+      "Use customer, workflow, adoption, and performance signals to evaluate the operating change and determine what to refine next.",
+    artifact: "A measurement model with review and adaptation points",
+  },
+];
+
+const evidenceStandards = [
+  {
+    title: "Trace the problem",
+    description:
+      "Connect each recommendation to observed workflows, system behavior, customer signals, and stakeholder evidence rather than assumption alone.",
+  },
+  {
+    title: "Name the decision and owner",
+    description:
+      "State what the organization must decide, who can make that decision, and which team owns the resulting work.",
+  },
+  {
+    title: "Define how improvement will be judged",
+    description:
+      "Specify the operating and customer signals that should change, the limits of the evidence, and when the result should be reviewed.",
+  },
+];
+---
+
+<Layout
+  title="Services | Cadence Lab"
+  description="Diagnostic services for customer experience systems, lifecycle risk, CRM workflows, and responsible AI service readiness."
+  canonicalURL="/services/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="services-page" tabindex="-1">
+    <section class="services-hero" aria-labelledby="services-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Services</p>
+
+          <h1 id="services-title">
+            Fix the operating conditions behind customer friction.
+          </h1>
+
+          <p class="hero-lead">
+            Cadence Lab builds customer experience operating systems for the AI
+            era. The work starts with a focused diagnostic, then turns evidence
+            into clearer ownership, more usable workflows, and measurable
+            operating change.
+          </p>
+
+          <div class="hero-actions" aria-label="Services page actions">
+            <a class="button button-primary" href="/fit-check/">
+              Start a fit check
+            </a>
+            <a class="button button-text" href="#diagnostics">
+              Compare the diagnostics
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-note" aria-labelledby="hero-note-title">
+          <p id="hero-note-title" class="hero-note-label">Start here</p>
+          <p>
+            Choose the problem the organization needs to understand—not the
+            technology it expects to buy.
+          </p>
+          <ul role="list">
+            <li>One bounded operating question</li>
+            <li>One shared evidence base</li>
+            <li>One practical decision about what happens next</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section
+      id="diagnostics"
+      class="diagnostics section-block"
+      aria-labelledby="diagnostics-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Diagnostic entry points</p>
+            <h2 id="diagnostics-title">
+              Four ways to make the operating problem visible.
+            </h2>
+          </div>
+
+          <p>
+            Each engagement examines a distinct pattern of customer and
+            operational risk. The structure is consistent: clarify the problem,
+            inspect the evidence, define the decision, and recommend the next
+            useful change.
+          </p>
+        </div>
+
+        <ol class="diagnostic-list" role="list">
+          {
+            diagnostics.map((diagnostic) => (
+              <li id={diagnostic.id}>
+                <article class="diagnostic">
+                  <div class="diagnostic-heading">
+                    <p class="diagnostic-number" aria-hidden="true">
+                      {diagnostic.number}
+                    </p>
+                    <h3>{diagnostic.name}</h3>
+                  </div>
+
+                  <dl class="diagnostic-body">
+                    <div>
+                      <dt>Choose this when</dt>
+                      <dd>{diagnostic.situation}</dd>
+                    </div>
+                    <div>
+                      <dt>What Cadence Lab examines</dt>
+                      <dd>{diagnostic.examines}</dd>
+                    </div>
+                    <div>
+                      <dt>Decision and output</dt>
+                      <dd>{diagnostic.output}</dd>
+                    </div>
+                    <div>
+                      <dt>What it can lead to</dt>
+                      <dd>{diagnostic.continuation}</dd>
+                    </div>
+                  </dl>
+
+                  <a class="diagnostic-link" href={diagnostic.href}>
+                    Review {diagnostic.name}
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="selection section-block" aria-labelledby="selection-title">
+      <div class="page-container section-stack section-stack-compact">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Selection guidance</p>
+            <h2 id="selection-title">
+              Choose based on where the evidence is weakest.
+            </h2>
+          </div>
+
+          <p>
+            More than one condition may be present. Start with the diagnostic
+            that resolves the most consequential uncertainty and creates the
+            clearest decision for the organization.
+          </p>
+        </div>
+
+        <ul class="selection-list" role="list">
+          {
+            selectionGuide.map((item) => (
+              <li>
+                <article>
+                  <p class="selection-cue">{item.cue}</p>
+                  <h3>{item.choice}</h3>
+                  <p class="selection-decision">{item.decision}</p>
+                  <a href={item.href}>Review this diagnostic</a>
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section
+      id="working-model"
+      class="working-model section-block"
+      aria-labelledby="working-model-title"
+    >
+      <div class="page-container working-layout">
+        <div class="working-intro">
+          <p class="eyebrow">Working model</p>
+          <h2 id="working-model-title">
+            The diagnostic is the front door, not the final deliverable.
+          </h2>
+          <p>
+            Findings become useful only when they change a decision, workflow,
+            ownership model, or measurement practice. Cadence Lab keeps the work
+            connected from diagnosis through implementation and review.
+          </p>
+        </div>
+
+        <ol class="stage-list" role="list">
+          {
+            workingStages.map((stage) => (
+              <li>
+                <article class="stage">
+                  <p class="stage-number" aria-hidden="true">
+                    {stage.number}
+                  </p>
+                  <div class="stage-copy">
+                    <h3>{stage.title}</h3>
+                    <p>{stage.description}</p>
+                    <p class="stage-artifact">
+                      <span>Produces</span>
+                      {stage.artifact}
+                    </p>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="evidence" aria-labelledby="evidence-title">
+      <div class="page-container section-stack">
+        <div class="evidence-intro">
+          <p class="eyebrow eyebrow-inverse">Evidence standard</p>
+          <h2 id="evidence-title">
+            Recommendations should be traceable, owned, and measurable.
+          </h2>
+          <p>
+            Cadence Lab does not use activity, workshops, or technology launches
+            as substitutes for evidence. Every recommendation should make its
+            basis, accountability, and evaluation clear.
+          </p>
+        </div>
+
+        <ul class="evidence-grid" role="list">
+          {
+            evidenceStandards.map((standard, index) => (
+              <li>
+                <article>
+                  <p class="evidence-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3>{standard.title}</h3>
+                  <p>{standard.description}</p>
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="fit-check section-block" aria-labelledby="fit-check-title">
+      <div class="page-container fit-check-layout">
+        <div>
+          <p class="eyebrow">Fit check</p>
+          <h2 id="fit-check-title">
+            Bring the operating problem, even if it is still messy.
+          </h2>
+        </div>
+
+        <div class="fit-check-copy">
+          <p>
+            Describe the customer issue, affected teams, current systems, and
+            decision the organization needs to make. Cadence Lab will identify
+            whether one of these diagnostics is appropriate—or say directly
+            when another path makes more sense.
+          </p>
+
+          <dl class="fit-check-expectations">
+            <div>
+              <dt>Useful context</dt>
+              <dd>Customer impact, operating constraints, and accountable sponsor</dd>
+            </div>
+            <div>
+              <dt>Expected outcome</dt>
+              <dd>A recommendation about fit and the right next step</dd>
+            </div>
+          </dl>
+
+          <a class="button button-accent" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-page {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .section-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 6vw, 5rem);
+  }
+
+  .section-stack-compact {
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .eyebrow {
+    margin: 0 0 1rem;
+    color: var(--color-blue);
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  dl,
+  dd {
+    margin-block: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  h2 {
+    max-width: 19ch;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  h3 {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  .services-hero {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.65fr);
+    gap: clamp(3rem, 10vw, 8rem);
+    align-items: end;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-lead {
+    max-width: var(--measure-ui);
+    margin-top: 1.5rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .hero-note {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-top: 0.25rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-note-label {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .hero-note > p:last-of-type {
+    margin-top: 0.75rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-note ul,
+  .diagnostic-list,
+  .selection-list,
+  .stage-list,
+  .evidence-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-note ul {
+    display: grid;
+    gap: 0.625rem;
+    margin-top: 1.25rem;
+  }
+
+  .hero-note li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .hero-note li::before {
+    position: absolute;
+    top: 0.67em;
+    left: 0;
+    width: 0.3125rem;
+    height: 0.3125rem;
+    border-radius: 50%;
+    background: var(--color-blue);
+    content: "";
+  }
+
+  .diagnostics {
+    scroll-margin-top: var(--header-offset);
+    background: var(--color-surface-subtle);
+  }
+
+  .section-intro-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.75fr);
+    gap: clamp(2rem, 8vw, 7rem);
+    align-items: end;
+  }
+
+  .section-intro-split > p,
+  .working-intro > p:last-child,
+  .fit-check-copy > p {
+    max-width: var(--measure-ui);
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .diagnostic-list {
+    border-top: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .diagnostic-list > li {
+    scroll-margin-top: calc(var(--header-offset) + 1rem);
+    border-bottom: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .diagnostic {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.55fr) minmax(0, 1.45fr);
+    gap: clamp(2rem, 7vw, 6rem);
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .diagnostic-heading {
+    align-self: start;
+  }
+
+  .diagnostic-number,
+  .stage-number,
+  .evidence-number {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    font-feature-settings: var(--fea-tabular);
+  }
+
+  .diagnostic-heading h3 {
+    max-width: 17ch;
+    margin-top: 0.75rem;
+  }
+
+  .diagnostic-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .diagnostic-body div {
+    min-width: 0;
+  }
+
+  .diagnostic-body dt {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+  }
+
+  .diagnostic-body dd {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .diagnostic-link {
+    display: inline-flex;
+    width: fit-content;
+    min-height: var(--control-min-size);
+    align-items: center;
+    gap: 0.4rem;
+    grid-column: 2;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    text-decoration: underline;
+    text-decoration-color: var(--color-blue);
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.25em;
+    transition: color var(--transition-fast);
+  }
+
+  .diagnostic-link:hover {
+    color: var(--color-blue);
+  }
+
+  .selection-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border-strong);
+    border-left: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .selection-list > li {
+    min-width: 0;
+    border-right: var(--border-width) solid var(--color-border-strong);
+    border-bottom: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .selection-list article {
+    display: flex;
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .selection-cue {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+  }
+
+  .selection-list h3 {
+    margin-top: 0.75rem;
+  }
+
+  .selection-decision {
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .selection-list a {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    text-decoration: underline;
+    text-decoration-color: var(--color-blue);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.22em;
+  }
+
+  .selection-list a:hover {
+    color: var(--color-blue);
+  }
+
+  .working-model {
+    background: var(--color-surface-subtle);
+  }
+
+  .working-layout {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 10vw, 9rem);
+    align-items: start;
+  }
+
+  .working-intro {
+    position: sticky;
+    top: calc(var(--header-offset) + 2rem);
+  }
+
+  .working-intro > p:last-child {
+    margin-top: 1.25rem;
+  }
+
+  .stage-list {
+    border-top: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .stage-list > li {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .stage {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .stage-copy h3 {
+    max-width: 29ch;
+  }
+
+  .stage-copy > p:not(.stage-artifact) {
+    max-width: var(--measure-ui);
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .stage-artifact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    margin-top: 1rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    line-height: var(--lh-small);
+  }
+
+  .stage-artifact span {
+    color: var(--color-blue);
+    font-weight: var(--fw-medium);
+  }
+
+  .evidence {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+  }
+
+  .evidence-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.75fr);
+    gap: 1rem clamp(2rem, 8vw, 7rem);
+    align-items: end;
+  }
+
+  .evidence-intro .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .evidence h2,
+  .evidence h3 {
+    color: var(--color-text-inverse);
+  }
+
+  .evidence-intro > p:last-child {
+    max-width: var(--measure-ui);
+    color: var(--color-text-inverse-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 28%);
+  }
+
+  .evidence-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .evidence-grid li + li {
+    border-left: var(--border-width) solid rgb(252 254 255 / 28%);
+  }
+
+  .evidence-number {
+    color: var(--color-green);
+  }
+
+  .evidence-grid h3 {
+    max-width: 22ch;
+    margin-top: 0.75rem;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin-top: 1rem;
+    color: var(--color-text-inverse-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .fit-check-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+    gap: clamp(2.5rem, 9vw, 8rem);
+    padding: clamp(2rem, 6vw, 4rem);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-check-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+
+  .fit-check-expectations {
+    width: 100%;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .fit-check-expectations div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.875rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .fit-check-expectations dt {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+  }
+
+  .fit-check-expectations dd {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: var(--lh-small);
+  }
+
+  .diagnostic-link:focus-visible,
+  .selection-list a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 68rem) {
+    .hero-layout,
+    .section-intro-split,
+    .working-layout,
+    .evidence-intro,
+    .fit-check-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-note {
+      max-width: 38rem;
+    }
+
+    .working-intro {
+      position: static;
+    }
+  }
+
+  @media (max-width: 54rem) {
+    .diagnostic {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .diagnostic-heading h3 {
+      max-width: 28ch;
+    }
+
+    .diagnostic-link {
+      grid-column: 1;
+    }
+
+    .selection-list,
+    .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .evidence-grid li + li {
+      border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .services-hero {
+      padding-block: clamp(3.75rem, 16vw, 5.5rem);
+    }
+
+    .hero-actions {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-actions .button,
+    .fit-check-copy .button {
+      width: 100%;
+    }
+
+    .diagnostic-body {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .stage {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .fit-check-layout {
+      padding: 1.5rem;
+    }
+
+    .fit-check-expectations div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .diagnostic-link,
+    .selection-list a {
+      min-height: var(--control-min-size-coarse);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .diagnostic-link {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .hero-note,
+    .diagnostic-list,
+    .diagnostic-list > li,
+    .selection-list,
+    .selection-list > li,
+    .stage-list,
+    .stage-list > li,
+    .evidence-grid,
+    .evidence-grid li,
+    .fit-check-layout,
+    .fit-check-expectations,
+    .fit-check-expectations div {
+      border-color: CanvasText;
+    }
+
+    .hero-note li::before {
+      background: CanvasText;
+    }
+  }
+</style>
