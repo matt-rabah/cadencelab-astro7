@@ -3,8 +3,11 @@ import tina from "@tinacms/astro/integration";
 import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
 export default defineConfig({
   output: "static",
+  site: "https://cadencelab.co",
 
   fonts: [
     {
@@ -86,7 +89,7 @@ export default defineConfig({
     },
   ],
 
-  integrations: [tina()],
+  integrations: [tina(), sitemap()],
 
   vite: {
     plugins: [tailwindcss(), tinaAdminDevRedirect()],
