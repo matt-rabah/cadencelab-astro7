@@ -1,0 +1,912 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const pointsOfView = [
+  {
+    number: "01",
+    title: "Customer experience is an operating system",
+    description:
+      "The experience customers receive is shaped by ownership, decisions, handoffs, data, tools, and frontline judgment. Improving one touchpoint without understanding that system rarely resolves the underlying friction.",
+  },
+  {
+    number: "02",
+    title: "Diagnosis protects the next investment",
+    description:
+      "A focused diagnostic makes the operating problem visible before a larger program, platform decision, or AI implementation begins. It establishes what is known, what remains uncertain, and which decision matters first.",
+  },
+  {
+    number: "03",
+    title: "AI readiness is operational readiness",
+    description:
+      "Responsible AI adoption depends on a useful customer or operating decision, reliable inputs, accountable owners, usable workflows, human oversight, and measures that reveal when the system needs correction.",
+  },
+];
+
+const workingPrinciples = [
+  {
+    number: "01",
+    title: "Follow the evidence",
+    description:
+      "Separate observed conditions from interpretation, state the limits of what the evidence supports, and keep recommendations traceable to the problem they are meant to improve.",
+  },
+  {
+    number: "02",
+    title: "Make ownership explicit",
+    description:
+      "Clarify who makes the decision, who performs the work, who handles exceptions, and who remains accountable for the customer and operating outcome.",
+  },
+  {
+    number: "03",
+    title: "Design for actual work",
+    description:
+      "Use the real constraints of teams, systems, incentives, data, and frontline behavior instead of assuming that a process diagram or technology launch will change practice by itself.",
+  },
+  {
+    number: "04",
+    title: "Measure the change",
+    description:
+      "Define the customer, adoption, workflow, and performance signals that should move, then review whether the operating change is working and what needs to adapt next.",
+  },
+];
+
+const systemLayers = [
+  {
+    label: "Customer reality",
+    description:
+      "The friction, risk, expectation, or consequence customers actually experience.",
+  },
+  {
+    label: "Frontline work",
+    description:
+      "The decisions, handoffs, judgment, and service behaviors that shape the response.",
+  },
+  {
+    label: "Systems and signals",
+    description:
+      "The CRM data, workflows, automation, and feedback that help people act—or obscure what matters.",
+  },
+  {
+    label: "Ownership and measurement",
+    description:
+      "The decision rights, governance, operating measures, and review rhythm that sustain change.",
+  },
+];
+
+const cadenceLabBrings = [
+  "A bounded diagnostic question instead of a broad capability exercise.",
+  "A cross-functional view of customer friction, workflow, systems, and ownership.",
+  "A practical distinction between evidence, assumptions, constraints, and decisions.",
+  "A sequenced recommendation that connects the immediate issue to a usable next step.",
+];
+
+const engagementRequires = [
+  "A consequential customer or operating problem worth understanding.",
+  "Access to the people and evidence surrounding the work.",
+  "An accountable sponsor who can resolve cross-functional decisions.",
+  "A willingness to change ownership or workflow when the evidence calls for it.",
+];
+---
+
+<Layout
+  title="About | Cadence Lab"
+  description="Learn how Cadence Lab approaches customer experience systems, CRM workflows, lifecycle risk, and responsible AI adoption."
+  canonicalURL="/about/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="about-page" tabindex="-1">
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">About Cadence Lab</p>
+
+          <h1 id="about-title">
+            Better customer experience requires a better system for work.
+          </h1>
+
+          <p class="hero-lead">
+            Cadence Lab helps organizations understand the operating conditions
+            behind customer friction, rebuild the workflows around them, and
+            create a responsible path from strategy to measurable change.
+          </p>
+
+          <div class="hero-actions" aria-label="About page actions">
+            <a class="button button-primary" href="/services/">
+              Review the services
+            </a>
+
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="premise-note" aria-labelledby="premise-note-title">
+          <p id="premise-note-title" class="note-label">The premise</p>
+
+          <p>
+            Customer experience is not produced by a channel, platform, or
+            department alone. It emerges from the system connecting all three.
+          </p>
+
+          <dl>
+            <div>
+              <dt>Start with</dt>
+              <dd>The operating problem</dd>
+            </div>
+            <div>
+              <dt>Make visible</dt>
+              <dd>Evidence, ownership, and constraints</dd>
+            </div>
+            <div>
+              <dt>Decide</dt>
+              <dd>The next useful change</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="point-of-view" aria-labelledby="point-of-view-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Point of view</p>
+            <h2 id="point-of-view-title">
+              The visible problem is often produced somewhere else.
+            </h2>
+          </div>
+
+          <p>
+            A customer issue may surface in service, retention, CRM reporting,
+            or an AI initiative while its cause sits across several teams and
+            decisions. Cadence Lab works across those boundaries without losing
+            sight of the customer consequence.
+          </p>
+        </div>
+
+        <ol class="view-list">
+          {
+            pointsOfView.map((item) => (
+              <li>
+                <article>
+                  <p class="item-number" aria-hidden="true">{item.number}</p>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="working-standard" aria-labelledby="working-standard-title">
+      <div class="page-container standard-layout">
+        <div class="standard-intro">
+          <p class="eyebrow eyebrow-inverse">Working standard</p>
+          <h2 id="working-standard-title">
+            Recommendations should survive contact with the work.
+          </h2>
+          <p>
+            The goal is not a polished explanation of complexity. It is a clear
+            decision that people can own, implement, evaluate, and revise as
+            the evidence changes.
+          </p>
+        </div>
+
+        <ol class="principle-grid">
+          {
+            workingPrinciples.map((principle) => (
+              <li>
+                <article>
+                  <p class="principle-number" aria-hidden="true">
+                    {principle.number}
+                  </p>
+                  <h3>{principle.title}</h3>
+                  <p>{principle.description}</p>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="system-view" aria-labelledby="system-view-title">
+      <div class="page-container system-layout">
+        <div class="system-intro">
+          <p class="eyebrow">System view</p>
+          <h2 id="system-view-title">
+            Connect the experience to the conditions that create it.
+          </h2>
+          <p>
+            Cadence Lab traces a problem through four connected layers. The
+            sequence keeps the customer consequence visible while the work
+            moves deeper into workflows, technology, accountability, and
+            measurement.
+          </p>
+        </div>
+
+        <ol class="system-sequence">
+          {
+            systemLayers.map((layer, index) => (
+              <li>
+                <article>
+                  <p class="sequence-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <div>
+                    <h3>{layer.label}</h3>
+                    <p>{layer.description}</p>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="engagement-boundaries" aria-labelledby="boundaries-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Engagement boundaries</p>
+            <h2 id="boundaries-title">
+              Useful work depends on candor from both sides.
+            </h2>
+          </div>
+
+          <p>
+            A diagnostic engagement is most useful when the organization wants
+            to understand the problem before committing to a predetermined
+            solution—and can act on what the evidence reveals.
+          </p>
+        </div>
+
+        <div class="boundary-grid">
+          <article class="boundary-panel boundary-panel-primary">
+            <p class="boundary-label">Cadence Lab brings</p>
+            <h3>A disciplined way to make the problem actionable</h3>
+            <ul role="list">
+              {cadenceLabBrings.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+
+          <article class="boundary-panel">
+            <p class="boundary-label boundary-label-muted">
+              The engagement requires
+            </p>
+            <h3>Conditions that support an honest diagnosis</h3>
+            <ul role="list">
+              {engagementRequires.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-close" aria-labelledby="about-close-title">
+      <div class="page-container close-layout">
+        <div>
+          <p class="eyebrow">Start with fit</p>
+          <h2 id="about-close-title">
+            The first useful answer may be that a different path makes more
+            sense.
+          </h2>
+        </div>
+
+        <div class="close-action">
+          <p>
+            Share the customer or operating problem, the people and systems
+            involved, and the decision that needs to be made. The fit check is
+            designed to clarify whether Cadence Lab is an appropriate next
+            step.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .about-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .about-hero,
+  .point-of-view,
+  .working-standard,
+  .system-view,
+  .engagement-boundaries,
+  .about-close {
+    padding-block: var(--section-space);
+  }
+
+  .about-hero {
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy,
+  .standard-intro,
+  .system-intro,
+  .close-action {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-copy {
+    gap: 1.25rem;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .principle-number,
+  .sequence-number,
+  .boundary-label {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    margin: 0;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-heading);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  .hero-lead,
+  .section-intro-split > p,
+  .standard-intro > p:not(.eyebrow),
+  .system-intro > p:not(.eyebrow),
+  .view-list article p,
+  .principle-grid article > p:last-child,
+  .system-sequence article p,
+  .close-action p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-lead {
+    max-width: 62ch;
+    font-size: var(--fs-body-ui);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    padding-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-blue);
+    background: var(--color-blue);
+    color: var(--color-light);
+  }
+
+  .button-primary:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+  }
+
+  .button-text {
+    padding: 0.875rem 0;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .button-text:hover {
+    color: var(--color-blue);
+    text-decoration-color: currentColor;
+  }
+
+  .premise-note {
+    display: grid;
+    min-width: 0;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .premise-note > p:not(.note-label) {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .premise-note dl {
+    display: grid;
+    margin: 0;
+    padding-top: 0.25rem;
+  }
+
+  .premise-note dl > div {
+    display: grid;
+    grid-template-columns: minmax(6rem, 0.45fr) minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.875rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .premise-note dt,
+  .premise-note dd {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .premise-note dt {
+    color: var(--color-text-muted);
+  }
+
+  .premise-note dd {
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .point-of-view,
+  .system-view,
+  .engagement-boundaries,
+  .about-close {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 6vw, 5rem);
+  }
+
+  .section-intro-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
+    gap: clamp(2.5rem, 7vw, 7rem);
+  }
+
+  .section-intro-split > div {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .section-intro-split h2 {
+    max-width: 19ch;
+  }
+
+  .section-intro-split > p {
+    max-width: 58ch;
+    align-self: end;
+    font-size: var(--fs-body-ui);
+  }
+
+  .view-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .view-list li {
+    padding-block: clamp(1.75rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .view-list article {
+    display: grid;
+    grid-template-columns: minmax(3rem, 0.22fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .view-list article > div {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.65fr) minmax(18rem, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .view-list article p {
+    max-width: 64ch;
+    font-size: var(--fs-small);
+  }
+
+  .working-standard {
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
+  }
+
+  .standard-layout {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .standard-intro {
+    gap: 1.25rem;
+  }
+
+  .standard-intro h2 {
+    max-width: 19ch;
+    color: var(--color-text-inverse);
+  }
+
+  .standard-intro > p:not(.eyebrow) {
+    max-width: 52ch;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-body-ui);
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(252 254 255 / 24%);
+    border-inline-start: 1px solid rgb(252 254 255 / 24%);
+    list-style: none;
+  }
+
+  .principle-grid li {
+    border-right: 1px solid rgb(252 254 255 / 24%);
+    border-bottom: 1px solid rgb(252 254 255 / 24%);
+  }
+
+  .principle-grid article {
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .principle-grid h3 {
+    color: var(--color-text-inverse);
+  }
+
+  .principle-grid article > p:last-child {
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+  }
+
+  .principle-number {
+    color: var(--color-green);
+  }
+
+  .system-view {
+    background: var(--color-surface-subtle);
+  }
+
+  .system-layout {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .system-intro {
+    gap: 1.25rem;
+  }
+
+  .system-intro h2 {
+    max-width: 18ch;
+  }
+
+  .system-intro > p:not(.eyebrow) {
+    max-width: 52ch;
+    font-size: var(--fs-body-ui);
+  }
+
+  .system-sequence {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .system-sequence li {
+    position: relative;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .system-sequence li:not(:last-child)::after {
+    position: absolute;
+    inset-block-end: -0.65rem;
+    inset-inline-start: 1rem;
+    z-index: 1;
+    display: grid;
+    width: 1.3rem;
+    height: 1.3rem;
+    place-items: center;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+    background: var(--color-surface-subtle);
+    color: var(--color-blue);
+    content: "↓";
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  .system-sequence article {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .system-sequence article > div {
+    display: grid;
+    gap: 0.625rem;
+  }
+
+  .system-sequence article p {
+    max-width: 62ch;
+    font-size: var(--fs-small);
+  }
+
+  .boundary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface-pure);
+  }
+
+  .boundary-panel {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: clamp(1.75rem, 5vw, 3.5rem);
+  }
+
+  .boundary-panel + .boundary-panel {
+    border-inline-start: 1px solid var(--color-border);
+  }
+
+  .boundary-panel-primary {
+    background: var(--color-surface-subtle);
+  }
+
+  .boundary-label-muted {
+    color: var(--color-text-muted);
+  }
+
+  .boundary-panel ul {
+    display: grid;
+    gap: 0.875rem;
+    margin: 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--color-border);
+    list-style: none;
+  }
+
+  .boundary-panel li {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .boundary-panel li::before {
+    position: absolute;
+    inset-block-start: 0.62em;
+    inset-inline-start: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-green);
+    content: "";
+  }
+
+  .about-close {
+    background: var(--color-surface);
+  }
+
+  .close-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .close-layout > div:first-child {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .close-layout h2 {
+    max-width: 21ch;
+  }
+
+  .close-action {
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .close-action p {
+    font-size: var(--fs-body-ui);
+  }
+
+  @media (max-width: 64rem) {
+    .view-list article > div {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 56rem) {
+    .hero-layout,
+    .section-intro-split,
+    .standard-layout,
+    .system-layout,
+    .close-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .premise-note {
+      max-width: 38rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .standard-intro,
+    .system-intro {
+      max-width: 42rem;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .view-list article {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .principle-grid,
+    .boundary-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .principle-grid article {
+      min-height: 0;
+    }
+
+    .boundary-panel + .boundary-panel {
+      border-block-start: 1px solid var(--color-border);
+      border-inline-start: 0;
+    }
+
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .hero-actions .button {
+      width: 100%;
+    }
+
+    .button-text {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 28rem) {
+    .premise-note dl > div,
+    .system-sequence article {
+      grid-template-columns: 1fr;
+    }
+
+    .system-sequence li:not(:last-child)::after {
+      inset-inline-start: 0;
+    }
+  }
+</style>
