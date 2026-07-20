@@ -200,7 +200,11 @@ const articleSchema = {
 
   <Footer />
 
-  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(articleSchema)}
+  />
 </Layout>
 
 <style>

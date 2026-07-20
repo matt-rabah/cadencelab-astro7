@@ -13,7 +13,7 @@ import Layout from "../layouts/Layout.astro";
 export async function getStaticPaths() {
   const pages = await getCollection("page");
 
-  return pages.map((entry) => {
+  const paths = pages.map((entry) => {
     const slug = entry.id
       .replace(/\.(md|mdx)$/i, "")
       .split("/")
@@ -33,6 +33,8 @@ export async function getStaticPaths() {
       },
     };
   });
+
+  return paths.filter(({ params }) => params.slug !== "fit-check");
 }
 
 interface Props {
