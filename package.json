@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build --content=local --skip-cloud-checks --skip-indexing && astro build",
+    "check": "tinacms build --content=local --skip-cloud-checks --skip-indexing && astro check",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types"
