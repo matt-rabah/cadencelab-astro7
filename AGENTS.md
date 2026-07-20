@@ -30,7 +30,7 @@ cadencelab-astro7/cadencelab-astro7/
 Work from the repository root:
 
 ```text
-/Users/mattrabah/Library/Mobile Documents/com~apple~CloudDocs/cadencelab-astro7
+/Users/mattrabah/Downloads/cadencelab-astro7
 ```
 
 Before making changes, confirm the current directory:
