@@ -1,0 +1,643 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const usefulContext = [
+  {
+    number: "01",
+    title: "The operating problem",
+    description:
+      "Describe the customer friction, workflow breakdown, or decision that has become difficult to manage.",
+  },
+  {
+    number: "02",
+    title: "The people and systems involved",
+    description:
+      "Name the teams, handoffs, CRM processes, service tools, or lifecycle stages shaping the current experience.",
+  },
+  {
+    number: "03",
+    title: "The outcome that needs to change",
+    description:
+      "Explain what better would look like for customers, frontline teams, operating leaders, or the business.",
+  },
+  {
+    number: "04",
+    title: "The constraints already known",
+    description:
+      "Share the timing, ownership, data, governance, adoption, or implementation limits that a useful recommendation must respect.",
+  },
+];
+---
+
+<Layout
+  title="Contact | Cadence Lab"
+  description="Start a conversation with Cadence Lab about customer experience systems, lifecycle risk, CRM workflows, or responsible AI service readiness."
+  canonicalURL="/contact/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="contact-page" tabindex="-1">
+    <section class="contact-hero" aria-labelledby="contact-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Contact</p>
+
+          <h1 id="contact-title">
+            Bring the operating problem, not a polished brief.
+          </h1>
+
+          <p class="hero-lead">
+            If customer experience, CRM, lifecycle, or AI work is stuck between
+            teams and systems, start by sharing the context. The first decision
+            is whether a focused conversation would actually be useful.
+          </p>
+
+          <div class="hero-actions" aria-label="Contact page actions">
+            <a class="button button-primary" href="/fit-check/">
+              Start a fit check
+            </a>
+
+            <a class="button button-text" href="/services/">
+              Review the services
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="contact-note" aria-labelledby="contact-note-title">
+          <p id="contact-note-title" class="note-label">A useful first step</p>
+
+          <p>
+            The fit check is a short assessment of the problem, operating
+            environment, ownership, and readiness for change.
+          </p>
+
+          <ul role="list">
+            <li>No finished scope is required</li>
+            <li>No platform decision is assumed</li>
+            <li>No consulting agreement is created</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="contact-paths" aria-labelledby="contact-paths-title">
+      <div class="page-container paths-layout">
+        <div class="section-intro">
+          <p class="eyebrow">Choose the useful route</p>
+
+          <h2 id="contact-paths-title">
+            Start where the decision is clearest.
+          </h2>
+        </div>
+
+        <div class="path-grid">
+          <article class="path-card path-card-primary">
+            <p class="path-number" aria-hidden="true">01</p>
+
+            <div class="path-copy">
+              <h3>You are considering an engagement</h3>
+
+              <p>
+                Use the fit check to share the customer problem, current
+                environment, internal ownership, and the outcome you need to
+                improve.
+              </p>
+            </div>
+
+            <a href="/fit-check/" class="path-link">
+              Complete the fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </article>
+
+          <article class="path-card">
+            <p class="path-number" aria-hidden="true">02</p>
+
+            <div class="path-copy">
+              <h3>You are still defining the problem</h3>
+
+              <p>
+                Compare the four diagnostic entry points to see which operating
+                question best matches the friction you are seeing.
+              </p>
+            </div>
+
+            <a href="/services/" class="path-link">
+              Compare the diagnostics
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="useful-context" aria-labelledby="useful-context-title">
+      <div class="page-container context-layout">
+        <div class="context-heading">
+          <p class="eyebrow">Before you reach out</p>
+
+          <h2 id="useful-context-title">
+            A small amount of context makes the first exchange more useful.
+          </h2>
+
+          <p>
+            You do not need a complete requirements document. A practical
+            description of these four areas is enough to establish whether
+            there is a sensible next step.
+          </p>
+        </div>
+
+        <ol class="context-list">
+          {
+            usefulContext.map((item) => (
+              <li>
+                <p class="context-number" aria-hidden="true">{item.number}</p>
+
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact-close" aria-labelledby="contact-close-title">
+      <div class="page-container close-panel">
+        <div>
+          <p class="eyebrow">Engagement assessment</p>
+
+          <h2 id="contact-close-title">
+            The right first conversation should clarify fit, not manufacture
+            urgency.
+          </h2>
+        </div>
+
+        <div class="close-action">
+          <p>
+            Share the operating context and use the response to decide what
+            should happen next—including when an engagement is not the right
+            answer.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .contact-hero,
+  .contact-paths,
+  .useful-context,
+  .contact-close {
+    padding-block: var(--section-space);
+  }
+
+  .contact-hero {
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy,
+  .section-intro,
+  .context-heading,
+  .path-copy,
+  .close-action {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-copy {
+    gap: 1.25rem;
+  }
+
+  .eyebrow,
+  .note-label,
+  .path-number,
+  .context-number {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-heading);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  .hero-lead {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    padding-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--color-blue);
+    background: var(--color-blue);
+    color: var(--color-light);
+  }
+
+  .button-primary:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+  }
+
+  .button-text {
+    padding: 0.875rem 0;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .button-text:hover {
+    color: var(--color-blue);
+    text-decoration-color: currentColor;
+  }
+
+  .contact-note {
+    display: grid;
+    min-width: 0;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .contact-note > p:not(.note-label) {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .contact-note ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--color-border);
+    list-style: none;
+  }
+
+  .contact-note li {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .contact-note li::before {
+    position: absolute;
+    inset-block-start: 0.58em;
+    inset-inline-start: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-green);
+    content: "";
+  }
+
+  .contact-paths {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .paths-layout {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .section-intro {
+    max-width: 48rem;
+    gap: 1rem;
+  }
+
+  .section-intro h2 {
+    max-width: 17ch;
+  }
+
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface-pure);
+  }
+
+  .path-card {
+    display: flex;
+    min-width: 0;
+    min-height: 24rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: clamp(1.75rem, 5vw, 3.5rem);
+  }
+
+  .path-card + .path-card {
+    border-inline-start: 1px solid var(--color-border);
+  }
+
+  .path-card-primary {
+    background: var(--color-surface-subtle);
+  }
+
+  .path-copy {
+    gap: 1rem;
+  }
+
+  .path-copy p,
+  .context-heading > p:not(.eyebrow),
+  .context-list p,
+  .close-action p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .path-copy p,
+  .context-heading > p:not(.eyebrow),
+  .close-action p {
+    font-size: var(--fs-body-ui);
+  }
+
+  .path-link {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    margin-top: auto;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.3;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .path-link:hover {
+    color: var(--color-ink);
+  }
+
+  .useful-context {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .context-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .context-heading {
+    gap: 1.25rem;
+  }
+
+  .context-heading h2 {
+    max-width: 18ch;
+  }
+
+  .context-heading > p:not(.eyebrow) {
+    max-width: 52ch;
+  }
+
+  .context-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .context-list li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .context-list li > div {
+    display: grid;
+    gap: 0.625rem;
+  }
+
+  .context-list p {
+    max-width: 60ch;
+    font-size: var(--fs-small);
+  }
+
+  .contact-close {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
+  }
+
+  .close-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .close-panel > div:first-child {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .close-panel h2 {
+    max-width: 21ch;
+    color: var(--color-text-inverse);
+  }
+
+  .close-panel .eyebrow {
+    color: var(--color-green);
+  }
+
+  .close-action {
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .close-action p {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .close-action .button-primary {
+    border-color: var(--color-light);
+    background: var(--color-light);
+    color: var(--color-ink);
+  }
+
+  .close-action .button-primary:hover {
+    border-color: var(--color-green);
+    background: var(--color-green);
+  }
+
+  @media (max-width: 56rem) {
+    .hero-layout,
+    .context-layout,
+    .close-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-note {
+      max-width: 38rem;
+    }
+
+    .path-card {
+      min-height: 21rem;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .path-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .path-card {
+      min-height: 0;
+    }
+
+    .path-card + .path-card {
+      border-block-start: 1px solid var(--color-border);
+      border-inline-start: 0;
+    }
+
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .hero-actions .button {
+      width: 100%;
+    }
+
+    .button-text {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 28rem) {
+    .context-list li {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+</style>
