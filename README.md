@@ -477,6 +477,8 @@ All commands are run from the project root.
 | `npm run build` | Build TinaCMS and the Astro site |
 | `npm run preview` | Preview the production build locally |
 | `npx tsc --noEmit` | Run TypeScript validation |
+| `npm run format -- <path>` | Format an explicit file or directory with Prettier |
+| `npm run format:check -- <path>` | Check an explicit file or directory without changing it |
 | `npm run astro -- --help` | Display Astro CLI help |
 | `git status` | Show repository changes |
 | `git diff` | Review unstaged changes |
