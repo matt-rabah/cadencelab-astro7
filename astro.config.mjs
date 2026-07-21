@@ -9,6 +9,23 @@ export default defineConfig({
   output: "static",
   site: "https://cadencelab.co",
 
+  security: {
+    csp: {
+      algorithm: "SHA-256",
+      directives: [
+        "base-uri 'none'",
+        "form-action 'self'",
+        "object-src 'none'",
+      ],
+      scriptDirective: {
+        resources: [{ resource: "'none'", kind: "attribute" }],
+      },
+      styleDirective: {
+        resources: [{ resource: "'unsafe-inline'", kind: "attribute" }],
+      },
+    },
+  },
+
   fonts: [
     {
       provider: fontProviders.local(),
