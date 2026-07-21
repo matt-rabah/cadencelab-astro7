@@ -144,8 +144,8 @@ const usefulContext = [
 
           <p>
             You do not need a complete requirements document. A practical
-            description of these four areas is enough to establish whether
-            there is a sensible next step.
+            description of these four areas is enough to establish whether there
+            is a sensible next step.
           </p>
         </div>
 
@@ -153,7 +153,9 @@ const usefulContext = [
           {
             usefulContext.map((item) => (
               <li>
-                <p class="context-number" aria-hidden="true">{item.number}</p>
+                <p class="context-number" aria-hidden="true">
+                  {item.number}
+                </p>
 
                 <div>
                   <h3>{item.title}</h3>
@@ -636,5 +638,4 @@ const usefulContext = [
       gap: 0.75rem;
     }
   }
-
 </style>
