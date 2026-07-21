@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
+import AuthorBio from "../../../../components/blog/AuthorBio.astro";
 import Footer from "../../../../components/Footer.astro";
 import NavHeader from "../../../../components/NavHeader.astro";
 import Layout from "../../../../layouts/Layout.astro";
@@ -187,14 +188,7 @@ const articleSchema = {
         <Content />
       </div>
 
-      <footer class="article-footer">
-        <p>Published by Cadence Lab.</p>
-
-        <a href="/blog/">
-          Browse more insights
-          <span aria-hidden="true">→</span>
-        </a>
-      </footer>
+      <AuthorBio author={author} />
     </article>
   </main>
 
@@ -400,43 +394,7 @@ const articleSchema = {
     overflow-x: auto;
   }
 
-  .article-footer {
-    display: flex;
-    width: min(100%, var(--measure-prose));
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-top: clamp(3rem, 7vw, 5rem);
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
-    font-family: var(--font-sans);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-regular);
-    line-height: 1.5;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-  }
-
-  .article-footer p {
-    margin: 0;
-    color: var(--color-text-muted);
-  }
-
-  .article-footer a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--color-blue);
-    font-weight: var(--fw-medium);
-    text-decoration: none;
-  }
-
-  .article-footer a:hover {
-    text-decoration: underline;
-  }
-
   .article-back-link:focus-visible,
-  .article-footer a:focus-visible,
   .article-body :global(a:focus-visible) {
     outline: var(--focus-ring-width) solid var(--color-focus);
     outline-offset: var(--focus-ring-offset);
@@ -450,16 +408,10 @@ const articleSchema = {
     .article-header h1 {
       max-width: none;
     }
-
-    .article-footer {
-      flex-direction: column;
-      align-items: flex-start;
-    }
   }
 
   @media (forced-colors: active) {
     .article-body,
-    .article-footer,
     .article-body :global(blockquote) {
       border-color: CanvasText;
     }

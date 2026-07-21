@@ -1,0 +1,147 @@
+---
+interface Props {
+  author: string;
+}
+
+const { author } = Astro.props;
+
+const isMattRabah = author.trim().toLowerCase() === "matt rabah";
+const isCadenceLab = author.trim().toLowerCase() === "cadence lab";
+---
+
+<footer class="author-bio" aria-labelledby="article-author-title">
+  <div class="author-copy">
+    <p class="author-label">About the author</p>
+    <h2 id="article-author-title">{author}</h2>
+
+    {
+      isMattRabah ? (
+        <p>
+          Matt Rabah is the Founder and CXO of Cadence Lab. He has 12 years of
+          experience in customer experience management and customer success
+          management, with work spanning service operations, lifecycle programs,
+          CRM workflows, and practical AI adoption.
+        </p>
+      ) : isCadenceLab ? (
+        <p>
+          Cadence Lab publishes practical analysis on customer experience
+          systems, CRM workflows, lifecycle risk, and responsible AI adoption.
+        </p>
+      ) : (
+        <p>{author} contributed this article to Cadence Lab Insights.</p>
+      )
+    }
+  </div>
+
+  <nav class="author-links" aria-label="Article links">
+    {
+      isMattRabah && (
+        <a href="/about/">
+          About Matt and Cadence Lab
+          <span aria-hidden="true">→</span>
+        </a>
+      )
+    }
+
+    <a href="/blog/">
+      Browse more insights
+      <span aria-hidden="true">→</span>
+    </a>
+  </nav>
+</footer>
+
+<style>
+  .author-bio {
+    display: grid;
+    width: min(100%, var(--measure-prose));
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: end;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    padding-top: clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .author-copy {
+    display: flex;
+    max-width: 40rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .author-label,
+  .author-copy h2,
+  .author-copy p,
+  .author-links a {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .author-label {
+    margin: 0;
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .author-copy h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  .author-copy p:last-child {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
+    line-height: 1.6;
+  }
+
+  .author-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .author-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.5;
+    text-decoration: none;
+  }
+
+  .author-links a:hover {
+    text-decoration: underline;
+  }
+
+  .author-links a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 48rem) {
+    .author-bio {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .author-bio {
+      border-color: CanvasText;
+    }
+  }
+</style>
