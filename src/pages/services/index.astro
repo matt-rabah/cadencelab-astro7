@@ -1,6 +1,7 @@
 ---
 import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const diagnostics = [
@@ -190,6 +191,16 @@ const evidenceStandards = [
       </div>
     </section>
 
+    <SectionNav
+      items={[
+        { label: "Diagnostics", href: "#diagnostics" },
+        { label: "Choose a diagnostic", href: "#selection" },
+        { label: "Working model", href: "#working-model" },
+        { label: "Evidence standards", href: "#evidence" },
+        { label: "Fit check", href: "#fit-check" },
+      ]}
+    />
+
     <section
       id="diagnostics"
       class="diagnostics section-block"
@@ -255,7 +266,11 @@ const evidenceStandards = [
       </div>
     </section>
 
-    <section class="selection section-block" aria-labelledby="selection-title">
+    <section
+      id="selection"
+      class="selection section-block"
+      aria-labelledby="selection-title"
+    >
       <div class="page-container section-stack section-stack-compact">
         <div class="section-intro section-intro-split">
           <div>
@@ -331,7 +346,7 @@ const evidenceStandards = [
       </div>
     </section>
 
-    <section class="evidence" aria-labelledby="evidence-title">
+    <section id="evidence" class="evidence" aria-labelledby="evidence-title">
       <div class="page-container section-stack">
         <div class="evidence-intro">
           <p class="eyebrow eyebrow-inverse">Evidence standard</p>
@@ -363,7 +378,11 @@ const evidenceStandards = [
       </div>
     </section>
 
-    <section class="fit-check section-block" aria-labelledby="fit-check-title">
+    <section
+      id="fit-check"
+      class="fit-check section-block"
+      aria-labelledby="fit-check-title"
+    >
       <div class="page-container fit-check-layout">
         <div>
           <p class="eyebrow">Fit check</p>

@@ -1,6 +1,7 @@
 ---
 import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const pointsOfView = [
@@ -151,7 +152,21 @@ const engagementRequires = [
       </div>
     </section>
 
-    <section class="founder-profile" aria-labelledby="founder-title">
+    <SectionNav
+      items={[
+        { label: "Founder", href: "#founder" },
+        { label: "Point of view", href: "#point-of-view" },
+        { label: "Working standard", href: "#working-standard" },
+        { label: "System view", href: "#system-view" },
+        { label: "Engagement fit", href: "#engagement-fit" },
+      ]}
+    />
+
+    <section
+      id="founder"
+      class="founder-profile"
+      aria-labelledby="founder-title"
+    >
       <div class="page-container founder-layout">
         <div class="founder-card">
           <figure
@@ -219,7 +234,11 @@ const engagementRequires = [
       </div>
     </section>
 
-    <section class="point-of-view" aria-labelledby="point-of-view-title">
+    <section
+      id="point-of-view"
+      class="point-of-view"
+      aria-labelledby="point-of-view-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
@@ -257,7 +276,11 @@ const engagementRequires = [
       </div>
     </section>
 
-    <section class="working-standard" aria-labelledby="working-standard-title">
+    <section
+      id="working-standard"
+      class="working-standard"
+      aria-labelledby="working-standard-title"
+    >
       <div class="page-container standard-layout">
         <div class="standard-intro">
           <p class="eyebrow eyebrow-inverse">Working standard</p>
@@ -288,7 +311,11 @@ const engagementRequires = [
       </div>
     </section>
 
-    <section class="system-view" aria-labelledby="system-view-title">
+    <section
+      id="system-view"
+      class="system-view"
+      aria-labelledby="system-view-title"
+    >
       <div class="page-container system-layout">
         <div class="system-intro">
           <p class="eyebrow">System view</p>
@@ -322,7 +349,11 @@ const engagementRequires = [
       </div>
     </section>
 
-    <section class="engagement-boundaries" aria-labelledby="boundaries-title">
+    <section
+      id="engagement-fit"
+      class="engagement-boundaries"
+      aria-labelledby="boundaries-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
