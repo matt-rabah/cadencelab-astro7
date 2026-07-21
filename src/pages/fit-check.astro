@@ -49,21 +49,67 @@ const pageDescription =
         </p>
       </header>
 
+      <aside class="fit-check-assurance" aria-label="Before you begin">
+        <dl>
+          <div>
+            <dt>Time</dt>
+            <dd>About five minutes</dd>
+          </div>
+          <div>
+            <dt>What happens next</dt>
+            <dd>Cadence Lab reviews the context and responds directly.</dd>
+          </div>
+          <div>
+            <dt>Privacy</dt>
+            <dd>Your answers are used only to assess fit and respond.</dd>
+          </div>
+        </dl>
+      </aside>
+
       <form
         class="fit-check-form"
         method="post"
-        action="/thanks/"
+        action="/api/fit-check"
         aria-labelledby="fit-check-form-title"
       >
+        <div class="honeypot" aria-hidden="true">
+          <label for="website">Website</label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
         <h2 id="fit-check-form-title" class="visually-hidden">
           Fit assessment form
         </h2>
 
-        <fieldset class="form-section">
-          <legend>
+        <div class="form-progress" data-form-progress hidden>
+          <p class="progress-status" data-progress-status aria-live="polite">
+            Step 1 of 5
+          </p>
+          <ol aria-label="Fit check progress">
+            <li aria-current="step">Problem</li>
+            <li>Environment</li>
+            <li>Readiness</li>
+            <li>Contact</li>
+            <li>Review</li>
+          </ol>
+        </div>
+
+        <fieldset class="form-section" data-form-step="1">
+          <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">01</span>
             Customer experience problem
           </legend>
+
+          <p id="problem-description" class="section-description">
+            Describe the operating problem and the outcome that would make the
+            work worthwhile.
+          </p>
 
           <div class="input-group">
             <label for="challenge">
@@ -75,8 +121,19 @@ const pageDescription =
               name="challenge"
               rows="5"
               autocomplete="off"
+              minlength="40"
+              maxlength="2000"
+              aria-describedby="challenge-hint challenge-error"
+              aria-errormessage="challenge-error"
               placeholder="Describe the customer friction, affected teams, and business impact."
               required></textarea>
+            <p id="challenge-hint" class="field-hint">
+              Include the customer friction, affected teams, and business
+              consequence.
+            </p>
+            <p id="challenge-error" class="field-error">
+              Describe the problem in at least 40 characters.
+            </p>
           </div>
 
           <div class="input-group">
@@ -89,82 +146,108 @@ const pageDescription =
               name="impact"
               rows="4"
               autocomplete="off"
+              minlength="20"
+              maxlength="2000"
+              aria-describedby="impact-hint impact-error"
+              aria-errormessage="impact-error"
               placeholder="Examples: improve retention, reduce service effort, increase adoption, or strengthen measurement."
               required></textarea>
+            <p id="impact-hint" class="field-hint">
+              Name an observable customer, operating, or business outcome.
+            </p>
+            <p id="impact-error" class="field-error">
+              Describe the desired outcome in at least 20 characters.
+            </p>
+          </div>
+
+          <div class="step-actions">
+            <button class="step-button step-button-primary" type="button" data-next-step>
+              Continue to environment
+            </button>
           </div>
         </fieldset>
 
-        <fieldset class="form-section">
-          <legend>
+        <fieldset class="form-section" data-form-step="2">
+          <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">02</span>
             Operating environment
           </legend>
 
+          <p class="section-description">
+            Select the descriptions that most closely reflect how work and
+            information move today.
+          </p>
+
           <div class="input-group">
-            <label for="environment">
+            <span class="group-label">
               Which description best matches your current environment?
-            </label>
+            </span>
 
-            <select id="environment" name="environment" required>
-              <option value="" disabled selected>
-                Select the closest description
-              </option>
-
-              <option value="fragmented">
-                Multiple disconnected systems and inconsistent workflows
-              </option>
-
-              <option value="transitioning">
-                Systems or processes are currently being consolidated
-              </option>
-
-              <option value="modern-siloed">
-                Modern tools exist, but teams or workflows remain siloed
-              </option>
-
-              <option value="established">
-                Core systems and workflows are established but need improvement
-              </option>
-
-              <option value="uncertain">
-                We need help understanding the current state
-              </option>
-            </select>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="environment" value="fragmented" required />
+                <span>Multiple disconnected systems and inconsistent workflows</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="environment" value="transitioning" />
+                <span>Systems or processes are currently being consolidated</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="environment" value="modern-siloed" />
+                <span>Modern tools exist, but teams or workflows remain siloed</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="environment" value="established" />
+                <span>Core systems and workflows are established but need improvement</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="environment" value="uncertain" />
+                <span>We need help understanding the current state</span>
+              </label>
+            </div>
           </div>
 
           <div class="input-group">
-            <label for="crm">
+            <span class="group-label">
               What role does CRM data play in the current workflow?
-            </label>
+            </span>
 
-            <select id="crm" name="crm" required>
-              <option value="" disabled selected>
-                Select the closest description
-              </option>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="crm" value="measured" required />
+                <span>CRM data is connected to workflows and performance measures</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="crm" value="active-limited" />
+                <span>Data is collected, but its operational use is limited</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="crm" value="fragmented" />
+                <span>Data quality or ownership is inconsistent across teams</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="crm" value="early" />
+                <span>CRM use is still developing</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="crm" value="unknown" />
+                <span>We are not sure how reliable or useful the data is</span>
+              </label>
+            </div>
+          </div>
 
-              <option value="measured">
-                CRM data is connected to workflows and performance measures
-              </option>
-
-              <option value="active-limited">
-                Data is collected, but its operational use is limited
-              </option>
-
-              <option value="fragmented">
-                Data quality or ownership is inconsistent across teams
-              </option>
-
-              <option value="early">CRM use is still developing</option>
-
-              <option value="unknown">
-                We are not sure how reliable or useful the data is
-              </option>
-            </select>
+          <div class="step-actions">
+            <button class="step-button step-button-secondary" type="button" data-previous-step>
+              Back
+            </button>
+            <button class="step-button step-button-primary" type="button" data-next-step>
+              Continue to readiness
+            </button>
           </div>
         </fieldset>
 
-        <fieldset class="form-section">
-          <legend>
+        <fieldset class="form-section" data-form-step="3">
+          <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">03</span>
             Readiness and ownership
           </legend>
@@ -231,10 +314,19 @@ const pageDescription =
               </label>
             </div>
           </div>
+
+          <div class="step-actions">
+            <button class="step-button step-button-secondary" type="button" data-previous-step>
+              Back
+            </button>
+            <button class="step-button step-button-primary" type="button" data-next-step>
+              Continue to contact
+            </button>
+          </div>
         </fieldset>
 
-        <fieldset class="form-section">
-          <legend>
+        <fieldset class="form-section" data-form-step="4">
+          <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">04</span>
             Contact information
           </legend>
@@ -247,8 +339,9 @@ const pageDescription =
                 id="name"
                 name="name"
                 type="text"
-                autocomplete="name"
-                required
+              autocomplete="name"
+              maxlength="100"
+              required
               />
             </div>
 
@@ -261,8 +354,17 @@ const pageDescription =
                 type="email"
                 autocomplete="email"
                 inputmode="email"
+                maxlength="254"
+                aria-describedby="email-hint email-error"
+                aria-errormessage="email-error"
                 required
               />
+              <p id="email-hint" class="field-hint">
+                Use the address where you want to receive the response.
+              </p>
+              <p id="email-error" class="field-error">
+                Enter a valid email address.
+              </p>
             </div>
           </div>
 
@@ -275,6 +377,7 @@ const pageDescription =
                 name="organization"
                 type="text"
                 autocomplete="organization"
+                maxlength="120"
                 required
               />
             </div>
@@ -287,6 +390,7 @@ const pageDescription =
                 name="role"
                 type="text"
                 autocomplete="organization-title"
+                maxlength="120"
               />
             </div>
           </div>
@@ -301,15 +405,49 @@ const pageDescription =
               id="additional-context"
               name="additional-context"
               rows="4"
+              maxlength="1000"
               autocomplete="off"></textarea>
+          </div>
+
+          <div class="step-actions">
+            <button class="step-button step-button-secondary" type="button" data-previous-step>
+              Back
+            </button>
+            <button class="step-button step-button-primary" type="button" data-next-step>
+              Review your answers
+            </button>
           </div>
         </fieldset>
 
+        <section class="review-section" data-review-step hidden aria-labelledby="review-title">
+          <div class="review-heading">
+            <div>
+              <p class="section-number" aria-hidden="true">05</p>
+              <h3 id="review-title" tabindex="-1">Review your answers</h3>
+            </div>
+            <p>Confirm the context below before submitting the fit assessment.</p>
+          </div>
+
+          <div class="review-groups" data-review-groups></div>
+
+          <div class="step-actions">
+            <button class="step-button step-button-secondary" type="button" data-previous-step>
+              Back
+            </button>
+          </div>
+        </section>
+
         <div class="form-footer">
-          <p class="form-note">
-            Submitting this form does not create a consulting agreement. Your
-            information will be used only to review the inquiry and respond.
-          </p>
+          <div class="form-note">
+            <p>
+              Submitting this form does not create a consulting agreement. Your
+              information will be used only to review the inquiry and respond.
+            </p>
+            <p>
+              Do not include passwords, access tokens, regulated personal data,
+              or other confidential credentials.
+            </p>
+          </div>
 
           <button type="submit" class="submit-button">
             Submit fit assessment
@@ -320,6 +458,249 @@ const pageDescription =
   </main>
 
   <Footer />
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".fit-check-form");
+
+  if (form) {
+    const steps = Array.from(
+      form.querySelectorAll<HTMLElement>("[data-form-step]"),
+    );
+    const reviewStep = form.querySelector<HTMLElement>("[data-review-step]");
+    const reviewGroups = form.querySelector<HTMLElement>("[data-review-groups]");
+    const progress = form.querySelector<HTMLElement>("[data-form-progress]");
+    const progressStatus = form.querySelector<HTMLElement>(
+      "[data-progress-status]",
+    );
+    const progressItems = Array.from(
+      form.querySelectorAll<HTMLElement>("[data-form-progress] li"),
+    );
+    const submitButton = form.querySelector<HTMLButtonElement>(
+      '.submit-button[type="submit"]',
+    );
+    let currentStep = 0;
+
+    const reviewSections = [
+      {
+        title: "Customer experience problem",
+        step: 0,
+        fields: [
+          ["challenge", "Customer experience problem"],
+          ["impact", "Successful outcome"],
+        ],
+      },
+      {
+        title: "Operating environment",
+        step: 1,
+        fields: [
+          ["environment", "Current environment"],
+          ["crm", "Role of CRM data"],
+        ],
+      },
+      {
+        title: "Readiness and ownership",
+        step: 2,
+        fields: [
+          ["leadership", "Accountable leadership"],
+          ["change-readiness", "Willingness to change"],
+        ],
+      },
+      {
+        title: "Contact information",
+        step: 3,
+        fields: [
+          ["name", "Name"],
+          ["email", "Work email"],
+          ["organization", "Organization"],
+          ["role", "Role"],
+          ["additional-context", "Additional context"],
+        ],
+      },
+    ] as const;
+
+    const getFieldValue = (name: string) => {
+      const controls = Array.from(
+        form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+          `[name="${name}"]`,
+        ),
+      );
+      const selected = controls.find(
+        (control) =>
+          !(control instanceof HTMLInputElement) ||
+          control.type !== "radio" ||
+          control.checked,
+      );
+
+      if (!selected?.value.trim()) return "Not provided";
+
+      if (selected.type === "radio") {
+        return (
+          selected.closest("label")?.querySelector("span")?.textContent?.trim() ??
+          selected.value
+        );
+      }
+
+      return selected.value.trim();
+    };
+
+    const buildReview = () => {
+      if (!reviewGroups) return;
+
+      reviewGroups.replaceChildren();
+
+      reviewSections.forEach((sectionData) => {
+        const section = document.createElement("section");
+        section.className = "review-group";
+
+        const header = document.createElement("div");
+        header.className = "review-group-header";
+
+        const heading = document.createElement("h4");
+        heading.textContent = sectionData.title;
+
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.className = "review-edit";
+        editButton.dataset.editStep = String(sectionData.step);
+        editButton.textContent = "Edit";
+
+        header.append(heading, editButton);
+
+        const list = document.createElement("dl");
+
+        sectionData.fields.forEach(([name, label]) => {
+          const row = document.createElement("div");
+          const term = document.createElement("dt");
+          const description = document.createElement("dd");
+
+          term.textContent = label;
+          description.textContent = getFieldValue(name);
+          row.append(term, description);
+          list.append(row);
+        });
+
+        section.append(header, list);
+        reviewGroups.append(section);
+      });
+    };
+
+    const focusStepHeading = (index: number) => {
+      const target =
+        index < steps.length
+          ? steps[index]?.querySelector<HTMLElement>("legend")
+          : reviewStep?.querySelector<HTMLElement>("h3");
+
+      target?.focus({ preventScroll: true });
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const showStep = (index: number, focusHeading = true) => {
+      currentStep = Math.max(0, Math.min(index, steps.length));
+
+      steps.forEach((step, stepIndex) => {
+        step.hidden = stepIndex !== currentStep;
+      });
+
+      const isReviewing = currentStep === steps.length;
+      if (reviewStep) reviewStep.hidden = !isReviewing;
+      form.classList.toggle("is-reviewing", isReviewing);
+
+      progressItems.forEach((item, itemIndex) => {
+        if (itemIndex === currentStep) {
+          item.setAttribute("aria-current", "step");
+        } else {
+          item.removeAttribute("aria-current");
+        }
+        item.classList.toggle("is-complete", itemIndex < currentStep);
+      });
+
+      if (progressStatus) {
+        progressStatus.textContent = `Step ${currentStep + 1} of ${steps.length + 1}`;
+      }
+
+      if (isReviewing) buildReview();
+      if (focusHeading) requestAnimationFrame(() => focusStepHeading(currentStep));
+    };
+
+    const validateStep = (step: HTMLElement) => {
+      const controls = Array.from(
+        step.querySelectorAll<
+          HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+        >("input, select, textarea"),
+      );
+      const firstInvalid = controls.find((control) => !control.checkValidity());
+
+      if (!firstInvalid) return true;
+
+      firstInvalid.reportValidity();
+      firstInvalid.focus();
+      return false;
+    };
+
+    form.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      const nextButton = target.closest<HTMLButtonElement>("[data-next-step]");
+      const previousButton = target.closest<HTMLButtonElement>(
+        "[data-previous-step]",
+      );
+      const editButton = target.closest<HTMLButtonElement>("[data-edit-step]");
+
+      if (nextButton) {
+        const step = nextButton.closest<HTMLElement>("[data-form-step]");
+        if (step && validateStep(step)) showStep(currentStep + 1);
+      }
+
+      if (previousButton) showStep(currentStep - 1);
+
+      if (editButton) {
+        const editStep = Number(editButton.dataset.editStep);
+        if (Number.isInteger(editStep)) showStep(editStep);
+      }
+    });
+
+    form.addEventListener("submit", (event) => {
+      const firstInvalid = Array.from(form.elements).find(
+        (element): element is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
+          element instanceof HTMLInputElement ||
+          element instanceof HTMLSelectElement ||
+          element instanceof HTMLTextAreaElement
+            ? !element.checkValidity()
+            : false,
+      );
+
+      if (firstInvalid) {
+        event.preventDefault();
+        const invalidStep = steps.findIndex((step) => step.contains(firstInvalid));
+        if (invalidStep >= 0) showStep(invalidStep, false);
+        firstInvalid.reportValidity();
+        firstInvalid.focus();
+        return;
+      }
+
+      if (currentStep !== steps.length) {
+        event.preventDefault();
+        showStep(steps.length);
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting…";
+      }
+    });
+
+    window.addEventListener("pageshow", () => {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit fit assessment";
+      }
+    });
+
+    form.classList.add("is-enhanced");
+    if (progress) progress.hidden = false;
+    showStep(0, false);
+  }
+</script>
 </Layout>
 
 <style>
@@ -343,6 +724,48 @@ const pageDescription =
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+  }
+
+  .fit-check-assurance {
+    padding-block: clamp(1.25rem, 3vw, 1.75rem);
+    border-block: 1px solid var(--color-border-strong);
+  }
+
+  .fit-check-assurance dl {
+    display: grid;
+    grid-template-columns: 0.65fr 1.2fr 1.4fr;
+    gap: 1.5rem;
+    margin: 0;
+  }
+
+  .fit-check-assurance dl > div {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .fit-check-assurance dt {
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+  }
+
+  .fit-check-assurance dd {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .fit-check-assurance a {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-blue);
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.2em;
   }
 
   .fit-check-eyebrow {
@@ -400,11 +823,73 @@ const pageDescription =
   .fit-check-form {
     display: grid;
     gap: clamp(2.5rem, 6vw, 4rem);
+    position: relative;
     padding: clamp(1.5rem, 5vw, 3.5rem);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: var(--color-surface-pure);
     box-shadow: var(--shadow-sm);
+  }
+
+  .honeypot {
+    position: absolute;
+    top: auto;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-progress {
+    display: grid;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .progress-status {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+  }
+
+  .form-progress ol {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .form-progress li {
+    position: relative;
+    padding-top: 0.75rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .form-progress li::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 0.1875rem;
+    background: var(--color-border);
+    content: "";
+  }
+
+  .form-progress li.is-complete,
+  .form-progress li[aria-current="step"] {
+    color: var(--color-ink);
+  }
+
+  .form-progress li.is-complete::before,
+  .form-progress li[aria-current="step"]::before {
+    background: var(--color-blue);
   }
 
   .form-section {
@@ -431,6 +916,21 @@ const pageDescription =
     line-height: var(--lh-h4);
     letter-spacing: 0;
     font-feature-settings: var(--fea-graphik);
+  }
+
+  .form-section legend:focus,
+  .review-heading h3:focus {
+    outline: 0;
+  }
+
+  .section-description {
+    max-width: var(--measure-ui);
+    margin: -0.25rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
   }
 
   .section-number {
@@ -460,6 +960,24 @@ const pageDescription =
   .optional-label {
     color: var(--color-text-muted);
     font-weight: var(--fw-regular);
+  }
+
+  .field-hint,
+  .field-error {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.5;
+  }
+
+  .field-hint {
+    color: var(--color-text-muted);
+  }
+
+  .field-error {
+    display: none;
+    color: var(--color-error);
+    font-weight: var(--fw-medium);
   }
 
   input[type="text"],
@@ -515,6 +1033,23 @@ const pageDescription =
       color-mix(in srgb, var(--color-focus) 25%, transparent);
   }
 
+  input:user-invalid,
+  select:user-invalid,
+  textarea:user-invalid {
+    border-color: var(--color-error);
+    background: color-mix(
+      in srgb,
+      var(--color-error) 4%,
+      var(--color-surface-pure)
+    );
+  }
+
+  input:user-invalid ~ .field-error,
+  select:user-invalid ~ .field-error,
+  textarea:user-invalid ~ .field-error {
+    display: block;
+  }
+
   .form-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -554,8 +1089,8 @@ const pageDescription =
   }
 
   .radio-option input {
-    width: 1rem;
-    height: 1rem;
+    width: 1.125rem;
+    height: 1.125rem;
     margin: 0.2rem 0 0;
     accent-color: var(--color-blue);
   }
@@ -569,6 +1104,167 @@ const pageDescription =
     font-feature-settings: var(--fea-graphik);
   }
 
+  .step-actions {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+
+  .is-enhanced .step-actions {
+    display: flex;
+  }
+
+  .step-button,
+  :global(.review-edit) {
+    min-height: var(--control-min-size);
+    font-family: var(--font-sans);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+  }
+
+  .step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-cta);
+    line-height: 1.2;
+  }
+
+  .step-button-primary {
+    margin-inline-start: auto;
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .step-button-secondary {
+    background: transparent;
+    color: var(--color-ink);
+  }
+
+  .step-button:hover {
+    border-color: var(--color-blue);
+  }
+
+  .step-button-primary:hover {
+    background: var(--color-blue);
+  }
+
+  .step-button:focus-visible,
+  :global(.review-edit:focus-visible) {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .review-section {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .review-heading {
+    display: grid;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .review-heading > div {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .review-heading h3 {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+  }
+
+  .review-heading > p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .review-groups {
+    display: grid;
+    gap: 2rem;
+  }
+
+  :global(.review-group) {
+    display: grid;
+    gap: 1rem;
+  }
+
+  :global(.review-group-header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  :global(.review-group h4) {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  :global(.review-edit) {
+    padding: 0.5rem 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.2em;
+  }
+
+  :global(.review-group dl) {
+    display: grid;
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  :global(.review-group dl > div) {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.875rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  :global(.review-group dt),
+  :global(.review-group dd) {
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  :global(.review-group dt) {
+    color: var(--color-text-muted);
+    font-weight: var(--fw-medium);
+  }
+
+  :global(.review-group dd) {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
   .form-footer {
     display: flex;
     align-items: center;
@@ -578,7 +1274,12 @@ const pageDescription =
   }
 
   .form-note {
+    display: grid;
+    gap: 0.5rem;
     max-width: 34rem;
+  }
+
+  .form-note p {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -587,6 +1288,14 @@ const pageDescription =
     line-height: 1.5;
     letter-spacing: 0;
     font-feature-settings: var(--fea-graphik);
+  }
+
+  .is-enhanced .form-footer {
+    display: none;
+  }
+
+  .is-enhanced.is-reviewing .form-footer {
+    display: flex;
   }
 
   .submit-button {
@@ -627,6 +1336,11 @@ const pageDescription =
     outline-offset: var(--focus-ring-offset);
   }
 
+  .submit-button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
   @media (max-width: 40rem) {
     .fit-check-page {
       padding-block: clamp(3.5rem, 14vw, 5rem);
@@ -638,6 +1352,29 @@ const pageDescription =
 
     .fit-check-form {
       padding: 1.25rem;
+    }
+
+    .fit-check-assurance dl,
+    :global(.review-group dl > div) {
+      grid-template-columns: 1fr;
+    }
+
+    .fit-check-assurance dl {
+      gap: 1rem;
+    }
+
+    .form-progress ol {
+      grid-template-columns: repeat(5, minmax(2rem, 1fr));
+    }
+
+    .form-progress li {
+      overflow: hidden;
+      color: transparent;
+      white-space: nowrap;
+    }
+
+    .form-progress li[aria-current="step"] {
+      color: transparent;
     }
 
     .form-grid {
@@ -652,13 +1389,32 @@ const pageDescription =
     .submit-button {
       width: 100%;
     }
+
+    .step-actions {
+      align-items: stretch;
+      flex-direction: column-reverse;
+    }
+
+    .step-button {
+      width: 100%;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .step-button,
+    :global(.review-edit),
+    .radio-option,
+    .submit-button {
+      min-height: var(--control-min-size-coarse);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     input,
     select,
     textarea,
-    .submit-button {
+    .submit-button,
+    .step-button {
       transition: none;
     }
   }
@@ -669,7 +1425,8 @@ const pageDescription =
     input,
     select,
     textarea,
-    .submit-button {
+    .submit-button,
+    .step-button {
       border-color: CanvasText;
     }
   }
