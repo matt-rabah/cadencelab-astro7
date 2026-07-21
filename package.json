@@ -38,7 +38,6 @@
     "workerd@1.20260714.1": true
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.20",
     "@tinacms/cli": "^2.5.6",
     "@types/node": "^26.1.1",
     "typescript": "^6.0.3"
