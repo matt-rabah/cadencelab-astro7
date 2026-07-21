@@ -683,8 +683,64 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       ),
     );
     const desktopMediaQuery = window.matchMedia("(min-width: 60rem)");
+    const collapseThreshold = 96;
+    const expandDistance = 28;
 
     let activeDesktopTrigger: HTMLButtonElement | null = null;
+    let lastScrollY = window.scrollY;
+    let upwardDistance = 0;
+    let scrollFrameRequested = false;
+    let collapseSuppressedUntil = 0;
+
+    const setDesktopHeaderState = (isCollapsed: boolean) => {
+      if (!desktopMediaQuery.matches) {
+        header.classList.remove("is-collapsed");
+        return;
+      }
+
+      header.classList.toggle("is-collapsed", isCollapsed);
+    };
+
+    const updateDesktopHeaderOnScroll = () => {
+      scrollFrameRequested = false;
+
+      if (!desktopMediaQuery.matches) {
+        setDesktopHeaderState(false);
+        lastScrollY = window.scrollY;
+        upwardDistance = 0;
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      if (currentScrollY <= collapseThreshold) {
+        setDesktopHeaderState(false);
+        upwardDistance = 0;
+      } else if (delta > 0) {
+        if (Date.now() >= collapseSuppressedUntil) {
+          setDesktopHeaderState(true);
+        }
+        upwardDistance = 0;
+      } else if (delta < 0) {
+        upwardDistance += Math.abs(delta);
+
+        if (upwardDistance >= expandDistance) {
+          setDesktopHeaderState(false);
+          collapseSuppressedUntil = Date.now() + 260;
+          upwardDistance = 0;
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    const requestDesktopHeaderUpdate = () => {
+      if (scrollFrameRequested) return;
+
+      scrollFrameRequested = true;
+      window.requestAnimationFrame(updateDesktopHeaderOnScroll);
+    };
 
     const closeDesktopMenus = (restoreFocus = false) => {
       const triggerToRestore = activeDesktopTrigger;
@@ -826,11 +882,22 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     const handleViewportChange = () => {
       closeDesktopMenus();
       setMobileMenuState(false);
+      setDesktopHeaderState(false);
+      lastScrollY = window.scrollY;
+      upwardDistance = 0;
+      collapseSuppressedUntil = 0;
     };
 
     desktopMediaQuery.addEventListener("change", handleViewportChange, {
       signal,
     });
+
+    window.addEventListener("scroll", requestDesktopHeaderUpdate, {
+      passive: true,
+      signal,
+    });
+
+    updateDesktopHeaderOnScroll();
   };
 
   if (cadenceWindow.__cadenceHeaderLoader) {
@@ -849,6 +916,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 <style>
   .site-header {
     --desktop-header-height: 6.5rem;
+    --desktop-primary-row-height: 3.5rem;
 
     position: sticky;
     inset-block-start: 0;
@@ -865,6 +933,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     display: grid;
     grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
     min-block-size: var(--desktop-header-height);
+    transition: min-block-size var(--transition-standard);
   }
 
   .brand-zone {
@@ -886,6 +955,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   .desktop-wordmark {
     inline-size: clamp(8.5rem, 10vw, 10.75rem);
     block-size: auto;
+    transition: inline-size var(--transition-standard);
   }
 
   .header-navigation {
@@ -897,11 +967,21 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   .utility-row {
     display: flex;
     min-block-size: 3rem;
+    max-block-size: 3rem;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-8);
+    overflow: hidden;
     padding-inline: clamp(1.25rem, 3vw, 2.5rem);
     border-block-end: var(--border-width) solid var(--color-border);
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      min-block-size var(--transition-standard),
+      max-block-size var(--transition-standard),
+      opacity var(--transition-fast),
+      transform var(--transition-standard),
+      border-color var(--transition-standard);
   }
 
   .site-search {
@@ -1093,6 +1173,24 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     border-block: var(--border-width) solid var(--color-border);
     background: var(--color-surface-pure);
     box-shadow: var(--shadow-md);
+    transition: inset-block-start var(--transition-standard);
+  }
+
+  .site-header.is-collapsed {
+    --desktop-header-height: var(--desktop-primary-row-height);
+  }
+
+  .site-header.is-collapsed .utility-row {
+    min-block-size: 0;
+    max-block-size: 0;
+    border-block-end-color: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.75rem);
+  }
+
+  .site-header.is-collapsed .desktop-wordmark {
+    inline-size: clamp(7.75rem, 9vw, 9.5rem);
   }
 
   .mega-menu[hidden] {
@@ -1549,6 +1647,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .desktop-header,
+    .desktop-wordmark,
+    .utility-row,
+    .mega-menu,
     .search-input,
     .mobile-search-input,
     .utility-navigation a,
