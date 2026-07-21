@@ -159,7 +159,11 @@ const pageDescription =
           </div>
 
           <div class="step-actions">
-            <button class="step-button step-button-primary" type="button" data-next-step>
+            <button
+              class="step-button step-button-primary"
+              type="button"
+              data-next-step
+            >
               Continue to environment
             </button>
           </div>
@@ -183,20 +187,34 @@ const pageDescription =
 
             <div class="radio-group">
               <label class="radio-option">
-                <input type="radio" name="environment" value="fragmented" required />
-                <span>Multiple disconnected systems and inconsistent workflows</span>
+                <input
+                  type="radio"
+                  name="environment"
+                  value="fragmented"
+                  required
+                />
+                <span
+                  >Multiple disconnected systems and inconsistent workflows</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="transitioning" />
-                <span>Systems or processes are currently being consolidated</span>
+                <span
+                  >Systems or processes are currently being consolidated</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="modern-siloed" />
-                <span>Modern tools exist, but teams or workflows remain siloed</span>
+                <span
+                  >Modern tools exist, but teams or workflows remain siloed</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="established" />
-                <span>Core systems and workflows are established but need improvement</span>
+                <span
+                  >Core systems and workflows are established but need
+                  improvement</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="uncertain" />
@@ -213,15 +231,21 @@ const pageDescription =
             <div class="radio-group">
               <label class="radio-option">
                 <input type="radio" name="crm" value="measured" required />
-                <span>CRM data is connected to workflows and performance measures</span>
+                <span
+                  >CRM data is connected to workflows and performance measures</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="active-limited" />
-                <span>Data is collected, but its operational use is limited</span>
+                <span
+                  >Data is collected, but its operational use is limited</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="fragmented" />
-                <span>Data quality or ownership is inconsistent across teams</span>
+                <span
+                  >Data quality or ownership is inconsistent across teams</span
+                >
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="early" />
@@ -235,10 +259,18 @@ const pageDescription =
           </div>
 
           <div class="step-actions">
-            <button class="step-button step-button-secondary" type="button" data-previous-step>
+            <button
+              class="step-button step-button-secondary"
+              type="button"
+              data-previous-step
+            >
               Back
             </button>
-            <button class="step-button step-button-primary" type="button" data-next-step>
+            <button
+              class="step-button step-button-primary"
+              type="button"
+              data-next-step
+            >
               Continue to readiness
             </button>
           </div>
@@ -314,10 +346,18 @@ const pageDescription =
           </div>
 
           <div class="step-actions">
-            <button class="step-button step-button-secondary" type="button" data-previous-step>
+            <button
+              class="step-button step-button-secondary"
+              type="button"
+              data-previous-step
+            >
               Back
             </button>
-            <button class="step-button step-button-primary" type="button" data-next-step>
+            <button
+              class="step-button step-button-primary"
+              type="button"
+              data-next-step
+            >
               Continue to contact
             </button>
           </div>
@@ -337,9 +377,9 @@ const pageDescription =
                 id="name"
                 name="name"
                 type="text"
-              autocomplete="name"
-              maxlength="100"
-              required
+                autocomplete="name"
+                maxlength="100"
+                required
               />
             </div>
 
@@ -408,16 +448,29 @@ const pageDescription =
           </div>
 
           <div class="step-actions">
-            <button class="step-button step-button-secondary" type="button" data-previous-step>
+            <button
+              class="step-button step-button-secondary"
+              type="button"
+              data-previous-step
+            >
               Back
             </button>
-            <button class="step-button step-button-primary" type="button" data-next-step>
+            <button
+              class="step-button step-button-primary"
+              type="button"
+              data-next-step
+            >
               Review your answers
             </button>
           </div>
         </fieldset>
 
-        <section class="review-section" data-review-step hidden aria-labelledby="review-title">
+        <section
+          class="review-section"
+          data-review-step
+          hidden
+          aria-labelledby="review-title"
+        >
           <div class="review-heading">
             <div>
               <p class="section-number" aria-hidden="true">05</p>
@@ -429,7 +482,11 @@ const pageDescription =
           <div class="review-groups" data-review-groups></div>
 
           <div class="step-actions">
-            <button class="step-button step-button-secondary" type="button" data-previous-step>
+            <button
+              class="step-button step-button-secondary"
+              type="button"
+              data-previous-step
+            >
               Back
             </button>
           </div>
@@ -457,248 +514,262 @@ const pageDescription =
 
   <Footer />
 
-<script>
-  const form = document.querySelector<HTMLFormElement>(".fit-check-form");
+  <script>
+    const form = document.querySelector<HTMLFormElement>(".fit-check-form");
 
-  if (form) {
-    const steps = Array.from(
-      form.querySelectorAll<HTMLElement>("[data-form-step]"),
-    );
-    const reviewStep = form.querySelector<HTMLElement>("[data-review-step]");
-    const reviewGroups = form.querySelector<HTMLElement>("[data-review-groups]");
-    const progress = form.querySelector<HTMLElement>("[data-form-progress]");
-    const progressStatus = form.querySelector<HTMLElement>(
-      "[data-progress-status]",
-    );
-    const progressItems = Array.from(
-      form.querySelectorAll<HTMLElement>("[data-form-progress] li"),
-    );
-    const submitButton = form.querySelector<HTMLButtonElement>(
-      '.submit-button[type="submit"]',
-    );
-    let currentStep = 0;
-
-    const reviewSections = [
-      {
-        title: "Customer experience problem",
-        step: 0,
-        fields: [
-          ["challenge", "Customer experience problem"],
-          ["impact", "Successful outcome"],
-        ],
-      },
-      {
-        title: "Operating environment",
-        step: 1,
-        fields: [
-          ["environment", "Current environment"],
-          ["crm", "Role of CRM data"],
-        ],
-      },
-      {
-        title: "Readiness and ownership",
-        step: 2,
-        fields: [
-          ["leadership", "Accountable leadership"],
-          ["change-readiness", "Willingness to change"],
-        ],
-      },
-      {
-        title: "Contact information",
-        step: 3,
-        fields: [
-          ["name", "Name"],
-          ["email", "Work email"],
-          ["organization", "Organization"],
-          ["role", "Role"],
-          ["additional-context", "Additional context"],
-        ],
-      },
-    ] as const;
-
-    const getFieldValue = (name: string) => {
-      const controls = Array.from(
-        form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
-          `[name="${name}"]`,
-        ),
+    if (form) {
+      const steps = Array.from(
+        form.querySelectorAll<HTMLElement>("[data-form-step]"),
       );
-      const selected = controls.find(
-        (control) =>
-          !(control instanceof HTMLInputElement) ||
-          control.type !== "radio" ||
-          control.checked,
+      const reviewStep = form.querySelector<HTMLElement>("[data-review-step]");
+      const reviewGroups = form.querySelector<HTMLElement>(
+        "[data-review-groups]",
       );
+      const progress = form.querySelector<HTMLElement>("[data-form-progress]");
+      const progressStatus = form.querySelector<HTMLElement>(
+        "[data-progress-status]",
+      );
+      const progressItems = Array.from(
+        form.querySelectorAll<HTMLElement>("[data-form-progress] li"),
+      );
+      const submitButton = form.querySelector<HTMLButtonElement>(
+        '.submit-button[type="submit"]',
+      );
+      let currentStep = 0;
 
-      if (!selected?.value.trim()) return "Not provided";
+      const reviewSections = [
+        {
+          title: "Customer experience problem",
+          step: 0,
+          fields: [
+            ["challenge", "Customer experience problem"],
+            ["impact", "Successful outcome"],
+          ],
+        },
+        {
+          title: "Operating environment",
+          step: 1,
+          fields: [
+            ["environment", "Current environment"],
+            ["crm", "Role of CRM data"],
+          ],
+        },
+        {
+          title: "Readiness and ownership",
+          step: 2,
+          fields: [
+            ["leadership", "Accountable leadership"],
+            ["change-readiness", "Willingness to change"],
+          ],
+        },
+        {
+          title: "Contact information",
+          step: 3,
+          fields: [
+            ["name", "Name"],
+            ["email", "Work email"],
+            ["organization", "Organization"],
+            ["role", "Role"],
+            ["additional-context", "Additional context"],
+          ],
+        },
+      ] as const;
 
-      if (selected.type === "radio") {
-        return (
-          selected.closest("label")?.querySelector("span")?.textContent?.trim() ??
-          selected.value
+      const getFieldValue = (name: string) => {
+        const controls = Array.from(
+          form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+            `[name="${name}"]`,
+          ),
         );
-      }
+        const selected = controls.find(
+          (control) =>
+            !(control instanceof HTMLInputElement) ||
+            control.type !== "radio" ||
+            control.checked,
+        );
 
-      return selected.value.trim();
-    };
+        if (!selected?.value.trim()) return "Not provided";
 
-    const buildReview = () => {
-      if (!reviewGroups) return;
+        if (selected.type === "radio") {
+          return (
+            selected
+              .closest("label")
+              ?.querySelector("span")
+              ?.textContent?.trim() ?? selected.value
+          );
+        }
 
-      reviewGroups.replaceChildren();
+        return selected.value.trim();
+      };
 
-      reviewSections.forEach((sectionData) => {
-        const section = document.createElement("section");
-        section.className = "review-group";
+      const buildReview = () => {
+        if (!reviewGroups) return;
 
-        const header = document.createElement("div");
-        header.className = "review-group-header";
+        reviewGroups.replaceChildren();
 
-        const heading = document.createElement("h4");
-        heading.textContent = sectionData.title;
+        reviewSections.forEach((sectionData) => {
+          const section = document.createElement("section");
+          section.className = "review-group";
 
-        const editButton = document.createElement("button");
-        editButton.type = "button";
-        editButton.className = "review-edit";
-        editButton.dataset.editStep = String(sectionData.step);
-        editButton.textContent = "Edit";
+          const header = document.createElement("div");
+          header.className = "review-group-header";
 
-        header.append(heading, editButton);
+          const heading = document.createElement("h4");
+          heading.textContent = sectionData.title;
 
-        const list = document.createElement("dl");
+          const editButton = document.createElement("button");
+          editButton.type = "button";
+          editButton.className = "review-edit";
+          editButton.dataset.editStep = String(sectionData.step);
+          editButton.textContent = "Edit";
 
-        sectionData.fields.forEach(([name, label]) => {
-          const row = document.createElement("div");
-          const term = document.createElement("dt");
-          const description = document.createElement("dd");
+          header.append(heading, editButton);
 
-          term.textContent = label;
-          description.textContent = getFieldValue(name);
-          row.append(term, description);
-          list.append(row);
+          const list = document.createElement("dl");
+
+          sectionData.fields.forEach(([name, label]) => {
+            const row = document.createElement("div");
+            const term = document.createElement("dt");
+            const description = document.createElement("dd");
+
+            term.textContent = label;
+            description.textContent = getFieldValue(name);
+            row.append(term, description);
+            list.append(row);
+          });
+
+          section.append(header, list);
+          reviewGroups.append(section);
+        });
+      };
+
+      const focusStepHeading = (index: number) => {
+        const target =
+          index < steps.length
+            ? steps[index]?.querySelector<HTMLElement>("legend")
+            : reviewStep?.querySelector<HTMLElement>("h3");
+
+        target?.focus({ preventScroll: true });
+        target?.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+
+      const showStep = (index: number, focusHeading = true) => {
+        currentStep = Math.max(0, Math.min(index, steps.length));
+
+        steps.forEach((step, stepIndex) => {
+          step.hidden = stepIndex !== currentStep;
         });
 
-        section.append(header, list);
-        reviewGroups.append(section);
-      });
-    };
+        const isReviewing = currentStep === steps.length;
+        if (reviewStep) reviewStep.hidden = !isReviewing;
+        form.classList.toggle("is-reviewing", isReviewing);
 
-    const focusStepHeading = (index: number) => {
-      const target =
-        index < steps.length
-          ? steps[index]?.querySelector<HTMLElement>("legend")
-          : reviewStep?.querySelector<HTMLElement>("h3");
+        progressItems.forEach((item, itemIndex) => {
+          if (itemIndex === currentStep) {
+            item.setAttribute("aria-current", "step");
+          } else {
+            item.removeAttribute("aria-current");
+          }
+          item.classList.toggle("is-complete", itemIndex < currentStep);
+        });
 
-      target?.focus({ preventScroll: true });
-      target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-
-    const showStep = (index: number, focusHeading = true) => {
-      currentStep = Math.max(0, Math.min(index, steps.length));
-
-      steps.forEach((step, stepIndex) => {
-        step.hidden = stepIndex !== currentStep;
-      });
-
-      const isReviewing = currentStep === steps.length;
-      if (reviewStep) reviewStep.hidden = !isReviewing;
-      form.classList.toggle("is-reviewing", isReviewing);
-
-      progressItems.forEach((item, itemIndex) => {
-        if (itemIndex === currentStep) {
-          item.setAttribute("aria-current", "step");
-        } else {
-          item.removeAttribute("aria-current");
+        if (progressStatus) {
+          progressStatus.textContent = `Step ${currentStep + 1} of ${steps.length + 1}`;
         }
-        item.classList.toggle("is-complete", itemIndex < currentStep);
-      });
 
-      if (progressStatus) {
-        progressStatus.textContent = `Step ${currentStep + 1} of ${steps.length + 1}`;
-      }
+        if (isReviewing) buildReview();
+        if (focusHeading)
+          requestAnimationFrame(() => focusStepHeading(currentStep));
+      };
 
-      if (isReviewing) buildReview();
-      if (focusHeading) requestAnimationFrame(() => focusStepHeading(currentStep));
-    };
+      const validateStep = (step: HTMLElement) => {
+        const controls = Array.from(
+          step.querySelectorAll<
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+          >("input, select, textarea"),
+        );
+        const firstInvalid = controls.find(
+          (control) => !control.checkValidity(),
+        );
 
-    const validateStep = (step: HTMLElement) => {
-      const controls = Array.from(
-        step.querySelectorAll<
-          HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-        >("input, select, textarea"),
-      );
-      const firstInvalid = controls.find((control) => !control.checkValidity());
+        if (!firstInvalid) return true;
 
-      if (!firstInvalid) return true;
-
-      firstInvalid.reportValidity();
-      firstInvalid.focus();
-      return false;
-    };
-
-    form.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      const nextButton = target.closest<HTMLButtonElement>("[data-next-step]");
-      const previousButton = target.closest<HTMLButtonElement>(
-        "[data-previous-step]",
-      );
-      const editButton = target.closest<HTMLButtonElement>("[data-edit-step]");
-
-      if (nextButton) {
-        const step = nextButton.closest<HTMLElement>("[data-form-step]");
-        if (step && validateStep(step)) showStep(currentStep + 1);
-      }
-
-      if (previousButton) showStep(currentStep - 1);
-
-      if (editButton) {
-        const editStep = Number(editButton.dataset.editStep);
-        if (Number.isInteger(editStep)) showStep(editStep);
-      }
-    });
-
-    form.addEventListener("submit", (event) => {
-      const firstInvalid = Array.from(form.elements).find(
-        (element): element is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
-          element instanceof HTMLInputElement ||
-          element instanceof HTMLSelectElement ||
-          element instanceof HTMLTextAreaElement
-            ? !element.checkValidity()
-            : false,
-      );
-
-      if (firstInvalid) {
-        event.preventDefault();
-        const invalidStep = steps.findIndex((step) => step.contains(firstInvalid));
-        if (invalidStep >= 0) showStep(invalidStep, false);
         firstInvalid.reportValidity();
         firstInvalid.focus();
-        return;
-      }
+        return false;
+      };
 
-      if (currentStep !== steps.length) {
-        event.preventDefault();
-        showStep(steps.length);
-        return;
-      }
+      form.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        const nextButton =
+          target.closest<HTMLButtonElement>("[data-next-step]");
+        const previousButton = target.closest<HTMLButtonElement>(
+          "[data-previous-step]",
+        );
+        const editButton =
+          target.closest<HTMLButtonElement>("[data-edit-step]");
 
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Submitting…";
-      }
-    });
+        if (nextButton) {
+          const step = nextButton.closest<HTMLElement>("[data-form-step]");
+          if (step && validateStep(step)) showStep(currentStep + 1);
+        }
 
-    window.addEventListener("pageshow", () => {
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = "Submit fit check";
-      }
-    });
+        if (previousButton) showStep(currentStep - 1);
 
-    form.classList.add("is-enhanced");
-    if (progress) progress.hidden = false;
-    showStep(0, false);
-  }
-</script>
+        if (editButton) {
+          const editStep = Number(editButton.dataset.editStep);
+          if (Number.isInteger(editStep)) showStep(editStep);
+        }
+      });
+
+      form.addEventListener("submit", (event) => {
+        const firstInvalid = Array.from(form.elements).find(
+          (
+            element,
+          ): element is
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
+            element instanceof HTMLInputElement ||
+            element instanceof HTMLSelectElement ||
+            element instanceof HTMLTextAreaElement
+              ? !element.checkValidity()
+              : false,
+        );
+
+        if (firstInvalid) {
+          event.preventDefault();
+          const invalidStep = steps.findIndex((step) =>
+            step.contains(firstInvalid),
+          );
+          if (invalidStep >= 0) showStep(invalidStep, false);
+          firstInvalid.reportValidity();
+          firstInvalid.focus();
+          return;
+        }
+
+        if (currentStep !== steps.length) {
+          event.preventDefault();
+          showStep(steps.length);
+          return;
+        }
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Submitting…";
+        }
+      });
+
+      window.addEventListener("pageshow", () => {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Submit fit check";
+        }
+      });
+
+      form.classList.add("is-enhanced");
+      if (progress) progress.hidden = false;
+      showStep(0, false);
+    }
+  </script>
 </Layout>
 
 <style>
