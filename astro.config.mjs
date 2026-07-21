@@ -3,8 +3,28 @@ import tina from "@tinacms/astro/integration";
 import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
 export default defineConfig({
   output: "static",
+  site: "https://cadencelab.co",
+
+  security: {
+    csp: {
+      algorithm: "SHA-256",
+      directives: [
+        "base-uri 'none'",
+        "form-action 'self'",
+        "object-src 'none'",
+      ],
+      scriptDirective: {
+        resources: [{ resource: "'none'", kind: "attribute" }],
+      },
+      styleDirective: {
+        resources: [{ resource: "'unsafe-inline'", kind: "attribute" }],
+      },
+    },
+  },
 
   fonts: [
     {
@@ -86,7 +106,7 @@ export default defineConfig({
     },
   ],
 
-  integrations: [tina()],
+  integrations: [tina(), sitemap()],
 
   vite: {
     plugins: [tailwindcss(), tinaAdminDevRedirect()],

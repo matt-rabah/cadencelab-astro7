@@ -15,13 +15,14 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tinacms/astro": "^0.6.1",
-    "astro": "^7.1.1",
+    "astro": "^7.1.3",
     "astro-font": "^1.1.0",
     "fs-extra": "11.3.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "tailwindcss": "^4.3.3",
     "tinacms": "^3.11.0",
     "wrangler": "^4.112.0"
