@@ -22,7 +22,7 @@ const pageTitle = `${title} | Cadence Lab`;
 
 const pageDescription =
   subtitle ??
-  "Assess whether your customer experience, CRM, and AI initiative is ready for a productive engagement.";
+  "Use the fit check to determine whether your customer experience, CRM, or AI initiative is ready for a productive engagement.";
 ---
 
 <Layout
@@ -42,10 +42,8 @@ const pageDescription =
         <p class="fit-check-intro">{subtitle}</p>
 
         <p class="fit-check-context">
-          This is not a technical audit or a sales qualification exercise. The
-          goal is to understand whether the operating problem is clear enough,
-          the conditions are workable, and a consulting engagement would
-          actually be useful.
+          The fit check focuses on the operating problem, the conditions around
+          it, and whether a consulting engagement would be useful.
         </p>
       </header>
 
@@ -57,7 +55,7 @@ const pageDescription =
           </div>
           <div>
             <dt>What happens next</dt>
-            <dd>Cadence Lab reviews the context and responds directly.</dd>
+            <dd>Matt reviews the context and responds directly.</dd>
           </div>
           <div>
             <dt>Privacy</dt>
@@ -84,7 +82,7 @@ const pageDescription =
         </div>
 
         <h2 id="fit-check-form-title" class="visually-hidden">
-          Fit assessment form
+          Fit check form
         </h2>
 
         <div class="form-progress" data-form-progress hidden>
@@ -397,7 +395,7 @@ const pageDescription =
 
           <div class="input-group">
             <label for="additional-context">
-              Anything else we should understand?
+              Anything else Matt should understand?
               <span class="optional-label">(Optional)</span>
             </label>
 
@@ -425,7 +423,7 @@ const pageDescription =
               <p class="section-number" aria-hidden="true">05</p>
               <h3 id="review-title" tabindex="-1">Review your answers</h3>
             </div>
-            <p>Confirm the context below before submitting the fit assessment.</p>
+            <p>Confirm the context below before submitting the fit check.</p>
           </div>
 
           <div class="review-groups" data-review-groups></div>
@@ -450,7 +448,7 @@ const pageDescription =
           </div>
 
           <button type="submit" class="submit-button">
-            Submit fit assessment
+            Submit fit check
           </button>
         </div>
       </form>
@@ -692,7 +690,7 @@ const pageDescription =
     window.addEventListener("pageshow", () => {
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = "Submit fit assessment";
+        submitButton.textContent = "Submit fit check";
       }
     });
 
