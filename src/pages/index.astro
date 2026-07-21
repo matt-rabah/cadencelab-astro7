@@ -8,63 +8,63 @@ const diagnostics = [
     number: "01",
     name: "CX Systems Diagnostic",
     trigger:
-      "Customer friction crosses teams, systems, and handoffs, but no one can see the full operating problem.",
+      "Customers repeat themselves, issues cross team boundaries, and leaders receive conflicting explanations for where the experience is breaking.",
     examines:
-      "Journey breakdowns, ownership, CRM signals, workflow dependencies, and the decisions shaping service performance.",
+      "Customer and team touchpoints, handoffs, ownership, CRM signals, service rules, and the systems influencing the experience.",
     output:
-      "A prioritized systems map and a practical decision brief for the highest-consequence improvements.",
+      "A friction map, ownership analysis, and a sequenced decision brief for the operating changes that matter first.",
     href: "/services/cx-systems-diagnostic/",
   },
   {
     number: "02",
     name: "Lifecycle Risk Review",
     trigger:
-      "Retention, adoption, or expansion problems appear late, after the warning signs have already moved across teams.",
+      "Onboarding drifts, accounts go quiet, adoption weakens, or renewal risk becomes visible after the useful intervention window has narrowed.",
     examines:
       "Lifecycle stages, risk signals, handoffs, intervention rules, and the data used to identify preventable loss.",
     output:
-      "A lifecycle risk model that clarifies where to intervene, who owns the response, and what to measure.",
+      "A lifecycle risk model that defines which signals should trigger action, when, and by whom.",
     href: "/services/lifecycle-risk-review/",
   },
   {
     number: "03",
     name: "CRM Workflow Audit",
     trigger:
-      "The CRM records activity but does not reliably guide work, surface accountability, or support customer decisions.",
+      "The CRM contains activity and dashboards, but teams still rely on workarounds and do not trust it to guide coordinated customer action.",
     examines:
       "Data quality, process design, automation, decision rights, reporting, and the gap between configured and actual work.",
     output:
-      "A sequenced remediation plan for cleaner signals, clearer ownership, and more usable workflows.",
+      "A current-state workflow map and prioritized remediation plan for cleaner signals, clearer ownership, and more usable work.",
     href: "/services/crm-workflow-audit/",
   },
   {
     number: "04",
     name: "AI Service Readiness Review",
     trigger:
-      "An AI initiative has executive support, but its workflow, governance, adoption conditions, or success measures remain unclear.",
+      "An AI use case has momentum, but the supporting workflow, human oversight, adoption conditions, or success measures remain unresolved.",
     examines:
       "Use-case fit, process readiness, human oversight, data dependencies, trust, adoption risk, and measurement design.",
     output:
-      "A readiness decision with constraints, required operating changes, and a responsible path to implementation.",
+      "A readiness decision, human-in-the-loop model, required guardrails, and a responsible path to implementation.",
     href: "/services/ai-service-readiness-review/",
   },
 ];
 
 const consequences = [
   {
-    title: "Handoffs hide the real failure",
+    title: "Context decays at every handoff",
     description:
-      "A customer issue moves between teams while ownership, context, and urgency degrade at every transition.",
+      "The customer repeats the story while ownership, history, and urgency weaken as work moves between teams.",
   },
   {
-    title: "Technology lands before the workflow",
+    title: "Risk appears after the intervention window",
     description:
-      "A tool is deployed into a process that still lacks decision rights, usable data, and a clear reason for people to adopt it.",
+      "Teams can see the churn, escalation, or failed adoption event, but not the earlier signals that could have changed the outcome.",
   },
   {
-    title: "Activity replaces evidence",
+    title: "AI accelerates an unresolved process",
     description:
-      "Teams can report launches, training, and usage without showing whether customer outcomes or operating performance improved.",
+      "Automation increases volume without resolving weak data, unclear decision rights, or the points where human judgment is required.",
   },
 ];
 
@@ -73,37 +73,37 @@ const operatingStages = [
     number: "01",
     title: "Diagnose the operating environment",
     description:
-      "Trace customer friction through workflows, systems, ownership, data, and frontline constraints before prescribing a solution.",
+      "Trace the customer problem through teams, systems, data, decisions, and frontline work before prescribing a solution.",
   },
   {
     number: "02",
     title: "Align the decisions",
     description:
-      "Define the outcome, accountable owners, decision rights, and practical limits that the operating model must support.",
+      "Define the outcome, accountable owners, decision rights, constraints, and sequence of changes before implementation begins.",
   },
   {
     number: "03",
     title: "Rebuild the workflow",
     description:
-      "Turn strategy into a usable sequence of work, with clear handoffs, CRM signals, governance, and human judgment.",
+      "Translate the decision into usable handoffs, CRM requirements, governance, team practices, and appropriate AI support.",
   },
   {
     number: "04",
     title: "Measure and adapt",
     description:
-      "Connect adoption and operating signals to customer and business outcomes, then refine the system as evidence changes.",
+      "Connect customer, workflow, adoption, and performance signals to the change, then refine the system as evidence develops.",
   },
 ];
 
 const strongFit = [
-  "Customer-facing friction materially affects retention, revenue, service quality, or team capacity.",
+  "Customer friction materially affects retention, revenue, service quality, or team capacity.",
   "The problem spans functions, systems, or decision layers and cannot be solved by one team in isolation.",
   "Leadership can sponsor cross-functional decisions and assign accountable owners.",
   "The organization is willing to change workflows instead of placing new technology on top of a broken process.",
 ];
 
 const limitedFit = [
-  "The primary goal is to install a tool without changing ownership, decisions, or frontline work.",
+  "The goal is to install a tool without changing ownership, decisions, or frontline work.",
   "The initiative is isolated within one technical team while business and customer operations remain outside the process.",
   "No sponsor can resolve competing priorities or make cross-functional workflow decisions.",
   "Success is defined only by delivery activity rather than adoption, operating performance, or customer impact.",
@@ -112,7 +112,7 @@ const limitedFit = [
 
 <Layout
   title="Cadence Lab | Customer experience operating systems for the AI era"
-  description="Cadence Lab diagnoses customer experience friction, rebuilds CRM and cross-functional workflows, and prepares organizations to adopt AI responsibly."
+  description="Cadence Lab diagnoses onboarding drift, lifecycle risk, unreliable CRM workflows, and AI service readiness, then turns evidence into practical operating change."
   canonicalURL="/"
   pageType="website"
 >
@@ -129,9 +129,9 @@ const limitedFit = [
           </h1>
 
           <p class="hero-lead">
-            Cadence Lab helps organizations find the operational causes of
-            customer friction, rebuild the workflows around them, and create the
-            conditions for responsible AI adoption.
+            Cadence Lab helps organizations resolve onboarding drift, quiet
+            accounts, unreliable CRM signals, and service handoffs—then build
+            the operating conditions required for responsible AI adoption.
           </p>
 
           <div class="hero-actions" aria-label="Homepage actions">
@@ -164,15 +164,15 @@ const limitedFit = [
           <dl class="hero-scope" aria-label="Cadence Lab operating scope">
             <div>
               <dt>Diagnose</dt>
-              <dd>Customer friction and lifecycle risk</dd>
+              <dd>Friction, lifecycle risk, and signal gaps</dd>
             </div>
             <div>
               <dt>Rebuild</dt>
-              <dd>CRM and cross-functional workflows</dd>
+              <dd>Ownership, handoffs, and CRM workflows</dd>
             </div>
             <div>
               <dt>Prepare</dt>
-              <dd>Responsible AI adoption and measurement</dd>
+              <dd>Human oversight, adoption, and measurement</dd>
             </div>
           </dl>
         </div>
@@ -189,15 +189,14 @@ const limitedFit = [
           <div>
             <p class="eyebrow">Diagnostic offers</p>
             <h2 id="diagnostics-title">
-              Start with the decision the organization needs to make.
+              Choose the problem to understand—not the technology to buy.
             </h2>
           </div>
 
           <p>
-            Each diagnostic turns a consequential operating problem into a
-            bounded review, a shared evidence base, and a practical next step.
-            The goal is clarity before a larger investment—not a longer list of
-            capabilities.
+            Each diagnostic starts with one consequential operating question,
+            builds a shared evidence base, and ends with a practical decision
+            about what should happen next.
           </p>
         </div>
 
@@ -261,12 +260,12 @@ const limitedFit = [
         <div class="consequences-intro">
           <p class="eyebrow eyebrow-inverse">What the work prevents</p>
           <h2 id="consequences-title">
-            Customer problems compound when the operating system stays unclear.
+            Visible customer problems usually begin as operating failures.
           </h2>
           <p>
-            The visible issue is often a symptom. The underlying loss comes from
-            disconnected ownership, unreliable signals, and workflows that do
-            not support the decision teams are expected to make.
+            Churn, escalations, CRM distrust, and stalled AI adoption are late
+            signals. The earlier failure is usually unclear ownership, missing
+            context, or a workflow that cannot support the required decision.
           </p>
         </div>
 
@@ -294,12 +293,12 @@ const limitedFit = [
         <div class="operating-intro">
           <p class="eyebrow">Operating model</p>
           <h2 id="operating-model-title">
-            Diagnosis comes before workflow change.
+            The recommendation follows the evidence—not the tool.
           </h2>
           <p>
             Cadence Lab connects strategy to the way work is owned, performed,
-            governed, and measured. Technology supports that system; it does not
-            substitute for it.
+            governed, and measured. Technology supports the operating model; it
+            does not substitute for one.
           </p>
 
           <figure
@@ -343,14 +342,16 @@ const limitedFit = [
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Engagement fit</p>
-            <h2 id="fit-title">The work requires operational readiness.</h2>
+            <h2 id="fit-title">
+              Useful change requires permission to change the work.
+            </h2>
           </div>
 
           <p>
-            A productive engagement needs a meaningful operating problem, an
-            accountable sponsor, and permission to improve how work actually
-            happens. The fit check is designed to establish that before either
-            side commits to more.
+            A productive engagement needs a consequential operating problem, an
+            accountable sponsor, and room to change ownership, decisions, or
+            workflows. The fit check establishes that before either side commits
+            to more.
           </p>
         </div>
 
@@ -379,16 +380,16 @@ const limitedFit = [
         <div>
           <p class="eyebrow">Fit check</p>
           <h2 id="fit-check-title">
-            Find the right next step before you fund the wrong one.
+            Decide whether the problem is ready for a diagnostic.
           </h2>
         </div>
 
         <div class="fit-check-copy">
           <p>
             Share the operating problem, the teams and systems involved, and the
-            outcome you need to improve. Cadence Lab will assess whether a
-            diagnostic engagement is appropriate and tell you directly if it is
-            not.
+            outcome that needs to change. Cadence Lab will assess fit, recommend
+            the most useful starting point, and tell you directly when a
+            diagnostic is not the right next step.
           </p>
 
           <a class="button button-accent" href="/fit-check/">
