@@ -1,6 +1,7 @@
 ---
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
 
 const diagnosticQuestions = [
@@ -168,6 +169,16 @@ const limitedFit = [
       </div>
     </section>
 
+    <SectionNav
+      items={[
+        { label: "Questions", href: "#questions" },
+        { label: "Scope", href: "#scope" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Fit", href: "#fit" },
+        { label: "Next step", href: "#next-step" },
+      ]}
+    />
+
     <section
       id="questions"
       class="questions section-block"
@@ -208,7 +219,11 @@ const limitedFit = [
       </div>
     </section>
 
-    <section class="scope section-block" aria-labelledby="scope-title">
+    <section
+      id="scope"
+      class="scope section-block"
+      aria-labelledby="scope-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
@@ -253,7 +268,7 @@ const limitedFit = [
       </div>
     </section>
 
-    <section class="outputs" aria-labelledby="outputs-title">
+    <section id="outputs" class="outputs" aria-labelledby="outputs-title">
       <div class="page-container section-stack">
         <div class="outputs-intro">
           <p class="eyebrow eyebrow-inverse">Deliverables and decisions</p>
@@ -291,7 +306,7 @@ const limitedFit = [
       </div>
     </section>
 
-    <section class="fit section-block" aria-labelledby="fit-title">
+    <section id="fit" class="fit section-block" aria-labelledby="fit-title">
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
@@ -328,7 +343,11 @@ const limitedFit = [
       </div>
     </section>
 
-    <section class="next-step section-block" aria-labelledby="next-step-title">
+    <section
+      id="next-step"
+      class="next-step section-block"
+      aria-labelledby="next-step-title"
+    >
       <div class="page-container next-step-layout">
         <div>
           <p class="eyebrow">Next step</p>

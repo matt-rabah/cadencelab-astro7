@@ -1,0 +1,144 @@
+---
+interface SectionNavItem {
+  label: string;
+  href: `#${string}`;
+}
+
+interface Props {
+  items: SectionNavItem[];
+  label?: string;
+}
+
+const { items, label = "On this page" } = Astro.props;
+---
+
+<nav class="section-nav" aria-label={label}>
+  <div class="section-nav-container">
+    <p class="section-nav-label" aria-hidden="true">{label}</p>
+
+    <ul role="list">
+      {
+        items.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .section-nav {
+    position: sticky;
+    inset-block-start: var(--header-offset, 6.5rem);
+    z-index: 20;
+    width: 100%;
+    border-block: var(--border-width) solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface-pure) 96%, transparent);
+    color: var(--color-text);
+    font-family: var(--ff-sans);
+    font-feature-settings: var(--fea-graphik);
+    backdrop-filter: blur(0.75rem);
+  }
+
+  .section-nav-container {
+    display: flex;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    margin-inline: auto;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .section-nav-label {
+    flex: 0 0 auto;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-nav ul {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--space-1);
+    margin: 0;
+    padding: var(--space-2) 0;
+    list-style: none;
+  }
+
+  .section-nav a {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  :global(main > section[id]) {
+    scroll-margin-block-start: calc(var(--header-offset) + 4.25rem);
+  }
+
+  @media (hover: hover) {
+    .section-nav a:hover {
+      background: var(--color-surface-subtle);
+      color: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 59.9375rem) {
+    .section-nav-container {
+      width: 100%;
+      padding-inline: var(--page-gutter);
+    }
+
+    .section-nav-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .section-nav a {
+      min-height: var(--control-min-size-coarse);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .section-nav {
+      background: var(--color-surface-pure);
+      backdrop-filter: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .section-nav {
+      border-color: CanvasText;
+      background: Canvas;
+      backdrop-filter: none;
+    }
+  }
+</style>

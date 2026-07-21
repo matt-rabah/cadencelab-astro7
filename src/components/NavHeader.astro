@@ -45,7 +45,6 @@ const navigationGroups: NavigationGroup[] = [
       {
         label: "Bio",
         href: "/about/",
-        status: "Coming soon",
       },
     ],
   },
@@ -207,6 +206,18 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   : undefined}
               >
                 Fit Check™
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/services/"
+                class="primary-link"
+                aria-current={isCurrentSection("/services/")
+                  ? "page"
+                  : undefined}
+              >
+                Services
               </a>
             </li>
 
@@ -539,6 +550,16 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             </a>
           </li>
 
+          <li>
+            <a
+              href="/services/"
+              class="mobile-primary-link"
+              aria-current={isCurrentSection("/services/") ? "page" : undefined}
+            >
+              Services
+            </a>
+          </li>
+
           {
             navigationGroups.slice(0, 3).map((group) => (
               <li>
@@ -687,6 +708,20 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     const header = document.querySelector<HTMLElement>("[data-site-header]");
 
     if (!header) return;
+
+    const syncHeaderOffset = () => {
+      document.documentElement.style.setProperty(
+        "--header-offset",
+        `${header.offsetHeight}px`,
+      );
+    };
+    const headerResizeObserver = new ResizeObserver(syncHeaderOffset);
+
+    headerResizeObserver.observe(header);
+    signal.addEventListener("abort", () => headerResizeObserver.disconnect(), {
+      once: true,
+    });
+    syncHeaderOffset();
 
     const mobileTrigger = header.querySelector<HTMLButtonElement>(
       "[data-mobile-menu-trigger]",
