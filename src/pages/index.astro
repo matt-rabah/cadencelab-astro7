@@ -145,20 +145,37 @@ const limitedFit = [
           </div>
         </div>
 
-        <dl class="hero-scope" aria-label="Cadence Lab operating scope">
-          <div>
-            <dt>Diagnose</dt>
-            <dd>Customer friction and lifecycle risk</dd>
-          </div>
-          <div>
-            <dt>Rebuild</dt>
-            <dd>CRM and cross-functional workflows</dd>
-          </div>
-          <div>
-            <dt>Prepare</dt>
-            <dd>Responsible AI adoption and measurement</dd>
-          </div>
-        </dl>
+        <div class="hero-visual-rail">
+          <figure
+            class="image-slot image-slot-hero"
+            data-image-slot="homepage-hero"
+            aria-hidden="true"
+          >
+            <div class="image-slot-frame">
+              <p class="image-slot-label">Future image</p>
+              <p class="image-slot-direction">
+                A physical operating system viewed through its handoffs,
+                routing, and points of decision.
+              </p>
+            </div>
+            <figcaption>Vertical crop · 4:5</figcaption>
+          </figure>
+
+          <dl class="hero-scope" aria-label="Cadence Lab operating scope">
+            <div>
+              <dt>Diagnose</dt>
+              <dd>Customer friction and lifecycle risk</dd>
+            </div>
+            <div>
+              <dt>Rebuild</dt>
+              <dd>CRM and cross-functional workflows</dd>
+            </div>
+            <div>
+              <dt>Prepare</dt>
+              <dd>Responsible AI adoption and measurement</dd>
+            </div>
+          </dl>
+        </div>
       </div>
     </section>
 
@@ -184,16 +201,33 @@ const limitedFit = [
           </p>
         </div>
 
+        <figure
+          class="image-slot image-slot-wide"
+          data-image-slot="diagnostic-evidence"
+          aria-hidden="true"
+        >
+          <div class="image-slot-frame">
+            <p class="image-slot-label">Future image</p>
+            <p class="image-slot-direction">
+              Evidence under review: plans, annotations, process records, or an
+              operational map that makes the system visible.
+            </p>
+          </div>
+          <figcaption>Wide crop · 3:1</figcaption>
+        </figure>
+
         <ol class="diagnostic-grid" role="list">
           {
             diagnostics.map((diagnostic) => (
               <li>
                 <article class="diagnostic-card">
-                  <p class="diagnostic-number" aria-hidden="true">
-                    {diagnostic.number}
-                  </p>
+                  <div class="diagnostic-heading">
+                    <p class="diagnostic-number" aria-hidden="true">
+                      {diagnostic.number}
+                    </p>
 
-                  <h3>{diagnostic.name}</h3>
+                    <h3>{diagnostic.name}</h3>
+                  </div>
 
                   <dl class="diagnostic-details">
                     <div>
@@ -267,6 +301,21 @@ const limitedFit = [
             governed, and measured. Technology supports that system; it does not
             substitute for it.
           </p>
+
+          <figure
+            class="image-slot image-slot-operating"
+            data-image-slot="operating-model"
+            aria-hidden="true"
+          >
+            <div class="image-slot-frame">
+              <p class="image-slot-label">Future image</p>
+              <p class="image-slot-direction">
+                Decision architecture: a circulation plan, control schematic,
+                or system diagram with visible sequence and constraints.
+              </p>
+            </div>
+            <figcaption>Landscape crop · 4:3</figcaption>
+          </figure>
         </div>
 
         <ol class="stage-list" role="list">
@@ -406,7 +455,7 @@ const limitedFit = [
   }
 
   h1 {
-    max-width: 18ch;
+    max-width: 15ch;
     font-size: var(--fs-display);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-display);
@@ -429,20 +478,21 @@ const limitedFit = [
   }
 
   .hero {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
+    padding-block: clamp(5rem, 11vw, 9rem);
   }
 
   .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(16rem, 0.7fr);
+    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.75fr);
     gap: clamp(3rem, 9vw, 8rem);
-    align-items: end;
+    align-items: start;
   }
 
   .hero-copy {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding-top: clamp(1rem, 5vw, 4rem);
   }
 
   .hero-lead {
@@ -461,6 +511,80 @@ const limitedFit = [
     gap: 0.75rem 1.25rem;
     align-items: center;
     margin-top: 2rem;
+  }
+
+  .hero-visual-rail {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .image-slot {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .image-slot-frame {
+    display: flex;
+    min-height: 15rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: var(--border-width) solid var(--color-border-strong);
+    background: var(--color-surface-subtle);
+  }
+
+  .image-slot-label,
+  .image-slot-direction,
+  .image-slot figcaption {
+    font-family: var(--font-sans);
+  }
+
+  .image-slot-label {
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .image-slot-direction {
+    max-width: 34rem;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .image-slot figcaption {
+    margin-top: 0.625rem;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    line-height: var(--lh-small);
+  }
+
+  .image-slot-hero .image-slot-frame {
+    min-height: 25rem;
+    aspect-ratio: 4 / 5;
+    background: var(--color-surface-pure);
+  }
+
+  .image-slot-wide .image-slot-frame {
+    min-height: 14rem;
+    aspect-ratio: 3 / 1;
+    background: var(--color-surface-pure);
+  }
+
+  .image-slot-operating {
+    margin-top: 2rem;
+  }
+
+  .image-slot-operating .image-slot-frame {
+    min-height: 14rem;
+    aspect-ratio: 4 / 3;
   }
 
   .hero-scope {
@@ -545,6 +669,16 @@ const limitedFit = [
     background: var(--color-surface-pure);
   }
 
+  .diagnostic-heading {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    align-items: start;
+    padding-bottom: 1.5rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
   .diagnostic-number,
   .stage-number {
     color: var(--color-blue);
@@ -555,19 +689,26 @@ const limitedFit = [
     font-feature-settings: var(--fea-tabular);
   }
 
-  .diagnostic-card h3 {
-    margin-top: 0.75rem;
-  }
-
   .diagnostic-details {
     display: grid;
-    gap: 1.125rem;
-    margin-top: 1.75rem;
+    gap: 0;
+    width: 100%;
+    margin-top: 0.5rem;
   }
 
   .diagnostic-details div {
     display: grid;
-    gap: 0.35rem;
+    grid-template-columns: minmax(7.5rem, 0.42fr) minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1.25rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-details div:last-child {
+    margin-inline: -0.75rem;
+    padding-inline: 0.75rem;
+    border-bottom: 0;
+    background: var(--color-surface-subtle);
   }
 
   .diagnostic-details dt {
@@ -631,6 +772,10 @@ const limitedFit = [
   .consequences h2,
   .consequences h3 {
     color: var(--color-text-inverse);
+  }
+
+  .consequences h2 {
+    max-width: 16ch;
   }
 
   .consequences-intro > p:last-child {
@@ -697,13 +842,18 @@ const limitedFit = [
 
   .stage {
     display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 3.5rem minmax(0, 1fr);
     gap: clamp(1rem, 3vw, 2rem);
     padding-block: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .stage h3 {
     max-width: 28ch;
+  }
+
+  .stage .stage-number {
+    font-size: var(--fs-h3);
+    line-height: 1;
   }
 
   .stage div > p {
@@ -723,20 +873,27 @@ const limitedFit = [
   .fit-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.25rem, 3vw, 2rem);
+    border-top: var(--border-width) solid var(--color-border-strong);
+    border-left: var(--border-width) solid var(--color-border-strong);
   }
 
   .fit-panel {
+    position: relative;
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2.75rem);
-    border: var(--border-width) solid var(--color-border-strong);
-    border-top: 0.25rem solid var(--color-ink);
-    border-radius: var(--radius-md);
+    border-right: var(--border-width) solid var(--color-border-strong);
+    border-bottom: var(--border-width) solid var(--color-border-strong);
     background: var(--color-surface-pure);
   }
 
-  .fit-panel-strong {
-    border-top-color: var(--color-blue);
+  .fit-panel-strong::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 0.25rem;
+    background: var(--color-blue);
+    content: "";
   }
 
   .fit-label {
@@ -791,7 +948,7 @@ const limitedFit = [
 
   .fit-check {
     padding-block: var(--section-space);
-    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-blue);
   }
 
   .fit-check-layout {
@@ -799,10 +956,19 @@ const limitedFit = [
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
     gap: clamp(2.5rem, 9vw, 8rem);
     align-items: start;
-    padding: clamp(2rem, 6vw, 4rem);
-    border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-md);
-    background: var(--color-surface-pure);
+  }
+
+  .fit-check .eyebrow {
+    color: var(--color-green);
+  }
+
+  .fit-check h2 {
+    max-width: 16ch;
+    color: var(--color-text-inverse);
+  }
+
+  .fit-check .fit-check-copy > p {
+    color: var(--color-text-inverse-muted);
   }
 
   .fit-check-copy {
@@ -834,6 +1000,10 @@ const limitedFit = [
       max-width: 36rem;
     }
 
+    .image-slot-hero {
+      max-width: 36rem;
+    }
+
     .section-intro-split > p,
     .consequences-intro > p:last-child {
       max-width: var(--measure-ui);
@@ -845,6 +1015,10 @@ const limitedFit = [
 
     .fit-check-layout {
       gap: 2rem;
+    }
+
+    .image-slot-wide .image-slot-frame {
+      aspect-ratio: 2 / 1;
     }
   }
 
@@ -891,13 +1065,22 @@ const limitedFit = [
       padding: 1.5rem;
     }
 
+    .diagnostic-details div {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+
     .stage {
       grid-template-columns: 1fr;
       gap: 0.5rem;
     }
 
-    .fit-check-layout {
-      padding: 1.5rem;
+    .image-slot-frame,
+    .image-slot-hero .image-slot-frame,
+    .image-slot-wide .image-slot-frame,
+    .image-slot-operating .image-slot-frame {
+      min-height: 14rem;
+      aspect-ratio: auto;
     }
   }
 
