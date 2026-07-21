@@ -1,5 +1,6 @@
 # build output
 dist/
+.wrangler/
 
 # generated Astro files
 .astro/
@@ -20,6 +21,7 @@ pnpm-debug.log*
 .env
 .env.*
 !.env.example
+.dev.vars*
 
 # macOS-specific files
 .DS_Store
