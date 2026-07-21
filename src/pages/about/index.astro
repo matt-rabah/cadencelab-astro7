@@ -65,7 +65,7 @@ const systemLayers = [
   {
     label: "Systems and signals",
     description:
-      "The CRM data, workflows, automation, and feedback that help people act—or obscure what matters.",
+      "The CRM data, workflows, automation, and feedback that help people act or obscure what matters.",
   },
   {
     label: "Ownership and measurement",
@@ -151,6 +151,74 @@ const engagementRequires = [
       </div>
     </section>
 
+    <section class="founder-profile" aria-labelledby="founder-title">
+      <div class="page-container founder-layout">
+        <div class="founder-card">
+          <figure
+            class="founder-portrait"
+            data-image-slot="founder-portrait"
+            aria-hidden="true"
+          >
+            <div class="founder-portrait-frame">
+              <p class="image-slot-label">Future portrait</p>
+              <p class="image-slot-direction">
+                Matt Rabah in a direct, natural working portrait with a quiet
+                background and clear eye contact.
+              </p>
+            </div>
+            <figcaption>Portrait crop · 4:5</figcaption>
+          </figure>
+
+          <div class="founder-summary">
+            <p class="eyebrow">Founder &amp; CXO</p>
+            <h2 id="founder-title">Matt Rabah</h2>
+            <p>
+              Matt has spent 12 years working in customer experience management
+              and customer success management. He founded Cadence Lab to help
+              organizations understand why customer problems persist and make
+              practical changes to the way the work gets done.
+            </p>
+          </div>
+        </div>
+
+        <div class="official-bio" aria-labelledby="official-bio-title">
+          <p class="eyebrow">Official bio</p>
+          <h2 id="official-bio-title">
+            Experience across the customer system.
+          </h2>
+
+          <div class="bio-copy">
+            <p>
+              Matt Rabah is the Founder and CXO of Cadence Lab, an independent
+              customer experience practice. He works with organizations on
+              service operations, customer lifecycle programs, CRM workflows,
+              and readiness for practical AI use.
+            </p>
+
+            <p>
+              His background includes 12 years in customer experience management
+              and customer success management. He has worked with Salesforce,
+              HubSpot, Gainsight, Zendesk, Delighted, and Oracle.
+            </p>
+
+            <p>
+              Matt's AI experience includes ChatGPT, Gemini, Claude, local
+              models, Salesforce Agentforce, and building task-specific agents.
+              He helps organizations identify useful applications, define the
+              role of human oversight, and prepare the workflows and data those
+              applications depend on.
+            </p>
+
+            <p>
+              Cadence Lab is a solo practice, and Matt leads every engagement.
+              Clients work directly with him from the initial diagnosis through
+              recommendations, workflow definition, and measurement planning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="point-of-view" aria-labelledby="point-of-view-title">
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
@@ -174,7 +242,9 @@ const engagementRequires = [
             pointsOfView.map((item) => (
               <li>
                 <article>
-                  <p class="item-number" aria-hidden="true">{item.number}</p>
+                  <p class="item-number" aria-hidden="true">
+                    {item.number}
+                  </p>
                   <div>
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
@@ -196,8 +266,8 @@ const engagementRequires = [
           </h2>
           <p>
             The goal is not a polished explanation of complexity. It is a clear
-            decision that people can own, implement, evaluate, and revise as
-            the evidence changes.
+            decision that people can own, implement, evaluate, and revise as the
+            evidence changes.
           </p>
         </div>
 
@@ -228,9 +298,8 @@ const engagementRequires = [
           </h2>
           <p>
             Cadence Lab traces a problem through four connected layers. The
-            sequence keeps the customer consequence visible while the work
-            moves deeper into workflows, technology, accountability, and
-            measurement.
+            sequence keeps the customer consequence visible while the work moves
+            deeper into workflows, technology, accountability, and measurement.
           </p>
         </div>
 
@@ -267,7 +336,7 @@ const engagementRequires = [
           <p>
             A diagnostic engagement is most useful when the organization wants
             to understand the problem before committing to a predetermined
-            solution—and can act on what the evidence reveals.
+            solution and can act on what the evidence reveals.
           </p>
         </div>
 
@@ -307,8 +376,7 @@ const engagementRequires = [
           <p>
             Share the customer or operating problem, the people and systems
             involved, and the decision that needs to be made. The fit check is
-            designed to clarify whether Cadence Lab is an appropriate next
-            step.
+            designed to clarify whether Cadence Lab is an appropriate next step.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
@@ -336,6 +404,7 @@ const engagementRequires = [
   }
 
   .about-hero,
+  .founder-profile,
   .point-of-view,
   .working-standard,
   .system-view,
@@ -346,6 +415,117 @@ const engagementRequires = [
 
   .about-hero {
     background: var(--color-surface-subtle);
+  }
+
+  .founder-profile {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .founder-layout {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.68fr) minmax(0, 1.32fr);
+    gap: clamp(3rem, 8vw, 8rem);
+    align-items: start;
+  }
+
+  .founder-card,
+  .official-bio,
+  .founder-summary,
+  .bio-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .founder-card {
+    gap: 1.75rem;
+  }
+
+  .founder-portrait {
+    margin: 0;
+  }
+
+  .founder-portrait-frame {
+    display: flex;
+    min-height: 24rem;
+    aspect-ratio: 4 / 5;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface-subtle);
+  }
+
+  .image-slot-label,
+  .image-slot-direction,
+  .founder-portrait figcaption {
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+
+  .image-slot-label {
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .image-slot-direction {
+    max-width: 30rem;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .founder-portrait figcaption {
+    margin-top: 0.625rem;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .founder-summary {
+    gap: 0.75rem;
+  }
+
+  .founder-summary h2 {
+    font-size: var(--fs-h3);
+  }
+
+  .founder-summary > p:last-child,
+  .bio-copy p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .founder-summary > p:last-child {
+    font-size: var(--fs-small);
+  }
+
+  .official-bio {
+    gap: 1rem;
+  }
+
+  .official-bio h2 {
+    max-width: 19ch;
+  }
+
+  .bio-copy {
+    max-width: 66ch;
+    gap: 1.25rem;
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+
+  .bio-copy p {
+    font-size: var(--fs-body-ui);
   }
 
   .hero-layout {
@@ -846,8 +1026,17 @@ const engagementRequires = [
     .section-intro-split,
     .standard-layout,
     .system-layout,
+    .founder-layout,
     .close-layout {
       grid-template-columns: 1fr;
+    }
+
+    .founder-card {
+      max-width: 38rem;
+    }
+
+    .founder-portrait {
+      max-width: 28rem;
     }
 
     .premise-note {
