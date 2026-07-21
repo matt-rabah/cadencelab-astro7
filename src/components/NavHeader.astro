@@ -305,23 +305,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                                   {item.label}
                                 </span>
 
-                                {item.status ? (
+                                {item.status && (
                                   <span class="menu-status">{item.status}</span>
-                                ) : (
-                                  <svg
-                                    class="menu-link-arrow"
-                                    aria-hidden="true"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.75"
-                                  >
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      d="M4 10h11m-4-4 4 4-4 4"
-                                    />
-                                  </svg>
                                 )}
                               </a>
                             </li>
@@ -1311,32 +1296,29 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
   .menu-link-list {
     display: grid;
-    gap: 0;
+    gap: var(--space-2);
     margin: 0;
     padding: 0;
-    border-block-start: var(--border-width) solid var(--color-border);
+    list-style: none;
   }
 
   .menu-link-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1rem, 3vw, 2.5rem);
   }
 
   .menu-link-list li {
     min-inline-size: 0;
-    border-block-end: var(--border-width) solid var(--color-border);
-  }
-
-  .menu-link-grid li:nth-child(odd) {
-    border-inline-end: var(--border-width) solid var(--color-border);
   }
 
   .menu-link-list a {
     display: flex;
-    min-block-size: 4rem;
+    min-block-size: 3.5rem;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
     color: var(--color-text);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
@@ -1348,15 +1330,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   }
 
   .menu-link-list a[aria-current="page"] {
-    box-shadow: inset 0.1875rem 0 var(--color-blue);
+    background: var(--color-surface-subtle);
     color: var(--color-blue);
-  }
-
-  .menu-link-arrow {
-    inline-size: 1rem;
-    block-size: 1rem;
-    flex: 0 0 auto;
-    transition: transform var(--transition-fast);
   }
 
   .menu-status {
@@ -1397,10 +1372,6 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     .menu-link-list a:hover {
       background: var(--color-surface-subtle);
       color: var(--color-blue);
-    }
-
-    .menu-link-list a:hover .menu-link-arrow {
-      transform: translateX(0.2rem);
     }
   }
 
@@ -1709,7 +1680,6 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     .expand-icon,
     .header-cta,
     .menu-link-list a,
-    .menu-link-arrow,
     .mobile-cta,
     .mobile-expand-icon {
       transition: none;
