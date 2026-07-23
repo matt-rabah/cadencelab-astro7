@@ -1,0 +1,738 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const supportPaths = [
+  {
+    number: "01",
+    label: "Active engagement",
+    title: "You are already working with Cadence Lab",
+    description:
+      "Use the project channel or email thread already established for the engagement. That keeps the question connected to the relevant decisions, evidence, and working context.",
+    action: "Review what to include",
+    href: "#engagement-support",
+  },
+  {
+    number: "02",
+    label: "New engagement",
+    title: "You want help with an operating problem",
+    description:
+      "Use the fit check to share the customer problem, teams and systems involved, accountable sponsor, and outcome that needs to change.",
+    action: "Start a fit check",
+    href: "/fit-check/",
+  },
+  {
+    number: "03",
+    label: "Service orientation",
+    title: "You are not sure which diagnostic applies",
+    description:
+      "Compare the diagnostic offers by recognizable trigger, evidence reviewed, and the decision each engagement is designed to support.",
+    action: "Compare the diagnostics",
+    href: "/services/",
+  },
+  {
+    number: "04",
+    label: "General inquiry",
+    title: "You found a website or content issue",
+    description:
+      "Use the contact route for corrections, accessibility concerns, broken links, or another question that does not belong to an active engagement.",
+    action: "Use the contact route",
+    href: "/contact/",
+  },
+];
+
+const usefulContext = [
+  {
+    number: "01",
+    title: "Name the work",
+    description:
+      "Include the engagement, deliverable, workflow, or decision the question relates to.",
+  },
+  {
+    number: "02",
+    title: "Describe what changed",
+    description:
+      "State the new information, constraint, dependency, or point of confusion as directly as possible.",
+  },
+  {
+    number: "03",
+    title: "Explain the consequence",
+    description:
+      "Clarify what decision, deadline, customer outcome, or team activity is affected.",
+  },
+  {
+    number: "04",
+    title: "Identify the useful next step",
+    description:
+      "Say whether you need clarification, review, a recommendation, or a change to the agreed work.",
+  },
+];
+---
+
+<Layout
+  title="Support | Cadence Lab"
+  description="Find the right route for active Cadence Lab engagements, new operating problems, service questions, and website or content issues."
+  canonicalURL="/support/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="support-page" tabindex="-1">
+    <section class="support-hero" aria-labelledby="support-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Support</p>
+
+          <h1 id="support-title">Start with the context already in motion.</h1>
+
+          <p class="hero-lead">
+            The most useful support route depends on whether work is already
+            underway. Keep active engagement questions with their existing
+            project context. Use the fit check or contact route for everything
+            else.
+          </p>
+        </div>
+
+        <aside class="route-note" aria-labelledby="route-note-title">
+          <p id="route-note-title" class="note-label">First question</p>
+          <p>Are you already working with Cadence Lab?</p>
+
+          <dl>
+            <div>
+              <dt>Yes</dt>
+              <dd>Continue in the established project channel</dd>
+            </div>
+            <div>
+              <dt>No</dt>
+              <dd>Choose the route that matches your current need</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="support-routes" aria-labelledby="support-routes-title">
+      <div class="page-container section-stack">
+        <header class="section-intro">
+          <p class="eyebrow">Choose a route</p>
+          <h2 id="support-routes-title">
+            Put the question where it can be answered with the right context.
+          </h2>
+        </header>
+
+        <div class="route-grid">
+          {
+            supportPaths.map((path) => (
+              <article class="route-card">
+                <div class="route-meta">
+                  <span aria-hidden="true">{path.number}</span>
+                  <span>{path.label}</span>
+                </div>
+
+                <div class="route-copy">
+                  <h3>{path.title}</h3>
+                  <p>{path.description}</p>
+                </div>
+
+                <a href={path.href}>
+                  {path.action}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="engagement-support"
+      class="engagement-support"
+      aria-labelledby="engagement-support-title"
+    >
+      <div class="page-container engagement-layout">
+        <header class="engagement-intro">
+          <p class="eyebrow eyebrow-inverse">Active engagement support</p>
+          <h2 id="engagement-support-title">
+            Keep the question connected to the work.
+          </h2>
+          <p>
+            Existing project channels preserve the decisions, evidence, and
+            constraints surrounding an engagement. Starting a separate inquiry
+            can separate the question from the context needed to resolve it.
+          </p>
+        </header>
+
+        <ol class="context-list">
+          {
+            usefulContext.map((item) => (
+              <li>
+                <p class="context-number" aria-hidden="true">
+                  {item.number}
+                </p>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="support-boundaries" aria-labelledby="boundaries-title">
+      <div class="page-container boundaries-layout">
+        <div class="boundaries-copy">
+          <p class="eyebrow">What this route is for</p>
+          <h2 id="boundaries-title">
+            Support should clarify the next action, not create another handoff.
+          </h2>
+        </div>
+
+        <div class="boundary-columns">
+          <article>
+            <h3>Use Support to</h3>
+            <ul>
+              <li>Find the right route for an existing question</li>
+              <li>Reconnect an issue to active engagement context</li>
+              <li>Report a website, content, or accessibility concern</li>
+              <li>Understand where a service or fit question belongs</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Use the Fit Check to</h3>
+            <ul>
+              <li>Introduce a new customer or operating problem</li>
+              <li>Assess whether a diagnostic is the right starting point</li>
+              <li>Describe the teams, systems, and decisions involved</li>
+              <li>Establish whether there is a useful next conversation</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-close" aria-labelledby="support-close-title">
+      <div class="page-container close-panel">
+        <div>
+          <p class="eyebrow">Not currently working together?</p>
+          <h2 id="support-close-title">
+            Bring the operating problem through the fit check.
+          </h2>
+        </div>
+
+        <div class="close-action">
+          <p>
+            Share the problem, the people and systems involved, and the outcome
+            that needs to change. Cadence Lab will assess whether a diagnostic
+            is the right entry point.
+          </p>
+          <a class="button-primary" href="/fit-check/">Start a fit check</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .support-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .support-hero,
+  .support-routes,
+  .engagement-support,
+  .support-boundaries,
+  .support-close {
+    padding-block: var(--section-space);
+  }
+
+  .support-hero {
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout,
+  .engagement-layout,
+  .boundaries-layout,
+  .close-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(20rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-layout {
+    align-items: end;
+  }
+
+  .hero-copy,
+  .section-stack,
+  .section-intro,
+  .engagement-intro,
+  .boundaries-copy,
+  .close-action {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-copy {
+    gap: 1.25rem;
+  }
+
+  .section-stack {
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .section-intro,
+  .engagement-intro,
+  .boundaries-copy {
+    gap: 1rem;
+  }
+
+  .eyebrow,
+  .note-label,
+  .context-number {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  dt,
+  dd,
+  a {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 16ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  h2 {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .hero-lead,
+  .engagement-intro > p:last-child,
+  .close-action p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-lead {
+    max-width: 62ch;
+  }
+
+  .route-note {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .route-note > p:not(.note-label) {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .route-note dl {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding-top: 1.25rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .route-note dl > div {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+  }
+
+  .route-note dt {
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .route-note dd {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .support-routes {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .section-intro {
+    max-width: 52rem;
+  }
+
+  .section-intro h2 {
+    max-width: 22ch;
+  }
+
+  .route-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  .route-card {
+    display: flex;
+    min-width: 0;
+    min-height: 22rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .route-card:nth-child(odd) {
+    border-inline-end: var(--border-width) solid var(--color-border);
+  }
+
+  .route-card:nth-child(n + 3) {
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+
+  .route-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .route-meta span:first-child {
+    color: var(--color-blue);
+  }
+
+  .route-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .route-copy h3 {
+    max-width: 26ch;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  .route-copy p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .route-card > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.25em;
+  }
+
+  .engagement-support {
+    background: var(--color-ink);
+    color: var(--color-text-inverse);
+  }
+
+  .engagement-intro {
+    position: sticky;
+    inset-block-start: calc(var(--header-offset) + 2rem);
+  }
+
+  .engagement-intro h2,
+  .context-list h3 {
+    color: var(--color-light);
+  }
+
+  .engagement-intro > p:last-child,
+  .context-list li > div > p {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .context-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .context-list li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-top: var(--border-width) solid rgb(252 254 255 / 20%);
+  }
+
+  .context-list li:last-child {
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 20%);
+  }
+
+  .context-list li > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .context-list li > div > p {
+    margin: 0;
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .support-boundaries {
+    background: var(--color-surface-subtle);
+  }
+
+  .boundaries-copy h2 {
+    max-width: 18ch;
+  }
+
+  .boundary-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .boundary-columns article {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  .boundary-columns article + article {
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .boundary-columns h3 {
+    padding-bottom: 1rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .boundary-columns ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .boundary-columns li {
+    position: relative;
+    padding-inline-start: 1rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .boundary-columns li::before {
+    position: absolute;
+    inset-block-start: 0.68em;
+    inset-inline-start: 0;
+    width: 0.35rem;
+    height: 0.35rem;
+    background: var(--color-blue);
+    content: "";
+  }
+
+  .support-close {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .close-panel {
+    align-items: end;
+  }
+
+  .close-panel > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .close-action {
+    gap: 1.5rem;
+  }
+
+  .button-primary {
+    display: inline-flex;
+    min-height: var(--control-min-size-coarse);
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.25rem;
+    border: var(--border-width) solid var(--color-blue);
+    border-radius: var(--radius-md);
+    background: var(--color-blue);
+    color: var(--color-light);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .button-primary:hover {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+  }
+
+  .support-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .engagement-support a:focus-visible {
+    outline-color: var(--color-light);
+  }
+
+  @media (hover: hover) {
+    .route-card > a:hover {
+      color: var(--color-ink);
+    }
+  }
+
+  @media (max-width: 62rem) {
+    .hero-layout,
+    .engagement-layout,
+    .boundaries-layout,
+    .close-panel {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .route-note {
+      max-width: 38rem;
+    }
+
+    .engagement-intro {
+      position: static;
+    }
+
+    .boundaries-copy h2 {
+      max-width: 24ch;
+    }
+
+    .close-panel {
+      align-items: start;
+    }
+
+    .close-action {
+      max-width: 44rem;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .route-grid,
+    .boundary-columns {
+      grid-template-columns: 1fr;
+    }
+
+    .route-card {
+      min-height: auto;
+    }
+
+    .route-card:nth-child(odd) {
+      border-inline-end: 0;
+    }
+
+    .route-card + .route-card {
+      border-block-start: var(--border-width) solid var(--color-border);
+    }
+
+    .boundary-columns article + article {
+      border-block-start: var(--border-width) solid var(--color-border);
+      border-inline-start: 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .route-note,
+    .route-grid,
+    .route-card,
+    .context-list li,
+    .boundary-columns,
+    .boundary-columns article,
+    .boundary-columns h3,
+    .support-close {
+      border-color: CanvasText;
+    }
+  }
+</style>
