@@ -1,0 +1,432 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getSearchEntries } from "../../lib/search";
+
+const entries = await getSearchEntries();
+---
+
+<Layout
+  title="Search | Cadence Lab"
+  description="Search Cadence Lab insights and practical resources."
+  canonicalURL="/search/"
+  noindex={true}
+>
+  <NavHeader />
+
+  <main id="main-content" class="search-page">
+    <div class="search-container">
+      <header class="search-header">
+        <p class="search-eyebrow">Search</p>
+        <h1>Search Cadence Lab.</h1>
+        <p>
+          Find published thinking by topic, operating problem, or category.
+          Planned resources will appear here as they are published.
+        </p>
+      </header>
+
+      <section class="search-interface" aria-labelledby="search-results-title">
+        <form action="/search/" method="get" class="page-search-form">
+          <label for="page-search-input">Search insights and resources</label>
+          <div>
+            <input
+              id="page-search-input"
+              type="search"
+              name="q"
+              placeholder="Try AI adoption, CRM, or workflow"
+              autocomplete="off"
+              data-page-search-input
+            />
+            <button type="submit">Search</button>
+          </div>
+          <p>
+            Press <kbd>Command</kbd>
+            <span aria-hidden="true">+</span>
+            <kbd>K</kbd> anywhere on the site for quick search.
+          </p>
+        </form>
+
+        <div class="search-results-heading">
+          <div>
+            <p class="search-results-label">Published content</p>
+            <h2 id="search-results-title">Insights</h2>
+          </div>
+          <p aria-live="polite" data-page-search-status>
+            {
+              entries.length === 1
+                ? "1 published insight"
+                : `${entries.length} published insights`
+            }
+          </p>
+        </div>
+
+        <div class="search-results" data-page-search-results>
+          {
+            entries.map((entry) => (
+              <article
+                class="search-result"
+                data-page-search-entry
+                data-search-text={entry.searchText}
+              >
+                <div class="search-result-meta">
+                  <span>{entry.category}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{entry.readTime}</span>
+                </div>
+
+                <h3>
+                  <a href={entry.href}>{entry.title}</a>
+                </h3>
+
+                <p>{entry.description}</p>
+
+                <a
+                  class="search-result-link"
+                  href={entry.href}
+                  aria-label={`Read ${entry.title}`}
+                >
+                  Read article
+                </a>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="search-empty" hidden data-page-search-empty>
+          <h3>No matching insights found.</h3>
+          <p>Try a broader topic or browse all published Insights.</p>
+          <a href="/blog/">Browse Insights</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>(
+    "[data-page-search-input]",
+  );
+  const status = document.querySelector<HTMLElement>(
+    "[data-page-search-status]",
+  );
+  const emptyState = document.querySelector<HTMLElement>(
+    "[data-page-search-empty]",
+  );
+  const entries = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-page-search-entry]"),
+  );
+
+  if (input && status && emptyState) {
+    const query = new URLSearchParams(window.location.search).get("q") ?? "";
+    input.value = query;
+
+    const terms = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    let visibleCount = 0;
+
+    entries.forEach((entry) => {
+      const searchText = entry.dataset.searchText ?? "";
+      const isVisible =
+        terms.length === 0 || terms.every((term) => searchText.includes(term));
+
+      entry.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+
+    status.textContent = query.trim()
+      ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"} for “${query.trim()}”`
+      : `${entries.length} published ${
+          entries.length === 1 ? "insight" : "insights"
+        }`;
+    emptyState.hidden = visibleCount !== 0;
+  }
+</script>
+
+<style>
+  .search-page {
+    width: 100%;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .search-container {
+    display: flex;
+    width: min(calc(100% - (2 * var(--page-gutter))), 64rem);
+    margin-inline: auto;
+    flex-direction: column;
+    gap: clamp(3rem, 8vw, 6rem);
+  }
+
+  .search-header {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .search-eyebrow,
+  .search-results-label {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .search-header h1 {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    text-wrap: balance;
+  }
+
+  .search-header > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .search-interface {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .page-search-form {
+    display: flex;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border-strong);
+    background: var(--color-surface-pure);
+    flex-direction: column;
+    gap: 0.75rem;
+    font-family: var(--font-sans);
+  }
+
+  .page-search-form label {
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .page-search-form > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .page-search-form input {
+    min-width: 0;
+    min-height: var(--control-min-size-coarse);
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--fs-body-ui);
+  }
+
+  .page-search-form button {
+    min-height: var(--control-min-size-coarse);
+    padding-inline: 1.5rem;
+    border: var(--border-width) solid var(--color-blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--color-blue);
+    color: var(--color-text-inverse);
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+  }
+
+  .page-search-form > p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.5;
+  }
+
+  kbd {
+    padding: 0.1rem 0.3rem;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-subtle);
+    font: inherit;
+  }
+
+  .search-results-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: var(--border-width) solid var(--color-border-strong);
+    font-family: var(--font-sans);
+  }
+
+  .search-results-heading > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-results-heading h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .search-results-heading > p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+  }
+
+  .search-results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .search-result {
+    display: flex;
+    min-width: 0;
+    padding-top: 1.25rem;
+    border-top: 0.1875rem solid var(--color-blue);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    font-family: var(--font-sans);
+  }
+
+  .search-result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+  }
+
+  .search-result h3,
+  .search-result p {
+    margin: 0;
+  }
+
+  .search-result h3 {
+    color: var(--color-ink);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  .search-result h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .search-result p {
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .search-result-link,
+  .search-empty a {
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.2em;
+  }
+
+  .search-empty {
+    padding: clamp(2rem, 6vw, 4rem);
+    border: var(--border-width) solid var(--color-border);
+    text-align: center;
+    font-family: var(--font-sans);
+  }
+
+  .search-empty h3,
+  .search-empty p {
+    margin: 0;
+  }
+
+  .search-empty h3 {
+    color: var(--color-ink);
+    font-size: var(--fs-h3);
+  }
+
+  .search-empty p {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+  }
+
+  .search-empty a {
+    display: inline-block;
+    margin-top: 1.25rem;
+  }
+
+  .search-page a:focus-visible,
+  .search-page button:focus-visible,
+  .search-page input:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 44rem) {
+    .search-results {
+      grid-template-columns: 1fr;
+    }
+
+    .search-results-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 32rem) {
+    .page-search-form > div {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .page-search-form input,
+    .page-search-form button {
+      border-radius: var(--radius-sm);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .page-search-form,
+    .page-search-form input,
+    .search-results-heading,
+    .search-result,
+    .search-empty,
+    kbd {
+      border-color: CanvasText;
+    }
+  }
+</style>

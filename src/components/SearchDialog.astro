@@ -1,0 +1,415 @@
+---
+import { getSearchEntries } from "../lib/search";
+
+const entries = await getSearchEntries();
+---
+
+<dialog
+  id="site-search-dialog"
+  class="search-dialog"
+  aria-labelledby="search-dialog-title"
+  data-search-dialog
+>
+  <div class="search-dialog-panel">
+    <header class="search-dialog-header">
+      <div>
+        <p class="search-dialog-eyebrow">Search</p>
+        <h2 id="search-dialog-title">Search Cadence Lab</h2>
+      </div>
+
+      <form method="dialog">
+        <button class="search-dialog-close" type="submit">
+          <span>Close</span>
+          <kbd>Esc</kbd>
+        </button>
+      </form>
+    </header>
+
+    <div class="search-dialog-field">
+      <label for="command-search-input">Search insights and resources</label>
+      <input
+        id="command-search-input"
+        type="search"
+        placeholder="Search by topic, problem, or category"
+        autocomplete="off"
+        data-command-search-input
+      />
+    </div>
+
+    <div class="search-dialog-status">
+      <p aria-live="polite" data-command-search-status>
+        {
+          entries.length === 1
+            ? "1 published insight"
+            : `${entries.length} published insights`
+        }
+      </p>
+      <a href="/search/" data-command-search-full>Open full search</a>
+    </div>
+
+    <div class="search-dialog-results" data-command-search-results>
+      {
+        entries.map((entry) => (
+          <article
+            data-command-search-entry
+            data-search-text={entry.searchText}
+          >
+            <div class="search-result-meta">
+              <span>{entry.category}</span>
+              <span aria-hidden="true">·</span>
+              <span>{entry.readTime}</span>
+            </div>
+            <h3>
+              <a href={entry.href}>{entry.title}</a>
+            </h3>
+            <p>{entry.description}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="search-dialog-empty" hidden data-command-search-empty>
+      No published insights match that search.
+    </p>
+  </div>
+</dialog>
+
+<script>
+  type SearchWindow = Window & {
+    __cadenceSearchController?: AbortController;
+    __cadenceSearchLoader?: EventListener;
+  };
+
+  const searchWindow = window as SearchWindow;
+
+  const initializeSearchDialog = () => {
+    searchWindow.__cadenceSearchController?.abort();
+
+    const controller = new AbortController();
+    searchWindow.__cadenceSearchController = controller;
+    const { signal } = controller;
+
+    const dialog = document.querySelector<HTMLDialogElement>(
+      "[data-search-dialog]",
+    );
+    const input = dialog?.querySelector<HTMLInputElement>(
+      "[data-command-search-input]",
+    );
+    const status = dialog?.querySelector<HTMLElement>(
+      "[data-command-search-status]",
+    );
+    const fullSearchLink = dialog?.querySelector<HTMLAnchorElement>(
+      "[data-command-search-full]",
+    );
+    const emptyState = dialog?.querySelector<HTMLElement>(
+      "[data-command-search-empty]",
+    );
+    const entries = Array.from(
+      dialog?.querySelectorAll<HTMLElement>("[data-command-search-entry]") ??
+        [],
+    );
+
+    if (!dialog || !input || !status || !fullSearchLink || !emptyState) {
+      return;
+    }
+
+    const normalizeQuery = (value: string): string =>
+      value.trim().toLocaleLowerCase();
+
+    const updateResults = () => {
+      const query = normalizeQuery(input.value);
+      const terms = query.split(/\s+/).filter(Boolean);
+      let visibleCount = 0;
+
+      entries.forEach((entry) => {
+        const searchText = entry.dataset.searchText ?? "";
+        const isVisible =
+          terms.length === 0 ||
+          terms.every((term) => searchText.includes(term));
+
+        entry.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      status.textContent = query
+        ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"}`
+        : `${entries.length} published ${
+            entries.length === 1 ? "insight" : "insights"
+          }`;
+      emptyState.hidden = visibleCount !== 0;
+      fullSearchLink.href = query
+        ? `/search/?q=${encodeURIComponent(input.value.trim())}`
+        : "/search/";
+    };
+
+    const openDialog = () => {
+      if (!dialog.open) dialog.showModal();
+      window.requestAnimationFrame(() => input.focus());
+    };
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (
+          event.key.toLocaleLowerCase() === "k" &&
+          (event.metaKey || event.ctrlKey)
+        ) {
+          event.preventDefault();
+          openDialog();
+        }
+      },
+      { signal },
+    );
+
+    input.addEventListener("input", updateResults, { signal });
+
+    dialog.addEventListener(
+      "click",
+      (event) => {
+        if (event.target === dialog) dialog.close();
+      },
+      { signal },
+    );
+
+    dialog.addEventListener(
+      "close",
+      () => {
+        input.value = "";
+        updateResults();
+      },
+      { signal },
+    );
+
+    updateResults();
+  };
+
+  if (searchWindow.__cadenceSearchLoader) {
+    document.removeEventListener(
+      "astro:page-load",
+      searchWindow.__cadenceSearchLoader,
+    );
+  }
+
+  const searchLoader: EventListener = () => initializeSearchDialog();
+  searchWindow.__cadenceSearchLoader = searchLoader;
+  document.addEventListener("astro:page-load", searchLoader);
+  initializeSearchDialog();
+</script>
+
+<style>
+  .search-dialog {
+    width: min(calc(100% - (2 * var(--page-gutter))), 48rem);
+    max-height: min(80vh, 42rem);
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-pure);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .search-dialog::backdrop {
+    background: rgb(0 5 4 / 58%);
+  }
+
+  .search-dialog-panel {
+    display: flex;
+    max-height: inherit;
+    flex-direction: column;
+  }
+
+  .search-dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .search-dialog-header > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .search-dialog-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .search-dialog h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+  }
+
+  .search-dialog-close {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: var(--fs-small);
+    cursor: pointer;
+  }
+
+  kbd {
+    padding: 0.2rem 0.4rem;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-subtle);
+    font: inherit;
+    font-size: var(--fs-eyebrow);
+  }
+
+  .search-dialog-field {
+    padding: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .search-dialog-field label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .search-dialog-field input {
+    width: 100%;
+    min-height: var(--control-min-size-coarse);
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--fs-body-ui);
+  }
+
+  .search-dialog-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 clamp(1.25rem, 4vw, 2rem) 1rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .search-dialog-status p,
+  .search-dialog-empty {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .search-dialog-status a {
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.2em;
+  }
+
+  .search-dialog-results {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .search-dialog-results article {
+    display: flex;
+    padding-block: 1.25rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .search-result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+  }
+
+  .search-dialog-results h3,
+  .search-dialog-results p {
+    margin: 0;
+  }
+
+  .search-dialog-results h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h4);
+  }
+
+  .search-dialog-results h3 a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .search-dialog-results p {
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .search-dialog-empty {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .search-dialog a:focus-visible,
+  .search-dialog button:focus-visible,
+  .search-dialog input:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 40rem) {
+    .search-dialog {
+      width: calc(100% - 2rem);
+      max-height: calc(100vh - 2rem);
+    }
+
+    .search-dialog-close span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .search-dialog,
+    .search-dialog-header,
+    .search-dialog-field input,
+    .search-dialog-status,
+    .search-dialog-results article,
+    kbd {
+      border-color: CanvasText;
+    }
+  }
+</style>

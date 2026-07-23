@@ -1,5 +1,6 @@
 ---
 import wordmark from "../assets/brand/cadencelab-wordmark-light-color.svg";
+import SearchDialog from "./SearchDialog.astro";
 
 interface NavigationItem {
   label: string;
@@ -151,7 +152,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               type="search"
               name="q"
               placeholder="Search insights and resources"
+              aria-keyshortcuts="Meta+K Control+K"
             />
+
+            <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
 
             <button class="search-submit" type="submit">
               <span class="visually-hidden">Submit search</span>
@@ -675,6 +679,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   </div>
 </header>
 
+<SearchDialog />
+
 <script>
   type CadenceWindow = Window & {
     __cadenceHeaderController?: AbortController;
@@ -1043,6 +1049,30 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     transition:
       border-color var(--transition-fast),
       background-color var(--transition-fast);
+  }
+
+  .search-input {
+    padding-inline-end: 5.25rem;
+  }
+
+  .search-shortcut {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 2.5rem;
+    display: inline-flex;
+    min-inline-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.15rem 0.35rem;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-pure);
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: var(--fs-eyebrow);
+    line-height: 1.2;
+    pointer-events: none;
+    transform: translateY(-50%);
   }
 
   .search-input::placeholder,
