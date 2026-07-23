@@ -1,0 +1,134 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
+---
+
+{
+  items.length > 0 && (
+    <div class="article-toc">
+      <nav class="toc-desktop" aria-labelledby="article-toc-title">
+        <p id="article-toc-title" class="toc-label">
+          In this article
+        </p>
+
+        <ol role="list">
+          {items.map((item) => (
+            <li class:list={{ "toc-subitem": item.depth === 3 }}>
+              <a href={`#${item.slug}`}>{item.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <details class="toc-mobile">
+        <summary>In this article</summary>
+
+        <nav aria-label="In this article">
+          <ol role="list">
+            {items.map((item) => (
+              <li class:list={{ "toc-subitem": item.depth === 3 }}>
+                <a href={`#${item.slug}`}>{item.text}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </details>
+    </div>
+  )
+}
+
+<style>
+  .article-toc {
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .toc-desktop {
+    width: 100%;
+  }
+
+  .toc-label,
+  .toc-mobile summary {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  ol {
+    display: flex;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    flex-direction: column;
+    gap: 0.85rem;
+    list-style: none;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  .toc-subitem {
+    padding-inline-start: 1rem;
+  }
+
+  a {
+    display: inline-block;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
+    line-height: 1.45;
+    text-decoration: none;
+    text-wrap: pretty;
+  }
+
+  a:hover {
+    color: var(--color-blue);
+  }
+
+  a:focus-visible,
+  .toc-mobile summary:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .toc-mobile {
+    display: none;
+    padding-block: 1rem;
+    border-block: 1px solid var(--color-border);
+  }
+
+  .toc-mobile summary {
+    cursor: pointer;
+  }
+
+  .toc-mobile nav {
+    padding-block-end: 0.25rem;
+  }
+
+  @media (max-width: 64rem) {
+    .toc-desktop {
+      display: none;
+    }
+
+    .toc-mobile {
+      display: block;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .toc-mobile {
+      border-color: CanvasText;
+    }
+  }
+</style>

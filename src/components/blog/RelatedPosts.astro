@@ -1,0 +1,172 @@
+---
+interface RelatedPost {
+  title: string;
+  description: string;
+  category: string;
+  readTime: string;
+  href: string;
+}
+
+interface Props {
+  posts: RelatedPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <header>
+        <p>Continue reading</p>
+        <h2 id="related-posts-title">Related insights</h2>
+      </header>
+
+      <div class="related-grid">
+        {posts.map((post) => (
+          <article>
+            <div class="post-metadata">
+              <span>{post.category}</span>
+              <span aria-hidden="true">·</span>
+              <span>{post.readTime}</span>
+            </div>
+
+            <h3>
+              <a href={post.href}>{post.title}</a>
+            </h3>
+
+            <p class="post-description">{post.description}</p>
+
+            <a
+              class="post-link"
+              href={post.href}
+              aria-label={`Read ${post.title}`}
+            >
+              Read article
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .related-posts {
+    display: flex;
+    width: 100%;
+    margin-top: clamp(4rem, 9vw, 7rem);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--color-border);
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 3rem);
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  header h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  article {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    padding-top: 1.25rem;
+    border-top: 0.1875rem solid var(--color-blue);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .post-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+  }
+
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    text-wrap: balance;
+  }
+
+  h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-description {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .post-link {
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+
+  h3 a:focus-visible,
+  .post-link:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 52rem) {
+    .related-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .related-posts,
+    article {
+      border-color: CanvasText;
+    }
+  }
+</style>
