@@ -2,9 +2,11 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
+import ArticleToc from "../../../../components/blog/ArticleToc.astro";
 import AuthorBio from "../../../../components/blog/AuthorBio.astro";
 import Footer from "../../../../components/Footer.astro";
 import NavHeader from "../../../../components/NavHeader.astro";
+import RelatedPosts from "../../../../components/blog/RelatedPosts.astro";
 import Layout from "../../../../layouts/Layout.astro";
 
 type BlogPost = CollectionEntry<"blog">;
@@ -42,7 +44,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props as { post: BlogPost };
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 const publishedDate = post.data.date;
 const updatedDate = post.data.updatedDate;
@@ -66,6 +68,42 @@ const description = post.data.description ?? post.data.subtitle;
 
 const author = post.data.author ?? "Cadence Lab";
 const canonicalPath = Astro.url.pathname;
+
+const getPostURL = (entry: BlogPost): string => {
+  const year = String(entry.data.date.getUTCFullYear());
+  const month = String(entry.data.date.getUTCMonth() + 1).padStart(2, "0");
+  const slug = entry.id
+    .replace(/\.(md|mdx)$/i, "")
+    .split("/")
+    .filter(Boolean)
+    .at(-1);
+
+  if (!slug) {
+    throw new Error(`Unable to determine a slug for blog entry: ${entry.id}`);
+  }
+
+  return `/blog/${year}/${month}/${slug}/`;
+};
+
+const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .filter((entry) => entry.id !== post.id)
+  .sort((a, b) => {
+    const aMatchesCategory = a.data.category === post.data.category ? 1 : 0;
+    const bMatchesCategory = b.data.category === post.data.category ? 1 : 0;
+
+    return (
+      bMatchesCategory - aMatchesCategory ||
+      b.data.date.getTime() - a.data.date.getTime()
+    );
+  })
+  .slice(0, 3)
+  .map((entry) => ({
+    title: entry.data.title,
+    description: entry.data.description ?? entry.data.subtitle,
+    category: entry.data.category,
+    readTime: entry.data.readTime,
+    href: getPostURL(entry),
+  }));
 
 const imageSource = post.data.image
   ? post.data.image.startsWith("/")
@@ -184,11 +222,18 @@ const articleSchema = {
         )
       }
 
-      <div class="article-body prose">
-        <Content />
+      <div class="article-content">
+        <div class="article-body prose">
+          <Content />
+        </div>
+
+        <aside class="article-sidebar">
+          <ArticleToc headings={headings} />
+        </aside>
       </div>
 
       <AuthorBio author={author} />
+      <RelatedPosts posts={relatedPosts} />
     </article>
   </main>
 
@@ -309,15 +354,32 @@ const articleSchema = {
     object-fit: cover;
   }
 
-  .article-body {
-    width: min(100%, var(--measure-prose));
+  .article-content {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, var(--measure-prose)) minmax(13rem, 16rem);
+    justify-content: center;
+    gap: clamp(3rem, 6vw, 5rem);
     margin-top: clamp(3rem, 7vw, 5rem);
+    align-items: start;
+  }
+
+  .article-body {
+    width: 100%;
     padding-top: clamp(2.5rem, 5vw, 4rem);
     border-top: 1px solid var(--color-border);
   }
 
+  .article-sidebar {
+    position: sticky;
+    inset-block-start: calc(var(--header-offset, 6.5rem) + 2rem);
+    min-width: 0;
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
   .article-body :global(h2) {
     margin-top: 2.75em;
+    scroll-margin-top: calc(var(--header-offset, 6.5rem) + 2rem);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--fs-post-h2);
@@ -330,6 +392,7 @@ const articleSchema = {
 
   .article-body :global(h3) {
     margin-top: 2.25em;
+    scroll-margin-top: calc(var(--header-offset, 6.5rem) + 2rem);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--fs-post-h3);
@@ -398,6 +461,19 @@ const articleSchema = {
   .article-body :global(a:focus-visible) {
     outline: var(--focus-ring-width) solid var(--color-focus);
     outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (max-width: 64rem) {
+    .article-content {
+      grid-template-columns: minmax(0, var(--measure-prose));
+      gap: 2rem;
+    }
+
+    .article-sidebar {
+      position: static;
+      grid-row: 1;
+      padding-top: 0;
+    }
   }
 
   @media (max-width: 40rem) {
