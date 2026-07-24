@@ -1,0 +1,1057 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import SectionNav from "../../components/SectionNav.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const governanceLayers = [
+  {
+    number: "01",
+    title: "Purpose and boundaries",
+    description:
+      "Define the customer or operating outcome, the decision being supported, acceptable use, and conditions where the system should not act.",
+  },
+  {
+    number: "02",
+    title: "Ownership and authority",
+    description:
+      "Name the accountable owner, the people authorized to approve changes, and the roles responsible for routine work, exceptions, and escalation.",
+  },
+  {
+    number: "03",
+    title: "Data and knowledge",
+    description:
+      "Identify the inputs the system relies on, who maintains them, how quality is assessed, and what happens when information is incomplete or conflicting.",
+  },
+  {
+    number: "04",
+    title: "Human oversight",
+    description:
+      "Specify where human judgment is required, what reviewers need to see, and when automation must pause, defer, or hand control back to a person.",
+  },
+  {
+    number: "05",
+    title: "Measurement and review",
+    description:
+      "Monitor customer, workflow, quality, adoption, and risk signals so the organization can correct the system as conditions change.",
+  },
+];
+
+const decisionSequence = [
+  {
+    phase: "Define",
+    question: "What decision should the system improve?",
+    evidence:
+      "Outcome, users, affected customers, known constraints, and a bounded use case.",
+  },
+  {
+    phase: "Authorize",
+    question: "Who can approve its use and its limits?",
+    evidence:
+      "Accountable owner, decision rights, review partners, and acceptance criteria.",
+  },
+  {
+    phase: "Operate",
+    question: "How should the work run in practice?",
+    evidence:
+      "Workflow, inputs, instructions, handoffs, user responsibilities, and traceable outputs.",
+  },
+  {
+    phase: "Intervene",
+    question: "When must a person take control?",
+    evidence:
+      "Exception rules, escalation paths, stop conditions, recovery steps, and response ownership.",
+  },
+  {
+    phase: "Review",
+    question: "What evidence determines whether it continues?",
+    evidence:
+      "Quality, customer consequence, adoption, overrides, incidents, and operating performance.",
+  },
+];
+
+const oversightConditions = [
+  {
+    label: "Consequence",
+    title: "The decision could materially affect a customer or employee",
+    description:
+      "Require appropriate review before the action is finalized, especially when the outcome is difficult to reverse.",
+  },
+  {
+    label: "Uncertainty",
+    title:
+      "The evidence is incomplete, conflicting, or outside known conditions",
+    description:
+      "Route the case to a person who can gather context, resolve ambiguity, and document the decision.",
+  },
+  {
+    label: "Exception",
+    title: "The request falls outside the intended workflow",
+    description:
+      "Prevent the system from improvising authority it does not have and provide a clear escalation path.",
+  },
+  {
+    label: "Change",
+    title: "The model, data, policy, workflow, or environment has changed",
+    description:
+      "Reassess assumptions and performance before relying on the prior approval or operating pattern.",
+  },
+];
+
+const evidenceArtifacts = [
+  {
+    title: "Decision record",
+    description:
+      "The use case, intended outcome, accountable owner, approved boundaries, and rationale for proceeding.",
+  },
+  {
+    title: "Operating map",
+    description:
+      "The actual workflow, system touchpoints, inputs, handoffs, human responsibilities, and exception paths.",
+  },
+  {
+    title: "Control register",
+    description:
+      "The guardrails, approval points, monitoring signals, escalation rules, and evidence that each control is working.",
+  },
+  {
+    title: "Review record",
+    description:
+      "Observed performance, incidents, overrides, customer consequences, changes made, and the next review decision.",
+  },
+];
+
+const reviewSignals = [
+  "Customer outcome and service quality",
+  "Accuracy, completeness, and consistency",
+  "Human corrections, overrides, and escalations",
+  "Adoption, workarounds, and abandonment",
+  "Workflow time, capacity, and failure recovery",
+  "Privacy, security, fairness, and policy concerns",
+];
+---
+
+<Layout
+  title="System Governance | Cadence Lab"
+  description="A practical governance model for customer experience systems, CRM workflows, automation, and applied AI."
+  canonicalURL="/governance/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="governance-page" tabindex="-1">
+    <section class="governance-hero" aria-labelledby="governance-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">System governance</p>
+          <h1 id="governance-title">
+            Govern the decisions, not just the technology.
+          </h1>
+          <p class="hero-lead">
+            Useful governance connects purpose, ownership, evidence, human
+            judgment, and review to the way a system actually operates. It makes
+            clear what the system can do, who remains accountable, and when the
+            organization must intervene.
+          </p>
+
+          <div class="hero-actions" aria-label="System governance actions">
+            <a class="button button-primary" href="/fit-check/">
+              Start a fit check
+            </a>
+            <a
+              class="button button-text"
+              href="/services/ai-service-readiness-review/"
+            >
+              Review AI readiness
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="governance-test" aria-labelledby="governance-test-title">
+          <p id="governance-test-title" class="note-label">
+            The governance test
+          </p>
+          <p>
+            Can the organization explain the decision, the evidence behind it,
+            the person accountable for it, and the condition that would cause
+            the system to stop or change?
+          </p>
+          <dl>
+            <div>
+              <dt>Before use</dt>
+              <dd>Purpose and authority</dd>
+            </div>
+            <div>
+              <dt>During use</dt>
+              <dd>Oversight and escalation</dd>
+            </div>
+            <div>
+              <dt>After use</dt>
+              <dd>Evidence and correction</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Operating standard", href: "#operating-standard" },
+        { label: "Governance layers", href: "#governance-layers" },
+        { label: "Decision lifecycle", href: "#decision-lifecycle" },
+        { label: "Human oversight", href: "#human-oversight" },
+        { label: "Evidence and review", href: "#evidence-review" },
+        { label: "Starting point", href: "#starting-point" },
+      ]}
+    />
+
+    <section
+      id="operating-standard"
+      class="operating-standard section-block"
+      aria-labelledby="operating-standard-title"
+    >
+      <div class="page-container split-intro">
+        <div>
+          <p class="eyebrow">Operating standard</p>
+          <h2 id="operating-standard-title">
+            Governance belongs inside the work.
+          </h2>
+        </div>
+
+        <div class="intro-copy">
+          <p>
+            A policy or review committee cannot govern a system by itself.
+            Governance becomes useful when people can apply it during ordinary
+            decisions, customer exceptions, workflow changes, incidents, and
+            performance reviews.
+          </p>
+          <p>
+            The goal is not to eliminate judgment or create approval at every
+            step. It is to place authority, evidence, and oversight where the
+            consequence of a decision requires them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="governance-layers"
+      class="governance-layers"
+      aria-labelledby="governance-layers-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Governance layers</p>
+          <h2 id="governance-layers-title">
+            Five layers connect accountability to operation.
+          </h2>
+          <p>
+            Each layer answers a different question. Together they prevent
+            governance from becoming a set of controls disconnected from the
+            customer and the work.
+          </p>
+        </div>
+
+        <ol class="layer-list">
+          {
+            governanceLayers.map((layer) => (
+              <li>
+                <p class="item-number">{layer.number}</p>
+                <div>
+                  <h3>{layer.title}</h3>
+                  <p>{layer.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="decision-lifecycle"
+      class="decision-lifecycle section-block"
+      aria-labelledby="decision-lifecycle-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">Decision lifecycle</p>
+          <h2 id="decision-lifecycle-title">
+            Governance follows a decision from intent to review.
+          </h2>
+          <p>
+            The evidence required should become more specific as a use case
+            moves from an idea into live work.
+          </p>
+        </div>
+
+        <ol class="sequence-list">
+          {
+            decisionSequence.map((item, index) => (
+              <li>
+                <div class="sequence-heading">
+                  <p class="sequence-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="sequence-phase">{item.phase}</p>
+                </div>
+                <h3>{item.question}</h3>
+                <p>{item.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="human-oversight"
+      class="human-oversight"
+      aria-labelledby="human-oversight-title"
+    >
+      <div class="page-container oversight-layout">
+        <div class="oversight-intro">
+          <p class="eyebrow eyebrow-inverse">Human oversight</p>
+          <h2 id="human-oversight-title">
+            Human review needs a reason, an owner, and authority.
+          </h2>
+          <p>
+            Adding a person to a process is not enough. The reviewer needs the
+            right context, time, competence, and authority to question or change
+            the result.
+          </p>
+        </div>
+
+        <div class="oversight-list">
+          {
+            oversightConditions.map((condition) => (
+              <article>
+                <p class="condition-label">{condition.label}</p>
+                <h3>{condition.title}</h3>
+                <p>{condition.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="evidence-review"
+      class="evidence-review section-block"
+      aria-labelledby="evidence-review-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence and review</p>
+            <h2 id="evidence-review-title">
+              Make the operating record usable.
+            </h2>
+          </div>
+          <p>
+            Governance evidence should help leaders and operators understand
+            what was approved, how the system is behaving, and what must change.
+            It should not exist only to demonstrate that a review occurred.
+          </p>
+        </div>
+
+        <div class="artifact-grid">
+          {
+            evidenceArtifacts.map((artifact, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{artifact.title}</h3>
+                <p>{artifact.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="review-panel">
+          <div>
+            <p class="eyebrow">Review signals</p>
+            <h3>Review the system through more than model performance.</h3>
+            <p>
+              Technical quality matters, but a system can still fail when people
+              avoid it, customers experience worse outcomes, or the workflow
+              cannot recover from exceptions.
+            </p>
+          </div>
+
+          <ul>
+            {reviewSignals.map((signal) => <li>{signal}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="starting-point"
+      class="starting-point"
+      aria-labelledby="starting-point-title"
+    >
+      <div class="page-container starting-layout">
+        <div>
+          <p class="eyebrow">Starting point</p>
+          <h2 id="starting-point-title">
+            Begin with one consequential decision.
+          </h2>
+          <p>
+            Describe the customer or operating decision, the current workflow,
+            the people affected, the available evidence, and the consequence of
+            getting it wrong. That is enough to assess where governance must
+            become more explicit.
+          </p>
+        </div>
+
+        <aside class="scope-note" aria-labelledby="scope-note-title">
+          <p id="scope-note-title" class="note-label">Important boundary</p>
+          <p>
+            Cadence Lab helps define operating governance for workflows,
+            customer systems, and applied AI. This work does not provide a legal
+            opinion, regulatory certification, security audit, privacy impact
+            assessment, or substitute for qualified specialists.
+          </p>
+          <a href="/fit-check/">
+            Start a fit check
+            <span aria-hidden="true">&#8594;</span>
+          </a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .governance-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block,
+  .starting-point {
+    padding-block: var(--section-space);
+  }
+
+  .governance-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .sequence-number,
+  .sequence-phase,
+  .condition-label {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 16ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .governance-test {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .governance-test > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .governance-test dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .governance-test dl > div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .governance-test dt,
+  .governance-test dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .governance-test dt {
+    color: var(--color-text-muted);
+  }
+
+  .governance-test dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .split-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .split-intro h2,
+  .section-intro h2,
+  .oversight-intro h2,
+  .starting-layout h2 {
+    max-width: 18ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .intro-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .intro-copy p,
+  .section-intro > p:not(.eyebrow),
+  .oversight-intro > p:not(.eyebrow),
+  .starting-layout > div > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2,
+  .oversight-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2,
+  .oversight-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .oversight-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .governance-layers,
+  .human-oversight {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .layer-list,
+  .sequence-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .layer-list {
+    display: grid;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .layer-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 2.25rem);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .layer-list h3,
+  .layer-list p {
+    color: var(--color-light);
+  }
+
+  .layer-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .layer-list li > div > p {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .layer-list .item-number {
+    color: var(--color-green);
+  }
+
+  .sequence-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  .sequence-list li {
+    display: flex;
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    flex-direction: column;
+  }
+
+  .sequence-list li + li {
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .sequence-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .sequence-phase {
+    color: var(--color-text-muted);
+  }
+
+  .sequence-list h3 {
+    margin-top: 2rem;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: 1.45;
+  }
+
+  .sequence-list li > p {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .oversight-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .oversight-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .oversight-list {
+    display: grid;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .oversight-list article {
+    padding-block: 1.5rem;
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .condition-label {
+    color: var(--color-green);
+  }
+
+  .oversight-list h3 {
+    max-width: 34ch;
+    margin-top: 0.6rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .oversight-list article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .artifact-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .artifact-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .artifact-grid article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .review-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.75fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    padding: clamp(1.75rem, 5vw, 3rem);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .review-panel h3 {
+    max-width: 24ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+  }
+
+  .review-panel > div > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .review-panel ul {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    margin: 0;
+    padding-inline-start: 1.3rem;
+  }
+
+  .review-panel li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .review-panel li::marker {
+    color: var(--color-blue);
+  }
+
+  .starting-point {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .starting-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.65fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .starting-layout > div > p:last-child {
+    margin-top: 1.25rem;
+  }
+
+  .scope-note {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .scope-note > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .scope-note a {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+  }
+
+  .governance-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .scope-note a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .sequence-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sequence-list li + li {
+      border-inline-start: 0;
+    }
+
+    .sequence-list li {
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .sequence-list li:nth-child(even) {
+      border-inline-start: var(--border-width) solid var(--color-border);
+    }
+
+    .sequence-list li:last-child {
+      grid-column: 1 / -1;
+      border-bottom: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .split-intro,
+    .oversight-layout,
+    .starting-layout,
+    .section-intro-split {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .governance-test,
+    .scope-note {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .review-panel {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .governance-test dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .layer-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+
+    .sequence-list,
+    .artifact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sequence-list li,
+    .sequence-list li:nth-child(even),
+    .sequence-list li:last-child {
+      grid-column: auto;
+      border-inline-start: 0;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .sequence-list li:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .governance-hero,
+    .governance-test,
+    .layer-list,
+    .layer-list li,
+    .sequence-list,
+    .sequence-list li,
+    .oversight-list,
+    .oversight-list article,
+    .artifact-grid,
+    .artifact-grid article,
+    .review-panel,
+    .starting-point,
+    .scope-note {
+      border-color: CanvasText;
+    }
+  }
+</style>
