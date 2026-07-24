@@ -1,0 +1,1313 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const visibleSignals = [
+  {
+    number: "01",
+    title: "The system prompt is expected to enforce the policy",
+    description:
+      "Sensitive rules, permissions, or operating boundaries live in natural-language instructions that the model can misinterpret, expose, or disregard.",
+  },
+  {
+    number: "02",
+    title: "External content enters the same context as trusted instructions",
+    description:
+      "Documents, websites, messages, retrieval results, and tool responses can contain text that influences the model as if it came from an authorized operator.",
+  },
+  {
+    number: "03",
+    title: "The model can reach more than the use case requires",
+    description:
+      "Broad data access, reusable credentials, powerful tools, or permissive actions allow one manipulated interaction to create consequences outside the intended task.",
+  },
+  {
+    number: "04",
+    title: "Approval occurs after the action",
+    description:
+      "People review summaries or logs after an AI workflow has already sent, changed, disclosed, purchased, routed, or deleted something consequential.",
+  },
+  {
+    number: "05",
+    title: "Testing recognizes phrases instead of unsafe outcomes",
+    description:
+      "A filter catches familiar jailbreak language but does not test indirect instructions, encoded content, tool misuse, data exposure, or unexpected action sequences.",
+  },
+  {
+    number: "06",
+    title: "Incidents cannot be reconstructed",
+    description:
+      "The organization lacks usable records of source content, model context, policy decisions, tool calls, approvals, outputs, and the final operating outcome.",
+  },
+];
+
+const controlLayers = [
+  {
+    label: "Trust boundaries",
+    question: "Which instructions, content, systems, and actors are trusted?",
+    description:
+      "Classify sources and preserve their provenance so untrusted content does not silently inherit the authority of the application, operator, or system prompt.",
+  },
+  {
+    label: "Task boundary",
+    question: "What is the model allowed to decide?",
+    description:
+      "Bound the use case, permitted inputs, expected outputs, prohibited behavior, and conditions that require refusal, escalation, or a different workflow.",
+  },
+  {
+    label: "Least privilege",
+    question: "What is the smallest access required for this task?",
+    description:
+      "Limit credentials, records, tools, functions, destinations, actions, and duration so a compromised model cannot reach unnecessary systems or data.",
+  },
+  {
+    label: "Deterministic controls",
+    question: "Which rules must be enforced outside the model?",
+    description:
+      "Use application code and policy services for authorization, schema validation, allowlists, data handling, transaction limits, and other non-negotiable behavior.",
+  },
+  {
+    label: "Human authority",
+    question: "Which consequences require informed approval?",
+    description:
+      "Place approval before high-impact actions and show the reviewer the source, proposed action, affected system, relevant uncertainty, and available alternatives.",
+  },
+  {
+    label: "Evaluation",
+    question: "How will the controls be tested and improved?",
+    description:
+      "Test direct, indirect, encoded, multimodal, and tool-mediated influence against real use-case consequences, then update controls as the system changes.",
+  },
+];
+
+const controlPath = [
+  {
+    phase: "Ingest",
+    question: "Where did the instruction or content originate?",
+    evidence:
+      "Source, trust classification, provenance, format, transformation, retrieval path, and handling requirements.",
+  },
+  {
+    phase: "Interpret",
+    question: "Which instructions should influence the task?",
+    evidence:
+      "Application intent, user authority, task boundary, untrusted content, conflicts, and required refusal or escalation.",
+  },
+  {
+    phase: "Decide",
+    question: "Is the proposed output or action allowed?",
+    evidence:
+      "Policy, authorization, schema, sensitive data, destination, confidence limits, and deterministic validation.",
+  },
+  {
+    phase: "Act",
+    question: "What consequence can the system create?",
+    evidence:
+      "Tool, permission, credential, transaction limit, human approval, reversibility, and downstream effect.",
+  },
+  {
+    phase: "Review",
+    question: "Can the organization detect and learn from unsafe behavior?",
+    evidence:
+      "Trace, control decision, blocked attempt, approval, outcome, incident response, evaluation result, and changed safeguard.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Prompts and instruction assembly",
+    description:
+      "System and developer instructions, user input, templates, memory, retrieved context, tool results, transformations, and the order in which they enter the model.",
+  },
+  {
+    title: "External and retrieved content",
+    description:
+      "Web pages, files, email, messages, knowledge sources, databases, images, metadata, and other content that may contain untrusted instructions.",
+  },
+  {
+    title: "Tools, credentials, and permissions",
+    description:
+      "Available functions, accessible records, API scopes, destinations, transaction limits, shared secrets, environment boundaries, and the code that authorizes action.",
+  },
+  {
+    title: "Outputs and downstream use",
+    description:
+      "Responses, structured data, links, code, recommendations, routing decisions, system updates, communications, and the people or services that trust them.",
+  },
+  {
+    title: "Approval and recovery",
+    description:
+      "Human checkpoints, displayed context, escalation, cancellation, rollback, exception handling, incident ownership, and the ability to reverse a consequential action.",
+  },
+  {
+    title: "Tests, traces, and outcomes",
+    description:
+      "Adversarial evaluations, blocked attempts, false positives, policy decisions, tool calls, approvals, incidents, customer effects, and changes made after learning.",
+  },
+];
+
+const failurePatterns = [
+  {
+    cue: "A classifier is treated as a complete firewall",
+    description:
+      "Input filtering becomes the primary defense even though unsafe influence can arrive indirectly, use unfamiliar forms, or produce harm through an otherwise ordinary output.",
+  },
+  {
+    cue: "Untrusted content is labeled but still obeyed",
+    description:
+      "The application marks retrieved material as external while allowing the same model context and permissions to interpret it and take consequential action.",
+  },
+  {
+    cue: "The model evaluates its own authority",
+    description:
+      "Natural-language instructions ask the model to determine whether it is authorized instead of enforcing identity, policy, scope, and permissions outside the model.",
+  },
+  {
+    cue: "Human review becomes a confirmation click",
+    description:
+      "Approvers see a polished summary without the source, proposed action, affected records, uncertainty, or reason the safeguard requested intervention.",
+  },
+  {
+    cue: "Tests stop at direct jailbreaks",
+    description:
+      "The evaluation covers obvious adversarial prompts but not compromised documents, retrieved content, multimodal input, tool output, chained actions, or data exfiltration.",
+  },
+  {
+    cue: "Controls remain static while the workflow changes",
+    description:
+      "New models, tools, data sources, permissions, and operating uses expand the attack surface without triggering a new threat model or control review.",
+  },
+];
+
+const practicalOutputs = [
+  {
+    number: "01",
+    title: "Prompt and trust-boundary map",
+    description:
+      "A trace of instructions, untrusted content, model context, tools, data, people, systems, and the points where authority or provenance can become ambiguous.",
+  },
+  {
+    number: "02",
+    title: "Layered control design",
+    description:
+      "A use-case-specific combination of task constraints, source separation, least privilege, deterministic policy, output validation, approval, and recovery.",
+  },
+  {
+    number: "03",
+    title: "Adversarial evaluation plan",
+    description:
+      "Test scenarios tied to real operating consequences, including direct and indirect injection, tool misuse, sensitive-data exposure, bypasses, and unsafe action sequences.",
+  },
+  {
+    number: "04",
+    title: "Monitoring and response model",
+    description:
+      "Trace requirements, control signals, thresholds, accountable responders, containment, rollback, evidence retention, review cadence, and the path for updating safeguards.",
+  },
+];
+
+const diagnosticPaths = [
+  {
+    title: "AI Service Readiness Review",
+    href: "/services/ai-service-readiness-review/",
+    useWhen:
+      "An AI use case needs a bounded role, human oversight, data and workflow controls, adoption conditions, measures, and a responsible implementation path.",
+  },
+  {
+    title: "CX Systems Diagnostic",
+    href: "/services/cx-systems-diagnostic/",
+    useWhen:
+      "The AI interaction crosses customer workflows, service rules, ownership, systems, and handoffs that must be understood before controls can be placed.",
+  },
+  {
+    title: "CRM Workflow Audit",
+    href: "/services/crm-workflow-audit/",
+    useWhen:
+      "The model reads or changes CRM data, recommends customer action, triggers automation, or depends on permissions and signals embedded in the CRM workflow.",
+  },
+];
+
+const strongFit = [
+  "An AI workflow consumes user-controlled, retrieved, external, or third-party content.",
+  "The model can access sensitive information, call tools, change records, communicate externally, or influence consequential decisions.",
+  "The organization needs to place human approval and deterministic policy around specific high-risk actions.",
+  "Security, product, operations, legal, data, and customer-facing owners can participate in the control design.",
+  "Leaders understand that prompt injection risk can be reduced and contained but not eliminated by a single filter.",
+];
+---
+
+<Layout
+  title="Prompt Firewalls | Cadence Lab"
+  description="Design layered prompt-injection controls around AI workflows using trust boundaries, least privilege, deterministic policy, human approval, and adversarial evaluation."
+  canonicalURL="/ai-tooling/prompt-guard/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="prompt-page" tabindex="-1">
+    <section class="prompt-hero" aria-labelledby="prompt-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">Prompt firewalls</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">AI tooling · Prompt firewalls</p>
+          <h1 id="prompt-title">
+            Reduce what a manipulated prompt is allowed to do.
+          </h1>
+          <p class="hero-lead">
+            A prompt firewall is not one filter between a user and a model. It
+            is a layered boundary around the full AI workflow: untrusted
+            content, instructions, permissions, tools, outputs, human authority,
+            and the operating consequences the system can create.
+          </p>
+
+          <div class="hero-actions" aria-label="Prompt firewall actions">
+            <a
+              class="button button-primary"
+              href="/services/ai-service-readiness-review/"
+            >
+              Review AI Service Readiness
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>
+            An AI workflow reads content it does not control and can reach data,
+            tools, or actions with consequences beyond generating text.
+          </p>
+          <dl>
+            <div>
+              <dt>Threat</dt>
+              <dd>Direct or indirect instruction manipulation</dd>
+            </div>
+            <div>
+              <dt>Exposure</dt>
+              <dd>Data, tools, decisions, and downstream systems</dd>
+            </div>
+            <div>
+              <dt>Control goal</dt>
+              <dd>Limit authority, detect misuse, and contain impact</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Signals", href: "#signals" },
+        { label: "Control layers", href: "#control-layers" },
+        { label: "Control path", href: "#control-path" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="signals"
+      class="signals section-block"
+      aria-labelledby="signals-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Visible signals</p>
+            <h2 id="signals-title">
+              Prompt risk becomes operating risk when the model has reach.
+            </h2>
+          </div>
+          <p>
+            Manipulated instructions matter most when they can cross a trust
+            boundary, reveal protected context, misuse a tool, influence a
+            consequential decision, or trigger action without informed human
+            authority.
+          </p>
+        </div>
+
+        <div class="signal-grid">
+          {
+            visibleSignals.map((signal) => (
+              <article>
+                <p class="item-number">{signal.number}</p>
+                <h3>{signal.title}</h3>
+                <p>{signal.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="control-layers"
+      class="control-layers"
+      aria-labelledby="control-layers-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Control layers</p>
+          <h2 id="control-layers-title">
+            Place enforceable boundaries outside the model.
+          </h2>
+          <p>
+            Model instructions can reduce unwanted behavior, but they should not
+            carry the full security burden. Layer controls around the use case
+            so one failed judgment does not become an unauthorized consequence.
+          </p>
+        </div>
+
+        <div class="layer-grid">
+          {
+            controlLayers.map((layer, index) => (
+              <article>
+                <div class="layer-heading">
+                  <p class="layer-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="layer-label">{layer.label}</p>
+                </div>
+                <h3>{layer.question}</h3>
+                <p>{layer.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="control-path"
+      class="control-path section-block"
+      aria-labelledby="control-path-title"
+    >
+      <div class="page-container path-layout">
+        <div class="path-intro">
+          <p class="eyebrow">Control path</p>
+          <h2 id="control-path-title">
+            Trace authority from content to consequence.
+          </h2>
+          <p>
+            Follow a real interaction from ingestion through action. At each
+            stage, determine what the system trusts, what the model may decide,
+            which rule is enforced outside the model, and where a person retains
+            authority.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            controlPath.map((stage, index) => (
+              <li>
+                <div class="path-marker">
+                  <p>{String(index + 1).padStart(2, "0")}</p>
+                  <span aria-hidden="true" />
+                </div>
+                <div class="path-content">
+                  <p class="path-phase">{stage.phase}</p>
+                  <h3>{stage.question}</h3>
+                  <p>{stage.evidence}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence</p>
+            <h2 id="evidence-title">
+              Examine the whole application, not only the prompt.
+            </h2>
+          </div>
+          <p>
+            The relevant evidence includes every source of instruction, the
+            systems the model can reach, the code enforcing policy, the people
+            approving actions, and the outcomes used to judge whether controls
+            work.
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="evidence-note">
+          <p class="note-label">No foolproof prompt layer</p>
+          <p>
+            Prompt injection cannot be treated as solved by one model
+            instruction or input filter. The practical objective is to reduce
+            exposure, enforce authority, constrain available actions, detect
+            unsafe behavior, and limit the consequence of a control failure.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-patterns"
+      aria-labelledby="failure-patterns-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+          <h2 id="failure-patterns-title">
+            A firewall fails when language is mistaken for authority.
+          </h2>
+          <p>
+            The most fragile designs ask the model to enforce rules that should
+            be implemented by identity, policy, application logic, permissions,
+            informed approval, and operational response.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failurePatterns.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="outputs"
+      class="outputs section-block"
+      aria-labelledby="outputs-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">Practical outputs</p>
+          <h2 id="outputs-title">
+            Turn prompt safety into an operating control model.
+          </h2>
+          <p>
+            The result should show how the AI workflow limits authority,
+            validates consequential behavior, involves people, records evidence,
+            and changes when new attacks or operating conditions appear.
+          </p>
+        </div>
+
+        <ol class="output-list">
+          {
+            practicalOutputs.map((output) => (
+              <li>
+                <p class="item-number">{output.number}</p>
+                <div>
+                  <h3>{output.title}</h3>
+                  <p>{output.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Engagement fit</p>
+          <h2 id="fit-title">
+            Use this work when AI can affect more than its own response.
+          </h2>
+          <p>
+            Prompt-firewall design is most useful when a bounded AI use case
+            processes untrusted content and can reach sensitive data, tools, or
+            consequential actions. It complements—not replaces—application
+            security, penetration testing, model-provider safeguards, privacy,
+            legal review, and incident response.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="diagnostic-paths" aria-labelledby="diagnostic-paths-title">
+      <div class="page-container">
+        <div class="diagnostic-intro">
+          <p class="eyebrow">Related diagnostic paths</p>
+          <h2 id="diagnostic-paths-title">
+            Begin with the workflow and consequence the controls must protect.
+          </h2>
+        </div>
+
+        <div class="diagnostic-grid">
+          {
+            diagnosticPaths.map((path) => (
+              <article>
+                <h3>{path.title}</h3>
+                <p>{path.useWhen}</p>
+                <a href={path.href}>
+                  Review the diagnostic
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prompt-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block,
+  .control-layers,
+  .failure-patterns,
+  .fit,
+  .diagnostic-paths {
+    padding-block: var(--section-space);
+  }
+
+  .prompt-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .layer-number,
+  .layer-label,
+  .path-phase,
+  .path-marker p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse,
+  .control-layers .layer-number,
+  .control-layers .layer-label {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro h2,
+  .path-intro h2,
+  .failure-intro h2,
+  .fit-copy h2,
+  .diagnostic-intro h2 {
+    max-width: 19ch;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .section-intro > p:not(.eyebrow),
+  .path-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .signal-grid,
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-grid article,
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-grid h3,
+  .evidence-grid h3 {
+    margin-top: 1.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .signal-grid article > p:last-child,
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .control-layers,
+  .failure-patterns {
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .layer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .layer-grid article {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .layer-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .layer-grid h3 {
+    max-width: 30ch;
+    margin-top: 2rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .layer-grid article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .path-intro,
+  .failure-intro,
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .path-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .path-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    min-height: 9rem;
+  }
+
+  .path-marker {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .path-marker p {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    border: var(--border-width) solid var(--color-blue);
+    border-radius: 50%;
+    place-items: center;
+  }
+
+  .path-marker span {
+    width: var(--border-width);
+    flex: 1;
+    background: var(--color-border);
+  }
+
+  .path-list li:last-child .path-marker span {
+    display: none;
+  }
+
+  .path-content {
+    padding-bottom: 2.25rem;
+  }
+
+  .path-content h3 {
+    max-width: 34ch;
+    margin-top: 0.6rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-content > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .evidence {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-note {
+    max-width: 52rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-note > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .failure-list h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 2.25rem);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-list li > div > p {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .fit {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy .button {
+    margin-top: 0.5rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .diagnostic-paths {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-paths .page-container {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .diagnostic-intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .diagnostic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid article {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .diagnostic-grid p {
+    margin: 0.75rem 0 1.5rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .diagnostic-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+  }
+
+  .prompt-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .diagnostic-grid a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .section-intro-split,
+    .path-layout,
+    .failure-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .signal-grid,
+    .evidence-grid,
+    .diagnostic-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .signal-grid,
+    .layer-grid,
+    .evidence-grid,
+    .failure-list,
+    .diagnostic-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .path-list li {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .path-marker p {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .prompt-hero,
+    .trigger-card,
+    .signal-grid,
+    .signal-grid article,
+    .layer-grid,
+    .layer-grid article,
+    .path-marker p,
+    .evidence,
+    .evidence-grid,
+    .evidence-grid article,
+    .evidence-note,
+    .failure-list,
+    .failure-list article,
+    .output-list,
+    .output-list li,
+    .fit,
+    .fit-list,
+    .diagnostic-paths,
+    .diagnostic-grid,
+    .diagnostic-grid article {
+      border-color: CanvasText;
+    }
+  }
+</style>
