@@ -1,0 +1,320 @@
+---
+import StructuredCapabilityPage from "../../../components/StructuredCapabilityPage.astro";
+
+const page = {
+  meta: {
+    title: "Experience Foundations | Cadence Lab",
+    description:
+      "Establish the customer understanding, ownership, workflow, service principles, evidence, and measurement that digital, physical, and AI-enabled experiences depend on.",
+    canonicalURL: "/product/experience-foundations/",
+  },
+  hero: {
+    breadcrumb: "Experience Foundations",
+    eyebrow: "Product · Experience Foundations",
+    title: "Build the conditions every experience depends on.",
+    lead: "Experience Foundations turns a broad experience ambition into a shared operating base: who the organization serves, which moments matter, how work and decisions move, what good service requires, and how teams will know whether the experience improved. It creates enough coherence for digital, physical, and AI-enabled work to reinforce rather than contradict one another.",
+    primaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    secondaryCta: {
+      label: "Review diagnostic offers",
+      href: "/services/",
+    },
+    trigger: {
+      introduction:
+        "The organization is investing in channels, platforms, automation, or transformation, but teams do not share a reliable definition of the customer problem, the intended experience, or the operating changes required to deliver it.",
+      items: [
+        {
+          label: "Visible symptom",
+          value: "Experience work fragments across initiatives",
+        },
+        {
+          label: "Foundation",
+          value: "Purpose, journey, decisions, ownership, evidence",
+        },
+        {
+          label: "Decision",
+          value: "What must be true before delivery expands",
+        },
+      ],
+    },
+  },
+  signals: {
+    eyebrow: "Visible signals",
+    title: "Experience inconsistency usually begins before the interface.",
+    introduction:
+      "Customers encounter the consequences of decisions made across strategy, policy, operations, data, technology, and frontline work. A foundation is needed when those decisions are locally reasonable but collectively incoherent.",
+    items: [
+      {
+        title: "Every team describes the customer differently",
+        description:
+          "Segments, needs, journeys, priorities, and success measures change across departments, leaving each initiative to invent its own version of the experience.",
+      },
+      {
+        title: "Channels solve the same problem in different ways",
+        description:
+          "Web, service, sales, product, location, and lifecycle teams create conflicting expectations, language, policies, and routes to resolution.",
+      },
+      {
+        title: "Research accumulates without changing decisions",
+        description:
+          "Interviews, surveys, analytics, and journey maps are available, but their findings are not connected to ownership, funding, workflow, or delivery priorities.",
+      },
+      {
+        title: "Teams debate solutions before bounding the problem",
+        description:
+          "Projects begin with a platform, feature, campaign, or automation request rather than a shared account of the customer and operating outcome.",
+      },
+      {
+        title: "Experience principles remain aspirational",
+        description:
+          "Values and service promises are visible in presentations but do not guide policy, handoffs, exceptions, interface behavior, or tradeoffs.",
+      },
+      {
+        title: "Success ends at launch",
+        description:
+          "Delivery activity is measured while customer effort, service quality, adoption, operating performance, and cross-channel consequences remain disconnected.",
+      },
+    ],
+  },
+  framework: {
+    eyebrow: "Foundation system",
+    title: "Connect experience intent to the way the organization works.",
+    introduction:
+      "A useful foundation is not a static map or vision statement. It is a set of shared decisions that teams can use when prioritizing, designing, operating, and measuring experiences.",
+    items: [
+      {
+        label: "Purpose",
+        question: "Which customer and operating outcome matters?",
+        title: "Purpose",
+        description:
+          "Define the people, situation, problem, consequence, strategic reason, and evidence that make the experience worth changing.",
+      },
+      {
+        label: "Journey",
+        question: "Which moments shape the outcome?",
+        title: "Journey",
+        description:
+          "Identify the goals, expectations, decisions, interactions, transitions, dependencies, and breakdowns that matter across the complete experience.",
+      },
+      {
+        label: "Decisions",
+        question: "What must the organization decide consistently?",
+        title: "Decisions",
+        description:
+          "Clarify service rules, priorities, tradeoffs, exceptions, promises, and principles that should guide teams when the ordinary path does not fit.",
+      },
+      {
+        label: "Ownership",
+        question: "Who can change the work behind each moment?",
+        title: "Ownership",
+        description:
+          "Connect journey responsibility to roles, decision rights, workflows, systems, handoffs, and the authority required to resolve a cross-functional problem.",
+      },
+      {
+        label: "Evidence",
+        question: "What will make the experience observable?",
+        title: "Evidence",
+        description:
+          "Combine customer, behavioral, service, workflow, financial, adoption, and qualitative signals without reducing the experience to one score.",
+      },
+      {
+        label: "Governance",
+        question: "How will the foundation remain useful?",
+        title: "Governance",
+        description:
+          "Define stewards, review rhythms, decision forums, change triggers, documentation, and how teams resolve new evidence or competing needs.",
+      },
+    ],
+  },
+  path: {
+    eyebrow: "Foundation path",
+    title: "Move from competing interpretations to shared action.",
+    introduction:
+      "The work begins with a consequential experience problem, traces it through customer and operating evidence, and ends with a foundation teams can apply to real decisions rather than admire from a distance.",
+    items: [
+      {
+        phase: "Frame",
+        question: "Which experience problem requires a shared foundation?",
+        evidence:
+          "Customer consequence, strategic importance, scope, affected people, channels, accountable sponsor, current initiatives, and decision required.",
+      },
+      {
+        phase: "Trace",
+        question: "How is the experience produced today?",
+        evidence:
+          "Customer goals, moments, research, service signals, workflows, policies, systems, handoffs, ownership, measures, and frontline behavior.",
+      },
+      {
+        phase: "Define",
+        question: "Which shared decisions should guide the experience?",
+        evidence:
+          "Experience intent, principles, priority moments, service rules, ownership, measures, constraints, and unresolved questions.",
+      },
+      {
+        phase: "Apply",
+        question: "Does the foundation improve a real decision?",
+        evidence:
+          "Priority use cases, journey changes, policy choices, concepts, workflow requirements, channel implications, and stakeholder review.",
+      },
+      {
+        phase: "Embed",
+        question: "How will teams maintain and use it?",
+        evidence:
+          "Stewards, governance, templates, decision forums, operating cadence, measures, evidence updates, onboarding, and change triggers.",
+      },
+    ],
+  },
+  evidence: {
+    eyebrow: "Evidence",
+    title:
+      "Build the foundation from observed experience and operating reality.",
+    introduction:
+      "A credible foundation distinguishes what customers experience, what teams believe, what systems record, and what the organization still needs to learn. It should show the strength and limits of the available evidence.",
+    items: [
+      {
+        title: "Customer goals and context",
+        description:
+          "Needs, expectations, circumstances, accessibility, language, trust, prior history, desired progress, and the consequences of delay, failure, or repeated effort.",
+      },
+      {
+        title: "Journey and interaction evidence",
+        description:
+          "Research, observation, analytics, contact reasons, feedback, complaints, behavioral patterns, drop-off, exceptions, recovery, and cross-channel transitions.",
+      },
+      {
+        title: "Workflow and service reality",
+        description:
+          "Queues, handoffs, approvals, service rules, workarounds, capacity, frontline judgment, escalation, and the difference between intended and actual work.",
+      },
+      {
+        title: "Ownership and decision rights",
+        description:
+          "Accountabilities, authority, competing incentives, funding, dependencies, governance, and the points where customer outcomes cross organizational boundaries.",
+      },
+      {
+        title: "Systems and information",
+        description:
+          "CRM records, product data, knowledge, content, identity, integration, automation, reporting, permissions, signal quality, and context available at each moment.",
+      },
+      {
+        title: "Measures and outcomes",
+        description:
+          "Customer effort, service quality, adoption, completion, retention, trust, accessibility, operating performance, cost, risk, and evidence that change caused improvement.",
+      },
+    ],
+    note: {
+      label: "Shared model, not false certainty",
+      description:
+        "A foundation should make evidence, assumptions, gaps, and competing needs visible. Its purpose is to improve coordinated decisions—not to imply that one journey map or set of principles can permanently represent every customer and context.",
+    },
+  },
+  failures: {
+    eyebrow: "Common failure patterns",
+    title: "A foundation fails when it cannot change a decision.",
+    introduction:
+      "Experience artifacts often create temporary alignment but lose authority when delivery begins. The risk is highest when the work describes customers without connecting their needs to ownership, constraints, and operating choices.",
+    items: [
+      {
+        title: "The journey map becomes the final deliverable",
+        description:
+          "The organization visualizes stages and pain points but does not assign decisions, owners, dependencies, measures, or a practical sequence for changing the experience.",
+      },
+      {
+        title: "One persona stands in for customer diversity",
+        description:
+          "A simplified profile hides differences in context, ability, language, history, risk, intent, and support needs that materially change the experience.",
+      },
+      {
+        title: "Principles avoid the difficult tradeoff",
+        description:
+          "Statements such as simple, seamless, or customer-first sound agreeable but do not guide a decision when policy, cost, capacity, risk, and customer need conflict.",
+      },
+      {
+        title: "Ownership stops at the channel boundary",
+        description:
+          "A web, app, service, or location team is accountable for the visible interaction but cannot change the workflow, policy, data, or upstream decision causing the problem.",
+      },
+      {
+        title: "The foundation reflects leadership assumptions",
+        description:
+          "Executive intent and internal workshops substitute for customer evidence, frontline reality, system behavior, and the experience of people most affected by failure.",
+      },
+      {
+        title: "Governance preserves the artifact instead of learning",
+        description:
+          "Teams protect approved language and diagrams while customer behavior, business conditions, technology, policy, and evidence continue to change.",
+      },
+    ],
+  },
+  outputs: {
+    eyebrow: "Practical outputs",
+    title: "Create a foundation teams can use in delivery and operations.",
+    introduction:
+      "The outputs should give different teams a shared account of the experience while making ownership, decisions, evidence, and next actions specific enough to guide real work.",
+    items: [
+      {
+        title: "Experience foundation model",
+        description:
+          "A shared view of customer goals, priority moments, experience intent, operating dependencies, constraints, and the evidence supporting the model.",
+      },
+      {
+        title: "Principles and decision guidance",
+        description:
+          "A bounded set of principles with practical implications, tradeoffs, examples, exclusions, and questions teams can use during policy, design, and delivery.",
+      },
+      {
+        title: "Ownership and operating map",
+        description:
+          "Roles, decision rights, workflows, systems, handoffs, governance, and the changes required for accountable teams to deliver the intended experience.",
+      },
+      {
+        title: "Measurement and activation plan",
+        description:
+          "Priority use cases, sequence, owners, customer and operating measures, evidence gaps, review cadence, and triggers for refining the foundation.",
+      },
+    ],
+  },
+  fit: {
+    eyebrow: "Engagement fit",
+    title:
+      "Use Experience Foundations when several initiatives need one operating base.",
+    introduction:
+      "This work is useful when experience decisions span teams, channels, systems, or delivery programs and leadership can sponsor shared choices. It is a limited fit when the need is one isolated interface improvement or when the organization wants a vision without changing ownership, policy, workflow, or measurement.",
+    items: [
+      "Several teams or channels influence the same customer outcome.",
+      "Research and experience artifacts exist but do not consistently guide priorities or delivery.",
+      "A transformation, platform, service, digital, location, or AI initiative needs a shared experience direction.",
+      "An accountable sponsor can resolve cross-functional decisions and assign owners.",
+      "The organization is willing to change operating conditions when customer evidence requires it.",
+    ],
+  },
+  diagnostics: {
+    eyebrow: "Related paths",
+    title: "Choose the next path based on where the foundation is weakest.",
+    items: [
+      {
+        title: "CX Systems Diagnostic",
+        href: "/services/cx-systems-diagnostic/",
+        useWhen:
+          "Recurring customer friction crosses teams, systems, service rules, ownership boundaries, or handoffs and the operating cause is not yet trusted.",
+      },
+      {
+        title: "Digital Experiences",
+        href: "/product/digital-experiences/",
+        useWhen:
+          "The foundation needs to become a coherent website, portal, service interface, or cross-channel digital experience.",
+      },
+      {
+        title: "AI Experience",
+        href: "/product/ai-experience/",
+        useWhen:
+          "The intended experience includes AI assistance, automation, recommendations, or agent behavior that requires explicit human and operating boundaries.",
+      },
+    ],
+  },
+};
+---
+
+<StructuredCapabilityPage {...page} />
