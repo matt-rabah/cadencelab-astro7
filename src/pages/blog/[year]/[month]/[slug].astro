@@ -67,6 +67,13 @@ const updatedDateISO = updatedDate?.toISOString();
 const description = post.data.description ?? post.data.subtitle;
 
 const author = post.data.author ?? "Cadence Lab";
+const normalizedAuthor = author.trim().toLowerCase();
+const authorPath =
+  normalizedAuthor === "matt rabah"
+    ? "/about/"
+    : normalizedAuthor === "cadence lab"
+      ? "/"
+      : undefined;
 const canonicalPath = Astro.url.pathname;
 
 const getPostURL = (entry: BlogPost): string => {
@@ -127,8 +134,13 @@ const articleSchema = {
     : {}),
 
   author: {
-    "@type": author === "Cadence Lab" ? "Organization" : "Person",
+    "@type": normalizedAuthor === "cadence lab" ? "Organization" : "Person",
     name: author,
+    ...(authorPath
+      ? {
+          url: new URL(authorPath, "https://cadencelab.co").href,
+        }
+      : {}),
   },
 
   publisher: {
