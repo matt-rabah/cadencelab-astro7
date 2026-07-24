@@ -1,0 +1,1067 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const linkRequirements = [
+  {
+    number: "01",
+    title: "A recognizable trigger",
+    description:
+      "The receiving team can tell what happened, why the work is moving, and which condition requires attention now.",
+  },
+  {
+    number: "02",
+    title: "Enough operating context",
+    description:
+      "Customer history, prior action, urgency, constraints, and the unresolved question travel with the work.",
+  },
+  {
+    number: "03",
+    title: "An accountable owner",
+    description:
+      "A named role accepts responsibility for the next decision instead of allowing the work to become merely visible.",
+  },
+  {
+    number: "04",
+    title: "Authority to act",
+    description:
+      "The owner can make the decision, obtain approval, or escalate without rebuilding the case from the beginning.",
+  },
+  {
+    number: "05",
+    title: "A time expectation",
+    description:
+      "The handoff defines when action is needed and how urgency changes as customer or operating consequence increases.",
+  },
+  {
+    number: "06",
+    title: "A closed feedback loop",
+    description:
+      "The originating team can see what happened, whether the customer need was resolved, and what the system should learn.",
+  },
+];
+
+const handoffPath = [
+  {
+    phase: "Origin",
+    question: "What event created the need for another team?",
+    evidence:
+      "Customer signal, operating condition, prior action, and urgency.",
+  },
+  {
+    phase: "Transfer",
+    question: "What context and responsibility moved with the work?",
+    evidence:
+      "Required information, stated owner, time expectation, and reason.",
+  },
+  {
+    phase: "Acceptance",
+    question: "Who acknowledged responsibility for the next decision?",
+    evidence:
+      "Receiving role, queue behavior, capacity, authority, and response.",
+  },
+  {
+    phase: "Action",
+    question: "What decision or customer response followed?",
+    evidence:
+      "Work completed, exception handled, approvals, and system updates.",
+  },
+  {
+    phase: "Closure",
+    question: "Did the outcome return to the customer system?",
+    evidence:
+      "Resolution, learning, downstream impact, and follow-up ownership.",
+  },
+];
+
+const failurePatterns = [
+  {
+    cue: "Visible everywhere, owned nowhere",
+    description:
+      "Multiple teams can see the issue, but responsibility remains shared in a way that prevents anyone from making the next decision.",
+  },
+  {
+    cue: "The activity moved without the story",
+    description:
+      "A task, ticket, or record reaches the next queue while customer history, prior judgment, and urgency stay behind.",
+  },
+  {
+    cue: "The receiving team must reopen the diagnosis",
+    description:
+      "Missing evidence forces the next team to repeat discovery, ask the customer for the same information, or reconstruct the case.",
+  },
+  {
+    cue: "Escalation begins after the response window",
+    description:
+      "The organization eventually identifies the correct owner, but only after delay has increased customer or business consequence.",
+  },
+  {
+    cue: "The handoff completes but the outcome disappears",
+    description:
+      "The originating team cannot see what happened, so reporting measures transfer activity instead of resolution or learning.",
+  },
+  {
+    cue: "Exceptions depend on personal networks",
+    description:
+      "Experienced employees know who to contact, while the formal workflow offers no reliable path for unfamiliar or high-risk cases.",
+  },
+];
+
+const evidenceSources = [
+  "Customer timelines, case histories, and escalation records",
+  "Queues, assignments, ownership changes, and transfer timestamps",
+  "Messages, meetings, spreadsheets, and other coordination outside formal systems",
+  "Policies, service rules, approval paths, and decision authority",
+  "Frontline accounts of routine work, exceptions, and recovery",
+  "Customer, workflow, capacity, quality, and outcome measures",
+];
+
+const linkOutputs = [
+  {
+    title: "Cross-functional link map",
+    description:
+      "A shared view of the teams, systems, decisions, context, and dependencies surrounding the customer work.",
+  },
+  {
+    title: "Context requirements",
+    description:
+      "The minimum information each receiving role needs to understand the situation and make the next useful decision.",
+  },
+  {
+    title: "Ownership and authority model",
+    description:
+      "Clear responsibility for accepting, deciding, escalating, resolving, and reviewing each consequential handoff.",
+  },
+  {
+    title: "Handoff repair sequence",
+    description:
+      "A prioritized order for workflow, system, data, role, service-rule, and measurement changes.",
+  },
+];
+
+const strongFit = [
+  "The customer problem crosses teams, systems, or lifecycle stages.",
+  "Customers repeat information or receive conflicting explanations.",
+  "Important work stalls between queues, functions, or approval layers.",
+  "Teams coordinate through messages and meetings because the formal path is incomplete.",
+  "Leadership can assign owners and change decision rights or workflow rules.",
+];
+---
+
+<Layout
+  title="Cross-functional Links | Cadence Lab"
+  description="Trace and repair the handoffs connecting customer work across teams, systems, ownership, decisions, and outcomes."
+  canonicalURL="/workflows/cross-functional/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="links-page" tabindex="-1">
+    <section class="links-hero" aria-labelledby="links-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">Cross-functional links</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Workflow · Cross-functional links</p>
+          <h1 id="links-title">Make the handoff carry the work.</h1>
+          <p class="hero-lead">
+            Cross-functional links determine whether customer context,
+            responsibility, urgency, and decision authority survive as work
+            moves between teams. Mapping those links reveals where a handoff
+            completes in the system but fails in the operating model.
+          </p>
+
+          <div class="hero-actions" aria-label="Cross-functional link actions">
+            <a
+              class="button button-primary"
+              href="/services/cx-systems-diagnostic/"
+            >
+              Review the CX Systems Diagnostic
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>
+            Customers repeat the story, teams receive incomplete context, and
+            important work becomes visible to several functions without becoming
+            clearly owned by one.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible symptom</dt>
+              <dd>Delay, repetition, conflicting responses</dd>
+            </div>
+            <div>
+              <dt>Trace</dt>
+              <dd>Trigger, context, owner, authority, action</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>Which link must change first</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "The operating link", href: "#operating-link" },
+        { label: "Link requirements", href: "#link-requirements" },
+        { label: "Handoff path", href: "#handoff-path" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Evidence and outputs", href: "#evidence-outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="operating-link"
+      class="operating-link section-block"
+      aria-labelledby="operating-link-title"
+    >
+      <div class="page-container operating-layout">
+        <div>
+          <p class="eyebrow">The operating link</p>
+          <h2 id="operating-link-title">
+            A handoff is a transfer of accountability.
+          </h2>
+        </div>
+
+        <div class="operating-copy">
+          <p>
+            A handoff is not complete when a record changes owner, a message is
+            sent, or a meeting ends. It is complete when the receiving role
+            understands the situation, accepts responsibility, has authority to
+            act, and can return the outcome to the broader customer system.
+          </p>
+          <p>
+            Cross-functional link mapping follows that transfer across teams,
+            queues, systems, policies, and decisions. It separates problems of
+            communication from problems of ownership, authority, capacity,
+            workflow design, or missing evidence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="link-requirements"
+      class="link-requirements"
+      aria-labelledby="link-requirements-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Link requirements</p>
+          <h2 id="link-requirements-title">
+            Six conditions make a handoff usable.
+          </h2>
+          <p>
+            A strong link carries more than information. It preserves the
+            decision context and makes the next responsibility explicit.
+          </p>
+        </div>
+
+        <ol class="requirement-grid">
+          {
+            linkRequirements.map((requirement) => (
+              <li>
+                <p class="item-number">{requirement.number}</p>
+                <h3>{requirement.title}</h3>
+                <p>{requirement.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="handoff-path"
+      class="handoff-path section-block"
+      aria-labelledby="handoff-path-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">Handoff path</p>
+          <h2 id="handoff-path-title">
+            Trace the link from origin to closure.
+          </h2>
+          <p>
+            Each stage tests whether the customer problem and operating
+            responsibility remain intact as the work changes hands.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            handoffPath.map((item, index) => (
+              <li>
+                <div class="path-heading">
+                  <p class="path-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="path-phase">{item.phase}</p>
+                </div>
+                <h3>{item.question}</h3>
+                <p>{item.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-patterns"
+      aria-labelledby="failure-patterns-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Failure patterns</p>
+          <h2 id="failure-patterns-title">
+            Context decays when the link has no owner.
+          </h2>
+          <p>
+            These patterns help distinguish a local communication problem from a
+            repeatable operating failure.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failurePatterns.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="evidence-outputs"
+      class="evidence-outputs section-block"
+      aria-labelledby="evidence-outputs-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence and outputs</p>
+            <h2 id="evidence-outputs-title">
+              Compare the intended handoff with the one people actually use.
+            </h2>
+          </div>
+          <p>
+            A useful diagnosis combines records and service rules with
+            timestamps, conversations, frontline behavior, exceptions, and
+            customer outcomes.
+          </p>
+        </div>
+
+        <div class="evidence-panel">
+          <div>
+            <p class="note-label">Evidence sources</p>
+            <h3>Follow the work across formal and informal systems.</h3>
+          </div>
+          <ul>
+            {evidenceSources.map((source) => <li>{source}</li>)}
+          </ul>
+        </div>
+
+        <div class="output-grid">
+          {
+            linkOutputs.map((output, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{output.title}</h3>
+                <p>{output.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use link mapping when the customer problem crosses boundaries.
+          </h2>
+          <p>
+            Cross-functional link mapping is most useful when teams agree that a
+            problem exists but explain its cause from different parts of the
+            system. It requires access to the people and evidence surrounding
+            the work and a sponsor able to resolve ownership or decision-right
+            questions.
+          </p>
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .links-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .links-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .path-number,
+  .path-phase {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 16ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .operating-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .operating-layout h2,
+  .section-intro h2,
+  .failure-intro h2,
+  .fit-copy h2 {
+    max-width: 19ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .operating-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .operating-copy p,
+  .section-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2,
+  .failure-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .link-requirements,
+  .failure-patterns {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .requirement-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .requirement-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .requirement-grid .item-number,
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .requirement-grid h3,
+  .failure-list h3 {
+    margin-top: 1.75rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .requirement-grid li > p:last-child,
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .path-list li {
+    display: flex;
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    flex-direction: column;
+  }
+
+  .path-list li + li {
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .path-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .path-phase {
+    color: var(--color-text-muted);
+  }
+
+  .path-list h3 {
+    margin-top: 2rem;
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: 1.45;
+  }
+
+  .path-list li > p {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .evidence-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    padding: clamp(1.75rem, 5vw, 3rem);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-panel h3 {
+    max-width: 24ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+  }
+
+  .evidence-panel ul {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    margin: 0;
+    padding-inline-start: 1.3rem;
+  }
+
+  .evidence-panel li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .evidence-panel li::marker {
+    color: var(--color-blue);
+  }
+
+  .output-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .output-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .links-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .path-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-list li + li {
+      border-inline-start: 0;
+    }
+
+    .path-list li {
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .path-list li:nth-child(even) {
+      border-inline-start: var(--border-width) solid var(--color-border);
+    }
+
+    .path-list li:last-child {
+      grid-column: 1 / -1;
+      border-bottom: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .operating-layout,
+    .section-intro-split,
+    .failure-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .requirement-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .evidence-panel {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .requirement-grid,
+    .failure-list,
+    .output-grid,
+    .path-list {
+      grid-template-columns: 1fr;
+    }
+
+    .path-list li,
+    .path-list li:nth-child(even),
+    .path-list li:last-child {
+      grid-column: auto;
+      border-inline-start: 0;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .path-list li:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .links-hero,
+    .trigger-card,
+    .requirement-grid,
+    .requirement-grid li,
+    .path-list,
+    .path-list li,
+    .failure-list,
+    .failure-list article,
+    .evidence-panel,
+    .output-grid,
+    .output-grid article,
+    .fit,
+    .fit-list {
+      border-color: CanvasText;
+    }
+  }
+</style>
