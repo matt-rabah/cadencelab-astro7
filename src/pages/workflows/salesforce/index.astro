@@ -1,0 +1,1076 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const traceStages = [
+  {
+    number: "01",
+    label: "Customer signal",
+    question: "What happened, and where did the signal enter?",
+    description:
+      "Identify the request, risk, intent, or service event and the channel, integration, form, or person that first recorded it.",
+  },
+  {
+    number: "02",
+    label: "Record behavior",
+    question: "How did Salesforce represent the work?",
+    description:
+      "Trace the object, record, field values, activity history, related records, and context available to the people expected to act.",
+  },
+  {
+    number: "03",
+    label: "Routing and action",
+    question: "Which rule or person determined what happened next?",
+    description:
+      "Follow assignment, queues, automation, approvals, notifications, ownership changes, and manual decisions.",
+  },
+  {
+    number: "04",
+    label: "Handoff and exception",
+    question: "Where did context, urgency, or accountability weaken?",
+    description:
+      "Examine transfers between teams and systems, unsupported cases, workarounds, stalled records, and recovery paths.",
+  },
+  {
+    number: "05",
+    label: "Outcome and evidence",
+    question: "Can the organization tell whether the work succeeded?",
+    description:
+      "Connect the final customer and operating outcome to the records, measures, and review process used to learn from it.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Objects, records, and fields",
+    description:
+      "The structure intended to hold customer, account, case, opportunity, task, and lifecycle context.",
+  },
+  {
+    title: "Flows, rules, and automation",
+    description:
+      "The logic assigning work, changing status, creating tasks, notifying teams, or moving records through a process.",
+  },
+  {
+    title: "Queues, roles, and ownership",
+    description:
+      "The people and teams responsible for receiving, deciding, acting, approving, and recovering the work.",
+  },
+  {
+    title: "Reports and operating measures",
+    description:
+      "The dashboards, definitions, filters, and review rhythms leaders use to interpret activity and outcomes.",
+  },
+  {
+    title: "Integrations and system boundaries",
+    description:
+      "The handoffs between Salesforce and service, marketing, billing, product, data, messaging, or knowledge systems.",
+  },
+  {
+    title: "Frontline behavior and workarounds",
+    description:
+      "The spreadsheets, messages, duplicate entry, personal reminders, and informal coordination that complete the real workflow.",
+  },
+];
+
+const failureModes = [
+  {
+    cue: "The record is complete, but the context is not",
+    consequence:
+      "Required fields are populated while the customer history, urgency, or reason for action remains difficult to understand.",
+  },
+  {
+    cue: "Automation moves the record, not the work",
+    consequence:
+      "Status changes and tasks fire correctly, but ownership, judgment, and the next customer action remain unclear.",
+  },
+  {
+    cue: "Every team has a different version of the workflow",
+    consequence:
+      "Salesforce reflects a formal process while frontline teams rely on local rules and tools to manage exceptions.",
+  },
+  {
+    cue: "Reporting explains activity after the useful window",
+    consequence:
+      "Dashboards show volume and completion, but earlier risk, delay, or customer consequence is not visible in time to intervene.",
+  },
+];
+
+const traceOutputs = [
+  {
+    number: "01",
+    title: "Observed workflow trace",
+    description:
+      "A shared view of the customer event as it moves through records, rules, roles, systems, decisions, and exceptions.",
+  },
+  {
+    number: "02",
+    title: "Signal and context gaps",
+    description:
+      "The information that is missing, late, unreliable, duplicated, or unavailable at the point where a decision is made.",
+  },
+  {
+    number: "03",
+    title: "Ownership and automation findings",
+    description:
+      "The points where responsibility is unclear, system behavior conflicts with the work, or automation increases fragility.",
+  },
+  {
+    number: "04",
+    title: "Repair sequence",
+    description:
+      "A practical order for workflow, ownership, data, reporting, adoption, and configuration changes based on consequence and dependency.",
+  },
+];
+
+const usefulWhen = [
+  "Teams do not trust Salesforce to tell them what requires attention.",
+  "Customer work crosses sales, success, service, operations, or technical teams.",
+  "Important cases depend on spreadsheets, messages, or individual memory.",
+  "Automation exists, but exceptions and handoffs still require manual recovery.",
+  "Leadership sees activity reports without a reliable account of customer or operating outcomes.",
+];
+---
+
+<Layout
+  title="Salesforce Tracing | Cadence Lab"
+  description="Trace customer work through Salesforce records, automation, ownership, handoffs, exceptions, and outcomes to find where the operating workflow breaks."
+  canonicalURL="/workflows/salesforce/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="salesforce-page" tabindex="-1">
+    <section class="salesforce-hero" aria-labelledby="salesforce-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">Salesforce tracing</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Workflow · Salesforce tracing</p>
+          <h1 id="salesforce-title">
+            Follow the customer work through Salesforce.
+          </h1>
+          <p class="hero-lead">
+            Salesforce tracing connects a customer event to the records, rules,
+            ownership changes, integrations, and frontline decisions that shape
+            the response. It reveals where the CRM supports coordinated work and
+            where context or accountability disappears.
+          </p>
+
+          <div class="hero-actions" aria-label="Salesforce tracing actions">
+            <a
+              class="button button-primary"
+              href="/services/crm-workflow-audit/"
+            >
+              Review the CRM Workflow Audit
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>
+            Salesforce contains activity, records, and dashboards, but people
+            still reconstruct the customer situation through messages,
+            spreadsheets, meetings, and individual memory.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible symptom</dt>
+              <dd>CRM distrust and manual reconciliation</dd>
+            </div>
+            <div>
+              <dt>Trace</dt>
+              <dd>Signal, record, rule, owner, action, outcome</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>What to repair before adding more automation</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "What tracing does", href: "#what-tracing-does" },
+        { label: "Trace stages", href: "#trace-stages" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Failure modes", href: "#failure-modes" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="what-tracing-does"
+      class="tracing-purpose section-block"
+      aria-labelledby="tracing-purpose-title"
+    >
+      <div class="page-container purpose-layout">
+        <div>
+          <p class="eyebrow">What tracing does</p>
+          <h2 id="tracing-purpose-title">
+            Start with the work, then inspect the configuration.
+          </h2>
+        </div>
+
+        <div class="purpose-copy">
+          <p>
+            Salesforce tracing begins with a real customer or operating event:
+            an escalation, renewal risk, onboarding delay, service exception,
+            lead handoff, or account change. The trace follows what people and
+            systems did with that event from entry to outcome.
+          </p>
+          <p>
+            Configuration matters, but it is evidence rather than the starting
+            assumption. A technically correct flow can still support the wrong
+            decision, hide context, create duplicate work, or leave nobody
+            accountable for the result.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="trace-stages"
+      class="trace-stages"
+      aria-labelledby="trace-stages-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Trace stages</p>
+          <h2 id="trace-stages-title">
+            Trace the path from customer signal to operating outcome.
+          </h2>
+          <p>
+            Each stage tests whether the next person or system receives enough
+            context, authority, and evidence to act.
+          </p>
+        </div>
+
+        <ol class="trace-list">
+          {
+            traceStages.map((stage) => (
+              <li>
+                <div class="trace-marker">
+                  <p>{stage.number}</p>
+                  <span aria-hidden="true" />
+                </div>
+                <div class="trace-content">
+                  <p class="trace-label">{stage.label}</p>
+                  <h3>{stage.question}</h3>
+                  <p>{stage.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence</p>
+            <h2 id="evidence-title">
+              Compare intended behavior with actual work.
+            </h2>
+          </div>
+          <p>
+            The evidence changes with the workflow. A useful trace combines
+            Salesforce structure and automation with records, operating
+            measures, system boundaries, and the experience of the people doing
+            the work.
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="evidence-note">
+          <p class="note-label">Evidence before certainty</p>
+          <p>
+            A trace distinguishes observed system behavior, frontline
+            explanation, and working hypotheses. It should state where
+            incomplete records, inaccessible configuration, or missing outcome
+            data limit confidence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="failure-modes"
+      class="failure-modes"
+      aria-labelledby="failure-modes-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Common failure modes</p>
+          <h2 id="failure-modes-title">
+            The breakdown is often between the fields.
+          </h2>
+          <p>
+            Salesforce can appear orderly while the operating system around it
+            remains fragmented. These patterns indicate where a trace should
+            look more closely.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failureModes.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.consequence}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="outputs"
+      class="outputs section-block"
+      aria-labelledby="outputs-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">Outputs</p>
+          <h2 id="outputs-title">
+            Turn a technical path into an operating decision.
+          </h2>
+          <p>
+            A trace should make the current workflow understandable and support
+            a decision about what needs to change first.
+          </p>
+        </div>
+
+        <ol class="output-list">
+          {
+            traceOutputs.map((output) => (
+              <li>
+                <p class="item-number">{output.number}</p>
+                <div>
+                  <h3>{output.title}</h3>
+                  <p>{output.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use tracing when the CRM records work but does not guide it.
+          </h2>
+          <p>
+            Salesforce tracing is most useful when the problem crosses records,
+            roles, automation, integrations, and customer-facing teams. It is
+            not intended as a substitute for routine administrator support or a
+            predetermined configuration project.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Useful when</p>
+          <ul>
+            {usefulWhen.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="independence-note" aria-labelledby="independence-title">
+      <div class="page-container">
+        <p id="independence-title" class="note-label">
+          Independent perspective
+        </p>
+        <p>
+          Cadence Lab is an independent practice and is not affiliated with,
+          sponsored by, or endorsed by Salesforce. Salesforce is a trademark of
+          Salesforce, Inc.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .salesforce-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .salesforce-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .trace-label,
+  .trace-marker p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .purpose-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .purpose-layout h2,
+  .section-intro h2,
+  .failure-intro h2,
+  .fit-copy h2 {
+    max-width: 19ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .purpose-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .purpose-copy p,
+  .section-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2,
+  .failure-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .trace-stages,
+  .failure-modes {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .trace-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trace-list li {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    min-height: 10rem;
+  }
+
+  .trace-marker {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .trace-marker p {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    border: var(--border-width) solid var(--color-green);
+    border-radius: 50%;
+    color: var(--color-green);
+    place-items: center;
+  }
+
+  .trace-marker span {
+    width: var(--border-width);
+    flex: 1;
+    background: rgb(252 254 255 / 22%);
+  }
+
+  .trace-list li:last-child .trace-marker span {
+    display: none;
+  }
+
+  .trace-content {
+    padding-bottom: 2.5rem;
+  }
+
+  .trace-label {
+    color: var(--color-green);
+  }
+
+  .trace-content h3 {
+    max-width: 34ch;
+    margin-top: 0.65rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .trace-content > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .evidence-note {
+    max-width: 52rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-note > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .failure-list h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 2.25rem);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-list li > div > p {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .independence-note {
+    padding-block: 1.5rem;
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .independence-note .page-container {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .independence-note p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .salesforce-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .purpose-layout,
+    .section-intro-split,
+    .failure-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .evidence-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div,
+    .independence-note .page-container {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .trace-list li {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .trace-marker p {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .evidence-grid,
+    .failure-list {
+      grid-template-columns: 1fr;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .salesforce-hero,
+    .trigger-card,
+    .trace-marker p,
+    .evidence-grid,
+    .evidence-grid article,
+    .evidence-note,
+    .failure-list,
+    .failure-list article,
+    .output-list,
+    .output-list li,
+    .fit,
+    .fit-list,
+    .independence-note {
+      border-color: CanvasText;
+    }
+  }
+</style>
