@@ -1,0 +1,1393 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const visibleSignals = [
+  {
+    number: "01",
+    title: "The strategy sounds shared but the decisions differ",
+    description:
+      "Leaders use the same language while assigning different outcomes, priorities, boundaries, owners, or definitions to the work.",
+  },
+  {
+    number: "02",
+    title: "The roadmap grows around unresolved questions",
+    description:
+      "Projects, platforms, features, and workstreams accumulate because the organization cannot choose which operating constraint should lead.",
+  },
+  {
+    number: "03",
+    title: "Each function brings a different version of the evidence",
+    description:
+      "Customer, revenue, service, product, operational, and technical measures support local narratives without creating a shared account of the problem.",
+  },
+  {
+    number: "04",
+    title: "Committees multiply while accountability thins",
+    description:
+      "More stakeholders attend reviews, but nobody holds authority to resolve competing priorities, accept a tradeoff, or assign the resulting work.",
+  },
+  {
+    number: "05",
+    title: "Teams optimize their part and weaken the whole",
+    description:
+      "Local goals improve while customer effort, handoffs, risk, data quality, or downstream capacity deteriorates somewhere else in the system.",
+  },
+  {
+    number: "06",
+    title: "Technology becomes the decision that alignment avoided",
+    description:
+      "A platform or AI initiative moves forward before leadership agrees on the workflow, ownership, decision rights, and outcome it is expected to improve.",
+  },
+];
+
+const alignmentConditions = [
+  {
+    label: "Outcome",
+    question: "What observable condition needs to change?",
+    description:
+      "A useful outcome connects customer consequence, operating performance, and business value without reducing success to project delivery.",
+  },
+  {
+    label: "Scope",
+    question: "Which problem is included and what is outside the decision?",
+    description:
+      "A bounded scope prevents adjacent ambitions, local symptoms, and speculative opportunities from obscuring the immediate operating need.",
+  },
+  {
+    label: "Ownership",
+    question: "Who has authority to decide and remain accountable?",
+    description:
+      "Participation is not ownership. A named sponsor must resolve tradeoffs, assign accountable roles, and accept the consequences of the chosen direction.",
+  },
+  {
+    label: "Evidence",
+    question: "What facts support the problem definition?",
+    description:
+      "Customer signals, workflow observation, system behavior, financial context, and operational measures should be separated from interpretation and advocacy.",
+  },
+  {
+    label: "Constraints",
+    question: "Which limits and tradeoffs must shape the choice?",
+    description:
+      "Capacity, timing, risk, policy, data, technology, contractual commitments, and change burden make some options more responsible than others.",
+  },
+  {
+    label: "Sequence",
+    question: "What must change first and what depends on it?",
+    description:
+      "Alignment becomes operational when leaders agree on the smallest useful order of decisions, work, evidence, and review.",
+  },
+];
+
+const decisionPath = [
+  {
+    phase: "Frame",
+    question: "What consequential problem requires a shared decision?",
+    evidence:
+      "Customer consequence, operating effect, current response, urgency, and accountable sponsor.",
+  },
+  {
+    phase: "Examine",
+    question: "What does the available evidence support?",
+    evidence:
+      "Observed facts, competing interpretations, evidence gaps, constraints, dependencies, and affected roles.",
+  },
+  {
+    phase: "Choose",
+    question: "Which outcome, scope, and tradeoffs will lead?",
+    evidence:
+      "Decision criteria, rejected alternatives, authority, resources, measures, and accepted consequences.",
+  },
+  {
+    phase: "Commit",
+    question: "Who owns the resulting decisions and work?",
+    evidence:
+      "Accountable roles, decision rights, handoffs, milestones, support, escalation, and communication.",
+  },
+  {
+    phase: "Review",
+    question: "What evidence will cause the direction to continue or change?",
+    evidence:
+      "Customer, workflow, adoption, performance, risk, learning, and a defined review rhythm.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Customer consequence",
+    description:
+      "Recurring friction, delay, effort, risk, trust, retention, service quality, and the customer conditions leadership expects the work to improve.",
+  },
+  {
+    title: "Actual operating workflow",
+    description:
+      "How work moves through teams, systems, decisions, handoffs, exceptions, and informal recovery—not only the process described in presentations.",
+  },
+  {
+    title: "Ownership and authority",
+    description:
+      "Formal accountability, practical decision rights, budget or resource authority, approval paths, unresolved overlaps, and gaps between title and control.",
+  },
+  {
+    title: "Measures and definitions",
+    description:
+      "The outcomes, terms, filters, time horizons, targets, assumptions, and local metrics used to describe success or justify a direction.",
+  },
+  {
+    title: "Constraints and dependencies",
+    description:
+      "Capacity, change burden, policy, risk, data, technology, contractual commitments, prior investments, and the work that must precede another decision.",
+  },
+  {
+    title: "Decision and change history",
+    description:
+      "Prior commitments, deferred choices, reversals, exceptions, unresolved recommendations, initiative overlap, and evidence explaining why earlier efforts stalled.",
+  },
+];
+
+const failurePatterns = [
+  {
+    cue: "Agreement is measured by attendance",
+    description:
+      "Stakeholders participate in workshops and reviews, but no explicit decision records what was chosen, rejected, owned, or accepted as a tradeoff.",
+  },
+  {
+    cue: "Consensus replaces accountable judgment",
+    description:
+      "The organization seeks universal comfort with the direction, allowing the most difficult cross-functional decisions to remain open.",
+  },
+  {
+    cue: "The loudest metric defines the problem",
+    description:
+      "A single commercial, operational, customer, or technical measure leads without showing its relationship to the full operating consequence.",
+  },
+  {
+    cue: "Scope expands to preserve every priority",
+    description:
+      "The program absorbs each stakeholder's concern, producing a larger roadmap without resolving which outcome or operating constraint matters first.",
+  },
+  {
+    cue: "Ownership is assigned without authority",
+    description:
+      "A program lead becomes responsible for delivery but cannot resolve competing goals, change cross-functional work, or secure the required participation.",
+  },
+  {
+    cue: "The decision disappears after the meeting",
+    description:
+      "Teams return to local incentives because the choice was not translated into changed roles, workflow, measures, resources, and review.",
+  },
+];
+
+const alignmentOutputs = [
+  {
+    number: "01",
+    title: "Shared problem definition",
+    description:
+      "A bounded account of the customer and operating problem, available evidence, competing interpretations, constraints, and important uncertainty.",
+  },
+  {
+    number: "02",
+    title: "Decision and tradeoff record",
+    description:
+      "The outcome, scope, criteria, chosen direction, rejected alternatives, accepted consequences, and condition that would trigger reconsideration.",
+  },
+  {
+    number: "03",
+    title: "Ownership and dependency map",
+    description:
+      "Accountable leaders, decision rights, participating roles, handoffs, dependencies, escalation paths, and the authority required to act.",
+  },
+  {
+    number: "04",
+    title: "Sequenced operating plan",
+    description:
+      "The smallest useful order of workflow, ownership, data, measurement, and technology changes with explicit review points.",
+  },
+];
+
+const diagnosticPaths = [
+  {
+    title: "CX Systems Diagnostic",
+    href: "/services/cx-systems-diagnostic/",
+    useWhen:
+      "Leadership sees recurring customer friction but lacks a shared account of its operating cause, consequence, ownership, and first useful change.",
+  },
+  {
+    title: "AI Service Readiness Review",
+    href: "/services/ai-service-readiness-review/",
+    useWhen:
+      "Executives support an AI use case but have not aligned on workflow readiness, oversight, governance, adoption, measures, or implementation boundaries.",
+  },
+  {
+    title: "CRM Workflow Audit",
+    href: "/services/crm-workflow-audit/",
+    useWhen:
+      "The disagreement centers on what the CRM should enable, which signals teams can trust, and whether process, data, ownership, or configuration should change first.",
+  },
+];
+
+const strongFit = [
+  "A consequential cross-functional initiative has momentum but no stable operating decision.",
+  "Leadership agrees on ambition while disagreeing on outcomes, scope, evidence, ownership, or sequence.",
+  "Teams are funding overlapping fixes for symptoms produced by the same underlying system.",
+  "A sponsor has authority to resolve tradeoffs and change cross-functional work.",
+  "Leaders are willing to narrow, pause, or redirect an initiative when the evidence supports it.",
+];
+---
+
+<Layout
+  title="Executive Misalignment | Cadence Lab"
+  description="Turn competing executive priorities, evidence, ownership, constraints, and roadmaps into a bounded operating decision and practical sequence."
+  canonicalURL="/solutions/misalignment/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="alignment-page" tabindex="-1">
+    <section class="alignment-hero" aria-labelledby="alignment-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">Executive misalignment</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Solution · Executive misalignment</p>
+          <h1 id="alignment-title">
+            Align the decision before aligning the roadmap.
+          </h1>
+          <p class="hero-lead">
+            Executive misalignment persists when leaders have not made the same
+            decision about the outcome, scope, evidence, ownership, constraints,
+            and sequence of change. A shared operating decision turns broad
+            agreement into accountable work.
+          </p>
+
+          <div class="hero-actions" aria-label="Executive alignment actions">
+            <a
+              class="button button-primary"
+              href="/services/cx-systems-diagnostic/"
+            >
+              Review the CX Systems Diagnostic
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="problem-card" aria-labelledby="problem-title">
+          <p id="problem-title" class="note-label">Recognizable pattern</p>
+          <p>
+            Leaders support the transformation in principle, but each function
+            is solving a different problem, using different evidence, and
+            protecting a different definition of success.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible label</dt>
+              <dd>Alignment or sponsorship problem</dd>
+            </div>
+            <div>
+              <dt>Operating question</dt>
+              <dd>Which decision is leadership avoiding?</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>What leads, who owns it, and what happens first</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Problem", href: "#problem" },
+        { label: "Signals", href: "#signals" },
+        { label: "Conditions", href: "#conditions" },
+        { label: "Decision path", href: "#decision-path" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Diagnostic paths", href: "#diagnostic-paths" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="problem"
+      class="problem section-block"
+      aria-labelledby="problem-heading"
+    >
+      <div class="page-container problem-layout">
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2 id="problem-heading">
+            Alignment is a decision condition, not a meeting outcome.
+          </h2>
+        </div>
+
+        <div class="problem-copy">
+          <p>
+            Leaders do not need identical perspectives. They need an explicit
+            way to use those perspectives to choose an outcome, accept
+            constraints and tradeoffs, assign authority, and sequence the
+            resulting work.
+          </p>
+          <p>
+            Without that decision, programs preserve every priority. Teams then
+            optimize local measures, technology carries unresolved operating
+            questions, and the organization mistakes activity for coordinated
+            change.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="signals" class="signals" aria-labelledby="signals-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Visible signals</p>
+          <h2 id="signals-title">
+            Look for agreement that does not govern the work.
+          </h2>
+          <p>
+            These patterns show where leadership support has not become a shared
+            operating decision.
+          </p>
+        </div>
+
+        <ol class="signal-grid">
+          {
+            visibleSignals.map((signal) => (
+              <li>
+                <p class="item-number">{signal.number}</p>
+                <h3>{signal.title}</h3>
+                <p>{signal.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="conditions"
+      class="conditions section-block"
+      aria-labelledby="conditions-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Alignment conditions</p>
+            <h2 id="conditions-title">
+              Make six parts of the decision explicit.
+            </h2>
+          </div>
+          <p>
+            Misalignment often becomes manageable when leaders stop debating a
+            broad initiative and start deciding the specific operating
+            conditions that should guide it.
+          </p>
+        </div>
+
+        <div class="condition-list">
+          {
+            alignmentConditions.map((condition, index) => (
+              <article>
+                <div class="condition-heading">
+                  <p class="item-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="condition-label">{condition.label}</p>
+                </div>
+                <h3>{condition.question}</h3>
+                <p>{condition.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="decision-path"
+      class="decision-path"
+      aria-labelledby="decision-path-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Decision path</p>
+          <h2 id="decision-path-title">
+            Move from competing perspectives to accountable action.
+          </h2>
+          <p>
+            The path keeps disagreement visible while requiring explicit choices
+            about the direction and the conditions that will govern it.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            decisionPath.map((stage, index) => (
+              <li>
+                <div class="path-heading">
+                  <p class="path-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="path-phase">{stage.phase}</p>
+                </div>
+                <h3>{stage.question}</h3>
+                <p>{stage.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container evidence-layout">
+        <div class="evidence-intro">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="evidence-title">
+            Build a shared account before choosing the intervention.
+          </h2>
+          <p>
+            A useful alignment process combines customer, operational,
+            commercial, and technical perspectives without allowing any one
+            function's framing to stand in for the whole system.
+          </p>
+          <div class="evidence-principle">
+            <p class="note-label">Evidence principle</p>
+            <p>
+              Separate observed conditions, stakeholder interpretation,
+              assumptions, and advocacy. Name where evidence remains weak.
+            </p>
+          </div>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-patterns"
+      aria-labelledby="failure-patterns-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+          <h2 id="failure-patterns-title">
+            More collaboration can preserve the missing decision.
+          </h2>
+          <p>
+            These patterns explain why alignment activity can increase without
+            changing ownership, scope, priorities, or the work itself.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failurePatterns.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="outputs"
+      class="outputs section-block"
+      aria-labelledby="outputs-title"
+    >
+      <div class="page-container output-layout">
+        <div class="output-intro">
+          <p class="eyebrow">Practical outputs</p>
+          <h2 id="outputs-title">
+            Turn alignment into decisions the organization can operate.
+          </h2>
+          <p>
+            The outputs make the chosen direction, evidence, ownership,
+            tradeoffs, and review conditions visible beyond the meeting.
+          </p>
+        </div>
+
+        <ol class="output-list">
+          {
+            alignmentOutputs.map((output) => (
+              <li>
+                <p class="item-number">{output.number}</p>
+                <div>
+                  <h3>{output.title}</h3>
+                  <p>{output.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="diagnostic-paths"
+      class="diagnostic-paths section-block"
+      aria-labelledby="paths-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Diagnostic paths</p>
+            <h2 id="paths-title">
+              Let the disputed decision determine the entry point.
+            </h2>
+          </div>
+          <p>
+            Executive misalignment may surround the broader customer system, a
+            proposed AI use case, or the workflow and signals the CRM should
+            support.
+          </p>
+        </div>
+
+        <div class="diagnostic-grid">
+          {
+            diagnosticPaths.map((path, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{path.title}</h3>
+                <p>{path.useWhen}</p>
+                <a href={path.href}>
+                  Review the diagnostic
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use this path when leadership can make the decision—not only discuss
+            it.
+          </h2>
+          <p>
+            The work is most useful when an accountable sponsor can resolve
+            tradeoffs, change cross-functional work, and accept an
+            evidence-based recommendation. It is not executive facilitation for
+            a predetermined decision or a substitute for governance authority.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .alignment-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .alignment-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .condition-label,
+  .path-number,
+  .path-phase {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .problem-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .problem-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .problem-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .problem-card dl > div {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .problem-card dt,
+  .problem-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .problem-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .problem-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .problem-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .problem-layout h2,
+  .section-intro h2,
+  .evidence-intro h2,
+  .failure-intro h2,
+  .output-intro h2,
+  .fit-copy h2 {
+    max-width: 20ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .problem-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .problem-copy p,
+  .section-intro > p:not(.eyebrow),
+  .evidence-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .output-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2,
+  .failure-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .signals,
+  .decision-path,
+  .failure-patterns {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .signal-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .signal-grid .item-number,
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .signal-grid h3,
+  .failure-list h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .signal-grid li > p:last-child,
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .condition-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .condition-list article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .condition-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .condition-list h3 {
+    max-width: 31ch;
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .condition-list article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 0.1875rem solid var(--color-green);
+    list-style: none;
+  }
+
+  .path-list li {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .path-list li:first-child {
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .path-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .path-number {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .path-phase {
+    color: var(--color-green);
+  }
+
+  .path-list h3 {
+    min-height: 6.75rem;
+    margin-top: 2rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-list li > p:last-child {
+    margin: 1rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .evidence {
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .evidence-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .evidence-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .evidence-principle {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-principle > p:last-child {
+    margin: 0.65rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 1.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .output-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .output-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .output-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    padding-block: 1.5rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-list li > div > p {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .diagnostic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid article {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .diagnostic-grid article > p:not(.item-number) {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .diagnostic-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.25em;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .alignment-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .diagnostic-grid a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .path-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-list h3 {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .problem-layout,
+    .section-intro-split,
+    .evidence-layout,
+    .failure-layout,
+    .output-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .problem-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .signal-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .diagnostic-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .problem-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .signal-grid,
+    .condition-list,
+    .path-list,
+    .evidence-grid,
+    .failure-list {
+      grid-template-columns: 1fr;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .alignment-hero,
+    .problem-card,
+    .signal-grid,
+    .signal-grid li,
+    .condition-list,
+    .condition-list article,
+    .path-list,
+    .path-list li,
+    .evidence-principle,
+    .evidence-grid,
+    .evidence-grid article,
+    .failure-list,
+    .failure-list article,
+    .output-list,
+    .output-list li,
+    .diagnostic-grid,
+    .diagnostic-grid article,
+    .fit,
+    .fit-list {
+      border-color: CanvasText;
+    }
+  }
+</style>
