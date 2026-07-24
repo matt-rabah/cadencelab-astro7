@@ -1,0 +1,202 @@
+---
+import SolutionDirectoryPage from "../../../components/SolutionDirectoryPage.astro";
+
+const page = {
+  meta: {
+    title: "Customer Experience Solutions by Team | Cadence Lab",
+    description:
+      "Find a customer experience, CRM workflow, lifecycle, digital, location, or AI diagnostic path based on the team that owns the problem and the decisions it needs to make.",
+    canonicalURL: "/solutions/team/",
+  },
+  hero: {
+    breadcrumb: "Solutions by team",
+    eyebrow: "Solutions · By team",
+    title: "Start with the team that can move the decision.",
+    lead: "Customer experience problems rarely belong to one function, but every useful change needs an accountable starting point. These paths help teams recognize the part of the system they can see, the boundaries they must cross, and the diagnostic most likely to create a shared operating decision.",
+    guide: {
+      introduction:
+        "Choose the team closest to the problem, then confirm that the required sponsor can involve the other functions, systems, and decision owners that shape the outcome.",
+      items: [
+        { label: "Start", value: "Name the accountable team" },
+        { label: "Expand", value: "Identify the required partners" },
+        { label: "Choose", value: "Review the diagnostic path" },
+      ],
+    },
+  },
+  directory: {
+    eyebrow: "Team paths",
+    title: "Find the path that matches your decision authority.",
+    introduction:
+      "A team can initiate the work without owning every contributing condition. Each path identifies common responsibilities and where cross-functional evidence is usually required.",
+    entries: [
+      {
+        eyebrow: "Executive and transformation",
+        title: "Turn competing initiatives into an operating sequence.",
+        description:
+          "Executive sponsors and transformation leaders need a shared account of the customer problem, operating consequence, decision rights, dependencies, and the order in which workflow, system, data, and ownership changes should happen.",
+        conditions: [
+          "Several functions offer conflicting explanations of the same problem.",
+          "Technology, process, and experience initiatives compete for priority.",
+          "No single owner can resolve the cross-functional operating constraint.",
+        ],
+        cta: {
+          label: "Review CX Systems Diagnostic",
+          href: "/services/cx-systems-diagnostic/",
+        },
+      },
+      {
+        eyebrow: "Customer experience and service",
+        title: "Connect visible friction to the work behind it.",
+        description:
+          "CX, customer service, success, and support teams often see repeated effort, escalations, complaints, and recovery work before the organization understands the workflows and decisions producing them.",
+        conditions: [
+          "Customers repeat context or receive inconsistent service across teams.",
+          "Frontline employees recover failures they cannot permanently change.",
+          "Experience measures are disconnected from workflow and system behavior.",
+        ],
+        cta: {
+          label: "Review CX Systems Diagnostic",
+          href: "/services/cx-systems-diagnostic/",
+        },
+      },
+      {
+        eyebrow: "Revenue, CRM, and operations",
+        title: "Make customer records guide coordinated action.",
+        description:
+          "Sales, revenue operations, CRM, success operations, and service operations teams need reliable signals, clear ownership, usable automation, and workflows that represent how customer work actually moves.",
+        conditions: [
+          "Teams rely on spreadsheets, messages, or memory beside the CRM.",
+          "Automation changes records without resolving ownership or next action.",
+          "Dashboards report activity but not trusted customer or operating outcomes.",
+        ],
+        cta: {
+          label: "Review CRM Workflow Audit",
+          href: "/services/crm-workflow-audit/",
+        },
+      },
+      {
+        eyebrow: "Product, design, and digital",
+        title: "Connect the interface to the complete service path.",
+        description:
+          "Product, design, content, research, and digital teams shape visible journeys but often depend on policies, data, systems, handoffs, and operational owners outside the product boundary.",
+        conditions: [
+          "A usable interface leads into a fragmented downstream workflow.",
+          "Research and design findings do not consistently change operating decisions.",
+          "Digital and human channels lose context when the journey crosses teams.",
+        ],
+        cta: {
+          label: "Review Digital Experiences",
+          href: "/product/digital-experiences/",
+        },
+      },
+      {
+        eyebrow: "Lifecycle, success, and retention",
+        title: "Act on customer risk before the useful window closes.",
+        description:
+          "Customer success, lifecycle, marketing, product, and retention teams need a shared model for signals, intervention, ownership, timing, and the customer and operating outcomes that define preventable loss.",
+        conditions: [
+          "Onboarding drifts or accounts go quiet without a coordinated response.",
+          "Product, service, commercial, and CRM signals remain disconnected.",
+          "Renewal risk becomes visible after meaningful intervention is difficult.",
+        ],
+        cta: {
+          label: "Review Lifecycle Risk",
+          href: "/services/lifecycle-risk-review/",
+        },
+      },
+      {
+        eyebrow: "Technology, data, and AI",
+        title: "Place technical capability inside a responsible workflow.",
+        description:
+          "Technology, data, automation, and AI teams need business ownership, bounded use cases, trustworthy context, human oversight, adoption conditions, safeguards, and measures tied to real work.",
+        conditions: [
+          "A platform or AI capability has momentum before the workflow is resolved.",
+          "Technical teams own delivery but not the consequential business decision.",
+          "Success measures emphasize deployment or usage rather than operating value.",
+        ],
+        cta: {
+          label: "Review AI Service Readiness",
+          href: "/services/ai-service-readiness-review/",
+        },
+      },
+    ],
+  },
+  selection: {
+    eyebrow: "Choose a path",
+    title: "Start with ownership, then test the boundary.",
+    introduction:
+      "The initiating team should be close enough to the work to provide evidence and senior enough to involve the people who can change the operating conditions behind it.",
+    items: [
+      {
+        title: "Accountability",
+        question: "Which team is accountable for the outcome today?",
+        description:
+          "Separate the team that sees the symptom from the role that can fund, prioritize, or authorize the cross-functional change required.",
+      },
+      {
+        title: "Evidence",
+        question: "Which part of the experience can this team observe?",
+        description:
+          "Identify the customer, workflow, system, data, service, adoption, or operating evidence available—and the evidence held by required partners.",
+      },
+      {
+        title: "Authority",
+        question: "Where does the team’s decision authority stop?",
+        description:
+          "Map the policies, workflows, systems, budgets, handoffs, and roles that another owner controls but that materially shape the outcome.",
+      },
+      {
+        title: "Participation",
+        question: "Who must be involved for the diagnosis to be useful?",
+        description:
+          "Include customer-facing, business, operational, technical, data, risk, and leadership perspectives in proportion to the real system boundary.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related solution paths",
+    title: "Approach the same problem from another useful angle.",
+    introduction:
+      "Team ownership is one way to orient the work. Industry conditions and the specific use case may reveal a more precise or more practical starting point.",
+    items: [
+      {
+        title: "Solutions by industry",
+        description:
+          "Consider how regulation, risk, service models, channels, data, and customer expectations shape the operating problem.",
+        href: "/solutions/industry/",
+        label: "Explore by industry",
+      },
+      {
+        title: "Solutions by use case",
+        description:
+          "Start with a recognizable problem such as lifecycle risk, CRM distrust, customer friction, digital service failure, or AI readiness.",
+        href: "/solutions/use-case/",
+        label: "Explore by use case",
+      },
+      {
+        title: "Diagnostic offers",
+        description:
+          "Compare the four evidence-led diagnostics and the cross-functional operating decision each one supports.",
+        href: "/services/",
+        label: "Compare diagnostics",
+      },
+    ],
+  },
+  nextStep: {
+    eyebrow: "Next step",
+    title: "Bring the team and the decision into the same conversation.",
+    description:
+      "Share the problem your team sees, the outcome it owns, the other functions and systems involved, the evidence available, and the decision leadership needs to make. Cadence Lab will recommend the most useful starting point.",
+    primaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    secondaryCta: {
+      label: "Review all services",
+      href: "/services/",
+    },
+  },
+};
+---
+
+<SolutionDirectoryPage {...page} />
