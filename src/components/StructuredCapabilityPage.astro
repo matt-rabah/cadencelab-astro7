@@ -1,0 +1,999 @@
+---
+import Footer from "./Footer.astro";
+import NavHeader from "./NavHeader.astro";
+import SectionNav from "./SectionNav.astro";
+import Layout from "../layouts/Layout.astro";
+
+interface Card {
+  title: string;
+  description: string;
+}
+
+interface LabeledCard extends Card {
+  label: string;
+  question: string;
+}
+
+interface PathStage {
+  phase: string;
+  question: string;
+  evidence: string;
+}
+
+interface Output {
+  title: string;
+  description: string;
+}
+
+interface DiagnosticPath {
+  title: string;
+  href: string;
+  useWhen: string;
+}
+
+interface SectionCopy {
+  eyebrow: string;
+  title: string;
+  introduction: string;
+}
+
+interface Props {
+  meta: {
+    title: string;
+    description: string;
+    canonicalURL: string;
+  };
+  hero: {
+    breadcrumb: string;
+    eyebrow: string;
+    title: string;
+    lead: string;
+    primaryCta: { label: string; href: string };
+    secondaryCta?: { label: string; href: string };
+    trigger: {
+      introduction: string;
+      items: Array<{ label: string; value: string }>;
+    };
+  };
+  signals: SectionCopy & { items: Card[] };
+  framework: SectionCopy & { items: LabeledCard[] };
+  path: SectionCopy & { items: PathStage[] };
+  evidence: SectionCopy & {
+    items: Card[];
+    note: { label: string; description: string };
+  };
+  failures: SectionCopy & { items: Card[] };
+  outputs: SectionCopy & { items: Output[] };
+  fit: SectionCopy & { items: string[] };
+  diagnostics: {
+    eyebrow: string;
+    title: string;
+    items: DiagnosticPath[];
+  };
+}
+
+const {
+  meta,
+  hero,
+  signals,
+  framework,
+  path,
+  evidence,
+  failures,
+  outputs,
+  fit,
+  diagnostics,
+} = Astro.props;
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  canonicalURL={meta.canonicalURL}
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="structured-page" tabindex="-1">
+    <section class="structured-hero" aria-labelledby="structured-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">{hero.breadcrumb}</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">{hero.eyebrow}</p>
+          <h1 id="structured-title">{hero.title}</h1>
+          <p class="hero-lead">{hero.lead}</p>
+
+          <div class="hero-actions" aria-label={`${hero.breadcrumb} actions`}>
+            <a class="button button-primary" href={hero.primaryCta.href}>
+              {hero.primaryCta.label}
+            </a>
+            {
+              hero.secondaryCta && (
+                <a class="button button-text" href={hero.secondaryCta.href}>
+                  {hero.secondaryCta.label}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              )
+            }
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>{hero.trigger.introduction}</p>
+          <dl>
+            {
+              hero.trigger.items.map((item) => (
+                <div>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Signals", href: "#signals" },
+        { label: framework.eyebrow, href: "#framework" },
+        { label: path.eyebrow, href: "#operating-path" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="signals"
+      class="signals section-block"
+      aria-labelledby="signals-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">{signals.eyebrow}</p>
+            <h2 id="signals-title">{signals.title}</h2>
+          </div>
+          <p>{signals.introduction}</p>
+        </div>
+
+        <div class="card-grid">
+          {
+            signals.items.map((item, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="framework"
+      class="framework-section"
+      aria-labelledby="framework-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">{framework.eyebrow}</p>
+          <h2 id="framework-title">{framework.title}</h2>
+          <p>{framework.introduction}</p>
+        </div>
+
+        <div class="framework-grid">
+          {
+            framework.items.map((item, index) => (
+              <article>
+                <div class="framework-heading">
+                  <p class="framework-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="framework-label">{item.label}</p>
+                </div>
+                <h3>{item.question}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="operating-path"
+      class="path-section section-block"
+      aria-labelledby="path-title"
+    >
+      <div class="page-container path-layout">
+        <div class="path-intro">
+          <p class="eyebrow">{path.eyebrow}</p>
+          <h2 id="path-title">{path.title}</h2>
+          <p>{path.introduction}</p>
+        </div>
+
+        <ol class="path-list">
+          {
+            path.items.map((item, index) => (
+              <li>
+                <div class="path-marker">
+                  <p>{String(index + 1).padStart(2, "0")}</p>
+                  <span aria-hidden="true" />
+                </div>
+                <div class="path-content">
+                  <p class="path-phase">{item.phase}</p>
+                  <h3>{item.question}</h3>
+                  <p>{item.evidence}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">{evidence.eyebrow}</p>
+            <h2 id="evidence-title">{evidence.title}</h2>
+          </div>
+          <p>{evidence.introduction}</p>
+        </div>
+
+        <div class="card-grid">
+          {
+            evidence.items.map((item, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="evidence-note">
+          <p class="note-label">{evidence.note.label}</p>
+          <p>{evidence.note.description}</p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-section"
+      aria-labelledby="failure-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">{failures.eyebrow}</p>
+          <h2 id="failure-title">{failures.title}</h2>
+          <p>{failures.introduction}</p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failures.items.map((item, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="outputs"
+      class="outputs section-block"
+      aria-labelledby="outputs-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">{outputs.eyebrow}</p>
+          <h2 id="outputs-title">{outputs.title}</h2>
+          <p>{outputs.introduction}</p>
+        </div>
+
+        <ol class="output-list">
+          {
+            outputs.items.map((item, index) => (
+              <li>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="fit" class="fit-section" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">{fit.eyebrow}</p>
+          <h2 id="fit-title">{fit.title}</h2>
+          <p>{fit.introduction}</p>
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {fit.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="diagnostic-section" aria-labelledby="diagnostics-title">
+      <div class="page-container section-stack">
+        <div class="diagnostic-intro">
+          <p class="eyebrow">{diagnostics.eyebrow}</p>
+          <h2 id="diagnostics-title">{diagnostics.title}</h2>
+        </div>
+
+        <div class="diagnostic-grid">
+          {
+            diagnostics.items.map((item) => (
+              <article>
+                <h3>{item.title}</h3>
+                <p>{item.useWhen}</p>
+                <a href={item.href}>
+                  Review the diagnostic
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .structured-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block,
+  .framework-section,
+  .failure-section,
+  .fit-section,
+  .diagnostic-section {
+    padding-block: var(--section-space);
+  }
+
+  .structured-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy,
+  .section-intro,
+  .path-intro,
+  .failure-intro,
+  .fit-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .framework-number,
+  .framework-label,
+  .path-phase,
+  .path-marker p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse,
+  .framework-number,
+  .framework-label {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead,
+  .section-intro > p:not(.eyebrow),
+  .path-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card,
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    max-width: 52rem;
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .section-intro h2,
+  .path-intro h2,
+  .failure-intro h2,
+  .fit-copy h2,
+  .diagnostic-intro h2 {
+    max-width: 19ch;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .card-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .card-grid h3,
+  .framework-grid h3,
+  .failure-list h3,
+  .output-list h3,
+  .diagnostic-grid h3,
+  .path-content h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .card-grid h3,
+  .failure-list h3 {
+    margin-top: 1.5rem;
+  }
+
+  .card-grid article > p:last-child,
+  .framework-grid article > p:last-child,
+  .failure-list article > p:last-child,
+  .diagnostic-grid p,
+  .path-content > p:last-child,
+  .evidence-note > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .framework-section,
+  .failure-section {
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2,
+  .framework-grid h3,
+  .failure-list h3 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .framework-grid article > p:last-child,
+  .failure-list article > p:last-child {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .framework-grid,
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .framework-grid article,
+  .failure-list article {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .framework-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .framework-grid h3 {
+    max-width: 30ch;
+    margin-top: 2rem;
+  }
+
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .path-layout,
+  .failure-layout,
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+  }
+
+  .path-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .path-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    min-height: 9rem;
+  }
+
+  .path-marker {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .path-marker p {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    border: var(--border-width) solid var(--color-blue);
+    border-radius: 50%;
+    place-items: center;
+  }
+
+  .path-marker span {
+    width: var(--border-width);
+    flex: 1;
+    background: var(--color-border);
+  }
+
+  .path-list li:last-child .path-marker span {
+    display: none;
+  }
+
+  .path-content {
+    padding-bottom: 2.25rem;
+  }
+
+  .path-content h3 {
+    max-width: 34ch;
+    margin-top: 0.6rem;
+  }
+
+  .evidence {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-note {
+    max-width: 52rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 2.25rem);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list li > div > p {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+  }
+
+  .fit-section {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-copy .button {
+    margin-top: 0.5rem;
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .diagnostic-section {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .diagnostic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid article {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid p {
+    margin-bottom: 1.5rem;
+  }
+
+  .diagnostic-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+  }
+
+  .structured-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .diagnostic-grid a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .section-intro-split,
+    .path-layout,
+    .failure-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .card-grid,
+    .diagnostic-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .card-grid,
+    .framework-grid,
+    .failure-list,
+    .diagnostic-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .path-list li {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .path-marker p {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .structured-hero,
+    .trigger-card,
+    .card-grid,
+    .card-grid article,
+    .framework-grid,
+    .framework-grid article,
+    .path-marker p,
+    .evidence,
+    .evidence-note,
+    .failure-list,
+    .failure-list article,
+    .output-list,
+    .output-list li,
+    .fit-section,
+    .fit-list,
+    .diagnostic-section,
+    .diagnostic-grid,
+    .diagnostic-grid article {
+      border-color: CanvasText;
+    }
+  }
+</style>

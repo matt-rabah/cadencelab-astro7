@@ -1,0 +1,315 @@
+---
+import StructuredCapabilityPage from "../../../components/StructuredCapabilityPage.astro";
+
+const page = {
+  meta: {
+    title: "Variance Tracing | Cadence Lab",
+    description:
+      "Trace where AI outputs diverge across inputs, context, retrieval, models, tools, and review so teams can define acceptable variation and intervene where it matters.",
+    canonicalURL: "/ai-tooling/hallucination/",
+  },
+  hero: {
+    breadcrumb: "Variance tracing",
+    eyebrow: "AI tooling · Variance tracing",
+    title: "Trace the output back to the conditions that produced it.",
+    lead: "AI outputs vary because prompts, source material, retrieval, model versions, tools, workflow state, and human interpretation vary. Variance tracing connects an unreliable answer to those operating conditions so the organization can decide what to constrain, validate, escalate, or accept.",
+    primaryCta: {
+      label: "Review AI Service Readiness",
+      href: "/services/ai-service-readiness-review/",
+    },
+    secondaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    trigger: {
+      introduction:
+        "The same task produces answers that are individually plausible but materially different in accuracy, evidence, confidence, or recommended action.",
+      items: [
+        { label: "Visible symptom", value: "Confident, inconsistent outputs" },
+        {
+          label: "Trace",
+          value: "Input, context, model, tool, output, outcome",
+        },
+        {
+          label: "Decision",
+          value: "Which variation is acceptable and which requires control",
+        },
+      ],
+    },
+  },
+  signals: {
+    eyebrow: "Visible signals",
+    title: "A hallucination label does not explain the failure.",
+    introduction:
+      "An incorrect or inconsistent output is the end of a path. The useful question is which combination of source evidence, context assembly, model behavior, tool use, validation, and human reliance allowed it to matter.",
+    items: [
+      {
+        title: "Repeated runs produce different material facts",
+        description:
+          "Names, dates, citations, totals, classifications, or recommendations change even though the business task appears unchanged.",
+      },
+      {
+        title: "Grounded answers drift beyond the source",
+        description:
+          "The response begins with retrieved evidence, then adds unsupported details, joins unrelated passages, or implies certainty the source does not contain.",
+      },
+      {
+        title: "A model update changes the workflow outcome",
+        description:
+          "A new model or snapshot improves general quality while changing instruction following, formatting, refusal, classification, or tool behavior in production.",
+      },
+      {
+        title: "Reviewers correct outputs without recording why",
+        description:
+          "People repair facts, tone, routing, or decisions, but the correction never becomes evaluation data or evidence for changing the workflow.",
+      },
+      {
+        title: "Quality is measured with one average score",
+        description:
+          "A summary metric hides the specific customers, inputs, failure modes, or consequential edge cases where performance is unacceptable.",
+      },
+      {
+        title: "The organization cannot replay a bad result",
+        description:
+          "The prompt is available, but the retrieved context, model version, parameters, tool results, policy state, and human action are missing.",
+      },
+    ],
+  },
+  framework: {
+    eyebrow: "Trace conditions",
+    title: "Define the conditions before judging the answer.",
+    introduction:
+      "Output quality cannot be separated from the task and evidence used to produce it. A useful trace holds six conditions together and shows where meaningful variation entered.",
+    items: [
+      {
+        label: "Task",
+        question: "What decision or action should the output support?",
+        title: "Task",
+        description:
+          "Define the user, operating purpose, expected form, consequential error, and the boundary between creative variation and required consistency.",
+      },
+      {
+        label: "Input",
+        question: "What changed in the request or source material?",
+        title: "Input",
+        description:
+          "Trace wording, ambiguity, missing facts, conflicting instructions, document quality, language, format, and the provenance of supplied evidence.",
+      },
+      {
+        label: "Context",
+        question: "Which evidence reached the model?",
+        title: "Context",
+        description:
+          "Record retrieval results, ranking, truncation, memory, conversation history, templates, system instructions, and the context excluded from the run.",
+      },
+      {
+        label: "Execution",
+        question: "Which model and tools produced the result?",
+        title: "Execution",
+        description:
+          "Capture model version, parameters, structured-output rules, tool calls, intermediate results, retries, fallbacks, and application-level transformations.",
+      },
+      {
+        label: "Judgment",
+        question: "How was the output evaluated or trusted?",
+        title: "Judgment",
+        description:
+          "Separate deterministic validation, model-based scoring, expert review, user interpretation, override, and the criteria used to call an answer acceptable.",
+      },
+      {
+        label: "Outcome",
+        question: "What happened because the output was used?",
+        title: "Outcome",
+        description:
+          "Connect the answer to the customer, workflow, decision, correction, delay, risk, or other operating consequence that determines its real importance.",
+      },
+    ],
+  },
+  path: {
+    eyebrow: "Trace path",
+    title: "Follow variance from request to consequence.",
+    introduction:
+      "Reconstruct representative runs, compare the conditions, identify where outputs diverge, and decide whether the right response is better evidence, stronger validation, narrower use, human judgment, or accepted variability.",
+    items: [
+      {
+        phase: "Bound",
+        question: "Which output difference is operationally meaningful?",
+        evidence:
+          "Task, user, expected behavior, acceptable range, prohibited error, and consequence.",
+      },
+      {
+        phase: "Capture",
+        question: "Can each run be reconstructed?",
+        evidence:
+          "Input, source, context, retrieval, prompt, model, parameters, tools, policy, output, and reviewer.",
+      },
+      {
+        phase: "Compare",
+        question: "Which condition changed with the result?",
+        evidence:
+          "Controlled repetitions, paired examples, model comparisons, edge cases, slices, and failure clusters.",
+      },
+      {
+        phase: "Explain",
+        question: "What evidence supports the likely cause?",
+        evidence:
+          "Observed correlation, eliminated alternatives, uncertainty, reproducibility, and limits of the trace.",
+      },
+      {
+        phase: "Control",
+        question: "What should the workflow do differently?",
+        evidence:
+          "Source repair, retrieval change, validation, model constraint, fallback, human review, monitoring, and reevaluation.",
+      },
+    ],
+  },
+  evidence: {
+    eyebrow: "Evidence",
+    title: "Preserve enough context to explain the difference.",
+    introduction:
+      "A useful trace needs more than prompts and responses. It connects model behavior to evidence assembly, application state, review decisions, and real-world outcomes.",
+    items: [
+      {
+        title: "Representative inputs",
+        description:
+          "Routine cases, consequential edge cases, ambiguous requests, incomplete records, adversarial examples, and previously observed failures.",
+      },
+      {
+        title: "Source and retrieval evidence",
+        description:
+          "Document versions, provenance, chunking, ranking, retrieved passages, missing context, conflicting sources, and the evidence actually visible to the model.",
+      },
+      {
+        title: "Execution configuration",
+        description:
+          "Model and snapshot, prompts, parameters, schemas, tools, retries, fallbacks, caches, memory, and application transformations.",
+      },
+      {
+        title: "Evaluation criteria",
+        description:
+          "Reference answers, rubrics, deterministic checks, graders, expert judgment, disagreement, thresholds, and performance by meaningful slice.",
+      },
+      {
+        title: "Human review behavior",
+        description:
+          "Corrections, overrides, accepted uncertainty, missed errors, reviewer differences, time burden, escalation, and the context shown during review.",
+      },
+      {
+        title: "Operating outcomes",
+        description:
+          "Customer effect, workflow result, downstream action, delay, rework, risk, adoption, complaint, and evidence that the output helped or harmed the task.",
+      },
+    ],
+    note: {
+      label: "Trace before certainty",
+      description:
+        "Variance tracing can identify reproducible conditions and strong evidence of likely causes. It should not invent a precise internal explanation for a probabilistic model when the available evidence only supports correlation or a bounded hypothesis.",
+    },
+  },
+  failures: {
+    eyebrow: "Common failure patterns",
+    title: "An evaluation fails when it hides the operating consequence.",
+    introduction:
+      "Quality programs become misleading when they optimize a benchmark while ignoring source reliability, workflow behavior, human reliance, and the cases where one wrong answer matters.",
+    items: [
+      {
+        title: "One correct answer becomes the entire standard",
+        description:
+          "A rigid reference penalizes useful variation or overlooks several acceptable responses, while still failing to define the facts and actions that cannot vary.",
+      },
+      {
+        title: "The average conceals the failure slice",
+        description:
+          "Overall performance looks strong even though a particular customer group, input type, language, or high-consequence decision remains unreliable.",
+      },
+      {
+        title: "Model grading is treated as independent truth",
+        description:
+          "A second model scores the output without calibration, expert review, disagreement analysis, or awareness that the grader may share the same blind spots.",
+      },
+      {
+        title: "Prompt changes substitute for system repair",
+        description:
+          "Teams repeatedly tune instructions while leaving weak sources, retrieval gaps, ambiguous tasks, downstream permissions, and review design unchanged.",
+      },
+      {
+        title: "Corrections disappear after delivery",
+        description:
+          "Frontline reviewers fix the answer but the original failure, reason, context, and outcome never enter the evaluation set or product backlog.",
+      },
+      {
+        title: "Deployment becomes the end of evaluation",
+        description:
+          "Model, data, workflows, tools, and user behavior change in production while the benchmark and acceptance threshold remain static.",
+      },
+    ],
+  },
+  outputs: {
+    eyebrow: "Practical outputs",
+    title: "Turn inconsistent answers into a controlled learning loop.",
+    introduction:
+      "The output should make meaningful variance observable, connect it to operating conditions, and define what the application or team does when an answer falls outside the acceptable range.",
+    items: [
+      {
+        title: "End-to-end variance map",
+        description:
+          "A trace of task, input, evidence, context, model, tools, validation, review, and outcome showing where meaningful differences enter.",
+      },
+      {
+        title: "Evaluation set and scorecard",
+        description:
+          "Representative cases, failure slices, reference evidence, rubrics, deterministic checks, reviewer guidance, thresholds, and documented disagreement.",
+      },
+      {
+        title: "Control and escalation rules",
+        description:
+          "The conditions that trigger validation, source lookup, retry, fallback, human review, refusal, correction, or removal from the automated path.",
+      },
+      {
+        title: "Monitoring and revision plan",
+        description:
+          "Production signals, sampling, correction capture, ownership, review cadence, model-change testing, incident learning, and criteria for revising the use case.",
+      },
+    ],
+  },
+  fit: {
+    eyebrow: "Engagement fit",
+    title: "Use tracing when output variation changes the work.",
+    introduction:
+      "Variance tracing is most useful for a bounded AI workflow with repeatable tasks, accessible evidence, observable corrections, and consequences that can be evaluated. It is not a promise that a generative model will become perfectly deterministic or factually infallible.",
+    items: [
+      "Teams see recurring incorrect, unsupported, inconsistent, or overconfident outputs in a defined workflow.",
+      "The organization can provide representative inputs, source material, configuration, outputs, corrections, and outcome evidence.",
+      "Different types of error have materially different customer, operational, legal, or financial consequences.",
+      "Product, domain, data, technical, risk, and frontline owners can agree on acceptable behavior and review.",
+      "Leaders are willing to narrow or remove the use case when controls cannot reduce risk to an acceptable level.",
+    ],
+  },
+  diagnostics: {
+    eyebrow: "Related diagnostic paths",
+    title: "Start with the decision the output is expected to support.",
+    items: [
+      {
+        title: "AI Service Readiness Review",
+        href: "/services/ai-service-readiness-review/",
+        useWhen:
+          "A use case needs bounded outcomes, evidence, evaluation, human oversight, safeguards, adoption conditions, and a responsible implementation decision.",
+      },
+      {
+        title: "CX Systems Diagnostic",
+        href: "/services/cx-systems-diagnostic/",
+        useWhen:
+          "The unreliable output is one part of a broader customer workflow spanning teams, systems, handoffs, ownership, and service rules.",
+      },
+      {
+        title: "CRM Workflow Audit",
+        href: "/services/crm-workflow-audit/",
+        useWhen:
+          "The AI output depends on CRM records, lifecycle signals, field definitions, automation, reporting, or customer context that may already be unreliable.",
+      },
+    ],
+  },
+};
+---
+
+<StructuredCapabilityPage {...page} />
