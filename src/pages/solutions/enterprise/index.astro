@@ -1,0 +1,1312 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const visibleSignals = [
+  {
+    number: "01",
+    title: "The shared model exists only in presentations",
+    description:
+      "Enterprise principles are clear at the center, but teams cannot translate them into everyday decisions, handoffs, system behavior, or customer work.",
+  },
+  {
+    number: "02",
+    title: "Every unit solves the same problem differently",
+    description:
+      "Regions, products, functions, and business units repeatedly design local processes because the organization has not defined a usable common core.",
+  },
+  {
+    number: "03",
+    title: "Standardization removes necessary context",
+    description:
+      "A single process is imposed across materially different customers, markets, risks, or service conditions, creating workarounds instead of consistency.",
+  },
+  {
+    number: "04",
+    title: "Exceptions become a shadow operating model",
+    description:
+      "Local teams manage legitimate variation through spreadsheets, messages, private rules, and individual judgment that the formal framework cannot see.",
+  },
+  {
+    number: "05",
+    title: "Results cannot be compared across the enterprise",
+    description:
+      "Teams report similar measures using different definitions, scopes, evidence, and time horizons, preventing reliable learning or resource decisions.",
+  },
+  {
+    number: "06",
+    title: "Governance adds review without improving decisions",
+    description:
+      "Committees and approvals multiply because authority, escalation, permitted variation, and the evidence required for an exception remain unclear.",
+  },
+];
+
+const frameworkConditions = [
+  {
+    label: "Purpose",
+    question: "Which consequential decision should the framework improve?",
+    description:
+      "A framework needs a bounded operating purpose. Broad ambitions such as consistency, transformation, or customer centricity do not tell teams what to decide differently.",
+  },
+  {
+    label: "Common core",
+    question: "What must remain consistent everywhere?",
+    description:
+      "Shared outcomes, definitions, minimum evidence, decision rules, safeguards, measures, and customer commitments create coherence across contexts.",
+  },
+  {
+    label: "Local variation",
+    question: "What may change when operating conditions differ?",
+    description:
+      "Market, customer, regulatory, product, channel, capacity, and service conditions may require explicit adaptation rather than silent noncompliance.",
+  },
+  {
+    label: "Decision rights",
+    question: "Who interprets, adapts, approves, and changes the model?",
+    description:
+      "The framework should assign authority close enough to the work to be useful while preserving escalation for choices with enterprise consequence.",
+  },
+  {
+    label: "Evidence",
+    question: "How will teams show that the model is working?",
+    description:
+      "Comparable customer, workflow, adoption, risk, and performance evidence should reveal both the value of the shared core and the effect of local choices.",
+  },
+  {
+    label: "Evolution",
+    question: "How will exceptions and outcomes improve the framework?",
+    description:
+      "A useful framework changes when repeated exceptions, weak outcomes, new constraints, or frontline learning show that its assumptions no longer hold.",
+  },
+];
+
+const operatingPath = [
+  {
+    phase: "Bound",
+    question: "Which recurring enterprise decision needs a shared model?",
+    evidence:
+      "Operating consequence, affected contexts, accountable sponsor, current variation, and the cost of inconsistency.",
+  },
+  {
+    phase: "Model",
+    question: "What common core should guide every context?",
+    evidence:
+      "Outcome, principles, definitions, minimum evidence, decision rules, safeguards, measures, and ownership.",
+  },
+  {
+    phase: "Adapt",
+    question: "Which conditions justify a different local response?",
+    evidence:
+      "Material context, permitted variation, boundaries, rationale, authority, risk, and documentation.",
+  },
+  {
+    phase: "Apply",
+    question: "How does the model change actual work?",
+    evidence:
+      "Workflow, roles, handoffs, systems, tools, training, escalation, and support at the point of decision.",
+  },
+  {
+    phase: "Learn",
+    question: "What evidence should change the shared model?",
+    evidence:
+      "Outcomes, exceptions, adoption, unintended effects, local learning, comparison, and review cadence.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Existing enterprise standards",
+    description:
+      "Principles, policies, playbooks, maturity models, service standards, architecture, governance, and the assumptions embedded in each.",
+  },
+  {
+    title: "Local operating conditions",
+    description:
+      "Differences in customers, markets, regulation, products, channels, risk, capacity, systems, service expectations, and organizational structure.",
+  },
+  {
+    title: "Actual workflows and decisions",
+    description:
+      "How teams interpret the model in real work, including handoffs, approvals, judgment, recovery, escalation, and the point where local context changes the choice.",
+  },
+  {
+    title: "Exceptions and workarounds",
+    description:
+      "Deviations, overrides, spreadsheets, parallel processes, informal rules, repeated escalations, and other evidence that the formal model does not fit the work.",
+  },
+  {
+    title: "Comparable outcomes",
+    description:
+      "Customer, operational, adoption, risk, quality, capacity, and business measures defined consistently enough to compare contexts responsibly.",
+  },
+  {
+    title: "Ownership and change history",
+    description:
+      "Who created, interprets, enforces, adapts, and reviews the framework, along with prior revisions and evidence explaining why they were made.",
+  },
+];
+
+const failurePatterns = [
+  {
+    cue: "The framework starts with a template",
+    description:
+      "A familiar model is selected before the organization defines the operating decision, evidence, context, and constraints it needs to support.",
+  },
+  {
+    cue: "Principles remain open to every interpretation",
+    description:
+      "The language is flexible enough to earn agreement but too abstract to resolve a real tradeoff or change what a team does next.",
+  },
+  {
+    cue: "Consistency means identical execution",
+    description:
+      "The enterprise standard specifies one process for unlike conditions, causing local teams to choose between customer needs and formal compliance.",
+  },
+  {
+    cue: "Every exception requires central approval",
+    description:
+      "Governance becomes a queue because local decision rights, evidence thresholds, safeguards, and escalation boundaries were never designed.",
+  },
+  {
+    cue: "Adoption is measured by publication",
+    description:
+      "The organization counts training, toolkits, downloads, or attestations without checking whether decisions, workflows, or outcomes changed.",
+  },
+  {
+    cue: "The model never learns from use",
+    description:
+      "Repeated exceptions and weak outcomes are treated as compliance problems instead of evidence that the common core or variation rules need revision.",
+  },
+];
+
+const frameworkOutputs = [
+  {
+    number: "01",
+    title: "Enterprise decision architecture",
+    description:
+      "A bounded account of the decision, shared outcome, definitions, evidence, rules, safeguards, measures, and accountable ownership.",
+  },
+  {
+    number: "02",
+    title: "Core and variation model",
+    description:
+      "A clear distinction between what must remain consistent, what may adapt, the conditions that justify variation, and the limits that still apply.",
+  },
+  {
+    number: "03",
+    title: "Decision-rights and escalation map",
+    description:
+      "Authority for interpretation, local adaptation, approval, exception handling, enterprise escalation, and changes to the framework itself.",
+  },
+  {
+    number: "04",
+    title: "Adoption and learning plan",
+    description:
+      "A practical sequence for workflow, tools, systems, support, measures, pilots, review, and framework revision based on evidence from use.",
+  },
+];
+
+const diagnosticPaths = [
+  {
+    title: "CX Systems Diagnostic",
+    href: "/services/cx-systems-diagnostic/",
+    useWhen:
+      "The organization needs a shared model for customer work spanning business units, functions, systems, ownership, service rules, and handoffs.",
+  },
+  {
+    title: "CRM Workflow Audit",
+    href: "/services/crm-workflow-audit/",
+    useWhen:
+      "Enterprise CRM standards need to distinguish common data, workflow, reporting, and governance requirements from legitimate local variation.",
+  },
+  {
+    title: "AI Service Readiness Review",
+    href: "/services/ai-service-readiness-review/",
+    useWhen:
+      "The enterprise needs consistent AI decision rules, human oversight, safeguards, measures, and escalation without ignoring differences between use cases.",
+  },
+];
+
+const strongFit = [
+  "The same customer or operating decision appears across several business units, regions, products, or functions.",
+  "Existing standards are either too abstract to guide work or too rigid to fit material differences in context.",
+  "Local variation is necessary, but the organization cannot distinguish responsible adaptation from avoidable fragmentation.",
+  "A sponsor can align central and local owners around shared outcomes, evidence, decision rights, and review.",
+  "Leaders are willing to change the framework when operating evidence shows that the current model is not useful.",
+];
+---
+
+<Layout
+  title="Enterprise Frameworks | Cadence Lab"
+  description="Design enterprise frameworks that create a usable common core, permit responsible local variation, clarify decision rights, and improve through operating evidence."
+  canonicalURL="/solutions/enterprise/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="enterprise-page" tabindex="-1">
+    <section class="enterprise-hero" aria-labelledby="enterprise-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">Enterprise frameworks</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Solution · Enterprise frameworks</p>
+          <h1 id="enterprise-title">
+            Create consistency without erasing context.
+          </h1>
+          <p class="hero-lead">
+            An enterprise framework should make recurring decisions coherent
+            across the organization while preserving the variation required by
+            different customers, markets, risks, and operating conditions. The
+            work is to define a useful common core, not impose identical action.
+          </p>
+
+          <div class="hero-actions" aria-label="Enterprise framework actions">
+            <a
+              class="button button-primary"
+              href="/services/cx-systems-diagnostic/"
+            >
+              Review the CX Systems Diagnostic
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>
+            The organization has enterprise standards, local playbooks, and
+            governance, but teams still interpret the same customer or operating
+            decision differently.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible symptom</dt>
+              <dd>Rigid standards or uncontrolled variation</dd>
+            </div>
+            <div>
+              <dt>Operating issue</dt>
+              <dd>The common core and local decision rights are unclear</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>What must be shared, what may vary, and who decides</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Signals", href: "#signals" },
+        { label: "Architecture", href: "#architecture" },
+        { label: "Operating path", href: "#operating-path" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Outputs", href: "#outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="signals"
+      class="signals section-block"
+      aria-labelledby="signals-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Visible signals</p>
+            <h2 id="signals-title">
+              Enterprise inconsistency is usually a design problem.
+            </h2>
+          </div>
+          <p>
+            Fragmentation does not always mean local teams are resisting a good
+            standard. The shared model may be too vague to guide a decision, too
+            rigid for the operating context, or disconnected from the workflow
+            expected to apply it.
+          </p>
+        </div>
+
+        <div class="signal-grid">
+          {
+            visibleSignals.map((signal) => (
+              <article>
+                <p class="item-number">{signal.number}</p>
+                <h3>{signal.title}</h3>
+                <p>{signal.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="architecture"
+      class="architecture"
+      aria-labelledby="architecture-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Framework architecture</p>
+          <h2 id="architecture-title">
+            Separate enterprise coherence from local execution.
+          </h2>
+          <p>
+            A usable framework makes six conditions explicit. Together they help
+            teams make comparable decisions without pretending that every
+            operating context is the same.
+          </p>
+        </div>
+
+        <div class="condition-grid">
+          {
+            frameworkConditions.map((condition, index) => (
+              <article>
+                <div class="condition-heading">
+                  <p class="condition-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="condition-label">{condition.label}</p>
+                </div>
+                <h3>{condition.question}</h3>
+                <p>{condition.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="operating-path"
+      class="operating-path section-block"
+      aria-labelledby="operating-path-title"
+    >
+      <div class="page-container path-layout">
+        <div class="path-intro">
+          <p class="eyebrow">Operating path</p>
+          <h2 id="operating-path-title">
+            Build the framework through use, not abstraction.
+          </h2>
+          <p>
+            Start with a real recurring decision. Define the common core,
+            examine where context changes the choice, apply the model to actual
+            work, and use the resulting evidence to improve it.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            operatingPath.map((stage, index) => (
+              <li>
+                <div class="path-marker">
+                  <p>{String(index + 1).padStart(2, "0")}</p>
+                  <span aria-hidden="true" />
+                </div>
+                <div class="path-content">
+                  <p class="path-phase">{stage.phase}</p>
+                  <h3>{stage.question}</h3>
+                  <p>{stage.evidence}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence</p>
+            <h2 id="evidence-title">
+              Compare the formal model with operating reality.
+            </h2>
+          </div>
+          <p>
+            The evidence should show where common standards improve decisions,
+            where material context requires adaptation, and where local
+            variation is compensating for an unresolved enterprise design gap.
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="evidence-note">
+          <p class="note-label">Consistency with consequence</p>
+          <p>
+            Enterprise consistency is useful when it makes decisions,
+            safeguards, evidence, and outcomes more reliable. Uniform process
+            without operating benefit is administrative similarity, not a
+            successful framework.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-patterns"
+      aria-labelledby="failure-patterns-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+          <h2 id="failure-patterns-title">
+            A framework fails when it cannot govern a real choice.
+          </h2>
+          <p>
+            Strong language and polished artifacts can hide weak operating
+            design. These patterns indicate that the model is unlikely to change
+            decisions or learn from its use.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failurePatterns.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="outputs"
+      class="outputs section-block"
+      aria-labelledby="outputs-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">Practical outputs</p>
+          <h2 id="outputs-title">
+            Leave with a model that can change the work.
+          </h2>
+          <p>
+            The output should help central and local teams make a recurring
+            decision, explain responsible variation, resolve exceptions, and
+            learn from comparable evidence.
+          </p>
+        </div>
+
+        <ol class="output-list">
+          {
+            frameworkOutputs.map((output) => (
+              <li>
+                <p class="item-number">{output.number}</p>
+                <div>
+                  <h3>{output.title}</h3>
+                  <p>{output.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Engagement fit</p>
+          <h2 id="fit-title">
+            Use an enterprise framework when the decision repeats across
+            contexts.
+          </h2>
+          <p>
+            This work is useful when the organization needs shared direction and
+            responsible local judgment. It is not a substitute for routine
+            documentation or a way to centralize decisions that should remain
+            close to customers and frontline work.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="diagnostic-paths" aria-labelledby="diagnostic-paths-title">
+      <div class="page-container">
+        <div class="diagnostic-intro">
+          <p class="eyebrow">Related diagnostic paths</p>
+          <h2 id="diagnostic-paths-title">
+            Start with the operating problem the framework must support.
+          </h2>
+        </div>
+
+        <div class="diagnostic-grid">
+          {
+            diagnosticPaths.map((path) => (
+              <article>
+                <h3>{path.title}</h3>
+                <p>{path.useWhen}</p>
+                <a href={path.href}>
+                  Review the diagnostic
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .enterprise-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block,
+  .architecture,
+  .failure-patterns,
+  .fit,
+  .diagnostic-paths {
+    padding-block: var(--section-space);
+  }
+
+  .enterprise-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .condition-number,
+  .condition-label,
+  .path-phase,
+  .path-marker p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse,
+  .architecture .condition-number,
+  .architecture .condition-label {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro h2,
+  .path-intro h2,
+  .failure-intro h2,
+  .fit-copy h2,
+  .diagnostic-intro h2 {
+    max-width: 19ch;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .section-intro > p:not(.eyebrow),
+  .path-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .signal-grid,
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-grid article,
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-grid h3,
+  .evidence-grid h3 {
+    margin-top: 1.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .signal-grid article > p:last-child,
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .architecture,
+  .failure-patterns {
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .condition-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .condition-grid article {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .condition-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .condition-grid h3 {
+    max-width: 30ch;
+    margin-top: 2rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .condition-grid article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .path-intro,
+  .failure-intro,
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .path-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .path-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    min-height: 9rem;
+  }
+
+  .path-marker {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .path-marker p {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    border: var(--border-width) solid var(--color-blue);
+    border-radius: 50%;
+    place-items: center;
+  }
+
+  .path-marker span {
+    width: var(--border-width);
+    flex: 1;
+    background: var(--color-border);
+  }
+
+  .path-list li:last-child .path-marker span {
+    display: none;
+  }
+
+  .path-content {
+    padding-bottom: 2.25rem;
+  }
+
+  .path-content h3 {
+    max-width: 34ch;
+    margin-top: 0.6rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-content > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .evidence {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-note {
+    max-width: 52rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-note > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .failure-list h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 2.25rem);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-list li > div > p {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .fit {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy .button {
+    margin-top: 0.5rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .diagnostic-paths {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-paths .page-container {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .diagnostic-intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .diagnostic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid article {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .diagnostic-grid p {
+    margin: 0.75rem 0 1.5rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .diagnostic-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+  }
+
+  .enterprise-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .diagnostic-grid a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .section-intro-split,
+    .path-layout,
+    .failure-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .signal-grid,
+    .evidence-grid,
+    .diagnostic-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .signal-grid,
+    .condition-grid,
+    .evidence-grid,
+    .failure-list,
+    .diagnostic-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .path-list li {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .path-marker p {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .enterprise-hero,
+    .trigger-card,
+    .signal-grid,
+    .signal-grid article,
+    .condition-grid,
+    .condition-grid article,
+    .path-marker p,
+    .evidence,
+    .evidence-grid,
+    .evidence-grid article,
+    .evidence-note,
+    .failure-list,
+    .failure-list article,
+    .output-list,
+    .output-list li,
+    .fit,
+    .fit-list,
+    .diagnostic-paths,
+    .diagnostic-grid,
+    .diagnostic-grid article {
+      border-color: CanvasText;
+    }
+  }
+</style>
