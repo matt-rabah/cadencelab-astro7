@@ -1,0 +1,1231 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const routingConditions = [
+  {
+    number: "01",
+    title: "Material consequence",
+    description:
+      "Route decisions that could meaningfully affect a customer, employee, commitment, entitlement, payment, access, safety, or difficult-to-reverse outcome.",
+  },
+  {
+    number: "02",
+    title: "Insufficient evidence",
+    description:
+      "Pause when required context is missing, conflicting, stale, inaccessible, or outside the information the system is authorized to use.",
+  },
+  {
+    number: "03",
+    title: "Unresolved uncertainty",
+    description:
+      "Transfer work when the system cannot distinguish among plausible interpretations or cannot support its next action with adequate evidence.",
+  },
+  {
+    number: "04",
+    title: "Policy or workflow exception",
+    description:
+      "Prevent the system from improvising authority when a request falls outside approved rules, known conditions, or the intended operating path.",
+  },
+  {
+    number: "05",
+    title: "Customer request or distress",
+    description:
+      "Respect an explicit request for a person and recognize language or behavior that indicates urgency, vulnerability, frustration, or loss of trust.",
+  },
+  {
+    number: "06",
+    title: "System or tool failure",
+    description:
+      "Provide a recovery path when a dependency fails, an action cannot be confirmed, or the system can no longer guarantee a coherent response.",
+  },
+];
+
+const routingPath = [
+  {
+    phase: "Recognize",
+    question: "What condition exceeds the system's intended role?",
+    evidence:
+      "Consequence, uncertainty, missing context, exception, request, or failure.",
+  },
+  {
+    phase: "Pause",
+    question: "What must stop while a person takes responsibility?",
+    evidence:
+      "Pending action, customer promise, automated follow-up, tool use, and safe state.",
+  },
+  {
+    phase: "Transfer",
+    question: "What context and priority must travel with the work?",
+    evidence:
+      "Customer intent, conversation, evidence, actions taken, uncertainty, and deadline.",
+  },
+  {
+    phase: "Decide",
+    question: "Who can judge the case and act with appropriate authority?",
+    evidence:
+      "Receiving role, decision rights, supporting expertise, response, and communication.",
+  },
+  {
+    phase: "Return",
+    question: "How does the outcome update the customer and the system?",
+    evidence:
+      "Resolution, rationale, records, follow-up, feedback, and changed routing rules.",
+  },
+];
+
+const contextRequirements = [
+  {
+    label: "Customer intent",
+    description:
+      "What the customer is trying to accomplish, not only the most recent message or classified topic.",
+  },
+  {
+    label: "Conversation and prior action",
+    description:
+      "Relevant history, promises, tool calls, records changed, content shown, and actions already attempted.",
+  },
+  {
+    label: "Reason for routing",
+    description:
+      "The exact boundary, uncertainty, exception, failure, or customer request that caused the system to stop.",
+  },
+  {
+    label: "Consequence and timing",
+    description:
+      "Customer or operating impact, urgency, elapsed time, commitments, and the next useful response window.",
+  },
+  {
+    label: "Evidence and uncertainty",
+    description:
+      "Sources used, missing information, conflicting signals, confidence limits, and questions still requiring judgment.",
+  },
+  {
+    label: "Ownership and next action",
+    description:
+      "The receiving role, expected acknowledgement, available authority, required customer update, and fallback path.",
+  },
+];
+
+const failurePatterns = [
+  {
+    cue: "The conversation transfers but the reasoning does not",
+    description:
+      "A person receives a transcript without the customer intent, actions already taken, evidence used, or unresolved question that requires judgment.",
+  },
+  {
+    cue: "Uncertainty is hidden behind a confident response",
+    description:
+      "The system continues because the workflow has no usable signal for ambiguity, missing evidence, or conditions outside its intended scope.",
+  },
+  {
+    cue: "The route reaches a person without decision authority",
+    description:
+      "A human becomes responsible for the conversation but cannot approve the exception, correct the record, change the outcome, or obtain timely support.",
+  },
+  {
+    cue: "The human queue loses the consequence",
+    description:
+      "Routed work arrives with a generic priority, separating it from the customer impact, elapsed time, or commitment that made intervention necessary.",
+  },
+  {
+    cue: "Automation continues while the case waits",
+    description:
+      "Messages, decisions, or downstream actions keep firing after routing, creating contradiction, duplicate work, or additional customer harm.",
+  },
+  {
+    cue: "Human decisions never improve the route",
+    description:
+      "Corrections, overrides, resolved exceptions, and recurring causes remain outside the review process, so the same failures continue.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Conversations and customer signals",
+    description:
+      "Requests, language, sentiment, repeated effort, explicit routing requests, outcome history, and the full customer context surrounding the event.",
+  },
+  {
+    title: "System decisions and tool activity",
+    description:
+      "Instructions, classifications, retrieved sources, generated responses, tool calls, records changed, and actions attempted or completed.",
+  },
+  {
+    title: "Routing triggers and boundaries",
+    description:
+      "Approved conditions, thresholds, stop rules, prohibited actions, known exceptions, fallback behavior, and the reason recorded for each transfer.",
+  },
+  {
+    title: "Human queue and response behavior",
+    description:
+      "Assignment, priority, acknowledgement, capacity, decision authority, elapsed time, collaboration, and customer communication.",
+  },
+  {
+    title: "Corrections and overrides",
+    description:
+      "What people changed, rejected, approved, or recovered and whether the underlying cause was data, instructions, workflow, policy, or system behavior.",
+  },
+  {
+    title: "Customer and operating outcomes",
+    description:
+      "Resolution quality, repeat contact, rework, delay, trust, escalation, cost, safety, and evidence that the routing decision improved the result.",
+  },
+];
+
+const routingOutputs = [
+  {
+    number: "01",
+    title: "Decision boundary map",
+    description:
+      "A shared view of what the system may handle, what requires human judgment, and which actions or consequences demand approval.",
+  },
+  {
+    number: "02",
+    title: "Routing and priority rules",
+    description:
+      "Explicit triggers, stop conditions, service expectations, receiving roles, decision authority, fallback paths, and customer communication requirements.",
+  },
+  {
+    number: "03",
+    title: "Human context packet",
+    description:
+      "The minimum customer intent, history, evidence, prior action, uncertainty, consequence, and next question that must accompany the transfer.",
+  },
+  {
+    number: "04",
+    title: "Review and improvement loop",
+    description:
+      "Measures and review practices connecting routes, overrides, failures, human decisions, customer outcomes, and changes to the operating system.",
+  },
+];
+
+const strongFit = [
+  "An AI-supported workflow can communicate with customers or take consequential action.",
+  "Human escalation exists, but routed cases arrive without enough context or priority.",
+  "Teams cannot explain when the system should stop, defer, ask, or transfer control.",
+  "Exceptions, corrections, and overrides recur without changing the workflow.",
+  "A sponsor can align process owners, frontline teams, governance partners, and technical owners.",
+];
+---
+
+<Layout
+  title="AI-to-human Routing | Cadence Lab"
+  description="Design AI-to-human routing around decision boundaries, usable context, human authority, safe pauses, customer communication, and accountable outcomes."
+  canonicalURL="/workflows/agent-routing/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="routing-page" tabindex="-1">
+    <section class="routing-hero" aria-labelledby="routing-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">AI-to-human routing</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Workflow · AI-to-human routing</p>
+          <h1 id="routing-title">
+            Route the judgment, not just the conversation.
+          </h1>
+          <p class="hero-lead">
+            AI-to-human routing defines when an AI-supported workflow must
+            pause, what evidence and customer context move with the work, which
+            person has authority to act, and how the outcome returns to the
+            operating system.
+          </p>
+
+          <div class="hero-actions" aria-label="AI-to-human routing actions">
+            <a
+              class="button button-primary"
+              href="/services/ai-service-readiness-review/"
+            >
+              Review the AI Service Readiness Review
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>
+            An AI assistant can answer, classify, recommend, or act, but the
+            organization cannot state clearly when it must stop, who accepts the
+            work, or what the person needs to make the next decision.
+          </p>
+          <dl>
+            <div>
+              <dt>Boundary</dt>
+              <dd>Where machine authority ends</dd>
+            </div>
+            <div>
+              <dt>Transfer</dt>
+              <dd>Intent, evidence, action, uncertainty, consequence</dd>
+            </div>
+            <div>
+              <dt>Outcome</dt>
+              <dd>Human judgment with accountable closure</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "What routing does", href: "#what-routing-does" },
+        { label: "Route conditions", href: "#route-conditions" },
+        { label: "Routing path", href: "#routing-path" },
+        { label: "Context transfer", href: "#context-transfer" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Evidence and outputs", href: "#evidence-outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="what-routing-does"
+      class="routing-purpose section-block"
+      aria-labelledby="routing-purpose-title"
+    >
+      <div class="page-container purpose-layout">
+        <div>
+          <p class="eyebrow">What routing does</p>
+          <h2 id="routing-purpose-title">
+            Make the limit of automation operational.
+          </h2>
+        </div>
+
+        <div class="purpose-copy">
+          <p>
+            Human oversight becomes useful only when the workflow can recognize
+            a condition requiring judgment, stop safely, and transfer the work
+            to a person who can change the outcome.
+          </p>
+          <p>
+            A routing map connects that condition to customer consequence,
+            evidence, priority, ownership, decision authority, communication,
+            recovery, and review. It treats the human response as part of the
+            operating system rather than a generic fallback.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="route-conditions"
+      class="route-conditions"
+      aria-labelledby="route-conditions-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Route conditions</p>
+          <h2 id="route-conditions-title">
+            Define when a person must enter the decision.
+          </h2>
+          <p>
+            The exact rules depend on the use case. These six conditions
+            establish a practical starting point for appropriate human control.
+          </p>
+        </div>
+
+        <ol class="condition-grid">
+          {
+            routingConditions.map((condition) => (
+              <li>
+                <p class="item-number">{condition.number}</p>
+                <h3>{condition.title}</h3>
+                <p>{condition.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="routing-path"
+      class="routing-path section-block"
+      aria-labelledby="routing-path-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Routing path</p>
+            <h2 id="routing-path-title">
+              Move from boundary recognition to accountable closure.
+            </h2>
+          </div>
+          <p>
+            Each stage tests whether the workflow preserves customer context,
+            stops inappropriate action, and places the decision with a person
+            who has enough authority and evidence to act.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            routingPath.map((stage, index) => (
+              <li>
+                <div class="path-heading">
+                  <p class="path-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="path-phase">{stage.phase}</p>
+                </div>
+                <h3>{stage.question}</h3>
+                <p>{stage.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="context-transfer"
+      class="context-transfer section-block"
+      aria-labelledby="context-transfer-title"
+    >
+      <div class="page-container context-layout">
+        <div class="context-intro">
+          <p class="eyebrow">Context transfer</p>
+          <h2 id="context-transfer-title">
+            Give the person a case, not a transcript.
+          </h2>
+          <p>
+            The receiving person should understand why the work arrived, what
+            the customer needs, what has already happened, what remains
+            uncertain, and what decision is now required.
+          </p>
+        </div>
+
+        <dl class="context-list">
+          {
+            contextRequirements.map((item, index) => (
+              <div>
+                <dt>
+                  <span aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {item.label}
+                </dt>
+                <dd>{item.description}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-patterns"
+      aria-labelledby="failure-patterns-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+          <h2 id="failure-patterns-title">
+            Human availability does not guarantee human control.
+          </h2>
+          <p>
+            These patterns reveal where a visible escalation feature fails to
+            create a usable, safe, and accountable response.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failurePatterns.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="evidence-outputs"
+      class="evidence-outputs section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence and outputs</p>
+            <h2 id="evidence-title">Examine the whole decision path.</h2>
+          </div>
+          <p>
+            A useful review compares intended routing rules with real
+            conversations, system behavior, human response, corrections, and
+            customer outcomes. It distinguishes observed facts from assumptions
+            about what the AI or the person did.
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="output-block">
+          <div class="output-intro">
+            <p class="note-label">Practical outputs</p>
+            <h2>Leave with a route people and systems can operate.</h2>
+          </div>
+
+          <ol class="output-list">
+            {
+              routingOutputs.map((output) => (
+                <li>
+                  <p class="item-number">{output.number}</p>
+                  <div>
+                    <h3>{output.title}</h3>
+                    <p>{output.description}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use routing design when AI participates in consequential customer
+            work.
+          </h2>
+          <p>
+            This work is most useful when an AI-supported workflow can answer,
+            recommend, classify, or act and people remain accountable for the
+            outcome. It is not a chatbot widget installation, a staffing
+            forecast, or a substitute for the broader AI readiness decision.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .routing-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .routing-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .path-number,
+  .path-phase {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .purpose-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .purpose-layout h2,
+  .section-intro h2,
+  .context-intro h2,
+  .failure-intro h2,
+  .output-intro h2,
+  .fit-copy h2 {
+    max-width: 20ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .purpose-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .purpose-copy p,
+  .section-intro > p:not(.eyebrow),
+  .context-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2,
+  .failure-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .route-conditions,
+  .failure-patterns {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .condition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .condition-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .condition-grid .item-number,
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .condition-grid h3,
+  .failure-list h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .condition-grid li > p:last-child,
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 0.1875rem solid var(--color-blue);
+    list-style: none;
+  }
+
+  .path-list li {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .path-list li:first-child {
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .path-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .path-number {
+    color: var(--color-text-muted);
+  }
+
+  .path-list h3 {
+    min-height: 6.75rem;
+    margin-top: 2rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-list li > p:last-child {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .context-transfer {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .context-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .context-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .context-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .context-list {
+    display: grid;
+    margin: 0;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .context-list > div {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.65fr) minmax(0, 1.35fr);
+    gap: 2rem;
+    padding-block: 1.25rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .context-list dt {
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.5;
+  }
+
+  .context-list dt span {
+    display: inline-block;
+    min-width: 2.5rem;
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--ls-eyebrow);
+  }
+
+  .context-list dd {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .output-block {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+    padding-top: clamp(2rem, 5vw, 4rem);
+    border-top: 0.1875rem solid var(--color-blue);
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    padding-block: 1.5rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-list li > div > p {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .routing-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .path-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-list h3 {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .purpose-layout,
+    .section-intro-split,
+    .context-layout,
+    .failure-layout,
+    .output-block,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .condition-grid,
+    .evidence-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div,
+    .context-list > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .condition-grid,
+    .path-list,
+    .failure-list,
+    .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .routing-hero,
+    .trigger-card,
+    .condition-grid,
+    .condition-grid li,
+    .path-list,
+    .path-list li,
+    .context-transfer,
+    .context-list,
+    .context-list > div,
+    .failure-list,
+    .failure-list article,
+    .evidence-grid,
+    .evidence-grid article,
+    .output-block,
+    .output-list,
+    .output-list li,
+    .fit,
+    .fit-list {
+      border-color: CanvasText;
+    }
+  }
+</style>
