@@ -5,6 +5,11 @@ import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
 
+const excludedSitemapPages = new Set([
+  "https://cadencelab.co/search/",
+  "https://cadencelab.co/thanks/",
+]);
+
 export default defineConfig({
   output: "static",
   site: "https://cadencelab.co",
@@ -106,7 +111,12 @@ export default defineConfig({
     },
   ],
 
-  integrations: [tina(), sitemap()],
+  integrations: [
+    tina(),
+    sitemap({
+      filter: (page) => !excludedSitemapPages.has(page),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss(), tinaAdminDevRedirect()],
