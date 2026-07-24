@@ -1,0 +1,1256 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const visibleSignals = [
+  {
+    number: "01",
+    title: "One customer has several competing identities",
+    description:
+      "Accounts, contacts, opportunities, cases, subscriptions, and product records cannot be joined into a reliable view of the relationship.",
+  },
+  {
+    number: "02",
+    title: "Pipeline stages mean different things to different teams",
+    description:
+      "The same status reflects different evidence, readiness, risk, or next actions depending on who entered it and which review is underway.",
+  },
+  {
+    number: "03",
+    title: "Required fields are complete but the context is missing",
+    description:
+      "Records satisfy configuration rules while the reason for action, customer history, urgency, or unresolved decision remains unclear.",
+  },
+  {
+    number: "04",
+    title: "Reports require manual reconciliation before use",
+    description:
+      "Leaders combine exports, spreadsheets, local definitions, and individual explanations before they trust a pipeline or customer view.",
+  },
+  {
+    number: "05",
+    title: "Integrations distribute ambiguity at scale",
+    description:
+      "Duplicate, stale, incomplete, or differently defined information moves across systems and triggers automation without improving the underlying decision.",
+  },
+  {
+    number: "06",
+    title: "Every cleanup decays after the project ends",
+    description:
+      "Records improve temporarily, then return to prior conditions because the workflow, definitions, ownership, and review practices did not change.",
+  },
+];
+
+const operatingCauses = [
+  {
+    label: "Decision",
+    question: "What decision should the data make easier?",
+    description:
+      "Fields and reports accumulate without a bounded operating question, leaving teams to collect information that is available but not useful.",
+  },
+  {
+    label: "Definitions",
+    question: "Do teams interpret the record in the same way?",
+    description:
+      "Customer, stage, source, risk, activity, ownership, and completion can carry different meanings across functions, systems, and reviews.",
+  },
+  {
+    label: "Workflow",
+    question: "Does the process create reliable information as work happens?",
+    description:
+      "Data quality weakens when entry occurs after the decision, repeats information already captured, or asks people to record context the workflow does not use.",
+  },
+  {
+    label: "Ownership",
+    question: "Who is accountable when information crosses a boundary?",
+    description:
+      "Records become stale or contradictory when responsibility for creation, maintenance, correction, acceptance, and exception recovery is unclear.",
+  },
+  {
+    label: "System boundaries",
+    question: "Which source is authoritative for each decision?",
+    description:
+      "Integrations create false confidence when synchronization rules, provenance, timing, conflict handling, and system responsibility remain undefined.",
+  },
+  {
+    label: "Review",
+    question: "How does the organization learn that a signal is unreliable?",
+    description:
+      "Corrections, workarounds, reporting disputes, failed automation, and customer consequences often remain outside the data-governance process.",
+  },
+];
+
+const dataPath = [
+  {
+    phase: "Capture",
+    question: "Where does the customer or operating signal enter?",
+    evidence:
+      "Source, purpose, timing, required evidence, person or system, and initial ownership.",
+  },
+  {
+    phase: "Define",
+    question: "What does the value mean and which decision uses it?",
+    evidence:
+      "Shared definition, allowed values, business rule, provenance, and known limitations.",
+  },
+  {
+    phase: "Transfer",
+    question: "How does the information move across records and systems?",
+    evidence:
+      "Mapping, matching, synchronization, transformations, conflict rules, and elapsed time.",
+  },
+  {
+    phase: "Act",
+    question: "Who relies on the signal and what happens next?",
+    evidence:
+      "Owner, workflow, automation, customer action, approval, exception, and consequence.",
+  },
+  {
+    phase: "Review",
+    question: "Can the organization tell whether the signal was useful?",
+    evidence:
+      "Correction, disagreement, outcome, failure, feedback, stewardship, and changed rules.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Records and relationships",
+    description:
+      "Representative accounts, contacts, opportunities, cases, lifecycle records, product or service records, and the links expected to connect them.",
+  },
+  {
+    title: "Definitions and field behavior",
+    description:
+      "Business meaning, allowed values, required fields, formulas, defaults, completion rules, help text, and differences between intended and actual use.",
+  },
+  {
+    title: "Workflow and ownership changes",
+    description:
+      "Creation, assignment, transfer, approval, correction, closure, reopening, and the roles responsible at each meaningful point.",
+  },
+  {
+    title: "Integrations and transformations",
+    description:
+      "Source systems, mappings, match rules, synchronization timing, conflict handling, enrichment, calculated values, and failed or delayed movement.",
+  },
+  {
+    title: "Reporting and reconciliation",
+    description:
+      "Dashboards, filters, exports, manual adjustments, local scorecards, disputed metrics, and the explanations required before a report can guide action.",
+  },
+  {
+    title: "Frontline behavior and outcomes",
+    description:
+      "Duplicate entry, outside tools, private notes, corrections, bypasses, customer effects, and other evidence showing where the formal record cannot be trusted.",
+  },
+];
+
+const repairSequence = [
+  {
+    phase: "Bound",
+    question: "Which decision and customer path matter first?",
+    evidence:
+      "Consequential workflow, affected roles, required signals, known failure, and expected outcome.",
+  },
+  {
+    phase: "Trace",
+    question: "Where does meaning or reliability weaken?",
+    evidence:
+      "Source, definition, record, transformation, owner, use, correction, and outcome.",
+  },
+  {
+    phase: "Assign",
+    question: "Who owns creation, acceptance, maintenance, and repair?",
+    evidence:
+      "Stewardship, decision rights, service expectations, exceptions, and escalation.",
+  },
+  {
+    phase: "Repair",
+    question: "What is the smallest useful sequence of changes?",
+    evidence:
+      "Definitions, workflow, fields, matching, integration, automation, reporting, and removed complexity.",
+  },
+  {
+    phase: "Govern",
+    question: "How will reliability be reviewed as conditions change?",
+    evidence:
+      "Quality signals, disputes, corrections, customer outcomes, ownership review, and change control.",
+  },
+];
+
+const diagnosticPaths = [
+  {
+    title: "CRM Workflow Audit",
+    href: "/services/crm-workflow-audit/",
+    useWhen:
+      "The core problem sits in records, definitions, field use, automation, reporting, adoption, or the workflow the CRM is expected to support.",
+  },
+  {
+    title: "CX Systems Diagnostic",
+    href: "/services/cx-systems-diagnostic/",
+    useWhen:
+      "Unreliable data is one part of a broader customer problem spanning ownership, service rules, handoffs, and several operating systems.",
+  },
+  {
+    title: "Lifecycle Risk Review",
+    href: "/services/lifecycle-risk-review/",
+    useWhen:
+      "The organization cannot trust the signals used to recognize onboarding drift, weak adoption, quiet accounts, intervention need, or renewal risk.",
+  },
+];
+
+const strongFit = [
+  "Teams cannot trust CRM pipeline, lifecycle, service, or customer signals without manual reconciliation.",
+  "Data issues cross systems, functions, definitions, ownership, or operating workflows.",
+  "Cleanups and governance programs have not produced durable improvement.",
+  "Automation or AI depends on records whose provenance and reliability remain unclear.",
+  "A sponsor can align business, customer-facing, data, operations, and technical owners.",
+];
+---
+
+<Layout
+  title="Siloed and Dirty CRM Pipelines | Cadence Lab"
+  description="Find why CRM records, pipeline stages, customer signals, integrations, and reports remain unreliable and determine what to repair first."
+  canonicalURL="/solutions/dirty-data/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="data-page" tabindex="-1">
+    <section class="data-hero" aria-labelledby="data-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">Siloed and dirty CRM pipelines</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Solution · Siloed and dirty CRM pipelines</p>
+          <h1 id="data-title">
+            Clean the decision path, not just the records.
+          </h1>
+          <p class="hero-lead">
+            CRM data becomes reliable when teams share definitions, workflows
+            create useful context, ownership survives system boundaries, and
+            signals are reviewed against real outcomes. Cleanup is necessary,
+            but it becomes durable only when the operating causes change.
+          </p>
+
+          <div
+            class="hero-actions"
+            aria-label="Siloed and dirty CRM pipeline actions"
+          >
+            <a
+              class="button button-primary"
+              href="/services/crm-workflow-audit/"
+            >
+              Review the CRM Workflow Audit
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="problem-card" aria-labelledby="problem-title">
+          <p id="problem-title" class="note-label">Recognizable pattern</p>
+          <p>
+            The CRM contains records, required fields, integrations, automation,
+            and dashboards, but teams still reconcile exports, maintain local
+            definitions, and ask experienced employees which number to trust.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible label</dt>
+              <dd>Dirty data or siloed systems</dd>
+            </div>
+            <div>
+              <dt>Operating question</dt>
+              <dd>Which decision cannot trust the available signal?</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>What to define, own, repair, or remove first</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Problem", href: "#problem" },
+        { label: "Signals", href: "#signals" },
+        { label: "Operating causes", href: "#operating-causes" },
+        { label: "Data path", href: "#data-path" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Repair sequence", href: "#repair-sequence" },
+        { label: "Diagnostic paths", href: "#diagnostic-paths" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="problem"
+      class="problem section-block"
+      aria-labelledby="problem-heading"
+    >
+      <div class="page-container problem-layout">
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2 id="problem-heading">
+            Data quality is produced by the operating system.
+          </h2>
+        </div>
+
+        <div class="problem-copy">
+          <p>
+            A record is not reliable because it is complete. It is reliable when
+            its meaning is shared, its source and timing are understood, its
+            owner can correct it, and the people using it know which decision it
+            can responsibly support.
+          </p>
+          <p>
+            When those conditions are missing, teams create local versions of
+            the truth. Integrations and automation then distribute the
+            disagreement faster, while cleanup projects repair symptoms that the
+            workflow continues to recreate.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="signals" class="signals" aria-labelledby="signals-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Visible signals</p>
+          <h2 id="signals-title">
+            Look for inconsistency at the point of decision.
+          </h2>
+          <p>
+            These patterns indicate that the CRM records activity without
+            providing a dependable account of the customer or the work.
+          </p>
+        </div>
+
+        <ol class="signal-grid">
+          {
+            visibleSignals.map((signal) => (
+              <li>
+                <p class="item-number">{signal.number}</p>
+                <h3>{signal.title}</h3>
+                <p>{signal.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="operating-causes"
+      class="operating-causes section-block"
+      aria-labelledby="causes-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Operating causes</p>
+            <h2 id="causes-title">
+              Find the condition that keeps recreating the problem.
+            </h2>
+          </div>
+          <p>
+            Duplicate and incomplete records matter. A durable response also
+            examines why the organization creates, interprets, transfers, and
+            corrects information in conflicting ways.
+          </p>
+        </div>
+
+        <div class="cause-list">
+          {
+            operatingCauses.map((cause, index) => (
+              <article>
+                <div class="cause-heading">
+                  <p class="item-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="cause-label">{cause.label}</p>
+                </div>
+                <h3>{cause.question}</h3>
+                <p>{cause.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="data-path" class="data-path" aria-labelledby="data-path-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Data path</p>
+          <h2 id="data-path-title">
+            Follow the signal from capture to consequence.
+          </h2>
+          <p>
+            Tracing one consequential customer or pipeline signal reveals where
+            meaning, reliability, ownership, or timing weakens.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            dataPath.map((stage, index) => (
+              <li>
+                <div class="path-heading">
+                  <p class="path-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="path-phase">{stage.phase}</p>
+                </div>
+                <h3>{stage.question}</h3>
+                <p>{stage.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container evidence-layout">
+        <div class="evidence-intro">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="evidence-title">
+            Compare the configured system with the trusted system.
+          </h2>
+          <p>
+            A useful review combines record inspection with workflow behavior,
+            definitions, integration logic, reporting practice, ownership, and
+            customer outcomes.
+          </p>
+          <div class="evidence-principle">
+            <p class="note-label">Evidence principle</p>
+            <p>
+              Start with representative decisions and records. Broad quality
+              scores can hide the specific missing signal that prevents useful
+              action.
+            </p>
+          </div>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="repair-sequence"
+      class="repair-sequence"
+      aria-labelledby="repair-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Repair sequence</p>
+          <h2 id="repair-title">
+            Improve one consequential path before cleaning everything.
+          </h2>
+          <p>
+            The sequence bounds the problem, repairs the operating conditions,
+            and creates a review loop that can support broader improvement.
+          </p>
+        </div>
+
+        <ol class="repair-list">
+          {
+            repairSequence.map((stage, index) => (
+              <li>
+                <div class="repair-heading">
+                  <p class="repair-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="repair-phase">{stage.phase}</p>
+                </div>
+                <h3>{stage.question}</h3>
+                <p>{stage.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="diagnostic-paths"
+      class="diagnostic-paths section-block"
+      aria-labelledby="paths-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Diagnostic paths</p>
+            <h2 id="paths-title">
+              Let the failed decision determine the entry point.
+            </h2>
+          </div>
+          <p>
+            Unreliable CRM data can be a focused workflow problem, part of a
+            broader customer system failure, or the reason lifecycle risk
+            remains invisible until it is too late.
+          </p>
+        </div>
+
+        <div class="diagnostic-grid">
+          {
+            diagnosticPaths.map((path, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{path.title}</h3>
+                <p>{path.useWhen}</p>
+                <a href={path.href}>
+                  Review the diagnostic
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use this path when unreliable data is preventing coordinated work.
+          </h2>
+          <p>
+            The work is most useful when leadership can change definitions,
+            workflow, ownership, configuration, and system behavior. It is not a
+            bulk deduplication service, a migration project, or a replacement
+            for routine data administration.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .data-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .data-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .cause-label,
+  .path-number,
+  .path-phase,
+  .repair-number,
+  .repair-phase {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .problem-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .problem-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .problem-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .problem-card dl > div {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .problem-card dt,
+  .problem-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .problem-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .problem-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .problem-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .problem-layout h2,
+  .section-intro h2,
+  .evidence-intro h2,
+  .fit-copy h2 {
+    max-width: 20ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .problem-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .problem-copy p,
+  .section-intro > p:not(.eyebrow),
+  .evidence-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .signals,
+  .data-path,
+  .repair-sequence {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .signal-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .signal-grid .item-number {
+    color: var(--color-green);
+  }
+
+  .signal-grid h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .signal-grid li > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .cause-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .cause-list article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .cause-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cause-list h3 {
+    max-width: 31ch;
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .cause-list article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-list,
+  .repair-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 0.1875rem solid var(--color-green);
+    list-style: none;
+  }
+
+  .path-list li,
+  .repair-list li {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .path-list li:first-child,
+  .repair-list li:first-child {
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .path-heading,
+  .repair-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .path-number,
+  .repair-number {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .path-phase,
+  .repair-phase {
+    color: var(--color-green);
+  }
+
+  .path-list h3,
+  .repair-list h3 {
+    min-height: 6.75rem;
+    margin-top: 2rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-list li > p:last-child,
+  .repair-list li > p:last-child {
+    margin: 1rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .evidence {
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .evidence-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .evidence-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .evidence-principle {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-principle > p:last-child {
+    margin: 0.65rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 1.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .diagnostic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid article {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .diagnostic-grid article > p:not(.item-number) {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .diagnostic-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.25em;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .data-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .diagnostic-grid a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .path-list,
+    .repair-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-list h3,
+    .repair-list h3 {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .problem-layout,
+    .section-intro-split,
+    .evidence-layout,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .problem-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .signal-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .diagnostic-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .problem-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .signal-grid,
+    .cause-list,
+    .path-list,
+    .evidence-grid,
+    .repair-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .data-hero,
+    .problem-card,
+    .signal-grid,
+    .signal-grid li,
+    .cause-list,
+    .cause-list article,
+    .path-list,
+    .path-list li,
+    .evidence-principle,
+    .evidence-grid,
+    .evidence-grid article,
+    .repair-list,
+    .repair-list li,
+    .diagnostic-grid,
+    .diagnostic-grid article,
+    .fit,
+    .fit-list {
+      border-color: CanvasText;
+    }
+  }
+</style>
