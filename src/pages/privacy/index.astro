@@ -1,0 +1,774 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const effectiveDate = "July 23, 2026";
+
+const policySections = [
+  { label: "Scope", href: "#scope" },
+  { label: "Information collected", href: "#information-collected" },
+  { label: "How information is used", href: "#how-information-is-used" },
+  { label: "Service providers", href: "#service-providers" },
+  { label: "Retention and security", href: "#retention-security" },
+  { label: "Your choices", href: "#your-choices" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<Layout
+  title="Privacy Policy | Cadence Lab"
+  description="How Cadence Lab collects, uses, shares, and protects information submitted through cadencelab.co."
+  canonicalURL="/privacy/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="privacy-page" tabindex="-1">
+    <header class="privacy-hero">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Privacy policy</p>
+          <h1>
+            Privacy should be understandable before information is shared.
+          </h1>
+          <p class="hero-lead">
+            This policy explains what Cadence Lab collects through this website,
+            why that information is used, which service providers help process
+            it, and what choices are available to you.
+          </p>
+        </div>
+
+        <aside class="policy-summary" aria-labelledby="policy-summary-title">
+          <p id="policy-summary-title" class="summary-label">
+            Policy at a glance
+          </p>
+          <dl>
+            <div>
+              <dt>Effective</dt>
+              <dd>{effectiveDate}</dd>
+            </div>
+            <div>
+              <dt>Applies to</dt>
+              <dd>cadencelab.co and its forms</dd>
+            </div>
+            <div>
+              <dt>Advertising</dt>
+              <dd>No third-party advertising trackers</dd>
+            </div>
+            <div>
+              <dt>Contact</dt>
+              <dd>
+                <a href="mailto:hi@cadencelab.co">hi@cadencelab.co</a>
+              </dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </header>
+
+    <div class="page-container policy-layout">
+      <aside class="policy-navigation">
+        <nav aria-label="Privacy policy contents">
+          <p>On this page</p>
+          <ol>
+            {
+              policySections.map((section, index) => (
+                <li>
+                  <a href={section.href}>
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {section.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+      </aside>
+
+      <article class="policy-content">
+        <section id="scope" aria-labelledby="scope-title">
+          <p class="section-number" aria-hidden="true">01</p>
+          <h2 id="scope-title">Scope and responsibility</h2>
+
+          <p>
+            This Privacy Policy applies to information processed through
+            <strong>cadencelab.co</strong>, including the Fit Check form and
+            communications that follow from an inquiry. “Cadence Lab,” “we,”
+            “us,” and “our” refer to Cadence Lab, an independent customer
+            experience practice led by Matt Rabah.
+          </p>
+
+          <p>
+            This policy does not govern websites or services operated by other
+            organizations. When this site links to another website, that
+            organization’s privacy terms apply to its handling of information.
+          </p>
+        </section>
+
+        <section
+          id="information-collected"
+          aria-labelledby="information-collected-title"
+        >
+          <p class="section-number" aria-hidden="true">02</p>
+          <h2 id="information-collected-title">Information we collect</h2>
+
+          <h3>Information you provide</h3>
+          <p>
+            The Fit Check asks for the information needed to understand an
+            operating problem and respond to the inquiry. This may include:
+          </p>
+
+          <ul>
+            <li>Your name, work email address, organization, and role</li>
+            <li>
+              The customer experience problem and its operating or business
+              impact
+            </li>
+            <li>
+              Information about your operating environment, CRM conditions,
+              leadership alignment, and readiness for workflow change
+            </li>
+            <li>Additional context you choose to provide</li>
+          </ul>
+
+          <div class="policy-note">
+            <p class="note-label">Please do not submit</p>
+            <p>
+              Passwords, access tokens, payment-card information, health
+              records, government identifiers, regulated personal data, or other
+              confidential credentials.
+            </p>
+          </div>
+
+          <h3>Information processed automatically</h3>
+          <p>
+            When you visit the site, the hosting and security infrastructure may
+            process technical information needed to deliver and protect it. This
+            can include an IP address, request date and time, requested page or
+            URL, browser and device information, referral information, and
+            security or diagnostic data.
+          </p>
+
+          <p>
+            Search terms entered on the full search page can appear in the page
+            URL. The quick-search dialog filters published content in your
+            browser, but opening a full search sends the search URL to the site
+            in the ordinary course of loading that page.
+          </p>
+
+          <h3>Cookies and tracking</h3>
+          <p>
+            Cadence Lab does not currently include third-party advertising
+            trackers or site analytics scripts in the public website. Cloudflare
+            may use cookies or similar technologies when necessary to provide
+            security, traffic management, and reliable delivery. Browser
+            controls can be used to manage cookies, although blocking necessary
+            technologies may affect site operation.
+          </p>
+        </section>
+
+        <section
+          id="how-information-is-used"
+          aria-labelledby="how-information-is-used-title"
+        >
+          <p class="section-number" aria-hidden="true">03</p>
+          <h2 id="how-information-is-used-title">How information is used</h2>
+
+          <p>Cadence Lab uses information to:</p>
+
+          <ul>
+            <li>
+              Review a Fit Check and assess whether an engagement is useful
+            </li>
+            <li>Respond to questions and continue requested communications</li>
+            <li>
+              Understand the teams, systems, constraints, and decisions
+              surrounding an inquiry
+            </li>
+            <li>Operate, secure, troubleshoot, and improve the website</li>
+            <li>Detect or prevent spam, abuse, and unauthorized activity</li>
+            <li>
+              Meet applicable legal, accounting, or contractual obligations
+            </li>
+          </ul>
+
+          <p>
+            Fit Check information is used to evaluate and respond to the
+            inquiry. Submitting the form does not subscribe you to a marketing
+            list and does not create a consulting agreement.
+          </p>
+
+          <p>
+            Where data-protection law requires a legal basis, processing may be
+            necessary to take steps at your request before entering a contract,
+            to pursue legitimate interests in operating and protecting the
+            practice, to comply with legal obligations, or to act with your
+            consent, depending on the context.
+          </p>
+        </section>
+
+        <section
+          id="service-providers"
+          aria-labelledby="service-providers-title"
+        >
+          <p class="section-number" aria-hidden="true">04</p>
+          <h2 id="service-providers-title">Service providers and disclosure</h2>
+
+          <p>
+            Cadence Lab uses a limited number of providers to operate this
+            website and deliver form submissions:
+          </p>
+
+          <div class="provider-list">
+            <article>
+              <p class="provider-name">Cloudflare</p>
+              <h3>Hosting, delivery, and security</h3>
+              <p>
+                Cloudflare hosts the website and processes network and request
+                information to deliver pages, operate infrastructure, and
+                protect the site.
+              </p>
+              <a
+                href="https://www.cloudflare.com/policies/privacy/"
+                rel="external"
+              >
+                Review Cloudflare’s privacy policy
+              </a>
+            </article>
+
+            <article>
+              <p class="provider-name">Resend</p>
+              <h3>Fit Check email delivery</h3>
+              <p>
+                A validated Fit Check submission is sent to Resend so it can
+                deliver the inquiry to Cadence Lab by email. The site
+                application does not write the submission to a separate website
+                database.
+              </p>
+              <a href="https://resend.com/legal/privacy-policy" rel="external">
+                Review Resend’s privacy policy
+              </a>
+            </article>
+          </div>
+
+          <p>
+            Information may also be disclosed when reasonably necessary to
+            comply with law, respond to valid legal process, protect rights or
+            safety, investigate abuse, or complete a business reorganization
+            subject to appropriate safeguards.
+          </p>
+
+          <p>
+            Cadence Lab does not sell personal information or share it for
+            cross-context behavioral advertising.
+          </p>
+        </section>
+
+        <section
+          id="retention-security"
+          aria-labelledby="retention-security-title"
+        >
+          <p class="section-number" aria-hidden="true">05</p>
+          <h2 id="retention-security-title">Retention and security</h2>
+
+          <h3>Retention</h3>
+          <p>
+            Information is retained only for as long as reasonably needed to
+            review and respond to an inquiry, maintain relevant business
+            records, support an engagement, resolve disputes, enforce
+            agreements, or meet legal obligations. Retention can vary according
+            to the nature of the communication and the resulting relationship.
+          </p>
+
+          <p>
+            Fit Check submissions are delivered through email and may remain in
+            Cadence Lab’s business email records and in service-provider systems
+            according to their configurations and retention practices.
+          </p>
+
+          <h3>Security</h3>
+          <p>
+            Cadence Lab uses reasonable administrative and technical measures
+            intended to protect information. The Fit Check validates input,
+            limits submission size, rejects unsupported request formats, checks
+            same-origin submissions, uses spam-screening measures, and avoids
+            storing submissions in a public website database.
+          </p>
+
+          <p>
+            No internet transmission or storage method is completely secure.
+            Please avoid sending information that is not necessary for the
+            inquiry.
+          </p>
+
+          <h3>International processing</h3>
+          <p>
+            Service providers may process information in the United States or
+            other locations where they operate. Privacy protections can differ
+            between jurisdictions. Providers are expected to process information
+            under their applicable terms and data-protection commitments.
+          </p>
+        </section>
+
+        <section id="your-choices" aria-labelledby="your-choices-title">
+          <p class="section-number" aria-hidden="true">06</p>
+          <h2 id="your-choices-title">Your choices and privacy rights</h2>
+
+          <p>
+            Depending on where you live and subject to applicable exceptions,
+            you may have the right to request access to, correction of, or
+            deletion of personal information; to object to or restrict certain
+            processing; or to request a portable copy of information.
+          </p>
+
+          <p>
+            You may also withdraw consent where processing relies on consent.
+            Withdrawing consent does not affect processing that occurred before
+            the withdrawal.
+          </p>
+
+          <p>
+            To make a request, email
+            <a href="mailto:hi@cadencelab.co">hi@cadencelab.co</a>. Include
+            enough information to identify the relevant communication, but do
+            not send sensitive identifiers. Cadence Lab may need to verify your
+            identity before completing a request and may retain information
+            where permitted or required by law.
+          </p>
+
+          <h3>Children</h3>
+          <p>
+            This website and its services are intended for business users and
+            are not directed to children. Cadence Lab does not knowingly collect
+            personal information from children.
+          </p>
+
+          <h3>Policy changes</h3>
+          <p>
+            This policy may be updated to reflect changes in the website,
+            services, providers, or legal requirements. The effective date at
+            the top of the page will be revised when the policy changes
+            materially.
+          </p>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <p class="section-number" aria-hidden="true">07</p>
+          <h2 id="contact-title">Contact Cadence Lab</h2>
+
+          <p>
+            Questions about this policy or requests concerning personal
+            information can be sent to:
+          </p>
+
+          <address>
+            <strong>Cadence Lab</strong>
+            <span>Attention: Privacy</span>
+            <a href="mailto:hi@cadencelab.co">hi@cadencelab.co</a>
+          </address>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .privacy-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .privacy-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .eyebrow,
+  .summary-label,
+  .section-number,
+  .note-label,
+  .provider-name,
+  .policy-navigation nav > p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd,
+  address {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .policy-summary {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .policy-summary dl {
+    display: grid;
+    margin: 1.25rem 0 0;
+  }
+
+  .policy-summary dl > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .policy-summary dt,
+  .policy-summary dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .policy-summary dt {
+    color: var(--color-text-muted);
+  }
+
+  .policy-summary dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .policy-summary a,
+  .policy-content a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .policy-layout {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.35fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+    padding-block: var(--section-space);
+  }
+
+  .policy-navigation {
+    position: sticky;
+    inset-block-start: calc(var(--header-offset) + 2rem);
+  }
+
+  .policy-navigation nav {
+    padding-top: 1.25rem;
+    border-top: 0.1875rem solid var(--color-blue);
+  }
+
+  .policy-navigation ol {
+    display: grid;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .policy-navigation li {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .policy-navigation li:last-child {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .policy-navigation a {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding-block: 0.8rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .policy-navigation a span {
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+  }
+
+  .policy-content {
+    display: grid;
+    min-width: 0;
+    gap: clamp(4rem, 9vw, 7rem);
+  }
+
+  .policy-content section {
+    display: flex;
+    max-width: 52rem;
+    scroll-margin-block-start: calc(var(--header-offset) + 2rem);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .policy-content h2 {
+    max-width: 22ch;
+    margin-top: 0.65rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .policy-content h3 {
+    margin-top: 2.25rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .policy-content section > p:not(.section-number),
+  .policy-content li {
+    max-width: var(--measure-ui);
+    color: var(--color-text);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+  }
+
+  .policy-content section > p:not(.section-number) {
+    margin: 1.25rem 0 0;
+    text-wrap: pretty;
+  }
+
+  .policy-content ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.4rem;
+  }
+
+  .policy-content li::marker {
+    color: var(--color-blue);
+  }
+
+  .policy-note {
+    margin-top: 1.75rem;
+    padding: 1.5rem;
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .policy-note > p:last-child {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .provider-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    margin-top: 1.75rem;
+    border: var(--border-width) solid var(--color-border);
+  }
+
+  .provider-list article {
+    display: flex;
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .provider-list article + article {
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .provider-list h3 {
+    margin: 0;
+  }
+
+  .provider-list article > p:not(.provider-name) {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .provider-list a {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  address {
+    display: flex;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: var(--fs-body-ui);
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  address span {
+    color: var(--color-text-muted);
+  }
+
+  .privacy-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .policy-navigation a:hover {
+      color: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .policy-summary {
+      max-width: 38rem;
+    }
+
+    .policy-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .policy-navigation {
+      position: static;
+    }
+
+    .policy-navigation nav {
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+    }
+
+    .policy-navigation ol {
+      display: flex;
+      width: max-content;
+    }
+
+    .policy-navigation li {
+      border-top: 0;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .policy-navigation a {
+      min-height: var(--control-min-size);
+      grid-template-columns: auto auto;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .provider-list {
+      grid-template-columns: 1fr;
+    }
+
+    .provider-list article + article {
+      border-block-start: var(--border-width) solid var(--color-border);
+      border-inline-start: 0;
+    }
+
+    .policy-summary dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .privacy-hero,
+    .policy-summary,
+    .policy-navigation nav,
+    .policy-navigation li,
+    .policy-note,
+    .provider-list,
+    .provider-list article,
+    address {
+      border-color: CanvasText;
+    }
+  }
+</style>
