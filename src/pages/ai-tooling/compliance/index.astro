@@ -1,0 +1,318 @@
+---
+import StructuredCapabilityPage from "../../../components/StructuredCapabilityPage.astro";
+
+const page = {
+  meta: {
+    title: "PII Scrubbing Nodes | Cadence Lab",
+    description:
+      "Place governed PII detection, minimization, transformation, and review controls at the points where sensitive data enters, moves through, and leaves an AI workflow.",
+    canonicalURL: "/ai-tooling/compliance/",
+  },
+  hero: {
+    breadcrumb: "PII scrubbing nodes",
+    eyebrow: "AI tooling · PII scrubbing nodes",
+    title: "Remove unnecessary identity before the model receives it.",
+    lead: "PII scrubbing nodes are controlled points in an AI data path where sensitive information is classified, minimized, transformed, blocked, or routed for review. The objective is not indiscriminate redaction. It is to preserve the information a bounded task requires while reducing avoidable exposure.",
+    primaryCta: {
+      label: "Review AI Service Readiness",
+      href: "/services/ai-service-readiness-review/",
+    },
+    secondaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    trigger: {
+      introduction:
+        "An AI workflow receives customer, employee, patient, financial, account, or operational data that contains more identifying information than the task requires.",
+      items: [
+        {
+          label: "Visible risk",
+          value: "Sensitive data crosses an unnecessary boundary",
+        },
+        {
+          label: "Control",
+          value: "Detect, minimize, transform, verify, and trace",
+        },
+        {
+          label: "Decision",
+          value: "Which data is necessary at each processing stage",
+        },
+      ],
+    },
+  },
+  signals: {
+    eyebrow: "Visible signals",
+    title: "Sensitive data often travels farther than the decision requires.",
+    introduction:
+      "Privacy exposure grows when entire records, conversations, documents, or exports enter an AI workflow for a task that needs only a small part of their meaning.",
+    items: [
+      {
+        title: "Whole records are sent for a narrow task",
+        description:
+          "Names, contact details, identifiers, notes, histories, and attachments travel together even when the model needs only a classification, topic, or bounded fact.",
+      },
+      {
+        title: "Free text bypasses structured controls",
+        description:
+          "Agents, customers, employees, and integrated systems place sensitive details in notes, messages, documents, and prompts that field-level rules do not inspect.",
+      },
+      {
+        title: "Redaction occurs only at the final output",
+        description:
+          "The visible response is cleaned while sensitive data remains in the prompt, retrieved context, logs, traces, tool arguments, caches, or downstream services.",
+      },
+      {
+        title: "One masking rule is applied to every use case",
+        description:
+          "A global pattern removes information some tasks require, misses contextual identifiers, and produces false confidence about what remains exposed.",
+      },
+      {
+        title: "Teams cannot explain where original values persist",
+        description:
+          "The organization knows a transformed value reached the model but cannot identify which services, logs, stores, vendors, or reviewers retained the source.",
+      },
+      {
+        title: "Compliance language substitutes for operating evidence",
+        description:
+          "A workflow is called compliant because a detection tool is enabled, without showing purpose, necessity, accuracy, access, retention, review, or individual impact.",
+      },
+    ],
+  },
+  framework: {
+    eyebrow: "Control design",
+    title: "Place each node around a defined processing purpose.",
+    introduction:
+      "A scrubbing node is useful only when the organization understands the data, the task, the privacy risk, the transformation, and the systems on both sides of the boundary.",
+    items: [
+      {
+        label: "Purpose",
+        question: "What decision requires this data?",
+        title: "Purpose",
+        description:
+          "Define the use case, affected people, expected outcome, permitted processing, and the specific information necessary to perform the task.",
+      },
+      {
+        label: "Classification",
+        question: "Which sensitive information can appear here?",
+        title: "Classification",
+        description:
+          "Identify direct identifiers, linked attributes, free-text disclosures, credentials, financial or health information, confidential business data, and contextual sensitivity.",
+      },
+      {
+        label: "Transformation",
+        question: "What should happen to each data type?",
+        title: "Transformation",
+        description:
+          "Choose removal, masking, tokenization, generalization, substitution, encryption, blocking, or approved retention based on what the task still needs.",
+      },
+      {
+        label: "Placement",
+        question: "Where should the control operate?",
+        title: "Placement",
+        description:
+          "Place nodes before model input, retrieval, logging, tool calls, external transfer, output display, analytics, storage, or any other boundary with material exposure.",
+      },
+      {
+        label: "Verification",
+        question: "How will the organization know the node worked?",
+        title: "Verification",
+        description:
+          "Test representative and adversarial samples, false negatives, false positives, transformed utility, downstream behavior, access, and residual re-identification risk.",
+      },
+      {
+        label: "Governance",
+        question: "Who owns exceptions, change, and response?",
+        title: "Governance",
+        description:
+          "Assign policy authority, review, escalation, correction, incident handling, retention, vendor oversight, control updates, and documentation of accepted risk.",
+      },
+    ],
+  },
+  path: {
+    eyebrow: "Data path",
+    title: "Trace sensitive information from collection to deletion.",
+    introduction:
+      "Follow representative data through the real workflow. At every boundary, determine whether the information remains necessary, whether the transformation preserves the task, and who can recover or access the original.",
+    items: [
+      {
+        phase: "Collect",
+        question: "Why did the workflow receive this information?",
+        evidence:
+          "Source, individual context, purpose, notice, permission, sensitivity, expected use, and initial owner.",
+      },
+      {
+        phase: "Prepare",
+        question: "What must be removed or transformed before AI processing?",
+        evidence:
+          "Data inventory, classification, necessity, rule, model context, retrieval scope, and residual meaning.",
+      },
+      {
+        phase: "Process",
+        question: "Which systems can see or reconstruct the original?",
+        evidence:
+          "Model provider, application, tools, logs, traces, caches, keys, mappings, permissions, vendors, and region.",
+      },
+      {
+        phase: "Return",
+        question: "Could the output expose or infer sensitive information?",
+        evidence:
+          "Response, structured output, downstream action, re-identification, display, export, sharing, and human review.",
+      },
+      {
+        phase: "Retain",
+        question: "What persists, for how long, and for what purpose?",
+        evidence:
+          "Originals, tokens, mappings, prompts, outputs, logs, backups, deletion, access history, and changed requirements.",
+      },
+    ],
+  },
+  evidence: {
+    eyebrow: "Evidence",
+    title: "Verify the complete data-processing chain.",
+    introduction:
+      "Detection accuracy is only one part of the evidence. A responsible control model also shows why data is processed, what remains useful after transformation, where copies persist, and how people are affected.",
+    items: [
+      {
+        title: "Data inventory and provenance",
+        description:
+          "Structured fields, free text, files, audio, images, metadata, derived attributes, sources, owners, sensitivity, and the people represented in the data.",
+      },
+      {
+        title: "Purpose and necessity",
+        description:
+          "The decision supported, minimum information required, lawful and policy context, individual expectations, alternative methods, and consequences of processing.",
+      },
+      {
+        title: "Transformation behavior",
+        description:
+          "Detection rules, classifiers, confidence, substitution, tokenization, mappings, context preservation, failure handling, and the ability to reverse a transformation.",
+      },
+      {
+        title: "System and vendor boundaries",
+        description:
+          "Applications, models, APIs, tools, stores, logs, subprocessors, regions, credentials, contracts, retention settings, and data-use configurations.",
+      },
+      {
+        title: "Access and retention",
+        description:
+          "Roles, permissions, approvals, operational access, support access, audit history, deletion schedules, backups, exceptions, and evidence of completed removal.",
+      },
+      {
+        title: "Testing and individual impact",
+        description:
+          "False negatives, false positives, demographic or language differences, re-identification tests, task utility, complaints, corrections, incidents, and review outcomes.",
+      },
+    ],
+    note: {
+      label: "Privacy beyond detection",
+      description:
+        "A scrubbing node can reduce data exposure, but it does not by itself establish legal compliance or eliminate privacy risk. Requirements depend on the processing purpose, jurisdiction, data, individuals, systems, agreements, and the full lifecycle surrounding the control.",
+    },
+  },
+  failures: {
+    eyebrow: "Common failure patterns",
+    title: "Redaction fails when the surrounding data flow remains invisible.",
+    introduction:
+      "Automated masking can create a strong visual signal of safety while originals, mappings, contextual identifiers, logs, and downstream inferences remain available elsewhere.",
+    items: [
+      {
+        title: "Pattern matching becomes the privacy program",
+        description:
+          "Regular expressions catch familiar formats but miss contextual identity, uncommon formats, linked attributes, sensitive meaning, and data represented across several fields.",
+      },
+      {
+        title: "The token is protected but the mapping is not",
+        description:
+          "Transformed values appear anonymous while a broadly accessible lookup table, shared key, or stable identifier makes re-identification straightforward.",
+      },
+      {
+        title: "Useful context is removed without testing",
+        description:
+          "Aggressive scrubbing changes the meaning needed for service, fairness, fraud, accessibility, safety, or quality, creating a new operating risk.",
+      },
+      {
+        title: "Logs preserve what the prompt removed",
+        description:
+          "The application sanitizes model input after raw content has already entered observability, analytics, error tracking, support tooling, or temporary storage.",
+      },
+      {
+        title: "Exceptions become permanent bypasses",
+        description:
+          "A legitimate edge case receives an override, but scope, duration, owner, review, and removal are not recorded, allowing sensitive data to flow indefinitely.",
+      },
+      {
+        title: "A vendor setting is treated as end-to-end proof",
+        description:
+          "Provider retention or training controls are reviewed while upstream collection, application logs, integrations, human access, and downstream outputs remain unexamined.",
+      },
+    ],
+  },
+  outputs: {
+    eyebrow: "Practical outputs",
+    title: "Turn data minimization into an enforceable workflow.",
+    introduction:
+      "The result should show where sensitive data appears, why it is needed, which transformation applies, how the node is tested, and who owns residual exposure throughout the lifecycle.",
+    items: [
+      {
+        title: "Sensitive-data flow map",
+        description:
+          "A trace of collection, records, free text, retrieval, prompts, models, tools, outputs, logs, vendors, storage, access, retention, and deletion.",
+      },
+      {
+        title: "Node and transformation specification",
+        description:
+          "Placement, data classes, purpose, detection method, transformation, exception behavior, utility requirements, permissions, traceability, and failure response.",
+      },
+      {
+        title: "Verification and exception plan",
+        description:
+          "Representative tests, false-negative and false-positive review, re-identification checks, approval criteria, accountable owners, escalation, and time-bounded overrides.",
+      },
+      {
+        title: "Lifecycle governance model",
+        description:
+          "Policies, roles, vendor requirements, access review, retention, deletion evidence, incident response, reassessment cadence, and triggers for updating the control.",
+      },
+    ],
+  },
+  fit: {
+    eyebrow: "Engagement fit",
+    title: "Use scrubbing nodes when sensitive data crosses an AI boundary.",
+    introduction:
+      "This work is useful for a bounded workflow with identifiable data sources, processing stages, and accountable privacy, security, technical, and operating owners. It complements—not replaces—qualified legal advice, security testing, records management, vendor diligence, and an organization-wide privacy program.",
+    items: [
+      "An AI use case processes customer, employee, patient, financial, account, credential, or other sensitive information.",
+      "The task can be separated from some of the identity or detail currently included in the data flow.",
+      "The organization can inspect application, model, tool, logging, vendor, storage, access, and retention behavior.",
+      "Privacy, security, legal, data, product, and frontline owners can define necessity, transformation, exceptions, and evidence.",
+      "Leaders are willing to stop or narrow processing when residual exposure cannot be responsibly controlled.",
+    ],
+  },
+  diagnostics: {
+    eyebrow: "Related diagnostic paths",
+    title: "Start with the workflow that creates the data exposure.",
+    items: [
+      {
+        title: "AI Service Readiness Review",
+        href: "/services/ai-service-readiness-review/",
+        useWhen:
+          "A use case needs a bounded role, data requirements, human oversight, safeguards, measures, and a responsible implementation decision.",
+      },
+      {
+        title: "CRM Workflow Audit",
+        href: "/services/crm-workflow-audit/",
+        useWhen:
+          "Sensitive information originates in CRM records, notes, cases, lifecycle signals, integrations, reporting, or customer-facing workflow.",
+      },
+      {
+        title: "CX Systems Diagnostic",
+        href: "/services/cx-systems-diagnostic/",
+        useWhen:
+          "The data exposure crosses several teams, systems, service rules, handoffs, ownership boundaries, or customer touchpoints.",
+      },
+    ],
+  },
+};
+---
+
+<StructuredCapabilityPage {...page} />
