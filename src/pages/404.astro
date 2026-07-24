@@ -1,0 +1,180 @@
+---
+import Footer from "../components/Footer.astro";
+import NavHeader from "../components/NavHeader.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Page not found | Cadence Lab"
+  description="The requested Cadence Lab page could not be found."
+  canonicalURL="/404.html"
+  noindex={true}
+>
+  <NavHeader />
+
+  <main id="main-content" class="not-found-page" tabindex="-1">
+    <div class="not-found-container">
+      <p class="eyebrow">404 · Page not found</p>
+
+      <div class="not-found-layout">
+        <header>
+          <h1>This page is not part of the current system.</h1>
+        </header>
+
+        <div class="not-found-copy">
+          <p>
+            The address may be incorrect, or the page may have moved. Use one
+            of the routes below to continue.
+          </p>
+
+          <nav aria-label="Page not found options">
+            <a class="primary-link" href="/">Return to the home page</a>
+            <a href="/services/">Review services</a>
+            <a href="/support/">Find support</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .not-found-page {
+    display: grid;
+    min-block-size: min(42rem, 70vh);
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
+    place-items: center;
+  }
+
+  .not-found-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .not-found-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    gap: clamp(3rem, 9vw, 9rem);
+    margin-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  h1 {
+    max-width: 15ch;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+    font-feature-settings: var(--fea-graphik);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .not-found-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .not-found-copy > p {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    font-feature-settings: var(--fea-graphik);
+    text-wrap: pretty;
+  }
+
+  nav {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  nav a {
+    display: inline-flex;
+    min-block-size: var(--control-min-size);
+    align-items: center;
+    padding-block: 0.75rem;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    font-feature-settings: var(--fea-graphik);
+    text-underline-offset: 0.25em;
+  }
+
+  nav .primary-link {
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid var(--color-ink);
+    border-radius: var(--radius-sm);
+    background: var(--color-ink);
+    color: var(--color-light);
+    text-decoration: none;
+  }
+
+  .not-found-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    nav a:hover {
+      color: var(--color-ink);
+    }
+
+    nav .primary-link:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+      color: var(--color-light);
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .not-found-page {
+      min-block-size: auto;
+    }
+
+    .not-found-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    nav .primary-link {
+      width: 100%;
+    }
+  }
+
+  @media (forced-colors: active) {
+    nav .primary-link {
+      border-color: ButtonText;
+    }
+  }
+</style>
