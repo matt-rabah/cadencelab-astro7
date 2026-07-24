@@ -1,0 +1,43 @@
+# Cadence Lab
+
+> Cadence Lab helps organizations improve customer experience by aligning workflows, systems, teams, and applied AI.
+
+Cadence Lab is an independent customer experience and operating systems practice. The pages below provide a concise path through its diagnostic offers, operating perspectives, and practical resources.
+
+## Diagnostic offers
+
+- [Services](https://cadencelab.co/services/): Compare the diagnostic offers and choose an operating problem before choosing technology.
+- [CX Systems Diagnostic](https://cadencelab.co/services/cx-systems-diagnostic/): Trace recurring customer friction through workflows, ownership, CRM signals, service rules, and cross-functional handoffs.
+- [Lifecycle Risk Review](https://cadencelab.co/services/lifecycle-risk-review/): Examine lifecycle stages, risk signals, handoffs, intervention rules, and the data used to identify preventable loss.
+- [CRM Workflow Audit](https://cadencelab.co/services/crm-workflow-audit/): Assess CRM data, automation, ownership, reporting, and the gap between configured and actual work.
+- [AI Service Readiness Review](https://cadencelab.co/services/ai-service-readiness-review/): Evaluate workflow readiness, human oversight, data dependencies, adoption risk, and measurement before implementation.
+
+## Operating perspectives
+
+- [Solutions by industry](https://cadencelab.co/solutions/industry/): Explore customer experience problems in different operating environments.
+- [Solutions by team](https://cadencelab.co/solutions/team/): Explore problems through the teams that own or influence the experience.
+- [Solutions by use case](https://cadencelab.co/solutions/use-case/): Explore recurring operating problems and desired outcomes.
+- [Experience Foundations](https://cadencelab.co/product/experience-foundations/): Establish the operating foundations required for consistent customer work.
+- [AI Experience](https://cadencelab.co/product/ai-experience/): Connect applied AI to responsible workflows, oversight, and measurement.
+- [Digital Experiences](https://cadencelab.co/product/digital-experiences/): Align digital touchpoints with the operating system behind them.
+- [CX on Location](https://cadencelab.co/product/cx-on-location/): Examine customer experience where physical environments and frontline work meet.
+
+## Workflow and AI guidance
+
+- [Salesforce tracing](https://cadencelab.co/workflows/salesforce/): Follow customer work through Salesforce records, automation, ownership, handoffs, exceptions, and outcomes.
+- [Cross-functional links](https://cadencelab.co/workflows/cross-functional/): Examine the handoffs and dependencies connecting customer-facing teams.
+- [SLA escalation maps](https://cadencelab.co/workflows/escalation/): Map service commitments, escalation paths, ownership, and recovery decisions.
+- [AI-to-human routing](https://cadencelab.co/workflows/agent-routing/): Define when automated work should transfer to human judgment.
+- [Prompt firewalls](https://cadencelab.co/ai-tooling/prompt-guard/): Apply controls around prompts, context, and unsafe or unsupported requests.
+- [Variance tracing](https://cadencelab.co/ai-tooling/hallucination/): Investigate inconsistent AI outputs and the conditions that produce them.
+- [PII scrubbing nodes](https://cadencelab.co/ai-tooling/compliance/): Protect sensitive information as it moves through AI-enabled workflows.
+- [Agent copilots](https://cadencelab.co/ai-tooling/co-pilot/): Support human work with AI while preserving accountability and judgment.
+
+## Resources and policies
+
+- [Insights](https://cadencelab.co/blog/): Read analysis about customer experience systems, workflows, CRM, service operations, and applied AI.
+- [AI tools resource list](https://cadencelab.co/resources/ai-tools/): Review a curated directory of AI tools and implementation resources.
+- [About Cadence Lab](https://cadencelab.co/about/): Learn about the practice and its operating perspective.
+- [System governance](https://cadencelab.co/governance/): Review the site's governance principles.
+- [Privacy policy](https://cadencelab.co/privacy/): Review how the site handles personal information.
+- [Contact](https://cadencelab.co/contact/): Start a conversation with Cadence Lab.
