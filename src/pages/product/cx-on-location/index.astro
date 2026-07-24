@@ -1,0 +1,320 @@
+---
+import StructuredCapabilityPage from "../../../components/StructuredCapabilityPage.astro";
+
+const page = {
+  meta: {
+    title: "CX on Location | Cadence Lab",
+    description:
+      "Design connected on-site experiences across arrival, environment, navigation, people, queues, service, digital touchpoints, accessibility, safety, and recovery.",
+    canonicalURL: "/product/cx-on-location/",
+  },
+  hero: {
+    breadcrumb: "CX on Location",
+    eyebrow: "Product · CX on Location",
+    title: "Make the place, people, and service work as one experience.",
+    lead: "CX on Location connects the physical environment to the information, employees, queues, service rules, digital touchpoints, systems, and decisions that shape an on-site experience. It helps organizations design what happens before arrival, within the location, and after a person leaves so the complete journey remains understandable and accountable.",
+    primaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    secondaryCta: {
+      label: "Review Experience Foundations",
+      href: "/product/experience-foundations/",
+    },
+    trigger: {
+      introduction:
+        "A store, branch, clinic, venue, campus, workplace, or service site has visible customer friction, but facilities, digital, operations, service, policy, and frontline teams each control only part of the experience.",
+      items: [
+        {
+          label: "Visible symptom",
+          value: "The location works differently from the journey",
+        },
+        {
+          label: "Experience",
+          value: "Prepare, arrive, navigate, receive, continue",
+        },
+        {
+          label: "Decision",
+          value: "What must change across place and operation",
+        },
+      ],
+    },
+  },
+  signals: {
+    eyebrow: "Visible signals",
+    title:
+      "On-site friction accumulates between physical and operating systems.",
+    introduction:
+      "People experience one environment even when the organization divides responsibility among property, operations, digital, brand, accessibility, security, service, and technology teams. The gaps between those owners become part of the customer journey.",
+    items: [
+      {
+        title: "Arrival depends on prior knowledge",
+        description:
+          "Parking, entrances, hours, access, check-in, required documents, timing, mobility, security, and what to expect are unclear until the person reaches the site.",
+      },
+      {
+        title: "The environment does not explain the service",
+        description:
+          "Signs, layout, zones, displays, kiosks, counters, and staff presence do not help people understand where to go, what to prepare, or what happens next.",
+      },
+      {
+        title: "Queues hide priority and progress",
+        description:
+          "People wait without knowing sequence, expected time, eligibility, status, alternatives, or whether a different channel could complete the task.",
+      },
+      {
+        title: "Employees reconstruct context at the counter",
+        description:
+          "Appointments, digital activity, records, prior conversations, needs, accommodations, and unresolved issues do not arrive with the customer.",
+      },
+      {
+        title: "Accessibility is reduced to physical access",
+        description:
+          "Entrances and routes are considered while communication, sensory conditions, cognition, language, seating, service interaction, digital tools, and recovery receive less attention.",
+      },
+      {
+        title: "Location performance hides customer effort",
+        description:
+          "Traffic, transactions, wait averages, utilization, and labor are measured without showing confusion, abandonment, repeated visits, unresolved needs, or uneven experience.",
+      },
+    ],
+  },
+  framework: {
+    eyebrow: "Location experience system",
+    title: "Design the environment and operating model together.",
+    introduction:
+      "A useful on-location experience coordinates six conditions. Physical design can support the journey, but only when information, people, workflows, systems, and recovery paths reinforce the same service.",
+    items: [
+      {
+        label: "Intent",
+        question: "Why is the person coming to this location?",
+        title: "Intent",
+        description:
+          "Define the visitor, customer, employee, patient, member, or guest; the task or need; the context; urgency; expected outcome; and consequences of failure.",
+      },
+      {
+        label: "Preparation",
+        question: "What should be understood before arrival?",
+        title: "Preparation",
+        description:
+          "Clarify eligibility, appointment, timing, documents, cost, access, transportation, security, accessibility, language, alternatives, and what the experience will require.",
+      },
+      {
+        label: "Environment",
+        question: "How should the place guide and support people?",
+        title: "Environment",
+        description:
+          "Connect approach, entrance, layout, wayfinding, zones, lighting, sound, seating, privacy, displays, tools, amenities, safety, and sensory conditions.",
+      },
+      {
+        label: "Service",
+        question: "How do people, queues, and decisions deliver the outcome?",
+        title: "Service",
+        description:
+          "Define roles, greeting, triage, priority, handoffs, service standards, decision rights, exceptions, accommodations, escalation, and accountable resolution.",
+      },
+      {
+        label: "Connection",
+        question: "How does the location connect to other channels?",
+        title: "Connection",
+        description:
+          "Preserve identity, appointment, history, context, status, records, notifications, digital self-service, remote support, fulfillment, and follow-up across boundaries.",
+      },
+      {
+        label: "Operation",
+        question: "How will the experience remain reliable?",
+        title: "Operation",
+        description:
+          "Assign ownership for staffing, training, content, facilities, technology, accessibility, safety, incidents, service quality, maintenance, and evidence-led change.",
+      },
+    ],
+  },
+  path: {
+    eyebrow: "Location journey",
+    title: "Follow the experience from preparation through continuation.",
+    introduction:
+      "Trace representative visits and exceptions across every channel and operating layer involved. The path should show what people need, what the organization knows, and where uncertainty or responsibility changes.",
+    items: [
+      {
+        phase: "Prepare",
+        question: "Can the person arrive ready for the experience?",
+        evidence:
+          "Search, website, booking, directions, eligibility, documents, timing, cost, access, transportation, language, accessibility, reminders, and alternatives.",
+      },
+      {
+        phase: "Arrive",
+        question: "Does the environment establish confidence and orientation?",
+        evidence:
+          "Approach, parking, transit, entrance, security, greeting, check-in, identity, sensory conditions, immediate needs, and the first clear next step.",
+      },
+      {
+        phase: "Navigate and wait",
+        question: "Can people understand where they are in the process?",
+        evidence:
+          "Wayfinding, zones, queue, priority, status, time, seating, privacy, amenities, staff availability, digital tools, accommodations, and exceptions.",
+      },
+      {
+        phase: "Receive",
+        question: "Can employees and systems resolve the need?",
+        evidence:
+          "Context, records, role, decision rights, service behavior, product or service delivery, handoffs, payment, policy, escalation, and recovery.",
+      },
+      {
+        phase: "Leave and continue",
+        question: "Does the outcome remain clear after departure?",
+        evidence:
+          "Confirmation, instructions, records, fulfillment, follow-up, status, support, feedback, unresolved work, another channel, and evidence of completion.",
+      },
+    ],
+  },
+  evidence: {
+    eyebrow: "Evidence",
+    title: "Observe the place and the work that makes it function.",
+    introduction:
+      "An on-site experience cannot be understood from floor plans or satisfaction scores alone. Evidence should combine direct observation with customer, employee, system, service, accessibility, safety, and operating information.",
+    items: [
+      {
+        title: "Customer and visitor context",
+        description:
+          "Purpose, expectations, prior knowledge, urgency, language, mobility, sensory and cognitive needs, companions, children, belongings, privacy, trust, and consequences of failure.",
+      },
+      {
+        title: "Journey observation",
+        description:
+          "Approach, arrival, orientation, movement, hesitation, questions, waiting, interaction, handoffs, abandonment, recovery, departure, and transitions to other channels.",
+      },
+      {
+        title: "Environment and accessibility",
+        description:
+          "Routes, entrances, layout, signs, lighting, sound, seating, reach, privacy, restrooms, media, kiosks, emergency information, assistive support, and sensory conditions.",
+      },
+      {
+        title: "Frontline and workflow behavior",
+        description:
+          "Roles, staffing, triage, queues, scripts, judgment, service rules, accommodations, approvals, workarounds, escalation, recovery, training, and employee constraints.",
+      },
+      {
+        title: "Systems and channel connections",
+        description:
+          "Appointments, identity, CRM, point of sale, records, status, inventory, case management, notifications, kiosks, devices, integrations, data quality, and continuity.",
+      },
+      {
+        title: "Customer and operating outcomes",
+        description:
+          "Completion, resolution, effort, accessibility, safety, trust, wait, abandonment, repeat visits, service demand, rework, utilization, capacity, incidents, and uneven outcomes.",
+      },
+    ],
+    note: {
+      label: "Design with, not only for",
+      description:
+        "Location decisions should include people who experience physical, sensory, cognitive, communication, language, safety, privacy, and service barriers. Standards and audits are essential evidence, but they do not replace participation and observation in the real environment.",
+    },
+  },
+  failures: {
+    eyebrow: "Common failure patterns",
+    title: "A location redesign fails when the service stays fragmented.",
+    introduction:
+      "A renovated environment can improve appearance without changing unclear arrival information, inaccessible interaction, weak staffing, missing context, unresolved queues, or the policies that determine what employees can do.",
+    items: [
+      {
+        title: "The floor plan becomes the experience strategy",
+        description:
+          "Adjacency, traffic, fixtures, counters, and capacity are optimized without defining customer intent, service decisions, information needs, exceptions, or the complete journey.",
+      },
+      {
+        title: "Wayfinding compensates for unclear service",
+        description:
+          "More signs are added while destinations, queue logic, names, roles, requirements, and the sequence of the underlying process remain difficult to understand.",
+      },
+      {
+        title: "Technology adds another place to wait",
+        description:
+          "Kiosks, appointments, displays, apps, or virtual queues digitize intake but do not improve routing, staffing, context, decision rights, or resolution.",
+      },
+      {
+        title: "Employees absorb every design gap",
+        description:
+          "Frontline teams give directions, translate policy, reconcile systems, manage emotion, create accommodations, and recover failures without adequate authority or support.",
+      },
+      {
+        title: "Averages hide uneven access",
+        description:
+          "Typical wait, completion, or satisfaction looks acceptable while particular locations, times, needs, languages, disabilities, services, or customer groups face persistent barriers.",
+      },
+      {
+        title: "The project ends when the location opens",
+        description:
+          "No durable owner connects facilities, service, digital, staffing, accessibility, safety, technology, and customer evidence after launch.",
+      },
+    ],
+  },
+  outputs: {
+    eyebrow: "Practical outputs",
+    title: "Create a location experience teams can deliver and maintain.",
+    introduction:
+      "The outputs should connect the physical concept to customer journeys, service behavior, digital and system requirements, operational readiness, and the evidence used after opening.",
+    items: [
+      {
+        title: "Location experience direction",
+        description:
+          "Priority people and journeys, experience intent, service principles, channel role, accessibility and safety commitments, constraints, outcomes, and design implications.",
+      },
+      {
+        title: "Journey and service blueprint",
+        description:
+          "Preparation, arrival, navigation, waiting, interaction, handoffs, departure, follow-up, visible touchpoints, backstage work, systems, ownership, and exceptions.",
+      },
+      {
+        title: "Environment and operating requirements",
+        description:
+          "Zones, wayfinding, information, accessibility, privacy, tools, queues, service roles, staffing, training, digital connections, data, workflows, escalation, and recovery.",
+      },
+      {
+        title: "Readiness and measurement plan",
+        description:
+          "Pilots, walkthroughs, accessibility testing, service rehearsals, acceptance criteria, owners, launch readiness, customer measures, operating measures, incidents, and review cadence.",
+      },
+    ],
+  },
+  fit: {
+    eyebrow: "Engagement fit",
+    title:
+      "Use CX on Location when the place and service must change together.",
+    introduction:
+      "This work is useful for a consequential physical environment with accountable facilities, operations, service, digital, accessibility, safety, and technology owners. It is a limited fit when the scope is purely aesthetic or when the organization cannot change staffing, process, information, or service behavior.",
+    items: [
+      "A store, branch, clinic, venue, campus, workplace, service center, or other site materially shapes the customer outcome.",
+      "The journey crosses physical space, employees, queues, digital touchpoints, systems, policies, or follow-up channels.",
+      "Accessibility, safety, privacy, communication, or service recovery materially affects the experience.",
+      "Facilities, operations, service, digital, technical, accessibility, and frontline owners can make decisions together.",
+      "The organization can pilot, observe, operate, and improve the experience after launch.",
+    ],
+  },
+  diagnostics: {
+    eyebrow: "Related paths",
+    title: "Choose the next path based on where the on-site journey breaks.",
+    items: [
+      {
+        title: "Experience Foundations",
+        href: "/product/experience-foundations/",
+        useWhen:
+          "Several locations, channels, or teams need shared customer, journey, principle, ownership, and measurement decisions before site-specific work begins.",
+      },
+      {
+        title: "Digital Experiences",
+        href: "/product/digital-experiences/",
+        useWhen:
+          "Search, booking, preparation, check-in, queue status, self-service, follow-up, or another digital path must connect coherently to the location.",
+      },
+      {
+        title: "CX Systems Diagnostic",
+        href: "/services/cx-systems-diagnostic/",
+        useWhen:
+          "Recurring on-site friction crosses teams, systems, policies, service rules, ownership boundaries, or handoffs and the operating cause is not yet trusted.",
+      },
+    ],
+  },
+};
+---
+
+<StructuredCapabilityPage {...page} />
