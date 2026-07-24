@@ -1,0 +1,1096 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const mapElements = [
+  {
+    number: "01",
+    title: "A consequential condition",
+    description:
+      "Define the customer, service, risk, or operating condition that requires a different response—not merely the moment a timer reaches zero.",
+  },
+  {
+    number: "02",
+    title: "A clear priority rule",
+    description:
+      "Connect urgency to customer and operating consequence so teams can distinguish routine delay from work that warrants intervention.",
+  },
+  {
+    number: "03",
+    title: "An accountable owner",
+    description:
+      "Name the role responsible for accepting the escalation, coordinating the response, and keeping the customer situation from becoming unowned.",
+  },
+  {
+    number: "04",
+    title: "Authority to intervene",
+    description:
+      "Give the owner a usable decision path: resolve, reassign, approve an exception, obtain support, or stop work that is increasing consequence.",
+  },
+  {
+    number: "05",
+    title: "A response expectation",
+    description:
+      "Specify acknowledgement, action, communication, and recovery expectations instead of treating one completion deadline as the entire service promise.",
+  },
+  {
+    number: "06",
+    title: "A closure and review rule",
+    description:
+      "Define what resolution means, who confirms it, what the customer is told, and how recurring escalations change the operating system.",
+  },
+];
+
+const escalationPath = [
+  {
+    phase: "Detect",
+    question: "What changed, and when did it become consequential?",
+    evidence:
+      "Customer signal, elapsed time, failed dependency, risk condition, or service exception.",
+  },
+  {
+    phase: "Qualify",
+    question: "What consequence makes this escalation different?",
+    evidence:
+      "Customer impact, urgency, recurrence, commercial exposure, safety, trust, or operating cost.",
+  },
+  {
+    phase: "Assign",
+    question: "Who accepts responsibility and has authority to act?",
+    evidence:
+      "Named owner, response role, decision rights, supporting teams, and fallback path.",
+  },
+  {
+    phase: "Intervene",
+    question: "What action and communication should occur now?",
+    evidence:
+      "Recovery step, approval, resource change, customer update, and next review time.",
+  },
+  {
+    phase: "Close",
+    question: "Was the condition resolved and the system updated?",
+    evidence:
+      "Confirmed outcome, customer response, root cause, follow-up owner, and operating change.",
+  },
+];
+
+const failurePatterns = [
+  {
+    cue: "The timer begins after the risk is already visible",
+    description:
+      "The formal SLA starts at assignment or ticket creation even though customer delay began earlier in another channel, queue, or team.",
+  },
+  {
+    cue: "Priority describes the record, not the consequence",
+    description:
+      "Severity labels are applied inconsistently or reflect internal categories that do not explain urgency, customer effect, or intervention need.",
+  },
+  {
+    cue: "Escalation raises visibility without adding authority",
+    description:
+      "More people are notified, but nobody gains the responsibility or decision rights required to change the outcome.",
+  },
+  {
+    cue: "Reassignment resets the clock and loses the context",
+    description:
+      "Work appears new to each receiving team while the customer's elapsed time, prior effort, and unresolved decision disappear.",
+  },
+  {
+    cue: "Internal resolution and customer communication separate",
+    description:
+      "Teams work the issue while the customer receives no reliable acknowledgement, expectation, progress update, or confirmation of closure.",
+  },
+  {
+    cue: "Breaches are reported but do not change the system",
+    description:
+      "Dashboards count late work without revealing recurring causes, weak ownership, capacity constraints, or service rules that require repair.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Customer and service history",
+    description:
+      "The original request, prior contacts, promised response, customer consequence, and full elapsed time across channels and teams.",
+  },
+  {
+    title: "Timestamps and state changes",
+    description:
+      "Creation, assignment, acknowledgement, transfer, action, waiting, communication, resolution, and reopening events.",
+  },
+  {
+    title: "Priority and service rules",
+    description:
+      "Definitions, thresholds, coverage windows, exclusions, exception logic, and the practical interpretation teams use during real work.",
+  },
+  {
+    title: "Ownership and decision rights",
+    description:
+      "Roles, queues, approval authority, fallback owners, on-call paths, and the difference between notification and accountability.",
+  },
+  {
+    title: "Coordination and communication",
+    description:
+      "Internal messages, customer updates, meetings, workarounds, and other activity that reveals how escalation actually occurs.",
+  },
+  {
+    title: "Outcomes and recurring causes",
+    description:
+      "Resolution quality, repeat contact, reopening, recovery effort, customer effect, root causes, and changes made after review.",
+  },
+];
+
+const mapOutputs = [
+  {
+    number: "01",
+    title: "Escalation condition map",
+    description:
+      "A shared definition of the signals, thresholds, consequences, and exceptions that should change the operating response.",
+  },
+  {
+    number: "02",
+    title: "Ownership and authority model",
+    description:
+      "Named responsibility for acknowledgement, decision, coordination, customer communication, recovery, and closure.",
+  },
+  {
+    number: "03",
+    title: "Context and communication requirements",
+    description:
+      "The minimum evidence that travels with the escalation and the updates required at each meaningful stage.",
+  },
+  {
+    number: "04",
+    title: "Measurement and review rhythm",
+    description:
+      "Measures that connect response timing to customer consequence, resolution quality, recurring causes, and operating improvement.",
+  },
+];
+
+const strongFit = [
+  "SLA breaches or late interventions recur across teams, queues, or systems.",
+  "Priority rules are interpreted differently by the people expected to act.",
+  "Escalations depend on personal networks, meetings, or executive attention.",
+  "Customers wait while ownership, authority, or required context is reconstructed.",
+  "A sponsor can change service rules, decision rights, workflow, and review practices.",
+];
+---
+
+<Layout
+  title="SLA Escalation Maps | Cadence Lab"
+  description="Map the conditions, ownership, authority, context, response, and review required to intervene before a service issue becomes a preventable customer failure."
+  canonicalURL="/workflows/escalation/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="escalation-page" tabindex="-1">
+    <section class="escalation-hero" aria-labelledby="escalation-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">SLA escalation maps</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Workflow · SLA escalation maps</p>
+          <h1 id="escalation-title">
+            Make escalation begin before the response window closes.
+          </h1>
+          <p class="hero-lead">
+            An SLA escalation map connects a consequential customer condition to
+            priority, ownership, decision authority, communication, and
+            recovery. It turns a timer into an operating response teams can
+            understand and use.
+          </p>
+
+          <div class="hero-actions" aria-label="SLA escalation map actions">
+            <a
+              class="button button-primary"
+              href="/services/lifecycle-risk-review/"
+            >
+              Review the Lifecycle Risk Review
+            </a>
+            <a class="button button-text" href="/fit-check/">
+              Start a fit check
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="trigger-card" aria-labelledby="trigger-title">
+          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p>
+            The organization has SLA targets, priority fields, queues, and
+            escalation reports, but consequential work still becomes urgent only
+            after the useful intervention window has narrowed.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible symptom</dt>
+              <dd>Late intervention and repeated breaches</dd>
+            </div>
+            <div>
+              <dt>Map</dt>
+              <dd>Condition, consequence, owner, authority, response</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>What must change before adding more alerts</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "What the map does", href: "#what-the-map-does" },
+        { label: "Conditions", href: "#conditions" },
+        { label: "Escalation path", href: "#escalation-path" },
+        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Evidence and outputs", href: "#evidence-outputs" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="what-the-map-does"
+      class="map-purpose section-block"
+      aria-labelledby="map-purpose-title"
+    >
+      <div class="page-container purpose-layout">
+        <div>
+          <p class="eyebrow">What the map does</p>
+          <h2 id="map-purpose-title">
+            Start with consequence, not the countdown.
+          </h2>
+        </div>
+
+        <div class="purpose-copy">
+          <p>
+            A useful escalation map begins with the moment a customer or
+            operating condition needs a different response. It identifies who
+            should notice, how priority is determined, which role accepts
+            responsibility, and what authority that role needs.
+          </p>
+          <p>
+            Time remains important, but an SLA alone cannot coordinate the work.
+            The map makes the decisions around the clock explicit, including
+            acknowledgement, customer communication, exception handling,
+            recovery, and review.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="conditions"
+      class="conditions"
+      aria-labelledby="conditions-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Escalation conditions</p>
+          <h2 id="conditions-title">
+            Define the response around six operating requirements.
+          </h2>
+          <p>
+            Each requirement tests whether the escalation can change the outcome
+            instead of simply creating another notification.
+          </p>
+        </div>
+
+        <ol class="condition-grid">
+          {
+            mapElements.map((element) => (
+              <li>
+                <p class="item-number">{element.number}</p>
+                <h3>{element.title}</h3>
+                <p>{element.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="escalation-path"
+      class="escalation-path section-block"
+      aria-labelledby="escalation-path-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Escalation path</p>
+            <h2 id="escalation-path-title">
+              Follow the condition from detection to learning.
+            </h2>
+          </div>
+          <p>
+            The path reveals where elapsed time, customer context, ownership, or
+            decision authority weakens as work moves through the response.
+          </p>
+        </div>
+
+        <ol class="path-list">
+          {
+            escalationPath.map((stage, index) => (
+              <li>
+                <div class="path-heading">
+                  <p class="path-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="path-phase">{stage.phase}</p>
+                </div>
+                <h3>{stage.question}</h3>
+                <p>{stage.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="failure-patterns"
+      class="failure-patterns"
+      aria-labelledby="failure-patterns-title"
+    >
+      <div class="page-container failure-layout">
+        <div class="failure-intro">
+          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+          <h2 id="failure-patterns-title">
+            A measured response can still be an unusable response.
+          </h2>
+          <p>
+            These patterns show where service-level reporting and actual
+            customer recovery have separated.
+          </p>
+        </div>
+
+        <div class="failure-list">
+          {
+            failurePatterns.map((failure, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{failure.cue}</h3>
+                <p>{failure.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="evidence-outputs"
+      class="evidence-outputs section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Evidence and outputs</p>
+            <h2 id="evidence-title">
+              Compare the service promise with the real response.
+            </h2>
+          </div>
+          <p>
+            A useful map combines system history with service rules, frontline
+            behavior, customer communication, decision rights, and outcomes. It
+            states where incomplete evidence limits confidence.
+          </p>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="output-block">
+          <div class="output-intro">
+            <p class="note-label">Practical outputs</p>
+            <h2>Leave with a response system people can operate.</h2>
+          </div>
+
+          <ol class="output-list">
+            {
+              mapOutputs.map((output) => (
+                <li>
+                  <p class="item-number">{output.number}</p>
+                  <div>
+                    <h3>{output.title}</h3>
+                    <p>{output.description}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use an escalation map when timing problems are really ownership
+            problems.
+          </h2>
+          <p>
+            SLA escalation mapping is most useful when customer consequence
+            crosses teams, systems, priorities, and decision layers. It is not a
+            monitoring-tool installation, a legal review of service-level
+            commitments, or a staffing model by itself.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .escalation-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .escalation-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .path-number,
+  .path-phase {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 18ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .trigger-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .trigger-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .trigger-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .trigger-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .trigger-card dt,
+  .trigger-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .trigger-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .trigger-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .purpose-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .purpose-layout h2,
+  .section-intro h2,
+  .failure-intro h2,
+  .output-intro h2,
+  .fit-copy h2 {
+    max-width: 20ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .purpose-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .purpose-copy p,
+  .section-intro > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2,
+  .failure-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2,
+  .failure-intro h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow),
+  .failure-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .conditions,
+  .failure-patterns {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .condition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .condition-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .condition-grid .item-number,
+  .failure-list .item-number {
+    color: var(--color-green);
+  }
+
+  .condition-grid h3,
+  .failure-list h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .condition-grid li > p:last-child,
+  .failure-list article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 0.1875rem solid var(--color-blue);
+    list-style: none;
+  }
+
+  .path-list li {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .path-list li:first-child {
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .path-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .path-number {
+    color: var(--color-text-muted);
+  }
+
+  .path-list h3 {
+    min-height: 6.75rem;
+    margin-top: 2rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-list li > p:last-child {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .failure-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .failure-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .failure-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .failure-list article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .output-block {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+    padding-top: clamp(2rem, 5vw, 4rem);
+    border-top: 0.1875rem solid var(--color-blue);
+  }
+
+  .output-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .output-list li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    padding-block: 1.5rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .output-list h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .output-list li > div > p {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .escalation-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .path-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-list h3 {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .purpose-layout,
+    .section-intro-split,
+    .failure-layout,
+    .output-block,
+    .fit-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .trigger-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .condition-grid,
+    .evidence-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .trigger-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .condition-grid,
+    .path-list,
+    .failure-list,
+    .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .output-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .escalation-hero,
+    .trigger-card,
+    .condition-grid,
+    .condition-grid li,
+    .path-list,
+    .path-list li,
+    .failure-list,
+    .failure-list article,
+    .evidence-grid,
+    .evidence-grid article,
+    .output-block,
+    .output-list,
+    .output-list li,
+    .fit,
+    .fit-list {
+      border-color: CanvasText;
+    }
+  }
+</style>
