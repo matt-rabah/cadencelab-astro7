@@ -1,0 +1,202 @@
+---
+import SolutionDirectoryPage from "../../../components/SolutionDirectoryPage.astro";
+
+const page = {
+  meta: {
+    title: "Customer Experience Solutions by Use Case | Cadence Lab",
+    description:
+      "Find a customer experience, CRM workflow, lifecycle, digital, location, or AI path based on the operating problem your organization needs to solve.",
+    canonicalURL: "/solutions/use-case/",
+  },
+  hero: {
+    breadcrumb: "Solutions by use case",
+    eyebrow: "Solutions · By use case",
+    title: "Start with the problem the organization can recognize.",
+    lead: "A useful starting point does not require a finished solution or a perfect diagnosis. It requires a consequential problem, evidence that the pattern is recurring, and a leadership decision that can change the work. These use cases connect visible symptoms to the most relevant existing path.",
+    guide: {
+      introduction:
+        "Choose the use case that most closely describes the operating problem, then use its conditions to confirm whether the suggested diagnostic or product path fits the real system boundary.",
+      items: [
+        { label: "Start", value: "Recognize the recurring symptom" },
+        { label: "Trace", value: "Identify the operating consequence" },
+        { label: "Choose", value: "Review the relevant path" },
+      ],
+    },
+  },
+  directory: {
+    eyebrow: "Use-case paths",
+    title: "Choose the problem before choosing the technology.",
+    introduction:
+      "Each use case describes a visible pattern and the operating conditions often surrounding it. The recommended path is a place to investigate—not a predetermined answer.",
+    entries: [
+      {
+        eyebrow: "Cross-functional customer friction",
+        title: "Find where the customer experience system is breaking.",
+        description:
+          "Customers repeat themselves, service varies, issues cross organizational boundaries, and each team sees only the portion of the problem it handles.",
+        conditions: [
+          "Several teams, systems, policies, or handoffs shape the same outcome.",
+          "Local fixes address symptoms without changing the recurring pattern.",
+          "Leadership lacks a trusted account of where friction originates.",
+        ],
+        cta: {
+          label: "Review CX Systems Diagnostic",
+          href: "/services/cx-systems-diagnostic/",
+        },
+      },
+      {
+        eyebrow: "Onboarding, adoption, and retention",
+        title: "Intervene before lifecycle risk becomes preventable loss.",
+        description:
+          "Onboarding drifts, accounts go quiet, adoption weakens, or renewal concern appears after the useful intervention window has narrowed.",
+        conditions: [
+          "Risk signals are distributed across product, CRM, service, and people.",
+          "Teams disagree about when and how intervention should begin.",
+          "Ownership changes across acquisition, onboarding, success, and renewal.",
+        ],
+        cta: {
+          label: "Review Lifecycle Risk",
+          href: "/services/lifecycle-risk-review/",
+        },
+      },
+      {
+        eyebrow: "CRM distrust and workflow friction",
+        title: "Make the CRM represent and guide the real work.",
+        description:
+          "Records, activity, automation, and dashboards exist, but employees still use spreadsheets, messages, meetings, and individual memory to coordinate customer action.",
+        conditions: [
+          "Required fields are complete while useful context remains difficult to find.",
+          "Automation moves records without resolving responsibility or next action.",
+          "Reports describe activity but do not support trusted operating decisions.",
+        ],
+        cta: {
+          label: "Review CRM Workflow Audit",
+          href: "/services/crm-workflow-audit/",
+        },
+      },
+      {
+        eyebrow: "Digital journey and service redesign",
+        title: "Connect the interface to the service it promises.",
+        description:
+          "A website, portal, application, form, or digital service needs improvement, but the largest sources of customer effort sit in content, policy, data, systems, downstream work, or channel transitions.",
+        conditions: [
+          "People struggle to understand requirements, choices, or the next step.",
+          "Digital submissions create manual reconciliation or fragmented service work.",
+          "The journey resets when people move to a human or physical channel.",
+        ],
+        cta: {
+          label: "Review Digital Experiences",
+          href: "/product/digital-experiences/",
+        },
+      },
+      {
+        eyebrow: "On-site and location experience",
+        title: "Connect arrival, environment, people, and service.",
+        description:
+          "A store, branch, clinic, venue, campus, workplace, or service site has recurring friction across preparation, wayfinding, queues, accessibility, frontline work, digital touchpoints, and follow-up.",
+        conditions: [
+          "Customers arrive without clear expectations or required information.",
+          "The environment and service process communicate different next steps.",
+          "Employees absorb failures across facilities, policy, systems, and channels.",
+        ],
+        cta: {
+          label: "Review CX on Location",
+          href: "/product/cx-on-location/",
+        },
+      },
+      {
+        eyebrow: "AI adoption and service readiness",
+        title: "Decide whether an AI use case is ready for real work.",
+        description:
+          "An AI capability or use case has momentum, but the workflow, evidence, human judgment, data, permissions, safeguards, adoption conditions, and success measures remain unresolved.",
+        conditions: [
+          "A demonstration works without representing operating exceptions or risk.",
+          "Technical owners cannot define the consequential business decision alone.",
+          "Success is measured by deployment or usage rather than customer and operating value.",
+        ],
+        cta: {
+          label: "Review AI Service Readiness",
+          href: "/services/ai-service-readiness-review/",
+        },
+      },
+    ],
+  },
+  selection: {
+    eyebrow: "Choose a path",
+    title: "Test whether the use case is ready to diagnose.",
+    introduction:
+      "A recognizable symptom becomes a useful engagement when the organization can bound the consequence, involve the operating system behind it, and act on what the evidence reveals.",
+    items: [
+      {
+        title: "Pattern",
+        question: "Is the problem recurring rather than isolated?",
+        description:
+          "Look for repeated customer effort, delays, exceptions, risk signals, rework, inconsistency, or failure across comparable situations.",
+      },
+      {
+        title: "Consequence",
+        question: "Why does the problem warrant action now?",
+        description:
+          "Connect the pattern to service quality, trust, accessibility, retention, revenue, capacity, safety, compliance, adoption, or another material outcome.",
+      },
+      {
+        title: "System boundary",
+        question: "Can the organization inspect what produces the outcome?",
+        description:
+          "Include the relevant people, workflow, systems, records, policies, channels, locations, decisions, measures, and external dependencies.",
+      },
+      {
+        title: "Decision",
+        question: "What will leadership decide with the evidence?",
+        description:
+          "Define the owner and the practical choice involving priority, workflow, ownership, data, technology, safeguards, funding, or the next sequence of work.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related solution paths",
+    title: "Approach the same problem from another useful angle.",
+    introduction:
+      "Use case is often the fastest orientation. Industry constraints and team ownership may reveal a stronger sponsor, a different system boundary, or a more precise starting point.",
+    items: [
+      {
+        title: "Solutions by industry",
+        description:
+          "Consider how regulation, risk, channels, service models, data, and customer expectations change the operating consequence.",
+        href: "/solutions/industry/",
+        label: "Explore by industry",
+      },
+      {
+        title: "Solutions by team",
+        description:
+          "Find a path based on the team that owns the outcome, the evidence it can access, and the partners required to change the work.",
+        href: "/solutions/team/",
+        label: "Explore by team",
+      },
+      {
+        title: "Diagnostic offers",
+        description:
+          "Compare the four evidence-led diagnostics and the operating decision each one is designed to support.",
+        href: "/services/",
+        label: "Compare diagnostics",
+      },
+    ],
+  },
+  nextStep: {
+    eyebrow: "Next step",
+    title: "Describe the problem before prescribing the answer.",
+    description:
+      "Share the recurring symptom, customer and operating consequence, teams and systems involved, evidence already available, and the decision leadership needs to make. Cadence Lab will recommend the most useful starting point.",
+    primaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    secondaryCta: {
+      label: "Review all services",
+      href: "/services/",
+    },
+  },
+};
+---
+
+<SolutionDirectoryPage {...page} />
