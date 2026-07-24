@@ -1,0 +1,747 @@
+---
+import Footer from "./Footer.astro";
+import NavHeader from "./NavHeader.astro";
+import SectionNav from "./SectionNav.astro";
+import Layout from "../layouts/Layout.astro";
+
+interface DirectoryEntry {
+  eyebrow: string;
+  title: string;
+  description: string;
+  conditions: string[];
+  cta: {
+    label: string;
+    href: string;
+  };
+}
+
+interface SelectionItem {
+  title: string;
+  question: string;
+  description: string;
+}
+
+interface RelatedPath {
+  title: string;
+  description: string;
+  href: string;
+  label: string;
+}
+
+interface Props {
+  meta: {
+    title: string;
+    description: string;
+    canonicalURL: string;
+  };
+  hero: {
+    breadcrumb: string;
+    eyebrow: string;
+    title: string;
+    lead: string;
+    guide: {
+      introduction: string;
+      items: Array<{ label: string; value: string }>;
+    };
+  };
+  directory: {
+    eyebrow: string;
+    title: string;
+    introduction: string;
+    entries: DirectoryEntry[];
+  };
+  selection: {
+    eyebrow: string;
+    title: string;
+    introduction: string;
+    items: SelectionItem[];
+  };
+  related: {
+    eyebrow: string;
+    title: string;
+    introduction: string;
+    items: RelatedPath[];
+  };
+  nextStep: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    primaryCta: { label: string; href: string };
+    secondaryCta?: { label: string; href: string };
+  };
+}
+
+const { meta, hero, directory, selection, related, nextStep } = Astro.props;
+---
+
+<Layout
+  title={meta.title}
+  description={meta.description}
+  canonicalURL={meta.canonicalURL}
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="directory-page" tabindex="-1">
+    <section class="directory-hero" aria-labelledby="directory-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">{hero.breadcrumb}</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">{hero.eyebrow}</p>
+          <h1 id="directory-title">{hero.title}</h1>
+          <p class="hero-lead">{hero.lead}</p>
+        </div>
+
+        <aside class="guide-card" aria-labelledby="guide-title">
+          <p id="guide-title" class="note-label">How to use this page</p>
+          <p>{hero.guide.introduction}</p>
+          <dl>
+            {
+              hero.guide.items.map((item) => (
+                <div>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: directory.eyebrow, href: "#directory" },
+        { label: "Choose a path", href: "#selection" },
+        { label: "Related paths", href: "#related" },
+        { label: "Next step", href: "#next-step" },
+      ]}
+    />
+
+    <section
+      id="directory"
+      class="directory-section section-block"
+      aria-labelledby="directory-section-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">{directory.eyebrow}</p>
+            <h2 id="directory-section-title">{directory.title}</h2>
+          </div>
+          <p>{directory.introduction}</p>
+        </div>
+
+        <div class="entry-grid">
+          {
+            directory.entries.map((entry, index) => (
+              <article class="entry-card">
+                <div class="entry-heading">
+                  <p class="item-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="entry-eyebrow">{entry.eyebrow}</p>
+                </div>
+                <h3>{entry.title}</h3>
+                <p class="entry-description">{entry.description}</p>
+                <div class="entry-conditions">
+                  <p class="note-label">Common conditions</p>
+                  <ul>
+                    {entry.conditions.map((condition) => (
+                      <li>{condition}</li>
+                    ))}
+                  </ul>
+                </div>
+                <a class="entry-link" href={entry.cta.href}>
+                  {entry.cta.label}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="selection"
+      class="selection-section"
+      aria-labelledby="selection-title"
+    >
+      <div class="page-container selection-layout">
+        <div class="selection-intro">
+          <p class="eyebrow eyebrow-inverse">{selection.eyebrow}</p>
+          <h2 id="selection-title">{selection.title}</h2>
+          <p>{selection.introduction}</p>
+        </div>
+
+        <ol class="selection-list">
+          {
+            selection.items.map((item, index) => (
+              <li>
+                <p class="selection-number">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <div>
+                  <p class="selection-label">{item.title}</p>
+                  <h3>{item.question}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="related"
+      class="related-section section-block"
+      aria-labelledby="related-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro">
+          <p class="eyebrow">{related.eyebrow}</p>
+          <h2 id="related-title">{related.title}</h2>
+          <p>{related.introduction}</p>
+        </div>
+
+        <div class="related-grid">
+          {
+            related.items.map((item, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <a href={item.href}>
+                  {item.label}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="next-step"
+      class="next-step-section"
+      aria-labelledby="next-step-title"
+    >
+      <div class="page-container next-step-layout">
+        <div>
+          <p class="eyebrow">{nextStep.eyebrow}</p>
+          <h2 id="next-step-title">{nextStep.title}</h2>
+        </div>
+        <div class="next-step-copy">
+          <p>{nextStep.description}</p>
+          <div class="next-step-actions">
+            <a class="button button-primary" href={nextStep.primaryCta.href}>
+              {nextStep.primaryCta.label}
+            </a>
+            {
+              nextStep.secondaryCta && (
+                <a class="button button-text" href={nextStep.secondaryCta.href}>
+                  {nextStep.secondaryCta.label}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .directory-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block,
+  .directory-hero,
+  .selection-section,
+  .next-step-section {
+    padding-block: var(--section-space);
+  }
+
+  .directory-hero {
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout,
+  .next-step-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a,
+  .entry-link,
+  .related-grid a,
+  .button-text {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .entry-eyebrow,
+  .selection-number,
+  .selection-label {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse,
+  .selection-number,
+  .selection-label {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 18ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead,
+  .section-intro > p,
+  .selection-intro > p:not(.eyebrow),
+  .next-step-copy > p {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .guide-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .guide-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .guide-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .guide-card dl > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .guide-card dt,
+  .guide-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .guide-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .guide-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro h2,
+  .selection-intro h2,
+  .next-step-layout h2 {
+    max-width: 20ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .entry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .entry-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .entry-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .entry-eyebrow {
+    color: var(--color-text-muted);
+  }
+
+  .entry-card h3,
+  .related-grid h3 {
+    margin-top: 1.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .entry-description,
+  .related-grid article > p:not(.item-number) {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .entry-conditions {
+    width: 100%;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .entry-conditions ul {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1rem 0 0;
+    padding-inline-start: 1.15rem;
+  }
+
+  .entry-conditions li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .entry-conditions li::marker {
+    color: var(--color-blue);
+  }
+
+  .entry-link,
+  .related-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .selection-section {
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .selection-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .selection-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .selection-intro h2,
+  .selection-list h3 {
+    color: var(--color-light);
+  }
+
+  .selection-intro > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .selection-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .selection-list li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-block: 1.75rem;
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .selection-list h3 {
+    margin-top: 0.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .selection-list li > div > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .related-grid article {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .next-step-section {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .next-step-layout {
+    align-items: start;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  }
+
+  .next-step-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .next-step-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .directory-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .entry-link:hover,
+    .related-grid a:hover,
+    .button-text:hover {
+      text-decoration: underline;
+    }
+
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .section-intro-split,
+    .selection-layout,
+    .next-step-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .guide-card {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .entry-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .guide-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .selection-list li {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .next-step-actions,
+    .button {
+      width: 100%;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .guide-card,
+    .entry-grid,
+    .entry-card,
+    .entry-conditions,
+    .selection-list,
+    .selection-list li,
+    .related-grid,
+    .related-grid article,
+    .next-step-section {
+      border-color: CanvasText;
+    }
+  }
+</style>

@@ -1,0 +1,204 @@
+---
+import SolutionDirectoryPage from "../../../components/SolutionDirectoryPage.astro";
+
+const page = {
+  meta: {
+    title: "Customer Experience Solutions by Industry | Cadence Lab",
+    description:
+      "Find a customer experience, CRM workflow, lifecycle, digital, location, or AI diagnostic path based on the operating conditions common to your industry.",
+    canonicalURL: "/solutions/industry/",
+  },
+  hero: {
+    breadcrumb: "Solutions by industry",
+    eyebrow: "Solutions · By industry",
+    title: "Start with how the experience operates in your industry.",
+    lead: "Industry shapes customer expectations, regulation, risk, channels, data, service models, and the decisions teams can make. These paths identify common operating conditions without assuming that every organization in a sector has the same problem or needs the same solution.",
+    guide: {
+      introduction:
+        "Choose the environment closest to your work, then use the operating conditions—not the category label—to decide whether the recommended diagnostic is a useful starting point.",
+      items: [
+        { label: "Start", value: "Recognize the operating conditions" },
+        { label: "Compare", value: "Identify the cross-functional decision" },
+        { label: "Choose", value: "Review the most relevant diagnostic" },
+      ],
+    },
+  },
+  directory: {
+    eyebrow: "Industry paths",
+    title: "Find the operating pattern behind the sector.",
+    introduction:
+      "The same visible symptom can have a different cause and consequence across industries. Each path highlights the customer and operating conditions that should shape the first investigation.",
+    entries: [
+      {
+        eyebrow: "Financial services",
+        title: "Connect trust, identity, service, and regulated decisions.",
+        description:
+          "Banking, insurance, payments, wealth, and financial-service experiences depend on accurate records, understandable decisions, secure identity, timely intervention, and continuity across digital and human channels.",
+        conditions: [
+          "High-consequence decisions require clear evidence and accountability.",
+          "Identity, privacy, fraud, eligibility, and regulatory requirements shape the journey.",
+          "Customers move between self-service, specialists, operations, and exception handling.",
+        ],
+        cta: {
+          label: "Review CX Systems Diagnostic",
+          href: "/services/cx-systems-diagnostic/",
+        },
+      },
+      {
+        eyebrow: "Healthcare and human services",
+        title: "Reduce the effort required to access and continue care.",
+        description:
+          "Healthcare, benefits, and human-service journeys often cross eligibility, scheduling, records, locations, specialists, sensitive information, accessibility needs, and emotionally consequential moments.",
+        conditions: [
+          "People must navigate several organizations, roles, or systems.",
+          "Missing context or delayed handoffs can materially affect the outcome.",
+          "Privacy, accessibility, language, trust, and human support are essential.",
+        ],
+        cta: {
+          label: "Review CX Systems Diagnostic",
+          href: "/services/cx-systems-diagnostic/",
+        },
+      },
+      {
+        eyebrow: "Retail and consumer",
+        title: "Join acquisition, purchase, fulfillment, service, and loyalty.",
+        description:
+          "Retail and consumer experiences span discovery, digital commerce, stores, inventory, delivery, returns, support, membership, and the lifecycle signals that indicate changing trust or intent.",
+        conditions: [
+          "Digital, physical, fulfillment, and service channels share one customer promise.",
+          "Inventory, order, account, and service context must remain consistent.",
+          "Quiet accounts and repeated friction can become preventable loss.",
+        ],
+        cta: {
+          label: "Review Lifecycle Risk",
+          href: "/services/lifecycle-risk-review/",
+        },
+      },
+      {
+        eyebrow: "Technology and SaaS",
+        title: "Connect product adoption to the customer operating model.",
+        description:
+          "Technology and subscription businesses depend on coordinated onboarding, product signals, account context, support, success, sales, renewal, and responsible AI-enabled service.",
+        conditions: [
+          "Adoption and risk signals are distributed across product and CRM systems.",
+          "Ownership changes across sales, onboarding, success, support, and renewal.",
+          "AI features or copilots require workflow, oversight, and measurement decisions.",
+        ],
+        cta: {
+          label: "Review Lifecycle Risk",
+          href: "/services/lifecycle-risk-review/",
+        },
+      },
+      {
+        eyebrow: "Professional and B2B services",
+        title: "Preserve context across complex, relationship-led work.",
+        description:
+          "Professional, business, and industrial services often combine long sales cycles, expert delivery, account teams, project transitions, service exceptions, and relationship knowledge that is difficult to encode.",
+        conditions: [
+          "Customer work crosses commercial, delivery, technical, and service roles.",
+          "Important context lives in people, documents, messages, and local tools.",
+          "CRM activity does not always represent the real state of the relationship.",
+        ],
+        cta: {
+          label: "Review CRM Workflow Audit",
+          href: "/services/crm-workflow-audit/",
+        },
+      },
+      {
+        eyebrow: "Public, education, and nonprofit",
+        title: "Make essential services understandable and accessible.",
+        description:
+          "Public institutions, education, associations, and nonprofits serve varied communities through policy-bound processes, limited capacity, digital and physical channels, and services people may not be able to avoid.",
+        conditions: [
+          "Eligibility, policy, funding, and accountability shape available choices.",
+          "Accessibility, language, digital access, and trust affect participation.",
+          "People often move across programs, departments, locations, and partners.",
+        ],
+        cta: {
+          label: "Review CX Systems Diagnostic",
+          href: "/services/cx-systems-diagnostic/",
+        },
+      },
+    ],
+  },
+  selection: {
+    eyebrow: "Choose a path",
+    title: "Let the operating decision narrow the starting point.",
+    introduction:
+      "Industry context matters, but it should not replace diagnosis. Use these questions to separate a broad sector challenge from the specific decision leadership needs to make.",
+    items: [
+      {
+        title: "Customer consequence",
+        question:
+          "Where does friction materially affect people or the organization?",
+        description:
+          "Identify the effect on access, trust, service, safety, retention, revenue, capacity, compliance, or another consequential outcome.",
+      },
+      {
+        title: "Operating boundary",
+        question:
+          "Which teams, systems, channels, and partners produce the experience?",
+        description:
+          "Follow the work beyond the visible touchpoint to the roles, rules, data, handoffs, locations, and dependencies that can change the result.",
+      },
+      {
+        title: "Decision owner",
+        question: "Who can act on the evidence?",
+        description:
+          "Choose a sponsor who can resolve cross-functional priorities, assign accountable owners, change workflow, and decide what should happen next.",
+      },
+      {
+        title: "Evidence readiness",
+        question: "What can the organization responsibly inspect?",
+        description:
+          "Consider customer signals, records, workflows, policies, system behavior, frontline experience, measures, and where evidence remains incomplete.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related solution paths",
+    title: "Approach the same problem from another useful angle.",
+    introduction:
+      "Industry is one way to orient the work. Team ownership and use case can reveal a more precise starting point when the sector category remains too broad.",
+    items: [
+      {
+        title: "Solutions by team",
+        description:
+          "Find a path based on who owns the experience, workflow, data, service, digital product, or AI decision.",
+        href: "/solutions/team/",
+        label: "Explore by team",
+      },
+      {
+        title: "Solutions by use case",
+        description:
+          "Start with a recognizable operating problem such as lifecycle risk, CRM distrust, cross-functional friction, or AI readiness.",
+        href: "/solutions/use-case/",
+        label: "Explore by use case",
+      },
+      {
+        title: "Diagnostic offers",
+        description:
+          "Compare the four evidence-led diagnostics and the operating decision each one is designed to support.",
+        href: "/services/",
+        label: "Compare diagnostics",
+      },
+    ],
+  },
+  nextStep: {
+    eyebrow: "Next step",
+    title: "Describe the operating problem in your industry.",
+    description:
+      "Share the customer consequence, teams, systems, constraints, evidence, and leadership decision involved. Cadence Lab will recommend the most useful starting point and say directly when a narrower or different path makes more sense.",
+    primaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    secondaryCta: {
+      label: "Review all services",
+      href: "/services/",
+    },
+  },
+};
+---
+
+<SolutionDirectoryPage {...page} />
