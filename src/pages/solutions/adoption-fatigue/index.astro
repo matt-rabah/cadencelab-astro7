@@ -1,0 +1,1224 @@
+---
+import Footer from "../../../components/Footer.astro";
+import NavHeader from "../../../components/NavHeader.astro";
+import SectionNav from "../../../components/SectionNav.astro";
+import Layout from "../../../layouts/Layout.astro";
+
+const visibleSignals = [
+  {
+    number: "01",
+    title: "Review takes longer than the original task",
+    description:
+      "People reopen source systems, reconstruct context, verify policy, and rewrite output before they feel safe acting.",
+  },
+  {
+    number: "02",
+    title: "A parallel process becomes the trusted process",
+    description:
+      "Spreadsheets, messages, private notes, meetings, or the previous tool remain necessary when the formal workflow becomes busy or consequential.",
+  },
+  {
+    number: "03",
+    title: "Usage remains steady while confidence declines",
+    description:
+      "Employees complete required steps in the system, then confirm the result elsewhere or avoid relying on it for important decisions.",
+  },
+  {
+    number: "04",
+    title: "Exceptions return to the most experienced people",
+    description:
+      "Specialists absorb the difficult cases because the workflow cannot explain, route, or safely recover from unfamiliar conditions.",
+  },
+  {
+    number: "05",
+    title: "Training repeats without changing the work",
+    description:
+      "People understand how to use the feature but still encounter weak inputs, unclear rules, duplicated effort, or consequences they cannot accept.",
+  },
+  {
+    number: "06",
+    title: "The launch succeeds while the outcome stays flat",
+    description:
+      "Availability, login, completion, or automation measures improve without a corresponding change in customer quality, work time, capacity, or trust.",
+  },
+];
+
+const operatingCauses = [
+  {
+    label: "Workflow",
+    question: "Does the new path reduce effort or add another layer?",
+    description:
+      "The task may be divided poorly between the system and the person, repeat discovery, create duplicate entry, or leave exception handling outside the designed flow.",
+  },
+  {
+    label: "Data and knowledge",
+    question: "Can people trust the inputs behind the output?",
+    description:
+      "Incomplete records, conflicting policies, stale knowledge, inaccessible context, and unclear provenance make verification a rational part of the job.",
+  },
+  {
+    label: "Decision rights",
+    question: "Who can approve, reject, correct, or stop the work?",
+    description:
+      "People may remain accountable for an outcome without having the authority to change the system response or resolve the operating constraint.",
+  },
+  {
+    label: "Human judgment",
+    question: "Is review bounded or a complete reconstruction?",
+    description:
+      "Useful oversight focuses attention where consequence or uncertainty requires it. Unbounded review quietly recreates the original task.",
+  },
+  {
+    label: "Incentives and consequence",
+    question: "What risk does the user carry when the system is wrong?",
+    description:
+      "Adoption weakens when speed and usage are rewarded while employees remain responsible for customer harm, rework, compliance, or recovery.",
+  },
+  {
+    label: "Measurement",
+    question: "Do the measures reveal useful work or recorded activity?",
+    description:
+      "Login, feature use, and task completion can look healthy while correction, bypass, delay, escalation, and customer outcomes deteriorate.",
+  },
+];
+
+const evidenceSources = [
+  {
+    title: "Task observation",
+    description:
+      "How people complete routine and consequential work on a normal day and under pressure, including every system, check, and workaround used.",
+  },
+  {
+    title: "Review and correction",
+    description:
+      "Time spent checking output, sources reopened, changes made, recommendations rejected, and work repeated before action.",
+  },
+  {
+    title: "Overrides and bypasses",
+    description:
+      "Cases where people reject, route around, disable, abandon, or replace the intended workflow and the reason each response feels safer.",
+  },
+  {
+    title: "Exceptions and escalation",
+    description:
+      "Conditions the workflow cannot handle, specialists who absorb them, context lost during transfer, and the effort required to recover.",
+  },
+  {
+    title: "User explanation",
+    description:
+      "What people believe the system is helping, where they hesitate, which consequences concern them, and what would make the workflow more useful.",
+  },
+  {
+    title: "Customer and operating outcomes",
+    description:
+      "Quality, completion time, repeat contact, rework, capacity, error, escalation, trust, and other evidence connected to the assisted task.",
+  },
+];
+
+const responseSequence = [
+  {
+    phase: "Observe",
+    question: "What work is happening around the intended workflow?",
+    evidence:
+      "Real tasks, busy-day behavior, review effort, workarounds, exceptions, and outcomes.",
+  },
+  {
+    phase: "Distinguish",
+    question: "What kind of problem is creating the resistance?",
+    evidence:
+      "Training, workflow, data, knowledge, ownership, system behavior, incentives, or use-case fit.",
+  },
+  {
+    phase: "Repair",
+    question: "Which operating condition should change first?",
+    evidence:
+      "Task boundaries, inputs, handoffs, authority, review, recovery, measurement, and removed complexity.",
+  },
+  {
+    phase: "Test",
+    question: "Does the revised workflow make the work more usable?",
+    evidence:
+      "A bounded group, representative cases, known exceptions, adoption support, and clear stop conditions.",
+  },
+  {
+    phase: "Review",
+    question: "What evidence supports continuation or expansion?",
+    evidence:
+      "Useful work, correction, bypass, quality, customer consequence, trust, and operating performance.",
+  },
+];
+
+const diagnosticPaths = [
+  {
+    title: "AI Service Readiness Review",
+    href: "/services/ai-service-readiness-review/",
+    useWhen:
+      "The adoption problem surrounds an AI use case whose workflow, oversight, governance, trust, or success conditions remain unresolved.",
+  },
+  {
+    title: "CRM Workflow Audit",
+    href: "/services/crm-workflow-audit/",
+    useWhen:
+      "Teams route around CRM records, fields, automation, reporting, or configured workflows because the system does not support the real work.",
+  },
+  {
+    title: "CX Systems Diagnostic",
+    href: "/services/cx-systems-diagnostic/",
+    useWhen:
+      "The resistance reflects customer friction, cross-functional handoffs, unclear ownership, or operating constraints spanning several systems and teams.",
+  },
+];
+
+const strongFit = [
+  "A launched workflow has acceptable usage but creates correction, verification, rework, or bypass.",
+  "Employees are described as resistant while their operating concerns remain unexplained.",
+  "The problem crosses system behavior, data, workflow, ownership, training, or incentives.",
+  "Customer or business outcomes have not improved with adoption activity.",
+  "A sponsor can change the work—not only require more use of the tool.",
+];
+---
+
+<Layout
+  title="User Adoption Fatigue | Cadence Lab"
+  description="Find why employees verify, correct, bypass, or abandon a workflow and determine which operating conditions must change before asking for more adoption."
+  canonicalURL="/solutions/adoption-fatigue/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="adoption-page" tabindex="-1">
+    <section class="adoption-hero" aria-labelledby="adoption-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-current="page">User adoption fatigue</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Solution · User adoption fatigue</p>
+          <h1 id="adoption-title">
+            Treat resistance as evidence about the work.
+          </h1>
+          <p class="hero-lead">
+            Adoption fatigue appears when people repeatedly absorb the review,
+            correction, coordination, and risk that a new workflow was expected
+            to reduce. The useful question is not how to force more use, but
+            what the behavior reveals about the operating system.
+          </p>
+
+          <div class="hero-actions" aria-label="User adoption fatigue actions">
+            <a class="button button-primary" href="/fit-check/">
+              Start a fit check
+            </a>
+            <a class="button button-text" href="#signals">
+              Review the signals
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="problem-card" aria-labelledby="problem-title">
+          <p id="problem-title" class="note-label">Recognizable pattern</p>
+          <p>
+            The feature is available and people have been trained. Usage appears
+            acceptable, but employees still verify every output, keep a safer
+            parallel process, or return to the old workflow when the work
+            becomes consequential.
+          </p>
+          <dl>
+            <div>
+              <dt>Visible label</dt>
+              <dd>Resistance or change fatigue</dd>
+            </div>
+            <div>
+              <dt>Operating question</dt>
+              <dd>What work and risk did the change leave behind?</dd>
+            </div>
+            <div>
+              <dt>Decision</dt>
+              <dd>Repair, narrow, support, or stop the workflow</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <SectionNav
+      items={[
+        { label: "Problem", href: "#problem" },
+        { label: "Signals", href: "#signals" },
+        { label: "Operating causes", href: "#operating-causes" },
+        { label: "Evidence", href: "#evidence" },
+        { label: "Response", href: "#response" },
+        { label: "Diagnostic paths", href: "#diagnostic-paths" },
+        { label: "Fit", href: "#fit" },
+      ]}
+    />
+
+    <section
+      id="problem"
+      class="problem section-block"
+      aria-labelledby="problem-heading"
+    >
+      <div class="page-container problem-layout">
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2 id="problem-heading">
+            Adoption weakens when the workflow moves risk onto the user.
+          </h2>
+        </div>
+
+        <div class="problem-copy">
+          <p>
+            A system can be technically correct and still make daily work
+            slower, less clear, or more fragile. People then create additional
+            checks and coordination to protect the customer and the outcome for
+            which they remain accountable.
+          </p>
+          <p>
+            Those behaviors are not automatically a training failure. They may
+            reveal weak data, unclear policy, missing context, brittle
+            automation, poorly divided tasks, or a use case that should have
+            remained narrower.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="signals" class="signals" aria-labelledby="signals-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Visible signals</p>
+          <h2 id="signals-title">
+            Look beyond whether the tool is being used.
+          </h2>
+          <p>
+            These patterns indicate that participation and useful adoption have
+            separated.
+          </p>
+        </div>
+
+        <ol class="signal-grid">
+          {
+            visibleSignals.map((signal) => (
+              <li>
+                <p class="item-number">{signal.number}</p>
+                <h3>{signal.title}</h3>
+                <p>{signal.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="operating-causes"
+      class="operating-causes section-block"
+      aria-labelledby="causes-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Operating causes</p>
+            <h2 id="causes-title">
+              Separate an enablement gap from a system problem.
+            </h2>
+          </div>
+          <p>
+            Training is useful when people lack knowledge or practice. It cannot
+            resolve a workflow that asks them to compensate for weak inputs,
+            unclear decisions, or consequences the system cannot manage.
+          </p>
+        </div>
+
+        <div class="cause-list">
+          {
+            operatingCauses.map((cause, index) => (
+              <article>
+                <div class="cause-heading">
+                  <p class="item-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="cause-label">{cause.label}</p>
+                </div>
+                <h3>{cause.question}</h3>
+                <p>{cause.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="evidence"
+      class="evidence section-block"
+      aria-labelledby="evidence-title"
+    >
+      <div class="page-container evidence-layout">
+        <div class="evidence-intro">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="evidence-title">Measure the work around the output.</h2>
+          <p>
+            A useful review connects behavior to the task and its consequence.
+            The purpose is to understand friction and risk—not to monitor
+            employees for failing to comply with a preferred narrative.
+          </p>
+          <div class="evidence-principle">
+            <p class="note-label">Evidence principle</p>
+            <p>
+              Compare intended work with actual work, then distinguish observed
+              facts, user interpretation, and working hypotheses.
+            </p>
+          </div>
+        </div>
+
+        <div class="evidence-grid">
+          {
+            evidenceSources.map((source, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="response" class="response" aria-labelledby="response-title">
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Practical response</p>
+          <h2 id="response-title">
+            Improve the conditions before expanding the mandate.
+          </h2>
+          <p>
+            The sequence keeps the response grounded in the real task and uses
+            adoption behavior to guide a bounded operating decision.
+          </p>
+        </div>
+
+        <ol class="response-list">
+          {
+            responseSequence.map((stage, index) => (
+              <li>
+                <div class="response-heading">
+                  <p class="response-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p class="response-phase">{stage.phase}</p>
+                </div>
+                <h3>{stage.question}</h3>
+                <p>{stage.evidence}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="diagnostic-paths"
+      class="diagnostic-paths section-block"
+      aria-labelledby="paths-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-split">
+          <div>
+            <p class="eyebrow">Diagnostic paths</p>
+            <h2 id="paths-title">
+              Let the operating cause determine the starting point.
+            </h2>
+          </div>
+          <p>
+            Adoption fatigue is a symptom, not a complete diagnosis. The right
+            entry point depends on whether the most consequential constraint
+            sits in AI readiness, CRM workflow, or the broader customer
+            operating system.
+          </p>
+        </div>
+
+        <div class="path-grid">
+          {
+            diagnosticPaths.map((path, index) => (
+              <article>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <h3>{path.title}</h3>
+                <p>{path.useWhen}</p>
+                <a href={path.href}>
+                  Review the diagnostic
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="fit" aria-labelledby="fit-title">
+      <div class="page-container fit-layout">
+        <div class="fit-copy">
+          <p class="eyebrow">Fit</p>
+          <h2 id="fit-title">
+            Use this path when adoption behavior is carrying an unresolved
+            operating problem.
+          </h2>
+          <p>
+            The work is most useful when leadership is willing to examine the
+            workflow and change its conditions. It is not intended to enforce
+            compliance, justify a predetermined platform, or label reasonable
+            risk responses as employee resistance.
+          </p>
+
+          <a class="button button-primary" href="/fit-check/">
+            Start a fit check
+          </a>
+        </div>
+
+        <aside class="fit-list" aria-labelledby="fit-list-title">
+          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <ul>
+            {strongFit.map((condition) => <li>{condition}</li>)}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="related-insight" aria-labelledby="insight-title">
+      <div class="page-container insight-layout">
+        <div>
+          <p class="eyebrow">Related insight</p>
+          <h2 id="insight-title">
+            When AI creates more work for the people using it
+          </h2>
+        </div>
+        <div>
+          <p>
+            A practical guide to recognizing review burden, hidden workarounds,
+            declining trust, and the operating questions behind AI adoption.
+          </p>
+          <a href="/blog/2026/06/adoption-fatigue/">
+            Read the article
+            <span aria-hidden="true">&#8594;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .adoption-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .section-block {
+    padding-block: var(--section-space);
+  }
+
+  .adoption-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number,
+  .cause-label,
+  .response-number,
+  .response-phase {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 18ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .problem-card {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .problem-card > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-ui);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .problem-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .problem-card dl > div {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .problem-card dt,
+  .problem-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .problem-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .problem-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .problem-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .problem-layout h2,
+  .section-intro h2,
+  .evidence-intro h2,
+  .fit-copy h2,
+  .related-insight h2 {
+    max-width: 20ch;
+    margin-top: 0.75rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .problem-copy {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+  }
+
+  .problem-copy p,
+  .section-intro > p:not(.eyebrow),
+  .evidence-intro > p:not(.eyebrow),
+  .fit-copy > p:not(.eyebrow) {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .section-intro {
+    display: flex;
+    max-width: 52rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .section-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .section-intro-inverse h2 {
+    color: var(--color-light);
+  }
+
+  .section-intro-inverse > p:not(.eyebrow) {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .section-intro-split {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro-split > p {
+    align-self: end;
+  }
+
+  .signals,
+  .response {
+    padding-block: var(--section-space);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    list-style: none;
+  }
+
+  .signal-grid li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .signal-grid .item-number {
+    color: var(--color-green);
+  }
+
+  .signal-grid h3 {
+    margin-top: 1.5rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .signal-grid li > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .cause-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .cause-list article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .cause-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cause-list h3 {
+    max-width: 31ch;
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .cause-list article > p:last-child {
+    max-width: var(--measure-ui);
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .evidence {
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .evidence-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .evidence-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .evidence-intro h2 {
+    margin-top: -0.5rem;
+  }
+
+  .evidence-principle {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-principle > p:last-child {
+    margin: 0.65rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .evidence-grid article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .evidence-grid h3 {
+    margin-top: 1.5rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .evidence-grid article > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .response-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 0.1875rem solid var(--color-green);
+    list-style: none;
+  }
+
+  .response-list li {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .response-list li:first-child {
+    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+  }
+
+  .response-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .response-number {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .response-phase {
+    color: var(--color-green);
+  }
+
+  .response-list h3 {
+    min-height: 6.75rem;
+    margin-top: 2rem;
+    color: var(--color-light);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .response-list li > p:last-child {
+    margin: 1rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .path-grid article {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .path-grid h3 {
+    margin-top: 1.75rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .path-grid article > p:not(.item-number) {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .path-grid a,
+  .related-insight a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.25em;
+  }
+
+  .fit {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .fit-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.7fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .fit-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fit-copy > p:not(.eyebrow) {
+    margin-top: 1.25rem;
+  }
+
+  .fit-copy .button {
+    margin-top: 1.75rem;
+  }
+
+  .fit-list {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .fit-list ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .fit-list li {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .fit-list li::marker {
+    color: var(--color-blue);
+  }
+
+  .related-insight {
+    padding-block: clamp(3rem, 7vw, 5rem);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-pure);
+  }
+
+  .insight-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .related-insight h2 {
+    margin-top: 0.75rem;
+  }
+
+  .insight-layout > div:last-child {
+    align-self: end;
+  }
+
+  .insight-layout > div:last-child > p {
+    max-width: var(--measure-ui);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+  }
+
+  .adoption-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-text:hover,
+    .path-grid a:hover,
+    .related-insight a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 70rem) {
+    .response-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .response-list h3 {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout,
+    .problem-layout,
+    .section-intro-split,
+    .evidence-layout,
+    .fit-layout,
+    .insight-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .problem-card,
+    .fit-list {
+      max-width: 40rem;
+    }
+
+    .section-intro-split > p {
+      align-self: start;
+    }
+
+    .signal-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .path-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .insight-layout > div:last-child {
+      align-self: start;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .hero-actions {
+      width: 100%;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .problem-card dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+
+    .signal-grid,
+    .cause-list,
+    .evidence-grid,
+    .response-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .adoption-hero,
+    .problem-card,
+    .signal-grid,
+    .signal-grid li,
+    .cause-list,
+    .cause-list article,
+    .evidence,
+    .evidence-principle,
+    .evidence-grid,
+    .evidence-grid article,
+    .response-list,
+    .response-list li,
+    .path-grid,
+    .path-grid article,
+    .fit,
+    .fit-list,
+    .related-insight {
+      border-color: CanvasText;
+    }
+  }
+</style>
