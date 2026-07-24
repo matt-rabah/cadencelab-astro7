@@ -1,0 +1,733 @@
+---
+import Footer from "../../components/Footer.astro";
+import NavHeader from "../../components/NavHeader.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const effectiveDate = "July 23, 2026";
+
+const termsSections = [
+  { label: "Scope and acceptance", href: "#scope" },
+  { label: "Website information", href: "#website-information" },
+  { label: "Inquiries and engagements", href: "#inquiries-engagements" },
+  { label: "Acceptable use", href: "#acceptable-use" },
+  { label: "Intellectual property", href: "#intellectual-property" },
+  { label: "Third-party services", href: "#third-party-services" },
+  { label: "Availability and liability", href: "#availability-liability" },
+  { label: "Changes and contact", href: "#changes-contact" },
+];
+---
+
+<Layout
+  title="Terms of Service | Cadence Lab"
+  description="Terms governing access to and use of the Cadence Lab website, content, forms, and public resources."
+  canonicalURL="/terms/"
+  pageType="website"
+>
+  <NavHeader />
+
+  <main id="main-content" class="terms-page" tabindex="-1">
+    <header class="terms-hero">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Terms of service</p>
+          <h1>Clear terms for using the Cadence Lab website.</h1>
+          <p class="hero-lead">
+            These terms govern access to this website and its public resources.
+            They do not replace the separate written agreement used when Cadence
+            Lab accepts a client engagement.
+          </p>
+        </div>
+
+        <aside class="terms-summary" aria-labelledby="terms-summary-title">
+          <p id="terms-summary-title" class="summary-label">
+            Terms at a glance
+          </p>
+          <dl>
+            <div>
+              <dt>Effective</dt>
+              <dd>{effectiveDate}</dd>
+            </div>
+            <div>
+              <dt>Applies to</dt>
+              <dd>cadencelab.co and its public resources</dd>
+            </div>
+            <div>
+              <dt>Engagements</dt>
+              <dd>Governed by a separate written agreement</dd>
+            </div>
+            <div>
+              <dt>Contact</dt>
+              <dd>
+                <a href="mailto:hi@cadencelab.co">hi@cadencelab.co</a>
+              </dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </header>
+
+    <div class="page-container terms-layout">
+      <aside class="terms-navigation">
+        <nav aria-label="Terms of service contents">
+          <p>On this page</p>
+          <ol>
+            {
+              termsSections.map((section, index) => (
+                <li>
+                  <a href={section.href}>
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {section.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+      </aside>
+
+      <article class="terms-content">
+        <section id="scope" aria-labelledby="scope-title">
+          <p class="section-number" aria-hidden="true">01</p>
+          <h2 id="scope-title">Scope and acceptance</h2>
+
+          <p>
+            These Terms of Service (“Terms”) apply to your access to and use of
+            <strong>cadencelab.co</strong>, including its pages, articles,
+            downloadable materials, search tools, contact methods, and Fit Check
+            form (collectively, the “Website”). “Cadence Lab,” “we,” “us,” and
+            “our” refer to Cadence Lab, an independent customer experience
+            practice led by Matt Rabah.
+          </p>
+
+          <p>
+            By accessing or using the Website, you agree to these Terms. If you
+            do not agree, do not use the Website. Your use is also subject to
+            the <a href="/privacy/">Privacy Policy</a>, which explains how
+            information submitted through the Website is handled.
+          </p>
+
+          <div class="terms-note">
+            <p class="note-label">Website terms only</p>
+            <p>
+              These Terms do not govern consulting, advisory, implementation, or
+              other client work. If Cadence Lab accepts an engagement, the
+              parties will define its scope, responsibilities, fees, ownership,
+              confidentiality, and other terms in a separate written agreement.
+            </p>
+          </div>
+        </section>
+
+        <section
+          id="website-information"
+          aria-labelledby="website-information-title"
+        >
+          <p class="section-number" aria-hidden="true">02</p>
+          <h2 id="website-information-title">Website information is general</h2>
+
+          <p>
+            The Website provides general information about customer experience
+            systems, workflows, CRM operations, applied AI, diagnostic offers,
+            and Cadence Lab’s approach to the work. It is intended to help
+            organizations understand possible operating questions and evaluate
+            whether a conversation may be useful.
+          </p>
+
+          <p>
+            Website content is not legal, financial, accounting, security,
+            employment, or other regulated professional advice. It is not a
+            substitute for advice based on your organization’s facts,
+            obligations, systems, risk profile, and decision context.
+          </p>
+
+          <p>
+            Examples, frameworks, articles, and descriptions of possible
+            outcomes are illustrative. They do not promise that any particular
+            method, diagnostic, technology, or engagement will produce a
+            specific result.
+          </p>
+        </section>
+
+        <section
+          id="inquiries-engagements"
+          aria-labelledby="inquiries-engagements-title"
+        >
+          <p class="section-number" aria-hidden="true">03</p>
+          <h2 id="inquiries-engagements-title">
+            Inquiries do not create an engagement
+          </h2>
+
+          <p>
+            Sending a message, completing a Fit Check, receiving an automated
+            confirmation, or participating in an initial conversation does not
+            create a consulting relationship, professional duty, partnership,
+            agency relationship, exclusivity obligation, or contract for
+            services.
+          </p>
+
+          <p>
+            Cadence Lab may decline an inquiry, recommend a different path, or
+            determine that a proposed engagement is not a useful fit. An
+            engagement begins only after Cadence Lab and the client enter into a
+            separate written agreement signed or otherwise accepted by both
+            parties.
+          </p>
+
+          <p>
+            Do not send passwords, access tokens, payment-card information,
+            health records, government identifiers, regulated personal data,
+            confidential credentials, or other sensitive information through a
+            public Website form. If an inquiry progresses, appropriate methods
+            for exchanging necessary information can be established separately.
+          </p>
+        </section>
+
+        <section id="acceptable-use" aria-labelledby="acceptable-use-title">
+          <p class="section-number" aria-hidden="true">04</p>
+          <h2 id="acceptable-use-title">Acceptable use</h2>
+
+          <p>
+            You may use the Website for lawful informational and business
+            evaluation purposes. You are responsible for complying with
+            applicable law and for the information you choose to submit.
+          </p>
+
+          <p>You may not use the Website to:</p>
+
+          <ul>
+            <li>
+              Interfere with, disrupt, overload, damage, or bypass the Website,
+              its hosting infrastructure, or its security controls
+            </li>
+            <li>
+              Attempt to gain unauthorized access to systems, accounts, data, or
+              nonpublic areas
+            </li>
+            <li>
+              Introduce malware, malicious code, automated abuse, spam, or
+              deceptive submissions
+            </li>
+            <li>
+              Misrepresent your identity, authority, affiliation, or the source
+              of information you submit
+            </li>
+            <li>
+              Use Website content or branding to imply Cadence Lab’s endorsement
+              of a person, product, service, or organization
+            </li>
+            <li>
+              Copy, scrape, extract, or republish Website content in a way that
+              violates applicable law or the rights described in these Terms
+            </li>
+            <li>
+              Use the Website for unlawful, fraudulent, abusive, or harmful
+              activity
+            </li>
+          </ul>
+
+          <p>
+            Cadence Lab may restrict or block access reasonably believed to
+            threaten the Website, other users, service providers, or legal
+            rights.
+          </p>
+        </section>
+
+        <section
+          id="intellectual-property"
+          aria-labelledby="intellectual-property-title"
+        >
+          <p class="section-number" aria-hidden="true">05</p>
+          <h2 id="intellectual-property-title">Intellectual property</h2>
+
+          <p>
+            Unless otherwise stated, the Website’s original text, visual design,
+            graphics, diagrams, organization, and Cadence Lab branding are owned
+            by or licensed to Cadence Lab and are protected by applicable
+            intellectual-property laws. Third-party names, marks, content, and
+            materials remain the property of their respective owners.
+          </p>
+
+          <p>
+            Cadence Lab gives you a limited, nonexclusive, revocable,
+            nontransferable permission to access the Website and to view or
+            download publicly available materials for your own internal,
+            informational evaluation. This permission does not transfer
+            ownership or authorize commercial republication, resale, removal of
+            attribution or rights notices, creation of a competing content
+            library, or use of Cadence Lab’s marks in a way that suggests
+            sponsorship or endorsement.
+          </p>
+
+          <p>
+            Quotations, links, commentary, and other uses permitted by
+            applicable law remain permitted. To request another use, email
+            <a href="mailto:hi@cadencelab.co">hi@cadencelab.co</a>.
+          </p>
+
+          <h3>Information you submit</h3>
+          <p>
+            You retain ownership of information you submit through the Website.
+            You give Cadence Lab permission to process and use that information
+            as reasonably necessary to review the inquiry, respond to you,
+            protect the Website, and operate the practice, subject to the
+            <a href="/privacy/">Privacy Policy</a>.
+          </p>
+
+          <p>
+            You represent that you have the right to submit the information and
+            that doing so does not violate another person’s rights or an
+            obligation of confidentiality.
+          </p>
+        </section>
+
+        <section
+          id="third-party-services"
+          aria-labelledby="third-party-services-title"
+        >
+          <p class="section-number" aria-hidden="true">06</p>
+          <h2 id="third-party-services-title">
+            Third-party services and links
+          </h2>
+
+          <p>
+            The Website may link to or rely on services operated by other
+            organizations. These can include hosting, security, email delivery,
+            source references, and other external resources. Cadence Lab does
+            not control third-party websites or their availability, content,
+            security, or practices.
+          </p>
+
+          <p>
+            A link does not necessarily mean Cadence Lab endorses the linked
+            organization or all of its content. Your use of a third-party
+            website or service is governed by that provider’s terms and
+            policies.
+          </p>
+        </section>
+
+        <section
+          id="availability-liability"
+          aria-labelledby="availability-liability-title"
+        >
+          <p class="section-number" aria-hidden="true">07</p>
+          <h2 id="availability-liability-title">
+            Availability, disclaimers, and liability
+          </h2>
+
+          <h3>Website availability</h3>
+          <p>
+            Cadence Lab may change, suspend, restrict, or discontinue any part
+            of the Website at any time. Although reasonable care is used in
+            preparing and maintaining the Website, Cadence Lab does not promise
+            that it will always be available, uninterrupted, secure, current,
+            complete, or free from errors.
+          </p>
+
+          <h3>Disclaimer</h3>
+          <p>
+            To the fullest extent permitted by applicable law, the Website and
+            its content are provided “as is” and “as available,” without
+            warranties of any kind, whether express, implied, or statutory.
+            Cadence Lab disclaims implied warranties of merchantability, fitness
+            for a particular purpose, title, and noninfringement to the extent
+            those disclaimers are permitted by law.
+          </p>
+
+          <h3>Limitation of liability</h3>
+          <p>
+            To the fullest extent permitted by applicable law, Cadence Lab will
+            not be liable for indirect, incidental, special, consequential, or
+            punitive damages, or for loss of profits, revenue, data, goodwill,
+            or business opportunity, arising from or related to use of or
+            inability to use the Website.
+          </p>
+
+          <p>
+            Some jurisdictions do not allow certain warranty exclusions or
+            limitations of liability. In those jurisdictions, these provisions
+            apply only to the extent permitted by law. Nothing in these Terms
+            excludes liability that cannot legally be excluded.
+          </p>
+        </section>
+
+        <section id="changes-contact" aria-labelledby="changes-contact-title">
+          <p class="section-number" aria-hidden="true">08</p>
+          <h2 id="changes-contact-title">Changes and contact</h2>
+
+          <h3>Changes to these Terms</h3>
+          <p>
+            Cadence Lab may update these Terms to reflect changes in the
+            Website, services, practices, or legal requirements. The effective
+            date at the top of the page will be revised when the Terms change.
+            Your continued use of the Website after updated Terms take effect
+            means the updated Terms apply to that continued use.
+          </p>
+
+          <h3>Severability</h3>
+          <p>
+            If a provision of these Terms is found unenforceable, it will be
+            limited or removed only to the extent necessary, and the remaining
+            provisions will continue to apply.
+          </p>
+
+          <h3>Contact Cadence Lab</h3>
+          <p>
+            Questions about these Terms or requests concerning Website content
+            can be sent to:
+          </p>
+
+          <address>
+            <strong>Cadence Lab</strong>
+            <span>Attention: Website terms</span>
+            <a href="mailto:hi@cadencelab.co">hi@cadencelab.co</a>
+          </address>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .terms-page {
+    width: 100%;
+    overflow: clip;
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .page-container {
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+  }
+
+  .terms-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .eyebrow,
+  .summary-label,
+  .section-number,
+  .note-label,
+  .terms-navigation nav > p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    font-feature-settings: var(--fea-eyebrow);
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd,
+  address {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 17ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+  }
+
+  .hero-lead {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .terms-summary {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  .terms-summary dl {
+    display: grid;
+    margin: 1.25rem 0 0;
+  }
+
+  .terms-summary dl > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .terms-summary dt,
+  .terms-summary dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .terms-summary dt {
+    color: var(--color-text-muted);
+  }
+
+  .terms-summary dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .terms-summary a,
+  .terms-content a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .terms-layout {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.35fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+    padding-block: var(--section-space);
+  }
+
+  .terms-navigation {
+    position: sticky;
+    inset-block-start: calc(var(--header-offset) + 2rem);
+  }
+
+  .terms-navigation nav {
+    padding-top: 1.25rem;
+    border-top: 0.1875rem solid var(--color-blue);
+  }
+
+  .terms-navigation ol {
+    display: grid;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .terms-navigation li {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .terms-navigation li:last-child {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .terms-navigation a {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding-block: 0.8rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .terms-navigation a span {
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+  }
+
+  .terms-content {
+    display: grid;
+    min-width: 0;
+    gap: clamp(4rem, 9vw, 7rem);
+  }
+
+  .terms-content section {
+    display: flex;
+    max-width: 52rem;
+    scroll-margin-block-start: calc(var(--header-offset) + 2rem);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .terms-content h2 {
+    max-width: 22ch;
+    margin-top: 0.65rem;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  .terms-content h3 {
+    margin-top: 2.25rem;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .terms-content section > p:not(.section-number),
+  .terms-content li {
+    max-width: var(--measure-ui);
+    color: var(--color-text);
+    font-size: var(--fs-body-ui);
+    line-height: var(--lh-ui);
+  }
+
+  .terms-content section > p:not(.section-number) {
+    margin: 1.25rem 0 0;
+    text-wrap: pretty;
+  }
+
+  .terms-content ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding-inline-start: 1.4rem;
+  }
+
+  .terms-content li::marker {
+    color: var(--color-blue);
+  }
+
+  .terms-note {
+    margin-top: 1.75rem;
+    padding: 1.5rem;
+    border-inline-start: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+  }
+
+  .terms-note > p:last-child {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  address {
+    display: flex;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-subtle);
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: var(--fs-body-ui);
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  address span {
+    color: var(--color-text-muted);
+  }
+
+  .terms-page a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .terms-navigation a:hover {
+      color: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .terms-summary {
+      max-width: 38rem;
+    }
+
+    .terms-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .terms-navigation {
+      position: static;
+    }
+
+    .terms-navigation nav {
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+    }
+
+    .terms-navigation ol {
+      display: flex;
+      width: max-content;
+    }
+
+    .terms-navigation li {
+      border-top: 0;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .terms-navigation a {
+      min-height: var(--control-min-size);
+      grid-template-columns: auto auto;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .terms-summary dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .terms-hero,
+    .terms-summary,
+    .terms-navigation nav,
+    .terms-navigation li,
+    .terms-note,
+    address {
+      border-color: CanvasText;
+    }
+  }
+</style>
