@@ -1,0 +1,320 @@
+---
+import StructuredCapabilityPage from "../../../components/StructuredCapabilityPage.astro";
+
+const page = {
+  meta: {
+    title: "Digital Experiences | Cadence Lab",
+    description:
+      "Design connected websites, portals, service interfaces, and digital journeys around customer intent, accessible interaction, trustworthy content, integrated workflows, and measurable outcomes.",
+    canonicalURL: "/product/digital-experiences/",
+  },
+  hero: {
+    breadcrumb: "Digital Experiences",
+    eyebrow: "Product · Digital Experiences",
+    title: "Make the digital path work beyond the screen.",
+    lead: "Digital Experiences connects what people see and do online to the content, identity, data, workflows, policies, systems, and teams required to complete the journey. The objective is not simply a polished interface. It is a coherent path that helps people understand what to do, complete the work, and recover when the ordinary route does not fit.",
+    primaryCta: {
+      label: "Start a fit check",
+      href: "/fit-check/",
+    },
+    secondaryCta: {
+      label: "Review Experience Foundations",
+      href: "/product/experience-foundations/",
+    },
+    trigger: {
+      introduction:
+        "A website, portal, application, or digital service is being redesigned or expanded, but the largest sources of friction sit across content, policy, data, integration, ownership, and the work that continues after a person submits or leaves the interface.",
+      items: [
+        {
+          label: "Visible symptom",
+          value: "A usable screen leads into a fragmented service",
+        },
+        {
+          label: "Experience",
+          value: "Intent, content, interaction, workflow, outcome",
+        },
+        {
+          label: "Decision",
+          value: "What the complete digital path must support",
+        },
+      ],
+    },
+  },
+  signals: {
+    eyebrow: "Visible signals",
+    title: "Digital friction often begins outside the interface.",
+    introduction:
+      "People experience one journey even when an organization divides it across websites, applications, content teams, platforms, departments, and service channels. A digital experience must make those internal boundaries less costly to navigate.",
+    items: [
+      {
+        title: "People cannot tell where to begin",
+        description:
+          "Navigation reflects the organization’s structure while customer intent, eligibility, situation, and the next useful action remain difficult to recognize.",
+      },
+      {
+        title: "Content explains but does not enable the task",
+        description:
+          "Pages contain accurate information, yet requirements, choices, evidence, timing, exceptions, and the route to completion remain fragmented or ambiguous.",
+      },
+      {
+        title: "Forms transfer work instead of completing it",
+        description:
+          "A digital submission creates a queue, email, or record that another team must manually interpret, reconcile, route, and recover.",
+      },
+      {
+        title: "The journey resets between channels",
+        description:
+          "People repeat identity, history, documents, and decisions when moving from web to phone, chat, location, sales, service, or another system.",
+      },
+      {
+        title: "Accessibility arrives after the design",
+        description:
+          "Structure, language, interaction, content, forms, media, focus, error recovery, and assistive-technology behavior are tested too late to shape the experience.",
+      },
+      {
+        title: "Success is measured by traffic and conversion alone",
+        description:
+          "Visits, clicks, and submissions improve while completion quality, repeated contact, downstream rework, service outcomes, and customer effort remain invisible.",
+      },
+    ],
+  },
+  framework: {
+    eyebrow: "Digital experience system",
+    title: "Connect the visible journey to the work it initiates.",
+    introduction:
+      "A useful digital experience aligns six conditions. Each should be designed as part of one service path rather than assigned to separate teams after the interface is approved.",
+    items: [
+      {
+        label: "Intent",
+        question: "What is the person trying to accomplish?",
+        title: "Intent",
+        description:
+          "Define the audience, situation, goal, urgency, prior knowledge, constraints, desired outcome, and the consequences of confusion or incomplete work.",
+      },
+      {
+        label: "Journey",
+        question: "Which steps and transitions shape completion?",
+        title: "Journey",
+        description:
+          "Trace discovery, orientation, decision, evidence, action, confirmation, status, support, exception, and movement between digital and human channels.",
+      },
+      {
+        label: "Content",
+        question: "What does the person need to understand?",
+        title: "Content",
+        description:
+          "Structure language, guidance, requirements, choices, policy, proof, timing, errors, help, and ownership around the decision at each moment.",
+      },
+      {
+        label: "Interaction",
+        question: "How will people complete and control the task?",
+        title: "Interaction",
+        description:
+          "Design navigation, forms, states, feedback, accessibility, identity, permissions, consent, responsiveness, errors, and recovery as one coherent system.",
+      },
+      {
+        label: "Connection",
+        question: "Which systems and teams continue the work?",
+        title: "Connection",
+        description:
+          "Connect records, integrations, routing, automation, handoffs, notifications, fulfillment, service, and the context needed after the visible interaction ends.",
+      },
+      {
+        label: "Operation",
+        question: "How will the experience remain accurate and useful?",
+        title: "Operation",
+        description:
+          "Assign content, product, platform, service, accessibility, analytics, incident, and journey ownership with practical review and change rhythms.",
+      },
+    ],
+  },
+  path: {
+    eyebrow: "Delivery path",
+    title: "Move from customer intent to a working service.",
+    introduction:
+      "The work begins with a real journey and follows it through the organization. Concepts are tested against customer understanding and the operating conditions required to deliver the promised outcome.",
+    items: [
+      {
+        phase: "Understand",
+        question: "Which digital problem is worth solving?",
+        evidence:
+          "Customer intent, research, behavior, accessibility, contact reasons, drop-off, repeated effort, operating consequence, current journey, and decision required.",
+      },
+      {
+        phase: "Architect",
+        question: "How should the complete path be organized?",
+        evidence:
+          "Information architecture, content model, journey stages, states, decisions, evidence, channels, service blueprint, ownership, and technical boundaries.",
+      },
+      {
+        phase: "Prototype",
+        question: "Can people understand and complete the task?",
+        evidence:
+          "Flows, content, interface states, forms, interaction, responsive behavior, accessibility, usability, edge cases, and observed comprehension.",
+      },
+      {
+        phase: "Connect",
+        question: "Can the organization deliver what the interface promises?",
+        evidence:
+          "Data, identity, records, integrations, workflows, routing, notifications, handoffs, exceptions, security, privacy, and operational readiness.",
+      },
+      {
+        phase: "Operate and learn",
+        question: "Does the released experience improve the outcome?",
+        evidence:
+          "Quality, accessibility, completion, customer effort, service demand, downstream rework, incidents, feedback, ownership, releases, and outcome measures.",
+      },
+    ],
+  },
+  evidence: {
+    eyebrow: "Evidence",
+    title: "Evaluate the screen, service, and downstream outcome together.",
+    introduction:
+      "A digital experience can appear successful in analytics while creating rework, exclusion, uncertainty, or failure elsewhere. Evidence should follow what people and teams must do across the complete path.",
+    items: [
+      {
+        title: "Customer intent and behavior",
+        description:
+          "Research, search terms, tasks, navigation, comprehension, choices, drop-off, repeat visits, support seeking, device context, language, and observed barriers.",
+      },
+      {
+        title: "Content and information quality",
+        description:
+          "Accuracy, findability, reading level, hierarchy, terminology, policy, requirements, metadata, duplication, ownership, freshness, and consistency across channels.",
+      },
+      {
+        title: "Interaction and accessibility",
+        description:
+          "Keyboard and screen-reader behavior, semantics, contrast, zoom, motion, forms, validation, focus, errors, responsive behavior, performance, and usability.",
+      },
+      {
+        title: "System and data behavior",
+        description:
+          "Identity, consent, records, integrations, APIs, automation, state, permissions, reliability, latency, data quality, security, privacy, and failure handling.",
+      },
+      {
+        title: "Workflow and service behavior",
+        description:
+          "Routing, ownership, queues, handoffs, fulfillment, notifications, exceptions, support context, workarounds, capacity, recovery, and frontline experience.",
+      },
+      {
+        title: "Customer and operating outcomes",
+        description:
+          "Completion quality, effort, accessibility, trust, resolution, adoption, service demand, rework, cycle time, retention, cost, risk, and unintended effects.",
+      },
+    ],
+    note: {
+      label: "Accessibility throughout the system",
+      description:
+        "Accessibility is not a final interface audit. It should shape research, content, information architecture, interaction, technical implementation, testing, support, procurement, governance, and the alternative paths available when a digital route cannot meet a person’s needs.",
+    },
+  },
+  failures: {
+    eyebrow: "Common failure patterns",
+    title: "A digital redesign fails when the service remains unchanged.",
+    introduction:
+      "Visual improvement can make a broken path feel more credible without resolving unclear content, inaccessible interaction, weak data, manual reconciliation, or an organizational handoff that still loses context.",
+    items: [
+      {
+        title: "The homepage carries the entire strategy",
+        description:
+          "Brand, navigation, campaigns, and stakeholder priorities compete above the fold while the deeper journeys, tasks, content, forms, and service outcomes receive less attention.",
+      },
+      {
+        title: "The design system standardizes the wrong behavior",
+        description:
+          "Reusable components create visual consistency while content, workflow states, error recovery, accessibility, and cross-channel decisions remain inconsistent.",
+      },
+      {
+        title: "Content migration preserves accumulated confusion",
+        description:
+          "Old pages move into a new platform without deciding what is necessary, accurate, owned, findable, redundant, or connected to a customer task.",
+      },
+      {
+        title: "The form is optimized but the queue is not",
+        description:
+          "Submission becomes easier while unclear routing, missing context, duplicate entry, manual review, service rules, and follow-up delays continue downstream.",
+      },
+      {
+        title: "Responsive design substitutes for inclusive design",
+        description:
+          "Layouts adapt to screen size but the experience still excludes people through language, cognition, motion, focus, forms, media, timing, identity, or unavailable support.",
+      },
+      {
+        title: "Launch closes the learning cycle",
+        description:
+          "The project ends when the new experience ships, leaving no durable owner for content, journey quality, accessibility, service outcomes, or evidence-driven iteration.",
+      },
+    ],
+  },
+  outputs: {
+    eyebrow: "Practical outputs",
+    title: "Create a digital experience the organization can operate.",
+    introduction:
+      "The outputs should connect customer understanding and interface direction to content, technical, workflow, governance, and measurement requirements teams can use through delivery and beyond launch.",
+    items: [
+      {
+        title: "Digital experience direction",
+        description:
+          "Customer intent, priority journeys, experience principles, channel role, scope, exclusions, outcomes, constraints, and the evidence guiding product and design decisions.",
+      },
+      {
+        title: "Journey and service architecture",
+        description:
+          "Information architecture, content model, flows, states, service blueprint, channel transitions, ownership, dependencies, and the complete path from entry to outcome.",
+      },
+      {
+        title: "Experience and implementation specification",
+        description:
+          "Content, responsive interfaces, components, accessibility, forms, identity, data, integration, workflow, analytics, edge cases, errors, handoffs, and acceptance criteria.",
+      },
+      {
+        title: "Operating and measurement plan",
+        description:
+          "Content and journey governance, product ownership, accessibility review, release and incident rhythms, customer measures, operating measures, and evidence for iteration.",
+      },
+    ],
+  },
+  fit: {
+    eyebrow: "Engagement fit",
+    title:
+      "Use Digital Experiences when the interface and service must change together.",
+    introduction:
+      "This work is useful for a consequential website, portal, application, account, service, or cross-channel journey with accountable business, content, design, technical, and operating owners. It is a limited fit when the need is cosmetic production or when downstream workflows and ownership are explicitly outside scope.",
+    items: [
+      "A digital journey materially affects customer access, service, conversion, adoption, trust, or operating performance.",
+      "The experience spans content, interaction, accessibility, data, systems, workflows, or human support.",
+      "Teams can inspect both the visible interface and what happens after a person submits, requests, purchases, or escalates.",
+      "Business, content, design, technical, data, service, and accessibility owners can make decisions together.",
+      "The organization can maintain the experience and measure customer and operating outcomes after launch.",
+    ],
+  },
+  diagnostics: {
+    eyebrow: "Related paths",
+    title:
+      "Choose the next path based on what prevents the digital journey from working.",
+    items: [
+      {
+        title: "Experience Foundations",
+        href: "/product/experience-foundations/",
+        useWhen:
+          "Several teams or channels need shared customer, journey, principle, ownership, and measurement decisions before digital delivery begins.",
+      },
+      {
+        title: "CRM Workflow Audit",
+        href: "/services/crm-workflow-audit/",
+        useWhen:
+          "Digital requests create records, routing, automation, service work, or lifecycle signals that are incomplete, unreliable, or poorly owned.",
+      },
+      {
+        title: "CX on Location",
+        href: "/product/cx-on-location/",
+        useWhen:
+          "The journey crosses a physical location, event, branch, workplace, venue, or other environment where digital and in-person experience must connect.",
+      },
+    ],
+  },
+};
+---
+
+<StructuredCapabilityPage {...page} />
