@@ -1,0 +1,33 @@
+---
+interface Props {
+  currentName: string;
+}
+
+const { currentName } = Astro.props;
+const siteURL = Astro.site ?? new URL("https://cadencelab.co");
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: new URL("/", siteURL).href,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: currentName,
+    },
+  ],
+};
+
+const serializedSchema = JSON.stringify(breadcrumbSchema).replace(
+  /</g,
+  "\\u003c",
+);
+---
+
+<script type="application/ld+json" is:inline set:html={serializedSchema} />
