@@ -1,4 +1,5 @@
 ---
+import BreadcrumbSchema from "../../../components/BreadcrumbSchema.astro";
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
@@ -121,6 +122,12 @@ const limitedFit = [
   pageType="website"
 >
   <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Services", href: "/services/" },
+      { name: "CRM Workflow Audit" },
+    ]}
+  />
 
   <main id="main-content" class="diagnostic-page" tabindex="-1">
     <section class="diagnostic-hero" aria-labelledby="diagnostic-title">
