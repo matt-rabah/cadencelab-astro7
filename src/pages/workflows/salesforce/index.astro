@@ -1,4 +1,5 @@
 ---
+import BreadcrumbSchema from "../../../components/BreadcrumbSchema.astro";
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
@@ -141,6 +142,7 @@ const usefulWhen = [
   pageType="website"
 >
   <NavHeader />
+  <BreadcrumbSchema currentName="Salesforce tracing" />
 
   <main id="main-content" class="salesforce-page" tabindex="-1">
     <section class="salesforce-hero" aria-labelledby="salesforce-title">
