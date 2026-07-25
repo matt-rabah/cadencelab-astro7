@@ -164,6 +164,8 @@ const articleSchema = {
   title={`${post.data.title} | Cadence Lab`}
   description={description}
   canonicalURL={canonicalPath}
+  image={imageSource}
+  imageAlt={imageAlt}
   pageType="article"
 >
   <NavHeader />
@@ -222,8 +224,8 @@ const articleSchema = {
             <img
               src={imageSource}
               alt={imageAlt}
-              width="1440"
-              height="810"
+              width="1600"
+              height="900"
               loading="eager"
               decoding="async"
               fetchpriority="high"

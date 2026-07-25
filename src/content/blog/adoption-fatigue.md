@@ -7,6 +7,8 @@ updatedDate: 2026-07-21T00:00:00.000Z
 readTime: 6 min read
 category: AI operations
 author: Matt Rabah
+image: /uploads/blog/when-ai-creates-more-work.webp
+imageAlt: Overhead editorial still life of a blue automated workflow looping through paper records and repeated review steps.
 ---
 
 An AI workflow can be technically sound and still fail in daily use.
