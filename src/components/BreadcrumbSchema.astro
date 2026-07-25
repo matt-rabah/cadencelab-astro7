@@ -1,27 +1,40 @@
 ---
-interface Props {
-  currentName: string;
+interface BreadcrumbItem {
+  name: string;
+  href?: string;
 }
 
-const { currentName } = Astro.props;
+interface Props {
+  currentName?: string;
+  items?: BreadcrumbItem[];
+}
+
+const { currentName, items } = Astro.props;
 const siteURL = Astro.site ?? new URL("https://cadencelab.co");
+
+const breadcrumbItems = items ?? [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: currentName ?? "",
+  },
+];
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: new URL("/", siteURL).href,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: currentName,
-    },
-  ],
+  itemListElement: breadcrumbItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    ...(item.href
+      ? {
+          item: new URL(item.href, siteURL).href,
+        }
+      : {}),
+  })),
 };
 
 const serializedSchema = JSON.stringify(breadcrumbSchema).replace(
