@@ -4,32 +4,55 @@ interface Props {
   title: string;
   description: string;
   canonicalURL?: string;
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+  pageType?: "website" | "article";
+  siteName?: string;
 }
 
 const {
   title,
   description,
   canonicalURL = "https://cadencelab.co/",
+  image,
+  imageAlt = "Cadence Lab",
+  noindex = false,
+  pageType = "website",
+  siteName = "Cadence Lab",
 } = Astro.props;
+
+const siteURL = Astro.site ?? new URL("https://cadencelab.co");
+const siteRoot = new URL("/", siteURL);
+const socialImage = image ? new URL(image, siteURL).toString() : undefined;
+
+const organizationId = new URL("/#organization", siteRoot).toString();
+const websiteId = new URL("/#website", siteRoot).toString();
 
 const schemaData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://cadencelab.co/#organization",
-      name: "Cadence Lab",
-      url: "https://cadencelab.co/",
-      logo: "https://cadencelab.co/assets/logo.png",
-      description:
-        "Cadence Lab diagnoses customer experience operational friction, lifecycle risk, and CRM workflows.",
+      "@id": organizationId,
+      name: siteName,
+      url: siteRoot.toString(),
+      description: "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
+      logo: {
+        "@type": "ImageObject",
+        url: new URL("/brand/cadencelab-wordmark-dark-color.svg", siteRoot).toString(),
+      },
     },
     {
       "@type": "WebSite",
-      "@id": "https://cadencelab.co/#website",
-      url: "https://cadencelab.co/",
-      name: "Cadence Lab",
-      publisher: { "@id": "https://cadencelab.co/#organization" },
+      "@id": websiteId,
+      name: siteName,
+      url: siteRoot.toString(),
+      description: "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
+      inLanguage: "en-US",
+      publisher: {
+        "@id": organizationId,
+      },
     },
     {
       "@type": "WebPage",
@@ -37,7 +60,7 @@ const schemaData = {
       url: canonicalURL,
       name: title,
       description: description,
-      isPartOf: { "@id": "https://cadencelab.co/#website" },
+      isPartOf: { "@id": websiteId },
     },
   ],
 };
@@ -45,13 +68,47 @@ const schemaData = {
 
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph / Social -->
-<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:type" content={pageType} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
+
+{
+  socialImage && (
+    <>
+      <meta property="og:image" content={socialImage} />
+      <meta property="og:image:alt" content={imageAlt} />
+    </>
+  )
+}
+
+<!-- Twitter -->
+<meta
+  name="twitter:card"
+  content={socialImage ? "summary_large_image" : "summary"}
+/>
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+{
+  socialImage && (
+    <>
+      <meta name="twitter:image" content={socialImage} />
+      <meta name="twitter:image:alt" content={imageAlt} />
+    </>
+  )
+}
 
 <!-- Structured JSON-LD Data -->
 <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

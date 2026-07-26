@@ -2,7 +2,7 @@
 // src/layouts/Layout.astro
 
 import { Font } from "astro:assets";
-
+import SEO from "../components/SEO.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -30,9 +30,7 @@ const {
   pageType = "website",
 } = Astro.props;
 
-const siteName = "Cadence Lab";
 const siteURL = Astro.site ?? new URL("https://cadencelab.co");
-const siteRoot = new URL("/", siteURL);
 
 const resolvedTitle = title.trim() || defaultTitle;
 const resolvedDescription = description.trim() || defaultDescription;
@@ -42,41 +40,6 @@ canonical.search = "";
 canonical.hash = "";
 
 const canonicalHref = canonical.toString();
-const socialImage = image ? new URL(image, siteURL).toString() : undefined;
-
-const organizationId = new URL("/#organization", siteRoot).toString();
-const websiteId = new URL("/#website", siteRoot).toString();
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": organizationId,
-      name: siteName,
-      url: siteRoot.toString(),
-      description: defaultDescription,
-      logo: {
-        "@type": "ImageObject",
-        url: new URL(
-          "/brand/cadencelab-wordmark-dark-color.svg",
-          siteRoot,
-        ).toString(),
-      },
-    },
-    {
-      "@type": "WebSite",
-      "@id": websiteId,
-      name: siteName,
-      url: siteRoot.toString(),
-      description: defaultDescription,
-      inLanguage: "en-US",
-      publisher: {
-        "@id": organizationId,
-      },
-    },
-  ],
-};
 ---
 
 <!doctype html>
@@ -91,60 +54,24 @@ const structuredData = {
     <Font cssVariable="--font-tiempos-text" />
     <Font cssVariable="--font-tiempos-headline" />
 
-    <title>{resolvedTitle}</title>
-    <meta name="description" content={resolvedDescription} />
-    <meta
-      name="robots"
-      content={noindex
-        ? "noindex, nofollow"
-        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
-    />
-
-    <link rel="canonical" href={canonicalHref} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
     <meta name="theme-color" content="#fcfeff" />
 
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:type" content={pageType} />
-    <meta property="og:title" content={resolvedTitle} />
-    <meta property="og:description" content={resolvedDescription} />
-    <meta property="og:url" content={canonicalHref} />
-
     {
-      socialImage && (
-        <>
-          <meta property="og:image" content={socialImage} />
-          <meta property="og:image:alt" content={imageAlt} />
-        </>
-      )
+      /* Inject SEO component for title, meta tags, OG tags, and JSON-LD schema */
     }
-
-    <meta
-      name="twitter:card"
-      content={socialImage ? "summary_large_image" : "summary"}
+    <SEO
+      title={resolvedTitle}
+      description={resolvedDescription}
+      canonicalURL={canonicalHref}
+      image={image}
+      imageAlt={imageAlt}
+      noindex={noindex}
+      pageType={pageType}
     />
-    <meta name="twitter:title" content={resolvedTitle} />
-    <meta name="twitter:description" content={resolvedDescription} />
-
-    {
-      socialImage && (
-        <>
-          <meta name="twitter:image" content={socialImage} />
-          <meta name="twitter:image:alt" content={imageAlt} />
-        </>
-      )
-    }
 
     <slot name="head" />
-
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(structuredData)}
-    />
   </head>
 
   <body data-page-type={pageType}>
