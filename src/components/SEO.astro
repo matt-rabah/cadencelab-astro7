@@ -1,0 +1,57 @@
+---
+// src/components/SEO.astro
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalURL = "https://cadencelab.co/",
+} = Astro.props;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cadencelab.co/#organization",
+      name: "Cadence Lab",
+      url: "https://cadencelab.co/",
+      logo: "https://cadencelab.co/assets/logo.png",
+      description:
+        "Cadence Lab diagnoses customer experience operational friction, lifecycle risk, and CRM workflows.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cadencelab.co/#website",
+      url: "https://cadencelab.co/",
+      name: "Cadence Lab",
+      publisher: { "@id": "https://cadencelab.co/#organization" },
+    },
+    {
+      "@type": "WebPage",
+      "@id": canonicalURL,
+      url: canonicalURL,
+      name: title,
+      description: description,
+      isPartOf: { "@id": "https://cadencelab.co/#website" },
+    },
+  ],
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+
+<!-- Structured JSON-LD Data -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
