@@ -48,17 +48,27 @@ const canonicalHref = canonical.toString();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
 
     <Font cssVariable="--font-graphik" preload />
     <Font cssVariable="--font-tiempos-text" />
     <Font cssVariable="--font-tiempos-headline" />
 
+    <!-- Dynamic Favicons for Light & Dark Browser Tabs -->
     <link
       rel="icon"
       type="image/svg+xml"
-      href="/brand/cadencelab-favicon.svg"
+      href="/brand/cadencelab-favicon-black.svg"
+      media="(prefers-color-scheme: light)"
     />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/brand/cadencelab-favicon-white.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="shortcut icon" href="/brand/cadencelab-favicon-black.svg" />
+
     <meta name="theme-color" content="#fcfeff" />
 
     {

@@ -126,9 +126,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         aria-label="Cadence Lab home"
         aria-current={isCurrentPage("/") ? "page" : undefined}>
         <img
-          src="/brand/cadencelab-wordmark.svg"
+          src="/brand/cadencelab-wordmark-light.svg"
           alt="Cadence Lab."
-          class="desktop-wordmark"
+          class="desktop-wordmark wordmark-light"
+        />
+        <img
+          src="/brand/cadencelab-wordmark-dark.svg"
+          alt="Cadence Lab."
+          class="desktop-wordmark wordmark-dark"
         />
       </a>
     </div>
@@ -441,9 +446,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       aria-label="Cadence Lab home"
       aria-current={isCurrentPage("/") ? "page" : undefined}>
       <img
-        src="/brand/cadencelab-wordmark.svg"
+        src="/brand/cadencelab-wordmark-light.svg"
         alt="Cadence Lab."
-        class="mobile-wordmark"
+        class="mobile-wordmark wordmark-light"
+      />
+      <img
+        src="/brand/cadencelab-wordmark-dark.svg"
+        alt="Cadence Lab."
+        class="mobile-wordmark wordmark-dark"
       />
     </a>
 
@@ -915,6 +925,36 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 </script>
 
 <style>
+  /* Dynamic Wordmark Visibility (System Settings, Manual Light/Dark Themes) */
+  .wordmark-dark {
+    display: none !important;
+  }
+  .wordmark-light {
+    display: block !important;
+  }
+
+  /* Automatic OS System Settings Preference */
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .wordmark-dark,
+    :global(html:not(.light)) .wordmark-dark {
+      display: block !important;
+    }
+    :global(:root:not([data-theme="light"])) .wordmark-light,
+    :global(html:not(.light)) .wordmark-light {
+      display: none !important;
+    }
+  }
+
+  /* Explicit Manual Dark Mode Override Classes */
+  :global(:root[data-theme="dark"]) .wordmark-dark,
+  :global(html.dark) .wordmark-dark {
+    display: block !important;
+  }
+  :global(:root[data-theme="dark"]) .wordmark-light,
+  :global(html.dark) .wordmark-light {
+    display: none !important;
+  }
+
   .site-header {
     --desktop-header-height: 6.5rem;
     --desktop-primary-row-height: 3.5rem;
