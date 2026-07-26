@@ -101,7 +101,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             primaryCta && (
               <a
                 href={primaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md bg-[#1823c9] px-8 text-sm font-medium !no-underline shadow transition-colors hover:bg-[#1823c9]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto"
+                class="inline-flex h-12 items-center justify-center rounded-md bg-[#1823c9] px-8 text-sm font-medium no-underline! shadow transition-colors hover:bg-[#1823c9]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto"
                 style="color: #ffffff !important; text-decoration: none !important;">
                 {primaryCta.text}
               </a>
@@ -111,7 +111,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             secondaryCta && (
               <a
                 href={secondaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md border border-[#000504] bg-transparent px-8 text-sm font-medium !no-underline transition-colors hover:bg-[#000504] hover:!text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000504] focus-visible:ring-offset-2 w-full sm:w-auto"
+                class="inline-flex h-12 items-center justify-center rounded-md border border-[#000504] bg-transparent px-8 text-sm font-medium no-underline! transition-colors hover:bg-[#000504] hover:text-white! focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000504] focus-visible:ring-offset-2 w-full sm:w-auto"
                 style="color: #000504 !important; text-decoration: none !important;">
                 {secondaryCta.text}
               </a>
@@ -176,7 +176,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             <img
               src={activeTab.image.src}
               alt={activeTab.image.alt}
-              class="aspect-16/9 w-full object-cover object-top"
+              class="aspect-video w-full object-cover object-top"
             />
           </div>
         </div>
