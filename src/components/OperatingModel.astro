@@ -2,96 +2,101 @@
 // src/components/OperatingModel.astro
 import { cn } from "@/lib/utils";
 
-interface StepItem {
+interface Stage {
   step: string;
   title: string;
   description: string;
 }
 
 interface Props {
-  badge?: string;
+  eyebrow?: string;
   heading?: string;
   subheading?: string;
-  steps?: StepItem[];
+  steps?: Stage[];
   className?: string;
 }
 
 const {
-  badge = "The Operating Model",
-  heading = "Let the evidence determine the recommendation",
-  subheading = "Most customer issues aren't technology failures—they're broken cross-functional handoffs, unclear ownership, and weak feedback loops.",
+  eyebrow = "Operating Model",
+  heading = "Let the evidence determine the recommendation.",
+  subheading = "Cadence Lab connects strategy to the way work is owned, performed, governed, and measured. Technology should support that operating model and make the work easier to manage.",
   steps = [
     {
       step: "01",
-      title: "Diagnose",
+      title: "Diagnose the operating environment",
       description:
-        "Trace customer friction through teams, systems, data, and decision rights to find root causes.",
+        "Trace the customer problem through teams, systems, data, decisions, and frontline work before prescribing a solution.",
     },
     {
       step: "02",
-      title: "Align",
+      title: "Align the decisions",
       description:
-        "Establish clear cross-functional ownership and resolve competing priorities across CS, Sales, and Ops.",
+        "Define the outcome, accountable owners, decision rights, constraints, and sequence of changes before implementation begins.",
     },
     {
       step: "03",
-      title: "Rebuild",
+      title: "Rebuild the workflow",
       description:
-        "Translate decisions into usable operating handoffs, CRM rules, and governance workflows.",
+        "Translate the decision into usable handoffs, CRM requirements, governance, team practices, and appropriate AI support.",
     },
     {
       step: "04",
-      title: "Measure",
+      title: "Measure and adapt",
       description:
-        "Connect customer health, workflow adherence, and adoption signals directly to operating performance.",
+        "Connect customer, workflow, adoption, and performance signals to the change, then refine the system as evidence develops.",
     },
   ],
   className = "",
 } = Astro.props;
-
-const hasSteps = Array.isArray(steps) && steps.length > 0;
 ---
 
 <section
-  class={cn("py-20 border-b border-border bg-background/50", className)}
+  class={cn(
+    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
+    className,
+  )}
   id="operating-model">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-      <span
-        class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-muted rounded-full">
-        {badge}
-      </span>
-      <h2
-        class="text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-        {heading}
-      </h2>
-      {
-        subheading && (
-          <p class="mt-4 text-muted-foreground text-base md:text-lg">
-            {subheading}
-          </p>
-        )
-      }
-    </div>
+  <div class="container mx-auto px-6 max-w-6xl">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
+      <!-- Left Column: Sticky Intro Header -->
+      <div
+        class="lg:col-span-5 flex flex-col items-start text-left lg:sticky lg:top-28">
+        <span
+          class="text-xs font-mono font-semibold uppercase tracking-widest text-primary mb-4">
+          {eyebrow}
+        </span>
+        <h2
+          class="text-3xl sm:text-4xl font-bold tracking-tight text-foreground text-left leading-tight">
+          {heading}
+        </h2>
+        <p
+          class="mt-6 text-base text-muted-foreground text-left leading-relaxed">
+          {subheading}
+        </p>
+      </div>
 
-    {
-      hasSteps && (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {steps.map((item) => (
-            <div class="relative flex flex-col p-6 rounded-xl border border-border bg-card/60 hover:border-primary/50 transition-colors">
-              <span class="text-xs font-mono font-bold text-primary mb-2">
-                STEP {item.step}
+      <!-- Right Column: Spacious 4-Step Process List -->
+      <div
+        class="lg:col-span-7 flex flex-col divide-y divide-border/60 border-t border-b border-border/60">
+        {
+          steps.map((stage) => (
+            <div class="py-8 md:py-10 flex flex-col sm:flex-row items-start gap-4 sm:gap-8 text-left">
+              <span class="text-sm font-mono font-bold text-primary shrink-0 pt-1">
+                {stage.step}
               </span>
-              <h3 class="text-xl font-semibold text-foreground mb-2">
-                {item.title}
-              </h3>
-              <p class="text-sm text-muted-foreground leading-relaxed">
-                {item.description}
-              </p>
+              <div class="space-y-3 text-left">
+                <h3 class="text-xl font-semibold text-foreground tracking-tight text-left">
+                  {stage.title}
+                </h3>
+                <p class="text-sm text-muted-foreground leading-relaxed text-left">
+                  {stage.description}
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
-      )
-    }
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>
