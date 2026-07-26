@@ -3,13 +3,13 @@
 import { cn } from "@/lib/utils";
 
 interface StatItem {
-  id: string;
   value: string;
   label: string;
-  description?: string;
+  description: string;
 }
 
 interface Props {
+  eyebrow?: string;
   heading?: string;
   subheading?: string;
   stats?: StatItem[];
@@ -17,79 +17,80 @@ interface Props {
 }
 
 const {
-  heading = "Diagnostic Offers",
-  subheading = "Choose the operating problem before choosing the technology.",
+  eyebrow = "Diagnostic Impact",
+  heading = "Choose the operating problem before choosing the technology.",
+  subheading = "Each diagnostic starts with one consequential operating question, builds a shared evidence base, and ends with a practical decision.",
   stats = [
     {
-      id: "stat-1",
-      value: "01",
-      label: "CX Systems Diagnostic",
+      value: "01 / CX Systems",
+      label: "Diagnostic Brief",
       description:
-        "Maps touchpoints, handoffs, and friction to output a sequenced decision brief.",
+        "Map touchpoints and cross-team boundaries to resolve conflicting explanations of friction.",
     },
     {
-      id: "stat-2",
-      value: "02",
-      label: "Lifecycle Risk Review",
+      value: "02 / Risk Review",
+      label: "Lifecycle Risk",
       description:
-        "Identifies onboarding drift and quiet accounts before renewal windows close.",
+        "Identify onboarding drift and quiet accounts before useful intervention windows close.",
     },
     {
-      id: "stat-3",
-      value: "03",
-      label: "CRM Workflow Audit",
+      value: "03 / Workflow Audit",
+      label: "CRM Workflows",
       description:
-        "Cleans up weak signals, process gaps, and misaligned decision rights.",
+        "Eliminate process workarounds and clean up untrusted CRM activity signals.",
     },
     {
-      id: "stat-4",
-      value: "04",
-      label: "AI Service Readiness",
+      value: "04 / AI Readiness",
+      label: "Service Readiness",
       description:
-        "Evaluates process readiness, trust, and human oversight for AI adoption.",
+        "Establish human-in-the-loop oversight and guardrails prior to AI deployment.",
     },
   ],
   className = "",
 } = Astro.props;
-
-const hasStats = Array.isArray(stats) && stats.length > 0;
 ---
 
 <section
-  class={cn("py-20 border-b border-border bg-background", className)}
+  class={cn(
+    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
+    className,
+  )}
   id="diagnostics">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col gap-3 text-center max-w-3xl mx-auto mb-14">
-      <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <!-- Left-aligned Header -->
+    <div class="max-w-3xl flex flex-col items-start text-left mb-16">
+      <span
+        class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
+        {eyebrow}
+      </span>
+      <h2
+        class="text-3xl sm:text-4xl font-bold tracking-tight text-[#000504] text-left leading-tight">
         {heading}
       </h2>
-      {
-        subheading && (
-          <p class="text-muted-foreground text-base md:text-lg">{subheading}</p>
-        )
-      }
+      <p class="mt-6 text-base text-muted-foreground text-left leading-relaxed">
+        {subheading}
+      </p>
     </div>
 
-    {
-      hasStats && (
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-          {stats.map((stat) => (
-            <div class="flex flex-col gap-3 p-6 rounded-xl border border-border bg-card/40 hover:border-primary/50 transition-colors">
-              <div class="text-4xl font-mono font-bold text-primary">
+    <!-- Spacious 4-Column Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {
+        stats.map((stat) => (
+          <div class="p-6 rounded-xl border border-border/60 bg-card/40 flex flex-col justify-between items-start text-left">
+            <div>
+              <span class="text-xs font-mono font-bold text-[#1823c9] block mb-2">
                 {stat.value}
-              </div>
-              <h3 class="text-lg font-semibold text-foreground">
+              </span>
+              <h3 class="text-lg font-semibold text-[#000504] mb-2 text-left">
                 {stat.label}
               </h3>
-              {stat.description && (
-                <p class="text-xs text-muted-foreground leading-relaxed">
-                  {stat.description}
-                </p>
-              )}
+              <p class="text-xs text-muted-foreground leading-relaxed text-left">
+                {stat.description}
+              </p>
             </div>
-          ))}
-        </div>
-      )
-    }
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>
