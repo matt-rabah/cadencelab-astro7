@@ -3,6 +3,7 @@ import BreadcrumbSchema from "./BreadcrumbSchema.astro";
 import Footer from "./Footer.astro";
 import NavHeader from "./NavHeader.astro";
 import SectionNav from "./SectionNav.astro";
+import TabbedPanels from "./TabbedPanels.astro";
 import Layout from "../layouts/Layout.astro";
 
 interface DirectoryEntry {
@@ -140,34 +141,21 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
           <p>{directory.introduction}</p>
         </div>
 
-        <div class="entry-grid">
-          {
-            directory.entries.map((entry, index) => (
-              <article class="entry-card">
-                <div class="entry-heading">
-                  <p class="item-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="entry-eyebrow">{entry.eyebrow}</p>
-                </div>
-                <h3>{entry.title}</h3>
-                <p class="entry-description">{entry.description}</p>
-                <div class="entry-conditions">
-                  <p class="note-label">Common conditions</p>
-                  <ul>
-                    {entry.conditions.map((condition) => (
-                      <li>{condition}</li>
-                    ))}
-                  </ul>
-                </div>
-                <a class="entry-link" href={entry.cta.href}>
-                  {entry.cta.label}
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              </article>
-            ))
-          }
-        </div>
+        <TabbedPanels
+          idPrefix="solution-directory"
+          label={`Browse ${directory.eyebrow}`}
+          panels={directory.entries.map((entry, index) => ({
+            id: `directory-entry-${index + 1}`,
+            label: entry.eyebrow,
+            number: String(index + 1).padStart(2, "0"),
+            eyebrow: entry.eyebrow,
+            title: entry.title,
+            description: entry.description,
+            listLabel: "Common conditions",
+            items: entry.conditions,
+            link: entry.cta,
+          }))}
+        />
       </div>
     </section>
 

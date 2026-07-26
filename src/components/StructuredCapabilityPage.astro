@@ -3,6 +3,7 @@ import BreadcrumbSchema from "./BreadcrumbSchema.astro";
 import Footer from "./Footer.astro";
 import NavHeader from "./NavHeader.astro";
 import SectionNav from "./SectionNav.astro";
+import TabbedPanels from "./TabbedPanels.astro";
 import Layout from "../layouts/Layout.astro";
 
 interface Card {
@@ -195,22 +196,19 @@ const {
           <p>{framework.introduction}</p>
         </div>
 
-        <div class="framework-grid">
-          {
-            framework.items.map((item, index) => (
-              <article>
-                <div class="framework-heading">
-                  <p class="framework-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="framework-label">{item.label}</p>
-                </div>
-                <h3>{item.question}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))
-          }
-        </div>
+        <TabbedPanels
+          idPrefix="capability-framework"
+          label={framework.eyebrow}
+          theme="dark"
+          panels={framework.items.map((item, index) => ({
+            id: `framework-item-${index + 1}`,
+            label: item.label,
+            number: String(index + 1).padStart(2, "0"),
+            eyebrow: item.label,
+            title: item.question,
+            description: item.description,
+          }))}
+        />
       </div>
     </section>
 
