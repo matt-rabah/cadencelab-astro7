@@ -52,7 +52,7 @@ const {
 
 <section
   class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
+    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
     className,
   )}
   id="diagnostics">
@@ -60,31 +60,31 @@ const {
     <!-- Left-aligned Header -->
     <div class="max-w-3xl flex flex-col items-start text-left mb-16">
       <span
-        class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
+        class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
         {eyebrow}
       </span>
       <h2
-        class="text-3xl sm:text-4xl font-bold tracking-tight text-[#000504] text-left leading-tight">
+        class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
         {heading}
       </h2>
-      <p class="mt-6 text-base text-muted-foreground text-left leading-relaxed">
+      <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
         {subheading}
       </p>
     </div>
 
-    <!-- Spacious 4-Column Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <!-- Flat Corporate Grid with Soft Borders -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {
         stats.map((stat) => (
-          <div class="p-6 rounded-xl border border-border/60 bg-card/40 flex flex-col justify-between items-start text-left">
+          <div class="p-6 rounded-xs border border-black/10 bg-[#f8f9fa] flex flex-col justify-between items-start text-left transition-colors hover:border-black/30">
             <div>
-              <span class="text-xs font-mono font-bold text-[#1823c9] block mb-2">
+              <span class="text-xs font-mono font-bold text-[#1823c9] block mb-3">
                 {stat.value}
               </span>
-              <h3 class="text-lg font-semibold text-[#000504] mb-2 text-left">
+              <h3 class="text-lg font-bold text-black mb-2 text-left">
                 {stat.label}
               </h3>
-              <p class="text-xs text-muted-foreground leading-relaxed text-left">
+              <p class="text-xs text-[#4a5056] leading-relaxed text-left">
                 {stat.description}
               </p>
             </div>

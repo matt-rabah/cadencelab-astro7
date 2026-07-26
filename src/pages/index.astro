@@ -10,7 +10,6 @@ import FAQ from "../components/FAQ.astro";
 import FitCheckForm from "../components/FitCheckForm.astro";
 import Footer from "../components/Footer.astro";
 
-// Your custom page data arrays
 const operatingStages = [
   {
     step: "01",
@@ -58,26 +57,36 @@ const fitBenefits = [
     class="min-h-screen bg-background text-foreground"
     tabindex="-1">
     <Hero
+      eyebrow="Customer Experience Operating Systems"
       heading="Customer experience operating systems for the AI era."
       description="Cadence Lab helps organizations resolve onboarding drift, quiet accounts, unreliable CRM signals, and service handoffs, then build the operating conditions required for responsible AI adoption."
+      primaryCta={{ text: "Start a Fit Check™", url: "/fit-check/" }}
+      secondaryCta={{ text: "Review diagnostic offers", url: "#diagnostics" }}
     />
 
     <Logos />
 
     <Stats
+      eyebrow="Diagnostic Impact"
       heading="Choose the operating problem before choosing the technology"
       subheading="Each diagnostic starts with one consequential operating question, builds a shared evidence base, and ends with a practical decision."
     />
 
     <OperatingModel
+      eyebrow="Operating Model"
       heading="Let the evidence determine the recommendation"
       subheading="Cadence Lab connects strategy to the way work is owned, performed, governed, and measured."
       steps={operatingStages}
     />
 
-    <FAQ />
+    <FAQ
+      eyebrow="Frequently Asked Questions"
+      heading="Clear answers about diagnostic engagements."
+      description="Everything you need to know about scope, deliverables, and how Cadence Lab partners with your executive team."
+    />
 
     <FitCheckForm
+      badge="Fit Check™"
       heading="Decide whether the problem is ready for a diagnostic"
       description="Share the operating problem, the teams and systems involved, and the outcome that needs to change. Cadence Lab will assess fit directly."
       benefits={fitBenefits}

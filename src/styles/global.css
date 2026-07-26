@@ -38,7 +38,7 @@
 }
 
 /* ==========================================================================
-   2. Design Tokens & APCA Contrast Thresholds
+   2. Deloitte-Inspired Design Tokens (Sharp Radii, Soft Dividers)
    ========================================================================== */
 
 :root {
@@ -49,68 +49,48 @@
   --font-mono:
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /*
-   * APCA Calibrated Palette
-   * Primary Ink (#000504) on Light (#FCFEFF) = Lc 102 (Target Lc 90+ for Body)
-   * Muted Copy (#454848) on Light (#FCFEFF) = Lc 82 (Target Lc 75+ for 12px Meta)
-   * Border (#9EB0AC) on Light (#FCFEFF) = Lc 48 (Target Lc 45+ for UI Boundaries)
-   */
-  --color-ink: #000504;
-  --color-light: #fcfeff;
-  --color-blue: #1823c9; /* Brand Accent - Lc 82 on light surface */
-  --color-blue-hover: #121ab0;
-  --color-green: #2e8b2b; /* Calibrated status green (Lc 78) */
+  /* Executive Palette */
+  --color-ink: #000000; /* Pure black for high-contrast executive text */
+  --color-light: #ffffff; /* Clean white background surface */
+  --color-blue: #1823c9; /* Brand Accent Blue */
+  --color-blue-hover: #111aab;
+  --color-green: #2e8b2b; /* Calibrated status green */
 
   /* Semantic Surfaces */
   --color-surface: var(--color-light);
   --color-surface-pure: #ffffff;
-  --color-surface-subtle: #f2f6f5;
-  --color-surface-muted: #e5ecea;
+  --color-surface-subtle: #f8f9fa; /* Subtle off-white section background */
+  --color-surface-muted: #f1f3f4;
   --color-surface-inverse: var(--color-ink);
 
   /* Semantic Typography */
-  --color-text: var(--color-ink);
-  --color-text-muted: #454848; /* APCA Lc 82 pass for captions & labels */
-  --color-text-subtle: #454848;
+  --color-text: #111111;
+  --color-text-muted: #4a5056; /* APCA Lc 82 compliant subtext */
+  --color-text-subtle: #6c757d;
   --color-text-inverse: #ffffff;
   --color-text-inverse-muted: #d0dad7;
 
-  /* Interaction & State Aliases */
-  --color-accent: var(--color-blue);
-  --color-link: var(--color-blue);
+  /* Non-Harsh Soft Dividers (Deloitte Style) */
+  --color-border: rgba(0, 0, 0, 0.08); /* Soft 8% opacity divider line */
+  --color-border-strong: rgba(0, 0, 0, 0.16);
   --color-focus: var(--color-blue);
-  --color-positive: var(--color-green);
-
-  /* UI Boundaries (APCA Lc 45+ for non-text components) */
-  --color-border: #9eb0ac;
-  --color-border-strong: #6c7f7b; /* Lc 64 - Elevated contrast */
-  --color-error: #9f1c12; /* Calibrated Lc 80 error state */
+  --color-error: #9f1c12;
   --color-success: #11683f;
   --color-warning: #7e5200;
 
-  /* Status Background Surfaces */
-  --color-error-surface: color-mix(
-    in srgb,
-    var(--color-error) 8%,
-    var(--color-light)
-  );
-  --color-success-surface: color-mix(
-    in srgb,
-    var(--color-success) 8%,
-    var(--color-light)
-  );
-  --color-warning-surface: color-mix(
-    in srgb,
-    var(--color-warning) 8%,
-    var(--color-light)
-  );
+  /* Sharp Corporate Radii (No rounded bubble cards) */
+  --border-width: 1px;
+  --radius-sm: 0.125rem; /* 2px minimal radius */
+  --radius-md: 0.25rem; /* 4px crisp radius */
+  --radius-lg: 0.25rem;
+  --radius-pill: 0.25rem; /* Square corporate buttons over pills */
 
-  /* Layout Containers */
-  --page-gutter: clamp(1.5rem, 5vw, 4rem);
-  --container-page: 80rem;
-  --container-wide: 90rem;
+  /* Layout Containers & Generous Executive Whitespace */
+  --page-gutter: clamp(1.5rem, 5vw, 4.5rem);
+  --container-page: 84rem;
+  --container-wide: 92rem;
   --container-header: 56rem;
-  --container-copy: 66ch;
+  --container-copy: 68ch;
   --container-copy-narrow: 58ch;
 
   /* Spacious Vertical Rhythm & Padding */
@@ -125,45 +105,42 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  --section-space: clamp(4.5rem, 11vw, 9rem);
-  --section-space-compact: clamp(3rem, 7vw, 5.5rem);
+  --section-space: clamp(
+    5rem,
+    12vw,
+    10rem
+  ); /* Generous Deloitte-style padding */
+  --section-space-compact: clamp(3rem, 7vw, 6rem);
 
-  /* Borders & Radii */
-  --border-width: 1px;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-pill: 999px;
-
-  /* Touch Controls & Ergonomics */
+  /* Touch Ergonomics & Accessibility */
   --control-min-size: 3rem; /* 48px Mobile Touch Standard */
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
-  --transition-fast: 150ms ease;
-  --transition-standard: 220ms ease;
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-standard: 250ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Shadcn / System Compatibility Tokens */
   --header-offset: 6rem;
   --z-skip-link: 1000;
-  --background: oklch(0.995 0 0);
-  --foreground: oklch(0.12 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.08 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
+  --card-foreground: oklch(0.08 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.995 0 0);
-  --secondary: oklch(0.965 0 0);
-  --secondary-foreground: oklch(0.12 0 0);
-  --muted: oklch(0.965 0 0);
-  --muted-foreground: oklch(0.38 0 0); /* APCA Lc 82 equivalent */
-  --accent: oklch(0.965 0 0);
-  --accent-foreground: oklch(0.12 0 0);
+  --popover-foreground: oklch(0.08 0 0);
+  --primary: oklch(0.25 0.22 264);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.08 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.4 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.08 0 0);
   --destructive: oklch(0.55 0.24 27);
-  --border: oklch(0.72 0 0); /* APCA Lc 48 equivalent */
-  --input: oklch(0.72 0 0);
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.12);
   --ring: oklch(0.35 0.22 264);
-  --radius: 0.5rem;
+  --radius: 0.125rem;
 }
 
 /* ==========================================================================
@@ -201,7 +178,7 @@ body {
   font-family: var(--ff-sans);
   font-feature-settings: var(--fea-graphik);
   text-align: left;
-  line-height: 1.75; /* Generous body line height for maximum legibility */
+  line-height: 1.75;
 }
 
 body,
@@ -248,7 +225,7 @@ table {
   border-spacing: 0;
 }
 
-/* Strict Left-Aligned Typography Hierarchy */
+/* Strict Left-Aligned Editorial Typography */
 h1,
 h2,
 h3,
@@ -259,6 +236,8 @@ h6 {
   text-wrap: balance;
   color: var(--color-ink);
   font-family: var(--ff-sans);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-feature-settings: var(--fea-graphik);
 }
 
@@ -289,7 +268,7 @@ b {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-blue) 25%, var(--color-light));
+  background: color-mix(in srgb, var(--color-blue) 20%, var(--color-light));
   color: var(--color-ink);
 }
 
@@ -298,17 +277,20 @@ b {
    ========================================================================== */
 
 @layer utilities {
-  /* Light-on-Dark Button Text: Font weight 600 compensates for halo erosion */
   .apca-btn-primary {
-    background-color: var(--color-blue);
+    background-color: var(--color-ink);
     color: #ffffff !important;
     font-weight: 600;
     font-size: 0.875rem;
-    letter-spacing: 0.015em;
+    letter-spacing: 0.01em;
     text-decoration: none !important;
+    border-radius: var(--radius-sm);
   }
 
-  /* Small 12px-13px Subtext: Lc 82 ensures high contrast perceptual reading */
+  .apca-btn-primary:hover {
+    background-color: var(--color-blue);
+  }
+
   .apca-subtext {
     color: var(--color-text-muted);
     font-size: 0.8125rem;
@@ -317,7 +299,6 @@ b {
     text-align: left;
   }
 
-  /* Strict Left-Aligned Structural Container */
   .left-grid-container {
     display: flex;
     flex-direction: column;
@@ -387,7 +368,7 @@ summary:focus-visible,
 }
 
 /* ==========================================================================
-   7. Buttons & Form Elements
+   7. Flat Corporate Buttons & Inputs
    ========================================================================== */
 
 .button {
@@ -398,8 +379,8 @@ summary:focus-visible,
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 0.875rem 1.5rem;
-  border: var(--border-width) solid transparent;
+  padding: 0.875rem 1.75rem;
+  border: 0;
   border-radius: var(--radius-sm);
   font-family: var(--ff-sans);
   font-size: 0.875rem;
@@ -410,33 +391,31 @@ summary:focus-visible,
   touch-action: manipulation;
   transition:
     background-color var(--transition-fast),
-    border-color var(--transition-fast),
     color var(--transition-fast);
 }
 
 .button-primary {
-  background: var(--color-blue);
+  background: var(--color-ink);
   color: #ffffff !important;
-  border-color: var(--color-blue);
 }
 
 .button-primary:hover {
-  background: var(--color-blue-hover);
-  border-color: var(--color-blue-hover);
+  background: var(--color-blue);
 }
 
 .button-secondary {
-  border-color: var(--color-ink);
-  background: transparent;
+  background: var(--color-surface-subtle);
   color: var(--color-ink) !important;
+  border: 1px solid var(--color-border);
 }
 
 .button-secondary:hover {
   background: var(--color-ink);
-  color: var(--color-light) !important;
+  color: #ffffff !important;
+  border-color: var(--color-ink);
 }
 
-/* Accessible Forms with APCA Boundaries */
+/* Form inputs with soft, non-intrusive focus borders */
 .form-field {
   display: grid;
   gap: var(--space-2);
@@ -457,15 +436,17 @@ textarea,
 select {
   inline-size: 100%;
   min-block-size: var(--control-min-size);
-  padding: var(--space-3) var(--space-4);
-  border: var(--border-width) solid var(--color-border); /* Lc 48 boundary */
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   background: var(--color-surface-pure);
   color: var(--color-ink);
   font-family: var(--ff-sans);
-  font-size: max(1rem, 1em); /* 16px min to prevent iOS Safari auto-zoom */
+  font-size: max(1rem, 1em); /* 16px min prevents iOS Safari auto-zoom */
   line-height: 1.5;
-  border-radius: var(--radius-sm);
-  transition: border-color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 input::placeholder,
@@ -524,39 +505,40 @@ select:focus-visible {
    ========================================================================== */
 
 .dark {
-  --background: oklch(0.12 0 0);
+  --background: oklch(0.08 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.18 0 0);
+  --card: oklch(0.12 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.18 0 0);
+  --popover: oklch(0.12 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.12 0 0);
-  --secondary: oklch(0.24 0 0);
+  --primary-foreground: oklch(0.08 0 0);
+  --secondary: oklch(0.18 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.24 0 0);
-  --muted-foreground: oklch(0.72 0 0); /* Lc -78 pass */
-  --border: oklch(1 0 0 / 18%); /* Lc -48 pass */
-  --input: oklch(1 0 0 / 22%);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.72 0 0);
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.16);
   --ring: oklch(0.65 0.22 264);
 
-  --color-ink: #f4f8f7;
-  --color-light: #090c0c;
-  --color-surface: #090c0c;
-  --color-surface-pure: #121615;
-  --color-surface-subtle: #191e1d;
-  --color-text: #f4f8f7;
-  --color-text-muted: #aab8b5;
-  --color-border: #384240;
+  --color-ink: #ffffff;
+  --color-light: #0a0c0d;
+  --color-surface: #0a0c0d;
+  --color-surface-pure: #121517;
+  --color-surface-subtle: #181c1f;
+  --color-text: #f0f2f4;
+  --color-text-muted: #a0a7ae;
+  --color-border: rgba(255, 255, 255, 0.12);
 }
 
+/* Base layer CSS using pure CSS variables to prevent Tailwind v4 build errors */
 @layer base {
   * {
-    border-color: var(--color-border, #9eb0ac);
+    border-color: var(--color-border);
   }
   body {
-    background-color: var(--color-surface, #fcfeff);
-    color: var(--color-text, #000504);
+    background-color: var(--color-surface);
+    color: var(--color-text);
     text-align: left;
     line-height: 1.75;
   }
@@ -564,7 +546,13 @@ select:focus-visible {
     font-family: var(--ff-sans);
     text-align: left;
   }
-  h1, h2, h3, h4, h5, h6, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     text-align: left;
     text-wrap: balance;
   }

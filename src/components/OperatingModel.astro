@@ -52,7 +52,7 @@ const {
 
 <section
   class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
+    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
     className,
   )}
   id="operating-model">
@@ -63,33 +63,32 @@ const {
       <div
         class="lg:col-span-5 flex flex-col items-start text-left lg:sticky lg:top-28">
         <span
-          class="text-xs font-mono font-semibold uppercase tracking-widest text-primary mb-4">
+          class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
           {eyebrow}
         </span>
         <h2
-          class="text-3xl sm:text-4xl font-bold tracking-tight text-foreground text-left leading-tight">
+          class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
           {heading}
         </h2>
-        <p
-          class="mt-6 text-base text-muted-foreground text-left leading-relaxed">
+        <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
           {subheading}
         </p>
       </div>
 
-      <!-- Right Column: Spacious 4-Step Process List -->
+      <!-- Right Column: Architectural Divider Grid -->
       <div
-        class="lg:col-span-7 flex flex-col divide-y divide-border/60 border-t border-b border-border/60">
+        class="lg:col-span-7 flex flex-col divide-y divide-black/10 border-t border-b border-black/10">
         {
           steps.map((stage) => (
             <div class="py-8 md:py-10 flex flex-col sm:flex-row items-start gap-4 sm:gap-8 text-left">
-              <span class="text-sm font-mono font-bold text-primary shrink-0 pt-1">
+              <span class="text-sm font-mono font-bold text-[#1823c9] shrink-0 pt-1">
                 {stage.step}
               </span>
               <div class="space-y-3 text-left">
-                <h3 class="text-xl font-semibold text-foreground tracking-tight text-left">
+                <h3 class="text-xl font-bold text-black tracking-tight text-left">
                   {stage.title}
                 </h3>
-                <p class="text-sm text-muted-foreground leading-relaxed text-left">
+                <p class="text-sm text-[#4a5056] leading-relaxed text-left">
                   {stage.description}
                 </p>
               </div>

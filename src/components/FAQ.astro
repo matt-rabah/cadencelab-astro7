@@ -18,7 +18,7 @@ interface Props {
 const {
   eyebrow = "Frequently Asked Questions",
   heading = "Clear answers about diagnostic engagements.",
-  description = "Everything you need to know about scope, deliverables, and how Cadence Lab partners with your team.",
+  description = "Everything you need to know about scope, deliverables, and how Cadence Lab partners with your executive team.",
   items = [
     {
       question: "How long does a typical CX Systems Diagnostic take?",
@@ -47,7 +47,7 @@ const {
 
 <section
   class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
+    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
     className,
   )}
   id="faq">
@@ -58,32 +58,31 @@ const {
       <div
         class="lg:col-span-5 flex flex-col items-start text-left lg:sticky lg:top-28">
         <span
-          class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
+          class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
           {eyebrow}
         </span>
         <h2
-          class="text-3xl sm:text-4xl font-bold tracking-tight text-[#000504] text-left leading-tight">
+          class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
           {heading}
         </h2>
-        <p
-          class="mt-6 text-base text-muted-foreground text-left leading-relaxed">
+        <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
           {description}
         </p>
       </div>
 
       <!-- Right Column Accordion List -->
       <div
-        class="lg:col-span-7 flex flex-col divide-y divide-border/60 border-t border-b border-border/60 w-full">
+        class="lg:col-span-7 flex flex-col divide-y divide-black/10 border-t border-b border-black/10 w-full">
         {
-          items.map((item, index) => (
+          items.map((item) => (
             <details class="group py-6 text-left cursor-pointer transition-colors">
-              <summary class="flex justify-between items-center text-left text-lg font-semibold text-[#000504] list-none select-none">
-                <span class="pr-4">{item.question}</span>
-                <span class="text-[#1823c9] transition-transform group-open:rotate-180 font-mono text-xl shrink-0">
+              <summary class="flex justify-between items-center text-left text-lg font-bold text-black list-none select-none group-hover:text-[#1823c9] transition-colors">
+                <span class="pr-6">{item.question}</span>
+                <span class="text-[#1823c9] transition-transform duration-200 group-open:rotate-180 font-mono text-xl shrink-0">
                   ↓
                 </span>
               </summary>
-              <p class="mt-4 text-sm text-muted-foreground leading-relaxed text-left pr-6">
+              <p class="mt-4 text-sm text-[#4a5056] leading-relaxed text-left pr-6">
                 {item.answer}
               </p>
             </details>

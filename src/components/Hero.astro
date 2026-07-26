@@ -20,11 +20,11 @@ interface Props {
 }
 
 const {
-  eyebrow = "Customer experience systems",
+  eyebrow = "Customer Experience Operating Systems",
   heading = "Customer experience operating systems for the AI era.",
   description = "Cadence Lab helps organizations resolve onboarding drift, quiet accounts, unreliable CRM signals, and service handoffs, then build the operating conditions required for responsible AI adoption.",
-  primaryCta = { text: "Start a fit check", url: "/fit-check/" },
-  secondaryCta = { text: "Review the diagnostic offers", url: "#diagnostics" },
+  primaryCta = { text: "Start a Fit Check™", url: "/fit-check/" },
+  secondaryCta = { text: "Review diagnostic offers", url: "#diagnostics" },
   tabs = [
     {
       title: "CX Diagnostics",
@@ -71,38 +71,37 @@ const activeTab = hasTabs ? tabs[0] : null;
 ---
 
 <section
-  class={`py-16 md:py-24 bg-background text-foreground border-b border-border/50 ${className}`}
+  class={`py-20 md:py-32 bg-background text-foreground border-b border-black/10 ${className}`}
   aria-labelledby="hero-title">
   <div class="container mx-auto px-6 max-w-6xl">
     <div
       class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
-      <!-- Left Column: Primary Copy & Buttons -->
+      <!-- Left Column: Executive Headline & Flat CTAs -->
       <div class="lg:col-span-8 flex flex-col items-start text-left">
         <span
-          class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
+          class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
           {eyebrow}
         </span>
 
         <h1
           id="hero-title"
-          class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#000504] text-left leading-[1.12] text-balance">
+          class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black text-left leading-[1.1] text-balance">
           {heading}
         </h1>
 
         <p
-          class="mt-6 text-base sm:text-lg text-muted-foreground text-left leading-relaxed max-w-2xl font-normal">
+          class="mt-8 text-base sm:text-lg text-[#4a5056] text-left leading-relaxed max-w-2xl font-normal">
           {description}
         </p>
 
-        <!-- CTA Group with forced contrast rules -->
+        <!-- Flat Executive Buttons (Sharp 2px Radii) -->
         <div
-          class="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
+          class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
           {
             primaryCta && (
               <a
                 href={primaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md bg-[#1823c9] px-8 text-sm font-medium no-underline! shadow transition-colors hover:bg-[#1823c9]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto"
-                style="color: #ffffff !important; text-decoration: none !important;">
+                class="inline-flex h-12 items-center justify-center rounded-xs bg-black px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto no-underline!">
                 {primaryCta.text}
               </a>
             )
@@ -111,8 +110,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             secondaryCta && (
               <a
                 href={secondaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md border border-[#000504] bg-transparent px-8 text-sm font-medium no-underline! transition-colors hover:bg-[#000504] hover:text-white! focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000504] focus-visible:ring-offset-2 w-full sm:w-auto"
-                style="color: #000504 !important; text-decoration: none !important;">
+                class="inline-flex h-12 items-center justify-center rounded-xs border border-black/15 bg-transparent px-8 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 w-full sm:w-auto no-underline!">
                 {secondaryCta.text}
               </a>
             )
@@ -120,59 +118,57 @@ const activeTab = hasTabs ? tabs[0] : null;
         </div>
       </div>
 
-      <!-- Right Column: System Telemetry Rail -->
+      <!-- Right Column: System Telemetry Rail (Subtle Left Divider) -->
       <div
-        class="lg:col-span-4 w-full border-l border-border/60 pl-8 hidden lg:flex flex-col gap-8 pt-2">
-        <div class="space-y-2">
+        class="lg:col-span-4 w-full border-l border-black/10 pl-8 hidden lg:flex flex-col gap-8 pt-2">
+        <div class="space-y-2 text-left">
           <span
-            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider"
+            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider block"
             >01 / DIAGNOSE</span
           >
-          <p class="text-xs text-muted-foreground leading-relaxed">
+          <p class="text-xs text-[#4a5056] leading-relaxed">
             Cross-functional friction, onboarding drift, and signal decay.
           </p>
         </div>
-        <div class="space-y-2">
+        <div class="space-y-2 text-left">
           <span
-            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider"
+            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider block"
             >02 / REBUILD</span
           >
-          <p class="text-xs text-muted-foreground leading-relaxed">
+          <p class="text-xs text-[#4a5056] leading-relaxed">
             Decision rights, CRM handoffs, and operational accountability.
           </p>
         </div>
-        <div class="space-y-2">
+        <div class="space-y-2 text-left">
           <span
-            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider"
+            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider block"
             >03 / PREPARE</span
           >
-          <p class="text-xs text-muted-foreground leading-relaxed">
+          <p class="text-xs text-[#4a5056] leading-relaxed">
             Human oversight, AI guardrails, and sustainable adoption.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Diagnostic Showcase Tabs -->
+    <!-- Diagnostic Showcase Tabs (Sharp Architectural Grid) -->
     {
       hasTabs && activeTab && (
-        <div class="mt-20 pt-16 border-t border-border/40">
+        <div class="mt-24 pt-16 border-t border-black/10">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {tabs.map((tab, i) => (
-              <div class="p-6 rounded-xl border border-border/60 bg-card/40 text-left hover:border-[#1823c9]/50 transition-colors">
-                <span class="text-xs font-mono text-muted-foreground block mb-2">
+              <div class="p-6 rounded-xs border border-black/10 bg-[#f8f9fa] text-left hover:border-black/30 transition-colors">
+                <span class="text-xs font-mono text-[#4a5056] block mb-2 font-semibold">
                   0{i + 1}
                 </span>
-                <h3 class="font-semibold text-foreground text-base mb-2">
-                  {tab.title}
-                </h3>
-                <p class="text-xs text-muted-foreground leading-relaxed">
+                <h3 class="font-bold text-black text-base mb-2">{tab.title}</h3>
+                <p class="text-xs text-[#4a5056] leading-relaxed">
                   {tab.description}
                 </p>
               </div>
             ))}
           </div>
-          <div class="relative rounded-2xl border border-border/60 overflow-hidden shadow-xl">
+          <div class="relative rounded-xs border border-black/10 overflow-hidden shadow-sm">
             <img
               src={activeTab.image.src}
               alt={activeTab.image.alt}

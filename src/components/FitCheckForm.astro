@@ -11,7 +11,7 @@ interface Props {
 }
 
 const {
-  badge = "Fit Check",
+  badge = "Fit Check™",
   heading = "Decide whether your problem is ready for a diagnostic",
   description = "Share the teams, systems, and operating friction involved. We assess fit directly and won't recommend a diagnostic unless there is a clear path to value.",
   benefits = [
@@ -25,34 +25,42 @@ const {
 const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
 ---
 
-<section class={cn("py-20 bg-background", className)} id="fit-check">
-  <div class="container mx-auto px-4">
+<section
+  class={cn(
+    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
+    className,
+  )}
+  id="fit-check">
+  <div class="container mx-auto px-6 max-w-6xl">
     <div
-      class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8 max-w-6xl mx-auto items-start">
-      <div class="flex flex-col gap-6">
+      class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-start text-left">
+      <!-- Left Column: Executive Copy & Principles -->
+      <div class="lg:col-span-5 flex flex-col gap-6 items-start text-left">
         <div>
           <span
-            class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-primary uppercase bg-muted rounded-full mb-4">
+            class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
             {badge}
           </span>
           <h2
-            class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
             {heading}
           </h2>
-          <p class="mt-4 text-muted-foreground text-base leading-relaxed">
+          <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
             {description}
           </p>
         </div>
 
         {
           hasBenefits && (
-            <ul class="flex flex-col gap-4 mt-2">
+            <ul class="flex flex-col gap-4 mt-2 text-left" role="list">
               {benefits.map((benefit) => (
-                <li class="flex items-start gap-3">
-                  <span class="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary mt-0.5">
+                <li class="flex items-start gap-3 text-left">
+                  <span
+                    class="flex size-4 shrink-0 items-center justify-center rounded-xs bg-black text-white text-[10px] font-bold mt-1"
+                    aria-hidden="true">
                     ✓
                   </span>
-                  <span class="text-sm font-medium text-foreground">
+                  <span class="text-sm font-medium text-black text-left leading-relaxed">
                     {benefit}
                   </span>
                 </li>
@@ -62,95 +70,158 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
         }
       </div>
 
+      <!-- Right Column: Flat Corporate Form Container -->
       <div
-        class="rounded-xl border border-border bg-card/60 p-6 sm:p-8 shadow-sm">
-        <form class="flex flex-col gap-5">
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div class="flex flex-col gap-2">
+        class="lg:col-span-7 rounded-xs border border-black/10 bg-[#f8f9fa] p-8 sm:p-12 shadow-none w-full">
+        <form
+          action="/fit-check/"
+          method="POST"
+          class="flex flex-col gap-6 text-left"
+          novalidate>
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <!-- First Name -->
+            <div class="flex flex-col gap-2 text-left">
               <label
                 for="firstName"
-                class="text-sm font-medium leading-none text-foreground"
-                >First Name</label
-              >
+                class="text-xs font-bold uppercase tracking-wider text-black text-left">
+                First Name <span class="text-[#9f1c12]" aria-hidden="true"
+                  >*</span
+                >
+              </label>
               <input
                 id="firstName"
                 name="firstName"
                 type="text"
-                placeholder="Alex"
+                autocomplete="given-name"
                 required
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                aria-required="true"
+                class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
               />
             </div>
-            <div class="flex flex-col gap-2">
+
+            <!-- Last Name -->
+            <div class="flex flex-col gap-2 text-left">
               <label
                 for="lastName"
-                class="text-sm font-medium leading-none text-foreground"
-                >Last Name</label
-              >
+                class="text-xs font-bold uppercase tracking-wider text-black text-left">
+                Last Name <span class="text-[#9f1c12]" aria-hidden="true"
+                  >*</span
+                >
+              </label>
               <input
                 id="lastName"
                 name="lastName"
                 type="text"
-                placeholder="Smith"
+                autocomplete="family-name"
                 required
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                aria-required="true"
+                class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
               />
             </div>
           </div>
 
-          <div class="flex flex-col gap-2">
+          <!-- Work Email -->
+          <div class="flex flex-col gap-2 text-left">
             <label
               for="email"
-              class="text-sm font-medium leading-none text-foreground"
-              >Work Email</label
-            >
+              class="text-xs font-bold uppercase tracking-wider text-black text-left">
+              Work Email <span class="text-[#9f1c12]" aria-hidden="true">*</span
+              >
+            </label>
             <input
               id="email"
               name="email"
               type="email"
-              placeholder="alex@company.com"
+              inputmode="email"
+              autocomplete="email"
               required
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              aria-required="true"
+              placeholder="alex@company.com"
+              class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
             />
           </div>
 
-          <div class="flex flex-col gap-2">
+          <!-- Organization -->
+          <div class="flex flex-col gap-2 text-left">
             <label
               for="company"
-              class="text-sm font-medium leading-none text-foreground"
-              >Company / Organization</label
-            >
+              class="text-xs font-bold uppercase tracking-wider text-black text-left">
+              Company / Organization <span
+                class="text-[#9f1c12]"
+                aria-hidden="true">*</span
+              >
+            </label>
             <input
               id="company"
               name="company"
               type="text"
-              placeholder="Acme Corp"
+              autocomplete="organization"
               required
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              aria-required="true"
+              class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
             />
           </div>
 
-          <div class="flex flex-col gap-2">
+          <!-- Problem Description -->
+          <div class="flex flex-col gap-2 text-left">
             <label
               for="message"
-              class="text-sm font-medium leading-none text-foreground"
-              >Describe your operating problem & systems involved</label
-            >
+              class="text-xs font-bold uppercase tracking-wider text-black text-left">
+              Operating problem & systems involved <span
+                class="text-[#9f1c12]"
+                aria-hidden="true">*</span
+              >
+            </label>
+            <p id="message-hint" class="text-xs text-[#4a5056] text-left">
+              Include platforms involved (e.g., Salesforce, HubSpot, Zendesk)
+              and impacted teams.
+            </p>
             <textarea
               id="message"
               name="message"
-              placeholder="e.g. Onboarding handoffs between Sales and CS are losing context in Salesforce..."
+              aria-describedby="message-hint"
               rows={4}
               required
-              class="flex min-h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              aria-required="true"
+              class="flex min-h-28 w-full rounded-xs border border-black/15 bg-white p-4 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
             ></textarea>
           </div>
 
-          <button
-            type="submit"
-            class="inline-flex h-11 w-full items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring mt-2">
-            Submit Fit Check Request
-          </button>
+          <!-- Submit Button & Governance Assurance -->
+          <div class="flex flex-col gap-4 mt-2 text-left">
+            <button
+              type="submit"
+              class="inline-flex h-12 w-full items-center justify-center rounded-xs bg-black px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 no-underline!"
+              style="color: #ffffff !important; text-decoration: none !important;">
+              Submit Fit Check Request
+            </button>
+
+            <p
+              class="text-xs text-[#4a5056] text-left leading-normal flex items-center gap-1.5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="shrink-0 text-black"
+                aria-hidden="true"
+                ><rect width="18" height="11" x="3" y="11" rx="2" ry="2"
+                ></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg
+              >
+              <span
+                >Protected under our <a
+                  href="/privacy/"
+                  class="underline text-black hover:text-[#1823c9]"
+                  >Privacy Policy</a
+                >. No spam.</span
+              >
+            </p>
+          </div>
         </form>
       </div>
     </div>
