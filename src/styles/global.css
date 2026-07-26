@@ -84,7 +84,7 @@
   );
 
   /* Layout */
-  --page-gutter: clamp(1.25rem, 4vw, 3rem);
+  --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
   --container-page: 80rem;
   --container-wide: 90rem;
   --container-header: 56rem;
@@ -105,9 +105,9 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  /* Shared section rhythm */
-  --section-space: clamp(3rem, 8vw, 7rem);
-  --section-space-compact: clamp(2rem, 5vw, 4rem);
+  /* Airy & spacious section rhythm */
+  --section-space: clamp(4rem, 10vw, 8.5rem);
+  --section-space-compact: clamp(2.5rem, 6vw, 5rem);
 
   /* Borders and radii */
   --border-width: 1px;
@@ -121,8 +121,8 @@
   --shadow-md: 0 4px 12px rgb(0 5 4 / 8%), 0 2px 4px rgb(0 5 4 / 5%);
   --shadow-lg: 0 18px 50px rgb(0 5 4 / 10%), 0 6px 18px rgb(0 5 4 / 6%);
 
-  /* Interaction */
-  --control-min-size: 2.75rem;
+  /* Interaction & Mobile Tap Target Defaults (48px standard) */
+  --control-min-size: 3rem;
   --control-min-size-coarse: 3rem;
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
@@ -183,6 +183,7 @@ html {
   scroll-padding-block-start: var(--header-offset);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  text-align: left;
 }
 
 html:focus-within {
@@ -199,6 +200,8 @@ body {
   color: var(--color-text);
   font-family: var(--ff-sans);
   font-feature-settings: var(--fea-graphik);
+  text-align: left;
+  line-height: 1.75; /* Generous default line-height for effortless legibility */
 }
 
 body,
@@ -285,6 +288,16 @@ textarea {
    3. Supplemental typography
    ========================================================================== */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: left;
+  text-wrap: balance;
+}
+
 h5,
 h6 {
   max-inline-size: var(--measure-heading);
@@ -295,7 +308,6 @@ h6 {
   font-weight: var(--fw-medium);
   line-height: 1.4;
   font-feature-settings: var(--fea-graphik);
-  text-wrap: balance;
 }
 
 p,
@@ -304,6 +316,8 @@ dd,
 dt,
 figcaption {
   text-wrap: pretty;
+  text-align: left;
+  line-height: 1.75; /* Loose paragraph rhythm */
 }
 
 strong,
@@ -318,7 +332,7 @@ i {
 
 small {
   font-size: var(--fs-small);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 sup,
@@ -349,12 +363,14 @@ sub {
   letter-spacing: 0;
   font-feature-settings: var(--fea-graphik);
   text-transform: none;
+  text-align: left;
 }
 
 .editorial-text {
   font-family: var(--ff-sans);
   font-weight: var(--fw-regular);
   line-height: var(--lh-ui);
+  text-align: left;
 }
 
 /* ==========================================================================
@@ -546,7 +562,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 0.75rem 1.125rem;
+  padding: 0.875rem 1.35rem;
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-sm);
   font-family: var(--ff-sans);
@@ -662,6 +678,7 @@ button {
   font-weight: var(--fw-medium);
   line-height: 1.4;
   font-feature-settings: var(--fea-graphik);
+  text-align: left;
 }
 
 .form-help {
@@ -670,6 +687,7 @@ button {
   font-size: var(--fs-eyebrow);
   line-height: 1.45;
   font-feature-settings: var(--fea-graphik);
+  text-align: left;
 }
 
 .form-error {
@@ -679,6 +697,7 @@ button {
   font-weight: var(--fw-medium);
   line-height: 1.45;
   font-feature-settings: var(--fea-graphik);
+  text-align: left;
 }
 
 input,
@@ -686,13 +705,13 @@ textarea,
 select {
   inline-size: 100%;
   min-block-size: var(--control-min-size);
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   border: var(--border-width) solid var(--color-border-strong);
   background: var(--color-surface-pure);
   color: var(--color-text);
   font-family: var(--ff-sans);
   font-size: max(1rem, 1em);
-  line-height: 1.4;
+  line-height: 1.5;
   font-feature-settings: var(--fea-graphik);
   accent-color: var(--color-accent);
   transition:
@@ -761,10 +780,11 @@ legend {
   font-family: var(--ff-serif);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
+  text-align: left;
 }
 
 .prose > * + * {
-  margin-block-start: 1.25em;
+  margin-block-start: 1.4em;
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) {
@@ -773,6 +793,7 @@ legend {
   font-style: normal;
   font-feature-settings: var(--fea-graphik);
   text-transform: none;
+  text-align: left;
   scroll-margin-block-start: var(--header-offset);
 }
 
@@ -800,10 +821,11 @@ legend {
 .prose ul,
 .prose ol {
   padding-inline-start: 1.35em;
+  text-align: left;
 }
 
 .prose li + li {
-  margin-block-start: 0.45em;
+  margin-block-start: 0.55em;
 }
 
 .prose hr {
@@ -859,7 +881,7 @@ legend {
 
 .prose th,
 .prose td {
-  padding: 0.65rem 0.8rem;
+  padding: 0.75rem 0.9rem;
   border: var(--border-width) solid var(--color-border);
   text-align: start;
   vertical-align: top;
@@ -921,6 +943,7 @@ legend {
   font-size: 0.9375rem;
   line-height: 1.5;
   font-feature-settings: var(--fea-graphik);
+  text-align: left;
 }
 
 .status-message-success {
@@ -956,7 +979,7 @@ legend {
 @media (max-width: 40rem) {
   :root {
     --header-offset: 5rem;
-    --section-space: clamp(2.5rem, 10vw, 4rem);
+    --section-space: clamp(3rem, 12vw, 5rem);
   }
 
   .button {
@@ -1176,8 +1199,24 @@ legend {
   }
   body {
     @apply bg-background text-foreground;
+    text-align: left;
+    line-height: 1.75;
   }
   html {
     @apply font-sans;
+    text-align: left;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    text-align: left;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
 }
