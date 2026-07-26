@@ -18,6 +18,7 @@ const diagnostics = [
       "A cross-functional friction map, ownership analysis, prioritized operating issues, and a practical sequence for improvement.",
     continuation:
       "Service-model redesign, workflow cleanup, customer-signal development, or AI-supported routing and summarization.",
+    linkLabel: "Explore the systems diagnostic",
     href: "/services/cx-systems-diagnostic/",
   },
   {
@@ -32,6 +33,7 @@ const diagnostics = [
       "A lifecycle risk model, signal inventory, intervention map, and clear recommendations for earlier, more accountable action.",
     continuation:
       "Onboarding redesign, account-health improvements, renewal-readiness workflows, or a stronger customer-success operating rhythm.",
+    linkLabel: "Explore the lifecycle review",
     href: "/services/lifecycle-risk-review/",
   },
   {
@@ -46,6 +48,7 @@ const diagnostics = [
       "A current-state workflow map, data and adoption findings, prioritized cleanup plan, and requirements for a more usable operating system.",
     continuation:
       "CRM process redesign, segmentation, outreach and escalation workflows, reporting improvements, or adoption support.",
+    linkLabel: "Explore the CRM audit",
     href: "/services/crm-workflow-audit/",
   },
   {
@@ -60,34 +63,43 @@ const diagnostics = [
       "A readiness decision, human-in-the-loop map, operating constraints, required guardrails, and sequenced implementation priorities.",
     continuation:
       "AI-assisted summaries, routing support, knowledge workflows, service visibility, or a bounded decision-support pilot.",
+    linkLabel: "Explore the AI readiness review",
     href: "/services/ai-service-readiness-review/",
   },
 ];
 
 const selectionGuide = [
   {
+    number: "01",
     cue: "The experience breaks across teams and systems",
     choice: "CX Systems Diagnostic",
     decision:
       "Where is friction created, and what operating change matters first?",
+    linkLabel: "Trace cross-functional friction",
     href: "#cx-systems-diagnostic",
   },
   {
+    number: "02",
     cue: "Risk appears too late in the lifecycle",
     choice: "Lifecycle Risk Review",
     decision: "Which signals should trigger action, when, and by whom?",
+    linkLabel: "Map earlier risk signals",
     href: "#lifecycle-risk-review",
   },
   {
+    number: "03",
     cue: "The CRM records work but does not guide it",
     choice: "CRM Workflow Audit",
     decision: "What must change for teams to trust and use the system?",
+    linkLabel: "Audit the CRM workflow",
     href: "#crm-workflow-audit",
   },
   {
+    number: "04",
     cue: "The AI proposal is ahead of operating readiness",
     choice: "AI Service Readiness Review",
     decision: "Is the use case ready, and what conditions must exist first?",
+    linkLabel: "Test AI service readiness",
     href: "#ai-service-readiness-review",
   },
 ];
@@ -251,7 +263,7 @@ const evidenceStandards = [
               },
             ],
             link: {
-              label: `Review ${diagnostic.name}`,
+              label: diagnostic.linkLabel,
               href: diagnostic.href,
             },
           }))}
@@ -285,15 +297,29 @@ const evidenceStandards = [
             selectionGuide.map((item) => (
               <li>
                 <article>
-                  <p class="selection-cue">{item.cue}</p>
+                  <div class="selection-meta">
+                    <span class="selection-dot" aria-hidden="true" />
+                    <p class="selection-number" aria-hidden="true">
+                      {item.number}
+                    </p>
+                    <p class="selection-cue">{item.cue}</p>
+                  </div>
                   <h3>{item.choice}</h3>
                   <p class="selection-decision">{item.decision}</p>
-                  <a href={item.href}>Review this diagnostic</a>
+                  <a href={item.href}>
+                    <span>{item.linkLabel}</span>
+                    <span class="selection-arrow" aria-hidden="true">
+                      &#8594;
+                    </span>
+                  </a>
                 </article>
               </li>
             ))
           }
         </ul>
+        <p class="selection-scroll-hint">
+          Scroll to compare <span aria-hidden="true">&#8594;</span>
+        </p>
       </div>
     </section>
 
@@ -701,20 +727,60 @@ const evidenceStandards = [
     color: var(--color-blue);
   }
 
+  .selection {
+    background: linear-gradient(
+      180deg,
+      var(--color-surface) 0%,
+      color-mix(in oklab, var(--color-blue) 3%, var(--color-surface-subtle))
+        100%
+    );
+  }
+
   .selection-list {
+    --selection-signal: #ffce31;
+
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: var(--border-width) solid var(--color-border-strong);
-    border-left: var(--border-width) solid var(--color-border-strong);
+    gap: clamp(0.875rem, 2vw, 1.25rem);
+  }
+
+  .selection-list > li:nth-child(1) {
+    --selection-accent: var(--color-blue);
+  }
+
+  .selection-list > li:nth-child(2) {
+    --selection-accent: #11683f;
+  }
+
+  .selection-list > li:nth-child(3) {
+    --selection-accent: #5940a8;
+  }
+
+  .selection-list > li:nth-child(4) {
+    --selection-accent: #9a4b00;
   }
 
   .selection-list > li {
     min-width: 0;
-    border-right: var(--border-width) solid var(--color-border-strong);
-    border-bottom: var(--border-width) solid var(--color-border-strong);
+    overflow: clip;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-block-start: 0.25rem solid var(--selection-accent);
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(
+        135deg,
+        transparent 55%,
+        color-mix(in oklab, var(--selection-accent) 7%, transparent) 100%
+      ),
+      color-mix(in oklab, var(--selection-accent) 4%, var(--color-surface-pure));
+    transition:
+      border-color var(--transition-standard),
+      background-color var(--transition-standard),
+      translate var(--transition-standard);
   }
 
   .selection-list article {
+    position: relative;
     display: flex;
     height: 100%;
     min-width: 0;
@@ -723,20 +789,47 @@ const evidenceStandards = [
     padding: clamp(1.5rem, 4vw, 2.5rem);
   }
 
+  .selection-meta {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .selection-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--selection-signal);
+  }
+
+  .selection-number,
   .selection-cue {
-    color: var(--color-blue);
+    margin: 0;
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: var(--lh-small);
   }
 
+  .selection-number {
+    color: var(--color-text-muted);
+    font-feature-settings: var(--fea-tabular);
+  }
+
+  .selection-cue {
+    color: var(--color-ink);
+  }
+
   .selection-list h3 {
-    margin-top: 0.75rem;
+    max-width: 24ch;
+    margin-top: 1.5rem;
   }
 
   .selection-decision {
-    margin-top: 1rem;
+    max-width: 52ch;
+    margin-top: 0.875rem;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-small);
@@ -748,6 +841,7 @@ const evidenceStandards = [
     display: inline-flex;
     min-height: var(--control-min-size);
     align-items: center;
+    gap: 0.45rem;
     margin-top: auto;
     padding-top: 1.5rem;
     color: var(--color-ink);
@@ -756,13 +850,41 @@ const evidenceStandards = [
     font-weight: var(--fw-medium);
     line-height: 1.3;
     text-decoration: underline;
-    text-decoration-color: var(--color-blue);
+    text-decoration-color: var(--selection-accent);
     text-decoration-thickness: 0.09em;
     text-underline-offset: 0.22em;
+    transition:
+      color var(--transition-fast),
+      gap var(--transition-fast);
   }
 
-  .selection-list a:hover {
-    color: var(--color-blue);
+  .selection-list .selection-arrow {
+    color: var(--selection-accent);
+    text-decoration: none;
+  }
+
+  .selection-scroll-hint {
+    display: none;
+    margin: -1.75rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-small);
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  @media (hover: hover) {
+    .selection-list > li:has(a:hover) {
+      border-color: var(--selection-accent);
+      translate: 0 -0.25rem;
+    }
+
+    .selection-list a:hover {
+      gap: 0.75rem;
+      color: var(--selection-accent);
+    }
   }
 
   .working-model {
@@ -978,9 +1100,32 @@ const evidenceStandards = [
       grid-column: 1;
     }
 
-    .selection-list,
     .evidence-grid {
       grid-template-columns: 1fr;
+    }
+
+    .selection-list {
+      grid-template-columns: none;
+      grid-auto-columns: minmax(17.5rem, 82%);
+      grid-auto-flow: column;
+      margin-inline: -0.25rem;
+      padding: 0.25rem 0.25rem 1rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-padding-inline: 0.25rem;
+      scroll-snap-type: inline mandatory;
+      scrollbar-color: var(--color-border-strong) transparent;
+      scrollbar-width: thin;
+    }
+
+    .selection-list > li {
+      scroll-snap-align: start;
+    }
+
+    .selection-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .evidence-grid li + li {
@@ -1010,6 +1155,10 @@ const evidenceStandards = [
       gap: 1.25rem;
     }
 
+    .selection-list {
+      grid-auto-columns: minmax(17rem, 88%);
+    }
+
     .stage {
       grid-template-columns: 1fr;
       gap: 0.5rem;
@@ -1033,8 +1182,32 @@ const evidenceStandards = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .diagnostic-link {
+    .diagnostic-link,
+    .selection-list > li,
+    .selection-list a {
       transition: none;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (min-width: 54.001rem) and (prefers-reduced-motion: no-preference) {
+      .selection-list > li {
+        animation: selection-enter linear both;
+        animation-timeline: view(block);
+        animation-range: entry 10% entry 35%;
+      }
+    }
+  }
+
+  @keyframes selection-enter {
+    from {
+      opacity: 0;
+      translate: 0 0.75rem;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0;
     }
   }
 
@@ -1054,7 +1227,12 @@ const evidenceStandards = [
       border-color: CanvasText;
     }
 
-    .hero-note li::before {
+    .selection-list > li {
+      background: Canvas;
+    }
+
+    .hero-note li::before,
+    .selection-dot {
       background: CanvasText;
     }
   }
