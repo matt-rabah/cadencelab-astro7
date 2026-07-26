@@ -28,7 +28,7 @@ const entries = await getSearchEntries();
       <section class="search-interface" aria-labelledby="search-results-title">
         <form action="/search/" method="get" class="page-search-form">
           <label for="page-search-input">Search insights and resources</label>
-          <div>
+          <div class="page-search-control">
             <input
               id="page-search-input"
               type="search"
@@ -37,7 +37,24 @@ const entries = await getSearchEntries();
               autocomplete="off"
               data-page-search-input
             />
-            <button type="submit">Search</button>
+
+            <button class="page-search-submit" type="submit">
+              <span class="visually-hidden">Submit search</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
+                ></path>
+              </svg>
+            </button>
+
+            <kbd class="page-search-shortcut" aria-hidden="true">⌘K</kbd>
           </div>
           <p>
             Press <kbd>Command</kbd>
@@ -221,34 +238,60 @@ const entries = await getSearchEntries();
     font-weight: var(--fw-medium);
   }
 
-  .page-search-form > div {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+  .page-search-control {
+    position: relative;
   }
 
   .page-search-form input {
+    width: 100%;
     min-width: 0;
-    min-height: var(--control-min-size-coarse);
-    padding: 0.75rem 1rem;
+    min-height: var(--control-min-size);
+    padding: 0.75rem 4rem 0.75rem 3rem;
     border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
     color: var(--color-text);
     font: inherit;
     font-size: var(--fs-body-ui);
   }
 
-  .page-search-form button {
-    min-height: var(--control-min-size-coarse);
-    padding-inline: 1.5rem;
-    border: var(--border-width) solid var(--color-blue);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    background: var(--color-blue);
-    color: var(--color-text-inverse);
+  .page-search-submit,
+  .page-search-shortcut {
+    position: absolute;
+    inset-block-start: 50%;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+  }
+
+  .page-search-submit {
+    inset-inline-start: 0;
+    width: 3rem;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-subtle);
+    cursor: pointer;
+  }
+
+  .page-search-submit svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .page-search-shortcut {
+    inset-inline-end: 1rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-subtle);
     font: inherit;
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
-    cursor: pointer;
+    pointer-events: none;
   }
 
   .page-search-form > p {
@@ -405,14 +448,12 @@ const entries = await getSearchEntries();
   }
 
   @media (max-width: 32rem) {
-    .page-search-form > div {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
+    .page-search-form input {
+      padding-inline-end: 1rem;
     }
 
-    .page-search-form input,
-    .page-search-form button {
-      border-radius: var(--radius-sm);
+    .page-search-shortcut {
+      display: none;
     }
   }
 

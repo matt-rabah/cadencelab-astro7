@@ -8,8 +8,7 @@ const entries = await getSearchEntries();
   id="site-search-dialog"
   class="search-dialog"
   aria-labelledby="search-dialog-title"
-  data-search-dialog
->
+  data-search-dialog>
   <div class="search-dialog-panel">
     <header class="search-dialog-header">
       <div>
@@ -27,13 +26,32 @@ const entries = await getSearchEntries();
 
     <div class="search-dialog-field">
       <label for="command-search-input">Search insights and resources</label>
-      <input
-        id="command-search-input"
-        type="search"
-        placeholder="Search by topic, problem, or category"
-        autocomplete="off"
-        data-command-search-input
-      />
+      <div class="search-dialog-control">
+        <span class="search-dialog-icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
+            ></path>
+          </svg>
+        </span>
+
+        <input
+          id="command-search-input"
+          type="search"
+          placeholder="Search by topic, problem, or category"
+          autocomplete="off"
+          aria-keyshortcuts="Meta+K Control+K"
+          data-command-search-input
+        />
+
+        <kbd class="search-dialog-shortcut" aria-hidden="true">⌘K</kbd>
+      </div>
     </div>
 
     <div class="search-dialog-status">
@@ -52,8 +70,7 @@ const entries = await getSearchEntries();
         entries.map((entry) => (
           <article
             data-command-search-entry
-            data-search-text={entry.searchText}
-          >
+            data-search-text={entry.searchText}>
             <div class="search-result-meta">
               <span>{entry.category}</span>
               <span aria-hidden="true">·</span>
@@ -290,16 +307,50 @@ const entries = await getSearchEntries();
     font-weight: var(--fw-medium);
   }
 
+  .search-dialog-control {
+    position: relative;
+  }
+
   .search-dialog-field input {
     width: 100%;
-    min-height: var(--control-min-size-coarse);
-    padding: 0.75rem 1rem;
+    min-height: var(--control-min-size);
+    padding: 0.75rem 4rem 0.75rem 3rem;
     border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     background: var(--color-surface);
     color: var(--color-text);
     font: inherit;
     font-size: var(--fs-body-ui);
+  }
+
+  .search-dialog-icon,
+  .search-dialog-shortcut {
+    position: absolute;
+    inset-block-start: 50%;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-text-subtle);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .search-dialog-icon {
+    inset-inline-start: 1rem;
+  }
+
+  .search-dialog-icon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .search-dialog-shortcut {
+    inset-inline-end: 1rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
   }
 
   .search-dialog-status {
@@ -399,6 +450,14 @@ const entries = await getSearchEntries();
       clip: rect(0 0 0 0);
       clip-path: inset(50%);
       white-space: nowrap;
+    }
+
+    .search-dialog-field input {
+      padding-inline-end: 1rem;
+    }
+
+    .search-dialog-shortcut {
+      display: none;
     }
   }
 
