@@ -2,5 +2,6 @@
   "astro.content-intellisense": true,
   "astro.updateImportsOnFileMove.enabled": true,
   "js/ts.tsdk.path": "node_modules/typescript/lib",
-  "css.lint.unknownAtRules": "ignore"
+  "npm.enableRunFromFolder": true,
+  "prettier.bracketSameLine": true
 }
