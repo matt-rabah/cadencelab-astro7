@@ -67,8 +67,7 @@ const getDescription = (post: BlogPost): string =>
   title="Insights | Cadence Lab"
   description="Perspectives on customer experience systems, CRM workflows, AI adoption, governance, and measurable operational improvement."
   canonicalURL="/blog/"
-  pageType="website"
->
+  pageType="website">
   <NavHeader />
 
   <main id="main-content" class="blog-index">
@@ -90,8 +89,7 @@ const getDescription = (post: BlogPost): string =>
           <>
             <section
               class="featured-section"
-              aria-labelledby="featured-post-title"
-            >
+              aria-labelledby="featured-post-title">
               <article class="featured-post">
                 <div class="post-metadata">
                   <span>{featuredPost.data.category}</span>
@@ -118,8 +116,7 @@ const getDescription = (post: BlogPost): string =>
                 <a
                   href={getPostURL(featuredPost)}
                   class="featured-link"
-                  aria-label={`Read ${featuredPost.data.title}`}
-                >
+                  aria-label={`Read ${featuredPost.data.title}`}>
                   Read the article
                   <span aria-hidden="true">→</span>
                 </a>
@@ -158,8 +155,7 @@ const getDescription = (post: BlogPost): string =>
 
                         <a
                           href={getPostURL(post)}
-                          aria-label={`Read ${post.data.title}`}
-                        >
+                          aria-label={`Read ${post.data.title}`}>
                           Read article
                           <span aria-hidden="true">→</span>
                         </a>
