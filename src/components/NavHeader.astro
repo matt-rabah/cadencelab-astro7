@@ -1040,10 +1040,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   .search-input,
   .mobile-search-input {
     inline-size: 100%;
-    min-block-size: 2.5rem;
-    padding: 0.5rem 2.75rem 0.5rem 0.875rem;
+    min-block-size: var(--control-min-size, 3rem);
+    padding: 0.5rem 0.875rem 0.5rem 3rem;
     border: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
-    border-radius: var(--radius-sm, 0.25rem);
+    border-radius: var(--radius-md, 0.25rem);
     background: var(--color-surface-pure, #ffffff);
     color: var(--color-text, #000504);
     font: inherit;
@@ -1053,24 +1053,23 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   }
 
   .search-input {
-    padding-inline-end: 5.25rem;
+    padding-inline-end: 4.25rem;
   }
 
   .search-shortcut {
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: 2.5rem;
+    inset-inline-end: 0.875rem;
     display: inline-flex;
-    min-inline-size: 2rem;
     align-items: center;
     justify-content: center;
-    padding: 0.15rem 0.35rem;
-    border: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
-    border-radius: var(--radius-sm, 0.25rem);
-    background: var(--color-surface-pure, #ffffff);
-    color: var(--color-text-muted, #454848);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-subtle, #6c757d);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: var(--fw-medium, 500);
     line-height: 1.2;
     pointer-events: none;
     transform: translateY(-50%);
@@ -1086,9 +1085,9 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   .mobile-search-submit {
     position: absolute;
     inset-block: 0;
-    inset-inline-end: 0;
+    inset-inline-start: 0;
     display: inline-flex;
-    inline-size: 2.5rem;
+    inline-size: var(--control-min-size, 3rem);
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -1100,8 +1099,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
   .search-submit svg,
   .mobile-search-submit svg {
-    inline-size: 1rem;
-    block-size: 1rem;
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
   }
 
   .search-form:focus-within .search-input,
