@@ -1,6 +1,17 @@
 /* src/styles/global.css */
 
+@import "tailwindcss";
 @import "./typography.css";
+
+/* ==========================================================================
+   Tailwind v4 Theme Configuration
+   ========================================================================== */
+
+@theme {
+  --font-sans: var(--ff-sans);
+  --font-serif: var(--ff-serif);
+  --font-display: var(--ff-serif-display);
+}
 
 /* ==========================================================================
    1. Design tokens
@@ -9,15 +20,8 @@
 :root {
   /*
    * Legacy compatibility aliases.
-   *
-   * Existing marketing components still reference --font-sans and
-   * --font-serif locally. Until those components are migrated individually,
-   * both resolve to Graphik so legacy component CSS cannot accidentally turn
-   * marketing copy into Tiempos.
-   *
-   * Editorial prose uses --ff-serif directly through typography.css.
-   * Produkt remains an approved future utility face, but it must not be wired
-   * until licensed webfont assets are present in the project.
+   * Both resolve to Graphik by default so legacy component CSS cannot
+   * accidentally turn marketing copy into Tiempos.
    */
   --font-sans: var(--ff-sans);
   --font-serif: var(--ff-sans);
@@ -108,10 +112,7 @@
   --radius-lg: 0.5rem;
   --radius-pill: 999px;
 
-  /*
-   * Shadows are reserved for temporary overlays or rare cases where borders
-   * and surface contrast cannot establish stacking clearly.
-   */
+  /* Shadows */
   --shadow-sm: 0 1px 2px rgb(0 5 4 / 5%), 0 1px 3px rgb(0 5 4 / 7%);
   --shadow-md: 0 4px 12px rgb(0 5 4 / 8%), 0 2px 4px rgb(0 5 4 / 5%);
   --shadow-lg: 0 18px 50px rgb(0 5 4 / 10%), 0 6px 18px rgb(0 5 4 / 6%);
@@ -246,11 +247,6 @@ textarea {
 
 /* ==========================================================================
    3. Supplemental typography
-
-   The site-wide scale, weights, tracking, leading, OpenType behavior,
-   responsive type scaling, and editorial prose system live in typography.css.
-
-   Graphik is the default everywhere outside deliberate editorial scopes.
    ========================================================================== */
 
 h5,
@@ -305,12 +301,6 @@ sub {
   inset-block-end: -0.25em;
 }
 
-/*
- * Sentence-case interface labels.
- *
- * True editorial eyebrows use .eyebrow from typography.css. Produkt may
- * replace Graphik here only after its licensed assets are registered.
- */
 .ui-label,
 .section-label {
   margin: 0;
@@ -325,12 +315,6 @@ sub {
   text-transform: none;
 }
 
-/*
- * Legacy compatibility class.
- *
- * This remains Graphik because Tiempos is not a general-purpose marketing
- * paragraph face in the finalized system.
- */
 .editorial-text {
   font-family: var(--ff-sans);
   font-weight: var(--fw-regular);
@@ -569,7 +553,6 @@ button {
   color: var(--color-light);
 }
 
-/* Reserved for explicit positive confirmation actions, not routine CTAs. */
 .button-positive {
   border-color: var(--color-green);
   background: var(--color-green);
@@ -733,19 +716,15 @@ legend {
 
 /* ==========================================================================
    9. Editorial prose structure
-
-   Tiempos Text is intentionally restricted to rendered long-form prose.
-   Graphik remains the typeface for article titles, article headings, metadata,
-   navigation, UI, marketing pages, forms, and all other site content.
-
-   Core editorial family, size, weight, leading, heading hierarchy, and
-   pull-quote typography are defined in typography.css.
    ========================================================================== */
 
 .prose {
   inline-size: min(100%, var(--measure-prose));
   max-inline-size: var(--measure-prose);
   color: var(--color-text);
+  font-family: var(--ff-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
 }
 
 .prose > * + * {
@@ -761,8 +740,25 @@ legend {
   scroll-margin-block-start: var(--header-offset);
 }
 
+.prose h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+}
+
+.prose h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+}
+
+.prose h3 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+}
+
 .prose h4 {
   margin-block: 1.75em 0.5em;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
 }
 
 .prose ul,

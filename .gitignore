@@ -41,3 +41,5 @@ coverage/
 # temporary files
 *.tmp
 *.temp
+
+.agents/
