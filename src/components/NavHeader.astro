@@ -1,5 +1,4 @@
 ---
-import wordmark from "../assets/brand/cadencelab-wordmark-light-color.svg";
 import SearchDialog from "./SearchDialog.astro";
 
 interface NavigationItem {
@@ -127,10 +126,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         aria-label="Cadence Lab home"
         aria-current={isCurrentPage("/") ? "page" : undefined}>
         <img
-          src={wordmark.src ?? wordmark}
-          alt="Cadence Lab"
-          width="3000"
-          height="413"
+          src="/brand/cadencelab-wordmark.svg"
+          alt="Cadence Lab."
           class="desktop-wordmark"
         />
       </a>
@@ -444,10 +441,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       aria-label="Cadence Lab home"
       aria-current={isCurrentPage("/") ? "page" : undefined}>
       <img
-        src={wordmark.src ?? wordmark}
-        alt="Cadence Lab"
-        width="3000"
-        height="413"
+        src="/brand/cadencelab-wordmark.svg"
+        alt="Cadence Lab."
         class="mobile-wordmark"
       />
     </a>
