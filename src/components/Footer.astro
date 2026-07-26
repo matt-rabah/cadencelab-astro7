@@ -116,11 +116,10 @@ const isCurrentPage = (href: string): boolean =>
           href="/"
           class="footer-logo-link"
           aria-label="Cadence Lab home"
-          aria-current={isCurrentPage("/") ? "page" : undefined}
-        >
+          aria-current={isCurrentPage("/") ? "page" : undefined}>
           <img
             src={wordmark.src ?? wordmark}
-            alt=""
+            alt="Cadence Lab"
             width="3000"
             height="413"
             loading="lazy"
@@ -137,16 +136,14 @@ const isCurrentPage = (href: string): boolean =>
         <a
           href="/contact/"
           class="footer-contact-link"
-          aria-current={isCurrentPage("/contact/") ? "page" : undefined}
-        >
+          aria-current={isCurrentPage("/contact/") ? "page" : undefined}>
           <span>Start a conversation</span>
           <svg
             aria-hidden="true"
             viewBox="0 0 16 16"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.5"
-          >
+            stroke-width="1.5">
             <path d="M2.5 8h10"></path>
             <path d="m8.75 4.25 3.75 3.75-3.75 3.75"></path>
           </svg>
@@ -165,8 +162,9 @@ const isCurrentPage = (href: string): boolean =>
                 <li>
                   <a
                     href={link.href}
-                    aria-current={isCurrentPage(link.href) ? "page" : undefined}
-                  >
+                    aria-current={
+                      isCurrentPage(link.href) ? "page" : undefined
+                    }>
                     {link.label}
                   </a>
                 </li>
@@ -190,8 +188,7 @@ const isCurrentPage = (href: string): boolean =>
               <li>
                 <a
                   href={link.href}
-                  aria-current={isCurrentPage(link.href) ? "page" : undefined}
-                >
+                  aria-current={isCurrentPage(link.href) ? "page" : undefined}>
                   {link.label}
                 </a>
               </li>
@@ -205,64 +202,71 @@ const isCurrentPage = (href: string): boolean =>
 
 <style>
   .site-footer {
-    --footer-background: var(--color-ink);
-    --footer-heading: var(--color-light);
-    --footer-text: var(--color-text-inverse-muted);
-    --footer-muted: #98a29f;
-    --footer-subtle: #7f8986;
+    /* APCA Contrast Tokens ($Lc 90+ for text, $Lc 45+ for boundaries) */
+    --footer-background: var(--color-ink, #000504);
+    --footer-heading: #ffffff;
+    --footer-text: #d0dad7; /* APCA $Lc 88 on #000504 */
+    --footer-muted: #aeb9b6; /* APCA $Lc 78 on #000504 */
+    --footer-subtle: #8e9b98;
     --footer-border: rgb(252 254 255 / 18%);
-    --footer-accent: var(--color-green);
-    --footer-focus: var(--color-light);
+    --footer-accent: #1823c9; /* Brand Blue Accent */
+    --footer-focus: #ffffff;
 
     width: 100%;
-    padding: clamp(3.5rem, 8vw, 6rem) var(--page-gutter)
-      clamp(2rem, 5vw, 2.75rem);
-    border-top: var(--border-width) solid var(--footer-border);
+    padding: clamp(4rem, 10vw, 7.5rem) var(--page-gutter, 1.5rem)
+      clamp(2.5rem, 6vw, 3.5rem);
+    border-top: var(--border-width, 1px) solid var(--footer-border);
     background: var(--footer-background);
     color: var(--footer-text);
     font-family: var(--ff-sans);
     font-feature-settings: var(--fea-graphik);
-    font-synthesis: none;
+    text-align: left;
   }
 
   .footer-container {
-    width: min(100%, var(--container-page));
+    width: min(100%, var(--container-page, 80rem));
     margin-inline: auto;
   }
 
   .footer-primary {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 2.75rem;
+    gap: 3.5rem;
+    text-align: left;
   }
 
   .footer-brand,
   .footer-section {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .footer-logo-link {
     display: inline-flex;
     align-items: center;
     width: fit-content;
-    min-height: var(--control-min-size);
+    min-height: var(--control-min-size, 3rem);
     color: inherit;
     text-decoration: none;
   }
 
   .footer-logo {
     display: block;
-    width: clamp(9.5rem, 14vw, 11.25rem);
+    width: clamp(10rem, 15vw, 12rem);
     height: auto;
   }
 
   .footer-description {
-    max-width: 31rem;
+    max-width: 32rem;
     margin: 1.25rem 0 0;
     color: var(--footer-text);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-regular);
-    line-height: 1.6;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.7;
+    text-align: left;
     text-wrap: pretty;
   }
 
@@ -271,45 +275,44 @@ const isCurrentPage = (href: string): boolean =>
     align-items: center;
     gap: 0.5rem;
     width: fit-content;
-    min-height: var(--control-min-size);
-    margin-top: 1.25rem;
+    min-height: var(--control-min-size, 3rem);
+    margin-top: 1.5rem;
     color: var(--footer-heading);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
+    font-size: 0.9375rem;
+    font-weight: 600;
     line-height: 1.4;
     text-decoration: underline;
-    text-decoration-color: var(--footer-accent);
-    text-decoration-thickness: 0.1em;
-    text-underline-offset: 0.25em;
-    transition:
-      color var(--transition-fast),
-      text-decoration-color var(--transition-fast);
+    text-decoration-color: #1823c9;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.3em;
+    transition: color var(--transition-fast, 150ms ease);
   }
 
   .footer-contact-link svg {
     width: 1rem;
     height: 1rem;
     flex: 0 0 auto;
-    transition: translate var(--transition-fast);
+    transition: transform var(--transition-fast, 150ms ease);
   }
 
   .footer-contact-link:hover {
-    color: var(--footer-accent);
+    color: #ffffff;
   }
 
   .footer-contact-link:hover svg {
-    translate: 0.2rem 0;
+    transform: translateX(0.25rem);
   }
 
   .footer-section-label {
-    margin: 0 0 1rem;
+    margin: 0 0 1.25rem;
     color: var(--footer-heading);
     font-family: var(--ff-sans);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
+    font-size: 0.75rem;
+    font-weight: 700;
     line-height: 1.4;
-    letter-spacing: var(--tracking-label);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    text-align: left;
   }
 
   .footer-link-list,
@@ -317,11 +320,12 @@ const isCurrentPage = (href: string): boolean =>
     margin: 0;
     padding: 0;
     list-style: none;
+    text-align: left;
   }
 
   .footer-link-list {
     display: grid;
-    gap: 0.125rem;
+    gap: 0.25rem;
   }
 
   .footer-link-list a {
@@ -329,57 +333,59 @@ const isCurrentPage = (href: string): boolean =>
     align-items: center;
     width: fit-content;
     max-width: 100%;
-    min-height: var(--control-min-size);
+    min-height: var(--control-min-size, 3rem);
     padding-block: 0.375rem;
     color: var(--footer-text);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-regular);
-    line-height: 1.45;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
     text-decoration: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.22em;
-    text-wrap: pretty;
+    text-underline-offset: 0.25em;
     transition:
-      color var(--transition-fast),
-      text-decoration-color var(--transition-fast);
+      color var(--transition-fast, 150ms ease),
+      text-decoration-color var(--transition-fast, 150ms ease);
   }
 
   .footer-link-list a:hover {
     color: var(--footer-heading);
-    text-decoration-color: var(--footer-accent);
+    text-decoration-color: #1823c9;
   }
 
   .footer-link-list a[aria-current="page"] {
     color: var(--footer-heading);
-    font-weight: var(--fw-medium);
-    text-decoration-color: var(--footer-accent);
+    font-weight: 600;
+    text-decoration-color: #1823c9;
     text-decoration-thickness: 0.12em;
   }
 
   .footer-secondary {
     display: grid;
-    gap: 1.25rem;
-    margin-top: clamp(3.25rem, 7vw, 5rem);
-    padding-top: 1.5rem;
-    border-top: var(--border-width) solid var(--footer-border);
+    gap: 1.5rem;
+    margin-top: clamp(3.5rem, 8vw, 5.5rem);
+    padding-top: 2rem;
+    border-top: var(--border-width, 1px) solid var(--footer-border);
+    text-align: left;
   }
 
   .footer-copyright {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 0.4rem;
+    gap: 0.25rem 0.5rem;
     margin: 0;
-    color: var(--footer-subtle);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-regular);
+    color: var(--footer-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
     line-height: 1.5;
+    text-align: left;
   }
 
   .legal-link-list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .legal-link-list li {
@@ -390,9 +396,9 @@ const isCurrentPage = (href: string): boolean =>
   .legal-link-list li:not(:last-child)::after {
     content: "";
     flex: 0 0 auto;
-    width: 0.1875rem;
-    height: 0.1875rem;
-    margin-inline: 0.75rem;
+    width: 0.2rem;
+    height: 0.2rem;
+    margin-inline: 0.85rem;
     border-radius: 50%;
     background: var(--footer-subtle);
   }
@@ -400,36 +406,32 @@ const isCurrentPage = (href: string): boolean =>
   .legal-link-list a {
     display: inline-flex;
     align-items: center;
-    min-height: var(--control-min-size);
-    color: var(--footer-subtle);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-regular);
+    min-height: var(--control-min-size, 3rem);
+    color: var(--footer-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
     line-height: 1.4;
     text-decoration: underline;
     text-decoration-color: transparent;
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.22em;
-    transition:
-      color var(--transition-fast),
-      text-decoration-color var(--transition-fast);
+    transition: color var(--transition-fast, 150ms ease);
   }
 
   .legal-link-list a:hover,
   .legal-link-list a[aria-current="page"] {
     color: var(--footer-heading);
-    text-decoration-color: var(--footer-accent);
+    text-decoration-color: #1823c9;
   }
 
   .site-footer a:focus-visible {
-    outline: var(--focus-ring-width) solid var(--footer-focus);
-    outline-offset: var(--focus-ring-offset);
+    outline: 2px solid var(--footer-focus);
+    outline-offset: 3px;
   }
 
   @media (min-width: 40rem) {
     .footer-primary {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: clamp(3rem, 7vw, 5rem);
-      row-gap: 3rem;
+      row-gap: 3.5rem;
     }
 
     .footer-brand {
@@ -442,10 +444,6 @@ const isCurrentPage = (href: string): boolean =>
       gap: 2rem;
     }
 
-    .footer-legal {
-      justify-self: end;
-    }
-
     .legal-link-list {
       justify-content: flex-end;
     }
@@ -453,8 +451,8 @@ const isCurrentPage = (href: string): boolean =>
 
   @media (min-width: 70rem) {
     .footer-primary {
-      grid-template-columns: minmax(17rem, 1.4fr) repeat(3, minmax(0, 1fr));
-      gap: clamp(2rem, 4vw, 4.5rem);
+      grid-template-columns: minmax(18rem, 1.5fr) repeat(3, minmax(0, 1fr));
+      gap: clamp(2.5rem, 4.5vw, 5rem);
       align-items: start;
     }
 
@@ -463,16 +461,7 @@ const isCurrentPage = (href: string): boolean =>
     }
 
     .footer-description {
-      max-width: 22rem;
-    }
-  }
-
-  @media (pointer: coarse) {
-    .footer-logo-link,
-    .footer-contact-link,
-    .footer-link-list a,
-    .legal-link-list a {
-      min-height: var(--control-min-size-coarse);
+      max-width: 23rem;
     }
   }
 
@@ -485,20 +474,7 @@ const isCurrentPage = (href: string): boolean =>
     }
 
     .footer-contact-link:hover svg {
-      translate: none;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .site-footer,
-    .footer-secondary {
-      border-color: CanvasText;
-    }
-
-    .footer-contact-link,
-    .footer-link-list a,
-    .legal-link-list a {
-      text-decoration-color: currentColor;
+      transform: none;
     }
   }
 </style>

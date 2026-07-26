@@ -125,11 +125,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         href="/"
         class="brand-link"
         aria-label="Cadence Lab home"
-        aria-current={isCurrentPage("/") ? "page" : undefined}
-      >
+        aria-current={isCurrentPage("/") ? "page" : undefined}>
         <img
           src={wordmark.src ?? wordmark}
-          alt=""
+          alt="Cadence Lab"
           width="3000"
           height="413"
           class="desktop-wordmark"
@@ -163,8 +162,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-              >
+                stroke-width="2">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -180,16 +178,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             <li>
               <a
                 href="/support/"
-                aria-current={isCurrentPage("/support/") ? "page" : undefined}
-              >
+                aria-current={isCurrentPage("/support/") ? "page" : undefined}>
                 Support
               </a>
             </li>
             <li>
               <a
                 href="/contact/"
-                aria-current={isCurrentPage("/contact/") ? "page" : undefined}
-              >
+                aria-current={isCurrentPage("/contact/") ? "page" : undefined}>
                 Contact
               </a>
             </li>
@@ -206,8 +202,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 class="primary-link"
                 aria-current={isCurrentSection("/fit-check/")
                   ? "page"
-                  : undefined}
-              >
+                  : undefined}>
                 Fit Check™
               </a>
             </li>
@@ -218,8 +213,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 class="primary-link"
                 aria-current={isCurrentSection("/services/")
                   ? "page"
-                  : undefined}
-              >
+                  : undefined}>
                 Services
               </a>
             </li>
@@ -231,14 +225,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   data-navigation-group
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
+                  }>
                   <button
                     class="navigation-trigger"
                     type="button"
                     aria-expanded="false"
-                    aria-controls={group.menuId}
-                  >
+                    aria-controls={group.menuId}>
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
                       <span class="visually-hidden">, current section</span>
@@ -249,8 +241,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                    >
+                      stroke-width="2">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -266,14 +257,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       { "mega-menu-compact": group.compact },
                     ]}
                     data-mega-menu
-                    hidden
-                  >
+                    hidden>
                     <div
                       class:list={[
                         "mega-menu-inner",
                         { "mega-menu-inner-compact": group.compact },
-                      ]}
-                    >
+                      ]}>
                       <div class="featured-column">
                         <p class="menu-label">{group.eyebrow}</p>
                         <p class="menu-heading">{group.heading}</p>
@@ -292,8 +281,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                             "menu-link-list",
                             { "menu-link-grid": !group.compact },
                           ]}
-                          role="list"
-                        >
+                          role="list">
                           {group.items.map((item) => (
                             <li>
                               <a
@@ -302,8 +290,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                                   isCurrentSection(item.href)
                                     ? "page"
                                     : undefined
-                                }
-                              >
+                                }>
                                 <span class="menu-link-label">
                                   {item.label}
                                 </span>
@@ -326,8 +313,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               <a
                 href="/blog/"
                 class="primary-link"
-                aria-current={isCurrentSection("/blog/") ? "page" : undefined}
-              >
+                aria-current={isCurrentSection("/blog/") ? "page" : undefined}>
                 Insights
               </a>
             </li>
@@ -339,14 +325,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   data-navigation-group
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
+                  }>
                   <button
                     class="navigation-trigger"
                     type="button"
                     aria-expanded="false"
-                    aria-controls={group.menuId}
-                  >
+                    aria-controls={group.menuId}>
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
                       <span class="visually-hidden">, current section</span>
@@ -357,8 +341,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                    >
+                      stroke-width="2">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -371,8 +354,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                     id={group.menuId}
                     class="mega-menu mega-menu-compact"
                     data-mega-menu
-                    hidden
-                  >
+                    hidden>
                     <div class="mega-menu-inner mega-menu-inner-compact">
                       <div class="featured-column">
                         <p class="menu-label">{group.eyebrow}</p>
@@ -391,8 +373,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                                   isCurrentSection(item.href)
                                     ? "page"
                                     : undefined
-                                }
-                              >
+                                }>
                                 <span class="menu-link-label">
                                   {item.label}
                                 </span>
@@ -415,8 +396,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         <a
           href="/contact/"
           class="header-cta"
-          aria-current={isCurrentPage("/contact/") ? "page" : undefined}
-        >
+          aria-current={isCurrentPage("/contact/") ? "page" : undefined}>
           Start a conversation
         </a>
       </div>
@@ -430,16 +410,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-navigation"
-      data-mobile-menu-trigger
-    >
+      data-mobile-menu-trigger>
       <svg
         class="menu-icon menu-icon-open"
         aria-hidden="true"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-      >
+        stroke-width="2">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -452,8 +430,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-      >
+        stroke-width="2">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -465,11 +442,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       href="/"
       class="mobile-brand-link"
       aria-label="Cadence Lab home"
-      aria-current={isCurrentPage("/") ? "page" : undefined}
-    >
+      aria-current={isCurrentPage("/") ? "page" : undefined}>
       <img
         src={wordmark.src ?? wordmark}
-        alt=""
+        alt="Cadence Lab"
         width="3000"
         height="413"
         class="mobile-wordmark"
@@ -479,8 +455,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     <a
       href="/fit-check/"
       class="mobile-cta"
-      aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}
-    >
+      aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}>
       Fit Check™
     </a>
   </div>
@@ -490,8 +465,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     class="mobile-navigation"
     data-mobile-navigation
     hidden
-    inert
-  >
+    inert>
     <div class="mobile-navigation-inner">
       <search class="mobile-search">
         <form class="mobile-search-form" action="/search/" method="get">
@@ -512,8 +486,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-            >
+              stroke-width="2">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -532,8 +505,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               class="mobile-primary-link"
               aria-current={isCurrentSection("/fit-check/")
                 ? "page"
-                : undefined}
-            >
+                : undefined}>
               Fit Check™
             </a>
           </li>
@@ -542,8 +514,9 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             <a
               href="/services/"
               class="mobile-primary-link"
-              aria-current={isCurrentSection("/services/") ? "page" : undefined}
-            >
+              aria-current={isCurrentSection("/services/")
+                ? "page"
+                : undefined}>
               Services
             </a>
           </li>
@@ -555,8 +528,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   class="mobile-navigation-group"
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
+                  }>
                   <summary>
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
@@ -568,8 +540,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                    >
+                      stroke-width="2">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -585,8 +556,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                           href={item.href}
                           aria-current={
                             isCurrentSection(item.href) ? "page" : undefined
-                          }
-                        >
+                          }>
                           <span>{item.label}</span>
                           {item.status && (
                             <span class="mobile-menu-status">
@@ -606,8 +576,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             <a
               href="/blog/"
               class="mobile-primary-link"
-              aria-current={isCurrentSection("/blog/") ? "page" : undefined}
-            >
+              aria-current={isCurrentSection("/blog/") ? "page" : undefined}>
               Insights
             </a>
           </li>
@@ -619,8 +588,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   class="mobile-navigation-group"
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
+                  }>
                   <summary>
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
@@ -632,8 +600,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                    >
+                      stroke-width="2">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -649,8 +616,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                           href={item.href}
                           aria-current={
                             isCurrentSection(item.href) ? "page" : undefined
-                          }
-                        >
+                          }>
                           <span>{item.label}</span>
                           {item.status && (
                             <span class="mobile-menu-status">
@@ -962,25 +928,28 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     inset-block-start: 0;
     z-index: 100;
     inline-size: 100%;
-    border-block-end: var(--border-width) solid var(--color-border);
-    background: var(--color-surface);
-    color: var(--color-text);
+    border-block-end: var(--border-width, 1px) solid
+      var(--color-border, #9eb0ac);
+    background: var(--color-surface, #fcfeff);
+    color: var(--color-text, #000504);
     font-family: var(--ff-sans);
     font-feature-settings: var(--fea-graphik);
+    text-align: left;
   }
 
   .desktop-header {
     display: grid;
     grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr);
     min-block-size: var(--desktop-header-height);
-    transition: min-block-size var(--transition-standard);
+    transition: min-block-size var(--transition-standard, 220ms ease);
   }
 
   .brand-zone {
     display: flex;
     align-items: center;
     padding-inline: clamp(1.25rem, 2.5vw, 2.25rem);
-    border-inline-end: var(--border-width) solid var(--color-border);
+    border-inline-end: var(--border-width, 1px) solid
+      var(--color-border, #9eb0ac);
   }
 
   .brand-link,
@@ -995,7 +964,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   .desktop-wordmark {
     inline-size: clamp(8.5rem, 10vw, 10.75rem);
     block-size: auto;
-    transition: inline-size var(--transition-standard);
+    transition: inline-size var(--transition-standard, 220ms ease);
   }
 
   .header-navigation {
@@ -1010,18 +979,18 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     max-block-size: 3rem;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-8);
+    gap: var(--space-8, 2rem);
     overflow: hidden;
     padding-inline: clamp(1.25rem, 3vw, 2.5rem);
-    border-block-end: var(--border-width) solid var(--color-border);
+    border-block-end: var(--border-width, 1px) solid
+      var(--color-border, #9eb0ac);
     opacity: 1;
     transform: translateY(0);
     transition:
-      min-block-size var(--transition-standard),
-      max-block-size var(--transition-standard),
-      opacity var(--transition-fast),
-      transform var(--transition-standard),
-      border-color var(--transition-standard);
+      min-block-size var(--transition-standard, 220ms ease),
+      max-block-size var(--transition-standard, 220ms ease),
+      opacity var(--transition-fast, 150ms ease),
+      transform var(--transition-standard, 220ms ease);
   }
 
   .site-search {
@@ -1036,18 +1005,16 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   .search-input,
   .mobile-search-input {
     inline-size: 100%;
-    min-block-size: 2.25rem;
-    padding: 0.5rem 2.75rem 0.5rem 0.75rem;
-    border: var(--border-width) solid transparent;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-subtle);
-    color: var(--color-text);
+    min-block-size: 2.5rem;
+    padding: 0.5rem 2.75rem 0.5rem 0.875rem;
+    border: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
+    border-radius: var(--radius-sm, 0.25rem);
+    background: var(--color-surface-pure, #ffffff);
+    color: var(--color-text, #000504);
     font: inherit;
-    font-size: var(--fs-small);
-    line-height: 1.3;
-    transition:
-      border-color var(--transition-fast),
-      background-color var(--transition-fast);
+    font-size: 1rem; /* 16px prevents iOS Safari auto-zoom */
+    line-height: 1.4;
+    transition: border-color var(--transition-fast, 150ms ease);
   }
 
   .search-input {
@@ -1063,12 +1030,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     align-items: center;
     justify-content: center;
     padding: 0.15rem 0.35rem;
-    border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-pure);
-    color: var(--color-text-muted);
-    font: inherit;
-    font-size: var(--fs-eyebrow);
+    border: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
+    border-radius: var(--radius-sm, 0.25rem);
+    background: var(--color-surface-pure, #ffffff);
+    color: var(--color-text-muted, #454848);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     line-height: 1.2;
     pointer-events: none;
     transform: translateY(-50%);
@@ -1076,8 +1043,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
   .search-input::placeholder,
   .mobile-search-input::placeholder {
-    color: var(--color-text-muted);
-    opacity: 1;
+    color: var(--color-text-muted, #454848);
+    opacity: 0.85;
   }
 
   .search-submit,
@@ -1092,7 +1059,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     padding: 0;
     border: 0;
     background: transparent;
-    color: var(--color-text-muted);
+    color: var(--color-text-muted, #454848);
     cursor: pointer;
   }
 
@@ -1104,34 +1071,32 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
   .search-form:focus-within .search-input,
   .mobile-search-form:focus-within .mobile-search-input {
-    border-color: var(--color-blue);
-    background: var(--color-surface-pure);
+    border-color: #1823c9;
   }
 
   .utility-navigation ul {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-6, 1.5rem);
     margin: 0;
     padding: 0;
   }
 
   .utility-navigation a {
-    color: var(--color-text-muted);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
+    color: var(--color-text-muted, #454848);
+    font-size: 0.8125rem;
+    font-weight: 500;
     line-height: 1.3;
-    text-decoration-line: underline;
+    text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 0.25em;
-    transition:
-      color var(--transition-fast),
-      text-decoration-color var(--transition-fast);
+    transition: color var(--transition-fast, 150ms ease);
   }
 
   .utility-navigation a[aria-current="page"] {
-    color: var(--color-blue);
+    color: #1823c9;
     text-decoration-color: currentColor;
+    font-weight: 600;
   }
 
   .primary-row {
@@ -1165,21 +1130,21 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     align-items: center;
     justify-content: center;
     gap: 0.375rem;
-    padding-inline: clamp(0.625rem, 1.15vw, 1rem);
+    padding-inline: clamp(0.75rem, 1.25vw, 1.125rem);
     border: 0;
     border-radius: 0;
     background: transparent;
-    color: var(--color-text);
+    color: var(--color-text, #000504);
     font: inherit;
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
+    font-size: 0.875rem;
+    font-weight: 600;
     line-height: 1;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
     transition:
-      background-color var(--transition-fast),
-      color var(--transition-fast);
+      background-color var(--transition-fast, 150ms ease),
+      color var(--transition-fast, 150ms ease);
   }
 
   .primary-link[aria-current="page"]::after,
@@ -1187,8 +1152,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     position: absolute;
     inset-inline: 0.75rem;
     inset-block-end: 0;
-    block-size: 0.125rem;
-    background: var(--color-blue);
+    block-size: 0.1875rem;
+    background: #1823c9;
     content: "";
   }
 
@@ -1197,21 +1162,22 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   }
 
   .navigation-trigger[aria-expanded="true"] {
-    background: var(--color-surface-subtle);
-    color: var(--color-blue);
+    background: var(--color-surface-subtle, #f2f6f5);
+    color: #1823c9;
   }
 
   .expand-icon {
     inline-size: 0.75rem;
     block-size: 0.75rem;
     flex: 0 0 auto;
-    transition: transform var(--transition-standard);
+    transition: transform var(--transition-standard, 220ms ease);
   }
 
   .navigation-trigger[aria-expanded="true"] .expand-icon {
     transform: rotate(180deg);
   }
 
+  /* APCA Light-on-Dark Primary CTA ($Lc -74 compliance requiring font-weight 600) */
   .header-cta {
     display: inline-flex;
     min-block-size: 3.5rem;
@@ -1219,14 +1185,15 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     align-items: center;
     justify-content: center;
     padding-inline: clamp(1.25rem, 2.5vw, 2.5rem);
-    background: var(--color-blue);
-    color: var(--color-light);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
+    background: #1823c9;
+    color: #ffffff !important;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.015em;
     line-height: 1;
-    text-decoration: none;
+    text-decoration: none !important;
     white-space: nowrap;
-    transition: background-color var(--transition-fast);
+    transition: background-color var(--transition-fast, 150ms ease);
   }
 
   .mega-menu {
@@ -1234,10 +1201,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     inset-block-start: var(--desktop-header-height);
     inset-inline: 0;
     inline-size: 100%;
-    border-block: var(--border-width) solid var(--color-border);
-    background: var(--color-surface-pure);
-    box-shadow: var(--shadow-md);
-    transition: inset-block-start var(--transition-standard);
+    border-block: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
+    background: var(--color-surface-pure, #ffffff);
+    box-shadow: 0 4px 12px rgb(0 5 4 / 8%);
+    transition: inset-block-start var(--transition-standard, 220ms ease);
   }
 
   .site-header.is-collapsed {
@@ -1265,9 +1232,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     display: grid;
     grid-template-columns: minmax(17rem, 0.8fr) minmax(0, 1.6fr);
     gap: clamp(3rem, 7vw, 7rem);
-    inline-size: min(calc(100% - (2 * var(--page-gutter))), 75rem);
+    inline-size: min(calc(100% - (2 * var(--page-gutter, 1.5rem))), 75rem);
     margin-inline: auto;
-    padding-block: clamp(2rem, 4vw, 3rem);
+    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+    text-align: left;
   }
 
   .mega-menu-inner-compact {
@@ -1279,56 +1247,60 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-3);
-    padding-inline-start: var(--space-5);
-    border-inline-start: 0.1875rem solid var(--color-blue);
+    gap: 0.75rem;
+    padding-inline-start: 1.25rem;
+    border-inline-start: 0.25rem solid #1823c9;
+    text-align: left;
   }
 
   .menu-label {
     margin: 0;
-    color: var(--color-text-muted);
-    font-family: var(--ff-utility);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
+    color: #1823c9;
+    font-size: 0.75rem;
+    font-weight: 700;
     line-height: 1.3;
-    letter-spacing: var(--ls-eyebrow);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    text-align: left;
   }
 
   .menu-heading {
     max-inline-size: 24ch;
     margin: 0;
-    color: var(--color-text);
-    font-size: var(--fs-h3);
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-h3);
-    letter-spacing: var(--ls-h3);
+    color: var(--color-ink, #000504);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: left;
     text-wrap: balance;
   }
 
   .menu-description {
     max-inline-size: 48ch;
     margin: 0;
-    color: var(--color-text-muted);
-    font-size: var(--fs-small);
-    line-height: var(--lh-small);
+    color: var(--color-text-muted, #454848);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-align: left;
     text-wrap: pretty;
   }
 
   .link-column {
     min-inline-size: 0;
+    text-align: left;
   }
 
   .link-column > .menu-label {
-    margin-block-end: var(--space-4);
+    margin-block-end: 1rem;
   }
 
   .menu-link-list {
     display: grid;
-    gap: var(--space-2);
+    gap: 0.5rem;
     margin: 0;
     padding: 0;
     list-style: none;
+    text-align: left;
   }
 
   .menu-link-grid {
@@ -1342,33 +1314,33 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
   .menu-link-list a {
     display: flex;
-    min-block-size: 3.5rem;
+    min-block-size: 3rem;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
-    padding: var(--space-3);
-    border-radius: var(--radius-sm);
-    color: var(--color-text);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    line-height: 1.35;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm, 0.25rem);
+    color: var(--color-text, #000504);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
     text-decoration: none;
     transition:
-      background-color var(--transition-fast),
-      color var(--transition-fast);
+      background-color var(--transition-fast, 150ms ease),
+      color var(--transition-fast, 150ms ease);
   }
 
   .menu-link-list a[aria-current="page"] {
-    background: var(--color-surface-subtle);
-    color: var(--color-blue);
+    background: var(--color-surface-subtle, #f2f6f5);
+    color: #1823c9;
+    font-weight: 600;
   }
 
   .menu-status {
     flex: 0 0 auto;
-    color: var(--color-text-muted);
-    font-size: 0.6875rem;
-    font-weight: var(--fw-medium);
-    line-height: 1.2;
+    color: var(--color-text-muted, #454848);
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 
   .mobile-header,
@@ -1382,54 +1354,25 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
   @media (hover: hover) {
     .utility-navigation a:hover {
-      color: var(--color-blue);
+      color: #1823c9;
       text-decoration-color: currentColor;
     }
 
     .primary-link:hover,
     .navigation-trigger:hover {
-      background: var(--color-surface-subtle);
-      color: var(--color-blue);
+      background: var(--color-surface-subtle, #f2f6f5);
+      color: #1823c9;
     }
 
     .header-cta:hover,
     .mobile-cta:hover {
-      background: color-mix(in srgb, var(--color-blue) 82%, var(--color-ink));
-      color: var(--color-light);
+      background: #121ab0;
+      color: #ffffff !important;
     }
 
     .menu-link-list a:hover {
-      background: var(--color-surface-subtle);
-      color: var(--color-blue);
-    }
-  }
-
-  @media (max-width: 74rem) and (min-width: 60rem) {
-    .desktop-header {
-      grid-template-columns: 10.5rem minmax(0, 1fr);
-    }
-
-    .brand-zone {
-      padding-inline: var(--space-4);
-    }
-
-    .desktop-wordmark {
-      inline-size: 8.5rem;
-    }
-
-    .primary-navigation-list {
-      padding-inline-start: var(--space-2);
-    }
-
-    .primary-link,
-    .navigation-trigger {
-      padding-inline: 0.5rem;
-      font-size: 0.72rem;
-    }
-
-    .header-cta {
-      padding-inline: var(--space-4);
-      font-size: 0.72rem;
+      background: var(--color-surface-subtle, #f2f6f5);
+      color: #1823c9;
     }
   }
 
@@ -1440,23 +1383,23 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
     .mobile-header {
       display: grid;
-      grid-template-columns: var(--control-min-size) minmax(0, 1fr) auto;
+      grid-template-columns: var(--control-min-size, 3rem) minmax(0, 1fr) auto;
       min-block-size: 4rem;
       align-items: center;
-      gap: var(--space-4);
-      padding-inline: var(--page-gutter);
+      gap: 1rem;
+      padding-inline: var(--page-gutter, 1.25rem);
     }
 
     .mobile-menu-trigger {
       display: inline-flex;
-      inline-size: var(--control-min-size);
-      block-size: var(--control-min-size);
+      inline-size: 3rem;
+      block-size: 3rem;
       align-items: center;
       justify-content: center;
       padding: 0;
       border: 0;
       background: transparent;
-      color: var(--color-text);
+      color: var(--color-text, #000504);
       cursor: pointer;
     }
 
@@ -1491,20 +1434,15 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       min-block-size: 2.75rem;
       align-items: center;
       justify-content: center;
-      padding-inline: 0.875rem;
-      border-radius: var(--radius-sm);
-      background: var(--color-blue);
-      color: var(--color-light);
-      font-size: 0.75rem;
-      font-weight: var(--fw-medium);
+      padding-inline: 1rem;
+      border-radius: var(--radius-sm, 0.25rem);
+      background: #1823c9;
+      color: #ffffff !important;
+      font-size: 0.8125rem;
+      font-weight: 600;
       line-height: 1;
-      text-decoration: none;
+      text-decoration: none !important;
       white-space: nowrap;
-    }
-
-    .mobile-cta[aria-current="page"] {
-      outline: var(--focus-ring-width) solid var(--color-ink);
-      outline-offset: -0.25rem;
     }
 
     .mobile-navigation {
@@ -1513,8 +1451,10 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       inset-inline: 0;
       overflow-y: auto;
       overscroll-behavior: contain;
-      border-block-start: var(--border-width) solid var(--color-border);
-      background: var(--color-surface-pure);
+      border-block-start: var(--border-width, 1px) solid
+        var(--color-border, #9eb0ac);
+      background: var(--color-surface-pure, #ffffff);
+      text-align: left;
     }
 
     .mobile-navigation:not([hidden]) {
@@ -1528,23 +1468,15 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     }
 
     .mobile-search {
-      padding: var(--space-4) var(--page-gutter);
-      border-block-end: var(--border-width) solid var(--color-border);
-    }
-
-    .mobile-search-input {
-      min-block-size: var(--control-min-size);
-      border-color: var(--color-border);
-      background: var(--color-surface-pure);
-    }
-
-    .mobile-search-submit {
-      inline-size: var(--control-min-size);
+      padding: 1rem var(--page-gutter, 1.25rem);
+      border-block-end: var(--border-width, 1px) solid
+        var(--color-border, #9eb0ac);
     }
 
     .mobile-navigation-list {
       margin: 0;
       padding: 0;
+      list-style: none;
     }
 
     .mobile-primary-link,
@@ -1554,12 +1486,13 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       min-block-size: 3.75rem;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-4);
-      padding-inline: var(--page-gutter);
-      border-block-end: var(--border-width) solid var(--color-border);
-      color: var(--color-text);
+      gap: 1rem;
+      padding-inline: var(--page-gutter, 1.25rem);
+      border-block-end: var(--border-width, 1px) solid
+        var(--color-border, #9eb0ac);
+      color: var(--color-text, #000504);
       font-size: 0.9375rem;
-      font-weight: var(--fw-medium);
+      font-weight: 600;
       line-height: 1.3;
       text-decoration: none;
     }
@@ -1569,8 +1502,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       position: absolute;
       inset-block: 0.75rem;
       inset-inline-start: 0;
-      inline-size: 0.1875rem;
-      background: var(--color-blue);
+      inline-size: 0.25rem;
+      background: #1823c9;
       content: "";
     }
 
@@ -1593,12 +1526,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       inline-size: 0.875rem;
       block-size: 0.875rem;
       flex: 0 0 auto;
-      transition: transform var(--transition-standard);
+      transition: transform var(--transition-standard, 220ms ease);
     }
 
     .mobile-navigation-group[open] > summary {
-      background: var(--color-surface-subtle);
-      color: var(--color-blue);
+      background: var(--color-surface-subtle, #f2f6f5);
+      color: #1823c9;
     }
 
     .mobile-navigation-group[open] .mobile-expand-icon {
@@ -1607,9 +1540,11 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
     .mobile-submenu {
       margin: 0;
-      padding: var(--space-2) var(--page-gutter) var(--space-3);
-      border-block-end: var(--border-width) solid var(--color-border);
-      background: var(--color-surface-subtle);
+      padding: 0.5rem var(--page-gutter, 1.25rem) 0.75rem;
+      border-block-end: var(--border-width, 1px) solid
+        var(--color-border, #9eb0ac);
+      background: var(--color-surface-subtle, #f2f6f5);
+      list-style: none;
     }
 
     .mobile-submenu a {
@@ -1617,82 +1552,54 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       min-block-size: 3rem;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-4);
-      padding: 0.65rem var(--space-3);
-      color: var(--color-text);
-      font-size: var(--fs-small);
+      gap: 1rem;
+      padding: 0.65rem 0.75rem;
+      color: var(--color-text, #000504);
+      font-size: 0.875rem;
       line-height: 1.35;
       text-decoration: none;
     }
 
     .mobile-submenu a[aria-current="page"] {
-      box-shadow: inset 0.1875rem 0 var(--color-blue);
-      background: var(--color-surface-pure);
-      color: var(--color-blue);
+      box-shadow: inset 0.25rem 0 #1823c9;
+      background: var(--color-surface-pure, #ffffff);
+      color: #1823c9;
+      font-weight: 600;
     }
 
     .mobile-menu-status {
       flex: 0 0 auto;
-      color: var(--color-text-muted);
-      font-size: 0.6875rem;
-      font-weight: var(--fw-medium);
+      color: var(--color-text-muted, #454848);
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
     .mobile-utility-navigation {
       align-self: end;
-      padding: var(--space-4) var(--page-gutter);
-      background: var(--color-surface-subtle);
+      padding: 1rem var(--page-gutter, 1.25rem);
+      background: var(--color-surface-subtle, #f2f6f5);
     }
 
     .mobile-utility-navigation ul {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-3);
+      gap: 0.75rem;
       margin: 0;
       padding: 0;
+      list-style: none;
     }
 
     .mobile-utility-navigation a {
       display: inline-flex;
-      min-block-size: var(--control-min-size);
+      min-block-size: 3rem;
       align-items: center;
       justify-content: center;
-      border: var(--border-width) solid var(--color-border-strong);
-      border-radius: var(--radius-sm);
-      color: var(--color-text);
-      font-size: var(--fs-eyebrow);
-      font-weight: var(--fw-medium);
+      border: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
+      border-radius: var(--radius-sm, 0.25rem);
+      color: var(--color-text, #000504);
+      font-size: 0.8125rem;
+      font-weight: 600;
       text-decoration: none;
-    }
-  }
-
-  @media (max-width: 25rem) {
-    .mobile-header {
-      gap: var(--space-2);
-      padding-inline: var(--space-4);
-    }
-
-    .mobile-wordmark {
-      inline-size: 7.25rem;
-    }
-
-    .mobile-cta {
-      padding-inline: 0.7rem;
-      font-size: 0.6875rem;
-    }
-  }
-
-  @media (hover: hover) and (max-width: 59.9375rem) {
-    .mobile-primary-link:hover,
-    .mobile-navigation-group > summary:hover,
-    .mobile-submenu a:hover {
-      background: var(--color-surface-subtle);
-      color: var(--color-blue);
-    }
-
-    .mobile-utility-navigation a:hover {
-      border-color: var(--color-blue);
-      color: var(--color-blue);
     }
   }
 
@@ -1703,7 +1610,6 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     .mega-menu,
     .search-input,
     .mobile-search-input,
-    .utility-navigation a,
     .primary-link,
     .navigation-trigger,
     .expand-icon,
@@ -1712,18 +1618,6 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     .mobile-cta,
     .mobile-expand-icon {
       transition: none;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .site-header,
-    .utility-row,
-    .mega-menu,
-    .mobile-navigation,
-    .mobile-primary-link,
-    .mobile-navigation-group > summary,
-    .mobile-submenu {
-      border-color: CanvasText;
     }
   }
 </style>
