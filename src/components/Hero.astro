@@ -76,7 +76,7 @@ const activeTab = hasTabs ? tabs[0] : null;
   <div class="container mx-auto px-6 max-w-6xl">
     <div
       class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
-      <!-- Left Column: Executive Headline & Flat CTAs -->
+      <!-- Left Column: Executive Headline & Standardized CTAs -->
       <div class="lg:col-span-8 flex flex-col items-start text-left">
         <span
           class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
@@ -94,14 +94,15 @@ const activeTab = hasTabs ? tabs[0] : null;
           {description}
         </p>
 
-        <!-- Flat Executive Buttons (Sharp 2px Radii) -->
+        <!-- Refined Executive Buttons -->
         <div
           class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
           {
             primaryCta && (
               <a
                 href={primaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-xs bg-black px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto no-underline!">
+                class="inline-flex h-12 items-center justify-center rounded-xs bg-black px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto no-underline!"
+                style="color: #ffffff !important;">
                 {primaryCta.text}
               </a>
             )
@@ -110,7 +111,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             secondaryCta && (
               <a
                 href={secondaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-xs border border-black/15 bg-transparent px-8 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 w-full sm:w-auto no-underline!">
+                class="inline-flex h-12 items-center justify-center rounded-xs border border-black/20 bg-white px-8 text-sm font-semibold text-black transition-colors hover:bg-[#f8f9fa] hover:border-[#1823c9] hover:text-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto no-underline!">
                 {secondaryCta.text}
               </a>
             )
@@ -118,7 +119,7 @@ const activeTab = hasTabs ? tabs[0] : null;
         </div>
       </div>
 
-      <!-- Right Column: System Telemetry Rail (Subtle Left Divider) -->
+      <!-- Right Column: System Telemetry Rail -->
       <div
         class="lg:col-span-4 w-full border-l border-black/10 pl-8 hidden lg:flex flex-col gap-8 pt-2">
         <div class="space-y-2 text-left">
@@ -151,13 +152,13 @@ const activeTab = hasTabs ? tabs[0] : null;
       </div>
     </div>
 
-    <!-- Diagnostic Showcase Tabs (Sharp Architectural Grid) -->
+    <!-- Diagnostic Showcase Tabs -->
     {
       hasTabs && activeTab && (
         <div class="mt-24 pt-16 border-t border-black/10">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {tabs.map((tab, i) => (
-              <div class="p-6 rounded-xs border border-black/10 bg-[#f8f9fa] text-left hover:border-black/30 transition-colors">
+              <div class="p-6 rounded-xs border border-black/10 bg-[#f8f9fa] text-left hover:border-[#1823c9]/40 transition-colors">
                 <span class="text-xs font-mono text-[#4a5056] block mb-2 font-semibold">
                   0{i + 1}
                 </span>
@@ -172,7 +173,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             <img
               src={activeTab.image.src}
               alt={activeTab.image.alt}
-              class="aspect-video w-full object-cover object-top"
+              class="aspect-16/9 w-full object-cover object-top"
             />
           </div>
         </div>
