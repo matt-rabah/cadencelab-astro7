@@ -11,8 +11,7 @@ const entries = await getSearchEntries();
   title="Search | Cadence Lab"
   description="Search Cadence Lab insights and practical resources."
   canonicalURL="/search/"
-  noindex={true}
->
+  noindex={true}>
   <NavHeader />
 
   <main id="main-content" class="search-page">
@@ -67,8 +66,7 @@ const entries = await getSearchEntries();
               <article
                 class="search-result"
                 data-page-search-entry
-                data-search-text={entry.searchText}
-              >
+                data-search-text={entry.searchText}>
                 <div class="search-result-meta">
                   <span>{entry.category}</span>
                   <span aria-hidden="true">·</span>
@@ -84,8 +82,7 @@ const entries = await getSearchEntries();
                 <a
                   class="search-result-link"
                   href={entry.href}
-                  aria-label={`Read ${entry.title}`}
-                >
+                  aria-label={`Read ${entry.title}`}>
                   Read article
                 </a>
               </article>
