@@ -1,13 +1,27 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "src/**/*", "tina/**/*"],
-  "exclude": ["dist", "node_modules"],
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "tina/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "skipLibCheck": true,
     "allowJs": true,
-    "types": ["astro/client", "node"]
+    "types": [
+      "astro/client",
+      "node"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
