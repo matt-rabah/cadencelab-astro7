@@ -3,5 +3,6 @@
   "astro.updateImportsOnFileMove.enabled": true,
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "npm.enableRunFromFolder": true,
-  "prettier.bracketSameLine": true
+  "prettier.bracketSameLine": true,
+  "css.lint.unknownAtRules": "ignore"
 }
