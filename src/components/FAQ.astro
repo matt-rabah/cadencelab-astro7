@@ -1,97 +1,95 @@
 ---
-// src/components/Faq.astro
+// src/components/FAQ.astro
 import { cn } from "@/lib/utils";
 
-interface FaqItem {
+interface FAQItem {
   question: string;
   answer: string;
 }
 
 interface Props {
+  eyebrow?: string;
   heading?: string;
-  subheading?: string;
-  items?: FaqItem[];
+  description?: string;
+  items?: FAQItem[];
   className?: string;
 }
 
 const {
-  heading = "Frequently Asked Questions",
-  subheading = "Understand our diagnostic approach, engagement requirements, and fit criteria.",
+  eyebrow = "Frequently Asked Questions",
+  heading = "Clear answers about diagnostic engagements.",
+  description = "Everything you need to know about scope, deliverables, and how Cadence Lab partners with your team.",
   items = [
     {
-      question: "What operating problems does Cadence Lab solve?",
+      question: "How long does a typical CX Systems Diagnostic take?",
       answer:
-        "Visible customer problems usually begin as operating failures. Context decays at handoffs, accounts go quiet, CRM signals become unreliable, and AI initiatives stall because underlying workflows lack human oversight and clear decision rights.",
+        "Most diagnostic engagements span 3 to 4 weeks from initial discovery interviews to the delivery of the sequenced decision brief.",
     },
     {
-      question: "What is required for a good engagement fit?",
+      question: "What access or data is required from our team?",
       answer:
-        "The ideal organization is willing to change cross-functional workflows instead of placing new technology on top of a broken process. An executive sponsor must be present to resolve competing priorities across CS, Sales, and Operations.",
+        "We require lightweight access to CRM workflow maps, key stakeholder interviews across CS/Sales/Product, and anonymized customer touchpoint records.",
     },
     {
-      question: "What does a diagnostic deliver?",
+      question: "How do you handle cross-functional misalignment?",
       answer:
-        "You receive a current-state friction map, ownership analysis, and a prioritized, sequenced decision brief for the operating changes that matter first.",
+        "Our diagnostic model traces customer friction objectively across team boundaries, providing evidence-based findings that give leadership clear permission to align decision rights.",
     },
     {
-      question: "How is a Fit Check conducted?",
+      question: "What happens after the diagnostic brief is delivered?",
       answer:
-        "You share the operating problem, involved teams, and target outcomes. Cadence Lab assesses fit and will tell you directly if a diagnostic is not the right next step.",
+        "The output includes a sequenced remediation plan with clear owners. You can execute the roadmap internally or partner with Cadence Lab to guide workflow rebuilding.",
     },
   ],
   className = "",
 } = Astro.props;
-
-const hasItems = Array.isArray(items) && items.length > 0;
 ---
 
 <section
-  class={cn("py-20 border-b border-border bg-background", className)}
+  class={cn(
+    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
+    className,
+  )}
   id="faq">
-  <div class="container mx-auto px-4">
-    <div class="mx-auto max-w-3xl">
-      <div class="text-center mb-12">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
+      <!-- Left Column Header -->
+      <div
+        class="lg:col-span-5 flex flex-col items-start text-left lg:sticky lg:top-28">
+        <span
+          class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
+          {eyebrow}
+        </span>
         <h2
-          class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          class="text-3xl sm:text-4xl font-bold tracking-tight text-[#000504] text-left leading-tight">
           {heading}
         </h2>
-        {
-          subheading && (
-            <p class="mt-3 text-muted-foreground text-base">{subheading}</p>
-          )
-        }
+        <p
+          class="mt-6 text-base text-muted-foreground text-left leading-relaxed">
+          {description}
+        </p>
       </div>
 
-      {
-        hasItems && (
-          <div class="space-y-4">
-            {items.map((item) => (
-              <details class="group rounded-xl border border-border bg-card/50 p-6 [&_svg]:open:rotate-180 transition-all">
-                <summary class="flex cursor-pointer items-center justify-between font-semibold text-lg text-foreground list-none select-none">
-                  <span>{item.question}</span>
-                  <span class="ml-4 shrink-0 transition-transform duration-200">
-                    <svg
-                      class="size-5 text-muted-foreground"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </span>
-                </summary>
-                <p class="mt-4 text-sm text-muted-foreground leading-relaxed border-t border-border/50 pt-4">
-                  {item.answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        )
-      }
+      <!-- Right Column Accordion List -->
+      <div
+        class="lg:col-span-7 flex flex-col divide-y divide-border/60 border-t border-b border-border/60 w-full">
+        {
+          items.map((item, index) => (
+            <details class="group py-6 text-left cursor-pointer transition-colors">
+              <summary class="flex justify-between items-center text-left text-lg font-semibold text-[#000504] list-none select-none">
+                <span class="pr-4">{item.question}</span>
+                <span class="text-[#1823c9] transition-transform group-open:rotate-180 font-mono text-xl shrink-0">
+                  ↓
+                </span>
+              </summary>
+              <p class="mt-4 text-sm text-muted-foreground leading-relaxed text-left pr-6">
+                {item.answer}
+              </p>
+            </details>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

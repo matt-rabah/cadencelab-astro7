@@ -20,11 +20,11 @@ interface Props {
 }
 
 const {
-  eyebrow = "Customer Experience Operating Systems",
-  heading = "Stop customer issues from becoming lost revenue.",
-  description = "Most customer-facing AI projects don't fail because of the model—they fail because the workflow, ownership, and measurement never worked. Cadence Lab diagnoses onboarding drift, lifecycle risk, and unreliable CRM workflows to turn evidence into practical operating change.",
-  primaryCta = { text: "Start a Fit Check", url: "/fit-check/" },
-  secondaryCta = { text: "Review Diagnostic Offers", url: "#diagnostics" },
+  eyebrow = "Customer experience systems",
+  heading = "Customer experience operating systems for the AI era.",
+  description = "Cadence Lab helps organizations resolve onboarding drift, quiet accounts, unreliable CRM signals, and service handoffs, then build the operating conditions required for responsible AI adoption.",
+  primaryCta = { text: "Start a fit check", url: "/fit-check/" },
+  secondaryCta = { text: "Review the diagnostic offers", url: "#diagnostics" },
   tabs = [
     {
       title: "CX Diagnostics",
@@ -71,13 +71,13 @@ const activeTab = hasTabs ? tabs[0] : null;
 ---
 
 <section
-  class={`py-20 md:py-32 bg-background text-foreground border-b border-border/50 ${className}`}
+  class={`py-16 md:py-24 bg-background text-foreground border-b border-border/50 ${className}`}
   aria-labelledby="hero-title">
   <div class="container mx-auto px-6 max-w-6xl">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start text-left">
-      <!-- Left Column: Primary Copy & Accessible CTAs -->
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
+      <!-- Left Column: Primary Copy & Buttons -->
       <div class="lg:col-span-8 flex flex-col items-start text-left">
-        <!-- Eyebrow explicitly locked to #1823c9 -->
         <span
           class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
           {eyebrow}
@@ -90,18 +90,19 @@ const activeTab = hasTabs ? tabs[0] : null;
         </h1>
 
         <p
-          class="mt-8 text-base sm:text-lg text-muted-foreground text-left leading-relaxed max-w-2xl font-normal">
+          class="mt-6 text-base sm:text-lg text-muted-foreground text-left leading-relaxed max-w-2xl font-normal">
           {description}
         </p>
 
-        <!-- Accessible CTA Group -->
+        <!-- CTA Group with forced contrast rules -->
         <div
-          class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
+          class="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
           {
             primaryCta && (
               <a
                 href={primaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md bg-[#1823c9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#1823c9]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto">
+                class="inline-flex h-12 items-center justify-center rounded-md bg-[#1823c9] px-8 text-sm font-medium !no-underline shadow transition-colors hover:bg-[#1823c9]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto"
+                style="color: #ffffff !important; text-decoration: none !important;">
                 {primaryCta.text}
               </a>
             )
@@ -110,7 +111,8 @@ const activeTab = hasTabs ? tabs[0] : null;
             secondaryCta && (
               <a
                 href={secondaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md border border-[#000504] bg-transparent px-8 text-sm font-medium text-[#000504] transition-colors hover:bg-[#000504] hover:text-[#fcfeff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000504] focus-visible:ring-offset-2 w-full sm:w-auto">
+                class="inline-flex h-12 items-center justify-center rounded-md border border-[#000504] bg-transparent px-8 text-sm font-medium !no-underline transition-colors hover:bg-[#000504] hover:!text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000504] focus-visible:ring-offset-2 w-full sm:w-auto"
+                style="color: #000504 !important; text-decoration: none !important;">
                 {secondaryCta.text}
               </a>
             )
@@ -154,7 +156,7 @@ const activeTab = hasTabs ? tabs[0] : null;
     <!-- Diagnostic Showcase Tabs -->
     {
       hasTabs && activeTab && (
-        <div class="mt-24 pt-16 border-t border-border/40">
+        <div class="mt-20 pt-16 border-t border-border/40">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {tabs.map((tab, i) => (
               <div class="p-6 rounded-xl border border-border/60 bg-card/40 text-left hover:border-[#1823c9]/50 transition-colors">
@@ -174,7 +176,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             <img
               src={activeTab.image.src}
               alt={activeTab.image.alt}
-              class="aspect-video w-full object-cover object-top"
+              class="aspect-16/9 w-full object-cover object-top"
             />
           </div>
         </div>
