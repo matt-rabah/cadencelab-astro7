@@ -1,9 +1,5 @@
 ---
 // src/components/FitCheckForm.astro
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -71,70 +67,90 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
         <form class="flex flex-col gap-5">
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div class="flex flex-col gap-2">
-              <Label htmlFor="firstName">First Name</Label>
-              <Input
+              <label
+                for="firstName"
+                class="text-sm font-medium leading-none text-foreground"
+                >First Name</label
+              >
+              <input
                 id="firstName"
                 name="firstName"
                 type="text"
                 placeholder="Alex"
                 required
-                className="bg-background"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               />
             </div>
             <div class="flex flex-col gap-2">
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input
+              <label
+                for="lastName"
+                class="text-sm font-medium leading-none text-foreground"
+                >Last Name</label
+              >
+              <input
                 id="lastName"
                 name="lastName"
                 type="text"
                 placeholder="Smith"
                 required
-                className="bg-background"
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               />
             </div>
           </div>
 
           <div class="flex flex-col gap-2">
-            <Label htmlFor="email">Work Email</Label>
-            <Input
+            <label
+              for="email"
+              class="text-sm font-medium leading-none text-foreground"
+              >Work Email</label
+            >
+            <input
               id="email"
               name="email"
               type="email"
               placeholder="alex@company.com"
               required
-              className="bg-background"
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             />
           </div>
 
           <div class="flex flex-col gap-2">
-            <Label htmlFor="company">Company / Organization</Label>
-            <Input
+            <label
+              for="company"
+              class="text-sm font-medium leading-none text-foreground"
+              >Company / Organization</label
+            >
+            <input
               id="company"
               name="company"
               type="text"
               placeholder="Acme Corp"
               required
-              className="bg-background"
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             />
           </div>
 
           <div class="flex flex-col gap-2">
-            <Label htmlFor="message"
-              >Describe your operating problem & systems involved</Label
+            <label
+              for="message"
+              class="text-sm font-medium leading-none text-foreground"
+              >Describe your operating problem & systems involved</label
             >
-            <Textarea
+            <textarea
               id="message"
               name="message"
               placeholder="e.g. Onboarding handoffs between Sales and CS are losing context in Salesforce..."
               rows={4}
               required
-              className="bg-background"
-            />
+              class="flex min-h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            ></textarea>
           </div>
 
-          <Button type="submit" size="lg" className="w-full mt-2">
+          <button
+            type="submit"
+            class="inline-flex h-11 w-full items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring mt-2">
             Submit Fit Check Request
-          </Button>
+          </button>
         </form>
       </div>
     </div>

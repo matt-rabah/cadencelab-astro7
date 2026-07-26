@@ -1,6 +1,5 @@
 ---
 // src/components/Hero.astro
-import { Button } from "@/components/ui/button";
 
 interface TabItem {
   title: string;
@@ -68,7 +67,6 @@ const {
   className = "",
 } = Astro.props;
 
-// Safe frontmatter boolean check to prevent TS template parser errors
 const hasTabs = Array.isArray(tabs) && tabs.length > 0;
 const activeTab = hasTabs ? tabs[0] : null;
 ---
@@ -96,27 +94,20 @@ const activeTab = hasTabs ? tabs[0] : null;
           class="mx-auto mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           {
             primaryCta && (
-              <Button
-                size="lg"
-                render={<a href={primaryCta.url} />}
-                nativeButton={false}
-                className="w-full sm:w-auto"
-              >
+              <a
+                href={primaryCta.url}
+                class="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring w-full sm:w-auto">
                 {primaryCta.text}
-              </Button>
+              </a>
             )
           }
           {
             secondaryCta && (
-              <Button
-                size="lg"
-                variant="outline"
-                render={<a href={secondaryCta.url} />}
-                nativeButton={false}
-                className="w-full sm:w-auto"
-              >
+              <a
+                href={secondaryCta.url}
+                class="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring w-full sm:w-auto">
                 {secondaryCta.text}
-              </Button>
+              </a>
             )
           }
         </div>

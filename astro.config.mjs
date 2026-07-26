@@ -2,7 +2,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import tina from "@tinacms/astro/integration";
 import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
 import tailwindcss from "@tailwindcss/vite";
-
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 const excludedSitemapPages = new Set([
@@ -112,6 +112,7 @@ export default defineConfig({
   ],
 
   integrations: [
+    react(),
     tina(),
     sitemap({
       filter: (page) => !excludedSitemapPages.has(page),
