@@ -71,23 +71,21 @@ const activeTab = hasTabs ? tabs[0] : null;
 ---
 
 <section
-  class:list={[
-    "py-20 md:py-32 bg-background text-foreground border-b border-border/50",
-    className,
-  ]}
+  class={`py-20 md:py-32 bg-background text-foreground border-b border-border/50 ${className}`}
   aria-labelledby="hero-title">
   <div class="container mx-auto px-6 max-w-6xl">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start text-left">
-      <!-- Left Column: Primary Copy & CTAs -->
+      <!-- Left Column: Primary Copy & Accessible CTAs -->
       <div class="lg:col-span-8 flex flex-col items-start text-left">
+        <!-- Eyebrow explicitly locked to #1823c9 -->
         <span
-          class="text-xs font-mono font-semibold uppercase tracking-widest text-primary mb-4">
+          class="text-xs font-mono font-semibold uppercase tracking-widest text-[#1823c9] mb-4">
           {eyebrow}
         </span>
 
         <h1
           id="hero-title"
-          class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground text-left leading-[1.12] text-balance">
+          class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#000504] text-left leading-[1.12] text-balance">
           {heading}
         </h1>
 
@@ -96,13 +94,14 @@ const activeTab = hasTabs ? tabs[0] : null;
           {description}
         </p>
 
+        <!-- Accessible CTA Group -->
         <div
           class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
           {
             primaryCta && (
               <a
                 href={primaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring w-full sm:w-auto">
+                class="inline-flex h-12 items-center justify-center rounded-md bg-[#1823c9] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#1823c9]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto">
                 {primaryCta.text}
               </a>
             )
@@ -111,7 +110,7 @@ const activeTab = hasTabs ? tabs[0] : null;
             secondaryCta && (
               <a
                 href={secondaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring w-full sm:w-auto">
+                class="inline-flex h-12 items-center justify-center rounded-md border border-[#000504] bg-transparent px-8 text-sm font-medium text-[#000504] transition-colors hover:bg-[#000504] hover:text-[#fcfeff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000504] focus-visible:ring-offset-2 w-full sm:w-auto">
                 {secondaryCta.text}
               </a>
             )
@@ -119,11 +118,12 @@ const activeTab = hasTabs ? tabs[0] : null;
         </div>
       </div>
 
-      <!-- Right Column: Clean Telemetry Rail (Spacious & Minimal) -->
+      <!-- Right Column: System Telemetry Rail -->
       <div
         class="lg:col-span-4 w-full border-l border-border/60 pl-8 hidden lg:flex flex-col gap-8 pt-2">
         <div class="space-y-2">
-          <span class="text-xs font-mono text-primary font-bold tracking-wider"
+          <span
+            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider"
             >01 / DIAGNOSE</span
           >
           <p class="text-xs text-muted-foreground leading-relaxed">
@@ -131,7 +131,8 @@ const activeTab = hasTabs ? tabs[0] : null;
           </p>
         </div>
         <div class="space-y-2">
-          <span class="text-xs font-mono text-primary font-bold tracking-wider"
+          <span
+            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider"
             >02 / REBUILD</span
           >
           <p class="text-xs text-muted-foreground leading-relaxed">
@@ -139,7 +140,8 @@ const activeTab = hasTabs ? tabs[0] : null;
           </p>
         </div>
         <div class="space-y-2">
-          <span class="text-xs font-mono text-primary font-bold tracking-wider"
+          <span
+            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider"
             >03 / PREPARE</span
           >
           <p class="text-xs text-muted-foreground leading-relaxed">
@@ -149,40 +151,30 @@ const activeTab = hasTabs ? tabs[0] : null;
       </div>
     </div>
 
-    <!-- Feature Gallery Preview (Spacious Tab Cards) -->
+    <!-- Diagnostic Showcase Tabs -->
     {
       hasTabs && activeTab && (
         <div class="mt-24 pt-16 border-t border-border/40">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {tabs.map((tab, i) => (
-              <button
-                type="button"
-                class:list={[
-                  "tab-trigger text-left p-6 rounded-xl border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                  i === 0
-                    ? "border-primary bg-primary/5 active-tab"
-                    : "border-border/60 bg-card/40 hover:border-primary/50 inactive-tab",
-                ]}
-                data-image-src={tab.image.src}
-                data-image-alt={tab.image.alt}>
-                <span class="text-xs font-mono text-muted-foreground block mb-2 pointer-events-none">
+              <div class="p-6 rounded-xl border border-border/60 bg-card/40 text-left hover:border-[#1823c9]/50 transition-colors">
+                <span class="text-xs font-mono text-muted-foreground block mb-2">
                   0{i + 1}
                 </span>
-                <h3 class="font-semibold text-foreground text-base mb-2 pointer-events-none">
+                <h3 class="font-semibold text-foreground text-base mb-2">
                   {tab.title}
                 </h3>
-                <p class="text-xs text-muted-foreground leading-relaxed pointer-events-none">
+                <p class="text-xs text-muted-foreground leading-relaxed">
                   {tab.description}
                 </p>
-              </button>
+              </div>
             ))}
           </div>
-          <div class="relative rounded-2xl border border-border/60 overflow-hidden shadow-xl bg-muted">
+          <div class="relative rounded-2xl border border-border/60 overflow-hidden shadow-xl">
             <img
-              id="gallery-image"
               src={activeTab.image.src}
               alt={activeTab.image.alt}
-              class="aspect-video w-full object-cover object-top transition-opacity duration-300"
+              class="aspect-16/9 w-full object-cover object-top"
             />
           </div>
         </div>
@@ -190,48 +182,3 @@ const activeTab = hasTabs ? tabs[0] : null;
     }
   </div>
 </section>
-
-<script>
-  function setupTabs() {
-    const triggers =
-      document.querySelectorAll<HTMLButtonElement>(".tab-trigger");
-    const image = document.getElementById("gallery-image") as HTMLImageElement;
-
-    if (!triggers.length || !image) return;
-
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        // Reset all tabs to inactive styles
-        triggers.forEach((t) => {
-          t.classList.remove("border-primary", "bg-primary/5", "active-tab");
-          t.classList.add("border-border/60", "bg-card/40", "inactive-tab");
-        });
-
-        // Set clicked tab to active styles
-        trigger.classList.remove(
-          "border-border/60",
-          "bg-card/40",
-          "inactive-tab",
-        );
-        trigger.classList.add("border-primary", "bg-primary/5", "active-tab");
-
-        // Crossfade image
-        const newSrc = trigger.dataset.imageSrc;
-        const newAlt = trigger.dataset.imageAlt;
-
-        if (newSrc && image.src !== newSrc) {
-          image.style.opacity = "0.4";
-          setTimeout(() => {
-            image.src = newSrc;
-            if (newAlt) image.alt = newAlt;
-            image.style.opacity = "1";
-          }, 150);
-        }
-      });
-    });
-  }
-
-  // Setup on initial load and after Astro view transitions
-  setupTabs();
-  document.addEventListener("astro:after-swap", setupTabs);
-</script>
