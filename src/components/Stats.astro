@@ -1,0 +1,95 @@
+---
+// src/components/Stats.astro
+import { cn } from "@/lib/utils";
+
+interface StatItem {
+  id: string;
+  value: string;
+  label: string;
+  description?: string;
+}
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  stats?: StatItem[];
+  className?: string;
+}
+
+const {
+  heading = "Diagnostic Offers",
+  subheading = "Choose the operating problem before choosing the technology.",
+  stats = [
+    {
+      id: "stat-1",
+      value: "01",
+      label: "CX Systems Diagnostic",
+      description:
+        "Maps touchpoints, handoffs, and friction to output a sequenced decision brief.",
+    },
+    {
+      id: "stat-2",
+      value: "02",
+      label: "Lifecycle Risk Review",
+      description:
+        "Identifies onboarding drift and quiet accounts before renewal windows close.",
+    },
+    {
+      id: "stat-3",
+      value: "03",
+      label: "CRM Workflow Audit",
+      description:
+        "Cleans up weak signals, process gaps, and misaligned decision rights.",
+    },
+    {
+      id: "stat-4",
+      value: "04",
+      label: "AI Service Readiness",
+      description:
+        "Evaluates process readiness, trust, and human oversight for AI adoption.",
+    },
+  ],
+  className = "",
+} = Astro.props;
+
+const hasStats = Array.isArray(stats) && stats.length > 0;
+---
+
+<section
+  class={cn("py-20 border-b border-border bg-background", className)}
+  id="diagnostics">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col gap-3 text-center max-w-3xl mx-auto mb-14">
+      <h2 class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        {heading}
+      </h2>
+      {
+        subheading && (
+          <p class="text-muted-foreground text-base md:text-lg">{subheading}</p>
+        )
+      }
+    </div>
+
+    {
+      hasStats && (
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+          {stats.map((stat) => (
+            <div class="flex flex-col gap-3 p-6 rounded-xl border border-border bg-card/40 hover:border-primary/50 transition-colors">
+              <div class="text-4xl font-mono font-bold text-primary">
+                {stat.value}
+              </div>
+              <h3 class="text-lg font-semibold text-foreground">
+                {stat.label}
+              </h3>
+              {stat.description && (
+                <p class="text-xs text-muted-foreground leading-relaxed">
+                  {stat.description}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

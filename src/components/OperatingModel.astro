@@ -1,0 +1,97 @@
+---
+// src/components/OperatingModel.astro
+import { cn } from "@/lib/utils";
+
+interface StepItem {
+  step: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  badge?: string;
+  heading?: string;
+  subheading?: string;
+  steps?: StepItem[];
+  className?: string;
+}
+
+const {
+  badge = "The Operating Model",
+  heading = "Let the evidence determine the recommendation",
+  subheading = "Most customer issues aren't technology failures—they're broken cross-functional handoffs, unclear ownership, and weak feedback loops.",
+  steps = [
+    {
+      step: "01",
+      title: "Diagnose",
+      description:
+        "Trace customer friction through teams, systems, data, and decision rights to find root causes.",
+    },
+    {
+      step: "02",
+      title: "Align",
+      description:
+        "Establish clear cross-functional ownership and resolve competing priorities across CS, Sales, and Ops.",
+    },
+    {
+      step: "03",
+      title: "Rebuild",
+      description:
+        "Translate decisions into usable operating handoffs, CRM rules, and governance workflows.",
+    },
+    {
+      step: "04",
+      title: "Measure",
+      description:
+        "Connect customer health, workflow adherence, and adoption signals directly to operating performance.",
+    },
+  ],
+  className = "",
+} = Astro.props;
+
+const hasSteps = Array.isArray(steps) && steps.length > 0;
+---
+
+<section
+  class={cn("py-20 border-b border-border bg-background/50", className)}
+  id="operating-model">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+      <span
+        class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-muted rounded-full">
+        {badge}
+      </span>
+      <h2
+        class="text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
+        {heading}
+      </h2>
+      {
+        subheading && (
+          <p class="mt-4 text-muted-foreground text-base md:text-lg">
+            {subheading}
+          </p>
+        )
+      }
+    </div>
+
+    {
+      hasSteps && (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {steps.map((item) => (
+            <div class="relative flex flex-col p-6 rounded-xl border border-border bg-card/60 hover:border-primary/50 transition-colors">
+              <span class="text-xs font-mono font-bold text-primary mb-2">
+                STEP {item.step}
+              </span>
+              <h3 class="text-xl font-semibold text-foreground mb-2">
+                {item.title}
+              </h3>
+              <p class="text-sm text-muted-foreground leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

@@ -1,0 +1,97 @@
+---
+// src/components/Faq.astro
+import { cn } from "@/lib/utils";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  items?: FaqItem[];
+  className?: string;
+}
+
+const {
+  heading = "Frequently Asked Questions",
+  subheading = "Understand our diagnostic approach, engagement requirements, and fit criteria.",
+  items = [
+    {
+      question: "What operating problems does Cadence Lab solve?",
+      answer:
+        "Visible customer problems usually begin as operating failures. Context decays at handoffs, accounts go quiet, CRM signals become unreliable, and AI initiatives stall because underlying workflows lack human oversight and clear decision rights.",
+    },
+    {
+      question: "What is required for a good engagement fit?",
+      answer:
+        "The ideal organization is willing to change cross-functional workflows instead of placing new technology on top of a broken process. An executive sponsor must be present to resolve competing priorities across CS, Sales, and Operations.",
+    },
+    {
+      question: "What does a diagnostic deliver?",
+      answer:
+        "You receive a current-state friction map, ownership analysis, and a prioritized, sequenced decision brief for the operating changes that matter first.",
+    },
+    {
+      question: "How is a Fit Check conducted?",
+      answer:
+        "You share the operating problem, involved teams, and target outcomes. Cadence Lab assesses fit and will tell you directly if a diagnostic is not the right next step.",
+    },
+  ],
+  className = "",
+} = Astro.props;
+
+const hasItems = Array.isArray(items) && items.length > 0;
+---
+
+<section
+  class={cn("py-20 border-b border-border bg-background", className)}
+  id="faq">
+  <div class="container mx-auto px-4">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center mb-12">
+        <h2
+          class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          {heading}
+        </h2>
+        {
+          subheading && (
+            <p class="mt-3 text-muted-foreground text-base">{subheading}</p>
+          )
+        }
+      </div>
+
+      {
+        hasItems && (
+          <div class="space-y-4">
+            {items.map((item) => (
+              <details class="group rounded-xl border border-border bg-card/50 p-6 [&_svg]:open:rotate-180 transition-all">
+                <summary class="flex cursor-pointer items-center justify-between font-semibold text-lg text-foreground list-none select-none">
+                  <span>{item.question}</span>
+                  <span class="ml-4 shrink-0 transition-transform duration-200">
+                    <svg
+                      class="size-5 text-muted-foreground"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+                <p class="mt-4 text-sm text-muted-foreground leading-relaxed border-t border-border/50 pt-4">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

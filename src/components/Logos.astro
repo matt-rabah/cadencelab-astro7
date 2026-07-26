@@ -1,0 +1,71 @@
+---
+// src/components/Logos.astro
+import { cn } from "@/lib/utils";
+
+interface LogoItem {
+  name: string;
+  subtitle?: string;
+  href?: string;
+}
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  logos?: LogoItem[];
+  className?: string;
+}
+
+const {
+  heading = "Workflows & Systems We Audit",
+  subheading = "Diagnosing friction across enterprise customer platforms and cross-functional handoffs.",
+  logos = [
+    { name: "Salesforce CRM", subtitle: "Pipeline & Data Hygiene" },
+    { name: "HubSpot", subtitle: "Lifecycle Marketing" },
+    { name: "Zendesk", subtitle: "Support & SLA Escalation" },
+    { name: "Gainsight", subtitle: "Onboarding & CS Readiness" },
+    { name: "Custom AI Gateways", subtitle: "AI-to-Human Routing" },
+    { name: "Slack / Teams", subtitle: "Cross-Functional Alerts" },
+  ],
+  className = "",
+} = Astro.props;
+
+// Safe frontmatter boolean check to avoid TS parser errors in templates
+const hasLogos = Array.isArray(logos) && logos.length > 0;
+---
+
+<section class={cn("py-16 border-b border-border bg-background/50", className)}>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center text-center max-w-4xl mx-auto">
+      <h2
+        class="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+        {heading}
+      </h2>
+      {
+        subheading && (
+          <p class="mt-2 text-sm text-muted-foreground md:text-base">
+            {subheading}
+          </p>
+        )
+      }
+
+      {
+        hasLogos && (
+          <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 w-full">
+            {logos.map((logo) => (
+              <div class="flex flex-col items-center justify-center p-3.5 rounded-lg border border-border/80 bg-card/60 hover:border-primary/50 transition-colors">
+                <span class="font-medium text-xs text-foreground text-center">
+                  {logo.name}
+                </span>
+                {logo.subtitle && (
+                  <span class="text-[10px] text-muted-foreground mt-1 text-center line-clamp-1">
+                    {logo.subtitle}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

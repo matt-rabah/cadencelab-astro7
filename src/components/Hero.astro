@@ -1,205 +1,155 @@
 ---
 // src/components/Hero.astro
+import { Button } from "@/components/ui/button";
+
+interface TabItem {
+  title: string;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+}
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
+  primaryCta?: { text: string; url: string };
+  secondaryCta?: { text: string; url: string };
+  tabs?: TabItem[];
+  className?: string;
+}
+
+const {
+  eyebrow = "Customer Experience Operating Systems",
+  heading = "Stop customer issues from becoming lost revenue.",
+  description = "Most customer-facing AI projects don't fail because of the model—they fail because the workflow, ownership, and measurement never worked. Cadence Lab diagnoses onboarding drift, lifecycle risk, and unreliable CRM workflows to turn evidence into practical operating change.",
+  primaryCta = { text: "Start a Fit Check", url: "/fit-check/" },
+  secondaryCta = { text: "Review Diagnostic Offers", url: "#diagnostics" },
+  tabs = [
+    {
+      title: "CX Diagnostics",
+      description:
+        "Map touchpoints, handoffs, and friction to output a sequenced decision brief.",
+      image: {
+        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-1-16x9.png",
+        alt: "CX Systems Diagnostic Dashboard",
+      },
+    },
+    {
+      title: "Lifecycle Risk",
+      description:
+        "Identify onboarding drift and quiet accounts before renewal windows close.",
+      image: {
+        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-2-16x9.png",
+        alt: "Lifecycle Risk Monitoring",
+      },
+    },
+    {
+      title: "CRM Workflows",
+      description:
+        "Clean up weak signals, process gaps, and misaligned decision rights.",
+      image: {
+        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-3-16x9.png",
+        alt: "CRM Workflow Audit Visualizer",
+      },
+    },
+    {
+      title: "AI Readiness",
+      description:
+        "Evaluate process readiness, trust, and human oversight for AI adoption.",
+      image: {
+        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-4-16x9.png",
+        alt: "AI Service Readiness Assessment",
+      },
+    },
+  ],
+  className = "",
+} = Astro.props;
+
+// Safe frontmatter boolean check to prevent TS template parser errors
+const hasTabs = Array.isArray(tabs) && tabs.length > 0;
+const activeTab = hasTabs ? tabs[0] : null;
 ---
 
-<section class="hero-section" aria-labelledby="hero-title">
-  <div class="hero-container">
-    <div class="hero-content">
-      <p class="hero-eyebrow">Customer experience systems</p>
-
-      <h1 id="hero-title" class="hero-title">
-        Stop customer issues from becoming lost revenue{" "}
-        <span class="hero-accent">lost revenue.</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        Most customer-facing AI projects don't fail because of the model. They
-        fail because the workflow, ownership, and measurement around it never
-        worked. We help teams fix that.
-      </p>
-
-      <div class="hero-actions">
-        <a href="/fit-check/" class="hero-button hero-button-primary">
-          Start a fit check
-        </a>
-
-        <a href="#framework" class="hero-button hero-button-secondary">
-          Explore the adoption framework
-        </a>
+<section
+  class={`overflow-hidden py-16 md:py-24 bg-background text-foreground ${className}`}
+  aria-labelledby="hero-title">
+  <div class="container mx-auto px-4">
+    <div class="border-x border-border py-12 lg:py-16">
+      <div class="relative mx-auto max-w-4xl px-6 text-center">
+        <p
+          class="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+          {eyebrow}
+        </p>
+        <h1
+          id="hero-title"
+          class="mx-auto max-w-4xl text-3xl font-bold tracking-tight text-balance md:text-5xl lg:text-6xl text-foreground">
+          {heading}
+        </h1>
+        <p
+          class="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg leading-relaxed">
+          {description}
+        </p>
+        <div
+          class="mx-auto mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          {
+            primaryCta && (
+              <Button
+                size="lg"
+                render={<a href={primaryCta.url} />}
+                nativeButton={false}
+                className="w-full sm:w-auto"
+              >
+                {primaryCta.text}
+              </Button>
+            )
+          }
+          {
+            secondaryCta && (
+              <Button
+                size="lg"
+                variant="outline"
+                render={<a href={secondaryCta.url} />}
+                nativeButton={false}
+                className="w-full sm:w-auto"
+              >
+                {secondaryCta.text}
+              </Button>
+            )
+          }
+        </div>
       </div>
+
+      {
+        hasTabs && activeTab && (
+          <div class="mt-12 md:mt-16 lg:mt-20 px-4 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+              {tabs.map((tab, i) => (
+                <div class="p-4 rounded-lg border border-border bg-card/50 text-left hover:border-primary/50 transition-colors">
+                  <span class="text-xs font-mono text-muted-foreground block mb-1">
+                    0{i + 1}
+                  </span>
+                  <h3 class="font-semibold text-foreground text-sm mb-1">
+                    {tab.title}
+                  </h3>
+                  <p class="text-xs text-muted-foreground line-clamp-2">
+                    {tab.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div class="relative rounded-xl border border-border overflow-hidden shadow-2xl">
+              <img
+                src={activeTab.image.src}
+                alt={activeTab.image.alt}
+                class="aspect-16/10 w-full object-cover object-top"
+              />
+            </div>
+          </div>
+        )
+      }
     </div>
   </div>
 </section>
-
-<style>
-  .hero-section {
-    width: 100%;
-    padding-block: clamp(5rem, 11vw, 9rem);
-    background: var(--color-surface);
-    color: var(--color-text);
-  }
-
-  .hero-container {
-    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
-    margin-inline: auto;
-  }
-
-  .hero-content {
-    display: flex;
-    max-width: 62rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: clamp(1.5rem, 3vw, 2rem);
-  }
-
-  .hero-eyebrow {
-    margin: 0;
-    color: var(--color-blue);
-    font-family: var(--font-sans);
-    font-size: var(--fs-eyebrow);
-    font-style: normal;
-    font-weight: var(--fw-medium);
-    line-height: 1.4;
-    letter-spacing: var(--ls-eyebrow);
-    font-feature-settings: var(--fea-eyebrow);
-    text-transform: uppercase;
-  }
-
-  .hero-title {
-    max-width: 20ch;
-    margin: 0;
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-size: var(--fs-display);
-    font-weight: var(--fw-semibold);
-    line-height: 1.08;
-    letter-spacing: -0.005em;
-    font-feature-settings: var(--fea-graphik);
-    text-wrap: balance;
-  }
-
-  .hero-accent {
-    color: var(--color-blue);
-  }
-
-  .hero-subtitle {
-    max-width: var(--measure-ui);
-    margin: 0;
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-body-ui);
-    font-style: normal;
-    font-weight: var(--fw-regular);
-    line-height: var(--lh-ui);
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-wrap: pretty;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.875rem;
-    margin-top: 0.5rem;
-  }
-
-  .hero-button {
-    display: inline-flex;
-    width: fit-content;
-    min-height: 3rem;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 1.25rem;
-    border: 1px solid transparent;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
-    font-size: var(--fs-cta);
-    font-style: normal;
-    font-weight: var(--fw-medium);
-    line-height: 1.2;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-align: center;
-    text-decoration: none;
-    transition:
-      background-color var(--transition-fast),
-      border-color var(--transition-fast),
-      color var(--transition-fast),
-      transform var(--transition-fast);
-  }
-
-  .hero-button:hover {
-    text-decoration: none;
-  }
-
-  .hero-button:active {
-    transform: translateY(1px);
-  }
-
-  .hero-button-primary {
-    border-color: var(--color-ink);
-    background: var(--color-ink);
-    color: var(--color-light);
-  }
-
-  .hero-button-primary:hover {
-    border-color: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
-    background: color-mix(in srgb, var(--color-ink) 86%, var(--color-light));
-    color: var(--color-light);
-  }
-
-  .hero-button-secondary {
-    border-color: var(--color-border-strong);
-    background: transparent;
-    color: var(--color-ink);
-  }
-
-  .hero-button-secondary:hover {
-    border-color: var(--color-ink);
-    background: var(--color-surface-pure);
-    color: var(--color-ink);
-  }
-
-  .hero-button:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus);
-    outline-offset: var(--focus-ring-offset);
-  }
-
-  @media (max-width: 40rem) {
-    .hero-section {
-      padding-block: clamp(4rem, 18vw, 6rem);
-    }
-
-    .hero-title {
-      max-width: 20ch;
-    }
-
-    .hero-subtitle {
-      max-width: 36rem;
-    }
-
-    .hero-actions {
-      width: 100%;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.75rem;
-    }
-
-    .hero-button {
-      width: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-button {
-      transition: none;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .hero-button {
-      border-color: ButtonText;
-    }
-  }
-</style>

@@ -1,0 +1,142 @@
+---
+// src/components/FitCheckForm.astro
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  badge?: string;
+  heading?: string;
+  description?: string;
+  benefits?: string[];
+  className?: string;
+}
+
+const {
+  badge = "Fit Check",
+  heading = "Decide whether your problem is ready for a diagnostic",
+  description = "Share the teams, systems, and operating friction involved. We assess fit directly and won't recommend a diagnostic unless there is a clear path to value.",
+  benefits = [
+    "Direct assessment of whether a diagnostic is right for your team.",
+    "Zero high-pressure sales follow-ups or spam.",
+    "Tailored recommendations on cross-functional alignment.",
+  ],
+  className = "",
+} = Astro.props;
+
+const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
+---
+
+<section class={cn("py-20 bg-background", className)} id="fit-check">
+  <div class="container mx-auto px-4">
+    <div
+      class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8 max-w-6xl mx-auto items-start">
+      <div class="flex flex-col gap-6">
+        <div>
+          <span
+            class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-primary uppercase bg-muted rounded-full mb-4">
+            {badge}
+          </span>
+          <h2
+            class="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            {heading}
+          </h2>
+          <p class="mt-4 text-muted-foreground text-base leading-relaxed">
+            {description}
+          </p>
+        </div>
+
+        {
+          hasBenefits && (
+            <ul class="flex flex-col gap-4 mt-2">
+              {benefits.map((benefit) => (
+                <li class="flex items-start gap-3">
+                  <span class="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary mt-0.5">
+                    ✓
+                  </span>
+                  <span class="text-sm font-medium text-foreground">
+                    {benefit}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+
+      <div
+        class="rounded-xl border border-border bg-card/60 p-6 sm:p-8 shadow-sm">
+        <form class="flex flex-col gap-5">
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <Label htmlFor="firstName">First Name</Label>
+              <Input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="Alex"
+                required
+                className="bg-background"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <Label htmlFor="lastName">Last Name</Label>
+              <Input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Smith"
+                required
+                className="bg-background"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <Label htmlFor="email">Work Email</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="alex@company.com"
+              required
+              className="bg-background"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <Label htmlFor="company">Company / Organization</Label>
+            <Input
+              id="company"
+              name="company"
+              type="text"
+              placeholder="Acme Corp"
+              required
+              className="bg-background"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <Label htmlFor="message"
+              >Describe your operating problem & systems involved</Label
+            >
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="e.g. Onboarding handoffs between Sales and CS are losing context in Salesforce..."
+              rows={4}
+              required
+              className="bg-background"
+            />
+          </div>
+
+          <Button type="submit" size="lg" className="w-full mt-2">
+            Submit Fit Check Request
+          </Button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
