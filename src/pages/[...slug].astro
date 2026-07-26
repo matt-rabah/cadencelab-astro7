@@ -71,8 +71,7 @@ const canonicalURL = `/${slug}/`;
 <Layout
   title={`${title} | Cadence Lab`}
   description={description}
-  canonicalURL={canonicalURL}
->
+  canonicalURL={canonicalURL}>
   <NavHeader />
 
   <main id="main-content" class="content-page">
@@ -82,8 +81,7 @@ const canonicalURL = `/${slug}/`;
           page.category && (
             <p
               class="content-eyebrow"
-              data-tina-field={tinaField(page, "category")}
-            >
+              data-tina-field={tinaField(page, "category")}>
               {page.category}
             </p>
           )
@@ -97,8 +95,7 @@ const canonicalURL = `/${slug}/`;
           page.subtitle && (
             <p
               class="content-subtitle"
-              data-tina-field={tinaField(page, "subtitle")}
-            >
+              data-tina-field={tinaField(page, "subtitle")}>
               {page.subtitle}
             </p>
           )
