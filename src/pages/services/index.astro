@@ -986,8 +986,8 @@ const evidenceStandards = [
   .evidence-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-top: var(--border-width) solid rgb(252 254 255 / 28%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 28%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .evidence-grid li {
@@ -996,7 +996,7 @@ const evidenceStandards = [
   }
 
   .evidence-grid li + li {
-    border-left: var(--border-width) solid rgb(252 254 255 / 28%);
+    border-left: var(--border-width) solid var(--color-border-inverse);
   }
 
   .evidence-number {
@@ -1129,7 +1129,7 @@ const evidenceStandards = [
     }
 
     .evidence-grid li + li {
-      border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+      border-top: var(--border-width) solid var(--color-border-inverse);
       border-left: 0;
     }
   }
