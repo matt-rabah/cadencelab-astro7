@@ -1,9 +1,12 @@
 ---
 // src/components/Logos.astro
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { cn } from "@/lib/utils";
 
 interface LogoItem {
   name: string;
+  src?: string;
 }
 
 interface Props {
@@ -15,15 +18,23 @@ interface Props {
 const {
   heading = "Enterprise systems and platforms mapped in diagnostics",
   logos = [
-    { name: "Salesforce" },
-    { name: "HubSpot" },
-    { name: "Zendesk" },
-    { name: "ServiceNow" },
-    { name: "Jira" },
-    { name: "Snowflake" },
+    { name: "Salesforce", src: "/brand/platforms/salesforce.svg" },
+    { name: "HubSpot", src: "/brand/platforms/hubspot.svg" },
+    { name: "Zendesk", src: "/brand/platforms/zendesk.svg" },
+    { name: "Gainsight", src: "/brand/platforms/gainsight.svg" },
+    { name: "Qualtrics", src: "/brand/platforms/qualtrics.svg" },
+    { name: "ServiceNow", src: "/brand/platforms/servicenow.svg" },
   ],
   className = "",
 } = Astro.props;
+
+const publicDirectory = join(process.cwd(), "public");
+const availableLogos = logos.map((item) => ({
+  ...item,
+  hasAsset:
+    typeof item.src === "string" &&
+    existsSync(join(publicDirectory, item.src.replace(/^\//, ""))),
+}));
 ---
 
 <section
@@ -36,15 +47,38 @@ const {
       <h2 id="platform-title">{heading}</h2>
     </div>
 
-    <ul role="list">
-      {
-        logos.map((item) => (
-          <li>
-            <span>{item.name}</span>
-          </li>
-        ))
-      }
-    </ul>
+    <div
+      class="logo-rail"
+      role="group"
+      tabindex="0"
+      aria-label="Platform logos"
+    >
+      <ul role="list">
+        {
+          availableLogos.map((item) => (
+            <li>
+              {item.hasAsset ? (
+                <img
+                  class:list={{
+                    "logo-adapts-to-dark": [
+                      "Gainsight",
+                      "Qualtrics",
+                      "Zendesk",
+                    ].includes(item.name),
+                  }}
+                  src={item.src}
+                  alt={item.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <span>{item.name}</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -91,26 +125,54 @@ const {
     text-transform: uppercase;
   }
 
+  .logo-rail {
+    min-width: 0;
+    padding-block-end: 0.625rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 0.125rem;
+    scroll-snap-type: inline proximity;
+    scrollbar-color: var(--color-border-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  .logo-rail:focus-visible {
+    border-radius: var(--radius-sm);
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
   ul {
-    display: grid;
+    display: flex;
+    width: max-content;
+    min-width: 100%;
     margin: 0;
     padding: 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-block-start: var(--border-width) solid var(--color-border-strong);
-    border-inline-start: var(--border-width) solid var(--color-border-strong);
+    gap: clamp(0.75rem, 2vw, 1.25rem);
     list-style: none;
   }
 
   li {
-    min-width: 0;
-    padding: 0.9rem 1rem;
-    border-inline-end: var(--border-width) solid var(--color-border-strong);
-    border-block-end: var(--border-width) solid var(--color-border-strong);
-    background: color-mix(
-      in oklab,
-      var(--color-blue) 2%,
-      var(--color-surface-pure)
-    );
+    display: grid;
+    width: clamp(10rem, 16vw, 13rem);
+    min-height: 5rem;
+    flex: 0 0 auto;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    scroll-snap-align: start;
+    place-items: center;
+  }
+
+  li img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 2.5rem;
+  }
+
+  :global(:root[data-theme="dark"]) .logo-adapts-to-dark {
+    filter: brightness(0) invert(1);
   }
 
   li span {
@@ -126,15 +188,19 @@ const {
       grid-template-columns: 1fr;
     }
 
-    ul {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    li {
+      width: min(11rem, 68vw);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme])) .logo-adapts-to-dark {
+      filter: brightness(0) invert(1);
     }
   }
 
   @media (forced-colors: active) {
-    .platform-context,
-    ul,
-    li {
+    .platform-context {
       border-color: CanvasText;
       background: Canvas;
     }
