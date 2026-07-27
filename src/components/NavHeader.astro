@@ -124,7 +124,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         href="/"
         class="brand-link"
         aria-label="Cadence Lab home"
-        aria-current={isCurrentPage("/") ? "page" : undefined}>
+        aria-current={isCurrentPage("/") ? "page" : undefined}
+      >
         <img
           src="/brand/cadencelab-wordmark-light.svg"
           alt="Cadence Lab."
@@ -164,7 +165,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2">
+                stroke-width="2"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -178,16 +180,57 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         <nav class="utility-navigation" aria-label="Utility">
           <ul role="list">
             <li>
+              <button
+                class="theme-toggle"
+                type="button"
+                data-theme-toggle
+                aria-label="Change color theme"
+                aria-pressed="false"
+              >
+                <svg
+                  class="theme-icon theme-icon-moon"
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.5 12.5A7 7 0 0 1 7.5 3.5 7 7 0 1 0 16.5 12.5Z"
+                  ></path>
+                </svg>
+                <svg
+                  class="theme-icon theme-icon-sun"
+                  aria-hidden="true"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                >
+                  <circle cx="10" cy="10" r="3.25"></circle>
+                  <path
+                    stroke-linecap="round"
+                    d="M10 2v1.5M10 16.5V18M2 10h1.5M16.5 10H18M4.35 4.35l1.05 1.05M14.6 14.6l1.05 1.05M15.65 4.35 14.6 5.4M5.4 14.6l-1.05 1.05"
+                  ></path>
+                </svg>
+                <span data-theme-toggle-label>Theme</span>
+              </button>
+            </li>
+            <li>
               <a
                 href="/support/"
-                aria-current={isCurrentPage("/support/") ? "page" : undefined}>
+                aria-current={isCurrentPage("/support/") ? "page" : undefined}
+              >
                 Support
               </a>
             </li>
             <li>
               <a
                 href="/contact/"
-                aria-current={isCurrentPage("/contact/") ? "page" : undefined}>
+                aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+              >
                 Contact
               </a>
             </li>
@@ -204,7 +247,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 class="primary-link"
                 aria-current={isCurrentSection("/fit-check/")
                   ? "page"
-                  : undefined}>
+                  : undefined}
+              >
                 Fit Check™
               </a>
             </li>
@@ -215,7 +259,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 class="primary-link"
                 aria-current={isCurrentSection("/services/")
                   ? "page"
-                  : undefined}>
+                  : undefined}
+              >
                 Services
               </a>
             </li>
@@ -227,12 +272,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   data-navigation-group
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }>
+                  }
+                >
                   <button
                     class="navigation-trigger"
                     type="button"
                     aria-expanded="false"
-                    aria-controls={group.menuId}>
+                    aria-controls={group.menuId}
+                  >
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
                       <span class="visually-hidden">, current section</span>
@@ -243,7 +290,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2">
+                      stroke-width="2"
+                    >
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -259,12 +307,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       { "mega-menu-compact": group.compact },
                     ]}
                     data-mega-menu
-                    hidden>
+                    hidden
+                  >
                     <div
                       class:list={[
                         "mega-menu-inner",
                         { "mega-menu-inner-compact": group.compact },
-                      ]}>
+                      ]}
+                    >
                       <div class="featured-column">
                         <p class="menu-label">{group.eyebrow}</p>
                         <p class="menu-heading">{group.heading}</p>
@@ -283,7 +333,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                             "menu-link-list",
                             { "menu-link-grid": !group.compact },
                           ]}
-                          role="list">
+                          role="list"
+                        >
                           {group.items.map((item) => (
                             <li>
                               <a
@@ -292,7 +343,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                                   isCurrentSection(item.href)
                                     ? "page"
                                     : undefined
-                                }>
+                                }
+                              >
                                 <span class="menu-link-label">
                                   {item.label}
                                 </span>
@@ -315,7 +367,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               <a
                 href="/blog/"
                 class="primary-link"
-                aria-current={isCurrentSection("/blog/") ? "page" : undefined}>
+                aria-current={isCurrentSection("/blog/") ? "page" : undefined}
+              >
                 Insights
               </a>
             </li>
@@ -327,12 +380,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   data-navigation-group
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }>
+                  }
+                >
                   <button
                     class="navigation-trigger"
                     type="button"
                     aria-expanded="false"
-                    aria-controls={group.menuId}>
+                    aria-controls={group.menuId}
+                  >
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
                       <span class="visually-hidden">, current section</span>
@@ -343,7 +398,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2">
+                      stroke-width="2"
+                    >
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -356,7 +412,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                     id={group.menuId}
                     class="mega-menu mega-menu-compact"
                     data-mega-menu
-                    hidden>
+                    hidden
+                  >
                     <div class="mega-menu-inner mega-menu-inner-compact">
                       <div class="featured-column">
                         <p class="menu-label">{group.eyebrow}</p>
@@ -375,7 +432,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                                   isCurrentSection(item.href)
                                     ? "page"
                                     : undefined
-                                }>
+                                }
+                              >
                                 <span class="menu-link-label">
                                   {item.label}
                                 </span>
@@ -398,7 +456,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         <a
           href="/contact/"
           class="header-cta"
-          aria-current={isCurrentPage("/contact/") ? "page" : undefined}>
+          aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+        >
           Start a conversation
         </a>
       </div>
@@ -412,14 +471,16 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-navigation"
-      data-mobile-menu-trigger>
+      data-mobile-menu-trigger
+    >
       <svg
         class="menu-icon menu-icon-open"
         aria-hidden="true"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2">
+        stroke-width="2"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -432,7 +493,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2">
+        stroke-width="2"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -444,7 +506,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       href="/"
       class="mobile-brand-link"
       aria-label="Cadence Lab home"
-      aria-current={isCurrentPage("/") ? "page" : undefined}>
+      aria-current={isCurrentPage("/") ? "page" : undefined}
+    >
       <img
         src="/brand/cadencelab-wordmark-light.svg"
         alt="Cadence Lab."
@@ -460,7 +523,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     <a
       href="/fit-check/"
       class="mobile-cta"
-      aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}>
+      aria-current={isCurrentSection("/fit-check/") ? "page" : undefined}
+    >
       Fit Check™
     </a>
   </div>
@@ -470,7 +534,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     class="mobile-navigation"
     data-mobile-navigation
     hidden
-    inert>
+    inert
+  >
     <div class="mobile-navigation-inner">
       <search class="mobile-search">
         <form class="mobile-search-form" action="/search/" method="get">
@@ -491,7 +556,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2">
+              stroke-width="2"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -510,7 +576,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               class="mobile-primary-link"
               aria-current={isCurrentSection("/fit-check/")
                 ? "page"
-                : undefined}>
+                : undefined}
+            >
               Fit Check™
             </a>
           </li>
@@ -519,9 +586,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             <a
               href="/services/"
               class="mobile-primary-link"
-              aria-current={isCurrentSection("/services/")
-                ? "page"
-                : undefined}>
+              aria-current={isCurrentSection("/services/") ? "page" : undefined}
+            >
               Services
             </a>
           </li>
@@ -533,7 +599,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   class="mobile-navigation-group"
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }>
+                  }
+                >
                   <summary>
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
@@ -545,7 +612,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2">
+                      stroke-width="2"
+                    >
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -561,7 +629,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                           href={item.href}
                           aria-current={
                             isCurrentSection(item.href) ? "page" : undefined
-                          }>
+                          }
+                        >
                           <span>{item.label}</span>
                           {item.status && (
                             <span class="mobile-menu-status">
@@ -581,7 +650,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             <a
               href="/blog/"
               class="mobile-primary-link"
-              aria-current={isCurrentSection("/blog/") ? "page" : undefined}>
+              aria-current={isCurrentSection("/blog/") ? "page" : undefined}
+            >
               Insights
             </a>
           </li>
@@ -593,7 +663,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                   class="mobile-navigation-group"
                   data-current-section={
                     groupIsCurrent(group) ? "true" : undefined
-                  }>
+                  }
+                >
                   <summary>
                     <span>{group.label}</span>
                     {groupIsCurrent(group) && (
@@ -605,7 +676,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                       viewBox="0 0 20 20"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2">
+                      stroke-width="2"
+                    >
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -621,7 +693,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                           href={item.href}
                           aria-current={
                             isCurrentSection(item.href) ? "page" : undefined
-                          }>
+                          }
+                        >
                           <span>{item.label}</span>
                           {item.status && (
                             <span class="mobile-menu-status">
@@ -641,6 +714,44 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
       <nav class="mobile-utility-navigation" aria-label="Mobile utility">
         <ul role="list">
+          <li class="mobile-theme-item">
+            <button
+              class="theme-toggle mobile-theme-toggle"
+              type="button"
+              data-theme-toggle
+              aria-label="Change color theme"
+              aria-pressed="false"
+            >
+              <svg
+                class="theme-icon theme-icon-moon"
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 12.5A7 7 0 0 1 7.5 3.5 7 7 0 1 0 16.5 12.5Z"></path>
+              </svg>
+              <svg
+                class="theme-icon theme-icon-sun"
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+              >
+                <circle cx="10" cy="10" r="3.25"></circle>
+                <path
+                  stroke-linecap="round"
+                  d="M10 2v1.5M10 16.5V18M2 10h1.5M16.5 10H18M4.35 4.35l1.05 1.05M14.6 14.6l1.05 1.05M15.65 4.35 14.6 5.4M5.4 14.6l-1.05 1.05"
+                ></path>
+              </svg>
+              <span data-theme-toggle-label>Theme</span>
+            </button>
+          </li>
           <li><a href="/support/">Support</a></li>
           <li><a href="/contact/">Contact</a></li>
         </ul>
@@ -925,7 +1036,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 </script>
 
 <style>
-  /* Dynamic Wordmark Visibility (System Settings, Manual Light/Dark Themes) */
+  /* Wordmark visibility follows the resolved document theme. */
   .wordmark-dark {
     display: none !important;
   }
@@ -933,25 +1044,19 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     display: block !important;
   }
 
-  /* Automatic OS System Settings Preference */
   @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme="light"])) .wordmark-dark,
-    :global(html:not(.light)) .wordmark-dark {
+    :global(:root:not([data-theme])) .wordmark-dark {
       display: block !important;
     }
-    :global(:root:not([data-theme="light"])) .wordmark-light,
-    :global(html:not(.light)) .wordmark-light {
+    :global(:root:not([data-theme])) .wordmark-light {
       display: none !important;
     }
   }
 
-  /* Explicit Manual Dark Mode Override Classes */
-  :global(:root[data-theme="dark"]) .wordmark-dark,
-  :global(html.dark) .wordmark-dark {
+  :global(:root[data-theme="dark"]) .wordmark-dark {
     display: block !important;
   }
-  :global(:root[data-theme="dark"]) .wordmark-light,
-  :global(html.dark) .wordmark-light {
+  :global(:root[data-theme="dark"]) .wordmark-light {
     display: none !important;
   }
 
@@ -1114,6 +1219,47 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     gap: var(--space-6, 1.5rem);
     margin: 0;
     padding: 0;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    min-inline-size: 3rem;
+    min-block-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.6rem;
+    border: var(--border-width, 1px) solid var(--color-border);
+    border-radius: var(--radius-sm, 0.125rem);
+    background: transparent;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      border-color var(--transition-fast),
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .theme-icon {
+    inline-size: 1rem;
+    block-size: 1rem;
+    flex: 0 0 auto;
+  }
+
+  .theme-icon-sun {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) .theme-icon-moon {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) .theme-icon-sun {
+    display: block;
   }
 
   .utility-navigation a {
@@ -1387,6 +1533,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   }
 
   @media (hover: hover) {
+    .theme-toggle:hover {
+      border-color: var(--color-blue);
+      background: var(--color-surface-subtle);
+      color: var(--color-blue);
+    }
+
     .utility-navigation a:hover {
       color: #1823c9;
       text-decoration-color: currentColor;
@@ -1623,6 +1775,15 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       list-style: none;
     }
 
+    .mobile-theme-item {
+      grid-column: 1 / -1;
+    }
+
+    .mobile-theme-toggle {
+      inline-size: 100%;
+      min-block-size: 3rem;
+    }
+
     .mobile-utility-navigation a {
       display: inline-flex;
       min-block-size: 3rem;
@@ -1650,8 +1811,16 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     .header-cta,
     .menu-link-list a,
     .mobile-cta,
-    .mobile-expand-icon {
+    .mobile-expand-icon,
+    .theme-toggle {
       transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .theme-toggle {
+      border-color: ButtonBorder;
+      color: ButtonText;
     }
   }
 </style>
