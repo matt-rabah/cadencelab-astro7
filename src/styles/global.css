@@ -76,6 +76,7 @@
   /* Non-Harsh Soft Dividers (Deloitte Style) */
   --color-border: rgba(0, 0, 0, 0.08); /* Soft 8% opacity divider line */
   --color-border-strong: rgba(0, 0, 0, 0.16);
+  --color-border-inverse: rgb(255 255 255 / 28%);
   --color-focus: var(--color-blue);
   --color-error: #9f1c12;
   --color-success: #11683f;
@@ -546,6 +547,7 @@ select:focus-visible {
   --color-text-inverse-muted: #3f474f;
   --color-border: rgb(244 245 247 / 14%);
   --color-border-strong: rgb(244 245 247 / 28%);
+  --color-border-inverse: rgb(0 0 0 / 22%);
   --color-focus: #b7bdff;
   --color-error: #ff958a;
   --color-success: #77d3a5;
@@ -590,6 +592,7 @@ select:focus-visible {
     --color-text-inverse-muted: #3f474f;
     --color-border: rgb(244 245 247 / 14%);
     --color-border-strong: rgb(244 245 247 / 28%);
+    --color-border-inverse: rgb(0 0 0 / 22%);
     --color-focus: #b7bdff;
     --color-error: #ff958a;
     --color-success: #77d3a5;
