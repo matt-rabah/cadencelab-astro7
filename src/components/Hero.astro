@@ -1,21 +1,11 @@
 ---
 // src/components/Hero.astro
-interface TabItem {
-  title: string;
-  description: string;
-  image: {
-    src: string;
-    alt: string;
-  };
-}
-
 interface Props {
   eyebrow?: string;
   heading?: string;
   description?: string;
   primaryCta?: { text: string; url: string };
   secondaryCta?: { text: string; url: string };
-  tabs?: TabItem[];
   className?: string;
 }
 
@@ -25,159 +15,344 @@ const {
   description = "Cadence Lab helps companies fix onboarding drift, quiet accounts, unreliable CRM signals, and service handoffs, then build the conditions needed for effective AI adoption.",
   primaryCta = { text: "Start a Fit Check™", url: "/fit-check/" },
   secondaryCta = { text: "Review diagnostic offers", url: "#diagnostics" },
-  tabs = [
-    {
-      title: "CX Diagnostics",
-      description:
-        "Map touchpoints, handoffs, and friction to output a sequenced decision brief.",
-      image: {
-        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-1-16x9.png",
-        alt: "CX Systems Diagnostic Dashboard",
-      },
-    },
-    {
-      title: "Lifecycle Risk",
-      description:
-        "Identify onboarding drift and quiet accounts before renewal windows close.",
-      image: {
-        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-2-16x9.png",
-        alt: "Lifecycle Risk Monitoring",
-      },
-    },
-    {
-      title: "CRM Workflows",
-      description:
-        "Clean up weak signals, process gaps, and misaligned decision rights.",
-      image: {
-        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-3-16x9.png",
-        alt: "CRM Workflow Audit Visualizer",
-      },
-    },
-    {
-      title: "AI Readiness",
-      description:
-        "Evaluate process readiness, trust, and human oversight for AI adoption.",
-      image: {
-        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/saas-hero/saas-hero-4-16x9.png",
-        alt: "AI Service Readiness Assessment",
-      },
-    },
-  ],
   className = "",
 } = Astro.props;
 
-const hasTabs = Array.isArray(tabs) && tabs.length > 0;
-const activeTab = hasTabs ? tabs[0] : null;
+const operatingSignals = [
+  {
+    number: "01",
+    label: "Diagnose",
+    description: "Friction, lifecycle risk, and signal gaps",
+  },
+  {
+    number: "02",
+    label: "Rebuild",
+    description: "Ownership, handoffs, and CRM workflows",
+  },
+  {
+    number: "03",
+    label: "Prepare",
+    description: "Human oversight, adoption, and measurement",
+  },
+];
 ---
 
-<section
-  class={`py-20 md:py-32 bg-background text-foreground border-b border-black/10 ${className}`}
-  aria-labelledby="hero-title">
-  <div class="container mx-auto px-6 max-w-6xl">
-    <div
-      class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
-      <!-- Left Column: Executive Headline & Standardized CTAs -->
-      <div class="lg:col-span-8 flex flex-col items-start text-left">
-        <span
-          class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
-          {eyebrow}
-        </span>
+<section class:list={["hero", className]} aria-labelledby="hero-title">
+  <div class="hero-container">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">{eyebrow}</p>
+      <h1 id="hero-title">{heading}</h1>
+      <p class="hero-description">{description}</p>
 
-        <h1
-          id="hero-title"
-          class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black text-left leading-[1.1] text-balance">
-          {heading}
-        </h1>
-
-        <p
-          class="mt-8 text-base sm:text-lg text-[#4a5056] text-left leading-relaxed max-w-2xl font-normal">
-          {description}
-        </p>
-
-        <!-- Refined Executive Buttons -->
-        <div
-          class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-stretch sm:items-center">
-          {
-            primaryCta && (
-              <a
-                href={primaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-xs bg-black px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto no-underline!"
-                style="color: #ffffff !important;">
-                {primaryCta.text}
-              </a>
-            )
-          }
-          {
-            secondaryCta && (
-              <a
-                href={secondaryCta.url}
-                class="inline-flex h-12 items-center justify-center rounded-xs border border-black/20 bg-white px-8 text-sm font-semibold text-black transition-colors hover:bg-[#f8f9fa] hover:border-[#1823c9] hover:text-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 w-full sm:w-auto no-underline!">
-                {secondaryCta.text}
-              </a>
-            )
-          }
-        </div>
-      </div>
-
-      <!-- Right Column: System Telemetry Rail -->
-      <div
-        class="lg:col-span-4 w-full border-l border-black/10 pl-8 hidden lg:flex flex-col gap-8 pt-2">
-        <div class="space-y-2 text-left">
-          <span
-            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider block"
-            >01 / DIAGNOSE</span
-          >
-          <p class="text-xs text-[#4a5056] leading-relaxed">
-            Cross-functional friction, onboarding drift, and signal decay.
-          </p>
-        </div>
-        <div class="space-y-2 text-left">
-          <span
-            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider block"
-            >02 / REBUILD</span
-          >
-          <p class="text-xs text-[#4a5056] leading-relaxed">
-            Decision rights, CRM handoffs, and operational accountability.
-          </p>
-        </div>
-        <div class="space-y-2 text-left">
-          <span
-            class="text-xs font-mono text-[#1823c9] font-bold tracking-wider block"
-            >03 / PREPARE</span
-          >
-          <p class="text-xs text-[#4a5056] leading-relaxed">
-            Human oversight, AI guardrails, and sustainable adoption.
-          </p>
-        </div>
+      <div class="hero-actions" aria-label="Homepage actions">
+        {
+          primaryCta && (
+            <a class="button button-primary" href={primaryCta.url}>
+              {primaryCta.text}
+            </a>
+          )
+        }
+        {
+          secondaryCta && (
+            <a class="button button-secondary" href={secondaryCta.url}>
+              {secondaryCta.text}
+              <span aria-hidden="true">&#8595;</span>
+            </a>
+          )
+        }
       </div>
     </div>
 
-    <!-- Diagnostic Showcase Tabs -->
-    {
-      hasTabs && activeTab && (
-        <div class="mt-24 pt-16 border-t border-black/10">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {tabs.map((tab, i) => (
-              <div class="p-6 rounded-xs border border-black/10 bg-[#f8f9fa] text-left hover:border-[#1823c9]/40 transition-colors">
-                <span class="text-xs font-mono text-[#4a5056] block mb-2 font-semibold">
-                  0{i + 1}
-                </span>
-                <h3 class="font-bold text-black text-base mb-2">{tab.title}</h3>
-                <p class="text-xs text-[#4a5056] leading-relaxed">
-                  {tab.description}
-                </p>
+    <aside class="hero-system" aria-labelledby="hero-system-title">
+      <div class="hero-system-heading">
+        <span class="signal-dot" aria-hidden="true"></span>
+        <p id="hero-system-title">Operating sequence</p>
+      </div>
+
+      <ol>
+        {
+          operatingSignals.map((signal) => (
+            <li>
+              <p class="signal-number" aria-hidden="true">
+                {signal.number}
+              </p>
+              <div>
+                <h2>{signal.label}</h2>
+                <p>{signal.description}</p>
               </div>
-            ))}
-          </div>
-          <div class="relative rounded-xs border border-black/10 overflow-hidden shadow-sm">
-            <img
-              src={activeTab.image.src}
-              alt={activeTab.image.alt}
-              class="aspect-video w-full object-cover object-top"
-            />
-          </div>
-        </div>
-      )
-    }
+            </li>
+          ))
+        }
+      </ol>
+    </aside>
   </div>
 </section>
+
+<style>
+  .hero {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--color-blue) 5%, transparent),
+        transparent 42%
+      ),
+      var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .hero-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    align-items: end;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-eyebrow,
+  .hero-system-heading p,
+  .signal-number {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 17ch;
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    max-width: 63ch;
+    margin: 1.75rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+      border-color var(--transition-fast),
+      background-color var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-secondary {
+    border-color: var(--color-border-strong);
+    background: color-mix(
+      in oklab,
+      var(--color-blue) 3%,
+      var(--color-surface-pure)
+    );
+    color: var(--color-ink);
+  }
+
+  .hero-system {
+    overflow: clip;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-block-start: 0.25rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: color-mix(
+      in oklab,
+      var(--color-blue) 4%,
+      var(--color-surface-pure)
+    );
+  }
+
+  .hero-system-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.25rem 1.5rem;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #ffce31;
+  }
+
+  .hero-system ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-system li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .hero-system li:not(:last-child) {
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-number {
+    color: var(--color-text-muted);
+  }
+
+  .hero-system h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
+    line-height: 1.4;
+  }
+
+  .hero-system li div p {
+    margin: 0.35rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  :where(.button):focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button-primary:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--color-blue);
+      color: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 58rem) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 3rem;
+    }
+
+    .hero-system {
+      width: 100%;
+    }
+
+    .hero-system ol {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hero-system li {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-system li:not(:last-child) {
+      border-block-end: 0;
+      border-inline-end: var(--border-width) solid var(--color-border);
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .hero-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .hero-system ol {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-system li {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+
+    .hero-system li:not(:last-child) {
+      border-inline-end: 0;
+      border-block-end: var(--border-width) solid var(--color-border);
+    }
+  }
+
+  @media (pointer: coarse) {
+    .button {
+      min-height: 3rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .hero,
+    .hero-system,
+    .hero-system-heading,
+    .hero-system li {
+      border-color: CanvasText;
+    }
+
+    .hero,
+    .hero-system,
+    .button-secondary {
+      background: Canvas;
+    }
+
+    .signal-dot {
+      background: Highlight;
+    }
+  }
+</style>

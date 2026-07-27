@@ -6,6 +6,8 @@ interface StatItem {
   value: string;
   label: string;
   description: string;
+  href: string;
+  linkLabel: string;
 }
 
 interface Props {
@@ -26,24 +28,32 @@ const {
       label: "Diagnostic Brief",
       description:
         "Map touchpoints and cross-team boundaries to resolve conflicting explanations of friction.",
+      href: "/services/cx-systems-diagnostic/",
+      linkLabel: "Explore the systems diagnostic",
     },
     {
       value: "02 / Risk Review",
       label: "Lifecycle Risk",
       description:
         "Identify onboarding drift and quiet accounts before useful intervention windows close.",
+      href: "/services/lifecycle-risk-review/",
+      linkLabel: "Explore the lifecycle review",
     },
     {
       value: "03 / Workflow Audit",
       label: "CRM Workflows",
       description:
         "Eliminate process workarounds and clean up untrusted CRM activity signals.",
+      href: "/services/crm-workflow-audit/",
+      linkLabel: "Explore the CRM audit",
     },
     {
       value: "04 / AI Readiness",
       label: "Service Readiness",
       description:
         "Establish human-in-the-loop oversight and guardrails prior to AI deployment.",
+      href: "/services/ai-service-readiness-review/",
+      linkLabel: "Explore AI readiness",
     },
   ],
   className = "",
@@ -51,46 +61,279 @@ const {
 ---
 
 <section
-  class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
-    className,
-  )}
-  id="diagnostics">
-  <div class="container mx-auto px-6 max-w-6xl">
-    <!-- Left-aligned Header -->
-    <div class="max-w-3xl flex flex-col items-start text-left mb-16">
-      <span
-        class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
-        {eyebrow}
-      </span>
-      <h2
-        class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
-        {heading}
-      </h2>
-      <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
-        {subheading}
-      </p>
+  class={cn("diagnostics", className)}
+  id="diagnostics"
+  aria-labelledby="diagnostics-title"
+>
+  <div class="diagnostics-container">
+    <div class="diagnostics-intro">
+      <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id="diagnostics-title">{heading}</h2>
+      </div>
+      <p>{subheading}</p>
     </div>
 
-    <!-- Flat Corporate Grid with Soft Borders -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <ul class="diagnostic-list" role="list">
       {
         stats.map((stat) => (
-          <div class="p-6 rounded-xs border border-black/10 bg-[#f8f9fa] flex flex-col justify-between items-start text-left transition-colors hover:border-black/30">
-            <div>
-              <span class="text-xs font-mono font-bold text-[#1823c9] block mb-3">
-                {stat.value}
-              </span>
-              <h3 class="text-lg font-bold text-black mb-2 text-left">
-                {stat.label}
-              </h3>
-              <p class="text-xs text-[#4a5056] leading-relaxed text-left">
-                {stat.description}
-              </p>
-            </div>
-          </div>
+          <li>
+            <article>
+              <p class="diagnostic-number">{stat.value}</p>
+              <h3>{stat.label}</h3>
+              <p class="diagnostic-description">{stat.description}</p>
+              <a href={stat.href}>
+                <span>{stat.linkLabel}</span>
+                <span class="arrow" aria-hidden="true">
+                  &#8594;
+                </span>
+              </a>
+            </article>
+          </li>
         ))
       }
-    </div>
+    </ul>
+
+    <p class="scroll-hint">
+      Scroll to compare <span aria-hidden="true">&#8594;</span>
+    </p>
   </div>
 </section>
+
+<style>
+  .diagnostics {
+    padding-block: var(--section-space);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background: linear-gradient(
+      180deg,
+      var(--color-surface) 0%,
+      color-mix(in oklab, var(--color-blue) 3%, var(--color-surface-subtle))
+        100%
+    );
+  }
+
+  .diagnostics-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    gap: clamp(2.75rem, 6vw, 5rem);
+  }
+
+  .diagnostics-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.7fr);
+    align-items: end;
+    gap: clamp(2.5rem, 8vw, 7rem);
+  }
+
+  .eyebrow,
+  .diagnostic-number {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 24ch;
+    margin: 0.75rem 0 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .diagnostics-intro > p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .diagnostic-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.875rem, 2vw, 1.25rem);
+    list-style: none;
+  }
+
+  .diagnostic-list > li:nth-child(1) {
+    --diagnostic-accent: var(--color-blue);
+  }
+
+  .diagnostic-list > li:nth-child(2) {
+    --diagnostic-accent: var(--color-success);
+  }
+
+  .diagnostic-list > li:nth-child(3) {
+    --diagnostic-accent: #5940a8;
+  }
+
+  .diagnostic-list > li:nth-child(4) {
+    --diagnostic-accent: #9a4b00;
+  }
+
+  .diagnostic-list > li {
+    min-width: 0;
+    overflow: clip;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-block-start: 0.25rem solid var(--diagnostic-accent);
+    border-radius: var(--radius-lg);
+    background: color-mix(
+      in oklab,
+      var(--diagnostic-accent) 4%,
+      var(--color-surface-pure)
+    );
+  }
+
+  article {
+    display: flex;
+    height: 100%;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .diagnostic-number {
+    color: var(--color-text-muted);
+  }
+
+  h3 {
+    margin: 1.5rem 0 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h4);
+  }
+
+  .diagnostic-description {
+    max-width: 52ch;
+    margin: 0.75rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  a {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration-color: var(--diagnostic-accent);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.22em;
+    transition:
+      color var(--transition-fast),
+      gap var(--transition-fast);
+  }
+
+  .arrow {
+    color: var(--diagnostic-accent);
+    text-decoration: none;
+  }
+
+  .scroll-hint {
+    display: none;
+    margin: -1.75rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      gap: 0.8rem;
+      color: var(--diagnostic-accent);
+    }
+  }
+
+  @media (max-width: 54rem) {
+    .diagnostics-intro {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1.5rem;
+    }
+
+    .diagnostic-list {
+      grid-template-columns: none;
+      grid-auto-columns: minmax(17.5rem, 82%);
+      grid-auto-flow: column;
+      margin-inline: -0.25rem;
+      padding: 0.25rem 0.25rem 1rem;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-padding-inline: 0.25rem;
+      scroll-snap-type: inline mandatory;
+      scrollbar-color: var(--color-border-strong) transparent;
+      scrollbar-width: thin;
+    }
+
+    .diagnostic-list > li {
+      scroll-snap-align: start;
+    }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .diagnostic-list {
+      grid-auto-columns: minmax(17rem, 88%);
+    }
+  }
+
+  @media (pointer: coarse) {
+    a {
+      min-height: 3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .diagnostics,
+    .diagnostic-list > li {
+      border-color: CanvasText;
+      background: Canvas;
+    }
+  }
+</style>

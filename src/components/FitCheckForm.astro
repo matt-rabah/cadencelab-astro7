@@ -26,204 +26,306 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
 ---
 
 <section
-  class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
-    className,
-  )}
-  id="fit-check">
-  <div class="container mx-auto px-6 max-w-6xl">
-    <div
-      class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-start text-left">
-      <!-- Left Column: Executive Copy & Principles -->
-      <div class="lg:col-span-5 flex flex-col gap-6 items-start text-left">
-        <div>
-          <span
-            class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
-            {badge}
-          </span>
-          <h2
-            class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
-            {heading}
-          </h2>
-          <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
-            {description}
-          </p>
-        </div>
+  class={cn("fit-check", className)}
+  id="fit-check"
+  aria-labelledby="fit-check-title"
+>
+  <div class="fit-check-container">
+    <div class="fit-check-copy">
+      <p class="eyebrow">{badge}</p>
+      <h2 id="fit-check-title">{heading}</h2>
+      <p class="description">{description}</p>
 
-        {
-          hasBenefits && (
-            <ul class="flex flex-col gap-4 mt-2 text-left" role="list">
-              {benefits.map((benefit) => (
-                <li class="flex items-start gap-3 text-left">
-                  <span
-                    class="flex size-4 shrink-0 items-center justify-center rounded-xs bg-black text-white text-[10px] font-bold mt-1"
-                    aria-hidden="true">
-                    ✓
-                  </span>
-                  <span class="text-sm font-medium text-black text-left leading-relaxed">
-                    {benefit}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )
-        }
-      </div>
-
-      <!-- Right Column: Flat Corporate Form Container -->
-      <div
-        class="lg:col-span-7 rounded-xs border border-black/10 bg-[#f8f9fa] p-8 sm:p-12 shadow-none w-full">
-        <form
-          action="/fit-check/"
-          method="POST"
-          class="flex flex-col gap-6 text-left"
-          novalidate>
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <!-- First Name -->
-            <div class="flex flex-col gap-2 text-left">
-              <label
-                for="firstName"
-                class="text-xs font-bold uppercase tracking-wider text-black text-left">
-                First Name <span class="text-[#9f1c12]" aria-hidden="true"
-                  >*</span
-                >
-              </label>
-              <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                autocomplete="given-name"
-                required
-                aria-required="true"
-                class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
-              />
-            </div>
-
-            <!-- Last Name -->
-            <div class="flex flex-col gap-2 text-left">
-              <label
-                for="lastName"
-                class="text-xs font-bold uppercase tracking-wider text-black text-left">
-                Last Name <span class="text-[#9f1c12]" aria-hidden="true"
-                  >*</span
-                >
-              </label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                autocomplete="family-name"
-                required
-                aria-required="true"
-                class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
-              />
-            </div>
-          </div>
-
-          <!-- Work Email -->
-          <div class="flex flex-col gap-2 text-left">
-            <label
-              for="email"
-              class="text-xs font-bold uppercase tracking-wider text-black text-left">
-              Work Email <span class="text-[#9f1c12]" aria-hidden="true">*</span
-              >
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              required
-              aria-required="true"
-              placeholder="alex@company.com"
-              class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
-            />
-          </div>
-
-          <!-- Organization -->
-          <div class="flex flex-col gap-2 text-left">
-            <label
-              for="company"
-              class="text-xs font-bold uppercase tracking-wider text-black text-left">
-              Company / Organization <span
-                class="text-[#9f1c12]"
-                aria-hidden="true">*</span
-              >
-            </label>
-            <input
-              id="company"
-              name="company"
-              type="text"
-              autocomplete="organization"
-              required
-              aria-required="true"
-              class="flex h-12 w-full rounded-xs border border-black/15 bg-white px-4 py-3 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
-            />
-          </div>
-
-          <!-- Problem Description -->
-          <div class="flex flex-col gap-2 text-left">
-            <label
-              for="message"
-              class="text-xs font-bold uppercase tracking-wider text-black text-left">
-              Operating problem & systems involved <span
-                class="text-[#9f1c12]"
-                aria-hidden="true">*</span
-              >
-            </label>
-            <p id="message-hint" class="text-xs text-[#4a5056] text-left">
-              Include platforms involved (e.g., Salesforce, HubSpot, Zendesk)
-              and impacted teams.
-            </p>
-            <textarea
-              id="message"
-              name="message"
-              aria-describedby="message-hint"
-              rows={4}
-              required
-              aria-required="true"
-              class="flex min-h-28 w-full rounded-xs border border-black/15 bg-white p-4 text-base sm:text-sm text-black placeholder:text-[#6c757d] focus-visible:outline-none focus-visible:border-[#1823c9] focus-visible:ring-1 focus-visible:ring-[#1823c9]"
-            ></textarea>
-          </div>
-
-          <!-- Submit Button & Governance Assurance -->
-          <div class="flex flex-col gap-4 mt-2 text-left">
-            <button
-              type="submit"
-              class="inline-flex h-12 w-full items-center justify-center rounded-xs bg-black px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1823c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1823c9] focus-visible:ring-offset-2 no-underline!"
-              style="color: #ffffff !important; text-decoration: none !important;">
-              Submit Fit Check Request
-            </button>
-
-            <p
-              class="text-xs text-[#4a5056] text-left leading-normal flex items-center gap-1.5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="shrink-0 text-black"
-                aria-hidden="true"
-                ><rect width="18" height="11" x="3" y="11" rx="2" ry="2"
-                ></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg
-              >
-              <span
-                >Protected under our <a
-                  href="/privacy/"
-                  class="underline text-black hover:text-[#1823c9]"
-                  >Privacy Policy</a
-                >. No spam.</span
-              >
-            </p>
-          </div>
-        </form>
-      </div>
+      {
+        hasBenefits && (
+          <ul role="list">
+            {benefits.map((benefit) => (
+              <li>
+                <span class="benefit-marker" aria-hidden="true">
+                  &#10003;
+                </span>
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </div>
+
+    <aside class="fit-check-action" aria-labelledby="fit-check-action-title">
+      <div class="action-heading">
+        <span class="signal-dot" aria-hidden="true"></span>
+        <p id="fit-check-action-title">Before you begin</p>
+      </div>
+
+      <dl>
+        <div>
+          <dt>Time</dt>
+          <dd>About five minutes</dd>
+        </div>
+        <div>
+          <dt>Useful context</dt>
+          <dd>The customer problem, affected teams, systems, and sponsor</dd>
+        </div>
+        <div>
+          <dt>What happens next</dt>
+          <dd>Matt reviews the context and responds directly</dd>
+        </div>
+      </dl>
+
+      <a class="button" href="/fit-check/">
+        Start the Fit Check
+        <span aria-hidden="true">&#8594;</span>
+      </a>
+
+      <p class="privacy-note">
+        Responses are used only to assess fit and reply. Review the
+        <a href="/privacy/">privacy policy</a>.
+      </p>
+    </aside>
   </div>
 </section>
+
+<style>
+  .fit-check {
+    padding-block: var(--section-space);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--color-blue) 6%, transparent),
+        transparent 48%
+      ),
+      var(--color-surface);
+  }
+
+  .fit-check-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.72fr);
+    align-items: start;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .eyebrow,
+  .action-heading p {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 22ch;
+    margin: 0.75rem 0 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .description {
+    max-width: 60ch;
+    margin: 1.25rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.875rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.55;
+  }
+
+  .benefit-marker {
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: var(--border-width) solid var(--color-ink);
+    border-radius: var(--radius-md);
+    background: var(--color-ink);
+    color: var(--color-light);
+    font-size: 0.75rem;
+    place-items: center;
+  }
+
+  .fit-check-action {
+    overflow: clip;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-block-start: 0.25rem solid var(--color-blue);
+    border-radius: var(--radius-lg);
+    background: color-mix(
+      in oklab,
+      var(--color-blue) 4%,
+      var(--color-surface-pure)
+    );
+  }
+
+  .action-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.25rem 1.5rem;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  .signal-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #ffce31;
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  dl > div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  dt,
+  dd {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .button {
+    display: flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5rem;
+    padding: 0.8rem 1rem;
+    border: var(--border-width) solid var(--color-ink);
+    border-radius: var(--radius-md);
+    background: var(--color-ink);
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .privacy-note {
+    margin: 0;
+    padding: 0 1.5rem 1.5rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.55;
+  }
+
+  .privacy-note a {
+    color: var(--color-ink);
+    text-underline-offset: 0.2em;
+  }
+
+  :where(.button, .privacy-note a):focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .button:hover {
+      border-color: var(--color-blue);
+      background: var(--color-blue);
+    }
+
+    .privacy-note a:hover {
+      color: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 58rem) {
+    .fit-check-container {
+      grid-template-columns: 1fr;
+    }
+
+    .fit-check-action {
+      max-width: 42rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    dl > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (pointer: coarse) {
+    .button {
+      min-height: 3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .fit-check,
+    .fit-check-action,
+    .action-heading,
+    dl > div,
+    .button,
+    .benefit-marker {
+      border-color: CanvasText;
+      background: Canvas;
+      color: CanvasText;
+    }
+
+    .signal-dot {
+      background: Highlight;
+    }
+  }
+</style>

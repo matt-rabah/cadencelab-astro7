@@ -51,51 +51,148 @@ const {
 ---
 
 <section
-  class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
-    className,
-  )}
-  id="operating-model">
-  <div class="container mx-auto px-6 max-w-6xl">
-    <div
-      class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
-      <!-- Left Column: Sticky Intro Header -->
-      <div
-        class="lg:col-span-5 flex flex-col items-start text-left lg:sticky lg:top-28">
-        <span
-          class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
-          {eyebrow}
-        </span>
-        <h2
-          class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
-          {heading}
-        </h2>
-        <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
-          {subheading}
-        </p>
-      </div>
-
-      <!-- Right Column: Architectural Divider Grid -->
-      <div
-        class="lg:col-span-7 flex flex-col divide-y divide-black/10 border-t border-b border-black/10">
-        {
-          steps.map((stage) => (
-            <div class="py-8 md:py-10 flex flex-col sm:flex-row items-start gap-4 sm:gap-8 text-left">
-              <span class="text-sm font-mono font-bold text-[#1823c9] shrink-0 pt-1">
-                {stage.step}
-              </span>
-              <div class="space-y-3 text-left">
-                <h3 class="text-xl font-bold text-black tracking-tight text-left">
-                  {stage.title}
-                </h3>
-                <p class="text-sm text-[#4a5056] leading-relaxed text-left">
-                  {stage.description}
-                </p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
+  class={cn("operating-model", className)}
+  id="operating-model"
+  aria-labelledby="operating-model-title"
+>
+  <div class="operating-container">
+    <div class="operating-intro">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id="operating-model-title">{heading}</h2>
+      <p>{subheading}</p>
     </div>
+
+    <ol class="stage-list">
+      {
+        steps.map((stage) => (
+          <li>
+            <p class="stage-number" aria-hidden="true">
+              {stage.step}
+            </p>
+            <h3>{stage.title}</h3>
+            <p>{stage.description}</p>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>
+
+<style>
+  .operating-model {
+    padding-block: var(--section-space);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
+  }
+
+  .operating-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    grid-template-columns: minmax(16rem, 0.7fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .operating-intro {
+    position: sticky;
+    top: calc(var(--header-offset) + 2rem);
+  }
+
+  .eyebrow,
+  .stage-number {
+    margin: 0;
+    color: var(--color-green);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 20ch;
+    margin: 0.75rem 0 0;
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .operating-intro > p:last-child {
+    max-width: 54ch;
+    margin: 1.25rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .stage-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block-start: var(--border-width) solid rgb(255 255 255 / 28%);
+    border-inline-start: var(--border-width) solid rgb(255 255 255 / 28%);
+    list-style: none;
+  }
+
+  .stage-list li {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border-inline-end: var(--border-width) solid rgb(255 255 255 / 28%);
+    border-block-end: var(--border-width) solid rgb(255 255 255 / 28%);
+  }
+
+  h3 {
+    margin: 1.5rem 0 0;
+    color: var(--color-light);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
+    text-wrap: balance;
+  }
+
+  .stage-list li > p:last-child {
+    margin: 0.75rem 0 0;
+    color: var(--color-text-inverse-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 58rem) {
+    .operating-container {
+      grid-template-columns: 1fr;
+    }
+
+    .operating-intro {
+      position: static;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .stage-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .operating-model,
+    .stage-list,
+    .stage-list li {
+      border-color: CanvasText;
+      background: Canvas;
+      color: CanvasText;
+    }
+  }
+</style>
