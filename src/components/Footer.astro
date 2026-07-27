@@ -210,7 +210,7 @@ const isCurrentPage = (href: string): boolean =>
     --footer-muted: #aeb9b6; /* APCA $Lc 78 on #000504 */
     --footer-subtle: #8e9b98;
     --footer-border: rgb(252 254 255 / 18%);
-    --footer-accent: #1823c9; /* Brand Blue Accent */
+    --footer-accent: #a3aaff;
     --footer-focus: #ffffff;
 
     width: 100%;
@@ -283,7 +283,7 @@ const isCurrentPage = (href: string): boolean =>
     font-weight: 600;
     line-height: 1.4;
     text-decoration: underline;
-    text-decoration-color: #1823c9;
+    text-decoration-color: var(--footer-accent);
     text-decoration-thickness: 0.12em;
     text-underline-offset: 0.3em;
     transition: color var(--transition-fast, 150ms ease);
@@ -351,13 +351,13 @@ const isCurrentPage = (href: string): boolean =>
 
   .footer-link-list a:hover {
     color: var(--footer-heading);
-    text-decoration-color: #1823c9;
+    text-decoration-color: var(--footer-accent);
   }
 
   .footer-link-list a[aria-current="page"] {
     color: var(--footer-heading);
     font-weight: 600;
-    text-decoration-color: #1823c9;
+    text-decoration-color: var(--footer-accent);
     text-decoration-thickness: 0.12em;
   }
 
@@ -420,7 +420,7 @@ const isCurrentPage = (href: string): boolean =>
   .legal-link-list a:hover,
   .legal-link-list a[aria-current="page"] {
     color: var(--footer-heading);
-    text-decoration-color: #1823c9;
+    text-decoration-color: var(--footer-accent);
   }
 
   .site-footer a:focus-visible {
