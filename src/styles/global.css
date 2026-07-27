@@ -55,6 +55,8 @@
   --color-blue: #1823c9; /* Brand Accent Blue */
   --color-blue-hover: #111aab;
   --color-green: #2e8b2b; /* Calibrated status green */
+  --color-yellow: #ffce31;
+  --color-link: var(--color-blue);
 
   /* Semantic Surfaces */
   --color-surface: var(--color-light);
@@ -155,7 +157,8 @@
 
 html {
   min-inline-size: 20rem;
-  color-scheme: light;
+  color-scheme: light dark;
+  accent-color: var(--color-blue);
   hanging-punctuation: first last;
   scroll-padding-block-start: var(--header-offset);
   -webkit-text-size-adjust: 100%;
@@ -279,7 +282,7 @@ b {
 @layer utilities {
   .apca-btn-primary {
     background-color: var(--color-ink);
-    color: #ffffff !important;
+    color: var(--color-text-inverse) !important;
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 0.01em;
@@ -397,7 +400,7 @@ summary:focus-visible,
 
 .button-primary {
   background: var(--color-ink);
-  color: #ffffff !important;
+  color: var(--color-text-inverse) !important;
 }
 
 .button-primary:hover {
@@ -505,7 +508,7 @@ select:focus-visible {
    9. Dark Mode Overrides (APCA Lc -90+ Targets)
    ========================================================================== */
 
-.dark {
+:root[data-theme="dark"] {
   --background: oklch(0.08 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.12 0 0);
@@ -522,14 +525,81 @@ select:focus-visible {
   --input: rgba(255, 255, 255, 0.16);
   --ring: oklch(0.65 0.22 264);
 
-  --color-ink: #ffffff;
+  --color-ink: #f4f5f7;
   --color-light: #0a0c0d;
+  --color-blue: #9da5ff;
+  --color-blue-hover: #c0c5ff;
+  --color-green: #75c870;
+  --color-yellow: #ffce31;
+  --color-link: var(--color-blue);
   --color-surface: #0a0c0d;
-  --color-surface-pure: #121517;
-  --color-surface-subtle: #181c1f;
-  --color-text: #f0f2f4;
-  --color-text-muted: #a0a7ae;
-  --color-border: rgba(255, 255, 255, 0.12);
+  --color-surface-pure: #111418;
+  --color-surface-subtle: #171b20;
+  --color-surface-muted: #20252b;
+  --color-surface-inverse: #f4f5f7;
+  --color-text: #f4f5f7;
+  --color-text-muted: #b7bec6;
+  --color-text-subtle: #929aa3;
+  --color-text-inverse: #0a0c0d;
+  --color-text-inverse-muted: #3f474f;
+  --color-border: rgb(244 245 247 / 14%);
+  --color-border-strong: rgb(244 245 247 / 28%);
+  --color-focus: #b7bdff;
+  --color-error: #ff958a;
+  --color-success: #77d3a5;
+  --color-warning: #f0bd62;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: oklch(0.08 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.12 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.12 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.08 0 0);
+    --secondary: oklch(0.18 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.18 0 0);
+    --muted-foreground: oklch(0.72 0 0);
+    --border: rgba(255, 255, 255, 0.12);
+    --input: rgba(255, 255, 255, 0.16);
+    --ring: oklch(0.65 0.22 264);
+
+    --color-ink: #f4f5f7;
+    --color-light: #0a0c0d;
+    --color-blue: #9da5ff;
+    --color-blue-hover: #c0c5ff;
+    --color-green: #75c870;
+    --color-yellow: #ffce31;
+    --color-link: var(--color-blue);
+    --color-surface: #0a0c0d;
+    --color-surface-pure: #111418;
+    --color-surface-subtle: #171b20;
+    --color-surface-muted: #20252b;
+    --color-surface-inverse: #f4f5f7;
+    --color-text: #f4f5f7;
+    --color-text-muted: #b7bec6;
+    --color-text-subtle: #929aa3;
+    --color-text-inverse: #0a0c0d;
+    --color-text-inverse-muted: #3f474f;
+    --color-border: rgb(244 245 247 / 14%);
+    --color-border-strong: rgb(244 245 247 / 28%);
+    --color-focus: #b7bdff;
+    --color-error: #ff958a;
+    --color-success: #77d3a5;
+    --color-warning: #f0bd62;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 /* Base layer CSS using pure CSS variables to prevent Tailwind v4 build errors */

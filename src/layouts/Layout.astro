@@ -49,27 +49,62 @@ const canonicalHref = canonical.toString();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" data-theme-color />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const colorSchemeMeta = document.querySelector(
+          'meta[name="color-scheme"]',
+        );
+        const themeColorMeta = document.querySelector("[data-theme-color]");
+        const systemPreference = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        );
+
+        let preference = null;
+
+        try {
+          const storedPreference = window.localStorage.getItem(
+            "cadencelab-color-scheme",
+          );
+
+          if (storedPreference === "light" || storedPreference === "dark") {
+            preference = storedPreference;
+          }
+        } catch {
+          // Storage may be unavailable in private or restricted contexts.
+        }
+
+        const resolvedTheme =
+          preference ?? (systemPreference.matches ? "dark" : "light");
+
+        root.dataset.theme = resolvedTheme;
+        root.dataset.themePreference = preference ? "pinned" : "system";
+        root.classList.toggle("dark", resolvedTheme === "dark");
+        root.classList.toggle("light", resolvedTheme === "light");
+
+        if (colorSchemeMeta) {
+          colorSchemeMeta.setAttribute("content", preference ?? "light dark");
+        }
+
+        if (themeColorMeta) {
+          themeColorMeta.setAttribute(
+            "content",
+            resolvedTheme === "dark" ? "#0a0c0d" : "#ffffff",
+          );
+        }
+      })();
+    </script>
 
     <Font cssVariable="--font-graphik" preload />
     <Font cssVariable="--font-tiempos-text" />
     <Font cssVariable="--font-tiempos-headline" />
 
-    <!-- Dynamic Favicons for Light & Dark Browser Tabs -->
     <link
       rel="icon"
       type="image/svg+xml"
-      href="/brand/cadencelab-favicon-black.svg"
-      media="(prefers-color-scheme: light)"
+      href="/brand/cadencelab-favicon.svg"
     />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/brand/cadencelab-favicon-white.svg"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link rel="shortcut icon" href="/brand/cadencelab-favicon-black.svg" />
-
-    <meta name="theme-color" content="#fcfeff" />
 
     {
       /* Inject SEO component for title, meta tags, OG tags, and JSON-LD schema */
@@ -91,5 +126,104 @@ const canonicalHref = canonical.toString();
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <slot />
+
+    <script>
+      const storageKey = "cadencelab-color-scheme";
+      const systemPreference = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      );
+
+      const getPinnedPreference = (): "light" | "dark" | null => {
+        try {
+          const preference = window.localStorage.getItem(storageKey);
+          return preference === "light" || preference === "dark"
+            ? preference
+            : null;
+        } catch {
+          return null;
+        }
+      };
+
+      const setPinnedPreference = (preference: "light" | "dark" | null) => {
+        try {
+          if (preference) {
+            window.localStorage.setItem(storageKey, preference);
+          } else {
+            window.localStorage.removeItem(storageKey);
+          }
+        } catch {
+          // Theme switching still works for the current page without storage.
+        }
+      };
+
+      const applyTheme = () => {
+        const root = document.documentElement;
+        const pinnedPreference = getPinnedPreference();
+        const resolvedTheme =
+          pinnedPreference ?? (systemPreference.matches ? "dark" : "light");
+        const colorSchemeMeta = document.querySelector<HTMLMetaElement>(
+          'meta[name="color-scheme"]',
+        );
+        const themeColorMeta =
+          document.querySelector<HTMLMetaElement>("[data-theme-color]");
+
+        root.dataset.theme = resolvedTheme;
+        root.dataset.themePreference = pinnedPreference ? "pinned" : "system";
+        root.classList.toggle("dark", resolvedTheme === "dark");
+        root.classList.toggle("light", resolvedTheme === "light");
+
+        colorSchemeMeta?.setAttribute(
+          "content",
+          pinnedPreference ?? "light dark",
+        );
+        themeColorMeta?.setAttribute(
+          "content",
+          resolvedTheme === "dark" ? "#0a0c0d" : "#ffffff",
+        );
+
+        document
+          .querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")
+          .forEach((toggle) => {
+            const isPinned = Boolean(pinnedPreference);
+            const nextTheme = systemPreference.matches ? "light" : "dark";
+            const actionLabel = isPinned
+              ? "Use system theme"
+              : `Use ${nextTheme} theme`;
+            const visibleLabel = isPinned
+              ? "System"
+              : nextTheme === "dark"
+                ? "Dark"
+                : "Light";
+
+            toggle.setAttribute("aria-label", actionLabel);
+            toggle.setAttribute("title", actionLabel);
+            toggle.setAttribute("aria-pressed", String(isPinned));
+
+            const label = toggle.querySelector<HTMLElement>(
+              "[data-theme-toggle-label]",
+            );
+            if (label) label.textContent = visibleLabel;
+          });
+      };
+
+      document.addEventListener("click", (event) => {
+        if (
+          !(event.target instanceof Element) ||
+          !event.target.closest("[data-theme-toggle]")
+        ) {
+          return;
+        }
+
+        const pinnedPreference = getPinnedPreference();
+        setPinnedPreference(
+          pinnedPreference ? null : systemPreference.matches ? "light" : "dark",
+        );
+        applyTheme();
+      });
+
+      systemPreference.addEventListener("change", applyTheme);
+      document.addEventListener("astro:page-load", applyTheme);
+      applyTheme();
+    </script>
   </body>
 </html>

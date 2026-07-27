@@ -37,10 +37,14 @@ const schemaData = {
       "@id": organizationId,
       name: siteName,
       url: siteRoot.toString(),
-      description: "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
+      description:
+        "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
       logo: {
         "@type": "ImageObject",
-        url: new URL("/brand/cadencelab-wordmark-dark-color.svg", siteRoot).toString(),
+        url: new URL(
+          "/brand/cadencelab-wordmark-light.svg",
+          siteRoot,
+        ).toString(),
       },
     },
     {
@@ -48,7 +52,8 @@ const schemaData = {
       "@id": websiteId,
       name: siteName,
       url: siteRoot.toString(),
-      description: "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
+      description:
+        "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.",
       inLanguage: "en-US",
       publisher: {
         "@id": organizationId,
