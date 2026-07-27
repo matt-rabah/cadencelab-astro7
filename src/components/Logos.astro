@@ -42,48 +42,104 @@ const availableLogos = logos.map((item) => ({
   aria-labelledby="platform-title"
 >
   <div class="platform-container">
-    <div class="platform-heading">
-      <span class="signal-dot" aria-hidden="true"></span>
-      <h2 id="platform-title">{heading}</h2>
+    <div class="platform-intro">
+      <div class="platform-heading">
+        <span class="signal-dot" aria-hidden="true"></span>
+        <h2 id="platform-title">{heading}</h2>
+      </div>
+
+      <button
+        class="logo-motion-toggle"
+        type="button"
+        aria-pressed="false"
+        data-logo-motion-toggle
+      >
+        <span class="pause-icon" aria-hidden="true"></span>
+        <span data-logo-motion-label>Pause logos</span>
+      </button>
     </div>
 
     <div
-      class="logo-rail"
+      class="logo-viewport"
       role="group"
-      tabindex="0"
-      aria-label="Platform logos"
+      aria-label="Enterprise platform logos"
+      data-logo-marquee
     >
-      <ul role="list">
+      <div class="logo-track">
         {
-          availableLogos.map((item) => (
-            <li>
-              {item.hasAsset ? (
-                <img
-                  class:list={{
-                    "logo-adapts-to-dark": [
-                      "Gainsight",
-                      "Qualtrics",
-                      "Zendesk",
-                    ].includes(item.name),
-                  }}
-                  src={item.src}
-                  alt={item.name}
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : (
-                <span>{item.name}</span>
-              )}
-            </li>
+          [false, true].map((isDuplicate) => (
+            <ul role="list" aria-hidden={isDuplicate ? "true" : undefined}>
+              {availableLogos.map((item) => (
+                <li>
+                  {item.hasAsset ? (
+                    <img
+                      class:list={{
+                        "logo-adapts-to-dark": [
+                          "Gainsight",
+                          "Qualtrics",
+                          "Zendesk",
+                        ].includes(item.name),
+                      }}
+                      src={item.src}
+                      alt={isDuplicate ? "" : item.name}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span>{item.name}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           ))
         }
-      </ul>
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  const initializeLogoMarquees = () => {
+    document
+      .querySelectorAll<HTMLElement>("[data-logo-marquee]")
+      .forEach((marquee) => {
+        if (marquee.dataset.initialized === "true") return;
+
+        const section = marquee.closest<HTMLElement>(".platform-context");
+        const button = section?.querySelector<HTMLButtonElement>(
+          "[data-logo-motion-toggle]",
+        );
+        const label = button?.querySelector<HTMLElement>(
+          "[data-logo-motion-label]",
+        );
+
+        if (!section || !button || !label) return;
+
+        marquee.dataset.initialized = "true";
+
+        button.addEventListener("click", () => {
+          const isPaused = section.dataset.paused === "true";
+
+          if (isPaused) {
+            delete section.dataset.paused;
+          } else {
+            section.dataset.paused = "true";
+          }
+
+          button.setAttribute("aria-pressed", String(!isPaused));
+          label.textContent = isPaused ? "Pause logos" : "Play logos";
+        });
+      });
+  };
+
+  initializeLogoMarquees();
+  document.addEventListener("astro:page-load", initializeLogoMarquees);
+</script>
+
 <style>
   .platform-context {
+    --logo-gap: clamp(2.5rem, 5vw, 5rem);
+
     padding-block: clamp(2.5rem, 6vw, 4rem);
     border-block-end: var(--border-width) solid var(--color-border);
     background: var(--color-surface-subtle);
@@ -96,6 +152,12 @@ const availableLogos = logos.map((item) => ({
     grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
     align-items: center;
     gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .platform-intro {
+    display: grid;
+    justify-items: start;
+    gap: 1rem;
   }
 
   .platform-heading {
@@ -125,41 +187,79 @@ const availableLogos = logos.map((item) => ({
     text-transform: uppercase;
   }
 
-  .logo-rail {
-    min-width: 0;
-    padding-block-end: 0.625rem;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scroll-padding-inline: 0.125rem;
-    scroll-snap-type: inline proximity;
-    scrollbar-color: var(--color-border-strong) transparent;
-    scrollbar-width: thin;
+  .logo-motion-toggle {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.625rem;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    cursor: pointer;
   }
 
-  .logo-rail:focus-visible {
-    border-radius: var(--radius-sm);
+  .logo-motion-toggle:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus);
     outline-offset: var(--focus-ring-offset);
   }
 
-  ul {
+  .pause-icon {
+    display: inline-block;
+    width: 0.625rem;
+    height: 0.75rem;
+    border-inline: 0.125rem solid currentcolor;
+  }
+
+  [data-paused="true"] .pause-icon {
+    width: 0;
+    height: 0;
+    border-block: 0.375rem solid transparent;
+    border-inline-start: 0.625rem solid currentcolor;
+    border-inline-end: 0;
+  }
+
+  .logo-viewport {
+    min-width: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .logo-track {
     display: flex;
     width: max-content;
-    min-width: 100%;
+    translate: 0 0;
+    animation: logo-marquee 28s linear infinite;
+    will-change: translate;
+  }
+
+  ul {
+    display: flex;
+    flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    gap: clamp(0.75rem, 2vw, 1.25rem);
+    padding: 0 var(--logo-gap) 0 0;
+    gap: var(--logo-gap);
     list-style: none;
   }
 
   li {
     display: grid;
-    width: clamp(10rem, 16vw, 13rem);
+    width: clamp(9rem, 14vw, 11rem);
     min-height: 5rem;
     flex: 0 0 auto;
-    padding: 1rem 1.25rem;
+    padding: 1rem 0.75rem;
     background: transparent;
-    scroll-snap-align: start;
     place-items: center;
   }
 
@@ -169,6 +269,17 @@ const availableLogos = logos.map((item) => ({
     max-width: 100%;
     height: auto;
     max-height: 2.5rem;
+  }
+
+  .logo-viewport:hover .logo-track,
+  [data-paused="true"] .logo-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes logo-marquee {
+    to {
+      translate: -50% 0;
+    }
   }
 
   :global(:root[data-theme="dark"]) .logo-adapts-to-dark {
@@ -193,9 +304,41 @@ const availableLogos = logos.map((item) => ({
     }
   }
 
+  @media (hover: hover) {
+    .logo-motion-toggle:hover {
+      border-color: var(--color-blue);
+      color: var(--color-ink);
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     :global(:root:not([data-theme])) .logo-adapts-to-dark {
       filter: brightness(0) invert(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-motion-toggle {
+      display: none;
+    }
+
+    .logo-viewport {
+      padding-block-end: 0.625rem;
+      overflow-x: auto;
+      mask-image: none;
+      overscroll-behavior-inline: contain;
+      scrollbar-color: var(--color-border-strong) transparent;
+      scrollbar-width: thin;
+    }
+
+    .logo-track {
+      animation: none;
+      translate: 0 0;
+      will-change: auto;
+    }
+
+    .logo-track ul[aria-hidden="true"] {
+      display: none;
     }
   }
 
@@ -207,6 +350,10 @@ const availableLogos = logos.map((item) => ({
 
     .signal-dot {
       background: Highlight;
+    }
+
+    .logo-viewport {
+      mask-image: none;
     }
   }
 </style>
