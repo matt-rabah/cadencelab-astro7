@@ -54,6 +54,7 @@
   --color-light: #ffffff; /* Clean white background surface */
   --color-blue: #1823c9; /* Brand Accent Blue */
   --color-blue-hover: #111aab;
+  --color-blue-foreground: #ffffff;
   --color-green: #2e8b2b; /* Calibrated status green */
   --color-yellow: #ffce31;
   --color-link: var(--color-blue);
@@ -527,8 +528,9 @@ select:focus-visible {
 
   --color-ink: #f4f5f7;
   --color-light: #0a0c0d;
-  --color-blue: #9da5ff;
+  --color-blue: #a3aaff;
   --color-blue-hover: #c0c5ff;
+  --color-blue-foreground: #0a0c0d;
   --color-green: #75c870;
   --color-yellow: #ffce31;
   --color-link: var(--color-blue);
@@ -570,8 +572,9 @@ select:focus-visible {
 
     --color-ink: #f4f5f7;
     --color-light: #0a0c0d;
-    --color-blue: #9da5ff;
+    --color-blue: #a3aaff;
     --color-blue-hover: #c0c5ff;
+    --color-blue-foreground: #0a0c0d;
     --color-green: #75c870;
     --color-yellow: #ffce31;
     --color-link: var(--color-blue);
