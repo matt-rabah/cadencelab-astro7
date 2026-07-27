@@ -28,7 +28,7 @@ const {
     {
       question: "What access or data is required from our team?",
       answer:
-        "We require lightweight access to CRM workflow maps, key stakeholder interviews across CS/Sales/Product, and anonymized customer touchpoint records.",
+        "We require lightweight access to CRM workflow maps, key stakeholder interviews across CS, Sales, and Product, and anonymized customer touchpoint records.",
     },
     {
       question: "How do you handle cross-functional misalignment?",
@@ -45,50 +45,212 @@ const {
 } = Astro.props;
 ---
 
-<section
-  class={cn(
-    "py-20 md:py-32 bg-background text-foreground border-b border-black/10",
-    className,
-  )}
-  id="faq">
-  <div class="container mx-auto px-6 max-w-6xl">
-    <div
-      class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
-      <!-- Left Column Header -->
-      <div
-        class="lg:col-span-5 flex flex-col items-start text-left lg:sticky lg:top-28">
-        <span
-          class="text-xs font-mono font-bold uppercase tracking-widest text-[#1823c9] mb-4 block">
-          {eyebrow}
-        </span>
-        <h2
-          class="text-3xl sm:text-4xl font-bold tracking-tight text-black text-left leading-tight">
-          {heading}
-        </h2>
-        <p class="mt-6 text-base text-[#4a5056] text-left leading-relaxed">
-          {description}
-        </p>
-      </div>
+<section class={cn("faq", className)} id="faq" aria-labelledby="faq-title">
+  <div class="faq-container">
+    <div class="faq-intro">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id="faq-title">{heading}</h2>
+      <p>{description}</p>
+    </div>
 
-      <!-- Right Column Accordion List -->
-      <div
-        class="lg:col-span-7 flex flex-col divide-y divide-black/10 border-t border-b border-black/10 w-full">
-        {
-          items.map((item) => (
-            <details class="group py-6 text-left cursor-pointer transition-colors">
-              <summary class="flex justify-between items-center text-left text-lg font-bold text-black list-none select-none group-hover:text-[#1823c9] transition-colors">
-                <span class="pr-6">{item.question}</span>
-                <span class="text-[#1823c9] transition-transform duration-200 group-open:rotate-180 font-mono text-xl shrink-0">
-                  ↓
-                </span>
-              </summary>
-              <p class="mt-4 text-sm text-[#4a5056] leading-relaxed text-left pr-6">
-                {item.answer}
-              </p>
-            </details>
-          ))
-        }
-      </div>
+    <div class="faq-list">
+      {
+        items.map((item, index) => (
+          <details name="homepage-faq" open={index === 0}>
+            <summary>
+              <span>{item.question}</span>
+              <span class="faq-icon" aria-hidden="true">
+                <span class="icon-closed">+</span>
+                <span class="icon-open">&#8722;</span>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>{item.answer}</p>
+            </div>
+          </details>
+        ))
+      }
     </div>
   </div>
 </section>
+
+<style>
+  .faq {
+    padding-block: var(--section-space);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .faq-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    grid-template-columns: minmax(16rem, 0.7fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: clamp(3rem, 9vw, 8rem);
+  }
+
+  .faq-intro {
+    position: sticky;
+    top: calc(var(--header-offset) + 2rem);
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 20ch;
+    margin: 0.75rem 0 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .faq-intro > p:last-child {
+    max-width: 54ch;
+    margin: 1.25rem 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  details {
+    overflow: clip;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+  }
+
+  details[open] {
+    border-block-start: 0.25rem solid var(--color-blue);
+    background: color-mix(
+      in oklab,
+      var(--color-blue) 3%,
+      var(--color-surface-pure)
+    );
+  }
+
+  summary {
+    display: flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-semibold);
+    line-height: 1.45;
+    cursor: pointer;
+  }
+
+  summary::marker {
+    content: "";
+  }
+
+  .faq-icon {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-subtle);
+    color: var(--color-blue);
+    font-size: 1.25rem;
+    line-height: 1;
+    place-items: center;
+  }
+
+  .icon-open {
+    display: none;
+  }
+
+  details[open] .icon-closed {
+    display: none;
+  }
+
+  details[open] .icon-open {
+    display: inline;
+  }
+
+  .faq-answer {
+    padding: 0 4.5rem 1.5rem 1.5rem;
+  }
+
+  .faq-answer p {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  summary:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: calc(-1 * var(--focus-ring-width));
+  }
+
+  @media (hover: hover) {
+    details:not([open]) summary:hover {
+      color: var(--color-blue);
+    }
+  }
+
+  @media (max-width: 58rem) {
+    .faq-container {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-intro {
+      position: static;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    summary {
+      padding: 1rem;
+    }
+
+    .faq-answer {
+      padding: 0 3.75rem 1.25rem 1rem;
+    }
+  }
+
+  @media (pointer: coarse) {
+    summary {
+      min-height: 3rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .faq,
+    details,
+    .faq-icon {
+      border-color: CanvasText;
+      background: Canvas;
+    }
+  }
+</style>

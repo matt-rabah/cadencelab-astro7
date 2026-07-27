@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 
 interface LogoItem {
   name: string;
-  logo?: string;
 }
 
 interface Props {
@@ -28,24 +27,120 @@ const {
 ---
 
 <section
-  class={cn("py-12 md:py-16 bg-[#f8f9fa] border-b border-black/10", className)}
-  id="logos">
-  <div class="container mx-auto px-6 max-w-6xl text-left">
-    <span
-      class="text-xs font-mono font-bold uppercase tracking-widest text-[#4a5056] mb-8 block text-left">
-      {heading}
-    </span>
+  class={cn("platform-context", className)}
+  aria-labelledby="platform-title"
+>
+  <div class="platform-container">
+    <div class="platform-heading">
+      <span class="signal-dot" aria-hidden="true"></span>
+      <h2 id="platform-title">{heading}</h2>
+    </div>
 
-    <!-- Flat Executive Platform Grid -->
-    <div
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 items-center">
+    <ul role="list">
       {
         logos.map((item) => (
-          <div class="flex items-center justify-center h-12 px-4 rounded-xs border border-black/10 bg-white text-xs font-mono font-bold tracking-wider text-black/80 hover:border-[#1823c9]/40 hover:text-[#1823c9] transition-colors select-none">
-            {item.name}
-          </div>
+          <li>
+            <span>{item.name}</span>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>
+
+<style>
+  .platform-context {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .platform-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .platform-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+
+  .signal-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    margin-top: 0.35rem;
+    border-radius: 50%;
+    background: #ffce31;
+  }
+
+  h2 {
+    max-width: 34ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block-start: var(--border-width) solid var(--color-border-strong);
+    border-inline-start: var(--border-width) solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  li {
+    min-width: 0;
+    padding: 0.9rem 1rem;
+    border-inline-end: var(--border-width) solid var(--color-border-strong);
+    border-block-end: var(--border-width) solid var(--color-border-strong);
+    background: color-mix(
+      in oklab,
+      var(--color-blue) 2%,
+      var(--color-surface-pure)
+    );
+  }
+
+  li span {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 48rem) {
+    .platform-container {
+      grid-template-columns: 1fr;
+    }
+
+    ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (forced-colors: active) {
+    .platform-context,
+    ul,
+    li {
+      border-color: CanvasText;
+      background: Canvas;
+    }
+
+    .signal-dot {
+      background: Highlight;
+    }
+  }
+</style>
