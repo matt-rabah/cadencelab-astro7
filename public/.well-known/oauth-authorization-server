@@ -1,0 +1,13 @@
+{
+  "issuer": "https://cadencelab.co",
+  "authorization_endpoint": "https://cadencelab.co/auth.md",
+  "token_endpoint": "https://cadencelab.co/auth.md",
+  "jwks_uri": "https://cadencelab.co/auth.md",
+  "grant_types_supported": ["client_credentials"],
+  "response_types_supported": ["code"],
+  "agent_auth": {
+    "register_uri": "https://cadencelab.co/auth.md",
+    "supported_identity_types": ["none"],
+    "supported_credential_types": ["none"]
+  }
+}
