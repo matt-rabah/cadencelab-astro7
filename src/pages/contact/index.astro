@@ -6,34 +6,34 @@ import Layout from "../../layouts/Layout.astro";
 const usefulContext = [
   {
     number: "01",
-    title: "The operating problem",
+    title: "What’s getting in the customer’s way",
     description:
-      "Describe the customer friction, workflow breakdown, or decision that has become difficult to manage.",
+      "Describe the customer friction, broken workflow, or decision that has become hard to manage.",
   },
   {
     number: "02",
-    title: "The people and systems involved",
+    title: "Who and what are involved",
     description:
-      "Name the teams, handoffs, CRM processes, service tools, or lifecycle stages shaping the current experience.",
+      "Name the teams, handoffs, CRM processes, service tools, or lifecycle stages shaping the problem.",
   },
   {
     number: "03",
-    title: "The outcome that needs to change",
+    title: "What needs to change",
     description:
-      "Explain what better would look like for customers, frontline teams, operating leaders, or the business.",
+      "Explain what a better result would look like for customers, frontline teams, leaders, or the business.",
   },
   {
     number: "04",
-    title: "The constraints already known",
+    title: "What limits are already known",
     description:
-      "Share the timing, ownership, data, governance, adoption, or implementation limits that a useful recommendation must respect.",
+      "Share any limits involving timing, ownership, data, governance, adoption, or implementation.",
   },
 ];
 ---
 
 <Layout
-  title="Contact | Cadence Lab"
-  description="Share a customer experience, lifecycle, CRM workflow, or AI service readiness problem with Matt Rabah at Cadence Lab."
+  title="Contact Matt Rabah | Cadence Lab"
+  description="Tell Matt Rabah about a customer experience, lifecycle risk, CRM workflow, or AI service readiness problem and get a direct recommendation about fit."
   canonicalURL="/contact/"
   pageType="website">
   <NavHeader />
@@ -44,38 +44,40 @@ const usefulContext = [
         <div class="hero-copy">
           <p class="eyebrow">Contact</p>
 
-          <h1 id="contact-title">Bring the operating problem.</h1>
+          <h1 id="contact-title">Tell me what’s stuck.</h1>
 
           <p class="hero-lead">
             If customer experience, CRM, lifecycle, or AI work is stuck between
-            teams and systems, start by sharing the context. Matt will use it to
-            determine whether a focused conversation would be useful.
+            teams and systems, tell me what’s happening. I’ll review the context
+            and tell you plainly whether a focused conversation would help.
           </p>
 
           <div class="hero-actions" aria-label="Contact page actions">
             <a class="button button-primary" href="/fit-check/">
-              Start a fit check
+              Start the Fit Check™
             </a>
 
             <a class="button button-text" href="/services/">
-              Review the services
+              Compare diagnostic services
               <span aria-hidden="true">&#8594;</span>
             </a>
           </div>
         </div>
 
         <aside class="contact-note" aria-labelledby="contact-note-title">
-          <p id="contact-note-title" class="note-label">A useful first step</p>
+          <p id="contact-note-title" class="note-label">
+            What the Fit Check does
+          </p>
 
           <p>
-            The fit check is a short review of the problem, operating
-            environment, ownership, and readiness for change.
+            The Fit Check is a short way to share the problem, who owns it, and
+            whether your organization is ready to make a change.
           </p>
 
           <ul role="list">
-            <li>No finished scope is required</li>
-            <li>No platform decision is assumed</li>
-            <li>No consulting agreement is created</li>
+            <li>You don’t need a finished scope</li>
+            <li>You don’t need to choose a platform</li>
+            <li>You aren’t committing to an engagement</li>
           </ul>
         </aside>
       </div>
@@ -84,11 +86,9 @@ const usefulContext = [
     <section class="contact-paths" aria-labelledby="contact-paths-title">
       <div class="page-container paths-layout">
         <div class="section-intro">
-          <p class="eyebrow">Choose the useful route</p>
+          <p class="eyebrow">Choose your next step</p>
 
-          <h2 id="contact-paths-title">
-            Start where the decision is clearest.
-          </h2>
+          <h2 id="contact-paths-title">Start with what you know today.</h2>
         </div>
 
         <div class="path-grid">
@@ -96,17 +96,16 @@ const usefulContext = [
             <p class="path-number" aria-hidden="true">01</p>
 
             <div class="path-copy">
-              <h3>You are considering an engagement</h3>
+              <h3>You have a problem worth solving</h3>
 
               <p>
-                Use the fit check to share the customer problem, current
-                environment, internal ownership, and the outcome you need to
-                improve.
+                Use the Fit Check to share what customers are experiencing, who
+                is involved, and what you need to improve.
               </p>
             </div>
 
             <a href="/fit-check/" class="path-link">
-              Complete the fit check
+              Start the Fit Check™
               <span aria-hidden="true">&#8594;</span>
             </a>
           </article>
@@ -115,16 +114,16 @@ const usefulContext = [
             <p class="path-number" aria-hidden="true">02</p>
 
             <div class="path-copy">
-              <h3>You are still defining the problem</h3>
+              <h3>You’re still working out what the problem is</h3>
 
               <p>
-                Compare the four diagnostic entry points to see which operating
-                question best matches the friction you are seeing.
+                Compare the four diagnostics to see which one best matches the
+                customer friction or business risk you can see.
               </p>
             </div>
 
             <a href="/services/" class="path-link">
-              Compare the diagnostics
+              Compare diagnostic services
               <span aria-hidden="true">&#8594;</span>
             </a>
           </article>
@@ -135,16 +134,16 @@ const usefulContext = [
     <section class="useful-context" aria-labelledby="useful-context-title">
       <div class="page-container context-layout">
         <div class="context-heading">
-          <p class="eyebrow">Before you reach out</p>
+          <p class="eyebrow">What to share</p>
 
           <h2 id="useful-context-title">
-            A small amount of context makes the first exchange more useful.
+            A little context makes the first reply more useful.
           </h2>
 
           <p>
-            You do not need a complete requirements document. A practical
-            description of these four areas is enough to establish whether there
-            is a sensible next step.
+            You don’t need a requirements document or a finished diagnosis.
+            These four basics are enough for me to understand whether there’s a
+            useful next step.
           </p>
         </div>
 
@@ -170,22 +169,19 @@ const usefulContext = [
     <section class="contact-close" aria-labelledby="contact-close-title">
       <div class="page-container close-panel">
         <div>
-          <p class="eyebrow">Engagement fit</p>
+          <p class="eyebrow">A direct answer</p>
 
-          <h2 id="contact-close-title">
-            The first conversation should clarify fit and the next decision.
-          </h2>
+          <h2 id="contact-close-title">You’ll get a clear answer about fit.</h2>
         </div>
 
         <div class="close-action">
           <p>
-            Share the operating context. Matt will respond with a practical
-            recommendation about whether to proceed and what the next step
-            should be.
+            Share what’s happening. I’ll respond with a practical recommendation
+            about whether we should talk and what should happen next.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
-            Start a fit check
+            Start the Fit Check™
           </a>
         </div>
       </div>
