@@ -3,16 +3,16 @@ import StructuredCapabilityPage from "../../../components/StructuredCapabilityPa
 
 const page = {
   meta: {
-    title: "AI Experience | Cadence Lab",
+    title: "AI Customer Experience Design | Cadence Lab",
     description:
-      "Design AI-enabled experiences around clear roles, trustworthy context, human judgment, safe action, effective handoffs, and evidence of customer and operating value.",
+      "Design AI experiences with clear roles, trustworthy context, useful controls, human judgment, complete handoffs, safe recovery, and measurable outcomes.",
     canonicalURL: "/product/ai-experience/",
   },
   hero: {
     breadcrumb: "AI Experience",
     eyebrow: "Product · AI Experience",
-    title: "Design the experience around the decision, not the model.",
-    lead: "AI Experience defines how a person encounters, understands, uses, challenges, and recovers from AI inside a real service or workflow. It connects the visible interaction to data, evidence, permissions, human judgment, operating ownership, and the downstream action that gives the experience consequence.",
+    title: "A confident answer is not the same as a trustworthy experience.",
+    lead: "An AI assistant gives a polished answer based on an old policy. The customer acts on it, reaches a human, and has to explain everything again. The output looked good. The experience failed. AI Experience designs what people should expect, what the system can do, where human judgment belongs, and how the organization recovers when AI gets it wrong.",
     primaryCta: {
       label: "Review AI Service Readiness",
       href: "/services/ai-service-readiness-review/",
@@ -23,292 +23,292 @@ const page = {
     },
     trigger: {
       introduction:
-        "An AI use case can produce an answer or complete a task, but the organization has not resolved what people should expect, which evidence they can trust, who remains accountable, or what happens when the system is wrong.",
+        "An AI use case can answer a question or complete a task, but the organization has not resolved what people should expect, which evidence they can trust, who remains accountable, or what happens when the result is wrong.",
       items: [
         {
           label: "Visible symptom",
-          value: "Capability exists without a coherent experience",
+          value: "The AI works, but the experience does not",
         },
         {
           label: "Experience",
-          value: "Expectation, context, judgment, action, recovery",
+          value: "Expect, understand, control, act, recover",
         },
         {
           label: "Decision",
-          value: "How AI should participate in the relationship",
+          value: "What role AI should play in the relationship",
         },
       ],
     },
   },
   signals: {
-    eyebrow: "Visible signals",
-    title: "AI friction appears where capability meets expectation.",
+    eyebrow: "Where it breaks",
+    title: "AI friction starts when people cannot judge the system.",
     introduction:
-      "People judge an AI-enabled experience through the complete relationship: why AI is present, what it knows, how it reached a recommendation, what control they retain, and whether the organization can recover when the result is incomplete or wrong.",
+      "People need more than a fast answer. They need to understand why AI is involved, what it knows, what it can do, and where accountable human help begins.",
     items: [
       {
         title: "People cannot tell when AI is involved",
         description:
-          "Automation, recommendations, summaries, routing, and generated responses influence the interaction without establishing a clear expectation about the system’s role.",
+          "Generated responses, recommendations, summaries, routing, or automation shape the interaction without making the system’s role clear.",
       },
       {
-        title: "The answer looks more certain than the evidence",
+        title: "The answer sounds more certain than the evidence",
         description:
-          "A fluent response hides missing context, conflicting sources, inference, or uncertainty that would materially change how a person interprets the result.",
+          "Fluent language hides old sources, missing context, conflicting records, inference, or uncertainty that could change the decision.",
       },
       {
-        title: "Personalization feels unexplained or intrusive",
+        title: "Personalization feels intrusive",
         description:
-          "The experience uses history, profile data, behavior, or inferred attributes without making the relevance, boundaries, and available control understandable.",
+          "The experience uses history, behavior, profile data, or inferred details without explaining why they matter or what control the person has.",
       },
       {
-        title: "Human support becomes harder to reach",
+        title: "AI stands between the customer and real help",
         description:
-          "AI is placed in front of service as a containment layer, forcing people to repeat context or prove failure before the organization provides accountable help.",
+          "People must repeat themselves, prove the system failed, or navigate another loop before reaching someone who can take responsibility.",
       },
       {
-        title: "Employees inherit invisible review work",
+        title: "Employees clean up the mistakes in private",
         description:
-          "Teams correct outputs, reconcile records, explain mistakes, and recover customer trust while the experience is measured only by automation or deflection.",
+          "Teams correct answers, rebuild context, reconcile records, and repair trust while the dashboard counts only speed, use, or deflection.",
       },
       {
-        title: "Adoption is mistaken for a successful experience",
+        title: "Use is mistaken for value",
         description:
-          "Usage rises because AI is available or required, but trust, comprehension, task success, fairness, effort, recovery, and customer outcomes remain unexamined.",
+          "Adoption rises because AI is available or required, but task success, effort, trust, fairness, recovery, and customer outcomes stay unclear.",
       },
     ],
   },
   framework: {
-    eyebrow: "Experience system",
-    title: "Design the AI role and the human relationship together.",
+    eyebrow: "The AI experience",
+    title: "Design the AI role and the human responsibility together.",
     introduction:
-      "A useful AI experience coordinates six conditions. Each one should remain understandable from the interaction while being supported by real operating controls behind it.",
+      "The model is one part of the experience. These six conditions determine whether people can use it with appropriate confidence and get help when they need it.",
     items: [
       {
-        label: "Purpose",
-        question: "Which human and operating outcome should improve?",
-        title: "Purpose",
+        label: "Outcome",
+        question: "What should improve for the person?",
+        title: "Outcome",
         description:
-          "Define the person, situation, need, decision, expected benefit, current friction, consequential error, and why AI is appropriate for this part of the experience.",
+          "Define the person, situation, task, expected benefit, current friction, meaningful risk, and why AI belongs in this part of the journey.",
       },
       {
         label: "Role",
-        question: "What part should AI play?",
+        question: "What is AI allowed to do?",
         title: "Role",
         description:
-          "Clarify whether AI finds, summarizes, recommends, creates, predicts, routes, acts, or supports judgment—and what remains outside its authority.",
+          "Clarify whether AI finds, summarizes, recommends, creates, predicts, routes, or acts, and what must remain outside its authority.",
       },
       {
         label: "Context",
         question: "What may the system know and use?",
         title: "Context",
         description:
-          "Bound the data, history, memory, retrieval, personalization, provenance, permissions, freshness, and sensitive information available in the interaction.",
+          "Set boundaries for data, history, memory, retrieval, personalization, permissions, freshness, provenance, and sensitive information.",
       },
       {
-        label: "Interaction",
-        question: "How will people understand and direct it?",
-        title: "Interaction",
+        label: "Control",
+        question: "Can people understand and direct the interaction?",
+        title: "Control",
         description:
-          "Design expectations, language, citations, uncertainty, choices, confirmations, corrections, accessibility, disclosure, feedback, and control at the point of use.",
+          "Design disclosure, evidence, uncertainty, choices, corrections, confirmations, feedback, accessibility, and a clear way to stop or change course.",
       },
       {
         label: "Handoff",
-        question: "When does another person or path take over?",
+        question: "When must a person or another path take over?",
         title: "Handoff",
         description:
-          "Define escalation, context transfer, urgent and sensitive cases, unsupported requests, disagreement, failure, and how accountable support continues the work.",
+          "Define escalation, context transfer, urgent cases, unsupported requests, disagreement, failure, and how accountable support continues the work.",
       },
       {
         label: "Learning",
-        question: "How will outcomes change the experience?",
+        question: "What will change the experience over time?",
         title: "Learning",
         description:
-          "Connect behavior, corrections, complaints, overrides, failure patterns, customer impact, employee experience, and operating results to ongoing decisions.",
+          "Connect corrections, overrides, complaints, failure patterns, customer impact, employee effort, and operating results to product decisions.",
       },
     ],
   },
   path: {
-    eyebrow: "Experience path",
-    title: "Follow the person from expectation through recovery.",
+    eyebrow: "How the experience moves",
+    title: "Follow the person from first expectation through recovery.",
     introduction:
-      "Trace representative situations through the complete experience, including what happens before and after the visible AI interaction. The path should reveal where trust, context, control, or accountability weakens.",
+      "Test the complete situation, not just the AI response. The experience includes what happens before, during, and after the model produces an output.",
     items: [
       {
-        phase: "Enter",
-        question: "What does the person expect to happen?",
+        phase: "Expect",
+        question: "Does the person know what AI will do?",
         evidence:
-          "Need, channel, prior relationship, disclosure, AI role, promised benefit, available alternatives, urgency, accessibility, and informed expectations.",
+          "Need, channel, prior relationship, disclosure, AI role, expected benefit, alternatives, urgency, accessibility, and known limits.",
       },
       {
         phase: "Inform",
-        question: "Which context shapes the interaction?",
+        question: "Does the system have the right context?",
         evidence:
-          "User input, records, history, retrieval, memory, personalization, permissions, provenance, freshness, missing information, and sensitive data.",
+          "User input, records, history, retrieval, memory, permissions, provenance, freshness, missing information, and sensitive data.",
       },
       {
         phase: "Interact",
-        question: "Can the person understand and influence the result?",
+        question: "Can the person make sense of the result?",
         evidence:
-          "Response, options, explanation, citations, uncertainty, correction, confirmation, refusal, accessibility, language, and interface behavior.",
+          "Response, choices, evidence, citations, uncertainty, correction, confirmation, refusal, accessibility, language, and interface behavior.",
       },
       {
-        phase: "Decide and act",
-        question: "Who owns the consequential next step?",
+        phase: "Act",
+        question: "Who owns the next decision or action?",
         evidence:
-          "Recommendation, human judgment, permission, action, record change, reversibility, notification, downstream effect, and accountability.",
+          "Recommendation, human judgment, permission, tool use, record change, reversibility, notification, downstream effect, and accountability.",
       },
       {
-        phase: "Recover and learn",
-        question: "What happens when the experience is wrong?",
+        phase: "Recover",
+        question: "What happens when AI is wrong?",
         evidence:
-          "Escalation, context transfer, complaint, correction, remediation, human support, incident response, outcome, feedback, and product learning.",
+          "Escalation, context transfer, complaint, correction, remediation, human support, incident response, customer outcome, and product learning.",
       },
     ],
   },
   evidence: {
-    eyebrow: "Evidence",
-    title: "Evaluate what people experience and what the system causes.",
+    eyebrow: "What to examine",
+    title: "Measure what people experience and what the system causes.",
     introduction:
-      "The evidence should connect perception and behavior to model, data, workflow, and operating conditions. A good interface cannot compensate for untrustworthy context, weak oversight, or an action the organization cannot responsibly support.",
+      "A strong model score cannot prove the experience works. Evidence should connect the interaction to the data, workflow, human decisions, and real outcomes around it.",
     items: [
       {
         title: "Human needs and expectations",
         description:
-          "Research, context, goals, mental models, trust, accessibility, language, preferences, prior experience, vulnerability, and the consequences of misunderstanding.",
+          "Research, goals, context, mental models, trust, accessibility, language, prior experience, vulnerability, and the cost of misunderstanding.",
       },
       {
         title: "Interaction behavior",
         description:
-          "Task completion, comprehension, choices, prompts, corrections, abandonment, repeated effort, uncertainty, escalation, feedback, and observed workarounds.",
+          "Task completion, comprehension, prompts, choices, corrections, abandonment, repeated effort, escalation, feedback, and workarounds.",
       },
       {
-        title: "Source and model behavior",
+        title: "Sources and model behavior",
         description:
-          "Data, retrieval, provenance, prompt, model, tools, variability, accuracy, groundedness, prohibited outputs, latency, refusals, and meaningful performance differences.",
+          "Data, retrieval, provenance, prompts, models, tools, variation, accuracy, groundedness, latency, refusals, limits, and prohibited outputs.",
       },
       {
         title: "Human judgment and oversight",
         description:
-          "Review, edits, overrides, disagreement, escalation, authority, automation bias, time burden, expertise, and the evidence available at the decision point.",
+          "Review, edits, overrides, disagreement, authority, automation bias, time burden, expertise, and the evidence available at the decision point.",
       },
       {
         title: "Workflow and action behavior",
         description:
-          "Permissions, tool calls, record changes, routing, handoffs, reversibility, exceptions, failure recovery, audit history, and downstream system effects.",
+          "Permissions, tool calls, record changes, routing, handoffs, reversibility, exceptions, audit history, failure recovery, and downstream effects.",
       },
       {
         title: "Customer and operating outcomes",
         description:
-          "Task success, effort, trust, accessibility, fairness, service quality, resolution, retention, capacity, rework, complaints, risk, and unintended consequences.",
+          "Task success, effort, trust, access, fairness, service quality, resolution, capacity, rework, complaints, retention, risk, and unintended harm.",
       },
     ],
     note: {
-      label: "Trust must remain evidence-based",
+      label: "Trust should match the evidence",
       description:
-        "The objective is not to make AI feel human or universally trusted. The experience should help people form an appropriately calibrated judgment about the system’s role, evidence, limitations, and the accountable organization behind it.",
+        "The goal is not to make AI feel human or earn blind trust. People should have enough information and control to judge the system’s role, limits, evidence, and the accountable organization behind it.",
     },
   },
   failures: {
-    eyebrow: "Common failure patterns",
-    title: "An AI experience fails when confidence replaces clarity.",
+    eyebrow: "What goes wrong",
+    title: "AI fails the experience when confidence hides the limits.",
     introduction:
-      "Polish, personality, and speed can make an interaction feel complete while hiding uncertainty, data use, unavailable support, or a consequential action that no one is prepared to own.",
+      "Speed and personality can make an answer feel complete while hiding weak context, uncertain evidence, unavailable support, or an action no one is ready to own.",
     items: [
       {
-        title: "A conversational interface becomes the strategy",
+        title: "Chat becomes the strategy",
         description:
-          "The organization adds chat without defining the human need, AI role, approved evidence, operating outcome, alternative path, or the decision the interaction should support.",
+          "The organization adds a conversational interface without defining the human need, AI role, approved evidence, intended outcome, or alternative path.",
       },
       {
-        title: "Anthropomorphic cues imply unsupported capability",
+        title: "The system acts more human than it is",
         description:
-          "Names, tone, emotion, or visual behavior encourage people to infer understanding, memory, agency, or care that the system and organization cannot actually provide.",
+          "Names, tone, emotion, or visual cues lead people to infer understanding, memory, judgment, or care the system cannot provide.",
       },
       {
-        title: "Explanation becomes decorative",
+        title: "Explanation becomes decoration",
         description:
-          "The interface displays confidence, citations, or a generic rationale without helping the person verify the source, understand uncertainty, or challenge the result.",
+          "Confidence scores, citations, or generic reasons appear without helping the person check the source, understand uncertainty, or challenge the result.",
       },
       {
-        title: "The human handoff resets the relationship",
+        title: "The human handoff starts from zero",
         description:
-          "Escalation sends the person to another queue without the history, evidence, decisions, urgency, or failed attempts already captured during the AI interaction.",
+          "Escalation sends the person to another queue without the history, evidence, urgency, choices, or failed attempts already captured.",
       },
       {
-        title: "Recovery depends on the affected person",
+        title: "The customer must find and fix the error",
         description:
-          "Customers or employees must detect the error, preserve evidence, find support, and pursue correction while the system lacks proactive review or remediation.",
+          "People must detect the mistake, save the evidence, locate support, and pursue correction because the service has no useful recovery path.",
       },
       {
-        title: "The benchmark ignores experience harm",
+        title: "The benchmark misses the harm",
         description:
-          "Accuracy or task completion appears acceptable while a particular group, sensitive situation, exception, or high-consequence failure remains difficult to see.",
+          "Average accuracy looks acceptable while a specific group, sensitive situation, exception, or high-impact failure remains hard to see.",
       },
     ],
   },
   outputs: {
-    eyebrow: "Practical outputs",
-    title: "Turn AI capability into an accountable experience model.",
+    eyebrow: "What teams receive",
+    title: "Leave with an AI experience teams can own.",
     introduction:
-      "The outputs should define the intended relationship, make the complete path visible, specify interaction and operating requirements, and establish how the organization will evaluate real use.",
+      "The outputs define the intended human relationship, the complete service path, the required controls, and how the organization will evaluate real use.",
     items: [
       {
-        title: "AI experience role and principles",
+        title: "AI role and experience rules",
         description:
-          "The human need, AI role, intended benefit, exclusions, interaction principles, decision boundaries, accountable owner, and practical implications for design and delivery.",
+          "The human need, intended benefit, AI role, exclusions, interaction rules, decision boundaries, accountable owner, and implications for delivery.",
       },
       {
-        title: "End-to-end experience blueprint",
+        title: "End-to-end AI service blueprint",
         description:
-          "The visible journey connected to data, models, tools, workflows, employees, policies, handoffs, exceptions, recovery, and the operating dependencies behind each moment.",
+          "The visible journey connected to data, models, tools, workflows, employees, policies, handoffs, exceptions, recovery, and operating dependencies.",
       },
       {
-        title: "Interaction and handoff specification",
+        title: "Interaction and handoff requirements",
         description:
-          "Expectations, context, disclosure, evidence, uncertainty, controls, confirmations, accessibility, escalation, human support, continuity, and recovery behavior.",
+          "Disclosure, context, evidence, uncertainty, controls, confirmation, accessibility, escalation, human support, continuity, and recovery behavior.",
       },
       {
         title: "Evaluation and governance plan",
         description:
-          "Representative cases, quality criteria, experience measures, outcome measures, review behavior, monitoring, complaints, incident triggers, owners, and reassessment cadence.",
+          "Representative cases, quality criteria, experience measures, outcomes, review behavior, monitoring, complaints, incident triggers, owners, and review cadence.",
       },
     ],
   },
   fit: {
-    eyebrow: "Engagement fit",
-    title: "Use AI Experience when AI changes a consequential interaction.",
+    eyebrow: "When it fits",
+    title: "Use AI Experience when AI changes a meaningful interaction.",
     introduction:
-      "This work is useful when AI will shape a customer, employee, citizen, patient, member, or partner experience and the organization can inspect the complete workflow behind it. It is a limited fit when the goal is only to add an interface, create a demonstration, or increase automation without resolving accountability and recovery.",
+      "This work fits when AI shapes how a customer, employee, patient, member, citizen, or partner gets information, makes a decision, completes a task, or receives support. It is not the right fit for a demo or an automation target that ignores accountability and recovery.",
     items: [
-      "A bounded AI use case changes how a person receives information, makes a decision, completes a task, or accesses support.",
-      "The experience depends on identifiable data, source material, models, tools, workflows, and human roles.",
-      "Trust, comprehension, accessibility, fairness, privacy, or human escalation materially affects the outcome.",
-      "Product, design, operating, technical, risk, data, and frontline owners can make decisions together.",
-      "The organization is willing to narrow or stop the experience when evidence does not support responsible use.",
+      "A bounded AI use case changes a meaningful task, decision, or service interaction.",
+      "The experience depends on identifiable data, sources, models, tools, workflows, and human roles.",
+      "Trust, comprehension, accessibility, fairness, privacy, or escalation affects the outcome.",
+      "Product, design, operations, technical, risk, data, and frontline owners can decide together.",
+      "The organization will narrow or stop the experience when the evidence does not support responsible use.",
     ],
   },
   diagnostics: {
     eyebrow: "Related paths",
-    title: "Choose the next path based on the unresolved experience condition.",
+    title: "Choose the next step based on what is still unresolved.",
     items: [
       {
         title: "AI Service Readiness Review",
         href: "/services/ai-service-readiness-review/",
         useWhen:
-          "A proposed use case needs a readiness decision across workflow, data, human oversight, safeguards, adoption, measurement, and implementation conditions.",
+          "A use case needs a readiness decision across workflow, data, human oversight, safeguards, adoption, measurement, and implementation conditions.",
       },
       {
         title: "Experience Foundations",
         href: "/product/experience-foundations/",
         useWhen:
-          "Teams need shared customer, journey, principle, ownership, and measurement decisions before defining AI’s role in the broader experience.",
+          "Teams need shared customer, journey, ownership, service, and measurement decisions before defining AI’s role in the broader experience.",
       },
       {
         title: "Agent Copilots",
         href: "/ai-tooling/co-pilot/",
         useWhen:
-          "The intended experience supports an employee or specialist with context, recommendations, bounded actions, and accountable human judgment.",
+          "The experience supports an employee or specialist with context, recommendations, bounded actions, and accountable human judgment.",
       },
     ],
   },
