@@ -7,21 +7,21 @@ import Layout from "../../layouts/Layout.astro";
 const pointsOfView = [
   {
     number: "01",
-    title: "Customer experience is an operating system",
+    title: "Customer experience reflects how the work gets done",
     description:
-      "The experience customers receive is shaped by ownership, decisions, handoffs, data, tools, and frontline judgment. Improving one touchpoint without understanding that system rarely resolves the underlying friction.",
+      "Customers feel the effects of ownership, handoffs, data, tools, and frontline decisions. Fixing one touchpoint without looking at the work around it rarely solves the real problem.",
   },
   {
     number: "02",
-    title: "Diagnosis protects the next investment",
+    title: "A good diagnosis protects your next investment",
     description:
-      "A focused diagnostic makes the operating problem visible before a larger program, platform decision, or AI implementation begins. It establishes what is known, what remains uncertain, and which decision matters first.",
+      "Before you buy a platform, launch a program, or expand AI, a focused diagnostic shows what is known, what is still unclear, and which decision matters first.",
   },
   {
     number: "03",
-    title: "AI readiness is operational readiness",
+    title: "AI readiness starts with the workflow",
     description:
-      "Responsible AI adoption depends on a useful customer or operating decision, reliable inputs, accountable owners, usable workflows, human oversight, and measures that reveal when the system needs correction.",
+      "Useful AI needs a clear purpose, reliable inputs, clear owners, a usable workflow, human review, and a way to catch when something goes wrong.",
   },
 ];
 
@@ -30,25 +30,25 @@ const workingPrinciples = [
     number: "01",
     title: "Follow the evidence",
     description:
-      "Separate observed conditions from interpretation, state the limits of what the evidence supports, and keep recommendations traceable to the problem they are meant to improve.",
+      "Separate what you can observe from what people assume. Be clear about what the evidence supports and where uncertainty remains.",
   },
   {
     number: "02",
-    title: "Make ownership explicit",
+    title: "Name the owner",
     description:
-      "Clarify who makes the decision, who performs the work, who handles exceptions, and who remains accountable for the customer and operating outcome.",
+      "Make it clear who decides, who does the work, who handles exceptions, and who owns the customer outcome.",
   },
   {
     number: "03",
-    title: "Design for actual work",
+    title: "Design for the work people actually do",
     description:
-      "Use the real constraints of teams, systems, incentives, data, and frontline behavior instead of assuming that a process diagram or technology launch will change practice by itself.",
+      "Work with the real limits of teams, systems, incentives, data, and frontline behavior. A process diagram or technology launch will not change the work by itself.",
   },
   {
     number: "04",
-    title: "Measure the change",
+    title: "Measure what changed",
     description:
-      "Define the customer, adoption, workflow, and performance signals that should move, then review whether the operating change is working and what needs to adapt next.",
+      "Choose the customer, adoption, workflow, and performance measures that should improve. Review the results and adjust.",
   },
 ];
 
@@ -56,43 +56,43 @@ const systemLayers = [
   {
     label: "Customer reality",
     description:
-      "The friction, risk, expectation, or consequence customers actually experience.",
+      "What customers are trying to do, where they get stuck, and what the problem costs them.",
   },
   {
     label: "Frontline work",
     description:
-      "The decisions, handoffs, judgment, and service behaviors that shape the response.",
+      "The decisions, handoffs, and service habits that shape what happens next.",
   },
   {
     label: "Systems and signals",
     description:
-      "The CRM data, workflows, automation, and feedback that help people act or obscure what matters.",
+      "The CRM data, workflows, automation, and feedback people rely on to act.",
   },
   {
-    label: "Ownership and measurement",
+    label: "Ownership and results",
     description:
-      "The decision rights, governance, operating measures, and review rhythm that sustain change.",
+      "Who makes the decision, who owns the outcome, and how the team knows the change worked.",
   },
 ];
 
 const cadenceLabBrings = [
-  "A bounded diagnostic question instead of a broad capability exercise.",
-  "A cross-functional view of customer friction, workflow, systems, and ownership.",
-  "A practical distinction between evidence, assumptions, constraints, and decisions.",
-  "A sequenced recommendation that connects the immediate issue to a usable next step.",
+  "One clear diagnostic question, not a broad consulting exercise.",
+  "A view across customer friction, teams, workflows, systems, and ownership.",
+  "A clear separation between facts, assumptions, limits, and decisions.",
+  "A practical recommendation that shows what to do first and what can wait.",
 ];
 
 const engagementRequires = [
-  "A consequential customer or operating problem worth understanding.",
-  "Access to the people and evidence surrounding the work.",
-  "An accountable sponsor who can resolve cross-functional decisions.",
-  "A willingness to change ownership or workflow when the evidence calls for it.",
+  "A customer or business problem worth solving.",
+  "Access to the people, data, and examples around the work.",
+  "A sponsor who can help teams make decisions together.",
+  "A willingness to change ownership or workflows when the evidence points there.",
 ];
 ---
 
 <Layout
-  title="About | Cadence Lab"
-  description="Learn how Cadence Lab approaches customer experience systems, CRM workflows, lifecycle risk, and responsible AI adoption."
+  title="About Matt Rabah and Cadence Lab | Customer Experience"
+  description="Meet Matt Rabah, founder of Cadence Lab. Learn how he helps organizations fix customer experience problems across teams, CRM workflows, lifecycle risk, and AI."
   canonicalURL="/about/"
   pageType="website">
   <NavHeader />
@@ -104,18 +104,18 @@ const engagementRequires = [
           <p class="eyebrow">About Cadence Lab</p>
 
           <h1 id="about-title">
-            Better customer experience requires a better system for work.
+            Customer problems don’t stay in one department.
           </h1>
 
           <p class="hero-lead">
-            Cadence Lab helps organizations understand the operating conditions
-            behind customer friction, rebuild the workflows around them, and
-            create a responsible path from strategy to measurable change.
+            I’m Matt Rabah. I help organizations find where customer experience
+            breaks across teams, systems, and decisions, then turn what we learn
+            into practical change.
           </p>
 
           <div class="hero-actions" aria-label="About page actions">
             <a class="button button-primary" href="/services/">
-              Review the services
+              See how I can help
             </a>
 
             <a class="button button-text" href="/fit-check/">
@@ -129,22 +129,23 @@ const engagementRequires = [
           <p id="premise-note-title" class="note-label">The premise</p>
 
           <p>
-            Customer experience is not produced by a channel, platform, or
-            department alone. It emerges from the system connecting all three.
+            Customers experience one company, even when the work crosses many
+            teams. That’s why fixing one touchpoint rarely fixes the whole
+            problem.
           </p>
 
           <dl>
             <div>
               <dt>Start with</dt>
-              <dd>The operating problem</dd>
+              <dd>What customers are experiencing</dd>
             </div>
             <div>
               <dt>Make visible</dt>
-              <dd>Evidence, ownership, and constraints</dd>
+              <dd>Where the work breaks down</dd>
             </div>
             <div>
               <dt>Decide</dt>
-              <dd>The next useful change</dd>
+              <dd>What to fix first</dd>
             </div>
           </dl>
         </aside>
@@ -155,9 +156,9 @@ const engagementRequires = [
       items={[
         { label: "Founder", href: "#founder" },
         { label: "Point of view", href: "#point-of-view" },
-        { label: "Working standard", href: "#working-standard" },
+        { label: "How I work", href: "#working-standard" },
         { label: "System view", href: "#system-view" },
-        { label: "Engagement fit", href: "#engagement-fit" },
+        { label: "Fit", href: "#engagement-fit" },
       ]}
     />
 
@@ -185,10 +186,9 @@ const engagementRequires = [
             <p class="eyebrow">Founder &amp; CXO</p>
             <h2 id="founder-title">Matt Rabah</h2>
             <p>
-              Matt has spent 12 years working in customer experience management
-              and customer success management. He founded Cadence Lab to help
-              organizations understand why customer problems persist and make
-              practical changes to the way the work gets done.
+              I’ve spent 12 years in customer experience and customer success. I
+              started Cadence Lab to help organizations understand why customer
+              problems keep coming back and fix the way the work gets done.
             </p>
           </div>
         </div>
@@ -196,35 +196,35 @@ const engagementRequires = [
         <div class="official-bio" aria-labelledby="official-bio-title">
           <p class="eyebrow">Official bio</p>
           <h2 id="official-bio-title">
-            Experience across the customer system.
+            Experience across the full customer journey.
           </h2>
 
           <div class="bio-copy">
             <p>
               Matt Rabah is the Founder and CXO of Cadence Lab, an independent
-              customer experience practice. He works with organizations on
-              service operations, customer lifecycle programs, CRM workflows,
-              and readiness for practical AI use.
+              customer experience practice. He works directly with organizations
+              on service operations, customer lifecycle programs, CRM workflows,
+              and practical AI adoption.
             </p>
 
             <p>
-              His background includes 12 years in customer experience management
-              and customer success management. He has worked with Salesforce,
-              HubSpot, Gainsight, Zendesk, Delighted, and Oracle.
+              His background includes 12 years in customer experience and
+              customer success. His work has included Salesforce, HubSpot,
+              Gainsight, Zendesk, Delighted, and Oracle.
             </p>
 
             <p>
-              Matt's AI experience includes ChatGPT, Gemini, Claude, local
+              Matt’s AI experience includes ChatGPT, Gemini, Claude, local
               models, Salesforce Agentforce, and building task-specific agents.
-              He helps organizations identify useful applications, define the
-              role of human oversight, and prepare the workflows and data those
-              applications depend on.
+              He helps organizations choose useful applications, define where
+              people need to stay involved, and prepare the workflows and data
+              those applications need.
             </p>
 
             <p>
               Cadence Lab is a solo practice, and Matt leads every engagement.
-              Clients work directly with him from the initial diagnosis through
-              recommendations, workflow definition, and measurement planning.
+              Clients work with him from the first diagnosis through
+              recommendations, workflow design, and measurement planning.
             </p>
           </div>
         </div>
@@ -240,15 +240,15 @@ const engagementRequires = [
           <div>
             <p class="eyebrow">Point of view</p>
             <h2 id="point-of-view-title">
-              The visible problem is often produced somewhere else.
+              The problem you see isn’t always where the problem starts.
             </h2>
           </div>
 
           <p>
-            A customer issue may surface in service, retention, CRM reporting,
-            or an AI initiative while its cause sits across several teams and
-            decisions. Cadence Lab works across those boundaries without losing
-            sight of the customer consequence.
+            A problem may show up in service, retention, CRM reporting, or an AI
+            project. Its cause may sit in another team, system, rule, or
+            decision. I follow those connections without losing sight of what
+            the customer experiences.
           </p>
         </div>
 
@@ -278,13 +278,13 @@ const engagementRequires = [
       aria-labelledby="working-standard-title">
       <div class="page-container standard-layout">
         <div class="standard-intro">
-          <p class="eyebrow eyebrow-inverse">Working standard</p>
+          <p class="eyebrow eyebrow-inverse">How I work</p>
           <h2 id="working-standard-title">
-            Recommendations should survive contact with the work.
+            The recommendation has to work in real life.
           </h2>
           <p>
-            The goal is a clear decision that people can own, implement,
-            evaluate, and revise as the evidence changes.
+            The goal is a decision people can understand, own, carry out, and
+            improve as new evidence appears.
           </p>
         </div>
 
@@ -314,12 +314,12 @@ const engagementRequires = [
         <div class="system-intro">
           <p class="eyebrow">System view</p>
           <h2 id="system-view-title">
-            Connect the experience to the conditions that create it.
+            Follow the problem from the customer to the root cause.
           </h2>
           <p>
-            Cadence Lab traces a problem through four connected layers. The
-            sequence keeps the customer consequence visible while the work moves
-            deeper into workflows, technology, accountability, and measurement.
+            I trace each problem through four connected layers. This keeps the
+            customer experience visible while we look deeper into the work,
+            technology, ownership, and results.
           </p>
         </div>
 
@@ -350,23 +350,23 @@ const engagementRequires = [
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
-            <p class="eyebrow">Engagement boundaries</p>
+            <p class="eyebrow">Working together</p>
             <h2 id="boundaries-title">
-              Useful work depends on candor from both sides.
+              The best work starts with honesty on both sides.
             </h2>
           </div>
 
           <p>
-            A diagnostic engagement is most useful when the organization wants
-            to understand the problem before committing to a predetermined
-            solution and can act on what the evidence reveals.
+            A diagnostic works best when your team wants to understand the
+            problem before choosing a solution and is willing to act on what we
+            find.
           </p>
         </div>
 
         <div class="boundary-grid">
           <article class="boundary-panel boundary-panel-primary">
             <p class="boundary-label">Cadence Lab brings</p>
-            <h3>A disciplined way to make the problem actionable</h3>
+            <h3>A clear way to turn a messy problem into a decision</h3>
             <ul role="list">
               {cadenceLabBrings.map((item) => <li>{item}</li>)}
             </ul>
@@ -376,7 +376,7 @@ const engagementRequires = [
             <p class="boundary-label boundary-label-muted">
               The engagement requires
             </p>
-            <h3>Conditions that support an honest diagnosis</h3>
+            <h3>The access and authority to get to the truth</h3>
             <ul role="list">
               {engagementRequires.map((item) => <li>{item}</li>)}
             </ul>
@@ -388,18 +388,17 @@ const engagementRequires = [
     <section class="about-close" aria-labelledby="about-close-title">
       <div class="page-container close-layout">
         <div>
-          <p class="eyebrow">Start with fit</p>
+          <p class="eyebrow">Start with an honest fit check</p>
           <h2 id="about-close-title">
-            The first useful answer may be that a different path makes more
-            sense.
+            Sometimes the honest answer is that I’m not the right fit.
           </h2>
         </div>
 
         <div class="close-action">
           <p>
-            Share the customer or operating problem, the people and systems
-            involved, and the decision that needs to be made. The fit check is
-            designed to clarify whether Cadence Lab is an appropriate next step.
+            Share what customers are experiencing, which people and systems are
+            involved, and what needs to change. I’ll review it and tell you
+            plainly whether Cadence Lab is a useful next step.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
