@@ -13,41 +13,41 @@ import Footer from "../components/Footer.astro";
 const operatingStages = [
   {
     step: "01",
-    title: "Diagnose the operating environment",
+    title: "Find what's really happening",
     description:
-      "Trace the customer problem through teams, systems, data, decisions, and frontline work before prescribing a solution.",
+      "Follow the customer problem through teams, systems, data, handoffs, and frontline work.",
   },
   {
     step: "02",
-    title: "Align the decisions",
+    title: "Agree on what needs to change",
     description:
-      "Define the outcome, accountable owners, decision rights, constraints, and sequence of changes before implementation begins.",
+      "Set the outcome, owner, boundaries, and order of work before implementation starts.",
   },
   {
     step: "03",
-    title: "Rebuild the workflow",
+    title: "Fix the way work gets done",
     description:
-      "Translate the decision into usable handoffs, CRM requirements, governance, team practices, and appropriate AI support.",
+      "Turn the decision into better handoffs, CRM workflows, team practices, governance, and AI support.",
   },
   {
     step: "04",
-    title: "Measure and adapt",
+    title: "Track what changes",
     description:
-      "Connect customer, workflow, adoption, and performance signals to the change, then refine the system as evidence develops.",
+      "Measure customer results, team adoption, and workflow performance. Then adjust based on what the data shows.",
   },
 ];
 
 const fitBenefits = [
-  "Customer friction materially affects retention, revenue, service quality, or team capacity.",
-  "The problem spans functions, systems, or decision layers and cannot be solved by one team in isolation.",
-  "Leadership can sponsor cross-functional decisions and assign accountable owners.",
-  "The organization is willing to change workflows instead of placing new technology on top of a broken process.",
+  "Customer friction is hurting retention, revenue, service quality, or team capacity.",
+  "The problem crosses teams or systems, and one group cannot solve it alone.",
+  "A leader can sponsor the work and assign clear owners.",
+  "Your organization is willing to fix the workflow, not just add another tool.",
 ];
 ---
 
 <Layout
-  title="Cadence Lab | Customer experience operating systems for the AI era"
-  description="Cadence Lab diagnoses onboarding drift, lifecycle risk, unreliable CRM workflows, and AI service readiness, then turns evidence into practical operating change."
+  title="Customer Experience Systems for the AI Era | Cadence Lab"
+  description="Cadence Lab helps organizations find and fix onboarding drift, quiet accounts, unreliable CRM workflows, service handoffs, and AI readiness problems."
   canonicalURL="/"
   pageType="website">
   <NavHeader />
@@ -57,38 +57,38 @@ const fitBenefits = [
     class="min-h-screen bg-background text-foreground"
     tabindex="-1">
     <Hero
-      eyebrow="Customer Experience Operating Systems"
-      heading="Customer experience operating systems for the AI era."
-      description="Cadence Lab helps organizations resolve onboarding drift, quiet accounts, unreliable CRM signals, and service handoffs, then build the operating conditions required for responsible AI adoption."
-      primaryCta={{ text: "Start a Fit Check™", url: "/fit-check/" }}
-      secondaryCta={{ text: "Review diagnostic offers", url: "#diagnostics" }}
+      eyebrow="CX without the BS."
+      heading="Fix the systems behind customer friction."
+      description="Cadence Lab helps you find the real cause of onboarding drift, quiet accounts, broken CRM signals, and AI service workflows that aren’t ready for real use. You’ll know what to fix first and why."
+      primaryCta={{ text: "Start the Fit Check™", url: "/fit-check/" }}
+      secondaryCta={{ text: "See the diagnostic offers", url: "#diagnostics" }}
     />
 
     <Logos />
 
     <Stats
-      eyebrow="Diagnostic Impact"
-      heading="Choose the operating problem before choosing the technology"
-      subheading="Each diagnostic starts with one consequential operating question, builds a shared evidence base, and ends with a practical decision."
+      eyebrow="Diagnostic Services"
+      heading="Start with the problem, not the platform."
+      subheading="Each diagnostic answers one important question: What is causing the problem, and what should your team fix first?"
     />
 
     <OperatingModel
-      eyebrow="Operating Model"
-      heading="Let the evidence determine the recommendation"
-      subheading="Cadence Lab connects strategy to the way work is owned, performed, governed, and measured."
+      eyebrow="How the Work Happens"
+      heading="Find the cause. Make the next move clear."
+      subheading="We connect strategy to the people, systems, and decisions that shape the customer experience."
       steps={operatingStages}
     />
 
     <FAQ
-      eyebrow="Frequently Asked Questions"
-      heading="Clear answers about diagnostic engagements."
-      description="Everything you need to know about scope, deliverables, and how Cadence Lab partners with your executive team."
+      eyebrow="Common Questions"
+      heading="What to expect from a diagnostic"
+      description="Clear answers about timing, access, deliverables, and what happens after the review."
     />
 
     <FitCheckForm
       badge="Fit Check™"
-      heading="Decide whether the problem is ready for a diagnostic"
-      description="Share the operating problem, the teams and systems involved, and the outcome that needs to change. Cadence Lab will assess fit directly."
+      heading="Is this the right problem to solve together?"
+      description="Tell me what’s getting in the customer’s way, which teams and systems are involved, and what needs to change. I’ll review it and tell you plainly whether Cadence Lab can help."
       benefits={fitBenefits}
     />
   </main>

@@ -8,27 +8,27 @@ import Layout from "../../../layouts/Layout.astro";
 const diagnosticQuestions = [
   {
     number: "01",
-    question: "Where does the CRM stop supporting the work?",
+    question: "Where does the CRM stop helping?",
     explanation:
-      "Trace the actual customer workflow through records, fields, queues, handoffs, approvals, and outside tools to find where the system no longer guides coordinated action.",
+      "Follow the real customer workflow through records, fields, queues, handoffs, approvals, and outside tools to find where the system gets in the way.",
   },
   {
     number: "02",
-    question: "Which data and signals can teams trust?",
+    question: "Which data can your teams trust?",
     explanation:
-      "Assess whether required information is clear, current, consistently used, and connected to the decisions people are expected to make.",
+      "Check whether the information is clear, current, used the same way across teams, and connected to real decisions.",
   },
   {
     number: "03",
-    question: "Which rules, automations, or handoffs create friction?",
+    question: "What creates extra work?",
     explanation:
-      "Identify routing gaps, duplicate effort, unclear ownership, brittle automation, and process requirements that encourage teams to work around the CRM.",
+      "Find routing gaps, duplicate effort, unclear ownership, weak automation, and process rules that push teams outside the CRM.",
   },
   {
     number: "04",
-    question: "What should the organization repair first?",
+    question: "What should you fix first?",
     explanation:
-      "Sequence workflow, data, ownership, reporting, and configuration changes so the CRM becomes more useful without expanding unnecessary complexity.",
+      "Set the right order for workflow, data, ownership, reporting, and configuration changes without adding more complexity.",
   },
 ];
 
@@ -36,32 +36,32 @@ const evidenceAreas = [
   {
     title: "Actual customer workflows",
     description:
-      "How work moves from trigger to completion across sales, service, success, operations, and other teams, including steps performed outside the documented process.",
+      "How work moves from start to finish across sales, service, success, operations, and other teams, including steps outside the official process.",
   },
   {
     title: "Fields, records, and data quality",
     description:
-      "Required inputs, definitions, duplicate or missing information, record ownership, data freshness, and whether the available context supports customer decisions.",
+      "Required fields, definitions, missing or duplicate information, record ownership, data age, and whether teams have enough context to decide.",
   },
   {
     title: "Automation and routing",
     description:
-      "Assignment rules, alerts, tasks, approvals, integrations, sequences, and other automation that shapes who acts, when they act, and what information follows the work.",
+      "Assignment rules, alerts, tasks, approvals, integrations, and sequences that shape who acts, when they act, and what context follows the work.",
   },
   {
     title: "Ownership and handoffs",
     description:
-      "Accountabilities, queue management, escalation authority, cross-functional transfers, and places where work becomes visible without becoming owned.",
+      "Who owns each step, how queues and escalations work, and where work becomes visible without anyone taking responsibility.",
   },
   {
     title: "Reporting and measurement",
     description:
-      "Dashboards, pipeline or service measures, lifecycle reporting, operational reviews, and whether current metrics reveal decisions and outcomes or only recorded activity.",
+      "Dashboards, pipeline and service measures, lifecycle reports, and whether current metrics show decisions and outcomes or only activity.",
   },
   {
     title: "Adoption and workarounds",
     description:
-      "How frontline teams interpret the system, where they duplicate effort, which spreadsheets or messages replace CRM behavior, and why established workarounds persist.",
+      "How frontline teams use the system, where they repeat work, which spreadsheets or messages replace it, and why those workarounds remain.",
   },
 ];
 
@@ -70,56 +70,57 @@ const deliverables = [
     number: "01",
     title: "Current-state workflow map",
     description:
-      "A shared view of the real customer workflow across roles, records, automations, systems, decisions, handoffs, and known workarounds.",
+      "A shared view of the real customer workflow across roles, records, automation, systems, decisions, handoffs, and known workarounds.",
     decision:
-      "Where the CRM supports the operating model and where the workflow breaks, duplicates effort, or loses accountability.",
+      "Where the CRM supports the work and where it causes breakdowns, duplicate effort, or lost ownership.",
   },
   {
     number: "02",
     title: "Data and adoption findings",
     description:
-      "An evidence-based assessment of field use, data quality, signal reliability, user behavior, reporting gaps, and the reasons teams route around the system.",
+      "An evidence-based review of field use, data quality, signal reliability, user behavior, reporting gaps, and why teams work around the system.",
     decision:
-      "Which problems come from configuration, process design, ownership, training, incentives, or missing operating context.",
+      "Which problems come from configuration, process, ownership, training, incentives, or missing context.",
   },
   {
     number: "03",
     title: "Prioritized remediation plan",
     description:
-      "A sequenced set of workflow, data, automation, reporting, and governance changes ranked by operating consequence and dependency.",
+      "An ordered set of workflow, data, automation, reporting, and governance changes ranked by impact and dependency.",
     decision:
-      "What to correct first, what should wait, and which low-value complexity should be removed.",
+      "What to fix first, what can wait, and which low-value complexity to remove.",
   },
   {
     number: "04",
     title: "Target workflow requirements",
     description:
-      "Clear requirements for the next useful version of the workflow, including responsibilities, decision points, signals, system behavior, and adoption conditions.",
+      "Clear requirements for the next useful workflow, including owners, decisions, signals, system behavior, and adoption needs.",
     decision:
-      "What the CRM must enable before implementation, automation, or platform investment expands.",
+      "What the CRM must support before implementation, automation, or platform investment grows.",
   },
 ];
 
 const strongFit = [
-  "The CRM records activity but does not reliably guide coordinated customer work.",
-  "Teams depend on spreadsheets, messages, manual reconciliation, or individual memory to complete important workflows.",
-  "A sponsor can align business, customer-facing, operational, data, and technical owners around workflow decisions.",
-  "The organization is willing to change process and ownership as well as fields, dashboards, or automation.",
+  "The CRM records activity but does not help teams coordinate customer work.",
+  "Teams depend on spreadsheets, messages, manual checks, or memory to complete important workflows.",
+  "A sponsor can bring business, customer-facing, operations, data, and technical owners together.",
+  "Your organization is willing to change the process and ownership, not just fields, dashboards, or automation.",
 ];
 
 const limitedFit = [
-  "The request is limited to implementing a predetermined configuration with no review of the operating workflow.",
-  "The issue is one isolated technical defect with a known owner and a clearly tested fix.",
-  "Frontline users, process owners, CRM administrators, or relevant records cannot be included in the review.",
-  "Success measures stop at feature delivery, field completion, or login activity and leave out useful work and customer outcomes.",
+  "You only need a planned configuration built and do not want to review the workflow behind it.",
+  "The issue is one technical defect with a known owner and a tested fix.",
+  "Frontline users, process owners, CRM administrators, or needed records cannot be part of the review.",
+  "Success is measured only by features, completed fields, or logins, not by useful work and customer outcomes.",
 ];
 ---
 
 <Layout
   title="CRM Workflow Audit | Cadence Lab"
-  description="Find where CRM workflows, data, automation, and ownership stop supporting coordinated customer work. Determine what to repair first."
+  description="Find where CRM workflows, data, automation, and ownership get in the way of customer work. See what to fix first with a CRM Workflow Audit."
   canonicalURL="/services/crm-workflow-audit/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema
     items={[
@@ -140,12 +141,11 @@ const limitedFit = [
           </nav>
 
           <p class="eyebrow">Diagnostic 03</p>
-          <h1 id="diagnostic-title">Make the CRM useful during the work.</h1>
+          <h1 id="diagnostic-title">Make your CRM support the work.</h1>
           <p class="hero-lead">
-            The CRM Workflow Audit examines actual workflows, field use, data
-            quality, automation, handoffs, reporting, and frontline behavior so
-            the system can support clearer decisions and more accountable
-            customer work.
+            The CRM Workflow Audit shows where workflows, data, automation,
+            handoffs, and ownership break down. You’ll see why teams work around
+            the system and what to fix first so the CRM helps them do the job.
           </p>
 
           <div class="hero-actions" aria-label="CRM Workflow Audit actions">
@@ -159,16 +159,15 @@ const limitedFit = [
         </div>
 
         <aside class="trigger" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="trigger-label">Recognizable trigger</p>
+          <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
-            The CRM contains fields, notes, activity, dashboards, and
-            automation, yet teams still rely on spreadsheets, messages, and
+            Your CRM is full of fields, notes, activity, dashboards, and
+            automation. Your teams still rely on spreadsheets, messages, and
             memory to move customer work forward.
           </p>
           <p>
-            Records describe activity without reliably showing the next
-            decision, the accountable owner, or the context another team needs
-            to act.
+            Records show what happened, but not the next decision, who owns it,
+            or what another team needs to act.
           </p>
         </aside>
       </div>
@@ -187,19 +186,20 @@ const limitedFit = [
     <section
       id="questions"
       class="questions section-block"
-      aria-labelledby="questions-title">
+      aria-labelledby="questions-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Questions answered</p>
             <h2 id="questions-title">
-              Turn recorded activity into a usable operating workflow.
+              Turn CRM activity into a workflow people can use.
             </h2>
           </div>
           <p>
-            The audit starts with the work teams must complete and the decisions
-            the CRM should support. From there, the audit traces where process,
-            data, configuration, and ownership diverge from that need.
+            We start with the work your teams need to complete and the decisions
+            the CRM should support. Then we trace where the process, data,
+            configuration, and ownership fall short.
           </p>
         </div>
 
@@ -226,20 +226,18 @@ const limitedFit = [
     <section
       id="scope"
       class="scope section-block"
-      aria-labelledby="scope-title">
+      aria-labelledby="scope-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Scope and evidence</p>
-            <h2 id="scope-title">
-              Examine how the CRM behaves inside the real workflow.
-            </h2>
+            <h2 id="scope-title">See how the CRM works in real life.</h2>
           </div>
           <p>
-            The exact evidence depends on the workflow and what the organization
-            can responsibly provide. Cadence Lab compares documented process and
-            system design with actual records, behavior, handoffs, and operating
-            decisions.
+            The evidence depends on the workflow and what your team can share. I
+            compare the official process and system design with real records,
+            behavior, handoffs, and decisions.
           </p>
         </div>
 
@@ -262,10 +260,10 @@ const limitedFit = [
         <aside class="scope-note" aria-labelledby="scope-note-title">
           <h3 id="scope-note-title">Workflow before configuration</h3>
           <p>
-            A technically valid configuration can still support the wrong
-            process. The audit separates workflow requirements from platform
-            habits so changes are justified by useful work, clear ownership, and
-            reliable customer context.
+            A valid configuration can still support the wrong process. The audit
+            separates real workflow needs from platform habits so every change
+            supports useful work, clear ownership, and reliable customer
+            context.
           </p>
         </aside>
       </div>
@@ -276,13 +274,12 @@ const limitedFit = [
         <div class="outputs-intro">
           <p class="eyebrow eyebrow-inverse">Deliverables and decisions</p>
           <h2 id="outputs-title">
-            Leave with a clearer workflow and a sequenced repair plan.
+            Get a clear workflow and a practical repair plan.
           </h2>
           <p>
-            The deliverables connect observed CRM behavior to operating
-            decisions. Each output clarifies where work breaks, why teams
-            compensate, what the system should enable, and which changes deserve
-            priority.
+            You’ll get more than a list of system issues. Each deliverable shows
+            where work breaks, why teams compensate, what the CRM should
+            support, and which changes matter most.
           </p>
         </div>
 
@@ -316,22 +313,21 @@ const limitedFit = [
           <div>
             <p class="eyebrow">Engagement fit</p>
             <h2 id="fit-title">
-              Use this audit when the CRM records work but does not reliably
-              guide it.
+              Use this audit when teams work around the CRM.
             </h2>
           </div>
           <p>
-            A useful audit needs access to frontline users, process owners,
-            administrators, records, and the decisions surrounding customer
-            work. It also needs permission to challenge both process and
-            configuration assumptions.
+            A useful audit needs access to frontline users, process owners, CRM
+            administrators, records, and the decisions behind customer work.
+            Your organization must also be open to changing the process, not
+            only the system.
           </p>
         </div>
 
         <div class="fit-grid">
           <article class="fit-panel fit-panel-strong">
             <p class="fit-label">Strong fit</p>
-            <h3>Conditions that support a useful diagnosis</h3>
+            <h3>This is likely a good fit when</h3>
             <ul role="list">
               {strongFit.map((criterion) => <li>{criterion}</li>)}
             </ul>
@@ -339,7 +335,7 @@ const limitedFit = [
 
           <article class="fit-panel">
             <p class="fit-label fit-label-muted">Limited fit</p>
-            <h3>Conditions that point to another path</h3>
+            <h3>Another path may work better when</h3>
             <ul role="list">
               {limitedFit.map((criterion) => <li>{criterion}</li>)}
             </ul>
@@ -351,35 +347,33 @@ const limitedFit = [
     <section
       id="next-step"
       class="next-step section-block"
-      aria-labelledby="next-step-title">
+      aria-labelledby="next-step-title"
+    >
       <div class="page-container next-step-layout">
         <div>
           <p class="eyebrow">Next step</p>
-          <h2 id="next-step-title">Show where the workflow breaks down.</h2>
+          <h2 id="next-step-title">Tell me where the CRM gets in the way.</h2>
         </div>
 
         <div class="next-step-copy">
           <p>
-            Share the customer workflow, affected teams, current CRM behavior,
-            known workarounds, and the decision the organization needs to
-            improve. Cadence Lab will assess whether this audit is the right
-            entry point and say directly when a narrower technical fix makes
-            more sense.
+            Share the customer workflow, teams involved, current CRM behavior,
+            known workarounds, and the decision you need to improve. I’ll tell
+            you plainly whether this audit is the right place to start or if a
+            smaller technical fix makes more sense.
           </p>
 
           <dl class="next-step-details">
             <div>
               <dt>Useful context</dt>
               <dd>
-                Workflow problem, affected teams, CRM context, and accountable
+                Workflow problem, teams involved, CRM context, and accountable
                 sponsor
               </dd>
             </div>
             <div>
               <dt>Expected outcome</dt>
-              <dd>
-                A direct recommendation about fit and the appropriate next step
-              </dd>
+              <dd>A direct answer about fit and the best next step</dd>
             </div>
           </dl>
 
