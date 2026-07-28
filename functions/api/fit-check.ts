@@ -31,31 +31,31 @@ interface PagesContext {
 const MAX_BODY_BYTES = 32_768;
 
 const environmentOptions: Record<string, string> = {
-  fragmented: "Multiple disconnected systems and inconsistent workflows",
-  transitioning: "Systems or processes are currently being consolidated",
-  "modern-siloed": "Modern tools exist, but teams or workflows remain siloed",
-  established: "Core systems and workflows are established but need improvement",
-  uncertain: "We need help understanding the current state",
+  fragmented: "Teams use disconnected systems and inconsistent workflows",
+  transitioning: "Systems or workflows are being combined or replaced",
+  "modern-siloed": "The tools are modern, but teams or workflows remain siloed",
+  established: "Core systems and workflows are in place but need improvement",
+  uncertain: "We need help making sense of the current state",
 };
 
 const crmOptions: Record<string, string> = {
-  measured: "CRM data is connected to workflows and performance measures",
-  "active-limited": "Data is collected, but its operational use is limited",
-  fragmented: "Data quality or ownership is inconsistent across teams",
-  early: "CRM use is still developing",
-  unknown: "We are not sure how reliable or useful the data is",
+  measured: "It supports workflows and performance decisions",
+  "active-limited": "We collect data, but teams do not use it consistently",
+  fragmented: "Data quality or ownership varies across teams",
+  early: "We are still building how we use the CRM",
+  unknown: "We do not know whether the data is reliable enough",
 };
 
 const leadershipOptions: Record<string, string> = {
   yes: "Yes, an accountable sponsor is involved",
-  developing: "Support exists, but ownership is still developing",
-  no: "No, we are still building internal alignment",
+  developing: "Support exists, but ownership is still taking shape",
+  no: "No, we are still building internal support",
 };
 
 const readinessOptions: Record<string, string> = {
   yes: "Yes, workflow changes are within scope",
   limited: "Possibly, depending on the recommendation",
-  no: "No, the current process must remain largely unchanged",
+  no: "No, the current process must stay mostly unchanged",
 };
 
 function readText(
@@ -77,7 +77,9 @@ function readText(
   } else if (value && value.length < min) {
     errors.push(`${label} must be at least ${min} characters.`);
   } else if (value.length > max) {
-    errors.push(`${label} must be ${max.toLocaleString()} characters or fewer.`);
+    errors.push(
+      `${label} must be ${max.toLocaleString()} characters or fewer.`,
+    );
   }
 
   return value;
@@ -205,15 +207,15 @@ function formatSubmission(submission: FitCheckSubmission): string {
     "CURRENT SITUATION",
     `Primary challenge: ${submission.challenge}`,
     "",
-    `Business impact: ${submission.impact}`,
+    `Useful result: ${submission.impact}`,
     "",
     "OPERATING ENVIRONMENT",
     `Environment: ${submission.environment}`,
-    `Primary platform: ${submission.crm}`,
+    `CRM data usefulness: ${submission.crm}`,
     "",
     "READINESS",
     `Leadership alignment: ${submission.leadership}`,
-    `Timing: ${submission.changeReadiness}`,
+    `Willingness to change: ${submission.changeReadiness}`,
     "",
     "ADDITIONAL CONTEXT",
     submission.additionalContext || "Not provided",
@@ -317,7 +319,7 @@ export const onRequest = async ({
         from: env.FIT_CHECK_FROM_EMAIL,
         to: [env.FIT_CHECK_TO_EMAIL],
         reply_to: submission.email,
-        subject: `Fit Check: ${subjectOrganization} — ${subjectName}`,
+        subject: `Fit Check: ${subjectOrganization} | ${subjectName}`,
         text: formatSubmission(submission),
       }),
     });
