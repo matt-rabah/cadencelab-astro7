@@ -8,177 +8,104 @@ import Layout from "../../../layouts/Layout.astro";
 const visibleSignals = [
   {
     number: "01",
-    title: "One customer has several competing identities",
+    title: "One customer has several identities",
     description:
-      "Accounts, contacts, opportunities, cases, subscriptions, and product records cannot be joined into a reliable view of the relationship.",
+      "Accounts, contacts, cases, and product records don't connect into one reliable view.",
   },
   {
     number: "02",
-    title: "Pipeline stages mean different things to different teams",
+    title: "Pipeline stages change meaning by team",
     description:
-      "The same status reflects different evidence, readiness, risk, or next actions depending on who entered it and which review is underway.",
+      "The same status can mean different evidence, risk, or next steps depending on who entered it.",
   },
   {
     number: "03",
-    title: "Required fields are complete but the context is missing",
+    title: "The fields are complete, but the story is missing",
     description:
-      "Records satisfy configuration rules while the reason for action, customer history, urgency, or unresolved decision remains unclear.",
+      "The record passes validation while the customer's history, urgency, or next decision stays unclear.",
   },
   {
     number: "04",
-    title: "Reports require manual reconciliation before use",
+    title: "Every report needs an explanation",
     description:
-      "Leaders combine exports, spreadsheets, local definitions, and individual explanations before they trust a pipeline or customer view.",
-  },
-  {
-    number: "05",
-    title: "Integrations distribute ambiguity at scale",
-    description:
-      "Duplicate, stale, incomplete, or differently defined information moves across systems and triggers automation without improving the underlying decision.",
-  },
-  {
-    number: "06",
-    title: "Every cleanup decays after the project ends",
-    description:
-      "Records improve temporarily, then return to prior conditions because the workflow, definitions, ownership, and review practices did not change.",
+      "Leaders reconcile exports, spreadsheets, and local definitions before they trust the number.",
   },
 ];
 
 const operatingCauses = [
   {
-    label: "Decision",
-    question: "What decision should the data make easier?",
+    label: "Purpose",
+    question: "What decision is this data meant to support?",
     description:
-      "Fields and reports accumulate without a bounded operating question, leaving teams to collect information that is available but not useful.",
+      "Fields pile up when no one can explain who uses them, when, or why.",
   },
   {
     label: "Definitions",
-    question: "Do teams interpret the record in the same way?",
+    question: "Does the value mean the same thing to every team?",
     description:
-      "Customer, stage, source, risk, activity, ownership, and completion can carry different meanings across functions, systems, and reviews.",
+      "Words like customer, stage, source, risk, and complete often hide different rules.",
   },
   {
     label: "Workflow",
-    question: "Does the process create reliable information as work happens?",
+    question: "Does useful data get created while the work happens?",
     description:
-      "Data quality weakens when entry occurs after the decision, repeats information already captured, or asks people to record context the workflow does not use.",
+      "Quality falls when entry happens later, repeats known information, or adds work without value.",
   },
   {
     label: "Ownership",
-    question: "Who is accountable when information crosses a boundary?",
+    question: "Who fixes the record when systems or teams disagree?",
     description:
-      "Records become stale or contradictory when responsibility for creation, maintenance, correction, acceptance, and exception recovery is unclear.",
-  },
-  {
-    label: "System boundaries",
-    question: "Which source is authoritative for each decision?",
-    description:
-      "Integrations create false confidence when synchronization rules, provenance, timing, conflict handling, and system responsibility remain undefined.",
-  },
-  {
-    label: "Review",
-    question: "How does the organization learn that a signal is unreliable?",
-    description:
-      "Corrections, workarounds, reporting disputes, failed automation, and customer consequences often remain outside the data-governance process.",
-  },
-];
-
-const dataPath = [
-  {
-    phase: "Capture",
-    question: "Where does the customer or operating signal enter?",
-    evidence:
-      "Source, purpose, timing, required evidence, person or system, and initial ownership.",
-  },
-  {
-    phase: "Define",
-    question: "What does the value mean and which decision uses it?",
-    evidence:
-      "Shared definition, allowed values, business rule, provenance, and known limitations.",
-  },
-  {
-    phase: "Transfer",
-    question: "How does the information move across records and systems?",
-    evidence:
-      "Mapping, matching, synchronization, transformations, conflict rules, and elapsed time.",
-  },
-  {
-    phase: "Act",
-    question: "Who relies on the signal and what happens next?",
-    evidence:
-      "Owner, workflow, automation, customer action, approval, exception, and consequence.",
-  },
-  {
-    phase: "Review",
-    question: "Can the organization tell whether the signal was useful?",
-    evidence:
-      "Correction, disagreement, outcome, failure, feedback, stewardship, and changed rules.",
+      "Records decay when no one owns creation, acceptance, correction, and exceptions across boundaries.",
   },
 ];
 
 const evidenceSources = [
   {
-    title: "Records and relationships",
+    title: "Real decisions",
     description:
-      "Representative accounts, contacts, opportunities, cases, lifecycle records, product or service records, and the links expected to connect them.",
+      "Start with the decisions teams can't make confidently and identify the signals each one needs.",
   },
   {
-    title: "Definitions and field behavior",
+    title: "Records and definitions",
     description:
-      "Business meaning, allowed values, required fields, formulas, defaults, completion rules, help text, and differences between intended and actual use.",
+      "Inspect representative records, relationships, field rules, and the meaning teams give each value.",
   },
   {
-    title: "Workflow and ownership changes",
+    title: "Workflow and ownership",
     description:
-      "Creation, assignment, transfer, approval, correction, closure, reopening, and the roles responsible at each meaningful point.",
+      "Follow how data is created, handed off, approved, corrected, and maintained as the work moves.",
   },
   {
-    title: "Integrations and transformations",
+    title: "Systems and workarounds",
     description:
-      "Source systems, mappings, match rules, synchronization timing, conflict handling, enrichment, calculated values, and failed or delayed movement.",
-  },
-  {
-    title: "Reporting and reconciliation",
-    description:
-      "Dashboards, filters, exports, manual adjustments, local scorecards, disputed metrics, and the explanations required before a report can guide action.",
-  },
-  {
-    title: "Frontline behavior and outcomes",
-    description:
-      "Duplicate entry, outside tools, private notes, corrections, bypasses, customer effects, and other evidence showing where the formal record cannot be trusted.",
+      "Trace integrations, match rules, reports, spreadsheets, private notes, corrections, and customer impact.",
   },
 ];
 
 const repairSequence = [
   {
     phase: "Bound",
-    question: "Which decision and customer path matter first?",
+    question: "Choose one decision that matters.",
     evidence:
-      "Consequential workflow, affected roles, required signals, known failure, and expected outcome.",
+      "Name the workflow, roles, required signals, current failure, and expected outcome.",
   },
   {
     phase: "Trace",
-    question: "Where does meaning or reliability weaken?",
+    question: "Follow the signal end to end.",
     evidence:
-      "Source, definition, record, transformation, owner, use, correction, and outcome.",
-  },
-  {
-    phase: "Assign",
-    question: "Who owns creation, acceptance, maintenance, and repair?",
-    evidence:
-      "Stewardship, decision rights, service expectations, exceptions, and escalation.",
+      "Check its source, definition, record, movement, owner, use, correction, and outcome.",
   },
   {
     phase: "Repair",
-    question: "What is the smallest useful sequence of changes?",
+    question: "Fix what keeps creating bad data.",
     evidence:
-      "Definitions, workflow, fields, matching, integration, automation, reporting, and removed complexity.",
+      "Change definitions, workflow, fields, matching, ownership, integration, or reporting.",
   },
   {
-    phase: "Govern",
-    question: "How will reliability be reviewed as conditions change?",
+    phase: "Sustain",
+    question: "Keep the signal useful.",
     evidence:
-      "Quality signals, disputes, corrections, customer outcomes, ownership review, and change control.",
+      "Review disputes, corrections, outcomes, ownership, and changing business rules.",
   },
 ];
 
@@ -187,34 +114,33 @@ const diagnosticPaths = [
     title: "CRM Workflow Audit",
     href: "/services/crm-workflow-audit/",
     useWhen:
-      "The core problem sits in records, definitions, field use, automation, reporting, adoption, or the workflow the CRM is expected to support.",
+      "Use this when the problem sits in CRM records, fields, automation, reporting, or workflow.",
   },
   {
     title: "CX Systems Diagnostic",
     href: "/services/cx-systems-diagnostic/",
     useWhen:
-      "Unreliable data is one part of a broader customer problem spanning ownership, service rules, handoffs, and several operating systems.",
+      "Use this when unreliable data is part of a broader customer, ownership, or handoff problem.",
   },
   {
     title: "Lifecycle Risk Review",
     href: "/services/lifecycle-risk-review/",
     useWhen:
-      "The organization cannot trust the signals used to recognize onboarding drift, weak adoption, quiet accounts, intervention need, or renewal risk.",
+      "Use this when weak signals hide onboarding drift, low adoption, or renewal risk.",
   },
 ];
 
 const strongFit = [
-  "Teams cannot trust CRM pipeline, lifecycle, service, or customer signals without manual reconciliation.",
-  "Data issues cross systems, functions, definitions, ownership, or operating workflows.",
-  "Cleanups and governance programs have not produced durable improvement.",
-  "Automation or AI depends on records whose provenance and reliability remain unclear.",
-  "A sponsor can align business, customer-facing, data, operations, and technical owners.",
+  "Teams can't trust CRM, pipeline, service, or customer signals without manual checks.",
+  "Data issues cross systems, definitions, owners, or workflows.",
+  "Past cleanup projects haven't produced lasting improvement.",
+  "A sponsor can align business, operations, data, and technical owners.",
 ];
 ---
 
 <Layout
-  title="Siloed and Dirty CRM Pipelines | Cadence Lab"
-  description="Find why CRM records, pipeline stages, customer signals, integrations, and reports remain unreliable and determine what to repair first."
+  title="Dirty CRM Data and Siloed Pipelines | Cadence Lab"
+  description="Find why CRM data, pipeline stages, integrations, and reports stay unreliable. Fix the workflow that keeps recreating the problem."
   canonicalURL="/solutions/dirty-data/"
   pageType="website">
   <NavHeader />
@@ -233,13 +159,12 @@ const strongFit = [
 
           <p class="eyebrow">Solution · Siloed and dirty CRM pipelines</p>
           <h1 id="data-title">
-            Clean the decision path, not just the records.
+            Your CRM is only as clean as the work behind it.
           </h1>
           <p class="hero-lead">
-            CRM data becomes reliable when teams share definitions, workflows
-            create useful context, ownership survives system boundaries, and
-            signals are reviewed against real outcomes. Cleanup is necessary,
-            but it becomes durable only when the operating causes change.
+            A cleanup can remove duplicates. It can't fix unclear definitions,
+            weak handoffs, or fields no one uses. Fix how the data gets created,
+            moved, and owned, and the records have a chance to stay clean.
           </p>
 
           <div
@@ -260,9 +185,9 @@ const strongFit = [
         <aside class="problem-card" aria-labelledby="problem-title">
           <p id="problem-title" class="note-label">Recognizable pattern</p>
           <p>
-            The CRM contains records, required fields, integrations, automation,
-            and dashboards, but teams still reconcile exports, maintain local
-            definitions, and ask experienced employees which number to trust.
+            The CRM has required fields, integrations, automation, and
+            dashboards. Teams still reconcile exports and ask an experienced
+            employee which number is real.
           </p>
           <dl>
             <div>
@@ -287,7 +212,6 @@ const strongFit = [
         { label: "Problem", href: "#problem" },
         { label: "Signals", href: "#signals" },
         { label: "Operating causes", href: "#operating-causes" },
-        { label: "Data path", href: "#data-path" },
         { label: "Evidence", href: "#evidence" },
         { label: "Repair sequence", href: "#repair-sequence" },
         { label: "Diagnostic paths", href: "#diagnostic-paths" },
@@ -303,22 +227,20 @@ const strongFit = [
         <div>
           <p class="eyebrow">The problem</p>
           <h2 id="problem-heading">
-            Data quality is produced by the operating system.
+            A cleanup won't fix a workflow that keeps making bad data.
           </h2>
         </div>
 
         <div class="problem-copy">
           <p>
-            A record is not reliable because it is complete. It is reliable when
-            its meaning is shared, its source and timing are understood, its
-            owner can correct it, and the people using it know which decision it
-            can responsibly support.
+            A complete record isn't always a useful one. People need to share
+            its meaning, trust where it came from, know who can fix it, and
+            understand which decision it supports.
           </p>
           <p>
-            When those conditions are missing, teams create local versions of
-            the truth. Integrations and automation then distribute the
-            disagreement faster, while cleanup projects repair symptoms that the
-            workflow continues to recreate.
+            Without that, teams create their own version of the truth.
+            Integrations spread the disagreement faster, and cleanup projects
+            repair symptoms that the workflow recreates.
           </p>
         </div>
       </div>
@@ -329,11 +251,11 @@ const strongFit = [
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Visible signals</p>
           <h2 id="signals-title">
-            Look for inconsistency at the point of decision.
+            Look for the moment someone stops trusting the record.
           </h2>
           <p>
-            These patterns indicate that the CRM records activity without
-            providing a dependable account of the customer or the work.
+            The warning isn't an empty field. It's the extra work people do
+            before they're willing to act.
           </p>
         </div>
 
@@ -359,14 +281,11 @@ const strongFit = [
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Operating causes</p>
-            <h2 id="causes-title">
-              Find the condition that keeps recreating the problem.
-            </h2>
+            <h2 id="causes-title">Find what keeps putting bad data back in.</h2>
           </div>
           <p>
-            Duplicate and incomplete records matter. A durable response also
-            examines why the organization creates, interprets, transfers, and
-            corrects information in conflicting ways.
+            Duplicates matter. So do the definitions, workflows, and ownership
+            rules that create them again after every cleanup.
           </p>
         </div>
 
@@ -389,38 +308,6 @@ const strongFit = [
       </div>
     </section>
 
-    <section id="data-path" class="data-path" aria-labelledby="data-path-title">
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Data path</p>
-          <h2 id="data-path-title">
-            Follow the signal from capture to consequence.
-          </h2>
-          <p>
-            Tracing one consequential customer or pipeline signal reveals where
-            meaning, reliability, ownership, or timing weakens.
-          </p>
-        </div>
-
-        <ol class="path-list">
-          {
-            dataPath.map((stage, index) => (
-              <li>
-                <div class="path-heading">
-                  <p class="path-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="path-phase">{stage.phase}</p>
-                </div>
-                <h3>{stage.question}</h3>
-                <p>{stage.evidence}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
     <section
       id="evidence"
       class="evidence section-block"
@@ -429,19 +316,18 @@ const strongFit = [
         <div class="evidence-intro">
           <p class="eyebrow">Evidence</p>
           <h2 id="evidence-title">
-            Compare the configured system with the trusted system.
+            Compare the system you configured with the one people trust.
           </h2>
           <p>
-            A useful review combines record inspection with workflow behavior,
-            definitions, integration logic, reporting practice, ownership, and
-            customer outcomes.
+            Inspect the records and the work around them. The spreadsheet,
+            private note, or manual check often explains what the CRM is
+            missing.
           </p>
           <div class="evidence-principle">
             <p class="note-label">Evidence principle</p>
             <p>
-              Start with representative decisions and records. Broad quality
-              scores can hide the specific missing signal that prevents useful
-              action.
+              Start with a real decision and the records behind it. A broad
+              quality score can hide the one missing signal that blocks action.
             </p>
           </div>
         </div>
@@ -468,11 +354,11 @@ const strongFit = [
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Repair sequence</p>
           <h2 id="repair-title">
-            Improve one consequential path before cleaning everything.
+            Fix one decision path before cleaning everything.
           </h2>
           <p>
-            The sequence bounds the problem, repairs the operating conditions,
-            and creates a review loop that can support broader improvement.
+            A smaller scope makes the cause visible and gives you a result you
+            can test before expanding.
           </p>
         </div>
 
@@ -504,13 +390,12 @@ const strongFit = [
           <div>
             <p class="eyebrow">Diagnostic paths</p>
             <h2 id="paths-title">
-              Let the failed decision determine the entry point.
+              Start where the unreliable signal does the most harm.
             </h2>
           </div>
           <p>
-            Unreliable CRM data can be a focused workflow problem, part of a
-            broader customer system failure, or the reason lifecycle risk
-            remains invisible until it is too late.
+            The right diagnostic depends on whether the problem is inside the
+            CRM, across the customer operating system, or hiding lifecycle risk.
           </p>
         </div>
 
@@ -537,13 +422,12 @@ const strongFit = [
         <div class="fit-copy">
           <p class="eyebrow">Fit</p>
           <h2 id="fit-title">
-            Use this path when unreliable data is preventing coordinated work.
+            Use this path when unreliable data blocks coordinated work.
           </h2>
           <p>
-            The work is most useful when leadership can change definitions,
-            workflow, ownership, configuration, and system behavior. It is not a
-            bulk deduplication service, a migration project, or a replacement
-            for routine data administration.
+            This work helps when leaders can change definitions, workflow,
+            ownership, configuration, and system behavior. It isn't a bulk
+            deduplication or migration service.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
@@ -633,8 +517,6 @@ const strongFit = [
   .note-label,
   .item-number,
   .cause-label,
-  .path-number,
-  .path-phase,
   .repair-number,
   .repair-phase {
     margin: 0;
@@ -841,7 +723,6 @@ const strongFit = [
   }
 
   .signals,
-  .data-path,
   .repair-sequence {
     padding-block: var(--section-space);
     background: var(--color-ink);
@@ -850,7 +731,7 @@ const strongFit = [
 
   .signal-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
     padding: 0;
     border-top: var(--border-width) solid rgb(252 254 255 / 22%);
@@ -923,17 +804,15 @@ const strongFit = [
     text-wrap: pretty;
   }
 
-  .path-list,
   .repair-list {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0;
     padding: 0;
     border-top: 0.1875rem solid var(--color-green);
     list-style: none;
   }
 
-  .path-list li,
   .repair-list li {
     min-width: 0;
     padding: clamp(1.25rem, 3vw, 1.75rem);
@@ -941,12 +820,10 @@ const strongFit = [
     border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
   }
 
-  .path-list li:first-child,
   .repair-list li:first-child {
     border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
   }
 
-  .path-heading,
   .repair-heading {
     display: flex;
     align-items: baseline;
@@ -954,17 +831,14 @@ const strongFit = [
     gap: 1rem;
   }
 
-  .path-number,
   .repair-number {
     color: var(--color-text-inverse-muted);
   }
 
-  .path-phase,
   .repair-phase {
     color: var(--color-green);
   }
 
-  .path-list h3,
   .repair-list h3 {
     min-height: 6.75rem;
     margin-top: 2rem;
@@ -974,7 +848,6 @@ const strongFit = [
     line-height: 1.35;
   }
 
-  .path-list li > p:last-child,
   .repair-list li > p:last-child {
     margin: 1rem 0 0;
     color: var(--color-text-inverse-muted);
@@ -1161,12 +1034,10 @@ const strongFit = [
   }
 
   @media (max-width: 70rem) {
-    .path-list,
     .repair-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .path-list h3,
     .repair-list h3 {
       min-height: 0;
     }
@@ -1219,7 +1090,6 @@ const strongFit = [
 
     .signal-grid,
     .cause-list,
-    .path-list,
     .evidence-grid,
     .repair-list {
       grid-template-columns: 1fr;
@@ -1233,8 +1103,6 @@ const strongFit = [
     .signal-grid li,
     .cause-list,
     .cause-list article,
-    .path-list,
-    .path-list li,
     .evidence-principle,
     .evidence-grid,
     .evidence-grid article,
