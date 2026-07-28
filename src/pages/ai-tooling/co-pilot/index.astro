@@ -3,16 +3,16 @@ import StructuredCapabilityPage from "../../../components/StructuredCapabilityPa
 
 const page = {
   meta: {
-    title: "Agent Copilots | Cadence Lab",
+    title: "AI Copilot Design | Cadence Lab",
     description:
-      "Design agent copilots that assemble trustworthy context, support bounded decisions, preserve human accountability, and improve through evidence from real work.",
+      "Design AI copilots that bring trusted context into real workflows, support better decisions, and keep people accountable for the outcome.",
     canonicalURL: "/ai-tooling/co-pilot/",
   },
   hero: {
-    breadcrumb: "Agent copilots",
-    eyebrow: "AI tooling · Agent copilots",
-    title: "Help people make the next decision without hiding the work.",
-    lead: "An agent copilot supports a person inside a defined workflow by assembling context, preparing a recommendation, completing permitted tasks, and making uncertainty visible. The useful design question is not how much work the copilot can perform. It is where assistance improves the decision while accountability remains clear.",
+    breadcrumb: "AI copilot design",
+    eyebrow: "AI tooling · AI copilot design",
+    title: "Give people useful help without hiding the decision.",
+    lead: "A good copilot does more than generate an answer. It brings the right context into the work, shows what it knows, and helps a person decide what happens next. The goal isn't maximum automation. It's better judgment with clear accountability.",
     primaryCta: {
       label: "Review AI Service Readiness",
       href: "/services/ai-service-readiness-review/",
@@ -23,108 +23,108 @@ const page = {
     },
     trigger: {
       introduction:
-        "Teams spend meaningful time finding context, reconstructing history, and preparing routine actions, but the work still requires judgment, accountability, and a responsible person at the point of decision.",
+        "People spend too much time gathering context and preparing routine work, but the final decision still needs human judgment.",
       items: [
         {
-          label: "Visible constraint",
-          value: "Judgment is buried under context gathering",
+          label: "Friction",
+          value: "Useful judgment is buried under busywork",
         },
         {
           label: "Copilot role",
-          value: "Assemble, propose, explain, act within permission",
+          value: "Gather, explain, recommend, and assist",
         },
         {
           label: "Decision",
-          value: "What AI may prepare and what a person must own",
+          value: "What AI can prepare and what a person must own",
         },
       ],
     },
   },
   signals: {
     eyebrow: "Visible signals",
-    title: "The strongest copilot opportunities begin with work friction.",
+    title: "Start with work people already struggle to complete.",
     introduction:
-      "A copilot should resolve a specific operating constraint. General access to a model rarely fixes missing context, conflicting ownership, or a workflow that does not define the decision people are expected to make.",
+      "A copilot should solve a clear operating problem. A general chat tool won't fix missing context, unclear ownership, or a workflow that never defined the decision.",
     items: [
       {
-        title: "People reconstruct the same context repeatedly",
+        title: "People rebuild the same story every time",
         description:
-          "Customer history, policy, product behavior, prior decisions, and current status are spread across records, messages, documents, and systems.",
+          "Customer history, policy, product behavior, and past decisions live across records, messages, and documents.",
       },
       {
-        title: "Routine preparation delays expert judgment",
+        title: "Preparation delays expert judgment",
         description:
-          "Skilled people spend time searching, summarizing, formatting, and entering data before they can evaluate the exception or make the consequential decision.",
+          "Skilled people search, summarize, format, and enter data before they can evaluate the real issue.",
       },
       {
-        title: "Responses vary with individual memory",
+        title: "Answers depend on who remembers what",
         description:
-          "Two capable employees handle the same situation differently because guidance, evidence, and past resolutions are difficult to retrieve at the point of work.",
+          "Similar cases get different treatment because guidance and past resolutions are hard to find during the work.",
       },
       {
-        title: "AI use has moved outside the governed workflow",
+        title: "Employees use unapproved AI tools",
         description:
-          "Employees paste information into general tools because the approved systems do not offer timely, usable assistance where the task occurs.",
+          "People move work into general tools because approved systems don't provide useful help when they need it.",
       },
       {
-        title: "Automation cannot handle the exception",
+        title: "Rules fail on the exceptions",
         description:
-          "Rules process the ordinary path, but ambiguous requests, conflicting evidence, sensitive cases, and cross-functional handoffs require human interpretation.",
+          "Automation handles the normal path, but unclear, sensitive, or cross-team cases still need interpretation.",
       },
       {
-        title: "Leaders cannot see whether assistance helped",
+        title: "Usage is measured, but value isn't",
         description:
-          "Adoption and message volume are reported, but recommendation quality, correction, decision time, customer effect, and operating outcomes remain unknown.",
+          "Leaders track adoption without knowing whether the copilot improved decisions, service, or rework.",
       },
     ],
   },
   framework: {
     eyebrow: "Copilot design",
-    title: "Define the working relationship before choosing the interface.",
+    title: "Define the working relationship before the interface.",
     introduction:
-      "A responsible copilot has a bounded role, an explicit source of context, limited actions, visible uncertainty, and a clear human owner. These conditions should be designed together.",
+      "A responsible copilot needs a clear role, trusted context, limited actions, visible uncertainty, and a human owner.",
     items: [
       {
         label: "Role",
-        question: "Which part of the work should the copilot support?",
+        question: "Which part of the work should AI support?",
         title: "Role",
         description:
-          "Define the user, task, operating outcome, starting condition, expected assistance, and the point where the copilot returns control to a person.",
+          "Name the person, task, outcome, help provided, and point where control returns to a person.",
       },
       {
         label: "Context",
-        question: "Which evidence may inform the recommendation?",
+        question: "Which evidence can shape the recommendation?",
         title: "Context",
         description:
-          "Specify approved systems, records, documents, history, policy, provenance, freshness, permissions, and the context that must remain excluded.",
+          "Define approved sources, freshness, permissions, provenance, and information that must stay out.",
       },
       {
         label: "Judgment",
-        question: "What must a person still evaluate?",
+        question: "What must a person still decide?",
         title: "Judgment",
         description:
-          "Identify ambiguity, exceptions, customer consequence, policy interpretation, competing priorities, and decisions requiring accountable human review.",
+          "Identify the exceptions, tradeoffs, policy questions, and consequences that require human review.",
       },
       {
         label: "Action",
-        question: "What may the copilot do after the decision?",
+        question: "What can the copilot do after review?",
         title: "Action",
         description:
-          "Bound drafting, record updates, tool calls, routing, notifications, and other effects by permission, confirmation, reversibility, and consequence.",
+          "Limit drafts, updates, tool calls, and notifications by permission, confirmation, and reversibility.",
       },
       {
         label: "Escalation",
-        question: "When should assistance stop or widen review?",
+        question: "When should the copilot stop?",
         title: "Escalation",
         description:
-          "Define uncertainty, missing evidence, sensitive content, conflict, prohibited requests, system failure, and risk thresholds that require another path.",
+          "Set clear triggers for missing evidence, uncertainty, sensitive content, conflict, or system failure.",
       },
       {
         label: "Learning",
-        question: "How will corrections improve the operating system?",
+        question: "How will real use improve the system?",
         title: "Learning",
         description:
-          "Capture edits, overrides, rejected recommendations, exceptions, outcomes, and reviewer disagreement without turning surveillance or volume into the goal.",
+          "Capture edits, overrides, rejected advice, exceptions, and outcomes without turning surveillance into the goal.",
       },
     ],
   },
@@ -132,161 +132,160 @@ const page = {
     eyebrow: "Assistance path",
     title: "Follow the work from request to accountable outcome.",
     introduction:
-      "Trace representative cases through the complete human-and-system interaction. Each stage should show what the copilot knows, what it proposes, what the person decides, and what evidence remains afterward.",
+      "Trace real cases through the full human and system interaction. At every step, show what AI knows, what it recommends, and what the person owns.",
     items: [
       {
         phase: "Receive",
-        question: "What task is the person trying to complete?",
+        question: "What is the person trying to complete?",
         evidence:
-          "User, customer context, workflow state, request, urgency, permissions, expected decision, and consequential edge cases.",
+          "User, customer context, workflow state, request, urgency, permissions, and expected decision.",
       },
       {
         phase: "Assemble",
         question: "Which context is relevant and trustworthy?",
         evidence:
-          "Sources, retrieval, provenance, freshness, conflicting evidence, missing information, access rules, and sensitive-data controls.",
+          "Sources, provenance, freshness, conflicts, missing facts, access rules, and sensitive data.",
       },
       {
-        phase: "Propose",
-        question: "What assistance should the copilot provide?",
+        phase: "Recommend",
+        question: "What help should the copilot provide?",
         evidence:
-          "Summary, options, recommendation, rationale, citations, uncertainty, missing facts, and the next permitted action.",
+          "Summary, options, rationale, citations, uncertainty, and the next permitted action.",
       },
       {
         phase: "Decide",
-        question: "What does the accountable person review or change?",
+        question: "What does the accountable person review?",
         evidence:
-          "Confirmation, correction, override, escalation, additional evidence, decision ownership, and the time and effort required.",
+          "Confirmation, correction, override, escalation, added evidence, and decision ownership.",
       },
       {
         phase: "Act and learn",
-        question: "What changed, and did it improve the outcome?",
+        question: "What changed, and did it help?",
         evidence:
-          "Tool actions, records, notifications, reversibility, customer effect, workflow result, correction, feedback, and review cadence.",
+          "Actions, records, reversibility, customer effect, workflow result, feedback, and review.",
       },
     ],
   },
   evidence: {
     eyebrow: "Evidence",
-    title: "Evaluate assistance inside the real workflow.",
+    title: "Test the copilot inside the real workflow.",
     introduction:
-      "A convincing demonstration is not enough. The evidence should show whether the copilot uses trustworthy context, supports better decisions, behaves safely at the edges, and reduces work without creating hidden review or recovery costs.",
+      "A polished demo isn't proof. Evidence should show whether the copilot uses trusted context, improves the work, and behaves safely when the case gets difficult.",
     items: [
       {
-        title: "Task and workflow evidence",
+        title: "Real tasks and cases",
         description:
-          "Real cases, decision points, current effort, delays, exceptions, dependencies, workarounds, handoffs, and the operating outcome the assistance should improve.",
+          "Routine work, important exceptions, current effort, delays, handoffs, workarounds, and expected outcomes.",
       },
       {
-        title: "Knowledge and provenance",
+        title: "Knowledge and sources",
         description:
-          "Approved sources, ownership, freshness, retrieval, access, citations, missing evidence, conflicting guidance, and how people verify what the copilot presents.",
+          "Approved sources, ownership, freshness, retrieval, permissions, citations, conflicts, and missing evidence.",
       },
       {
         title: "Recommendation quality",
         description:
-          "Accuracy, completeness, relevance, consistency, uncertainty, prohibited errors, performance by meaningful case type, and comparison with the current process.",
+          "Accuracy, relevance, consistency, uncertainty, unacceptable errors, and results by meaningful case type.",
       },
       {
-        title: "Human review behavior",
+        title: "Human review",
         description:
-          "Acceptance, edits, overrides, escalation, disagreement, automation bias, review time, expertise required, and whether the interface supports deliberate judgment.",
+          "Acceptance, edits, overrides, review time, disagreement, automation bias, and escalation behavior.",
       },
       {
-        title: "Action and control behavior",
+        title: "Actions and controls",
         description:
-          "Permissions, confirmations, tool results, failures, retries, reversibility, audit history, sensitive-data handling, and response to unavailable systems.",
+          "Permissions, confirmations, tool results, failures, reversibility, audit history, and sensitive data handling.",
       },
       {
         title: "Operating outcomes",
         description:
-          "Decision time, rework, customer effect, service quality, capacity, adoption, error recovery, employee experience, and downstream consequences.",
+          "Decision time, rework, customer effect, service quality, capacity, employee experience, and recovery cost.",
       },
     ],
     note: {
-      label: "Assistance before autonomy",
+      label: "Support before autonomy",
       description:
-        "A copilot can become more capable without becoming independently accountable. Increased action should follow evidence about the task, data, failure modes, human review, reversibility, and consequence—not a general preference for autonomy.",
+        "More capability doesn't create accountability. Expand what a copilot can do only when evidence supports the task, controls, review, and consequences.",
     },
   },
   failures: {
     eyebrow: "Common failure patterns",
-    title: "A copilot fails when it makes weak work easier to accept.",
+    title: "A copilot fails when weak work becomes easier to accept.",
     introduction:
-      "Fluent recommendations can accelerate a workflow while obscuring missing evidence, unresolved ownership, reviewer burden, or a decision the organization never properly defined.",
+      "Fluent output can hide missing evidence, unclear ownership, review burden, or a decision the business never defined.",
     items: [
       {
-        title: "The interface arrives before the operating decision",
+        title: "The chat box comes before the use case",
         description:
-          "A chat box is added without defining the user, task, decision, approved evidence, success measure, or the point where human accountability applies.",
+          "The team launches an interface without defining the task, evidence, decision owner, or measure of success.",
       },
       {
-        title: "A summary hides the source conflict",
+        title: "A summary hides conflicting sources",
         description:
-          "The copilot produces one coherent account from records and policies that disagree, preventing the reviewer from seeing the ambiguity that requires judgment.",
+          "The copilot turns disagreement into one clean answer instead of showing the issue that needs judgment.",
       },
       {
-        title: "Human review becomes ceremonial",
+        title: "Human review becomes a formality",
         description:
-          "People are labeled the final decision-maker but lack time, context, expertise, or interface support to meaningfully challenge the recommendation.",
+          "People remain accountable but lack the time, context, or authority to challenge the recommendation.",
       },
       {
-        title: "Permission expands with convenience",
+        title: "Permission expands without new evidence",
         description:
-          "Drafting turns into sending, suggesting turns into updating, and one bounded action becomes broad tool access without new evidence or approval.",
+          "Drafting becomes sending and advice becomes action without a new review of risk or control.",
       },
       {
-        title: "Corrections create invisible labor",
+        title: "Corrections become invisible work",
         description:
-          "Employees repeatedly repair output, recover failed actions, and reconcile records while reported productivity counts only the time saved during generation.",
+          "Employees repair output and recover failed actions while reporting counts only generation time saved.",
       },
       {
-        title: "Adoption is treated as proof of value",
+        title: "Adoption becomes proof of value",
         description:
-          "High usage reflects availability or management pressure while decision quality, customer outcomes, rework, trust, and employee burden remain unmeasured.",
+          "High usage looks successful even when decision quality, rework, trust, and customer outcomes remain unknown.",
       },
     ],
   },
   outputs: {
     eyebrow: "Practical outputs",
-    title: "Turn a promising assistant into a governed working model.",
+    title: "Turn a promising assistant into a working model.",
     introduction:
-      "The result should define what the copilot supports, how it assembles evidence, where people exercise judgment, which actions are permitted, and how the organization learns from real use.",
+      "The result defines what the copilot supports, what it knows, what people decide, what it can do, and how the organization learns.",
     items: [
       {
         title: "Copilot role and boundary",
         description:
-          "A clear account of the user, task, operating outcome, assistance, exclusions, decision owner, escalation, and conditions required before capability expands.",
+          "The user, task, outcome, assistance, exclusions, owner, escalation path, and conditions for expansion.",
       },
       {
         title: "Context and interaction model",
         description:
-          "Approved sources, retrieval, provenance, permissions, sensitive-data rules, interface states, uncertainty, review, corrections, and handoff behavior.",
+          "Approved sources, retrieval, permissions, uncertainty, review, corrections, and handoff behavior.",
       },
       {
-        title: "Action and oversight specification",
+        title: "Action and oversight rules",
         description:
-          "Permitted tools, confirmation, reversibility, audit evidence, failure response, escalation thresholds, owners, and controls for consequential or sensitive cases.",
+          "Permitted tools, confirmations, reversibility, audit evidence, failure response, and control owners.",
       },
       {
         title: "Evaluation and learning plan",
         description:
-          "Representative cases, quality criteria, outcome measures, reviewer behavior, feedback capture, monitoring, reassessment, and evidence required for the next decision.",
+          "Representative cases, quality criteria, outcome measures, feedback, monitoring, and review cadence.",
       },
     ],
   },
   fit: {
     eyebrow: "Engagement fit",
-    title:
-      "Use a copilot when people need better support at a real decision point.",
+    title: "Use a copilot where better support can improve a real decision.",
     introduction:
-      "This work is useful when a bounded workflow combines repetitive context gathering with meaningful human judgment. It is a limited fit when the organization wants a general AI interface, has not defined the work, or expects human review to compensate for unresolved risk without providing the conditions for genuine oversight.",
+      "This work fits a repeatable workflow that combines routine preparation with meaningful judgment. It isn't a strong fit for a general AI interface or a process with no clear owner.",
     items: [
-      "A specific role performs a repeatable task with a defined customer or operating outcome.",
-      "The workflow requires evidence from identifiable systems, records, guidance, or prior decisions.",
-      "Human judgment remains necessary for ambiguity, exception, consequence, or accountability.",
-      "The organization can inspect permissions, data handling, retrieval, tool actions, review behavior, and downstream outcomes.",
-      "Leaders are willing to narrow the use case when evidence does not support reliable assistance or responsible action.",
+      "A specific role performs a repeatable task with a defined outcome.",
+      "The work depends on evidence from known systems, records, or guidance.",
+      "Human judgment remains necessary for exceptions or consequences.",
+      "The organization can inspect data, permissions, actions, review, and outcomes.",
+      "Leaders will narrow the use case when the evidence doesn't support it.",
     ],
   },
   diagnostics: {
@@ -297,19 +296,19 @@ const page = {
         title: "AI Service Readiness Review",
         href: "/services/ai-service-readiness-review/",
         useWhen:
-          "A proposed copilot needs a bounded use case, workflow assessment, human-oversight model, safeguards, adoption conditions, and implementation decision.",
+          "You need to define the use case, human oversight, safeguards, measures, and implementation decision.",
       },
       {
         title: "CRM Workflow Audit",
         href: "/services/crm-workflow-audit/",
         useWhen:
-          "The copilot depends on CRM context, records, automation, ownership, reporting, or customer work that teams do not currently trust.",
+          "The copilot depends on CRM records, automation, ownership, reporting, or customer work people don't trust.",
       },
       {
         title: "CX Systems Diagnostic",
         href: "/services/cx-systems-diagnostic/",
         useWhen:
-          "The intended assistance crosses teams, systems, decisions, service rules, handoffs, or customer-experience boundaries.",
+          "The assistance crosses teams, systems, decisions, service rules, handoffs, or customer experience boundaries.",
       },
     ],
   },
