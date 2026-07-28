@@ -8,27 +8,27 @@ import Layout from "../../../layouts/Layout.astro";
 const diagnosticQuestions = [
   {
     number: "01",
-    question: "Is the proposed use case appropriate and consequential?",
+    question: "Is AI right for this problem?",
     explanation:
-      "Clarify the customer or operating decision AI is expected to support, the people affected, the value of improving it, and whether automation is the right intervention.",
+      "Define the customer or business decision AI should support, who it affects, what could improve, and whether AI is the right tool.",
   },
   {
     number: "02",
-    question: "Is the underlying workflow ready?",
+    question: "Is the workflow ready?",
     explanation:
-      "Trace the current work, ownership, exceptions, data, and decision rules to determine whether the process is stable enough to support responsible AI assistance.",
+      "Review the current work, ownership, exceptions, data, and decision rules to see whether the process is clear enough for AI support.",
   },
   {
     number: "03",
-    question: "What human oversight and guardrails are required?",
+    question: "Where do people stay in control?",
     explanation:
-      "Define where people must review, approve, correct, override, or escalate AI-supported work and who remains accountable for customer and operating outcomes.",
+      "Define where people must review, approve, correct, override, or escalate AI-supported work and who remains accountable for the outcome.",
   },
   {
     number: "04",
-    question: "How will readiness and success be judged?",
+    question: "How will you know it works?",
     explanation:
-      "Establish the evidence, adoption conditions, operating measures, risk signals, and review points needed before implementation expands.",
+      "Set the evidence, adoption needs, performance measures, risk signals, and review points required before the work expands.",
   },
 ];
 
@@ -36,32 +36,32 @@ const evidenceAreas = [
   {
     title: "Use-case and decision fit",
     description:
-      "The customer problem, operating decision, intended users, expected benefit, known alternatives, and whether AI support is proportionate to the consequence.",
+      "The customer problem, business decision, intended users, expected value, other options, and whether AI fits the level of risk.",
   },
   {
     title: "Workflow and process readiness",
     description:
-      "Current steps, handoffs, decision rights, exceptions, service rules, failure recovery, and places where the work remains undefined or inconsistent.",
+      "Current steps, handoffs, decision rights, exceptions, service rules, recovery paths, and places where the work is still unclear or inconsistent.",
   },
   {
     title: "Data and knowledge dependencies",
     description:
-      "Required records, knowledge sources, data quality, access, freshness, provenance, privacy constraints, and the context people use to judge an appropriate response.",
+      "Required records, knowledge sources, data quality, access, age, source, privacy limits, and the context people use to judge a response.",
   },
   {
     title: "Human oversight and exceptions",
     description:
-      "Review points, approval thresholds, escalation paths, override authority, quality checks, and the responsibilities people retain when AI supports the work.",
+      "Review points, approval limits, escalation paths, override authority, quality checks, and the work people still own.",
   },
   {
     title: "Governance, risk, and trust",
     description:
-      "Acceptable-use boundaries, security and privacy needs, customer disclosure, auditability, accountability, failure consequences, and stakeholder concerns.",
+      "Acceptable-use limits, security and privacy needs, customer disclosure, audit records, accountability, failure impact, and stakeholder concerns.",
   },
   {
     title: "Adoption and measurement",
     description:
-      "User readiness, training needs, workflow integration, success measures, risk indicators, feedback paths, and the evidence required to continue, change, or stop.",
+      "User readiness, training, workflow fit, success measures, risk indicators, feedback paths, and the evidence needed to continue, change, or stop.",
   },
 ];
 
@@ -70,56 +70,57 @@ const deliverables = [
     number: "01",
     title: "Readiness decision",
     description:
-      "An evidence-based assessment of whether the proposed use case is ready to proceed, needs operating changes first, should be narrowed, or should not move forward.",
+      "An evidence-based answer on whether the use case is ready, needs operating changes first, should be narrowed, or should stop.",
     decision:
-      "Whether to proceed now, pause for prerequisites, reshape the use case, or choose a different intervention.",
+      "Whether to proceed, fix the missing conditions, reshape the use case, or choose another approach.",
   },
   {
     number: "02",
     title: "Human-in-the-loop map",
     description:
-      "A clear view of where AI can assist, where human judgment remains essential, how exceptions move, and who holds authority and accountability.",
+      "A clear view of where AI can help, where human judgment is essential, how exceptions move, and who has authority and accountability.",
     decision:
-      "Which decisions can be supported, which require approval, and how people recover when the system is uncertain or wrong.",
+      "Which decisions AI can support, which need approval, and how people respond when the system is unsure or wrong.",
   },
   {
     number: "03",
     title: "Operating constraints and guardrails",
     description:
-      "Documented workflow, data, knowledge, governance, privacy, quality, and trust conditions that must shape any implementation.",
+      "Documented workflow, data, knowledge, governance, privacy, quality, and trust needs that must shape the implementation.",
     decision:
-      "What boundaries and controls must exist before the use case can operate responsibly.",
+      "Which boundaries and controls must be in place before the use case can operate responsibly.",
   },
   {
     number: "04",
     title: "Sequenced implementation priorities",
     description:
-      "A practical order for prerequisite operating changes, a bounded pilot, adoption support, measurement, review, and any justified expansion.",
+      "A practical order for operating changes, a focused pilot, adoption support, measurement, review, and any justified expansion.",
     decision:
-      "What to change first, what a responsible initial release should include, and what evidence should govern the next investment.",
+      "What to change first, what the first release should include, and what evidence should guide the next investment.",
   },
 ];
 
 const strongFit = [
-  "An AI proposal has executive support, but workflow, governance, adoption conditions, or success measures remain unclear.",
-  "The proposed use case affects customer service, success, or operations across teams, systems, or decision boundaries.",
+  "An AI proposal has support, but the workflow, governance, adoption needs, or success measures are still unclear.",
+  "The use case affects customer service, success, or operations across teams, systems, or decisions.",
   "A sponsor can involve process owners, frontline users, data and knowledge owners, risk partners, and technical teams.",
-  "The organization is willing to postpone, narrow, or reshape the use case when the evidence shows that prerequisites are missing.",
+  "Your organization is willing to delay, narrow, or reshape the use case when important conditions are missing.",
 ];
 
 const limitedFit = [
-  "The request is limited to vendor selection or implementation of a predetermined solution with no readiness decision.",
-  "AI is expected to compensate for an undefined or broken workflow without changing ownership, process, or decision rules.",
-  "Process owners, frontline users, data or knowledge owners, governance partners, or accountable leaders cannot participate.",
-  "Success measures stop at launch, usage, or automation volume and leave out useful work, responsible adoption, and customer outcomes.",
+  "You only need vendor selection or implementation of a chosen solution, with no readiness decision.",
+  "AI is expected to cover for a broken workflow without changing ownership, process, or decision rules.",
+  "Process owners, frontline users, data or knowledge owners, risk partners, or accountable leaders cannot take part.",
+  "Success is measured only by launch, use, or automation volume, not by useful work and customer outcomes.",
 ];
 ---
 
 <Layout
   title="AI Service Readiness Review | Cadence Lab"
-  description="Determine whether a service, success, or operations AI use case has the workflow, data, oversight, governance, adoption, and measurement conditions required to proceed responsibly."
+  description="Find out if your service AI use case is ready. Review workflow, data, human oversight, governance, adoption, and measurement before you build."
   canonicalURL="/services/ai-service-readiness-review/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema
     items={[
@@ -141,19 +142,19 @@ const limitedFit = [
 
           <p class="eyebrow">Diagnostic 04</p>
           <h1 id="diagnostic-title">
-            Decide whether the service AI use case is ready before
-            implementation.
+            Know if your AI use case is ready before you build it.
           </h1>
           <p class="hero-lead">
-            The AI Service Readiness Review examines use-case fit, workflow
-            stability, data and knowledge dependencies, human oversight,
-            governance, adoption conditions, and measurement so the organization
-            can make a responsible implementation decision.
+            The AI Service Readiness Review tests the use case, workflow, data,
+            human oversight, governance, adoption needs, and success measures.
+            You’ll get a clear decision to proceed, fix the gaps first, narrow
+            the idea, or stop.
           </p>
 
           <div
             class="hero-actions"
-            aria-label="AI Service Readiness Review actions">
+            aria-label="AI Service Readiness Review actions"
+          >
             <a class="button button-primary" href="/fit-check/">
               Start a fit check
             </a>
@@ -164,16 +165,14 @@ const limitedFit = [
         </div>
 
         <aside class="trigger" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="trigger-label">Recognizable trigger</p>
+          <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
-            An AI initiative has momentum, but the supporting workflow, data,
-            human oversight, governance, adoption conditions, or success
-            measures remain unclear.
+            An AI idea has support, but the workflow, data, human oversight,
+            governance, adoption needs, or success measures are still unclear.
           </p>
           <p>
-            Leaders need to know whether the use case is ready, which
-            constraints must shape it, and what must change before
-            implementation expands.
+            Leaders need a clear answer before a pilot becomes a larger
+            commitment of money, time, and customer trust.
           </p>
         </aside>
       </div>
@@ -192,19 +191,20 @@ const limitedFit = [
     <section
       id="questions"
       class="questions section-block"
-      aria-labelledby="questions-title">
+      aria-labelledby="questions-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Questions answered</p>
             <h2 id="questions-title">
-              Turn AI interest into a bounded operating decision.
+              Turn AI interest into a clear decision.
             </h2>
           </div>
           <p>
-            The review starts with the customer and operating problem. From
-            there, it checks whether the conditions for responsible AI support
-            exist before comparing platforms or planning automation.
+            We start with the customer and business problem. Then we check
+            whether the right conditions exist before you compare platforms or
+            plan automation.
           </p>
         </div>
 
@@ -231,20 +231,18 @@ const limitedFit = [
     <section
       id="scope"
       class="scope section-block"
-      aria-labelledby="scope-title">
+      aria-labelledby="scope-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Scope and evidence</p>
-            <h2 id="scope-title">
-              Examine the operating conditions around the proposed use case.
-            </h2>
+            <h2 id="scope-title">Check the work before you automate it.</h2>
           </div>
           <p>
-            The exact evidence depends on the decision and what the organization
-            can responsibly provide. Cadence Lab compares the proposed AI
-            behavior with the real workflow, available context, human judgment,
-            risk constraints, and measures required to operate it well.
+            The evidence depends on the decision and what your team can share. I
+            compare the proposed AI behavior with the real workflow, available
+            context, human judgment, risks, and measures needed to run it well.
           </p>
         </div>
 
@@ -267,9 +265,9 @@ const limitedFit = [
         <aside class="scope-note" aria-labelledby="scope-note-title">
           <h3 id="scope-note-title">Readiness before automation</h3>
           <p>
-            AI should not automate ambiguity. The review identifies where
-            workflow, knowledge, decision rights, or accountability must become
-            clearer before a system can support the work responsibly.
+            AI should not automate confusion. The review shows where workflows,
+            knowledge, decision rights, or accountability need to become clearer
+            before AI can support the work responsibly.
           </p>
         </aside>
       </div>
@@ -280,13 +278,12 @@ const limitedFit = [
         <div class="outputs-intro">
           <p class="eyebrow eyebrow-inverse">Deliverables and decisions</p>
           <h2 id="outputs-title">
-            Leave with a readiness decision and responsible path forward.
+            Get a readiness decision and a responsible path forward.
           </h2>
           <p>
-            The deliverables connect operating evidence to an implementation
-            decision. Each output clarifies whether the use case should proceed,
-            what constraints must shape it, and which evidence should govern any
-            expansion.
+            You’ll get more than a list of AI risks. Each deliverable shows
+            whether the use case should proceed, what must shape it, and which
+            evidence should guide any expansion.
           </p>
         </div>
 
@@ -320,22 +317,20 @@ const limitedFit = [
           <div>
             <p class="eyebrow">Engagement fit</p>
             <h2 id="fit-title">
-              Use this review before a service AI initiative becomes an
-              implementation commitment.
+              Use this review before AI becomes a build commitment.
             </h2>
           </div>
           <p>
             A useful review needs access to the people, workflow, data,
-            knowledge, and constraints surrounding the proposed use case. It
-            also needs permission to challenge whether AI is appropriate and
-            whether the organization is ready to proceed.
+            knowledge, and risks around the use case. Your organization must
+            also be open to the answer that AI is not the right move yet.
           </p>
         </div>
 
         <div class="fit-grid">
           <article class="fit-panel fit-panel-strong">
             <p class="fit-label">Strong fit</p>
-            <h3>Conditions that support a useful readiness decision</h3>
+            <h3>This is likely a good fit when</h3>
             <ul role="list">
               {strongFit.map((criterion) => <li>{criterion}</li>)}
             </ul>
@@ -343,7 +338,7 @@ const limitedFit = [
 
           <article class="fit-panel">
             <p class="fit-label fit-label-muted">Limited fit</p>
-            <h3>Conditions that point to another path</h3>
+            <h3>Another path may work better when</h3>
             <ul role="list">
               {limitedFit.map((criterion) => <li>{criterion}</li>)}
             </ul>
@@ -355,36 +350,33 @@ const limitedFit = [
     <section
       id="next-step"
       class="next-step section-block"
-      aria-labelledby="next-step-title">
+      aria-labelledby="next-step-title"
+    >
       <div class="page-container next-step-layout">
         <div>
           <p class="eyebrow">Next step</p>
-          <h2 id="next-step-title">Define the proposed use case.</h2>
+          <h2 id="next-step-title">Tell me what you want AI to help with.</h2>
         </div>
 
         <div class="next-step-copy">
           <p>
-            Share the customer or operating problem, affected workflow and
-            users, available data and knowledge, known constraints, accountable
-            sponsor, and decision leadership needs to make. Cadence Lab will
-            assess whether this review is the right entry point and say directly
-            when another path makes more sense.
+            Share the customer or business problem, workflow and users involved,
+            available data and knowledge, known risks, sponsor, and decision you
+            need to make. I’ll tell you plainly whether this review is the right
+            place to start or if another path makes more sense.
           </p>
 
           <dl class="next-step-details">
             <div>
               <dt>Useful context</dt>
               <dd>
-                Proposed use case, affected workflow, known constraints, and
+                Proposed use case, workflow involved, known risks, and
                 accountable sponsor
               </dd>
             </div>
             <div>
               <dt>Expected outcome</dt>
-              <dd>
-                A direct recommendation about readiness and the appropriate next
-                step
-              </dd>
+              <dd>A direct answer about readiness and the best next step</dd>
             </div>
           </dl>
 

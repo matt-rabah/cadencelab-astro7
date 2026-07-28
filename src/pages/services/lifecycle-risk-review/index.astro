@@ -8,27 +8,27 @@ import Layout from "../../../layouts/Layout.astro";
 const diagnosticQuestions = [
   {
     number: "01",
-    question: "Where does lifecycle risk first become visible?",
+    question: "Where does risk show up first?",
     explanation:
-      "Identify the earliest useful signals across onboarding, adoption, service activity, account behavior, and customer feedback, including the signs that appear before a renewal is in danger.",
+      "Find the early signs across onboarding, adoption, service activity, account behavior, and customer feedback before a renewal is in danger.",
   },
   {
     number: "02",
-    question: "Which signals should trigger action?",
+    question: "Which signals matter enough to act on?",
     explanation:
-      "Distinguish meaningful changes in customer conditions from routine variation, incomplete data, and measures that describe activity without revealing risk.",
+      "Separate meaningful changes in customer behavior from normal variation, incomplete data, and activity that does not reveal real risk.",
   },
   {
     number: "03",
     question: "Who should respond, and when?",
     explanation:
-      "Clarify ownership, intervention rules, escalation paths, and the context each team needs to act before the useful response window closes.",
+      "Set clear ownership, response rules, escalation paths, and the context each team needs before the best response window closes.",
   },
   {
     number: "04",
-    question: "How should the organization judge improvement?",
+    question: "How will you know the response worked?",
     explanation:
-      "Connect earlier action to customer, adoption, workflow, and business indicators so the organization can review whether the intervention is useful.",
+      "Connect earlier action to customer, adoption, workflow, and business measures so your team can see whether the response helped.",
   },
 ];
 
@@ -36,32 +36,32 @@ const evidenceAreas = [
   {
     title: "Lifecycle stages and expectations",
     description:
-      "How the organization defines onboarding, adoption, value realization, renewal readiness, and other meaningful transitions in the customer relationship.",
+      "How your team defines onboarding, adoption, customer value, renewal readiness, and other important stages in the relationship.",
   },
   {
     title: "Customer and account signals",
     description:
-      "Product or service use, engagement changes, support patterns, feedback, stakeholder movement, commercial context, and other available indicators of changing conditions.",
+      "Product or service use, changes in engagement, support patterns, feedback, stakeholder changes, and other signs that conditions are shifting.",
   },
   {
     title: "Handoffs and intervention paths",
     description:
-      "How customer context moves across sales, onboarding, success, service, operations, and leadership when a signal requires coordinated action.",
+      "How customer context moves across sales, onboarding, success, service, operations, and leadership when teams need to act together.",
   },
   {
     title: "Health measures and data quality",
     description:
-      "The inputs, assumptions, missing data, weighting, freshness, and practical use of current scores, dashboards, alerts, and account-review materials.",
+      "The inputs, assumptions, missing data, age, and real use of current health scores, dashboards, alerts, and account reviews.",
   },
   {
     title: "Ownership and escalation rules",
     description:
-      "Who monitors conditions, interprets ambiguity, initiates outreach, resolves blockers, and makes decisions when customer risk crosses team boundaries.",
+      "Who watches for risk, makes sense of unclear signals, contacts the customer, removes blockers, and makes cross-team decisions.",
   },
   {
     title: "Outcomes and review cadence",
     description:
-      "How the organization evaluates interventions, learns from preventable loss, and updates signals or operating rules as customer behavior changes.",
+      "How your team reviews its response, learns from preventable losses, and updates signals or rules as customer behavior changes.",
   },
 ];
 
@@ -70,56 +70,57 @@ const deliverables = [
     number: "01",
     title: "Lifecycle risk model",
     description:
-      "A shared definition of meaningful lifecycle stages, risk conditions, and the transitions where earlier action can still change the outcome.",
+      "A shared definition of customer stages, risk conditions, and the points where earlier action can still change the outcome.",
     decision:
-      "Where the organization should monitor risk and which lifecycle boundaries require clearer operating attention.",
+      "Where to watch for risk and which lifecycle stages need clearer attention.",
   },
   {
     number: "02",
     title: "Signal inventory and assessment",
     description:
-      "A review of available indicators, their evidence strength, known gaps, freshness, ownership, and usefulness for a specific decision.",
+      "A review of available signals, the strength of their evidence, known gaps, age, ownership, and value for a specific decision.",
     decision:
-      "Which signals can guide action now, which need improvement, and which should not be treated as reliable evidence.",
+      "Which signals can guide action now, which need work, and which are not reliable enough to use.",
   },
   {
     number: "03",
     title: "Intervention and ownership map",
     description:
-      "A practical view of triggers, responsible roles, escalation paths, required context, and the response expected when risk conditions appear.",
+      "A practical view of triggers, owners, escalation paths, needed context, and the response expected when risk appears.",
     decision:
-      "Who acts, when they act, what information they need, and where cross-functional support is required.",
+      "Who acts, when they act, what they need to know, and where teams must work together.",
   },
   {
     number: "04",
     title: "Prioritized improvement plan",
     description:
-      "A sequenced set of changes to lifecycle definitions, data, workflows, reviews, and measurement based on consequence and dependency.",
+      "An ordered set of changes to lifecycle definitions, data, workflows, reviews, and measurement based on impact and dependencies.",
     decision:
-      "What to improve first and what conditions should exist before introducing more automation or predictive complexity.",
+      "What to improve first and what needs to be ready before adding automation or predictive tools.",
   },
 ];
 
 const strongFit = [
-  "Onboarding drift, weak adoption, quiet accounts, or renewal risk becomes visible later than the organization can respond effectively.",
-  "Customer context and risk signals are fragmented across teams, systems, or account-review practices.",
-  "A sponsor can align customer-facing, operational, data, and commercial owners around shared intervention decisions.",
-  "The organization is willing to change lifecycle definitions, workflows, and ownership.",
+  "Onboarding slips, adoption falls, accounts go quiet, or renewal risk appears too late for an effective response.",
+  "Customer context and risk signals are spread across teams, systems, or account reviews.",
+  "A sponsor can bring customer-facing, operations, data, and commercial owners together.",
+  "Your organization is willing to change lifecycle definitions, workflows, and ownership.",
 ];
 
 const limitedFit = [
-  "The only goal is to purchase a predictive tool without changing how teams interpret and act on customer risk.",
-  "The immediate need is a recovery plan for one known account.",
-  "Relevant customer, account, workflow, or outcome evidence is unavailable and cannot be responsibly examined.",
-  "No accountable owner can change intervention rules, escalation paths, or cross-functional customer work.",
+  "The goal is only to buy a predictive tool without changing how teams understand and respond to risk.",
+  "You need an urgent recovery plan for one known account.",
+  "The needed customer, account, workflow, or outcome evidence is not available.",
+  "No accountable owner can change response rules, escalation paths, or cross-team work.",
 ];
 ---
 
 <Layout
   title="Lifecycle Risk Review | Cadence Lab"
-  description="Identify lifecycle risk earlier, clarify which customer signals should trigger action, and define who responds before the useful intervention window closes."
+  description="Find customer lifecycle risk earlier. Learn which signals matter, who should respond, and what to improve before renewal risk becomes urgent."
   canonicalURL="/services/lifecycle-risk-review/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema
     items={[
@@ -141,13 +142,13 @@ const limitedFit = [
 
           <p class="eyebrow">Diagnostic 02</p>
           <h1 id="diagnostic-title">
-            See lifecycle risk while there is still time to act.
+            See customer risk before it’s too late to act.
           </h1>
           <p class="hero-lead">
-            The Lifecycle Risk Review examines customer stages, changing account
-            conditions, health signals, intervention rules, and ownership so
-            teams can respond before preventable risk becomes a late-stage
-            surprise.
+            The Lifecycle Risk Review finds early warning signs across
+            onboarding, adoption, account health, customer feedback, and
+            renewal. You’ll see which signals matter, who should respond, and
+            what needs to change before the risk becomes urgent.
           </p>
 
           <div class="hero-actions" aria-label="Lifecycle Risk Review actions">
@@ -161,16 +162,15 @@ const limitedFit = [
         </div>
 
         <aside class="trigger" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="trigger-label">Recognizable trigger</p>
+          <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
-            Onboarding drifts, adoption weakens, important stakeholders
-            disengage, or accounts become quiet without creating a clear
-            operating response.
+            Onboarding slips, adoption falls, key contacts disengage, or
+            accounts go quiet without a clear response from the team.
           </p>
           <p>
-            Risk becomes undeniable only after the useful intervention window
-            has narrowed, because signals, ownership, and customer context
-            remain fragmented across teams and systems.
+            The risk becomes clear only when there is little time left to act.
+            Signals, ownership, and customer context are spread across teams and
+            systems.
           </p>
         </aside>
       </div>
@@ -189,19 +189,20 @@ const limitedFit = [
     <section
       id="questions"
       class="questions section-block"
-      aria-labelledby="questions-title">
+      aria-labelledby="questions-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Questions answered</p>
             <h2 id="questions-title">
-              Turn late-stage surprises into earlier operating decisions.
+              Turn late surprises into earlier action.
             </h2>
           </div>
           <p>
-            The review starts with the decisions teams need to make. Available
-            signals and workflows are tested against the need for timely,
-            accountable action.
+            We start with the decisions your team needs to make. Then we test
+            whether your signals and workflows support timely, accountable
+            action.
           </p>
         </div>
 
@@ -228,20 +229,18 @@ const limitedFit = [
     <section
       id="scope"
       class="scope section-block"
-      aria-labelledby="scope-title">
+      aria-labelledby="scope-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Scope and evidence</p>
-            <h2 id="scope-title">
-              Examine the conditions that reveal and shape lifecycle risk.
-            </h2>
+            <h2 id="scope-title">See how risk is tracked and handled today.</h2>
           </div>
           <p>
-            The exact evidence depends on the customer model and what the
-            organization can responsibly provide. Cadence Lab compares intended
-            lifecycle practices with actual signals, decisions, and intervention
-            behavior.
+            The evidence depends on your customer model and what your team can
+            share. I compare the intended lifecycle process with the signals,
+            decisions, and responses that happen in practice.
           </p>
         </div>
 
@@ -264,10 +263,9 @@ const limitedFit = [
         <aside class="scope-note" aria-labelledby="scope-note-title">
           <h3 id="scope-note-title">Signals before scores</h3>
           <p>
-            A score is useful only when its inputs are understood and its result
-            changes a responsible decision. The review separates observable
-            conditions from assumptions and states where incomplete data limits
-            confidence.
+            A health score is useful only when you understand its inputs and it
+            changes a real decision. The review separates evidence from
+            assumptions and shows where missing data limits confidence.
           </p>
         </aside>
       </div>
@@ -278,13 +276,12 @@ const limitedFit = [
         <div class="outputs-intro">
           <p class="eyebrow eyebrow-inverse">Deliverables and decisions</p>
           <h2 id="outputs-title">
-            Leave with earlier signals and clearer intervention rules.
+            Know what to watch, who acts, and what happens next.
           </h2>
           <p>
-            The deliverables connect lifecycle evidence to action. Each output
-            clarifies which conditions matter, how confidently they can be
-            interpreted, who responds, and what the organization should improve
-            next.
+            You’ll get a practical system for turning lifecycle evidence into
+            action. Each deliverable makes the signals, ownership, response, and
+            next improvement clear.
           </p>
         </div>
 
@@ -317,22 +314,20 @@ const limitedFit = [
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Engagement fit</p>
-            <h2 id="fit-title">
-              Use this review when customer risk appears after the best response
-              window.
-            </h2>
+            <h2 id="fit-title">Use this review when risk shows up too late.</h2>
           </div>
           <p>
             A useful review needs access to the teams, customer context,
-            lifecycle data, and decisions surrounding intervention. It also
-            needs permission to change how risk is defined, owned, and reviewed.
+            lifecycle data, and decisions behind the response. Your organization
+            must also be open to changing how risk is defined, owned, and
+            reviewed.
           </p>
         </div>
 
         <div class="fit-grid">
           <article class="fit-panel fit-panel-strong">
             <p class="fit-label">Strong fit</p>
-            <h3>Conditions that support a useful diagnosis</h3>
+            <h3>This is likely a good fit when</h3>
             <ul role="list">
               {strongFit.map((criterion) => <li>{criterion}</li>)}
             </ul>
@@ -340,7 +335,7 @@ const limitedFit = [
 
           <article class="fit-panel">
             <p class="fit-label fit-label-muted">Limited fit</p>
-            <h3>Conditions that point to another path</h3>
+            <h3>Another path may work better when</h3>
             <ul role="list">
               {limitedFit.map((criterion) => <li>{criterion}</li>)}
             </ul>
@@ -352,36 +347,33 @@ const limitedFit = [
     <section
       id="next-step"
       class="next-step section-block"
-      aria-labelledby="next-step-title">
+      aria-labelledby="next-step-title"
+    >
       <div class="page-container next-step-layout">
         <div>
           <p class="eyebrow">Next step</p>
-          <h2 id="next-step-title">
-            Show where lifecycle risk appears too late.
-          </h2>
+          <h2 id="next-step-title">Tell me where risk appears too late.</h2>
         </div>
 
         <div class="next-step-copy">
           <p>
-            Share where risk appears too late, which lifecycle stages are
-            affected, the teams and systems involved, and the signals already
-            available. Cadence Lab will assess whether this review is the right
-            entry point and say directly when another path makes more sense.
+            Share when risk becomes visible, which lifecycle stages are
+            affected, the teams and systems involved, and the signals you
+            already have. I’ll tell you plainly whether this review is the right
+            place to start or if another path makes more sense.
           </p>
 
           <dl class="next-step-details">
             <div>
               <dt>Useful context</dt>
               <dd>
-                Lifecycle concern, available signals, affected teams, and
+                Lifecycle concern, available signals, teams involved, and
                 accountable sponsor
               </dd>
             </div>
             <div>
               <dt>Expected outcome</dt>
-              <dd>
-                A direct recommendation about fit and the appropriate next step
-              </dd>
+              <dd>A direct answer about fit and the best next step</dd>
             </div>
           </dl>
 
