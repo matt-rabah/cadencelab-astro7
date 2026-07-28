@@ -10,37 +10,37 @@ const mapElements = [
     number: "01",
     title: "A consequential condition",
     description:
-      "Define the customer, service, risk, or operating condition that requires a different response—not merely the moment a timer reaches zero.",
+      "Define the customer, service, risk, or operating condition that needs a different response, not just when a timer ends.",
   },
   {
     number: "02",
     title: "A clear priority rule",
     description:
-      "Connect urgency to customer and operating consequence so teams can distinguish routine delay from work that warrants intervention.",
+      "Tie urgency to real impact so teams can separate routine delay from work that needs intervention.",
   },
   {
     number: "03",
     title: "An accountable owner",
     description:
-      "Name the role responsible for accepting the escalation, coordinating the response, and keeping the customer situation from becoming unowned.",
+      "Name the role that accepts the escalation, coordinates the response, and keeps the case owned.",
   },
   {
     number: "04",
     title: "Authority to intervene",
     description:
-      "Give the owner a usable decision path: resolve, reassign, approve an exception, obtain support, or stop work that is increasing consequence.",
+      "Let the owner resolve, reassign, approve an exception, get support, or stop work that is making things worse.",
   },
   {
     number: "05",
     title: "A response expectation",
     description:
-      "Specify acknowledgement, action, communication, and recovery expectations instead of treating one completion deadline as the entire service promise.",
+      "Define acknowledgement, action, communication, and recovery instead of relying on one completion deadline.",
   },
   {
     number: "06",
     title: "A closure and review rule",
     description:
-      "Define what resolution means, who confirms it, what the customer is told, and how recurring escalations change the operating system.",
+      "Define resolution, confirmation, customer communication, and how repeat escalations change the system.",
   },
 ];
 
@@ -49,31 +49,31 @@ const escalationPath = [
     phase: "Detect",
     question: "What changed, and when did it become consequential?",
     evidence:
-      "Customer signal, elapsed time, failed dependency, risk condition, or service exception.",
+      "Customer signal, elapsed time, failed dependency, risk, or service exception.",
   },
   {
     phase: "Qualify",
     question: "What consequence makes this escalation different?",
     evidence:
-      "Customer impact, urgency, recurrence, commercial exposure, safety, trust, or operating cost.",
+      "Customer impact, urgency, recurrence, revenue, safety, trust, or operating cost.",
   },
   {
     phase: "Assign",
     question: "Who accepts responsibility and has authority to act?",
     evidence:
-      "Named owner, response role, decision rights, supporting teams, and fallback path.",
+      "Named owner, decision rights, supporting teams, and fallback path.",
   },
   {
     phase: "Intervene",
     question: "What action and communication should occur now?",
     evidence:
-      "Recovery step, approval, resource change, customer update, and next review time.",
+      "Recovery step, approval, resource change, customer update, and next review.",
   },
   {
     phase: "Close",
     question: "Was the condition resolved and the system updated?",
     evidence:
-      "Confirmed outcome, customer response, root cause, follow-up owner, and operating change.",
+      "Confirmed outcome, customer response, cause, follow-up owner, and operating change.",
   },
 ];
 
@@ -81,32 +81,32 @@ const failurePatterns = [
   {
     cue: "The timer begins after the risk is already visible",
     description:
-      "The formal SLA starts at assignment or ticket creation even though customer delay began earlier in another channel, queue, or team.",
+      "The SLA starts at assignment even though the customer began waiting in another channel, queue, or team.",
   },
   {
     cue: "Priority describes the record, not the consequence",
     description:
-      "Severity labels are applied inconsistently or reflect internal categories that do not explain urgency, customer effect, or intervention need.",
+      "Severity labels reflect internal categories but don't explain urgency, customer impact, or the need to act.",
   },
   {
     cue: "Escalation raises visibility without adding authority",
     description:
-      "More people are notified, but nobody gains the responsibility or decision rights required to change the outcome.",
+      "More people are notified, but nobody gains the authority needed to change the outcome.",
   },
   {
     cue: "Reassignment resets the clock and loses the context",
     description:
-      "Work appears new to each receiving team while the customer's elapsed time, prior effort, and unresolved decision disappear.",
+      "The work looks new to each team while the customer's wait, prior effort, and open decision disappear.",
   },
   {
     cue: "Internal resolution and customer communication separate",
     description:
-      "Teams work the issue while the customer receives no reliable acknowledgement, expectation, progress update, or confirmation of closure.",
+      "Teams work the issue while the customer gets no clear acknowledgement, update, or confirmation.",
   },
   {
     cue: "Breaches are reported but do not change the system",
     description:
-      "Dashboards count late work without revealing recurring causes, weak ownership, capacity constraints, or service rules that require repair.",
+      "Dashboards count late work without showing repeat causes, weak ownership, capacity limits, or broken service rules.",
   },
 ];
 
@@ -114,32 +114,32 @@ const evidenceSources = [
   {
     title: "Customer and service history",
     description:
-      "The original request, prior contacts, promised response, customer consequence, and full elapsed time across channels and teams.",
+      "The request, prior contacts, promised response, customer impact, and full wait across channels and teams.",
   },
   {
     title: "Timestamps and state changes",
     description:
-      "Creation, assignment, acknowledgement, transfer, action, waiting, communication, resolution, and reopening events.",
+      "Creation, assignment, acknowledgement, transfer, action, communication, resolution, and reopening.",
   },
   {
     title: "Priority and service rules",
     description:
-      "Definitions, thresholds, coverage windows, exclusions, exception logic, and the practical interpretation teams use during real work.",
+      "Definitions, thresholds, coverage windows, exclusions, exceptions, and how teams apply them in real work.",
   },
   {
     title: "Ownership and decision rights",
     description:
-      "Roles, queues, approval authority, fallback owners, on-call paths, and the difference between notification and accountability.",
+      "Roles, queues, approval authority, fallback owners, on-call paths, and who is truly accountable.",
   },
   {
     title: "Coordination and communication",
     description:
-      "Internal messages, customer updates, meetings, workarounds, and other activity that reveals how escalation actually occurs.",
+      "Messages, customer updates, meetings, and workarounds that show how escalation really happens.",
   },
   {
     title: "Outcomes and recurring causes",
     description:
-      "Resolution quality, repeat contact, reopening, recovery effort, customer effect, root causes, and changes made after review.",
+      "Resolution quality, repeat contact, reopening, recovery effort, causes, and changes made after review.",
   },
 ];
 
@@ -148,25 +148,25 @@ const mapOutputs = [
     number: "01",
     title: "Escalation condition map",
     description:
-      "A shared definition of the signals, thresholds, consequences, and exceptions that should change the operating response.",
+      "A shared definition of the signals, thresholds, impact, and exceptions that should change the response.",
   },
   {
     number: "02",
     title: "Ownership and authority model",
     description:
-      "Named responsibility for acknowledgement, decision, coordination, customer communication, recovery, and closure.",
+      "Named responsibility for acknowledgement, decisions, coordination, customer communication, recovery, and closure.",
   },
   {
     number: "03",
     title: "Context and communication requirements",
     description:
-      "The minimum evidence that travels with the escalation and the updates required at each meaningful stage.",
+      "The minimum evidence that travels with the escalation and the updates required at each stage.",
   },
   {
     number: "04",
     title: "Measurement and review rhythm",
     description:
-      "Measures that connect response timing to customer consequence, resolution quality, recurring causes, and operating improvement.",
+      "Measures that connect timing to customer impact, resolution quality, repeat causes, and improvement.",
   },
 ];
 
@@ -181,9 +181,10 @@ const strongFit = [
 
 <Layout
   title="SLA Escalation Maps | Cadence Lab"
-  description="Map the conditions, ownership, authority, context, response, and review required to intervene before a service issue becomes a preventable customer failure."
+  description="Map the conditions, ownership, authority, context, and response needed to act before a service issue becomes a preventable failure."
   canonicalURL="/workflows/escalation/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema currentName="SLA escalation maps" />
 
@@ -200,19 +201,19 @@ const strongFit = [
 
           <p class="eyebrow">Workflow · SLA escalation maps</p>
           <h1 id="escalation-title">
-            Make escalation begin before the response window closes.
+            An SLA can't fix a response nobody owns.
           </h1>
           <p class="hero-lead">
-            An SLA escalation map connects a consequential customer condition to
-            priority, ownership, decision authority, communication, and
-            recovery. It turns a timer into an operating response teams can
-            understand and use.
+            An escalation map connects a customer condition to priority,
+            ownership, authority, communication, and recovery. It turns a timer
+            into a response people can actually use.
           </p>
 
           <div class="hero-actions" aria-label="SLA escalation map actions">
             <a
               class="button button-primary"
-              href="/services/lifecycle-risk-review/">
+              href="/services/lifecycle-risk-review/"
+            >
               Review the Lifecycle Risk Review
             </a>
             <a class="button button-text" href="/fit-check/">
@@ -225,9 +226,9 @@ const strongFit = [
         <aside class="trigger-card" aria-labelledby="trigger-title">
           <p id="trigger-title" class="note-label">Recognizable trigger</p>
           <p>
-            The organization has SLA targets, priority fields, queues, and
-            escalation reports, but consequential work still becomes urgent only
-            after the useful intervention window has narrowed.
+            You have SLA targets, priority fields, queues, and reports.
+            Important work still becomes urgent only after the best time to act
+            has passed.
           </p>
           <dl>
             <div>
@@ -240,7 +241,7 @@ const strongFit = [
             </div>
             <div>
               <dt>Decision</dt>
-              <dd>What must change before adding more alerts</dd>
+              <dd>What to fix before adding more alerts</dd>
             </div>
           </dl>
         </aside>
@@ -261,27 +262,26 @@ const strongFit = [
     <section
       id="what-the-map-does"
       class="map-purpose section-block"
-      aria-labelledby="map-purpose-title">
+      aria-labelledby="map-purpose-title"
+    >
       <div class="page-container purpose-layout">
         <div>
           <p class="eyebrow">What the map does</p>
           <h2 id="map-purpose-title">
-            Start with consequence, not the countdown.
+            Start with the impact, not the countdown.
           </h2>
         </div>
 
         <div class="purpose-copy">
           <p>
-            A useful escalation map begins with the moment a customer or
-            operating condition needs a different response. It identifies who
-            should notice, how priority is determined, which role accepts
-            responsibility, and what authority that role needs.
+            Begin with the moment a customer or operating condition needs a
+            different response. Define who should notice, how priority is set,
+            who accepts responsibility, and what authority that person needs.
           </p>
           <p>
-            Time remains important, but an SLA alone cannot coordinate the work.
-            The map makes the decisions around the clock explicit, including
-            acknowledgement, customer communication, exception handling,
-            recovery, and review.
+            Time matters, but an SLA can't coordinate the work by itself. The
+            map makes acknowledgement, communication, exceptions, recovery, and
+            review explicit.
           </p>
         </div>
       </div>
@@ -290,16 +290,17 @@ const strongFit = [
     <section
       id="conditions"
       class="conditions"
-      aria-labelledby="conditions-title">
+      aria-labelledby="conditions-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Escalation conditions</p>
           <h2 id="conditions-title">
-            Define the response around six operating requirements.
+            Six things make an escalation actionable.
           </h2>
           <p>
-            Each requirement tests whether the escalation can change the outcome
-            instead of simply creating another notification.
+            Each one tests whether the escalation can change the outcome instead
+            of creating another notification.
           </p>
         </div>
 
@@ -320,18 +321,19 @@ const strongFit = [
     <section
       id="escalation-path"
       class="escalation-path section-block"
-      aria-labelledby="escalation-path-title">
+      aria-labelledby="escalation-path-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Escalation path</p>
             <h2 id="escalation-path-title">
-              Follow the condition from detection to learning.
+              Follow the issue from detection to learning.
             </h2>
           </div>
           <p>
-            The path reveals where elapsed time, customer context, ownership, or
-            decision authority weakens as work moves through the response.
+            See where time, customer context, ownership, or authority weakens as
+            the response moves forward.
           </p>
         </div>
 
@@ -357,16 +359,17 @@ const strongFit = [
     <section
       id="failure-patterns"
       class="failure-patterns"
-      aria-labelledby="failure-patterns-title">
+      aria-labelledby="failure-patterns-title"
+    >
       <div class="page-container failure-layout">
         <div class="failure-intro">
           <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
           <h2 id="failure-patterns-title">
-            A measured response can still be an unusable response.
+            Measuring the response doesn't make it useful.
           </h2>
           <p>
-            These patterns show where service-level reporting and actual
-            customer recovery have separated.
+            These patterns show where SLA reporting and customer recovery split
+            apart.
           </p>
         </div>
 
@@ -387,19 +390,20 @@ const strongFit = [
     <section
       id="evidence-outputs"
       class="evidence-outputs section-block"
-      aria-labelledby="evidence-title">
+      aria-labelledby="evidence-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Evidence and outputs</p>
             <h2 id="evidence-title">
-              Compare the service promise with the real response.
+              Compare the service promise with what really happened.
             </h2>
           </div>
           <p>
-            A useful map combines system history with service rules, frontline
-            behavior, customer communication, decision rights, and outcomes. It
-            states where incomplete evidence limits confidence.
+            Combine system history with service rules, frontline behavior,
+            customer communication, decision rights, and outcomes. Be clear
+            where missing evidence limits confidence.
           </p>
         </div>
 
@@ -418,7 +422,7 @@ const strongFit = [
         <div class="output-block">
           <div class="output-intro">
             <p class="note-label">Practical outputs</p>
-            <h2>Leave with a response system people can operate.</h2>
+            <h2>Build a response people can operate.</h2>
           </div>
 
           <ol class="output-list">
@@ -443,14 +447,12 @@ const strongFit = [
         <div class="fit-copy">
           <p class="eyebrow">Fit</p>
           <h2 id="fit-title">
-            Use an escalation map when timing problems are really ownership
-            problems.
+            Use a map when the timing problem is really an ownership problem.
           </h2>
           <p>
-            SLA escalation mapping is most useful when customer consequence
-            crosses teams, systems, priorities, and decision layers. It is not a
-            monitoring-tool installation, a legal review of service-level
-            commitments, or a staffing model by itself.
+            This work fits when customer impact crosses teams, systems,
+            priorities, and decision layers. It isn't a monitoring-tool
+            installation, a legal review of SLA terms, or a staffing model.
           </p>
 
           <a class="button button-primary" href="/fit-check/">

@@ -10,37 +10,37 @@ const linkRequirements = [
     number: "01",
     title: "A recognizable trigger",
     description:
-      "The receiving team can tell what happened, why the work is moving, and which condition requires attention now.",
+      "The next team can tell what happened, why the work moved, and what needs attention now.",
   },
   {
     number: "02",
     title: "Enough operating context",
     description:
-      "Customer history, prior action, urgency, constraints, and the unresolved question travel with the work.",
+      "Customer history, prior action, urgency, constraints, and the open question travel with the work.",
   },
   {
     number: "03",
     title: "An accountable owner",
     description:
-      "A named role accepts responsibility for the next decision instead of allowing the work to become merely visible.",
+      "A named role accepts responsibility for the next decision instead of simply seeing the work.",
   },
   {
     number: "04",
     title: "Authority to act",
     description:
-      "The owner can make the decision, obtain approval, or escalate without rebuilding the case from the beginning.",
+      "The owner can decide, get approval, or escalate without rebuilding the case.",
   },
   {
     number: "05",
     title: "A time expectation",
     description:
-      "The handoff defines when action is needed and how urgency changes as customer or operating consequence increases.",
+      "The handoff defines when action is needed and how urgency changes as the impact grows.",
   },
   {
     number: "06",
     title: "A closed feedback loop",
     description:
-      "The originating team can see what happened, whether the customer need was resolved, and what the system should learn.",
+      "The first team can see what happened, whether the need was resolved, and what should change.",
   },
 ];
 
@@ -55,7 +55,7 @@ const handoffPath = [
     phase: "Transfer",
     question: "What context and responsibility moved with the work?",
     evidence:
-      "Required information, stated owner, time expectation, and reason.",
+      "Required information, named owner, time expectation, and reason.",
   },
   {
     phase: "Acceptance",
@@ -72,8 +72,7 @@ const handoffPath = [
   {
     phase: "Closure",
     question: "Did the outcome return to the customer system?",
-    evidence:
-      "Resolution, learning, downstream impact, and follow-up ownership.",
+    evidence: "Resolution, learning, downstream impact, and follow-up owner.",
   },
 ];
 
@@ -81,32 +80,32 @@ const failurePatterns = [
   {
     cue: "Visible everywhere, owned nowhere",
     description:
-      "Multiple teams can see the issue, but responsibility remains shared in a way that prevents anyone from making the next decision.",
+      "Several teams see the issue, but shared responsibility prevents anyone from making the next decision.",
   },
   {
     cue: "The activity moved without the story",
     description:
-      "A task, ticket, or record reaches the next queue while customer history, prior judgment, and urgency stay behind.",
+      "A task or record reaches the next queue while the customer history, prior judgment, and urgency stay behind.",
   },
   {
     cue: "The receiving team must reopen the diagnosis",
     description:
-      "Missing evidence forces the next team to repeat discovery, ask the customer for the same information, or reconstruct the case.",
+      "Missing evidence forces the next team to repeat discovery, ask again, or rebuild the case.",
   },
   {
     cue: "Escalation begins after the response window",
     description:
-      "The organization eventually identifies the correct owner, but only after delay has increased customer or business consequence.",
+      "The right owner is found only after the delay has increased the customer or business impact.",
   },
   {
     cue: "The handoff completes but the outcome disappears",
     description:
-      "The originating team cannot see what happened, so reporting measures transfer activity instead of resolution or learning.",
+      "The first team can't see what happened, so reporting tracks transfers instead of resolution or learning.",
   },
   {
     cue: "Exceptions depend on personal networks",
     description:
-      "Experienced employees know who to contact, while the formal workflow offers no reliable path for unfamiliar or high-risk cases.",
+      "Experienced employees know who to contact, but the formal workflow offers no reliable path for unfamiliar cases.",
   },
 ];
 
@@ -123,22 +122,22 @@ const linkOutputs = [
   {
     title: "Cross-functional link map",
     description:
-      "A shared view of the teams, systems, decisions, context, and dependencies surrounding the customer work.",
+      "A shared view of the teams, systems, decisions, context, and dependencies around the work.",
   },
   {
     title: "Context requirements",
     description:
-      "The minimum information each receiving role needs to understand the situation and make the next useful decision.",
+      "The minimum information each receiving role needs to understand the case and decide what comes next.",
   },
   {
     title: "Ownership and authority model",
     description:
-      "Clear responsibility for accepting, deciding, escalating, resolving, and reviewing each consequential handoff.",
+      "Clear responsibility for accepting, deciding, escalating, resolving, and reviewing each handoff.",
   },
   {
     title: "Handoff repair sequence",
     description:
-      "A prioritized order for workflow, system, data, role, service-rule, and measurement changes.",
+      "A prioritized order for workflow, system, data, role, service rule, and measurement changes.",
   },
 ];
 
@@ -146,16 +145,17 @@ const strongFit = [
   "The customer problem crosses teams, systems, or lifecycle stages.",
   "Customers repeat information or receive conflicting explanations.",
   "Important work stalls between queues, functions, or approval layers.",
-  "Teams coordinate through messages and meetings because the formal path is incomplete.",
+  "Teams rely on messages and meetings because the formal path is incomplete.",
   "Leadership can assign owners and change decision rights or workflow rules.",
 ];
 ---
 
 <Layout
   title="Cross-functional Links | Cadence Lab"
-  description="Trace and repair the handoffs connecting customer work across teams, systems, ownership, decisions, and outcomes."
+  description="Find and repair the handoffs where customer context, ownership, or urgency gets lost between teams and systems."
   canonicalURL="/workflows/cross-functional/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema currentName="Cross-functional links" />
 
@@ -171,18 +171,20 @@ const strongFit = [
           </nav>
 
           <p class="eyebrow">Workflow · Cross-functional links</p>
-          <h1 id="links-title">Make the handoff carry the work.</h1>
+          <h1 id="links-title">
+            A handoff isn't complete because the ticket moved.
+          </h1>
           <p class="hero-lead">
-            Cross-functional links determine whether customer context,
-            responsibility, urgency, and decision authority survive as work
-            moves between teams. Mapping those links reveals where a handoff
-            completes in the system but fails in the operating model.
+            A useful handoff carries the customer story, urgency, ownership, and
+            authority to act. Mapping the link shows where the system moves the
+            work but the operating model drops it.
           </p>
 
           <div class="hero-actions" aria-label="Cross-functional link actions">
             <a
               class="button button-primary"
-              href="/services/cx-systems-diagnostic/">
+              href="/services/cx-systems-diagnostic/"
+            >
               Review the CX Systems Diagnostic
             </a>
             <a class="button button-text" href="/fit-check/">
@@ -196,13 +198,12 @@ const strongFit = [
           <p id="trigger-title" class="note-label">Recognizable trigger</p>
           <p>
             Customers repeat the story, teams receive incomplete context, and
-            important work becomes visible to several functions without becoming
-            clearly owned by one.
+            important work becomes visible to everyone but owned by no one.
           </p>
           <dl>
             <div>
               <dt>Visible symptom</dt>
-              <dd>Delay, repetition, conflicting responses</dd>
+              <dd>Delay, repetition, and conflicting responses</dd>
             </div>
             <div>
               <dt>Trace</dt>
@@ -231,27 +232,27 @@ const strongFit = [
     <section
       id="operating-link"
       class="operating-link section-block"
-      aria-labelledby="operating-link-title">
+      aria-labelledby="operating-link-title"
+    >
       <div class="page-container operating-layout">
         <div>
           <p class="eyebrow">The operating link</p>
           <h2 id="operating-link-title">
-            A handoff is a transfer of accountability.
+            The work moves only when accountability moves with it.
           </h2>
         </div>
 
         <div class="operating-copy">
           <p>
-            A handoff is not complete when a record changes owner, a message is
-            sent, or a meeting ends. It is complete when the receiving role
-            understands the situation, accepts responsibility, has authority to
-            act, and can return the outcome to the broader customer system.
+            A changed owner, sent message, or finished meeting doesn't complete
+            a handoff. The receiving role must understand the case, accept
+            responsibility, have authority to act, and return the outcome.
           </p>
           <p>
-            Cross-functional link mapping follows that transfer across teams,
-            queues, systems, policies, and decisions. It separates problems of
-            communication from problems of ownership, authority, capacity,
-            workflow design, or missing evidence.
+            Link mapping follows that transfer across teams, queues, systems,
+            policies, and decisions. It separates a communication gap from a
+            deeper problem with ownership, authority, capacity, workflow, or
+            evidence.
           </p>
         </div>
       </div>
@@ -260,16 +261,17 @@ const strongFit = [
     <section
       id="link-requirements"
       class="link-requirements"
-      aria-labelledby="link-requirements-title">
+      aria-labelledby="link-requirements-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Link requirements</p>
           <h2 id="link-requirements-title">
-            Six conditions make a handoff usable.
+            Six things must travel with the work.
           </h2>
           <p>
-            A strong link carries more than information. It preserves the
-            decision context and makes the next responsibility explicit.
+            A strong link preserves the decision context and makes the next
+            responsibility clear.
           </p>
         </div>
 
@@ -290,16 +292,17 @@ const strongFit = [
     <section
       id="handoff-path"
       class="handoff-path section-block"
-      aria-labelledby="handoff-path-title">
+      aria-labelledby="handoff-path-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro">
           <p class="eyebrow">Handoff path</p>
           <h2 id="handoff-path-title">
-            Trace the link from origin to closure.
+            Follow the handoff from origin to closure.
           </h2>
           <p>
-            Each stage tests whether the customer problem and operating
-            responsibility remain intact as the work changes hands.
+            At each stage, check whether the customer problem and responsibility
+            remain intact.
           </p>
         </div>
 
@@ -325,15 +328,16 @@ const strongFit = [
     <section
       id="failure-patterns"
       class="failure-patterns"
-      aria-labelledby="failure-patterns-title">
+      aria-labelledby="failure-patterns-title"
+    >
       <div class="page-container failure-layout">
         <div class="failure-intro">
           <p class="eyebrow eyebrow-inverse">Failure patterns</p>
           <h2 id="failure-patterns-title">
-            Context decays when the link has no owner.
+            Context gets lost when nobody owns the link.
           </h2>
           <p>
-            These patterns help distinguish a local communication problem from a
+            These patterns separate a one-time communication miss from a
             repeatable operating failure.
           </p>
         </div>
@@ -355,26 +359,26 @@ const strongFit = [
     <section
       id="evidence-outputs"
       class="evidence-outputs section-block"
-      aria-labelledby="evidence-outputs-title">
+      aria-labelledby="evidence-outputs-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
             <p class="eyebrow">Evidence and outputs</p>
             <h2 id="evidence-outputs-title">
-              Compare the intended handoff with the one people actually use.
+              Compare the formal handoff with the real one.
             </h2>
           </div>
           <p>
-            A useful diagnosis combines records and service rules with
-            timestamps, conversations, frontline behavior, exceptions, and
-            customer outcomes.
+            Combine records and service rules with timestamps, conversations,
+            frontline behavior, exceptions, and customer outcomes.
           </p>
         </div>
 
         <div class="evidence-panel">
           <div>
             <p class="note-label">Evidence sources</p>
-            <h3>Follow the work across formal and informal systems.</h3>
+            <h3>Follow the work wherever people actually do it.</h3>
           </div>
           <ul>
             {evidenceSources.map((source) => <li>{source}</li>)}
@@ -400,14 +404,13 @@ const strongFit = [
         <div class="fit-copy">
           <p class="eyebrow">Fit</p>
           <h2 id="fit-title">
-            Use link mapping when the customer problem crosses boundaries.
+            Use link mapping when the problem lives between teams.
           </h2>
           <p>
-            Cross-functional link mapping is most useful when teams agree that a
-            problem exists but explain its cause from different parts of the
-            system. It requires access to the people and evidence surrounding
-            the work and a sponsor able to resolve ownership or decision-right
-            questions.
+            This work fits when teams agree on the problem but explain its cause
+            from different parts of the system. It needs access to the people
+            and evidence around the work, plus a sponsor who can resolve
+            ownership and decision rights.
           </p>
           <a class="button button-primary" href="/fit-check/">
             Start a fit check
