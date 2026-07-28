@@ -1,0 +1,17 @@
+{
+  "serverInfo": {
+    "name": "Cadence Lab",
+    "version": "1.0.0"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": false
+  },
+  "description": "Cadence Lab provides customer experience diagnostics, workflow guidance, and AI readiness assessments. This server card describes discoverable resources — no live MCP transport is currently available.",
+  "links": {
+    "website": "https://cadencelab.co/",
+    "documentation": "https://cadencelab.co/about/",
+    "llmsTxt": "https://cadencelab.co/llms.txt"
+  }
+}

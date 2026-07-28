@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://cadencelab.co/",
+      "service-desc": [
+        {
+          "href": "https://cadencelab.co/llms.txt",
+          "type": "text/plain"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://cadencelab.co/about/",
+          "type": "text/html"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://cadencelab.co/sitemap-index.xml",
+          "type": "application/xml"
+        }
+      ]
+    }
+  ]
+}
