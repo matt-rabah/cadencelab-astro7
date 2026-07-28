@@ -8,11 +8,11 @@
 AI agents, LLM-based crawlers, and automated tools that discover and interact
 with web services.
 
-## Authentication status
+## Agent Registration
 
-Cadence Lab does not currently operate protected APIs. All site content —
-including pages, blog posts, diagnostic service descriptions, and
-machine-readable resources — is publicly accessible without authentication.
+**No registration is required.** 
+
+Cadence Lab does not currently operate protected APIs. All site content — including pages, blog posts, diagnostic service descriptions, and machine-readable resources — is publicly accessible without authentication, api keys, or registration.
 
 ## Available machine-readable resources
 
