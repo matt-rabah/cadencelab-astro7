@@ -2,5 +2,15 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow major AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://cadencelab.co/sitemap-index.xml
 Llms-Txt: https://cadencelab.co/llms.txt
