@@ -22,7 +22,7 @@ const pageTitle = `${title} | Cadence Lab`;
 
 const pageDescription =
   subtitle ??
-  "Use the fit check to determine whether your customer experience, CRM, or AI initiative is ready for a productive engagement.";
+  "Use the Fit Check to see whether your customer experience, CRM, or AI initiative is ready for a useful next step.";
 ---
 
 <Layout
@@ -43,8 +43,8 @@ const pageDescription =
           <p class="fit-check-intro">{subtitle}</p>
 
           <p class="fit-check-context">
-            The fit check focuses on the operating problem, the conditions
-            around it, and whether a consulting engagement would be useful.
+            Tell me what’s going wrong, what’s getting in the way, and what you
+            need to decide. I’ll tell you plainly whether I can help.
           </p>
         </header>
 
@@ -53,15 +53,15 @@ const pageDescription =
           <dl>
             <div>
               <dt>Time</dt>
-              <dd>About five minutes</dd>
+              <dd>About 5 minutes</dd>
             </div>
             <div>
               <dt>What happens next</dt>
-              <dd>Matt reviews the context and responds directly.</dd>
+              <dd>I’ll review your answers and reply directly.</dd>
             </div>
             <div>
               <dt>Privacy</dt>
-              <dd>Your answers are used only to assess fit and respond.</dd>
+              <dd>I’ll use your answers only to assess fit and respond.</dd>
             </div>
           </dl>
         </aside>
@@ -104,17 +104,17 @@ const pageDescription =
         <fieldset class="form-section" data-form-step="1">
           <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">01</span>
-            Customer experience problem
+            Problem and outcome
           </legend>
 
           <p id="problem-description" class="section-description">
-            Describe the operating problem and the outcome that would make the
-            work worthwhile.
+            Tell me what’s happening now and what a useful result would look
+            like.
           </p>
 
           <div class="input-group">
             <label for="challenge">
-              What customer experience problem are you trying to solve?
+              What customer or workflow problem are you trying to solve?
             </label>
 
             <textarea
@@ -126,11 +126,11 @@ const pageDescription =
               maxlength="2000"
               aria-describedby="challenge-hint challenge-error"
               aria-errormessage="challenge-error"
-              placeholder="Describe the customer friction, affected teams, and business impact."
+              placeholder="Describe what customers or teams experience and where the work gets stuck."
               required></textarea>
             <p id="challenge-hint" class="field-hint">
-              Include the customer friction, affected teams, and business
-              consequence.
+              Include who is affected, which teams are involved, and why the
+              problem matters.
             </p>
             <p id="challenge-error" class="field-error">
               Describe the problem in at least 40 characters.
@@ -138,9 +138,7 @@ const pageDescription =
           </div>
 
           <div class="input-group">
-            <label for="impact">
-              What outcome would make this work successful?
-            </label>
+            <label for="impact">What would a useful result look like?</label>
 
             <textarea
               id="impact"
@@ -151,10 +149,11 @@ const pageDescription =
               maxlength="2000"
               aria-describedby="impact-hint impact-error"
               aria-errormessage="impact-error"
-              placeholder="Examples: improve retention, reduce service effort, increase adoption, or strengthen measurement."
+              placeholder="Examples: reduce repeat contacts, improve adoption, lower service effort, or spot risk earlier."
               required></textarea>
             <p id="impact-hint" class="field-hint">
-              Name an observable customer, operating, or business outcome.
+              Name a customer, team, or business result you could see or
+              measure.
             </p>
             <p id="impact-error" class="field-error">
               Describe the desired outcome in at least 20 characters.
@@ -167,7 +166,7 @@ const pageDescription =
               type="button"
               data-next-step
             >
-              Continue to environment
+              Continue to your environment
             </button>
           </div>
         </fieldset>
@@ -175,17 +174,17 @@ const pageDescription =
         <fieldset class="form-section" data-form-step="2">
           <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">02</span>
-            Operating environment
+            Your operating environment
           </legend>
 
           <p class="section-description">
-            Select the descriptions that most closely reflect how work and
-            information move today.
+            Choose the options that best describe how work and information move
+            today.
           </p>
 
           <div class="input-group">
             <span id="environment-label" class="group-label">
-              Which description best matches your current environment?
+              How does the work happen today?
             </span>
 
             <div
@@ -201,38 +200,35 @@ const pageDescription =
                   required
                 />
                 <span
-                  >Multiple disconnected systems and inconsistent workflows</span
+                  >Teams use disconnected systems and inconsistent workflows</span
                 >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="transitioning" />
-                <span
-                  >Systems or processes are currently being consolidated</span
-                >
+                <span>Systems or workflows are being combined or replaced</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="modern-siloed" />
                 <span
-                  >Modern tools exist, but teams or workflows remain siloed</span
+                  >The tools are modern, but teams or workflows remain siloed</span
                 >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="established" />
                 <span
-                  >Core systems and workflows are established but need
-                  improvement</span
+                  >Core systems and workflows are in place but need improvement</span
                 >
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="uncertain" />
-                <span>We need help understanding the current state</span>
+                <span>We need help making sense of the current state</span>
               </label>
             </div>
           </div>
 
           <div class="input-group">
             <span id="crm-label" class="group-label">
-              What role does CRM data play in the current workflow?
+              How useful is your CRM data today?
             </span>
 
             <div
@@ -242,29 +238,25 @@ const pageDescription =
             >
               <label class="radio-option">
                 <input type="radio" name="crm" value="measured" required />
-                <span
-                  >CRM data is connected to workflows and performance measures</span
-                >
+                <span>It supports workflows and performance decisions</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="active-limited" />
                 <span
-                  >Data is collected, but its operational use is limited</span
+                  >We collect data, but teams do not use it consistently</span
                 >
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="fragmented" />
-                <span
-                  >Data quality or ownership is inconsistent across teams</span
-                >
+                <span>Data quality or ownership varies across teams</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="early" />
-                <span>CRM use is still developing</span>
+                <span>We are still building how we use the CRM</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="unknown" />
-                <span>We are not sure how reliable or useful the data is</span>
+                <span>We do not know whether the data is reliable enough</span>
               </label>
             </div>
           </div>
@@ -295,8 +287,7 @@ const pageDescription =
 
           <div class="input-group">
             <span id="leadership-label" class="group-label">
-              Is there an accountable leader who can support cross-functional
-              decisions?
+              Is there a leader who can support decisions across teams?
             </span>
 
             <div
@@ -306,25 +297,25 @@ const pageDescription =
             >
               <label class="radio-option">
                 <input type="radio" name="leadership" value="yes" required />
-                <span>Yes, an accountable sponsor is involved.</span>
+                <span>Yes, an accountable sponsor is involved</span>
               </label>
 
               <label class="radio-option">
                 <input type="radio" name="leadership" value="developing" />
-                <span>Support exists, but ownership is still developing.</span>
+                <span>Support exists, but ownership is still taking shape</span>
               </label>
 
               <label class="radio-option">
                 <input type="radio" name="leadership" value="no" />
-                <span>No, we are still building internal alignment.</span>
+                <span>No, we are still building internal support</span>
               </label>
             </div>
           </div>
 
           <div class="input-group">
             <span id="change-readiness-label" class="group-label">
-              Is the organization willing to change workflows, ownership, or
-              operating practices?
+              Can your organization change workflows, ownership, or team
+              practices if needed?
             </span>
 
             <div
@@ -339,19 +330,17 @@ const pageDescription =
                   value="yes"
                   required
                 />
-                <span>Yes, workflow changes are within scope.</span>
+                <span>Yes, workflow changes are within scope</span>
               </label>
 
               <label class="radio-option">
                 <input type="radio" name="change-readiness" value="limited" />
-                <span>Possibly, depending on the recommendation.</span>
+                <span>Possibly, depending on the recommendation</span>
               </label>
 
               <label class="radio-option">
                 <input type="radio" name="change-readiness" value="no" />
-                <span
-                  >No, the current process must remain largely unchanged.</span
-                >
+                <span>No, the current process must stay mostly unchanged</span>
               </label>
             </div>
           </div>
@@ -446,7 +435,7 @@ const pageDescription =
 
           <div class="input-group">
             <label for="additional-context">
-              Anything else Matt should understand?
+              Anything else I should know?
               <span class="optional-label">(Optional)</span>
             </label>
 
@@ -487,7 +476,7 @@ const pageDescription =
               <p class="section-number" aria-hidden="true">05</p>
               <h3 id="review-title" tabindex="-1">Review your answers</h3>
             </div>
-            <p>Confirm the context below before submitting the fit check.</p>
+            <p>Check your answers before you send the fit check.</p>
           </div>
 
           <div class="review-groups" data-review-groups></div>
@@ -506,8 +495,8 @@ const pageDescription =
         <div class="form-footer">
           <div class="form-note">
             <p>
-              Submitting this form does not create a consulting agreement. Your
-              information will be used only to review the inquiry and respond.
+              Sending this form does not create a consulting agreement. I’ll use
+              your information only to assess fit and respond.
             </p>
             <p>
               Do not include passwords, access tokens, regulated personal data,
@@ -515,9 +504,7 @@ const pageDescription =
             </p>
           </div>
 
-          <button type="submit" class="submit-button">
-            Submit fit check
-          </button>
+          <button type="submit" class="submit-button">Send my fit check</button>
         </div>
       </form>
     </div>
@@ -550,19 +537,19 @@ const pageDescription =
 
       const reviewSections = [
         {
-          title: "Customer experience problem",
+          title: "Problem and outcome",
           step: 0,
           fields: [
-            ["challenge", "Customer experience problem"],
-            ["impact", "Successful outcome"],
+            ["challenge", "Current problem"],
+            ["impact", "Useful result"],
           ],
         },
         {
-          title: "Operating environment",
+          title: "Your operating environment",
           step: 1,
           fields: [
-            ["environment", "Current environment"],
-            ["crm", "Role of CRM data"],
+            ["environment", "How work happens today"],
+            ["crm", "CRM data usefulness"],
           ],
         },
         {
@@ -779,7 +766,7 @@ const pageDescription =
       window.addEventListener("pageshow", () => {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = "Submit fit check";
+          submitButton.textContent = "Send my fit check";
         }
       });
 
