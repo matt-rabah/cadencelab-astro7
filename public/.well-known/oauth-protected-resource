@@ -3,5 +3,6 @@
   "authorization_servers": [
     "https://cadencelab.co"
   ],
-  "scopes_supported": []
+  "scopes_supported": [],
+  "bearer_methods_supported": ["header"]
 }
