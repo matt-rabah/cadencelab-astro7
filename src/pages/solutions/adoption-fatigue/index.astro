@@ -8,144 +8,104 @@ import Layout from "../../../layouts/Layout.astro";
 const visibleSignals = [
   {
     number: "01",
-    title: "Review takes longer than the original task",
+    title: "Checking takes longer than the task",
     description:
-      "People reopen source systems, reconstruct context, verify policy, and rewrite output before they feel safe acting.",
+      "People reopen records, verify policy, and rewrite the output before they trust it.",
   },
   {
     number: "02",
-    title: "A parallel process becomes the trusted process",
+    title: "The workaround becomes the real workflow",
     description:
-      "Spreadsheets, messages, private notes, meetings, or the previous tool remain necessary when the formal workflow becomes busy or consequential.",
+      "Spreadsheets, messages, and the old system still carry the work that matters.",
   },
   {
     number: "03",
-    title: "Usage remains steady while confidence declines",
+    title: "Usage looks healthy, but trust is low",
     description:
-      "Employees complete required steps in the system, then confirm the result elsewhere or avoid relying on it for important decisions.",
+      "People complete the required steps, then confirm the answer somewhere else.",
   },
   {
     number: "04",
-    title: "Exceptions return to the most experienced people",
+    title: "Every exception finds the same expert",
     description:
-      "Specialists absorb the difficult cases because the workflow cannot explain, route, or safely recover from unfamiliar conditions.",
-  },
-  {
-    number: "05",
-    title: "Training repeats without changing the work",
-    description:
-      "People understand how to use the feature but still encounter weak inputs, unclear rules, duplicated effort, or consequences they cannot accept.",
-  },
-  {
-    number: "06",
-    title: "The launch succeeds while the outcome stays flat",
-    description:
-      "Availability, login, completion, or automation measures improve without a corresponding change in customer quality, work time, capacity, or trust.",
+      "Experienced people absorb the hard cases because the workflow can't explain, route, or recover from them.",
   },
 ];
 
 const operatingCauses = [
   {
     label: "Workflow",
-    question: "Does the new path reduce effort or add another layer?",
+    question: "Did the new path remove work or add a layer?",
     description:
-      "The task may be divided poorly between the system and the person, repeat discovery, create duplicate entry, or leave exception handling outside the designed flow.",
+      "A tool can automate one step while leaving duplicate entry, extra checks, and exceptions for the user.",
   },
   {
-    label: "Data and knowledge",
-    question: "Can people trust the inputs behind the output?",
+    label: "Inputs",
+    question: "Can people trust what the answer is based on?",
     description:
-      "Incomplete records, conflicting policies, stale knowledge, inaccessible context, and unclear provenance make verification a rational part of the job.",
+      "Missing records, stale knowledge, and conflicting rules make verification part of the job.",
   },
   {
-    label: "Decision rights",
-    question: "Who can approve, reject, correct, or stop the work?",
+    label: "Control",
+    question: "Can the user correct, reject, or stop the work?",
     description:
-      "People may remain accountable for an outcome without having the authority to change the system response or resolve the operating constraint.",
+      "Trust falls when people own the outcome but can't change the system's response.",
   },
   {
-    label: "Human judgment",
-    question: "Is review bounded or a complete reconstruction?",
+    label: "Risk",
+    question: "What happens when the system is wrong?",
     description:
-      "Useful oversight focuses attention where consequence or uncertainty requires it. Unbounded review quietly recreates the original task.",
-  },
-  {
-    label: "Incentives and consequence",
-    question: "What risk does the user carry when the system is wrong?",
-    description:
-      "Adoption weakens when speed and usage are rewarded while employees remain responsible for customer harm, rework, compliance, or recovery.",
-  },
-  {
-    label: "Measurement",
-    question: "Do the measures reveal useful work or recorded activity?",
-    description:
-      "Login, feature use, and task completion can look healthy while correction, bypass, delay, escalation, and customer outcomes deteriorate.",
+      "People will slow down when they carry the cost of customer harm, rework, or compliance failure.",
   },
 ];
 
 const evidenceSources = [
   {
-    title: "Task observation",
+    title: "Watch the real task",
     description:
-      "How people complete routine and consequential work on a normal day and under pressure, including every system, check, and workaround used.",
+      "See which systems, checks, and workarounds people use on a normal day and under pressure.",
   },
   {
-    title: "Review and correction",
+    title: "Count review and rework",
     description:
-      "Time spent checking output, sources reopened, changes made, recommendations rejected, and work repeated before action.",
+      "Track time spent checking output, reopening sources, correcting answers, and repeating work.",
   },
   {
-    title: "Overrides and bypasses",
+    title: "Study bypasses and exceptions",
     description:
-      "Cases where people reject, route around, disable, abandon, or replace the intended workflow and the reason each response feels safer.",
+      "Find where people leave the intended path, who handles the hard cases, and why the alternative feels safer.",
   },
   {
-    title: "Exceptions and escalation",
+    title: "Connect behavior to outcomes",
     description:
-      "Conditions the workflow cannot handle, specialists who absorb them, context lost during transfer, and the effort required to recover.",
-  },
-  {
-    title: "User explanation",
-    description:
-      "What people believe the system is helping, where they hesitate, which consequences concern them, and what would make the workflow more useful.",
-  },
-  {
-    title: "Customer and operating outcomes",
-    description:
-      "Quality, completion time, repeat contact, rework, capacity, error, escalation, trust, and other evidence connected to the assisted task.",
+      "Compare usage with quality, completion time, repeat contact, errors, escalation, and customer impact.",
   },
 ];
 
 const responseSequence = [
   {
     phase: "Observe",
-    question: "What work is happening around the intended workflow?",
+    question: "See the work around the workflow.",
     evidence:
-      "Real tasks, busy-day behavior, review effort, workarounds, exceptions, and outcomes.",
+      "Follow real tasks, including checks, workarounds, exceptions, and outcomes.",
   },
   {
-    phase: "Distinguish",
-    question: "What kind of problem is creating the resistance?",
+    phase: "Diagnose",
+    question: "Name the source of the friction.",
     evidence:
-      "Training, workflow, data, knowledge, ownership, system behavior, incentives, or use-case fit.",
+      "Separate a skill gap from a problem with workflow, data, control, risk, or use-case fit.",
   },
   {
     phase: "Repair",
-    question: "Which operating condition should change first?",
+    question: "Fix the smallest useful constraint.",
     evidence:
-      "Task boundaries, inputs, handoffs, authority, review, recovery, measurement, and removed complexity.",
+      "Change the task boundary, input, handoff, control, review step, or recovery path.",
   },
   {
     phase: "Test",
-    question: "Does the revised workflow make the work more usable?",
+    question: "Prove the work got better.",
     evidence:
-      "A bounded group, representative cases, known exceptions, adoption support, and clear stop conditions.",
-  },
-  {
-    phase: "Review",
-    question: "What evidence supports continuation or expansion?",
-    evidence:
-      "Useful work, correction, bypass, quality, customer consequence, trust, and operating performance.",
+      "Test with real cases and compare review, bypass, quality, speed, trust, and customer impact.",
   },
 ];
 
@@ -154,34 +114,33 @@ const diagnosticPaths = [
     title: "AI Service Readiness Review",
     href: "/services/ai-service-readiness-review/",
     useWhen:
-      "The adoption problem surrounds an AI use case whose workflow, oversight, governance, trust, or success conditions remain unresolved.",
+      "Use this when an AI workflow still lacks clear oversight, guardrails, trust, or success measures.",
   },
   {
     title: "CRM Workflow Audit",
     href: "/services/crm-workflow-audit/",
     useWhen:
-      "Teams route around CRM records, fields, automation, reporting, or configured workflows because the system does not support the real work.",
+      "Use this when teams route around CRM data, automation, reporting, or configured workflows.",
   },
   {
     title: "CX Systems Diagnostic",
     href: "/services/cx-systems-diagnostic/",
     useWhen:
-      "The resistance reflects customer friction, cross-functional handoffs, unclear ownership, or operating constraints spanning several systems and teams.",
+      "Use this when friction crosses customer journeys, handoffs, ownership, systems, and teams.",
   },
 ];
 
 const strongFit = [
-  "A launched workflow has acceptable usage but creates correction, verification, rework, or bypass.",
-  "Employees are described as resistant while their operating concerns remain unexplained.",
-  "The problem crosses system behavior, data, workflow, ownership, training, or incentives.",
-  "Customer or business outcomes have not improved with adoption activity.",
-  "A sponsor can change the work—not only require more use of the tool.",
+  "Usage is acceptable, but checking, correction, rework, or bypass is rising.",
+  "Employees are called resistant, but no one has studied the work behind that behavior.",
+  "Adoption activity has increased without a clear gain in customer or business outcomes.",
+  "A sponsor can change the workflow, not just require more use.",
 ];
 ---
 
 <Layout
   title="User Adoption Fatigue | Cadence Lab"
-  description="Find why employees verify, correct, bypass, or abandon a workflow and determine which operating conditions must change before asking for more adoption."
+  description="Find out why people verify, correct, or bypass a workflow. Fix the work before asking for more adoption."
   canonicalURL="/solutions/adoption-fatigue/"
   pageType="website">
   <NavHeader />
@@ -200,13 +159,13 @@ const strongFit = [
 
           <p class="eyebrow">Solution · User adoption fatigue</p>
           <h1 id="adoption-title">
-            Treat resistance as evidence about the work.
+            The new tool saves two minutes. Then it adds ten minutes of
+            checking.
           </h1>
           <p class="hero-lead">
-            Adoption fatigue appears when people repeatedly absorb the review,
-            correction, coordination, and risk that a new workflow was expected
-            to reduce. The useful question is not how to force more use, but
-            what the behavior reveals about the operating system.
+            That's not simple resistance. It's a sign that the workflow moved
+            effort or risk onto the people using it. Find that friction, fix it,
+            and give adoption a reason to grow.
           </p>
 
           <div class="hero-actions" aria-label="User adoption fatigue actions">
@@ -223,10 +182,9 @@ const strongFit = [
         <aside class="problem-card" aria-labelledby="problem-title">
           <p id="problem-title" class="note-label">Recognizable pattern</p>
           <p>
-            The feature is available and people have been trained. Usage appears
-            acceptable, but employees still verify every output, keep a safer
-            parallel process, or return to the old workflow when the work
-            becomes consequential.
+            The launch is complete. Training is done. Usage looks fine. Yet
+            people still check every answer, keep a backup spreadsheet, or
+            return to the old process when the stakes rise.
           </p>
           <dl>
             <div>
@@ -235,7 +193,7 @@ const strongFit = [
             </div>
             <div>
               <dt>Operating question</dt>
-              <dd>What work and risk did the change leave behind?</dd>
+              <dd>What work or risk did the change leave behind?</dd>
             </div>
             <div>
               <dt>Decision</dt>
@@ -266,22 +224,20 @@ const strongFit = [
         <div>
           <p class="eyebrow">The problem</p>
           <h2 id="problem-heading">
-            Adoption weakens when the workflow moves risk onto the user.
+            People work around systems that make good work harder.
           </h2>
         </div>
 
         <div class="problem-copy">
           <p>
-            A system can be technically correct and still make daily work
-            slower, less clear, or more fragile. People then create additional
-            checks and coordination to protect the customer and the outcome for
-            which they remain accountable.
+            A system can work as designed and still make the job slower or less
+            clear. People add checks and workarounds to protect the customer and
+            the outcome they still own.
           </p>
           <p>
-            Those behaviors are not automatically a training failure. They may
-            reveal weak data, unclear policy, missing context, brittle
-            automation, poorly divided tasks, or a use case that should have
-            remained narrower.
+            More training won't fix weak data, unclear rules, brittle
+            automation, or a poorly chosen use case. First, learn which problem
+            you have.
           </p>
         </div>
       </div>
@@ -291,13 +247,8 @@ const strongFit = [
       <div class="page-container section-stack">
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Visible signals</p>
-          <h2 id="signals-title">
-            Look beyond whether the tool is being used.
-          </h2>
-          <p>
-            These patterns indicate that participation and useful adoption have
-            separated.
-          </p>
+          <h2 id="signals-title">Usage can hide the real cost.</h2>
+          <p>A login proves access. It doesn't prove the workflow helps.</p>
         </div>
 
         <ol class="signal-grid">
@@ -323,13 +274,13 @@ const strongFit = [
           <div>
             <p class="eyebrow">Operating causes</p>
             <h2 id="causes-title">
-              Separate an enablement gap from a system problem.
+              Find the friction before you prescribe training.
             </h2>
           </div>
           <p>
-            Training is useful when people lack knowledge or practice. It cannot
-            resolve a workflow that asks them to compensate for weak inputs,
-            unclear decisions, or consequences the system cannot manage.
+            Training helps when people lack skill or practice. It can't repair a
+            workflow that asks them to compensate for bad inputs, weak controls,
+            or unmanaged risk.
           </p>
         </div>
 
@@ -359,17 +310,17 @@ const strongFit = [
       <div class="page-container evidence-layout">
         <div class="evidence-intro">
           <p class="eyebrow">Evidence</p>
-          <h2 id="evidence-title">Measure the work around the output.</h2>
+          <h2 id="evidence-title">Measure what happens after the click.</h2>
           <p>
-            A useful review connects behavior to the task and its consequence.
-            The purpose is to understand friction and risk—not to monitor
-            employees for failing to comply with a preferred narrative.
+            Review the full task, not just activity inside the tool. The goal is
+            to understand friction and risk, not punish people for finding a
+            safer path.
           </p>
           <div class="evidence-principle">
             <p class="note-label">Evidence principle</p>
             <p>
-              Compare intended work with actual work, then distinguish observed
-              facts, user interpretation, and working hypotheses.
+              Compare the intended workflow with the real one. Keep observed
+              facts separate from opinions and assumptions.
             </p>
           </div>
         </div>
@@ -393,11 +344,11 @@ const strongFit = [
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Practical response</p>
           <h2 id="response-title">
-            Improve the conditions before expanding the mandate.
+            Fix the work. Then ask people to adopt it.
           </h2>
           <p>
-            The sequence keeps the response grounded in the real task and uses
-            adoption behavior to guide a bounded operating decision.
+            Start small, use real cases, and expand only when the evidence says
+            the workflow is better.
           </p>
         </div>
 
@@ -429,13 +380,12 @@ const strongFit = [
           <div>
             <p class="eyebrow">Diagnostic paths</p>
             <h2 id="paths-title">
-              Let the operating cause determine the starting point.
+              Start with the problem underneath the behavior.
             </h2>
           </div>
           <p>
-            Adoption fatigue is a symptom, not a complete diagnosis. The right
-            entry point depends on whether the most consequential constraint
-            sits in AI readiness, CRM workflow, or the broader customer
+            Adoption fatigue is a symptom. The right diagnostic depends on
+            whether the constraint sits in AI, CRM, or the broader customer
             operating system.
           </p>
         </div>
@@ -463,14 +413,13 @@ const strongFit = [
         <div class="fit-copy">
           <p class="eyebrow">Fit</p>
           <h2 id="fit-title">
-            Use this path when adoption behavior is carrying an unresolved
-            operating problem.
+            Use this path when the workflow, not willingness, may be the
+            problem.
           </h2>
           <p>
-            The work is most useful when leadership is willing to examine the
-            workflow and change its conditions. It is not intended to enforce
-            compliance, justify a predetermined platform, or label reasonable
-            risk responses as employee resistance.
+            This work helps when leaders can change the conditions around the
+            job. It isn't a compliance campaign or a way to defend a tool that
+            has already been chosen.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
@@ -497,8 +446,8 @@ const strongFit = [
         </div>
         <div>
           <p>
-            A practical guide to recognizing review burden, hidden workarounds,
-            declining trust, and the operating questions behind AI adoption.
+            See how review burden, workarounds, and low trust can turn AI into
+            more work.
           </p>
           <a href="/blog/2026/06/adoption-fatigue/">
             Read the article
@@ -796,7 +745,7 @@ const strongFit = [
 
   .signal-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
     padding: 0;
     border-top: var(--border-width) solid rgb(252 254 255 / 22%);
@@ -937,7 +886,7 @@ const strongFit = [
 
   .response-list {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0;
     padding: 0;
     border-top: 0.1875rem solid var(--color-green);

@@ -8,204 +8,137 @@ import Layout from "../../../layouts/Layout.astro";
 const visibleSignals = [
   {
     number: "01",
-    title: "The strategy sounds shared but the decisions differ",
+    title: "The words match, but the decisions don't",
     description:
-      "Leaders use the same language while assigning different outcomes, priorities, boundaries, owners, or definitions to the work.",
+      "Leaders repeat the same strategy while choosing different outcomes, priorities, and owners.",
   },
   {
     number: "02",
-    title: "The roadmap grows around unresolved questions",
+    title: "The roadmap grows because nothing gets ruled out",
     description:
-      "Projects, platforms, features, and workstreams accumulate because the organization cannot choose which operating constraint should lead.",
+      "Projects and platforms pile up because every priority survives the meeting.",
   },
   {
     number: "03",
-    title: "Each function brings a different version of the evidence",
+    title: "More people join, but no one can decide",
     description:
-      "Customer, revenue, service, product, operational, and technical measures support local narratives without creating a shared account of the problem.",
+      "Committees get larger while authority to resolve tradeoffs stays unclear.",
   },
   {
     number: "04",
-    title: "Committees multiply while accountability thins",
+    title: "Technology becomes the decision",
     description:
-      "More stakeholders attend reviews, but nobody holds authority to resolve competing priorities, accept a tradeoff, or assign the resulting work.",
-  },
-  {
-    number: "05",
-    title: "Teams optimize their part and weaken the whole",
-    description:
-      "Local goals improve while customer effort, handoffs, risk, data quality, or downstream capacity deteriorates somewhere else in the system.",
-  },
-  {
-    number: "06",
-    title: "Technology becomes the decision that alignment avoided",
-    description:
-      "A platform or AI initiative moves forward before leadership agrees on the workflow, ownership, decision rights, and outcome it is expected to improve.",
+      "A platform or AI initiative moves ahead before leaders agree on the work it should improve.",
   },
 ];
 
 const alignmentConditions = [
   {
     label: "Outcome",
-    question: "What observable condition needs to change?",
+    question: "What needs to be different when this works?",
     description:
-      "A useful outcome connects customer consequence, operating performance, and business value without reducing success to project delivery.",
+      "Define a result that connects customer impact, operating performance, and business value.",
   },
   {
     label: "Scope",
-    question: "Which problem is included and what is outside the decision?",
+    question: "What are we solving, and what are we not solving?",
     description:
-      "A bounded scope prevents adjacent ambitions, local symptoms, and speculative opportunities from obscuring the immediate operating need.",
+      "A real boundary keeps every local concern from becoming part of one endless program.",
   },
   {
-    label: "Ownership",
-    question: "Who has authority to decide and remain accountable?",
+    label: "Authority",
+    question: "Who can make the call and own the result?",
     description:
-      "Participation is not ownership. A named sponsor must resolve tradeoffs, assign accountable roles, and accept the consequences of the chosen direction.",
+      "Participation isn't ownership. One sponsor must be able to close the decision and accept its tradeoffs.",
   },
   {
     label: "Evidence",
-    question: "What facts support the problem definition?",
+    question: "Which facts will guide the choice?",
     description:
-      "Customer signals, workflow observation, system behavior, financial context, and operational measures should be separated from interpretation and advocacy.",
+      "Separate customer and operating facts from assumptions, interpretation, and advocacy.",
   },
   {
-    label: "Constraints",
-    question: "Which limits and tradeoffs must shape the choice?",
+    label: "Boundaries",
+    question: "What stays consistent, and what may adapt?",
     description:
-      "Capacity, timing, risk, policy, data, technology, contractual commitments, and change burden make some options more responsible than others.",
-  },
-  {
-    label: "Sequence",
-    question: "What must change first and what depends on it?",
-    description:
-      "Alignment becomes operational when leaders agree on the smallest useful order of decisions, work, evidence, and review.",
+      "Define the shared outcome and safeguards, then allow local choices where customers, markets, or risks differ.",
   },
 ];
 
 const decisionPath = [
   {
     phase: "Frame",
-    question: "What consequential problem requires a shared decision?",
+    question: "Name the decision, not the initiative.",
     evidence:
-      "Customer consequence, operating effect, current response, urgency, and accountable sponsor.",
-  },
-  {
-    phase: "Examine",
-    question: "What does the available evidence support?",
-    evidence:
-      "Observed facts, competing interpretations, evidence gaps, constraints, dependencies, and affected roles.",
+      "State the customer impact, operating effect, urgency, and accountable sponsor.",
   },
   {
     phase: "Choose",
-    question: "Which outcome, scope, and tradeoffs will lead?",
+    question: "Pick the outcome and accept the tradeoffs.",
     evidence:
-      "Decision criteria, rejected alternatives, authority, resources, measures, and accepted consequences.",
+      "Record the criteria, chosen direction, rejected options, constraints, and resources.",
   },
   {
     phase: "Commit",
-    question: "Who owns the resulting decisions and work?",
+    question: "Turn the choice into owned work.",
     evidence:
-      "Accountable roles, decision rights, handoffs, milestones, support, escalation, and communication.",
+      "Assign decision rights, handoffs, dependencies, support, escalation, and the first change.",
   },
   {
     phase: "Review",
-    question: "What evidence will cause the direction to continue or change?",
+    question: "Decide what could change the direction.",
     evidence:
-      "Customer, workflow, adoption, performance, risk, learning, and a defined review rhythm.",
+      "Set customer, workflow, performance, and risk measures with a clear review point.",
   },
 ];
 
 const evidenceSources = [
   {
-    title: "Customer consequence",
+    title: "Customer and business consequence",
     description:
-      "Recurring friction, delay, effort, risk, trust, retention, service quality, and the customer conditions leadership expects the work to improve.",
+      "What customers experience, what the business loses, and which result leaders expect to improve.",
   },
   {
-    title: "Actual operating workflow",
+    title: "The real workflow",
     description:
-      "How work moves through teams, systems, decisions, handoffs, exceptions, and informal recovery—not only the process described in presentations.",
+      "How work moves through teams, systems, handoffs, exceptions, and recovery outside the slide deck.",
   },
   {
-    title: "Ownership and authority",
+    title: "Authority and constraints",
     description:
-      "Formal accountability, practical decision rights, budget or resource authority, approval paths, unresolved overlaps, and gaps between title and control.",
+      "Who can decide, which limits shape the choice, and where formal titles differ from practical control.",
   },
   {
-    title: "Measures and definitions",
+    title: "Measures and decision history",
     description:
-      "The outcomes, terms, filters, time horizons, targets, assumptions, and local metrics used to describe success or justify a direction.",
-  },
-  {
-    title: "Constraints and dependencies",
-    description:
-      "Capacity, change burden, policy, risk, data, technology, contractual commitments, prior investments, and the work that must precede another decision.",
-  },
-  {
-    title: "Decision and change history",
-    description:
-      "Prior commitments, deferred choices, reversals, exceptions, unresolved recommendations, initiative overlap, and evidence explaining why earlier efforts stalled.",
-  },
-];
-
-const failurePatterns = [
-  {
-    cue: "Agreement is measured by attendance",
-    description:
-      "Stakeholders participate in workshops and reviews, but no explicit decision records what was chosen, rejected, owned, or accepted as a tradeoff.",
-  },
-  {
-    cue: "Consensus replaces accountable judgment",
-    description:
-      "The organization seeks universal comfort with the direction, allowing the most difficult cross-functional decisions to remain open.",
-  },
-  {
-    cue: "The loudest metric defines the problem",
-    description:
-      "A single commercial, operational, customer, or technical measure leads without showing its relationship to the full operating consequence.",
-  },
-  {
-    cue: "Scope expands to preserve every priority",
-    description:
-      "The program absorbs each stakeholder's concern, producing a larger roadmap without resolving which outcome or operating constraint matters first.",
-  },
-  {
-    cue: "Ownership is assigned without authority",
-    description:
-      "A program lead becomes responsible for delivery but cannot resolve competing goals, change cross-functional work, or secure the required participation.",
-  },
-  {
-    cue: "The decision disappears after the meeting",
-    description:
-      "Teams return to local incentives because the choice was not translated into changed roles, workflow, measures, resources, and review.",
+      "How teams define success, which choices were delayed or reversed, and why earlier efforts stalled.",
   },
 ];
 
 const alignmentOutputs = [
   {
     number: "01",
-    title: "Shared problem definition",
+    title: "Shared decision brief",
     description:
-      "A bounded account of the customer and operating problem, available evidence, competing interpretations, constraints, and important uncertainty.",
+      "The problem, outcome, scope, evidence, constraints, uncertainty, and decision owner in plain language.",
   },
   {
     number: "02",
-    title: "Decision and tradeoff record",
+    title: "Decision record",
     description:
-      "The outcome, scope, criteria, chosen direction, rejected alternatives, accepted consequences, and condition that would trigger reconsideration.",
+      "What was chosen, what was rejected, which tradeoffs were accepted, and what could reopen the choice.",
   },
   {
     number: "03",
-    title: "Ownership and dependency map",
+    title: "Decision-rights map",
     description:
-      "Accountable leaders, decision rights, participating roles, handoffs, dependencies, escalation paths, and the authority required to act.",
+      "Who decides, who contributes, who acts, where work crosses boundaries, and how issues escalate.",
   },
   {
     number: "04",
-    title: "Sequenced operating plan",
+    title: "First operating sequence",
     description:
-      "The smallest useful order of workflow, ownership, data, measurement, and technology changes with explicit review points.",
+      "The smallest useful order of workflow, ownership, data, and technology changes with a review point.",
   },
 ];
 
@@ -214,34 +147,33 @@ const diagnosticPaths = [
     title: "CX Systems Diagnostic",
     href: "/services/cx-systems-diagnostic/",
     useWhen:
-      "Leadership sees recurring customer friction but lacks a shared account of its operating cause, consequence, ownership, and first useful change.",
+      "Use this when leaders disagree about the cause, ownership, or first fix for customer friction.",
   },
   {
     title: "AI Service Readiness Review",
     href: "/services/ai-service-readiness-review/",
     useWhen:
-      "Executives support an AI use case but have not aligned on workflow readiness, oversight, governance, adoption, measures, or implementation boundaries.",
+      "Use this when leaders support AI but haven't aligned on workflow, oversight, risk, or success.",
   },
   {
     title: "CRM Workflow Audit",
     href: "/services/crm-workflow-audit/",
     useWhen:
-      "The disagreement centers on what the CRM should enable, which signals teams can trust, and whether process, data, ownership, or configuration should change first.",
+      "Use this when teams disagree about what the CRM should enable or which signals they can trust.",
   },
 ];
 
 const strongFit = [
-  "A consequential cross-functional initiative has momentum but no stable operating decision.",
-  "Leadership agrees on ambition while disagreeing on outcomes, scope, evidence, ownership, or sequence.",
-  "Teams are funding overlapping fixes for symptoms produced by the same underlying system.",
-  "A sponsor has authority to resolve tradeoffs and change cross-functional work.",
-  "Leaders are willing to narrow, pause, or redirect an initiative when the evidence supports it.",
+  "A cross-functional initiative has momentum but no stable operating decision.",
+  "Leaders agree on the ambition but not the outcome, scope, evidence, or owner.",
+  "A sponsor can resolve tradeoffs and change work across teams.",
+  "Leaders will narrow, pause, or redirect the initiative when evidence supports it.",
 ];
 ---
 
 <Layout
   title="Executive Misalignment | Cadence Lab"
-  description="Turn competing executive priorities, evidence, ownership, constraints, and roadmaps into a bounded operating decision and practical sequence."
+  description="Turn competing executive priorities into a clear decision, accountable ownership, and a practical operating sequence."
   canonicalURL="/solutions/misalignment/"
   pageType="website">
   <NavHeader />
@@ -260,13 +192,12 @@ const strongFit = [
 
           <p class="eyebrow">Solution · Executive misalignment</p>
           <h1 id="alignment-title">
-            Align the decision before aligning the roadmap.
+            If everyone agrees, why is every team doing something different?
           </h1>
           <p class="hero-lead">
-            Executive misalignment persists when leaders have not made the same
-            decision about the outcome, scope, evidence, ownership, constraints,
-            and sequence of change. A shared operating decision turns broad
-            agreement into accountable work.
+            Shared language isn't the same as a shared decision. Name the
+            outcome, boundaries, evidence, owner, and tradeoffs before another
+            roadmap turns disagreement into more work.
           </p>
 
           <div class="hero-actions" aria-label="Executive alignment actions">
@@ -285,9 +216,9 @@ const strongFit = [
         <aside class="problem-card" aria-labelledby="problem-title">
           <p id="problem-title" class="note-label">Recognizable pattern</p>
           <p>
-            Leaders support the transformation in principle, but each function
-            is solving a different problem, using different evidence, and
-            protecting a different definition of success.
+            Every leader supports the transformation. Each function is still
+            solving a different problem and protecting a different definition of
+            success.
           </p>
           <dl>
             <div>
@@ -314,7 +245,6 @@ const strongFit = [
         { label: "Conditions", href: "#conditions" },
         { label: "Decision path", href: "#decision-path" },
         { label: "Evidence", href: "#evidence" },
-        { label: "Failure patterns", href: "#failure-patterns" },
         { label: "Outputs", href: "#outputs" },
         { label: "Diagnostic paths", href: "#diagnostic-paths" },
         { label: "Fit", href: "#fit" },
@@ -329,22 +259,20 @@ const strongFit = [
         <div>
           <p class="eyebrow">The problem</p>
           <h2 id="problem-heading">
-            Alignment is a decision condition, not a meeting outcome.
+            Agreement is easy. A decision has tradeoffs.
           </h2>
         </div>
 
         <div class="problem-copy">
           <p>
-            Leaders do not need identical perspectives. They need an explicit
-            way to use those perspectives to choose an outcome, accept
-            constraints and tradeoffs, assign authority, and sequence the
-            resulting work.
+            Leaders don't need the same perspective. They need a clear way to
+            choose an outcome, accept constraints, assign authority, and decide
+            what happens first.
           </p>
           <p>
-            Without that decision, programs preserve every priority. Teams then
-            optimize local measures, technology carries unresolved operating
-            questions, and the organization mistakes activity for coordinated
-            change.
+            Without that choice, every priority survives. Teams optimize their
+            part, technology carries the unanswered questions, and activity
+            looks like progress.
           </p>
         </div>
       </div>
@@ -354,13 +282,8 @@ const strongFit = [
       <div class="page-container section-stack">
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Visible signals</p>
-          <h2 id="signals-title">
-            Look for agreement that does not govern the work.
-          </h2>
-          <p>
-            These patterns show where leadership support has not become a shared
-            operating decision.
-          </p>
+          <h2 id="signals-title">Look for agreement that changes nothing.</h2>
+          <p>Support only matters when it guides choices across teams.</p>
         </div>
 
         <ol class="signal-grid">
@@ -386,13 +309,12 @@ const strongFit = [
           <div>
             <p class="eyebrow">Alignment conditions</p>
             <h2 id="conditions-title">
-              Make six parts of the decision explicit.
+              Decide what the enterprise shares and what teams can adapt.
             </h2>
           </div>
           <p>
-            Misalignment often becomes manageable when leaders stop debating a
-            broad initiative and start deciding the specific operating
-            conditions that should guide it.
+            Stop debating the initiative in the abstract. Decide the conditions
+            that will govern real work across the enterprise.
           </p>
         </div>
 
@@ -423,11 +345,11 @@ const strongFit = [
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Decision path</p>
           <h2 id="decision-path-title">
-            Move from competing perspectives to accountable action.
+            Turn different views into one accountable choice.
           </h2>
           <p>
-            The path keeps disagreement visible while requiring explicit choices
-            about the direction and the conditions that will govern it.
+            Keep disagreement visible, then make the tradeoffs clear enough for
+            people to act.
           </p>
         </div>
 
@@ -458,18 +380,17 @@ const strongFit = [
         <div class="evidence-intro">
           <p class="eyebrow">Evidence</p>
           <h2 id="evidence-title">
-            Build a shared account before choosing the intervention.
+            Build one account of the problem before choosing the fix.
           </h2>
           <p>
-            A useful alignment process combines customer, operational,
-            commercial, and technical perspectives without allowing any one
-            function's framing to stand in for the whole system.
+            Bring customer, operating, commercial, and technical facts together
+            without letting one function define the whole problem.
           </p>
           <div class="evidence-principle">
             <p class="note-label">Evidence principle</p>
             <p>
-              Separate observed conditions, stakeholder interpretation,
-              assumptions, and advocacy. Name where evidence remains weak.
+              Keep facts, interpretations, assumptions, and advocacy separate.
+              Say where the evidence is weak.
             </p>
           </div>
         </div>
@@ -489,48 +410,16 @@ const strongFit = [
     </section>
 
     <section
-      id="failure-patterns"
-      class="failure-patterns"
-      aria-labelledby="failure-patterns-title">
-      <div class="page-container failure-layout">
-        <div class="failure-intro">
-          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
-          <h2 id="failure-patterns-title">
-            More collaboration can preserve the missing decision.
-          </h2>
-          <p>
-            These patterns explain why alignment activity can increase without
-            changing ownership, scope, priorities, or the work itself.
-          </p>
-        </div>
-
-        <div class="failure-list">
-          {
-            failurePatterns.map((failure, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{failure.cue}</h3>
-                <p>{failure.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section
       id="outputs"
       class="outputs section-block"
       aria-labelledby="outputs-title">
       <div class="page-container output-layout">
         <div class="output-intro">
           <p class="eyebrow">Practical outputs</p>
-          <h2 id="outputs-title">
-            Turn alignment into decisions the organization can operate.
-          </h2>
+          <h2 id="outputs-title">Leave with decisions people can use.</h2>
           <p>
-            The outputs make the chosen direction, evidence, ownership,
-            tradeoffs, and review conditions visible beyond the meeting.
+            Make the direction, tradeoffs, ownership, and review conditions
+            clear after the meeting ends.
           </p>
         </div>
 
@@ -559,13 +448,12 @@ const strongFit = [
           <div>
             <p class="eyebrow">Diagnostic paths</p>
             <h2 id="paths-title">
-              Let the disputed decision determine the entry point.
+              Start with the decision leaders can't close.
             </h2>
           </div>
           <p>
-            Executive misalignment may surround the broader customer system, a
-            proposed AI use case, or the workflow and signals the CRM should
-            support.
+            The right diagnostic depends on whether the disagreement is about
+            the customer system, an AI use case, or CRM workflow.
           </p>
         </div>
 
@@ -592,14 +480,13 @@ const strongFit = [
         <div class="fit-copy">
           <p class="eyebrow">Fit</p>
           <h2 id="fit-title">
-            Use this path when leadership can make the decision—not only discuss
-            it.
+            Use this path when leadership can make the decision, not just
+            discuss it.
           </h2>
           <p>
-            The work is most useful when an accountable sponsor can resolve
-            tradeoffs, change cross-functional work, and accept an
-            evidence-based recommendation. It is not executive facilitation for
-            a predetermined decision or a substitute for governance authority.
+            This work helps when a sponsor can resolve tradeoffs and change work
+            across teams. It isn't facilitation for a decision that has already
+            been made or a substitute for real authority.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
@@ -831,7 +718,6 @@ const strongFit = [
   .problem-layout h2,
   .section-intro h2,
   .evidence-intro h2,
-  .failure-intro h2,
   .output-intro h2,
   .fit-copy h2 {
     max-width: 20ch;
@@ -851,7 +737,6 @@ const strongFit = [
   .problem-copy p,
   .section-intro > p:not(.eyebrow),
   .evidence-intro > p:not(.eyebrow),
-  .failure-intro > p:not(.eyebrow),
   .output-intro > p:not(.eyebrow),
   .fit-copy > p:not(.eyebrow) {
     max-width: var(--measure-ui);
@@ -875,18 +760,15 @@ const strongFit = [
     gap: 1.25rem;
   }
 
-  .section-intro h2,
-  .failure-intro h2 {
+  .section-intro h2 {
     margin-top: -0.5rem;
   }
 
-  .section-intro-inverse h2,
-  .failure-intro h2 {
+  .section-intro-inverse h2 {
     color: var(--color-light);
   }
 
-  .section-intro-inverse > p:not(.eyebrow),
-  .failure-intro > p:not(.eyebrow) {
+  .section-intro-inverse > p:not(.eyebrow) {
     color: var(--color-text-inverse-muted);
   }
 
@@ -902,8 +784,7 @@ const strongFit = [
   }
 
   .signals,
-  .decision-path,
-  .failure-patterns {
+  .decision-path {
     padding-block: var(--section-space);
     background: var(--color-ink);
     color: var(--color-light);
@@ -911,7 +792,7 @@ const strongFit = [
 
   .signal-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
     padding: 0;
     border-top: var(--border-width) solid rgb(252 254 255 / 22%);
@@ -926,13 +807,11 @@ const strongFit = [
     border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
   }
 
-  .signal-grid .item-number,
-  .failure-list .item-number {
+  .signal-grid .item-number {
     color: var(--color-green);
   }
 
-  .signal-grid h3,
-  .failure-list h3 {
+  .signal-grid h3 {
     margin-top: 1.5rem;
     color: var(--color-light);
     font-size: var(--fs-h4);
@@ -940,8 +819,7 @@ const strongFit = [
     line-height: 1.35;
   }
 
-  .signal-grid li > p:last-child,
-  .failure-list article > p:last-child {
+  .signal-grid li > p:last-child {
     margin: 0.75rem 0 0;
     color: var(--color-text-inverse-muted);
     font-size: var(--fs-small);
@@ -989,7 +867,7 @@ const strongFit = [
 
   .path-list {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0;
     padding: 0;
     border-top: 0.1875rem solid var(--color-green);
@@ -1102,33 +980,6 @@ const strongFit = [
     font-size: var(--fs-small);
     line-height: 1.6;
     text-wrap: pretty;
-  }
-
-  .failure-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-    gap: clamp(3rem, 8vw, 8rem);
-  }
-
-  .failure-intro {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  .failure-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
-  }
-
-  .failure-list article {
-    min-width: 0;
-    padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
   }
 
   .output-layout {
@@ -1305,7 +1156,6 @@ const strongFit = [
     .problem-layout,
     .section-intro-split,
     .evidence-layout,
-    .failure-layout,
     .output-layout,
     .fit-layout {
       grid-template-columns: 1fr;
@@ -1350,8 +1200,7 @@ const strongFit = [
     .signal-grid,
     .condition-list,
     .path-list,
-    .evidence-grid,
-    .failure-list {
+    .evidence-grid {
       grid-template-columns: 1fr;
     }
 
@@ -1372,8 +1221,6 @@ const strongFit = [
     .evidence-principle,
     .evidence-grid,
     .evidence-grid article,
-    .failure-list,
-    .failure-list article,
     .output-list,
     .output-list li,
     .diagnostic-grid,
