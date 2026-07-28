@@ -1,0 +1,74 @@
+{
+  "name": "Cadence Lab",
+  "version": "1.0.0",
+  "description": "Customer experience operating systems practice. Cadence Lab diagnoses onboarding drift, lifecycle risk, unreliable CRM workflows, and AI service readiness, then turns evidence into practical operating change.",
+  "url": "https://cadencelab.co/",
+  "supportedInterfaces": [
+    {
+      "url": "https://cadencelab.co/.well-known/agent-skills/index.json",
+      "transport": "https"
+    }
+  ],
+  "provider": {
+    "organization": "Cadence Lab"
+  },
+  "capabilities": {
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain", "text/html"],
+  "skills": [
+    {
+      "id": "cx-diagnostic",
+      "name": "CX Systems Diagnostic",
+      "description": "Trace recurring customer friction through workflows, ownership, CRM signals, service rules, and cross-functional handoffs. Produces a structured evidence base and actionable operating recommendations.",
+      "tags": ["cx", "diagnostic", "crm", "workflow", "operations"],
+      "examples": [
+        "Diagnose why our onboarding completion rate dropped",
+        "Trace the handoff failures between sales and onboarding",
+        "Audit our CRM workflow for data quality issues"
+      ]
+    },
+    {
+      "id": "lifecycle-risk-review",
+      "name": "Lifecycle Risk Review",
+      "description": "Examine lifecycle stages, risk signals, handoffs, intervention rules, and the data used to identify preventable customer loss.",
+      "tags": ["lifecycle", "risk", "retention", "churn"],
+      "examples": [
+        "Identify where we are losing customers in the lifecycle",
+        "Review our intervention rules for at-risk accounts"
+      ]
+    },
+    {
+      "id": "crm-workflow-audit",
+      "name": "CRM Workflow Audit",
+      "description": "Assess CRM data, automation, ownership, reporting, and the gap between configured and actual work.",
+      "tags": ["crm", "audit", "salesforce", "automation"],
+      "examples": [
+        "Audit our Salesforce automation rules",
+        "Find gaps between CRM configuration and actual team behavior"
+      ]
+    },
+    {
+      "id": "ai-service-readiness",
+      "name": "AI Service Readiness Review",
+      "description": "Evaluate workflow readiness, human oversight, data dependencies, adoption risk, and measurement before AI implementation.",
+      "tags": ["ai", "readiness", "adoption", "governance"],
+      "examples": [
+        "Assess whether our support workflows are ready for AI",
+        "Review our AI adoption risks and governance gaps"
+      ]
+    },
+    {
+      "id": "fit-check",
+      "name": "Fit Check",
+      "description": "Decide whether an operating problem is ready for a diagnostic engagement. Share the problem, teams, systems, and desired outcome for a fit assessment.",
+      "tags": ["intake", "qualification", "engagement"],
+      "examples": [
+        "Is our retention problem a good fit for a diagnostic?",
+        "Start a fit check for our onboarding issues"
+      ]
+    }
+  ]
+}

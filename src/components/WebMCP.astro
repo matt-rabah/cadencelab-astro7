@@ -1,0 +1,131 @@
+---
+// src/components/WebMCP.astro
+// Registers site tools via the WebMCP API (navigator.modelContext)
+// so AI agents can discover and invoke site actions from the browser.
+// https://webmachinelearning.github.io/webmcp/
+---
+
+<script>
+  const registerWebMCPTools = () => {
+    if (!("modelContext" in navigator)) return;
+
+    const mc = navigator.modelContext as any;
+    if (typeof mc.registerTool !== "function") return;
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    mc.registerTool(
+      {
+        name: "search-site",
+        description:
+          "Navigate to the Cadence Lab site search page to find content across services, solutions, workflows, AI tooling, and insights.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description: "Optional search query to pre-fill",
+            },
+          },
+        },
+        execute: async (input: { query?: string }) => {
+          const url = input.query
+            ? `/search/?q=${encodeURIComponent(input.query)}`
+            : "/search/";
+          window.location.href = url;
+          return { navigatedTo: url };
+        },
+      },
+      { signal },
+    );
+
+    mc.registerTool(
+      {
+        name: "get-services",
+        description:
+          "List Cadence Lab's diagnostic service offers: CX Systems Diagnostic, Lifecycle Risk Review, CRM Workflow Audit, and AI Service Readiness Review.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+        },
+        execute: async () => {
+          return {
+            services: [
+              {
+                name: "CX Systems Diagnostic",
+                url: "https://cadencelab.co/services/cx-systems-diagnostic/",
+                description:
+                  "Trace recurring customer friction through workflows, ownership, CRM signals, service rules, and cross-functional handoffs.",
+              },
+              {
+                name: "Lifecycle Risk Review",
+                url: "https://cadencelab.co/services/lifecycle-risk-review/",
+                description:
+                  "Examine lifecycle stages, risk signals, handoffs, intervention rules, and the data used to identify preventable loss.",
+              },
+              {
+                name: "CRM Workflow Audit",
+                url: "https://cadencelab.co/services/crm-workflow-audit/",
+                description:
+                  "Assess CRM data, automation, ownership, reporting, and the gap between configured and actual work.",
+              },
+              {
+                name: "AI Service Readiness Review",
+                url: "https://cadencelab.co/services/ai-service-readiness-review/",
+                description:
+                  "Evaluate workflow readiness, human oversight, data dependencies, adoption risk, and measurement before implementation.",
+              },
+            ],
+          };
+        },
+      },
+      { signal },
+    );
+
+    mc.registerTool(
+      {
+        name: "start-fit-check",
+        description:
+          "Navigate to the Cadence Lab Fit Check form to determine whether an operating problem is ready for a diagnostic engagement.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+        },
+        execute: async () => {
+          window.location.href = "/fit-check/";
+          return { navigatedTo: "/fit-check/" };
+        },
+      },
+      { signal },
+    );
+
+    mc.registerTool(
+      {
+        name: "contact",
+        description:
+          "Navigate to the Cadence Lab contact page to start a conversation about customer experience operating problems.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+        },
+        execute: async () => {
+          window.location.href = "/contact/";
+          return { navigatedTo: "/contact/" };
+        },
+      },
+      { signal },
+    );
+
+    // Clean up on page navigation (Astro view transitions)
+    document.addEventListener(
+      "astro:before-preparation",
+      () => controller.abort(),
+      { once: true },
+    );
+  };
+
+  // Register on initial load and after Astro page transitions
+  registerWebMCPTools();
+  document.addEventListener("astro:page-load", registerWebMCPTools);
+</script>

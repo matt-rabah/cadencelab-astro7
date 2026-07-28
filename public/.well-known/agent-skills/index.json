@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "cx-diagnostic",
+      "type": "skill-md",
+      "description": "Trace recurring customer friction through workflows, ownership, CRM signals, service rules, and cross-functional handoffs. Produces a structured evidence base and actionable operating recommendations.",
+      "url": "https://cadencelab.co/.well-known/agent-skills/cx-diagnostic/SKILL.md",
+      "digest": "sha256:6ff01637c752dc1ebcc3f1b10849627a0bbde04e0f096e49e9873ca25db3f937"
+    },
+    {
+      "name": "fit-check",
+      "type": "skill-md",
+      "description": "Decide whether an operating problem is ready for a Cadence Lab diagnostic engagement. Share the problem, teams, systems, and desired outcome for a fit assessment.",
+      "url": "https://cadencelab.co/.well-known/agent-skills/fit-check/SKILL.md",
+      "digest": "sha256:7bc7dbd087685b7b068cf9be1a2c31f63c81527d717e5f3ddb340859c91b615f"
+    }
+  ]
+}

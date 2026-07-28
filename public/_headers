@@ -1,0 +1,42 @@
+# Cadence Lab — Cloudflare Pages custom headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# ── Homepage: Link response headers for agent discovery (RFC 8288) ──
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-card.json>; rel="describedby"; type="application/json", </llms.txt>; rel="service-desc"; type="text/plain", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"
+
+# ── API Catalog: must be served as application/linkset+json (RFC 9727) ──
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+
+# ── Agent card and MCP server card: JSON content type ──
+/.well-known/agent-card.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+/.well-known/mcp/server-card.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+# ── Agent skills discovery index ──
+/.well-known/agent-skills/index.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+# ── Agent skills SKILL.md files ──
+/.well-known/agent-skills/cx-diagnostic/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/fit-check/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+# ── LLMs.txt ──
+/llms.txt
+  Access-Control-Allow-Origin: *
+
+# ── Auth.md ──
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *

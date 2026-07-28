@@ -1,4 +1,6 @@
+#Cadence Lab
 User-agent: *
 Allow: /
 
 Sitemap: https://cadencelab.co/sitemap-index.xml
+Llms-Txt: https://cadencelab.co/llms.txt
