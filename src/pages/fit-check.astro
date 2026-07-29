@@ -23,6 +23,16 @@ const pageTitle = `${title} | Cadence Lab`;
 const pageDescription =
   subtitle ??
   "Use the Fit Check to see whether your customer experience, CRM, or AI initiative is ready for a useful next step.";
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+if (turnstileSiteKey) {
+  Astro.csp?.insertScriptResource("'self'");
+  Astro.csp?.insertScriptResource("https://challenges.cloudflare.com");
+  Astro.csp?.insertDirective(
+    "frame-src 'self' https://challenges.cloudflare.com",
+  );
+}
 ---
 
 <Layout
@@ -30,6 +40,18 @@ const pageDescription =
   description={pageDescription}
   canonicalURL="/fit-check/"
 >
+  {
+    turnstileSiteKey && (
+      <script
+        slot="head"
+        is:inline
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        data-cfasync="false"
+        defer
+      />
+    )
+  }
+
   <NavHeader />
 
   <main id="main-content" class="fit-check-page" tabindex="-1">
@@ -504,7 +526,37 @@ const pageDescription =
             </p>
           </div>
 
-          <button type="submit" class="submit-button">Send my fit check</button>
+          <div class="form-submit">
+            {
+              turnstileSiteKey ? (
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={turnstileSiteKey}
+                  data-action="fit-check"
+                  data-appearance="interaction-only"
+                  data-theme="auto"
+                  data-size="flexible"
+                  data-retry="auto"
+                  data-refresh-expired="auto"
+                />
+              ) : (
+                <p class="turnstile-configuration" role="status">
+                  The security check is unavailable in this environment.
+                </p>
+              )
+            }
+
+            <p
+              class="turnstile-status"
+              data-turnstile-status
+              aria-live="polite"
+            >
+            </p>
+
+            <button type="submit" class="submit-button">
+              Send my fit check
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -532,6 +584,9 @@ const pageDescription =
       );
       const submitButton = form.querySelector<HTMLButtonElement>(
         '.submit-button[type="submit"]',
+      );
+      const turnstileStatus = form.querySelector<HTMLElement>(
+        "[data-turnstile-status]",
       );
       let currentStep = 0;
 
@@ -794,6 +849,21 @@ const pageDescription =
           showStep(steps.length);
           return;
         }
+
+        const turnstileResponse = form.querySelector<HTMLInputElement>(
+          'input[name="cf-turnstile-response"]',
+        );
+
+        if (!turnstileResponse?.value) {
+          event.preventDefault();
+          if (turnstileStatus) {
+            turnstileStatus.textContent =
+              "Complete the security check before sending your fit check.";
+          }
+          return;
+        }
+
+        if (turnstileStatus) turnstileStatus.textContent = "";
 
         if (submitButton) {
           submitButton.disabled = true;
@@ -1470,6 +1540,32 @@ const pageDescription =
     font-feature-settings: var(--fea-graphik);
   }
 
+  .form-submit {
+    display: grid;
+    justify-items: end;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+  }
+
+  :global(.cf-turnstile) {
+    width: min(100%, 18.75rem);
+  }
+
+  .turnstile-status,
+  .turnstile-configuration {
+    max-width: 20rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.5;
+    text-align: end;
+  }
+
+  .turnstile-status:not(:empty) {
+    color: var(--color-error);
+  }
+
   .is-enhanced .form-footer {
     display: none;
   }
@@ -1605,6 +1701,16 @@ const pageDescription =
     .form-footer {
       flex-direction: column;
       align-items: stretch;
+    }
+
+    .form-submit {
+      justify-items: stretch;
+    }
+
+    .turnstile-status,
+    .turnstile-configuration {
+      max-width: none;
+      text-align: start;
     }
 
     .submit-button {
