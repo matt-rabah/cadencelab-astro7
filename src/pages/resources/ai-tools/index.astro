@@ -5,18 +5,6 @@ import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
 
-const futureTools = [
-  {
-    number: "06",
-    area: "Service recovery",
-    title: "Service Recovery Planner",
-    description:
-      "Describe a customer failure, the people affected, and the limits on what your team can offer. The tool would help shape a response, owner, timeline, and recovery checklist.",
-    output:
-      "A recovery plan with ownership, communication prompts, and follow-up steps.",
-  },
-];
-
 const buildStandards = [
   {
     title: "Solve one clear problem",
@@ -53,7 +41,7 @@ const buildStandards = [
 
 <Layout
   title="Free CX and AI Tools | Cadence Lab"
-  description="Use five free CX and AI tools, including the AI Use Case Stress Test, CX Handoff Mapper, AI Evaluation Builder, Feedback Signal Sorter, and CRM Data Health Sampler."
+  description="Use six free CX and AI tools for evaluating AI use cases, mapping handoffs, building evaluations, sorting feedback, reviewing CRM data, and planning service recovery."
   canonicalURL="/resources/ai-tools/"
   pageType="website"
 >
@@ -76,7 +64,7 @@ const buildStandards = [
             Useful tools. No signup. No sales-form detour.
           </h1>
           <p class="hero-lead">
-            Cadence Lab is building small tools that help people solve a real
+            Cadence Lab builds small tools that help people solve a real
             customer experience or AI problem. Each one will be free to use
             without an account or email address. You should get something useful
             even if we never work together.
@@ -87,7 +75,7 @@ const buildStandards = [
               Explore live tools
             </a>
             <a class="button button-text" href="#tool-roadmap">
-              View the roadmap
+              What comes next
               <span aria-hidden="true">&#8594;</span>
             </a>
           </div>
@@ -124,7 +112,7 @@ const buildStandards = [
     <SectionNav
       items={[
         { label: "Live tools", href: "#live-tools" },
-        { label: "Tool roadmap", href: "#tool-roadmap" },
+        { label: "What comes next", href: "#tool-roadmap" },
         { label: "Build standard", href: "#build-standard" },
         { label: "Privacy", href: "#privacy" },
         { label: "Beyond the tool", href: "#beyond-tool" },
@@ -376,6 +364,56 @@ const buildStandards = [
           </a>
         </div>
       </div>
+
+      <div class="page-container first-layout live-tool-secondary">
+        <div class="first-intro">
+          <p class="eyebrow">Live tool</p>
+          <p class="build-number">06</p>
+          <h2>Service Recovery Planner</h2>
+          <p>
+            Turn a customer failure into a practical response without inventing
+            promises or hiding uncertainty. The planner separates confirmed
+            facts, ownership, timing, remedy boundaries, and closure evidence.
+          </p>
+        </div>
+
+        <div class="first-detail">
+          <div>
+            <p class="detail-label">You provide</p>
+            <p>
+              The failure, affected group, impact, confirmed facts, unknowns,
+              owners, response timing, possible remedies, and limits on what can
+              be promised.
+            </p>
+          </div>
+          <div>
+            <p class="detail-label">You get</p>
+            <p>
+              A portable recovery plan with communication prompts, ownership,
+              response timing, escalation triggers, a checklist, and follow-up
+              evidence.
+            </p>
+          </div>
+          <div>
+            <p class="detail-label">Why it matters</p>
+            <p>
+              Customers can accept that something failed. What breaks trust is
+              silence, conflicting answers, vague ownership, or a promise the
+              next team cannot keep.
+            </p>
+          </div>
+          <p class="status-line">
+            <span>Status</span>
+            Available now. Free, private, and no signup required.
+          </p>
+          <a
+            class="button button-primary"
+            href="/resources/ai-tools/service-recovery-planner/"
+          >
+            Plan a service recovery
+          </a>
+        </div>
+      </div>
     </section>
 
     <section
@@ -385,36 +423,19 @@ const buildStandards = [
     >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Tool roadmap</p>
-          <h2 id="tool-roadmap-title">One more problem worth solving.</h2>
+          <p class="eyebrow eyebrow-inverse">Current roadmap</p>
+          <h2 id="tool-roadmap-title">
+            Six tools are live. The next one has to earn its place.
+          </h2>
           <p>
-            These are working directions, not product promises. The order may
-            change as real users show which problem is most useful to solve
-            next.
+            The initial roadmap is complete. Future tools will come from
+            recurring customer experience and AI problems where a small, private
+            tool can create a useful result without a lead gate.
           </p>
+          <a class="button button-primary roadmap-action" href="/contact/">
+            Suggest a problem worth solving
+          </a>
         </div>
-
-        <ol class="tool-grid">
-          {
-            futureTools.map((tool) => (
-              <li>
-                <article>
-                  <div class="tool-heading">
-                    <p class="item-number">{tool.number}</p>
-                    <p class="tool-area">{tool.area}</p>
-                  </div>
-                  <h3>{tool.title}</h3>
-                  <p>{tool.description}</p>
-                  <div class="tool-output">
-                    <p class="detail-label">Useful output</p>
-                    <p>{tool.output}</p>
-                  </div>
-                  <p class="tool-status">Future candidate</p>
-                </article>
-              </li>
-            ))
-          }
-        </ol>
       </div>
     </section>
 
@@ -593,8 +614,6 @@ const buildStandards = [
   .build-number,
   .detail-label,
   .item-number,
-  .tool-area,
-  .tool-status,
   .status-line span {
     margin: 0;
     color: var(--color-blue);
@@ -780,8 +799,7 @@ const buildStandards = [
     border-bottom: var(--border-width) solid var(--color-border);
   }
 
-  .first-detail > div > p:last-child,
-  .tool-output > p:last-child {
+  .first-detail > div > p:last-child {
     margin: 0.6rem 0 0;
     color: var(--color-text);
     font-size: var(--fs-body);
@@ -819,7 +837,7 @@ const buildStandards = [
     color: var(--color-light);
   }
 
-  .section-intro > p:last-child {
+  .section-intro > p:not(.eyebrow) {
     max-width: var(--measure-prose);
     margin: 0;
     color: var(--color-text-inverse-muted);
@@ -827,74 +845,12 @@ const buildStandards = [
     line-height: var(--lh-ui);
   }
 
-  .tool-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin: 0;
-    padding: 0;
-    border-top: var(--border-width) solid var(--color-border-inverse);
-    list-style: none;
-  }
-
-  .tool-grid > li {
-    border-right: var(--border-width) solid var(--color-border-inverse);
-    border-bottom: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .tool-grid > li:nth-child(2n) {
-    border-right: 0;
-  }
-
-  .tool-grid article {
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    gap: 1rem;
-    padding: clamp(1.5rem, 4vw, 2.25rem);
-  }
-
-  .tool-heading {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .tool-area {
-    color: var(--color-text-inverse-muted);
-    text-align: end;
-  }
-
-  .tool-grid h3 {
-    color: var(--color-light);
-  }
-
-  .tool-grid article > p:not(.tool-status),
-  .tool-output > p:last-child {
-    margin: 0;
-    color: var(--color-text-inverse-muted);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-  }
-
-  .tool-output {
-    margin-top: 0.5rem;
-    padding-top: 1rem;
-    border-top: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .tool-output .detail-label,
-  .tool-status {
-    color: var(--color-green);
-  }
-
-  .tool-output > p:last-child {
-    margin-top: 0.5rem;
-  }
-
-  .tool-status {
-    margin-top: auto;
-    padding-top: 0.5rem;
+  .roadmap-action {
+    width: fit-content;
+    margin-top: 0.75rem;
+    border-color: var(--color-green);
+    background: var(--color-green);
+    color: var(--color-ink);
   }
 
   .standard-list {
@@ -986,16 +942,6 @@ const buildStandards = [
     }
   }
 
-  @media (max-width: 48rem) {
-    .tool-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .tool-grid > li {
-      border-right: 0;
-    }
-  }
-
   @media (max-width: 35rem) {
     .hero-actions,
     .beyond-actions {
@@ -1010,15 +956,6 @@ const buildStandards = [
     .promise-card dl > div {
       grid-template-columns: 1fr;
       gap: 0.25rem;
-    }
-
-    .tool-heading {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    .tool-area {
-      text-align: start;
     }
   }
 </style>

@@ -1,0 +1,81 @@
+.recovery-page .choice-list-four,
+.recovery-page .remedy-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.recovery-page .choice-list-four label,
+.recovery-page .remedy-list label {
+  min-height: 4rem;
+}
+
+.recovery-page .recovery-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 1.5rem 0 0;
+  border-top: 1px solid var(--color-border);
+  border-inline-start: 1px solid var(--color-border);
+}
+
+.recovery-page .recovery-facts > div {
+  padding: 1rem;
+  border-inline-end: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.recovery-page .recovery-facts dt,
+.recovery-page .fact-columns h4 {
+  margin: 0 0 0.35rem;
+  color: var(--color-text-muted);
+  font-family: var(--ff-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.recovery-page .recovery-facts dd,
+.recovery-page .fact-columns p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.recovery-page .fact-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.recovery-page .fact-columns > div {
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+}
+
+.recovery-page .fact-columns ul {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+}
+
+.recovery-page .summary-sheet h4 {
+  font-family: var(--ff-sans);
+}
+
+.recovery-page .summary-sheet ol,
+.recovery-page .summary-sheet ul {
+  padding-inline-start: 1.4rem;
+}
+
+.recovery-page .summary-sheet li + li {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 52rem) {
+  .recovery-page .choice-list-four,
+  .recovery-page .remedy-list,
+  .recovery-page .recovery-facts,
+  .recovery-page .fact-columns {
+    grid-template-columns: 1fr;
+  }
+}
