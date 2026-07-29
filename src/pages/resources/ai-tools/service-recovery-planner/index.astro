@@ -1,0 +1,690 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/feedback-signal-sorter.css";
+import "../../../../styles/service-recovery-planner.css";
+---
+
+<Layout
+  title="Free Service Recovery Planner | Cadence Lab"
+  description="Turn a customer failure into a practical recovery plan with clear ownership, response timing, communication prompts, escalation triggers, and follow-up steps."
+  canonicalURL="/resources/ai-tools/service-recovery-planner/"
+  pageType="website"
+>
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "Service Recovery Planner" },
+    ]}
+  />
+
+  <main id="main-content" class="feedback-page recovery-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li aria-current="page">Service Recovery Planner</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free service recovery tool</p>
+          <h1 id="tool-title">Give the customer a next step they can trust.</h1>
+          <p class="hero-lead">
+            Turn a customer failure into a clear response, owner, timeline,
+            recovery checklist, and follow-up plan—without pretending the tool
+            can authorize promises your team cannot keep.
+          </p>
+          <a class="button button-primary" href="#recovery-form">
+            Build a recovery plan
+          </a>
+        </div>
+
+        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p>
+            Your answers stay in this browser. Cadence Lab does not receive,
+            store, or analyze them.
+          </p>
+          <dl>
+            <div><dt>Cost</dt><dd>Free</dd></div>
+            <div><dt>Signup</dt><dd>None</dd></div>
+            <div><dt>Processing</dt><dd>On your device</dd></div>
+            <div><dt>Customer contact</dt><dd>None</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            Recovery begins when uncertainty gets an owner.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            The planner organizes what happened, what is confirmed, who owns the
+            response, what can be offered, and when the customer will hear from
+            you again.
+          </p>
+          <p>
+            It does not make policy, legal, financial, safety, or regulatory
+            decisions. Your authorized owners must approve commitments and
+            customer-facing language.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Plan the recovery</p>
+          <h2 id="workspace-title">
+            Use roles and facts, not customer records.
+          </h2>
+          <p>
+            Do not enter names, contact details, account or order numbers,
+            payment data, health information, secrets, or confidential or
+            regulated information. Describe people by role or group.
+          </p>
+        </div>
+
+        <form
+          id="recovery-form"
+          class="feedback-form recovery-form"
+          method="post"
+          action="/resources/ai-tools/service-recovery-planner/"
+        >
+          <fieldset>
+            <legend><span>01</span>Describe the failure</legend>
+
+            <div class="field">
+              <label for="plan-name">
+                Recovery plan name <span aria-hidden="true">*</span>
+              </label>
+              <p id="plan-name-hint" class="field-hint">
+                Use a neutral label, such as “Delayed onboarding recovery.”
+              </p>
+              <input
+                id="plan-name"
+                name="plan-name"
+                type="text"
+                maxlength="120"
+                aria-describedby="plan-name-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="failure">
+                What happened? <span aria-hidden="true">*</span>
+              </label>
+              <p id="failure-hint" class="field-hint">
+                State the observable failure without assigning blame.
+              </p>
+              <textarea
+                id="failure"
+                name="failure"
+                rows="5"
+                minlength="20"
+                maxlength="800"
+                aria-describedby="failure-hint privacy-hint"
+                required></textarea>
+              <p id="privacy-hint" class="privacy-hint">
+                Keep personal, confidential, regulated, and identifying
+                information out of this form.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="affected">
+                Who was affected? <span aria-hidden="true">*</span>
+              </label>
+              <p id="affected-hint" class="field-hint">
+                Use a role or group, such as “new customers awaiting access.”
+              </p>
+              <textarea
+                id="affected"
+                name="affected"
+                rows="3"
+                maxlength="400"
+                aria-describedby="affected-hint"
+                required></textarea>
+            </div>
+
+            <fieldset class="choice-group">
+              <legend>
+                How serious is the customer impact?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list">
+                <label>
+                  <input
+                    type="radio"
+                    name="severity"
+                    value="inconvenience"
+                    required
+                  />
+                  <span>
+                    <strong>Inconvenience</strong>
+                    <small
+                      >Limited interruption that should be easy to correct.</small
+                    >
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="severity" value="material" />
+                  <span>
+                    <strong>Material</strong>
+                    <small
+                      >Lost access, delay, rework, or a missed commitment.</small
+                    >
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="severity" value="serious" />
+                  <span>
+                    <strong>Serious</strong>
+                    <small
+                      >Possible financial, safety, rights, regulatory, or
+                      reputational harm.</small
+                    >
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>02</span>Separate facts from unknowns</legend>
+
+            <div class="field">
+              <label for="confirmed">
+                What is confirmed? <span aria-hidden="true">*</span>
+              </label>
+              <p id="confirmed-hint" class="field-hint">
+                Include only facts your team can support.
+              </p>
+              <textarea
+                id="confirmed"
+                name="confirmed"
+                rows="4"
+                maxlength="700"
+                aria-describedby="confirmed-hint"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="unknowns">
+                What is still unknown? <span class="optional">Optional</span>
+              </label>
+              <p id="unknowns-hint" class="field-hint">
+                Name the questions that still need investigation.
+              </p>
+              <textarea
+                id="unknowns"
+                name="unknowns"
+                rows="3"
+                maxlength="600"
+                aria-describedby="unknowns-hint"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="customer-need">
+                What does the customer need now?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="customer-need-hint" class="field-hint">
+                Describe the immediate outcome, not a solution your team has not
+                approved.
+              </p>
+              <textarea
+                id="customer-need"
+                name="customer-need"
+                rows="3"
+                maxlength="500"
+                aria-describedby="customer-need-hint"
+                required></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>03</span>Assign ownership and timing</legend>
+
+            <div class="field">
+              <label for="recovery-owner">
+                Recovery owner role <span aria-hidden="true">*</span>
+              </label>
+              <p id="recovery-owner-hint" class="field-hint">
+                Use a role, not a person’s name.
+              </p>
+              <input
+                id="recovery-owner"
+                name="recovery-owner"
+                type="text"
+                maxlength="120"
+                aria-describedby="recovery-owner-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="communication-owner">
+                Communication owner role <span class="optional">Optional</span>
+              </label>
+              <p id="communication-owner-hint" class="field-hint">
+                Leave blank if the recovery owner will also communicate.
+              </p>
+              <input
+                id="communication-owner"
+                name="communication-owner"
+                type="text"
+                maxlength="120"
+                aria-describedby="communication-owner-hint"
+              />
+            </div>
+
+            <fieldset class="choice-group">
+              <legend>
+                First response target <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list choice-list-four">
+                <label>
+                  <input
+                    type="radio"
+                    name="response-time"
+                    value="Within 1 hour"
+                    required
+                  />
+                  <span><strong>Within 1 hour</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="response-time"
+                    value="Same business day"
+                  />
+                  <span><strong>Same business day</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="response-time"
+                    value="Within 24 hours"
+                  />
+                  <span><strong>Within 24 hours</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="response-time"
+                    value="Not yet confirmed"
+                  />
+                  <span><strong>Not yet confirmed</strong></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="follow-up">
+                Next follow-up target <span aria-hidden="true">*</span>
+              </label>
+              <p id="follow-up-hint" class="field-hint">
+                State when the customer should receive the next update, even if
+                the issue is not resolved.
+              </p>
+              <input
+                id="follow-up"
+                name="follow-up"
+                type="text"
+                maxlength="160"
+                placeholder="For example: by 3 p.m. tomorrow"
+                aria-describedby="follow-up-hint"
+                required
+              />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>04</span>Define the recovery boundary</legend>
+
+            <fieldset class="choice-group">
+              <legend>
+                Which remedies may be available?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <p id="remedies-hint" class="field-hint">
+                Select categories only. The plan will mark them as subject to
+                approval or policy.
+              </p>
+              <div
+                class="choice-list remedy-list"
+                aria-describedby="remedies-hint"
+              >
+                <label>
+                  <input
+                    type="checkbox"
+                    name="remedies"
+                    value="A clear explanation or status update"
+                  />
+                  <span><strong>Explanation or status</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="remedies"
+                    value="Correction or rework"
+                  />
+                  <span><strong>Correction or rework</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="remedies"
+                    value="Restored access or service"
+                  />
+                  <span><strong>Restored access or service</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="remedies"
+                    value="Refund or credit"
+                  />
+                  <span><strong>Refund or credit</strong></span>
+                </label>
+                <label>
+                  <input type="checkbox" name="remedies" value="Replacement" />
+                  <span><strong>Replacement</strong></span>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="remedies"
+                    value="Specialist or leadership escalation"
+                  />
+                  <span><strong>Specialist escalation</strong></span>
+                </label>
+                <label>
+                  <input
+                    id="remedy-none"
+                    type="checkbox"
+                    name="remedies"
+                    value="No remedy is confirmed yet"
+                  />
+                  <span><strong>None confirmed yet</strong></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="constraints">
+                What cannot be promised or offered?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="constraints-hint" class="field-hint">
+                Name policy, authority, timing, or operational limits the
+                response must respect.
+              </p>
+              <textarea
+                id="constraints"
+                name="constraints"
+                rows="4"
+                maxlength="700"
+                aria-describedby="constraints-hint"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="closure-evidence">
+                What evidence will show the recovery worked?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="closure-evidence-hint" class="field-hint">
+                Examples: access restored, corrected record verified, or
+                customer confirms the next step is clear.
+              </p>
+              <textarea
+                id="closure-evidence"
+                name="closure-evidence"
+                rows="3"
+                maxlength="500"
+                aria-describedby="closure-evidence-hint"></textarea>
+            </div>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>
+              <strong>No customer is contacted.</strong> Review the output with the
+              people authorized to approve commitments before using it.
+            </p>
+            <button class="button button-primary" type="submit">
+              Build recovery plan
+            </button>
+          </div>
+        </form>
+
+        <noscript>
+          <p class="noscript-note">
+            This local tool needs JavaScript to build the plan. No data is sent
+            to Cadence Lab.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <section
+      id="recovery-results"
+      class="feedback-results recovery-results"
+      aria-labelledby="results-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow">Your recovery plan</p>
+            <h2 id="results-title" tabindex="-1">
+              <span data-output="plan-name">Service recovery</span>
+            </h2>
+          </div>
+          <div class="results-actions" aria-label="Recovery plan actions">
+            <button
+              id="copy-plan"
+              class="button button-secondary"
+              type="button"
+            >
+              Copy
+            </button>
+            <button
+              id="download-plan"
+              class="button button-secondary"
+              type="button"
+            >
+              Download
+            </button>
+            <button
+              id="print-plan"
+              class="button button-secondary"
+              type="button"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+
+        <p
+          id="plan-status"
+          class="feedback-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <article class="summary-sheet recovery-sheet">
+          <header>
+            <p class="summary-label">Situation</p>
+            <h3>What the plan is responding to</h3>
+            <dl class="recovery-facts">
+              <div><dt>Failure</dt><dd data-output="failure"></dd></div>
+              <div><dt>Affected group</dt><dd data-output="affected"></dd></div>
+              <div><dt>Impact</dt><dd data-output="severity"></dd></div>
+              <div>
+                <dt>Customer need</dt><dd data-output="customer-need"></dd>
+              </div>
+            </dl>
+          </header>
+
+          <section aria-labelledby="response-title">
+            <p class="summary-label">Immediate response</p>
+            <h3 id="response-title">What the first response must cover</h3>
+            <ol id="immediate-response"></ol>
+          </section>
+
+          <section aria-labelledby="ownership-title">
+            <p class="summary-label">Ownership and timing</p>
+            <h3 id="ownership-title">
+              Who acts, who communicates, what happens next
+            </h3>
+            <dl class="recovery-facts">
+              <div>
+                <dt>Recovery owner</dt><dd data-output="recovery-owner"></dd>
+              </div>
+              <div>
+                <dt>Communication owner</dt><dd
+                  data-output="communication-owner"
+                >
+                </dd>
+              </div>
+              <div>
+                <dt>First response</dt><dd data-output="response-time"></dd>
+              </div>
+              <div><dt>Next update</dt><dd data-output="follow-up"></dd></div>
+            </dl>
+          </section>
+
+          <section aria-labelledby="facts-title">
+            <p class="summary-label">Evidence boundary</p>
+            <h3 id="facts-title">Confirmed facts and open questions</h3>
+            <div class="fact-columns">
+              <div>
+                <h4>Confirmed</h4>
+                <p data-output="confirmed"></p>
+              </div>
+              <div>
+                <h4>Still unknown</h4>
+                <p data-output="unknowns"></p>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="prompts-title">
+            <p class="summary-label">Communication prompts</p>
+            <h3 id="prompts-title">A structure to review before you send</h3>
+            <ul id="communication-prompts"></ul>
+          </section>
+
+          <section aria-labelledby="remedies-title">
+            <p class="summary-label">Recovery boundary</p>
+            <h3 id="remedies-title">Possible remedies and limits</h3>
+            <div class="fact-columns">
+              <div>
+                <h4>Subject to approval or policy</h4>
+                <ul id="remedy-list"></ul>
+              </div>
+              <div>
+                <h4>Do not promise</h4>
+                <p data-output="constraints"></p>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="checklist-title">
+            <p class="summary-label">Recovery checklist</p>
+            <h3 id="checklist-title">Actions to complete and verify</h3>
+            <ol id="recovery-checklist"></ol>
+          </section>
+
+          <section aria-labelledby="escalation-title">
+            <p class="summary-label">Escalation triggers</p>
+            <h3 id="escalation-title">
+              When the response needs more authority
+            </h3>
+            <ul id="escalation-triggers"></ul>
+          </section>
+
+          <section aria-labelledby="closure-title">
+            <p class="summary-label">Follow-up evidence</p>
+            <h3 id="closure-title">What supports closure</h3>
+            <p data-output="closure-evidence"></p>
+          </section>
+
+          <footer>
+            <p class="summary-label">Method and limits</p>
+            <p>
+              This plan uses only the information entered. It does not verify
+              facts, assess law or policy, authorize compensation, determine
+              fault, contact a customer, or replace safety, security, privacy,
+              legal, regulatory, financial, or domain review. An authorized
+              owner must approve commitments and customer-facing language.
+            </p>
+          </footer>
+        </article>
+
+        <div class="results-reset">
+          <button id="start-over" class="button button-text" type="button">
+            Clear the plan and start over
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it organizes</p>
+          <h2 id="method-title">Four parts of a credible recovery.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span><p>
+              <strong>Truth</strong> What is confirmed, and what remains unknown?
+            </p>
+          </li>
+          <li>
+            <span>02</span><p>
+              <strong>Ownership</strong> Who fixes the failure and keeps the customer
+              informed?
+            </p>
+          </li>
+          <li>
+            <span>03</span><p>
+              <strong>Boundaries</strong> What may be offered, and what cannot be
+              promised?
+            </p>
+          </li>
+          <li>
+            <span>04</span><p>
+              <strong>Evidence</strong> What will show the recovery actually worked?
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/service-recovery-planner";
+</script>
