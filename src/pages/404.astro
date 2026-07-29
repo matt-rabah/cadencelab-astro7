@@ -8,7 +8,8 @@ import Layout from "../layouts/Layout.astro";
   title="Page not found | Cadence Lab"
   description="The requested Cadence Lab page could not be found."
   canonicalURL="/404.html"
-  noindex={true}>
+  noindex={true}
+>
   <NavHeader />
 
   <main id="main-content" class="not-found-page" tabindex="-1">
@@ -17,18 +18,19 @@ import Layout from "../layouts/Layout.astro";
 
       <div class="not-found-layout">
         <header>
-          <h1>This page is not part of the current system.</h1>
+          <h1>That page is not here.</h1>
         </header>
 
         <div class="not-found-copy">
           <p>
-            The address may be incorrect, or the page may have moved. Use one of
-            the routes below to continue.
+            The link may be old, the address may be wrong, or the page may have
+            moved. Choose a useful place to continue.
           </p>
 
-          <nav aria-label="Page not found options">
-            <a class="primary-link" href="/">Return to the home page</a>
-            <a href="/services/">Review services</a>
+          <nav aria-label="Page recovery">
+            <a class="primary-link" href="/">Go to the home page</a>
+            <a href="/search/">Search published insights</a>
+            <a href="/services/">Compare diagnostics</a>
             <a href="/support/">Find support</a>
           </nav>
         </div>
@@ -75,7 +77,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   h1 {
-    max-width: 15ch;
+    max-width: 12ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -108,10 +110,10 @@ import Layout from "../layouts/Layout.astro";
 
   nav {
     display: flex;
+    width: 100%;
     align-items: flex-start;
     flex-direction: column;
     gap: 0.25rem;
-    width: 100%;
   }
 
   nav a {

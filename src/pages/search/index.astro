@@ -9,66 +9,82 @@ const entries = await getSearchEntries();
 
 <Layout
   title="Search | Cadence Lab"
-  description="Search Cadence Lab insights and practical resources."
+  description="Search published Cadence Lab insights by customer experience, AI, CRM, data, workflow, or operating problem."
   canonicalURL="/search/"
-  noindex={true}>
+  noindex={true}
+>
   <NavHeader />
 
-  <main id="main-content" class="search-page">
+  <main id="main-content" class="search-page" tabindex="-1">
     <div class="search-container">
       <header class="search-header">
         <p class="search-eyebrow">Search</p>
-        <h1>Search Cadence Lab.</h1>
+        <h1>Find the idea you need.</h1>
         <p>
-          Find published thinking by topic, operating problem, or category.
-          Planned resources will appear here as they are published.
+          Search published insights by problem, topic, or category. Plain
+          language works just fine.
         </p>
       </header>
 
       <section class="search-interface" aria-labelledby="search-results-title">
-        <form action="/search/" method="get" class="page-search-form">
-          <label for="page-search-input">Search insights and resources</label>
-          <div class="page-search-control">
-            <input
-              id="page-search-input"
-              type="search"
-              name="q"
-              placeholder="Try AI adoption, CRM, or workflow"
-              autocomplete="off"
-              data-page-search-input
-            />
+        <search>
+          <form action="/search/" method="get" class="page-search-form">
+            <label for="page-search-input">Search published insights</label>
+            <p id="page-search-hint">
+              Try a problem such as dirty data, AI adoption, or broken handoffs.
+            </p>
 
-            <button class="page-search-submit" type="submit">
-              <span class="visually-hidden">Submit search</span>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
-                ></path>
-              </svg>
-            </button>
+            <div class="page-search-control">
+              <input
+                id="page-search-input"
+                type="search"
+                name="q"
+                aria-describedby="page-search-hint"
+                autocomplete="off"
+                autocapitalize="none"
+                enterkeyhint="search"
+                spellcheck="false"
+                data-page-search-input
+              />
 
-            <kbd class="page-search-shortcut" aria-hidden="true">⌘K</kbd>
-          </div>
-          <p>
-            Press <kbd>Command</kbd>
-            <span aria-hidden="true">+</span>
-            <kbd>K</kbd> anywhere on the site for quick search.
-          </p>
-        </form>
+              <button class="page-search-submit" type="submit">
+                <span>Search</span>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m21 21-4.35-4.35m2.35-6.15a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <p class="shortcut-note">
+              Quick search:
+              <kbd>Command</kbd>
+              <span aria-hidden="true">+</span>
+              <kbd>K</kbd>
+              on Mac or
+              <kbd>Control</kbd>
+              <span aria-hidden="true">+</span>
+              <kbd>K</kbd>
+              on Windows.
+            </p>
+          </form>
+        </search>
 
         <div class="search-results-heading">
           <div>
             <p class="search-results-label">Published content</p>
             <h2 id="search-results-title">Insights</h2>
           </div>
-          <p aria-live="polite" data-page-search-status>
+          <p aria-live="polite" aria-atomic="true" data-page-search-status>
             {
               entries.length === 1
                 ? "1 published insight"
@@ -83,7 +99,8 @@ const entries = await getSearchEntries();
               <article
                 class="search-result"
                 data-page-search-entry
-                data-search-text={entry.searchText}>
+                data-search-text={entry.searchText}
+              >
                 <div class="search-result-meta">
                   <span>{entry.category}</span>
                   <span aria-hidden="true">·</span>
@@ -91,26 +108,22 @@ const entries = await getSearchEntries();
                 </div>
 
                 <h3>
-                  <a href={entry.href}>{entry.title}</a>
+                  <a href={entry.href}>
+                    {entry.title}
+                    <span aria-hidden="true">&#8594;</span>
+                  </a>
                 </h3>
 
                 <p>{entry.description}</p>
-
-                <a
-                  class="search-result-link"
-                  href={entry.href}
-                  aria-label={`Read ${entry.title}`}>
-                  Read article
-                </a>
               </article>
             ))
           }
         </div>
 
         <div class="search-empty" hidden data-page-search-empty>
-          <h3>No matching insights found.</h3>
-          <p>Try a broader topic or browse all published Insights.</p>
-          <a href="/blog/">Browse Insights</a>
+          <h3>No results for that search.</h3>
+          <p>Try fewer words, a broader topic, or a different problem.</p>
+          <a href="/blog/">Browse all insights</a>
         </div>
       </section>
     </div>
@@ -135,9 +148,10 @@ const entries = await getSearchEntries();
 
   if (input && status && emptyState) {
     const query = new URLSearchParams(window.location.search).get("q") ?? "";
+    const trimmedQuery = query.trim();
     input.value = query;
 
-    const terms = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    const terms = trimmedQuery.toLocaleLowerCase().split(/\s+/).filter(Boolean);
     let visibleCount = 0;
 
     entries.forEach((entry) => {
@@ -149,8 +163,8 @@ const entries = await getSearchEntries();
       if (isVisible) visibleCount += 1;
     });
 
-    status.textContent = query.trim()
-      ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"} for “${query.trim()}”`
+    status.textContent = trimmedQuery
+      ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"} for “${trimmedQuery}”`
       : `${entries.length} published ${
           entries.length === 1 ? "insight" : "insights"
         }`;
@@ -195,7 +209,7 @@ const entries = await getSearchEntries();
   }
 
   .search-header h1 {
-    max-width: 16ch;
+    max-width: 14ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -238,42 +252,48 @@ const entries = await getSearchEntries();
     font-weight: var(--fw-medium);
   }
 
+  #page-search-hint,
+  .shortcut-note {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
   .page-search-control {
-    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem;
   }
 
   .page-search-form input {
     width: 100%;
     min-width: 0;
     min-height: var(--control-min-size);
-    padding: 0.75rem 4rem 0.75rem 3rem;
+    padding: 0.75rem 1rem;
     border: var(--border-width) solid var(--color-border-strong);
     border-radius: var(--radius-md);
     background: var(--color-surface);
     color: var(--color-text);
     font: inherit;
-    font-size: var(--fs-body-ui);
-  }
-
-  .page-search-submit,
-  .page-search-shortcut {
-    position: absolute;
-    inset-block-start: 50%;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(-50%);
+    font-size: max(1rem, var(--fs-body-ui));
   }
 
   .page-search-submit {
-    inset-inline-start: 0;
-    width: 3rem;
-    height: 100%;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--color-text-subtle);
+    display: inline-flex;
+    min-width: var(--control-min-size);
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid var(--color-blue);
+    border-radius: var(--radius-md);
+    background: var(--color-blue);
+    color: var(--color-light);
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
     cursor: pointer;
   }
 
@@ -282,23 +302,9 @@ const entries = await getSearchEntries();
     height: 1.125rem;
   }
 
-  .page-search-shortcut {
-    inset-inline-end: 1rem;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--color-text-subtle);
-    font: inherit;
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    pointer-events: none;
-  }
-
-  .page-search-form > p {
-    margin: 0;
-    color: var(--color-text-muted);
+  .shortcut-note {
+    margin-top: 0.25rem;
     font-size: var(--fs-eyebrow);
-    line-height: 1.5;
   }
 
   kbd {
@@ -380,8 +386,12 @@ const entries = await getSearchEntries();
   }
 
   .search-result h3 a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
     color: inherit;
-    text-decoration: none;
+    text-decoration-thickness: var(--border-width);
+    text-underline-offset: 0.2em;
   }
 
   .search-result p {
@@ -389,15 +399,6 @@ const entries = await getSearchEntries();
     font-size: var(--fs-small);
     line-height: 1.6;
     text-wrap: pretty;
-  }
-
-  .search-result-link,
-  .search-empty a {
-    margin-top: auto;
-    color: var(--color-blue);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    text-underline-offset: 0.2em;
   }
 
   .search-empty {
@@ -426,6 +427,10 @@ const entries = await getSearchEntries();
   .search-empty a {
     display: inline-block;
     margin-top: 1.25rem;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-underline-offset: 0.2em;
   }
 
   .search-page a:focus-visible,
@@ -435,9 +440,26 @@ const entries = await getSearchEntries();
     outline-offset: var(--focus-ring-offset);
   }
 
+  @media (hover: hover) {
+    .page-search-submit:hover {
+      border-color: var(--color-ink);
+      background: var(--color-ink);
+    }
+
+    .search-result h3 a:hover,
+    .search-empty a:hover {
+      color: var(--color-blue);
+    }
+  }
+
   @media (max-width: 44rem) {
+    .page-search-control,
     .search-results {
       grid-template-columns: 1fr;
+    }
+
+    .page-search-submit {
+      width: 100%;
     }
 
     .search-results-heading {
@@ -447,19 +469,10 @@ const entries = await getSearchEntries();
     }
   }
 
-  @media (max-width: 32rem) {
-    .page-search-form input {
-      padding-inline-end: 1rem;
-    }
-
-    .page-search-shortcut {
-      display: none;
-    }
-  }
-
   @media (forced-colors: active) {
     .page-search-form,
     .page-search-form input,
+    .page-search-submit,
     .search-results-heading,
     .search-result,
     .search-empty,
