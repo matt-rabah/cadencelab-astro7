@@ -1,0 +1,615 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/ai-use-case-stress-test.css";
+---
+
+<Layout
+  title="Free AI Use Case Stress Test | Cadence Lab"
+  description="Stress-test an AI use case before committing to a platform, pilot, or vendor. Identify readiness gaps, ownership questions, failure points, and the smallest useful test."
+  canonicalURL="/resources/ai-tools/use-case-stress-test/"
+  pageType="website"
+>
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "AI Use Case Stress Test" },
+    ]}
+  />
+
+  <main id="main-content" class="stress-test-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li aria-current="page">AI Use Case Stress Test</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free decision tool</p>
+          <h1 id="tool-title">Pressure-test the idea before you buy the AI.</h1>
+          <p class="hero-lead">
+            Turn an AI idea into a decision brief your team can challenge. The
+            stress test surfaces missing evidence, unclear ownership, failure
+            exposure, and the smallest responsible test.
+          </p>
+          <a class="button button-primary" href="#stress-test-form">
+            Start the stress test
+          </a>
+        </div>
+
+        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p>
+            Your answers stay in this browser. Cadence Lab does not receive,
+            store, or analyze them.
+          </p>
+          <dl>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free</dd>
+            </div>
+            <div>
+              <dt>Signup</dt>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Processing</dt>
+              <dd>On your device</dd>
+            </div>
+            <div>
+              <dt>Output</dt>
+              <dd>Copy, download, or print</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            A useful decision is more than a readiness score.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            The tool checks whether the problem, data, decision exposure,
+            ownership, controls, and evidence are clear enough to support a next
+            step.
+          </p>
+          <p>
+            It does not approve an AI system or replace security, privacy,
+            legal, accessibility, or domain review.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Build your brief</p>
+          <h2 id="workspace-title">Describe the work, not the technology.</h2>
+          <p>
+            Required fields establish the use case. Leave optional fields blank
+            when the answer is unresolved—the brief will treat that as a gap.
+          </p>
+        </div>
+
+        <form
+          id="stress-test-form"
+          class="stress-test-form"
+          method="post"
+          action="/resources/ai-tools/use-case-stress-test/"
+        >
+          <fieldset>
+            <legend>
+              <span>01</span>
+              Define the work
+            </legend>
+
+            <div class="field">
+              <label for="use-case-name">
+                Use case name <span aria-hidden="true">*</span>
+              </label>
+              <p id="use-case-name-hint" class="field-hint">
+                Use a working label, not a vendor or product name.
+              </p>
+              <input
+                id="use-case-name"
+                name="use-case-name"
+                type="text"
+                maxlength="100"
+                aria-describedby="use-case-name-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="people">
+                Who uses it or experiences the result?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="people-hint" class="field-hint">
+                Name the employees, customers, partners, or communities
+                affected.
+              </p>
+              <textarea
+                id="people"
+                name="people"
+                rows="3"
+                maxlength="500"
+                aria-describedby="people-hint"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="task">
+                What task should become easier or better?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="task-hint" class="field-hint">
+                Describe the work in plain language.
+              </p>
+              <textarea
+                id="task"
+                name="task"
+                rows="3"
+                maxlength="700"
+                aria-describedby="task-hint"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="outcome">
+                What useful outcome should change?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="outcome-hint" class="field-hint">
+                Describe an observable result, not “use AI” or “increase
+                efficiency.”
+              </p>
+              <textarea
+                id="outcome"
+                name="outcome"
+                rows="3"
+                maxlength="500"
+                aria-describedby="outcome-hint"
+                required></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              <span>02</span>
+              Inspect the dependencies
+            </legend>
+
+            <div class="field">
+              <label for="data">
+                What information would the system need?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="data-hint" class="field-hint">
+                Describe categories, sources, quality, and access. Do not paste
+                real customer, employee, or confidential data.
+              </p>
+              <textarea
+                id="data"
+                name="data"
+                rows="4"
+                maxlength="900"
+                aria-describedby="data-hint"></textarea>
+            </div>
+
+            <fieldset class="choice-group">
+              <legend>
+                Could the use case involve personal, confidential, regulated, or
+                safety-sensitive information?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list">
+                <label>
+                  <input type="radio" name="sensitivity" value="no" required />
+                  <span>
+                    <strong>No known sensitive information</strong>
+                    <small
+                      >Based on the intended scope and available data.</small
+                    >
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="sensitivity" value="unsure" />
+                  <span>
+                    <strong>Not sure yet</strong>
+                    <small>The data or downstream use is still unclear.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="sensitivity" value="yes" />
+                  <span>
+                    <strong>Yes</strong>
+                    <small>
+                      The use case may involve protected or high-impact
+                      information.
+                    </small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="decision">
+                What decision or action could the output influence?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="decision-hint" class="field-hint">
+                Include decisions made by people, workflows, or automated
+                systems.
+              </p>
+              <textarea
+                id="decision"
+                name="decision"
+                rows="3"
+                maxlength="700"
+                aria-describedby="decision-hint"></textarea>
+            </div>
+
+            <fieldset class="choice-group">
+              <legend>
+                What happens if the result is wrong?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list">
+                <label>
+                  <input type="radio" name="consequence" value="low" required />
+                  <span>
+                    <strong>Low consequence</strong>
+                    <small>An error is easy to notice and correct.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="consequence" value="moderate" />
+                  <span>
+                    <strong>Moderate consequence</strong>
+                    <small>
+                      An error creates rework, delay, confusion, or a poor
+                      experience.
+                    </small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="consequence" value="high" />
+                  <span>
+                    <strong>High consequence</strong>
+                    <small>
+                      An error could materially affect a person, commitment,
+                      right, or business outcome.
+                    </small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="choice-group">
+              <legend>
+                How reversible is the AI-influenced action?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list">
+                <label>
+                  <input
+                    type="radio"
+                    name="reversibility"
+                    value="easy"
+                    required
+                  />
+                  <span>
+                    <strong>Easy to reverse</strong>
+                    <small>No lasting effect if corrected quickly.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="reversibility" value="partial" />
+                  <span>
+                    <strong>Partly reversible</strong>
+                    <small>
+                      Correction is possible, but some effect or cost remains.
+                    </small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="reversibility" value="difficult" />
+                  <span>
+                    <strong>Difficult to reverse</strong>
+                    <small>
+                      A wrong action may create lasting harm or obligation.
+                    </small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              <span>03</span>
+              Define ownership and evidence
+            </legend>
+
+            <div class="field">
+              <label for="owner">
+                Who owns the outcome when the system is wrong?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="owner-hint" class="field-hint">
+                Name a role with authority to intervene—not “the business” or
+                “the AI team.”
+              </p>
+              <input
+                id="owner"
+                name="owner"
+                type="text"
+                maxlength="200"
+                aria-describedby="owner-hint"
+              />
+            </div>
+
+            <div class="field">
+              <label for="review">
+                Where does human judgment enter the workflow?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="review-hint" class="field-hint">
+                Describe who reviews what, when they can stop it, and what
+                evidence they see.
+              </p>
+              <textarea
+                id="review"
+                name="review"
+                rows="3"
+                maxlength="700"
+                aria-describedby="review-hint"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="success">
+                What evidence would show the use case is useful and safe enough?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="success-hint" class="field-hint">
+                Include quality, customer or employee impact, error patterns,
+                and operating cost.
+              </p>
+              <textarea
+                id="success"
+                name="success"
+                rows="3"
+                maxlength="700"
+                aria-describedby="success-hint"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="smallest-test">
+                What is the smallest useful test?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="smallest-test-hint" class="field-hint">
+                Prefer a limited sample, reversible setting, named owner, and
+                clear stop condition.
+              </p>
+              <textarea
+                id="smallest-test"
+                name="smallest-test"
+                rows="3"
+                maxlength="700"
+                aria-describedby="smallest-test-hint"></textarea>
+            </div>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>
+              <strong>Nothing is submitted.</strong> Your brief is generated locally
+              and disappears when you leave or refresh this page.
+            </p>
+            <button class="button button-primary" type="submit">
+              Build my decision brief
+            </button>
+          </div>
+        </form>
+
+        <noscript>
+          <p class="noscript-note">
+            This local tool needs JavaScript to generate the decision brief. No
+            answers are sent to Cadence Lab.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <section
+      id="decision-brief"
+      class="decision-brief"
+      aria-labelledby="brief-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="brief-header">
+          <div>
+            <p class="eyebrow">Your decision brief</p>
+            <h2 id="brief-title" tabindex="-1">
+              <span data-output="name">AI use case</span>
+            </h2>
+          </div>
+          <div class="brief-actions" aria-label="Decision brief actions">
+            <button
+              id="copy-brief"
+              class="button button-secondary"
+              type="button">Copy</button
+            >
+            <button
+              id="download-brief"
+              class="button button-secondary"
+              type="button">Download</button
+            >
+            <button
+              id="print-brief"
+              class="button button-secondary"
+              type="button">Print</button
+            >
+          </div>
+        </div>
+
+        <p
+          id="brief-status"
+          class="brief-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <article class="brief-sheet">
+          <header class="verdict">
+            <p class="brief-label">Recommended next step</p>
+            <h3 data-output="verdict"></h3>
+            <p data-output="verdict-detail"></p>
+          </header>
+
+          <section aria-labelledby="use-case-summary-title">
+            <p class="brief-label">Use case</p>
+            <h3 id="use-case-summary-title">The work being considered</h3>
+            <dl class="summary-list">
+              <div>
+                <dt>People affected</dt>
+                <dd data-output="people"></dd>
+              </div>
+              <div>
+                <dt>Task</dt>
+                <dd data-output="task"></dd>
+              </div>
+              <div>
+                <dt>Intended outcome</dt>
+                <dd data-output="outcome"></dd>
+              </div>
+              <div>
+                <dt>Decision influenced</dt>
+                <dd data-output="decision"></dd>
+              </div>
+            </dl>
+          </section>
+
+          <section aria-labelledby="dependencies-title">
+            <p class="brief-label">Readiness gaps</p>
+            <h3 id="dependencies-title">Dependencies to resolve</h3>
+            <ul data-output-list="gaps"></ul>
+          </section>
+
+          <section aria-labelledby="ownership-title">
+            <p class="brief-label">Human accountability</p>
+            <h3 id="ownership-title">Ownership questions</h3>
+            <ul data-output-list="ownership"></ul>
+          </section>
+
+          <section aria-labelledby="failure-title">
+            <p class="brief-label">Failure exposure</p>
+            <h3 id="failure-title">What the test must challenge</h3>
+            <ul data-output-list="failures"></ul>
+          </section>
+
+          <section aria-labelledby="test-title">
+            <p class="brief-label">Smallest useful test</p>
+            <h3 id="test-title">A bounded way to learn</h3>
+            <p data-output="test"></p>
+          </section>
+
+          <section aria-labelledby="stop-title">
+            <p class="brief-label">Stop conditions</p>
+            <h3 id="stop-title">Pause or stop the test when</h3>
+            <ul data-output-list="stops"></ul>
+          </section>
+
+          <footer class="brief-limit">
+            <p class="brief-label">Limits</p>
+            <p>
+              This brief reflects only the answers provided. It is a planning
+              aid, not an approval, compliance review, risk assessment, or
+              guarantee that an AI system is appropriate.
+            </p>
+          </footer>
+        </article>
+
+        <div class="brief-reset">
+          <button id="start-over" class="button button-text" type="button">
+            Clear answers and start over
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it considers</p>
+          <h2 id="method-title">Six questions behind the brief.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span>
+            <p>
+              <strong>Problem</strong> Is the work and useful outcome clear?
+            </p>
+          </li>
+          <li>
+            <span>02</span>
+            <p>
+              <strong>People</strong> Who experiences the decision and its errors?
+            </p>
+          </li>
+          <li>
+            <span>03</span>
+            <p>
+              <strong>Data</strong> Is the necessary information known, appropriate,
+              and available?
+            </p>
+          </li>
+          <li>
+            <span>04</span>
+            <p>
+              <strong>Exposure</strong> What happens when the output is wrong?
+            </p>
+          </li>
+          <li>
+            <span>05</span>
+            <p>
+              <strong>Ownership</strong> Who can review, intervene, and answer for
+              the result?
+            </p>
+          </li>
+          <li>
+            <span>06</span>
+            <p>
+              <strong>Evidence</strong> What would justify continuing, changing, or
+              stopping?
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/ai-use-case-stress-test";
+</script>
