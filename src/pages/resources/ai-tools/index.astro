@@ -5,283 +5,95 @@ import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
 
-const toolGroups = [
-  {
-    id: "assistants",
-    number: "01",
-    eyebrow: "General work",
-    title: "Assistants for thinking, drafting, and analysis",
-    introduction:
-      "Useful when the work starts with a question, a document, a decision, or a body of information that needs to be understood and shaped.",
-    tools: [
-      {
-        name: "ChatGPT",
-        href: "https://chatgpt.com/overview/",
-        useWhen:
-          "You need a flexible assistant for research, writing, analysis, images, files, or coding across a broad range of tasks.",
-        watchFor:
-          "Choose the right workspace and data controls before connecting internal sources or using customer information.",
-      },
-      {
-        name: "Claude",
-        href: "https://claude.com/product/overview",
-        useWhen:
-          "You need sustained work across long documents, research, analysis, writing, coding, or connected knowledge sources.",
-        watchFor:
-          "Review source grounding, connector permissions, and the boundary between generated analysis and accountable judgment.",
-      },
-      {
-        name: "Gemini",
-        href: "https://gemini.google.com/",
-        useWhen:
-          "Your work benefits from a general assistant connected to Google products, files, search, or multimodal inputs.",
-        watchFor:
-          "Personal and organizational accounts can have different features, retention rules, and administrative controls.",
-      },
-      {
-        name: "Microsoft 365 Copilot",
-        href: "https://www.microsoft.com/en-us/microsoft-365-copilot",
-        useWhen:
-          "Your work already lives in Microsoft 365 and needs assistance across documents, meetings, email, spreadsheets, and organizational context.",
-        watchFor:
-          "Existing permissions and information architecture determine what the assistant can retrieve and expose.",
-      },
-    ],
-  },
-  {
-    id: "research",
-    number: "02",
-    eyebrow: "Research and knowledge",
-    title: "Tools for finding, grounding, and synthesizing evidence",
-    introduction:
-      "Useful when the quality of the answer depends on traceable sources, a defined research corpus, or a repeatable evidence review.",
-    tools: [
-      {
-        name: "Perplexity",
-        href: "https://www.perplexity.ai/",
-        useWhen:
-          "You need web research with linked sources and a faster path from a question to an initial evidence map.",
-        watchFor:
-          "A citation can be relevant without fully supporting the generated claim; open and evaluate the original source.",
-      },
-      {
-        name: "NotebookLM / Gemini Notebook",
-        href: "https://workspace.google.com/products/notebooklm/",
-        useWhen:
-          "You want answers, summaries, or study material grounded in a source collection that you select.",
-        watchFor:
-          "Source quality and completeness still define the quality of the synthesis; a bounded corpus can preserve its own blind spots.",
-      },
-      {
-        name: "Elicit",
-        href: "https://elicit.com/",
-        useWhen:
-          "You need a structured starting point for literature review, paper comparison, evidence extraction, or research synthesis.",
-        watchFor:
-          "Confirm coverage, study quality, and extracted details against the original research before relying on a conclusion.",
-      },
-    ],
-  },
-  {
-    id: "automation",
-    number: "03",
-    eyebrow: "Workflow automation",
-    title: "Tools for connecting systems and coordinating repeatable work",
-    introduction:
-      "Useful when a stable trigger, decision, and action can move between systems without losing ownership, context, or a recovery path.",
-    tools: [
-      {
-        name: "Zapier AI",
-        href: "https://zapier.com/ai",
-        useWhen:
-          "You need accessible automation across common business applications, with AI steps inside a broader workflow.",
-        watchFor:
-          "Define failure handling, approval points, task volume, and the cost of an incorrect downstream action.",
-      },
-      {
-        name: "Make",
-        href: "https://www.make.com/en/ai-automation",
-        useWhen:
-          "You need visual, multi-step automation with branching, transformation, integrations, and AI-supported decisions.",
-        watchFor:
-          "Complex scenarios can become difficult to observe and govern; assign an owner and document exception behavior.",
-      },
-      {
-        name: "n8n",
-        href: "https://n8n.io/ai/",
-        useWhen:
-          "You need flexible workflow automation, AI orchestration, or more control over deployment and technical implementation.",
-        watchFor:
-          "Greater flexibility brings greater responsibility for security, credentials, monitoring, maintenance, and model behavior.",
-      },
-    ],
-  },
-  {
-    id: "coding",
-    number: "04",
-    eyebrow: "Software delivery",
-    title: "Tools for understanding, writing, and reviewing code",
-    introduction:
-      "Useful when the team can review generated changes, run the relevant checks, and preserve accountability for technical and product decisions.",
-    tools: [
-      {
-        name: "GitHub Copilot",
-        href: "https://github.com/features/copilot",
-        useWhen:
-          "Development work already happens in GitHub and supported editors, terminals, pull requests, or agent workflows.",
-        watchFor:
-          "Treat suggestions as untrusted changes until tests, security checks, code review, and product behavior confirm them.",
-      },
-      {
-        name: "Cursor",
-        href: "https://www.cursor.com/",
-        useWhen:
-          "You want an AI-centered code editor that can work with repository context, propose edits, and support implementation tasks.",
-        watchFor:
-          "Review the scope of every change, protect secrets, and keep generated edits inside established architecture and validation rules.",
-      },
-    ],
-  },
-  {
-    id: "creative",
-    number: "05",
-    eyebrow: "Creative production",
-    title: "Tools for images, design, audio, and media workflows",
-    introduction:
-      "Useful when the team has a clear brief, review criteria, rights policy, and a responsible process for selecting and refining generated material.",
-    tools: [
-      {
-        name: "Adobe Firefly",
-        href: "https://www.adobe.com/products/firefly.html",
-        useWhen:
-          "You need generative image, video, audio, or design capabilities connected to Adobe creative workflows.",
-        watchFor:
-          "Confirm the model, plan, usage rights, provenance requirements, and review process for the specific output.",
-      },
-      {
-        name: "Canva Magic Studio",
-        href: "https://www.canva.com/magic-studio/",
-        useWhen:
-          "Teams need accessible AI-assisted design, writing, image, presentation, or content production inside Canva.",
-        watchFor:
-          "Templates speed production but do not replace brand, accessibility, factual, legal, or channel-specific review.",
-      },
-      {
-        name: "Descript",
-        href: "https://www.descript.com/",
-        useWhen:
-          "You need transcript-centered editing for audio, video, clips, captions, or recorded communication.",
-        watchFor:
-          "Verify transcripts, speaker consent, synthetic voice use, accessibility, and the accuracy of edited statements.",
-      },
-    ],
-  },
-  {
-    id: "enterprise",
-    number: "06",
-    eyebrow: "Meetings and enterprise agents",
-    title: "Tools that act inside organizational work",
-    introduction:
-      "Useful when identity, permissions, workflow ownership, human escalation, observability, and operating controls are part of the design—not an afterthought.",
-    tools: [
-      {
-        name: "ZoomMate",
-        href: "https://www.zoom.com/en/products/ai-assistant/",
-        useWhen:
-          "You need assistance across meetings and work in the Zoom environment, including preparation, capture, follow-up, or task support.",
-        watchFor:
-          "Set clear recording, consent, retention, sharing, and verification practices before relying on meeting-generated records.",
-      },
-      {
-        name: "Salesforce Agentforce",
-        href: "https://www.salesforce.com/agentforce/",
-        useWhen:
-          "You need agents connected to Salesforce data, customer workflows, business rules, channels, and CRM actions.",
-        watchFor:
-          "Resolve data quality, permissions, ownership, handoffs, escalation, and measurement before expanding agent autonomy.",
-      },
-      {
-        name: "Microsoft Copilot Studio",
-        href: "https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio",
-        useWhen:
-          "You need to build and govern agents across Microsoft tools, organizational data, workflows, and external systems.",
-        watchFor:
-          "Define action boundaries, authentication, environment governance, support ownership, and the human recovery path.",
-      },
-      {
-        name: "Vertex AI Agent Builder",
-        href: "https://cloud.google.com/products/agent-builder",
-        useWhen:
-          "Technical teams need to build enterprise agents using Google Cloud models, data, search, orchestration, and controls.",
-        watchFor:
-          "Platform capability does not settle the use case, workflow, evaluation, risk ownership, or adoption decision.",
-      },
-    ],
-  },
-];
-
-const evaluationCriteria = [
-  {
-    number: "01",
-    title: "Task and outcome",
-    question: "What consequential work should improve?",
-    description:
-      "Name the user, the current task, the operating constraint, and the measurable customer or business outcome before comparing features.",
-  },
+const futureTools = [
   {
     number: "02",
-    title: "Data and context",
-    question: "What information can the tool access?",
+    area: "Customer journeys",
+    title: "CX Handoff Mapper",
     description:
-      "Review source quality, permissions, retention, training use, regional requirements, sensitive data, and the context required to produce a useful result.",
+      "Map the steps, owners, systems, and evidence behind a customer journey. The tool would flag missing owners, duplicate work, weak handoffs, and places where customers are likely to get stuck.",
+    output: "A shareable handoff map with risks and questions to resolve.",
   },
   {
     number: "03",
-    title: "Reliability",
-    question: "How will the output be tested?",
+    area: "AI quality",
+    title: "AI Evaluation Builder",
     description:
-      "Use representative examples, difficult edge cases, factual checks, source review, and a defined threshold for acceptable performance.",
+      "Describe an AI task, the result you need, and the errors that matter. The tool would turn that context into a practical evaluation rubric, test cases, and review rules.",
+    output:
+      "An editable evaluation plan with criteria, edge cases, and stop conditions.",
   },
   {
     number: "04",
-    title: "Human oversight",
-    question: "Where must a person decide or intervene?",
+    area: "Voice of customer",
+    title: "Feedback Signal Sorter",
     description:
-      "Identify review points, prohibited actions, escalation triggers, approval authority, correction paths, and accountability for the final outcome.",
+      "Paste a small set of anonymized customer comments. The tool would group recurring themes, show supporting evidence, surface contradictions, and separate patterns from one-off noise.",
+    output:
+      "A theme summary with evidence, open questions, and suggested next research.",
   },
   {
     number: "05",
-    title: "Control and security",
-    question: "Can the organization govern the tool?",
+    area: "CRM data",
+    title: "CRM Data Health Sampler",
     description:
-      "Assess identity, access, auditability, administrative controls, integrations, vendor terms, incident response, and the effect of changing features.",
+      "Review a sample CSV in the browser for missing values, likely duplicates, inconsistent formats, and fields that may not support the workflow people expect.",
+    output:
+      "A local data-quality snapshot with issues to inspect before migration or automation.",
   },
   {
     number: "06",
-    title: "Operating fit",
-    question: "Will the workflow improve after launch?",
+    area: "Service recovery",
+    title: "Service Recovery Planner",
     description:
-      "Include adoption, training, support, maintenance, exception volume, total cost, tool overlap, and the work created for people around the system.",
+      "Describe a customer failure, the people affected, and the limits on what your team can offer. The tool would help shape a response, owner, timeline, and recovery checklist.",
+    output:
+      "A recovery plan with ownership, communication prompts, and follow-up steps.",
   },
 ];
 
-const trialSteps = [
-  "Choose one bounded, consequential use case rather than a broad promise to use AI.",
-  "Document the current workflow, baseline effort, failure modes, and accountable owner.",
-  "Select representative examples, difficult edge cases, and prohibited data or actions.",
-  "Define what the tool may draft, recommend, retrieve, decide, or execute.",
-  "Measure accuracy, correction effort, time, customer effect, adoption, and exception volume.",
-  "Set an end date and decide whether to stop, revise, contain, or expand the trial.",
+const buildStandards = [
+  {
+    title: "Solve one clear problem",
+    description:
+      "Each tool should help someone complete a useful task, not generate a score designed to create anxiety.",
+  },
+  {
+    title: "Give the result without a gate",
+    description:
+      "No account, email address, credit card, or sales call should be required to use the core tool or receive its output.",
+  },
+  {
+    title: "Make the output portable",
+    description:
+      "People should be able to copy, download, or print the result and use it with their own team.",
+  },
+  {
+    title: "Explain the limits",
+    description:
+      "Every result should show what it considered, what it could not know, and what still needs human judgment.",
+  },
+  {
+    title: "Collect as little data as possible",
+    description:
+      "Use local browser processing when practical. If a tool sends data elsewhere, say where it goes and why before the user begins.",
+  },
+  {
+    title: "Work for more people",
+    description:
+      "Build for keyboard use, screen readers, zoom, clear language, and useful results on mobile and desktop.",
+  },
 ];
 ---
 
 <Layout
-  title="AI Tools Resource List | Cadence Lab"
-  description="A curated list of AI tools organized by the work they support, with practical guidance for evaluating fit, risk, oversight, and operating impact."
+  title="Free CX and AI Tools | Cadence Lab"
+  description="Free, practical CX and AI tools for evaluating use cases, mapping handoffs, testing AI outputs, reviewing CRM data, and planning better customer work."
   canonicalURL="/resources/ai-tools/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
-  <BreadcrumbSchema currentName="AI tools" />
+  <BreadcrumbSchema currentName="Free CX and AI tools" />
 
   <main id="main-content" class="tools-page" tabindex="-1">
     <section class="tools-hero" aria-labelledby="tools-title">
@@ -290,40 +102,54 @@ const trialSteps = [
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/">Home</a></li>
-              <li aria-current="page">AI tools</li>
+              <li aria-current="page">Free CX and AI tools</li>
             </ol>
           </nav>
 
-          <p class="eyebrow">Free resource · AI tools</p>
+          <p class="eyebrow">Free CX and AI tools</p>
           <h1 id="tools-title">
-            A practical list of AI tools, organized by the work they support.
+            Useful tools. No signup. No sales-form detour.
           </h1>
           <p class="hero-lead">
-            Use this directory to orient a tool search, compare likely use
-            cases, and identify the questions that should be resolved before a
-            trial or purchase. Start with the work and its operating conditions,
-            not the product category.
+            Cadence Lab is building small tools that help people solve a real
+            customer experience or AI problem. Each one will be free to use
+            without an account or email address. You should get something useful
+            even if we never work together.
           </p>
+
+          <div class="hero-actions" aria-label="Free tools actions">
+            <a class="button button-primary" href="#first-build">
+              See the first build
+            </a>
+            <a class="button button-text" href="#tool-roadmap">
+              View the roadmap
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
         </div>
 
-        <aside class="review-card" aria-labelledby="review-title">
-          <p id="review-title" class="note-label">How to use this list</p>
+        <aside class="promise-card" aria-labelledby="promise-title">
+          <p id="promise-title" class="note-label">The deal</p>
           <p>
-            Inclusion is not an endorsement. Product names, capabilities,
-            availability, terms, pricing, and data practices change.
+            These tools are meant to earn trust by being useful. They are not
+            calculators that hide the answer behind a lead form.
           </p>
           <dl>
             <div>
-              <dt>Reviewed</dt>
-              <dd>July 2026</dd>
+              <dt>Cost</dt>
+              <dd>Free</dd>
             </div>
             <div>
-              <dt>Links</dt>
-              <dd>Official product pages</dd>
+              <dt>Account</dt>
+              <dd>Not required</dd>
             </div>
             <div>
-              <dt>Before use</dt>
-              <dd>Verify current documentation and contract terms</dd>
+              <dt>Email</dt>
+              <dd>Not required</dd>
+            </div>
+            <div>
+              <dt>Launch dates</dt>
+              <dd>Shared when the tools are ready</dd>
             </div>
           </dl>
         </aside>
@@ -332,212 +158,189 @@ const trialSteps = [
 
     <SectionNav
       items={[
-        { label: "Tool categories", href: "#tool-categories" },
-        { label: "Evaluation criteria", href: "#evaluation" },
-        { label: "Trial checklist", href: "#trial" },
-        { label: "Related guidance", href: "#related" },
-        { label: "Next step", href: "#next-step" },
+        { label: "First build", href: "#first-build" },
+        { label: "Tool roadmap", href: "#tool-roadmap" },
+        { label: "Build standard", href: "#build-standard" },
+        { label: "Privacy", href: "#privacy" },
+        { label: "Beyond the tool", href: "#beyond-tool" },
       ]}
     />
 
     <section
-      id="tool-categories"
-      class="directory-intro section-block"
-      aria-labelledby="directory-title">
-      <div class="page-container intro-layout">
-        <div>
-          <p class="eyebrow">Tool categories</p>
-          <h2 id="directory-title">Choose the work before the tool.</h2>
-        </div>
-        <div class="intro-copy">
+      id="first-build"
+      class="first-build section-block"
+      aria-labelledby="first-build-title"
+    >
+      <div class="page-container first-layout">
+        <div class="first-intro">
+          <p class="eyebrow">Recommended first build</p>
+          <p class="build-number">01</p>
+          <h2 id="first-build-title">AI Use Case Stress Test</h2>
           <p>
-            Categories overlap. A general assistant can research, a meeting tool
-            can create tasks, and an automation platform can call several
-            models. The useful distinction is the role the tool will play in a
-            real workflow.
+            Describe an AI idea before the platform, pilot, or vendor decision
+            is locked in. The tool would test whether the work, data, ownership,
+            human judgment, controls, and expected outcome are clear enough to
+            support a responsible next step.
+          </p>
+        </div>
+
+        <div class="first-detail">
+          <div>
+            <p class="detail-label">You provide</p>
+            <p>
+              The user, task, desired outcome, available data, decision being
+              supported, and consequence of a bad result.
+            </p>
+          </div>
+          <div>
+            <p class="detail-label">You get</p>
+            <p>
+              A one-page decision brief with readiness gaps, key dependencies,
+              human-ownership questions, failure points, and the smallest useful
+              test.
+            </p>
+          </div>
+          <div>
+            <p class="detail-label">Why this comes first</p>
+            <p>
+              It helps before teams spend money, asks for little sensitive data,
+              and turns a broad AI idea into a decision people can discuss.
+            </p>
+          </div>
+          <p class="status-line">
+            <span>Status</span>
+            First build candidate. No launch date yet.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="tool-roadmap"
+      class="tool-roadmap"
+      aria-labelledby="tool-roadmap-title"
+    >
+      <div class="page-container section-stack">
+        <div class="section-intro section-intro-inverse">
+          <p class="eyebrow eyebrow-inverse">Tool roadmap</p>
+          <h2 id="tool-roadmap-title">Five more problems worth solving.</h2>
+          <p>
+            These are working directions, not product promises. The order may
+            change as real users show which problem is most useful to solve
+            next.
+          </p>
+        </div>
+
+        <ol class="tool-grid">
+          {
+            futureTools.map((tool) => (
+              <li>
+                <article>
+                  <div class="tool-heading">
+                    <p class="item-number">{tool.number}</p>
+                    <p class="tool-area">{tool.area}</p>
+                  </div>
+                  <h3>{tool.title}</h3>
+                  <p>{tool.description}</p>
+                  <div class="tool-output">
+                    <p class="detail-label">Useful output</p>
+                    <p>{tool.output}</p>
+                  </div>
+                  <p class="tool-status">Future candidate</p>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section
+      id="build-standard"
+      class="build-standard section-block"
+      aria-labelledby="build-standard-title"
+    >
+      <div class="page-container standard-layout">
+        <div class="standard-intro">
+          <p class="eyebrow">Build standard</p>
+          <h2 id="build-standard-title">
+            Every tool must earn its place here.
+          </h2>
+          <p>
+            A free tool is still a product. It should respect the user's time,
+            data, and ability to make an informed decision.
+          </p>
+        </div>
+
+        <ol class="standard-list">
+          {
+            buildStandards.map((standard, index) => (
+              <li>
+                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
+                <div>
+                  <h3>{standard.title}</h3>
+                  <p>{standard.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="privacy" class="privacy" aria-labelledby="privacy-title">
+      <div class="page-container privacy-layout">
+        <div>
+          <p class="eyebrow eyebrow-inverse">Privacy</p>
+          <h2 id="privacy-title">The tool should ask for less.</h2>
+          <p>
+            No tool should need your identity just to return a useful result.
+            When a tool goes live, its page will explain what it processes,
+            whether information leaves your browser, which service handles it,
+            and whether anything is retained.
+          </p>
+        </div>
+
+        <aside aria-labelledby="privacy-boundary-title">
+          <p id="privacy-boundary-title" class="note-label">
+            Before using a tool
           </p>
           <p>
             Do not enter confidential, regulated, customer, employee, or
-            proprietary information until your organization has approved the
-            tool, account, configuration, and intended use.
+            proprietary information unless the tool clearly states that it is
+            designed and approved for that data.
           </p>
-        </div>
-      </div>
-    </section>
-
-    {
-      toolGroups.map((group) => (
-        <section
-          id={group.id}
-          class="tool-group"
-          aria-labelledby={`${group.id}-title`}>
-          <div class="page-container group-layout">
-            <div class="group-intro">
-              <p class="group-number">{group.number}</p>
-              <p class="eyebrow">{group.eyebrow}</p>
-              <h2 id={`${group.id}-title`}>{group.title}</h2>
-              <p>{group.introduction}</p>
-            </div>
-
-            <ul class="tool-list">
-              {group.tools.map((tool) => (
-                <li>
-                  <article class="tool-card">
-                    <div class="tool-heading">
-                      <h3>{tool.name}</h3>
-                      <a
-                        href={tool.href}
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        Official site
-                        <span aria-hidden="true">↗</span>
-                      </a>
-                    </div>
-                    <dl>
-                      <div>
-                        <dt>Useful when</dt>
-                        <dd>{tool.useWhen}</dd>
-                      </div>
-                      <div>
-                        <dt>Watch for</dt>
-                        <dd>{tool.watchFor}</dd>
-                      </div>
-                    </dl>
-                  </article>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ))
-    }
-
-    <section
-      id="evaluation"
-      class="evaluation section-block"
-      aria-labelledby="evaluation-title">
-      <div class="page-container section-stack">
-        <div class="section-intro">
-          <p class="eyebrow eyebrow-inverse">Evaluation criteria</p>
-          <h2 id="evaluation-title">
-            Compare operating fit, not feature volume.
-          </h2>
-          <p>
-            A capable tool can still be a poor fit for the decision, data,
-            workflow, people, or consequences surrounding the work.
-          </p>
-        </div>
-
-        <ol class="criteria-grid">
-          {
-            evaluationCriteria.map((criterion) => (
-              <li>
-                <p class="item-number">{criterion.number}</p>
-                <p class="criterion-label">{criterion.title}</p>
-                <h3>{criterion.question}</h3>
-                <p>{criterion.description}</p>
-              </li>
-            ))
-          }
-        </ol>
+        </aside>
       </div>
     </section>
 
     <section
-      id="trial"
-      class="trial section-block"
-      aria-labelledby="trial-title">
-      <div class="page-container trial-layout">
-        <div class="trial-intro">
-          <p class="eyebrow">Trial checklist</p>
-          <h2 id="trial-title">Run a bounded test before expanding access.</h2>
-          <p>
-            A useful trial produces evidence about the workflow, not only a
-            demonstration of the technology. Preserve a path to stop when the
-            evidence does not support expansion.
-          </p>
-        </div>
-
-        <ol class="trial-list">
-          {
-            trialSteps.map((step, index) => (
-              <li>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{step}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section
-      id="related"
-      class="related section-block"
-      aria-labelledby="related-title">
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-light">
-          <p class="eyebrow">Related guidance</p>
-          <h2 id="related-title">
-            Place the tool inside the experience and operating system.
-          </h2>
-        </div>
-
-        <div class="related-grid">
-          <article>
-            <p class="note-label">Product perspective</p>
-            <h3>AI experience</h3>
-            <p>
-              Design how people understand, supervise, correct, and recover from
-              AI-supported work.
-            </p>
-            <a href="/product/ai-experience/">Review AI experience</a>
-          </article>
-          <article>
-            <p class="note-label">Workflow perspective</p>
-            <h3>Agent copilots</h3>
-            <p>
-              Define the context, decision boundary, human role, and measures
-              around a copilot workflow.
-            </p>
-            <a href="/ai-tooling/co-pilot/">Review agent copilots</a>
-          </article>
-          <article>
-            <p class="note-label">Control perspective</p>
-            <h3>PII scrubbing nodes</h3>
-            <p>
-              Examine where sensitive information enters, moves through, and
-              leaves an AI-enabled process.
-            </p>
-            <a href="/ai-tooling/compliance/">Review PII scrubbing nodes</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="next-step" class="next-step" aria-labelledby="next-step-title">
-      <div class="page-container next-layout">
+      id="beyond-tool"
+      class="beyond-tool section-block"
+      aria-labelledby="beyond-tool-title"
+    >
+      <div class="page-container beyond-layout">
         <div>
-          <p class="eyebrow eyebrow-inverse">Next step</p>
-          <h2 id="next-step-title">
-            Test whether the workflow is ready for the tool.
+          <p class="eyebrow">Beyond the tool</p>
+          <h2 id="beyond-tool-title">
+            A small tool can clarify one problem. It can't align the whole
+            system.
           </h2>
         </div>
-        <div class="next-copy">
+
+        <div class="beyond-copy">
           <p>
-            If an AI use case has momentum but its workflow, evidence,
-            oversight, adoption conditions, or measures remain unclear, start
-            with a readiness decision before implementation expands.
+            Use the free result on your own. If the problem crosses teams,
+            systems, data, ownership, or customer journeys, Cadence Lab can help
+            turn that starting point into an operating decision.
           </p>
-          <div class="next-actions">
-            <a
-              class="button button-light"
-              href="/services/ai-service-readiness-review/">
-              Review AI Service Readiness
+          <div class="beyond-actions">
+            <a class="button button-primary" href="/services/">
+              Review diagnostic offers
             </a>
             <a class="button button-text" href="/fit-check/">
               Start a fit check
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true">&#8594;</span>
             </a>
           </div>
         </div>
@@ -561,7 +364,9 @@ const trialSteps = [
     margin-inline: auto;
   }
 
-  .section-block {
+  .section-block,
+  .tool-roadmap,
+  .privacy {
     padding-block: var(--section-space);
   }
 
@@ -572,13 +377,12 @@ const trialSteps = [
   }
 
   .hero-layout,
-  .intro-layout,
-  .group-layout,
-  .trial-layout,
-  .next-layout {
+  .first-layout,
+  .standard-layout,
+  .privacy-layout,
+  .beyond-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(19rem, 0.7fr);
-    align-items: start;
+    grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
     gap: clamp(3rem, 8vw, 8rem);
   }
 
@@ -616,26 +420,27 @@ const trialSteps = [
     content: "/";
   }
 
-  .breadcrumb a,
-  .tool-heading a,
-  .related-grid a {
+  .breadcrumb a {
     color: var(--color-blue);
     text-underline-offset: 0.25em;
   }
 
   .eyebrow,
   .note-label,
-  .group-number,
+  .build-number,
+  .detail-label,
   .item-number,
-  .criterion-label {
+  .tool-area,
+  .tool-status,
+  .status-line span {
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: var(--ls-eyebrow);
-    font-feature-settings: var(--fea-eyebrow);
+    letter-spacing: 0.08em;
+    font-feature-settings: var(--fea-graphik);
     text-transform: uppercase;
   }
 
@@ -665,362 +470,46 @@ const trialSteps = [
   }
 
   h1 {
-    max-width: 18ch;
+    max-width: 16ch;
     font-size: var(--fs-display);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-display);
-    letter-spacing: var(--ls-display);
+    letter-spacing: -0.04em;
   }
 
-  .hero-lead,
-  .intro-copy p,
-  .group-intro > p:last-child,
-  .trial-intro > p:last-child,
-  .next-copy > p {
-    max-width: var(--measure-ui);
-    margin: 0;
-    color: var(--color-text-muted);
-    font-size: var(--fs-body-ui);
-    line-height: var(--lh-ui);
-    text-wrap: pretty;
-  }
-
-  .review-card {
-    padding: clamp(1.5rem, 4vw, 2.25rem);
-    border: var(--border-width) solid var(--color-border);
-    border-top: 0.1875rem solid var(--color-blue);
-    background: var(--color-surface-pure);
-  }
-
-  .review-card > p:not(.note-label) {
-    margin: 1rem 0 0;
-    color: var(--color-ink);
-    font-size: var(--fs-body-ui);
-    font-weight: var(--fw-medium);
-    line-height: var(--lh-ui);
-    text-wrap: pretty;
-  }
-
-  .review-card dl {
-    display: grid;
-    margin: 1.5rem 0 0;
-  }
-
-  .review-card dl > div {
-    display: grid;
-    grid-template-columns: 6rem minmax(0, 1fr);
-    gap: 1rem;
-    padding-block: 0.9rem;
-    border-top: var(--border-width) solid var(--color-border);
-  }
-
-  .review-card dt,
-  .review-card dd {
-    font-size: var(--fs-small);
-    line-height: 1.5;
-  }
-
-  .review-card dt {
-    color: var(--color-text-muted);
-  }
-
-  .review-card dd {
-    margin: 0;
-    color: var(--color-ink);
-    font-weight: var(--fw-medium);
-  }
-
-  .intro-layout,
-  .trial-layout,
-  .next-layout {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  }
-
-  .intro-layout h2,
-  .group-intro h2,
-  .section-intro h2,
-  .trial-intro h2,
-  .next-layout h2 {
-    max-width: 20ch;
-    margin-top: 0.75rem;
+  h2 {
     font-size: var(--fs-h2);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-h2);
-    letter-spacing: var(--ls-h2);
+    letter-spacing: -0.025em;
   }
 
-  .intro-copy {
-    display: grid;
-    align-content: start;
-    gap: 1.25rem;
-  }
-
-  .tool-group {
-    padding-block: clamp(3.5rem, 8vw, 6rem);
-    border-top: var(--border-width) solid var(--color-border);
-  }
-
-  .tool-group:nth-of-type(even) {
-    background: var(--color-surface-subtle);
-  }
-
-  .group-layout {
-    grid-template-columns: minmax(16rem, 0.65fr) minmax(0, 1.35fr);
-  }
-
-  .group-intro {
-    position: sticky;
-    top: 2rem;
-    align-self: start;
-  }
-
-  .group-number {
-    margin-bottom: 2.5rem;
-  }
-
-  .group-intro h2 {
-    margin-top: 0.75rem;
-  }
-
-  .group-intro > p:last-child {
-    margin-top: 1.25rem;
-  }
-
-  .tool-list {
-    display: grid;
-    margin: 0;
-    padding: 0;
-    border-top: var(--border-width) solid var(--color-border);
-    list-style: none;
-  }
-
-  .tool-list > li {
-    border-bottom: var(--border-width) solid var(--color-border);
-  }
-
-  .tool-card {
-    padding-block: clamp(1.5rem, 4vw, 2.25rem);
-  }
-
-  .tool-heading {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .tool-heading h3 {
+  h3 {
     font-size: var(--fs-h4);
-    font-weight: var(--fw-medium);
-    line-height: 1.35;
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h4);
+    letter-spacing: -0.01em;
   }
 
-  .tool-heading a,
-  .related-grid a {
-    flex: 0 0 auto;
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    line-height: 1.4;
-  }
-
-  .tool-heading a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .tool-card dl {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.5rem, 4vw, 3rem);
-    margin: 1.5rem 0 0;
-  }
-
-  .tool-card dt {
-    color: var(--color-text-muted);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    line-height: 1.5;
-  }
-
-  .tool-card dd {
-    max-width: 48ch;
-    margin: 0.5rem 0 0;
-    color: var(--color-text);
-    font-size: var(--fs-small);
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-
-  .evaluation,
-  .next-step {
-    background: var(--color-ink);
-    color: var(--color-light);
-  }
-
-  .section-stack {
-    display: grid;
-    gap: clamp(2.5rem, 6vw, 4.5rem);
-  }
-
-  .section-intro {
-    display: flex;
-    max-width: 52rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  .section-intro h2 {
-    margin-top: -0.5rem;
-    color: var(--color-light);
-  }
-
-  .section-intro > p:not(.eyebrow) {
-    max-width: var(--measure-ui);
+  .hero-lead,
+  .first-intro > p:last-child,
+  .standard-intro > p:last-child,
+  .privacy-layout > div > p:last-child,
+  .beyond-copy > p {
+    max-width: var(--measure-prose);
     margin: 0;
-    color: var(--color-text-inverse-muted);
-    font-size: var(--fs-body-ui);
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
     line-height: var(--lh-ui);
     text-wrap: pretty;
   }
 
-  .criteria-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 0;
-    padding: 0;
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
-    list-style: none;
-  }
-
-  .criteria-grid li {
-    padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
-  }
-
-  .criteria-grid .item-number,
-  .criteria-grid .criterion-label {
-    color: var(--color-green);
-  }
-
-  .criterion-label {
-    margin-top: 2rem;
-  }
-
-  .criteria-grid h3 {
-    margin-top: 0.65rem;
-    color: var(--color-light);
-    font-size: var(--fs-h4);
-    font-weight: var(--fw-medium);
-    line-height: 1.35;
-  }
-
-  .criteria-grid li > p:last-child {
-    margin: 0.75rem 0 0;
-    color: var(--color-text-inverse-muted);
-    font-size: var(--fs-small);
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-
-  .trial {
-    background: var(--color-surface-subtle);
-  }
-
-  .trial-intro > p:last-child {
-    margin-top: 1.25rem;
-  }
-
-  .trial-list {
-    display: grid;
-    margin: 0;
-    padding: 0;
-    border-top: var(--border-width) solid var(--color-border);
-    list-style: none;
-  }
-
-  .trial-list li {
-    display: grid;
-    grid-template-columns: 3rem minmax(0, 1fr);
-    gap: 1.5rem;
-    padding-block: 1.25rem;
-    border-bottom: var(--border-width) solid var(--color-border);
-  }
-
-  .trial-list span {
-    color: var(--color-blue);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
-    letter-spacing: var(--ls-eyebrow);
-  }
-
-  .trial-list p {
-    max-width: var(--measure-ui);
-    margin: 0;
-    color: var(--color-text);
-    font-size: var(--fs-body-ui);
-    line-height: var(--lh-ui);
-    text-wrap: pretty;
-  }
-
-  .section-intro-light h2 {
-    color: var(--color-ink);
-  }
-
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-top: var(--border-width) solid var(--color-border);
-    border-inline-start: var(--border-width) solid var(--color-border);
-  }
-
-  .related-grid article {
-    min-width: 0;
-    padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid var(--color-border);
-    border-bottom: var(--border-width) solid var(--color-border);
-  }
-
-  .related-grid h3 {
-    margin-top: 1.75rem;
-    font-size: var(--fs-h4);
-    font-weight: var(--fw-medium);
-    line-height: 1.35;
-  }
-
-  .related-grid article > p:not(.note-label) {
-    min-height: 7.7rem;
-    margin: 0.75rem 0 1.5rem;
-    color: var(--color-text-muted);
-    font-size: var(--fs-small);
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-
-  .next-step {
-    padding-block: var(--section-space);
-  }
-
-  .next-layout {
-    align-items: start;
-  }
-
-  .next-layout h2 {
-    color: var(--color-light);
-  }
-
-  .next-copy > p {
-    color: var(--color-text-inverse-muted);
-  }
-
-  .next-actions {
+  .hero-actions,
+  .beyond-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 1.75rem;
+    margin-top: 0.5rem;
   }
 
   .button {
@@ -1038,63 +527,318 @@ const trialSteps = [
     text-decoration: none;
   }
 
-  .button-light {
-    border-color: var(--color-light);
-    background: var(--color-light);
-    color: var(--color-ink);
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
   }
 
   .button-text {
+    color: var(--color-blue);
+  }
+
+  .promise-card,
+  .privacy-layout aside {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0.1875rem solid var(--color-blue);
+    background: var(--color-surface-pure);
+  }
+
+  .promise-card > p:not(.note-label),
+  .privacy-layout aside > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .promise-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .promise-card dl > div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .promise-card dt,
+  .promise-card dd {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .promise-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .promise-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .first-layout,
+  .standard-layout,
+  .privacy-layout,
+  .beyond-layout {
+    align-items: start;
+  }
+
+  .first-intro,
+  .standard-intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .build-number {
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-h3);
+  }
+
+  .first-detail {
+    border-top: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .first-detail > div {
+    padding-block: 1.5rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .first-detail > div > p:last-child,
+  .tool-output > p:last-child {
+    margin: 0.6rem 0 0;
+    color: var(--color-text);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  .status-line {
+    margin: 1.5rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .status-line span {
+    margin-inline-end: 0.75rem;
+  }
+
+  .tool-roadmap {
+    background: var(--color-ink);
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(3rem, 7vw, 5rem);
+  }
+
+  .section-intro {
+    display: grid;
+    max-width: 58rem;
+    gap: 1rem;
+  }
+
+  .section-intro h2 {
+    max-width: 18ch;
+    color: var(--color-light);
+  }
+
+  .section-intro > p:last-child {
+    max-width: var(--measure-prose);
+    margin: 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-ui);
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    list-style: none;
+  }
+
+  .tool-grid > li {
+    border-right: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
+  }
+
+  .tool-grid > li:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .tool-grid article {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  .tool-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .tool-area {
+    color: var(--color-text-inverse-muted);
+    text-align: end;
+  }
+
+  .tool-grid h3 {
+    color: var(--color-light);
+  }
+
+  .tool-grid article > p:not(.tool-status),
+  .tool-output > p:last-child {
+    margin: 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  .tool-output {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: var(--border-width) solid var(--color-border-inverse);
+  }
+
+  .tool-output .detail-label,
+  .tool-status {
     color: var(--color-green);
   }
 
-  .tools-page a:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus);
-    outline-offset: var(--focus-ring-offset);
+  .tool-output > p:last-child {
+    margin-top: 0.5rem;
   }
 
-  @media (hover: hover) {
-    .breadcrumb a:hover,
-    .tool-heading a:hover,
-    .related-grid a:hover,
-    .button-text:hover {
-      text-decoration: underline;
-      text-underline-offset: 0.25em;
-    }
+  .tool-status {
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
 
-    .button-light:hover {
-      border-color: var(--color-green);
-      background: var(--color-green);
-    }
+  .standard-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .standard-list li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding-block: 1.5rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .standard-list h3 {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+  }
+
+  .standard-list li div > p {
+    margin: 0.6rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  .privacy {
+    background: var(--color-ink);
+  }
+
+  .privacy-layout h2 {
+    max-width: 14ch;
+    margin-top: 0.75rem;
+    color: var(--color-light);
+  }
+
+  .privacy-layout > div > p:last-child {
+    margin-top: 1rem;
+    color: var(--color-text-inverse-muted);
+  }
+
+  .privacy-layout aside {
+    border-color: var(--color-border-inverse);
+    border-top-color: var(--color-green);
+    background: color-mix(in srgb, var(--color-ink) 92%, var(--color-light));
+  }
+
+  .privacy-layout aside .note-label {
+    color: var(--color-green);
+  }
+
+  .privacy-layout aside > p:not(.note-label) {
+    color: var(--color-light);
+  }
+
+  .beyond-layout h2 {
+    max-width: 19ch;
+    margin-top: 0.75rem;
+  }
+
+  .button:focus-visible,
+  .breadcrumb a:focus-visible {
+    outline: 0.1875rem solid var(--color-blue);
+    outline-offset: 0.1875rem;
+  }
+
+  .button-primary:hover {
+    background: var(--color-blue);
+    border-color: var(--color-blue);
+  }
+
+  .button-text:hover,
+  .breadcrumb a:hover {
+    text-decoration-thickness: 0.125rem;
   }
 
   @media (max-width: 64rem) {
     .hero-layout,
-    .intro-layout,
-    .group-layout,
-    .trial-layout,
-    .next-layout {
+    .first-layout,
+    .standard-layout,
+    .privacy-layout,
+    .beyond-layout {
       grid-template-columns: 1fr;
-      align-items: start;
       gap: 3rem;
-    }
-
-    .review-card {
-      max-width: 40rem;
-    }
-
-    .group-intro {
-      position: static;
-    }
-
-    .criteria-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (max-width: 44rem) {
-    .review-card dl > div,
-    .tool-card dl {
+  @media (max-width: 48rem) {
+    .tool-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tool-grid > li {
+      border-right: 0;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    .hero-actions,
+    .beyond-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    .promise-card dl > div {
       grid-template-columns: 1fr;
       gap: 0.25rem;
     }
@@ -1102,41 +846,10 @@ const trialSteps = [
     .tool-heading {
       align-items: flex-start;
       flex-direction: column;
-      gap: 0.75rem;
     }
 
-    .criteria-grid,
-    .related-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .related-grid article > p:not(.note-label) {
-      min-height: 0;
-    }
-
-    .next-actions {
-      align-items: stretch;
-      flex-direction: column;
-    }
-
-    .button {
-      width: 100%;
-    }
-  }
-
-  @media (forced-colors: active) {
-    .tools-hero,
-    .review-card,
-    .tool-group,
-    .tool-list,
-    .tool-list > li,
-    .criteria-grid,
-    .criteria-grid li,
-    .trial-list,
-    .trial-list li,
-    .related-grid,
-    .related-grid article {
-      border-color: CanvasText;
+    .tool-area {
+      text-align: start;
     }
   }
 </style>
