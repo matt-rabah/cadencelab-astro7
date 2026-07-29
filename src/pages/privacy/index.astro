@@ -3,7 +3,7 @@ import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
 import Layout from "../../layouts/Layout.astro";
 
-const effectiveDate = "July 23, 2026";
+const effectiveDate = "July 28, 2026";
 
 const policySections = [
   { label: "Scope", href: "#scope" },
@@ -18,9 +18,10 @@ const policySections = [
 
 <Layout
   title="Privacy Policy | Cadence Lab"
-  description="How Cadence Lab collects, uses, shares, and protects information submitted through cadencelab.co."
+  description="Learn what information Cadence Lab collects through cadencelab.co, why it is used, who helps process it, and what choices you have."
   canonicalURL="/privacy/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
 
   <main id="main-content" class="privacy-page" tabindex="-1">
@@ -28,20 +29,15 @@ const policySections = [
       <div class="page-container hero-layout">
         <div class="hero-copy">
           <p class="eyebrow">Privacy policy</p>
-          <h1>
-            Privacy should be understandable before information is shared.
-          </h1>
+          <h1>Here is what happens to your information.</h1>
           <p class="hero-lead">
-            This policy explains what Cadence Lab collects through this website,
-            why that information is used, which service providers help process
-            it, and what choices are available to you.
+            This policy explains what Cadence Lab collects through this site,
+            why it is used, who helps process it, and what choices you have.
           </p>
         </div>
 
         <aside class="policy-summary" aria-labelledby="policy-summary-title">
-          <p id="policy-summary-title" class="summary-label">
-            Policy at a glance
-          </p>
+          <p id="policy-summary-title" class="summary-label">Quick summary</p>
           <dl>
             <div>
               <dt>Effective</dt>
@@ -93,30 +89,31 @@ const policySections = [
           <h2 id="scope-title">Scope and responsibility</h2>
 
           <p>
-            This Privacy Policy applies to information processed through
-            <strong>cadencelab.co</strong>, including the Fit Check form and
-            communications that follow from an inquiry. “Cadence Lab,” “we,”
-            “us,” and “our” refer to Cadence Lab, an independent customer
-            experience practice led by Matt Rabah.
+            This Privacy Policy covers information processed through
+            <strong>cadencelab.co</strong>, including the Fit Check and any
+            communication that follows. “Cadence Lab,” “we,” “us,” and “our”
+            refer to Cadence Lab, an independent customer experience practice
+            led by Matt Rabah.
           </p>
 
           <p>
-            This policy does not govern websites or services operated by other
+            This policy does not cover websites or services run by other
             organizations. When this site links to another website, that
-            organization’s privacy terms apply to its handling of information.
+            organization’s privacy policy governs how it handles information.
           </p>
         </section>
 
         <section
           id="information-collected"
-          aria-labelledby="information-collected-title">
+          aria-labelledby="information-collected-title"
+        >
           <p class="section-number" aria-hidden="true">02</p>
           <h2 id="information-collected-title">Information we collect</h2>
 
           <h3>Information you provide</h3>
           <p>
-            The Fit Check asks for the information needed to understand an
-            operating problem and respond to the inquiry. This may include:
+            The Fit Check asks for enough information to understand an operating
+            problem and respond. This may include:
           </p>
 
           <ul>
@@ -143,11 +140,11 @@ const policySections = [
 
           <h3>Information processed automatically</h3>
           <p>
-            When you visit the site, the hosting and security infrastructure may
+            When you visit the site, its hosting and security systems may
             process technical information needed to deliver and protect it. This
-            can include an IP address, request date and time, requested page or
-            URL, browser and device information, referral information, and
-            security or diagnostic data.
+            can include your IP address, request date and time, requested page
+            or URL, browser and device information, referring page, and security
+            or diagnostic data.
           </p>
 
           <p>
@@ -170,7 +167,8 @@ const policySections = [
 
         <section
           id="how-information-is-used"
-          aria-labelledby="how-information-is-used-title">
+          aria-labelledby="how-information-is-used-title"
+        >
           <p class="section-number" aria-hidden="true">03</p>
           <h2 id="how-information-is-used-title">How information is used</h2>
 
@@ -209,13 +207,14 @@ const policySections = [
 
         <section
           id="service-providers"
-          aria-labelledby="service-providers-title">
+          aria-labelledby="service-providers-title"
+        >
           <p class="section-number" aria-hidden="true">04</p>
           <h2 id="service-providers-title">Service providers and disclosure</h2>
 
           <p>
-            Cadence Lab uses a limited number of providers to operate this
-            website and deliver form submissions:
+            Cadence Lab uses a small number of providers to run this website and
+            deliver Fit Check submissions:
           </p>
 
           <div class="provider-list">
@@ -229,7 +228,8 @@ const policySections = [
               </p>
               <a
                 href="https://www.cloudflare.com/policies/privacy/"
-                rel="external">
+                rel="external"
+              >
                 Review Cloudflare’s privacy policy
               </a>
             </article>
@@ -264,7 +264,8 @@ const policySections = [
 
         <section
           id="retention-security"
-          aria-labelledby="retention-security-title">
+          aria-labelledby="retention-security-title"
+        >
           <p class="section-number" aria-hidden="true">05</p>
           <h2 id="retention-security-title">Retention and security</h2>
 
