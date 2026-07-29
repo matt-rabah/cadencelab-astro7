@@ -2,6 +2,7 @@ interface Env {
   RESEND_API_KEY?: string;
   FIT_CHECK_TO_EMAIL?: string;
   FIT_CHECK_FROM_EMAIL?: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 interface FitCheckSubmission {
@@ -29,6 +30,42 @@ interface PagesContext {
 }
 
 const MAX_BODY_BYTES = 32_768;
+const TURNSTILE_ACTION = "fit-check";
+const TURNSTILE_VERIFY_URL =
+  "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+interface TurnstileVerificationResult {
+  success: boolean;
+  action?: string;
+  hostname?: string;
+  "error-codes"?: string[];
+}
+
+async function verifyTurnstile(
+  request: Request,
+  secretKey: string,
+  token: string,
+): Promise<TurnstileVerificationResult> {
+  const body = new FormData();
+  body.set("secret", secretKey);
+  body.set("response", token);
+  body.set("idempotency_key", crypto.randomUUID());
+
+  const remoteIp = request.headers.get("CF-Connecting-IP");
+  if (remoteIp) body.set("remoteip", remoteIp);
+
+  const response = await fetch(TURNSTILE_VERIFY_URL, {
+    method: "POST",
+    body,
+    signal: AbortSignal.timeout(5_000),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Turnstile verification returned ${response.status}.`);
+  }
+
+  return (await response.json()) as TurnstileVerificationResult;
+}
 
 const environmentOptions: Record<string, string> = {
   fragmented: "Teams use disconnected systems and inconsistent workflows",
@@ -278,6 +315,57 @@ export const onRequest = async ({
   const honeypot = formData.get("website");
   if (typeof honeypot === "string" && honeypot.trim()) {
     return Response.redirect(new URL("/thanks/", request.url), 303);
+  }
+
+  if (!env.TURNSTILE_SECRET_KEY) {
+    console.error("Fit Check Turnstile verification is not configured.");
+    return textResponse(
+      "The Fit Check is temporarily unavailable. Your information was not sent. Please try again later.",
+      503,
+    );
+  }
+
+  const turnstileToken = formData.get("cf-turnstile-response");
+  if (typeof turnstileToken !== "string" || !turnstileToken.trim()) {
+    return textResponse(
+      "Please complete the security check, then submit the Fit Check again.",
+      400,
+    );
+  }
+
+  let turnstileResult: TurnstileVerificationResult;
+  try {
+    turnstileResult = await verifyTurnstile(
+      request,
+      env.TURNSTILE_SECRET_KEY,
+      turnstileToken,
+    );
+  } catch (error) {
+    console.error("Fit Check Turnstile verification failed.", error);
+    return textResponse(
+      "The security check is temporarily unavailable. Your information was not sent. Please try again.",
+      503,
+    );
+  }
+
+  const hostnameIsValid =
+    requestUrl.hostname !== "cadencelab.co" ||
+    turnstileResult.hostname === requestUrl.hostname;
+
+  if (
+    !turnstileResult.success ||
+    turnstileResult.action !== TURNSTILE_ACTION ||
+    !hostnameIsValid
+  ) {
+    console.warn("Fit Check Turnstile verification was rejected.", {
+      action: turnstileResult.action,
+      hostname: turnstileResult.hostname,
+      errorCodes: turnstileResult["error-codes"],
+    });
+    return textResponse(
+      "The security check expired or could not be verified. Please go back and try again.",
+      400,
+    );
   }
 
   const { submission, errors } = validateSubmission(formData);

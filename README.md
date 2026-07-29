@@ -67,6 +67,8 @@ Add the required TinaCMS values to `.env`:
 NEXT_PUBLIC_TINA_CLIENT_ID=
 TINA_READ_ONLY_TOKEN=
 TINA_SEARCH_TOKEN=
+PUBLIC_TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=
 ```
 
 Do not commit `.env` or expose Tina tokens publicly.
@@ -343,6 +345,8 @@ The project uses these environment variables:
 | `NEXT_PUBLIC_TINA_CLIENT_ID` | Connects the Tina admin to the TinaCloud project |
 | `TINA_READ_ONLY_TOKEN` | Provides read-only TinaCloud access during server-side builds |
 | `TINA_SEARCH_TOKEN` | Provides Tina search indexing access |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Renders the public Turnstile widget on the Fit Check form |
+| `TURNSTILE_SECRET_KEY` | Verifies Fit Check Turnstile tokens in the Pages Function |
 
 Example:
 
@@ -350,6 +354,8 @@ Example:
 NEXT_PUBLIC_TINA_CLIENT_ID=your_client_id
 TINA_READ_ONLY_TOKEN=your_read_only_token
 TINA_SEARCH_TOKEN=your_search_token
+PUBLIC_TURNSTILE_SITE_KEY=your_site_key
+TURNSTILE_SECRET_KEY=your_secret_key
 ```
 
 Never commit real token values.
