@@ -3,16 +3,23 @@
 > Cadence Lab is a public informational site. No authentication is required
 > to access any content.
 
+This file provides access guidance for automated tools. It is not an
+authorization endpoint, token endpoint, registration endpoint, or JWKS
+endpoint.
+
 ## Agent audience
 
 AI agents, LLM-based crawlers, and automated tools that discover and interact
 with web services.
 
-## Agent Registration
+## Agent registration
 
-**No registration is required.** 
+**No registration is required.**
 
-Cadence Lab does not currently operate protected APIs. All site content — including pages, blog posts, diagnostic service descriptions, and machine-readable resources — is publicly accessible without authentication, api keys, or registration.
+Cadence Lab does not currently operate protected APIs. All site content,
+including pages, blog posts, diagnostic service descriptions, and
+machine-readable resources, is publicly accessible without authentication,
+API keys, or registration.
 
 ## Available machine-readable resources
 
@@ -28,5 +35,5 @@ Cadence Lab does not currently operate protected APIs. All site content — incl
 
 ## Contact
 
-To discuss API access or future integrations, visit
+To discuss future integrations, visit
 [cadencelab.co/contact/](https://cadencelab.co/contact/).
