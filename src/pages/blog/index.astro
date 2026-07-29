@@ -65,22 +65,23 @@ const getDescription = (post: BlogPost): string =>
 
 <Layout
   title="Insights | Cadence Lab"
-  description="Perspectives on customer experience systems, CRM workflows, AI adoption, governance, and measurable operational improvement."
+  description="Practical thinking about customer experience systems, CRM workflows, responsible AI, governance, and the work required to improve them."
   canonicalURL="/blog/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
 
-  <main id="main-content" class="blog-index">
+  <main id="main-content" class="blog-index" tabindex="-1">
     <div class="blog-container">
       <header class="blog-header">
         <p class="blog-eyebrow">Insights</p>
 
-        <h1>Practical thinking for complex customer systems.</h1>
+        <h1>Useful ideas for messy customer systems.</h1>
 
         <p class="blog-introduction">
-          Analysis and guidance on customer experience operations, CRM data,
-          workflow design, responsible AI adoption, and the organizational
-          conditions that shape results.
+          Straightforward thinking about customer experience, CRM data,
+          workflows, responsible AI, and the operating choices that shape the
+          result.
         </p>
       </header>
 
@@ -89,7 +90,8 @@ const getDescription = (post: BlogPost): string =>
           <>
             <section
               class="featured-section"
-              aria-labelledby="featured-post-title">
+              aria-labelledby="featured-post-title"
+            >
               <article class="featured-post">
                 <div class="post-metadata">
                   <span>{featuredPost.data.category}</span>
@@ -108,18 +110,11 @@ const getDescription = (post: BlogPost): string =>
                 <h2 id="featured-post-title">
                   <a href={getPostURL(featuredPost)}>
                     {featuredPost.data.title}
+                    <span aria-hidden="true">→</span>
                   </a>
                 </h2>
 
                 <p>{getDescription(featuredPost)}</p>
-
-                <a
-                  href={getPostURL(featuredPost)}
-                  class="featured-link"
-                  aria-label={`Read ${featuredPost.data.title}`}>
-                  Read the article
-                  <span aria-hidden="true">→</span>
-                </a>
               </article>
             </section>
 
@@ -128,7 +123,7 @@ const getDescription = (post: BlogPost): string =>
                 <div class="archive-heading">
                   <h2 id="archive-title">More insights</h2>
 
-                  <p>Browse the latest published thinking from Cadence Lab.</p>
+                  <p>More practical thinking from Cadence Lab.</p>
                 </div>
 
                 <div class="post-grid">
@@ -142,24 +137,20 @@ const getDescription = (post: BlogPost): string =>
                         <time datetime={post.data.date.toISOString()}>
                           {formatDate(post.data.date)}
                         </time>
+
+                        <span aria-hidden="true">·</span>
+
+                        <span>{post.data.readTime}</span>
                       </div>
 
                       <h3>
-                        <a href={getPostURL(post)}>{post.data.title}</a>
+                        <a href={getPostURL(post)}>
+                          {post.data.title}
+                          <span aria-hidden="true">→</span>
+                        </a>
                       </h3>
 
                       <p>{getDescription(post)}</p>
-
-                      <div class="post-card-footer">
-                        <span>{post.data.readTime}</span>
-
-                        <a
-                          href={getPostURL(post)}
-                          aria-label={`Read ${post.data.title}`}>
-                          Read article
-                          <span aria-hidden="true">→</span>
-                        </a>
-                      </div>
                     </article>
                   ))}
                 </div>
@@ -168,11 +159,11 @@ const getDescription = (post: BlogPost): string =>
           </>
         ) : (
           <section class="empty-state" aria-labelledby="empty-state-title">
-            <h2 id="empty-state-title">No articles are published yet.</h2>
+            <h2 id="empty-state-title">Nothing is published yet.</h2>
 
             <p>
-              New perspectives on customer experience systems and responsible AI
-              adoption will appear here as they are published.
+              New thinking about customer experience systems and responsible AI
+              will appear here as it is published.
             </p>
 
             <a href="/" class="return-link">
@@ -299,8 +290,12 @@ const getDescription = (post: BlogPost): string =>
   }
 
   .featured-post h2 a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
     color: var(--color-ink);
-    text-decoration: none;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
   }
 
   .featured-post h2 a:hover {
@@ -318,27 +313,6 @@ const getDescription = (post: BlogPost): string =>
     letter-spacing: 0;
     font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
-  }
-
-  .featured-link {
-    display: inline-flex;
-    min-height: 2.75rem;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--color-blue);
-    font-family: var(--font-sans);
-    font-size: var(--fs-cta);
-    font-weight: var(--fw-medium);
-    line-height: 1.2;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-    text-decoration: underline;
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 0.2em;
-  }
-
-  .featured-link:hover {
-    color: var(--color-ink);
   }
 
   .archive-section {
@@ -408,8 +382,12 @@ const getDescription = (post: BlogPost): string =>
   }
 
   .post-card h3 a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
     color: var(--color-ink);
-    text-decoration: none;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
   }
 
   .post-card h3 a:hover {
@@ -426,36 +404,6 @@ const getDescription = (post: BlogPost): string =>
     letter-spacing: 0;
     font-feature-settings: var(--fea-graphik);
     text-wrap: pretty;
-  }
-
-  .post-card-footer {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: auto;
-    padding-top: 0.75rem;
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: var(--fw-regular);
-    line-height: 1.4;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-graphik);
-  }
-
-  .post-card-footer a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    color: var(--color-blue);
-    font-weight: var(--fw-medium);
-    text-decoration: none;
-  }
-
-  .post-card-footer a:hover {
-    text-decoration: underline;
   }
 
   .empty-state {
