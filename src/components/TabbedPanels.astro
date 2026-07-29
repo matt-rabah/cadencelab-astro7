@@ -36,7 +36,7 @@ const { idPrefix, label, panels, theme = "light" } = Astro.props;
   <div class="tab-list-wrap">
     <div class="tab-list" data-tab-list aria-label={label}>
       {
-        panels.map((panel, index) => (
+        panels.map((panel) => (
           <button
             id={`${idPrefix}-tab-${panel.id}`}
             class="tab-trigger"
