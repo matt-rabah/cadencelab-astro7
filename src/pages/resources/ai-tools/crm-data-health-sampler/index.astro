@@ -1,0 +1,416 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/feedback-signal-sorter.css";
+import "../../../../styles/crm-data-health-sampler.css";
+---
+
+<Layout
+  title="Free CRM Data Health Sampler | Cadence Lab"
+  description="Review a small CSV sample locally for missing values, duplicate rows, inconsistent formats, and fields that may not support the workflow people expect."
+  canonicalURL="/resources/ai-tools/crm-data-health-sampler/"
+  pageType="website"
+>
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "CRM Data Health Sampler" },
+    ]}
+  />
+
+  <main id="main-content" class="feedback-page data-health-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li aria-current="page">CRM Data Health Sampler</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free CRM data tool</p>
+          <h1 id="tool-title">
+            Inspect the sample before you trust the system.
+          </h1>
+          <p class="hero-lead">
+            Review a small CSV for missing values, duplicate records,
+            inconsistent formats, and fields that may not support the workflow
+            your team expects.
+          </p>
+          <a class="button button-primary" href="#data-health-form">
+            Review a CSV sample
+          </a>
+        </div>
+
+        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p>
+            Your CSV stays in this browser. Cadence Lab does not receive, store,
+            or analyze it.
+          </p>
+          <dl>
+            <div><dt>Cost</dt><dd>Free</dd></div>
+            <div><dt>Signup</dt><dd>None</dd></div>
+            <div><dt>Processing</dt><dd>On your device</dd></div>
+            <div><dt>Sample limit</dt><dd>500 rows</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            A clean import can still support a broken workflow.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            The sampler profiles each column, finds exact duplicate rows, and
+            flags observable inconsistencies. Every finding includes the rule
+            that triggered it.
+          </p>
+          <p>
+            It does not connect to your CRM, infer business meaning, repair
+            records, or approve a migration. A sample can expose risks; it
+            cannot prove the full dataset is healthy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Review the sample</p>
+          <h2 id="workspace-title">Use the smallest safe dataset.</h2>
+          <p>
+            Remove names, email addresses, phone numbers, account identifiers,
+            payment details, health information, secrets, and confidential or
+            regulated data. Synthetic or deliberately anonymized records are
+            safest.
+          </p>
+        </div>
+
+        <form
+          id="data-health-form"
+          class="feedback-form data-health-form"
+          method="post"
+          action="/resources/ai-tools/crm-data-health-sampler/"
+        >
+          <fieldset>
+            <legend><span>01</span>Add the sample</legend>
+
+            <div class="field">
+              <label for="analysis-name">
+                Analysis name <span aria-hidden="true">*</span>
+              </label>
+              <p id="analysis-name-hint" class="field-hint">
+                Use a neutral label, such as “Opportunity export sample.”
+              </p>
+              <input
+                id="analysis-name"
+                name="analysis-name"
+                type="text"
+                maxlength="120"
+                aria-describedby="analysis-name-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="csv-file">
+                Choose a CSV file <span class="optional">Optional</span>
+              </label>
+              <p id="csv-file-hint" class="field-hint">
+                Maximum 2 MB. Only the first 500 data rows and 75 columns are
+                reviewed.
+              </p>
+              <input
+                id="csv-file"
+                name="csv-file"
+                type="file"
+                accept=".csv,text/csv"
+                aria-describedby="csv-file-hint file-status"
+              />
+              <p
+                id="file-status"
+                class="file-status"
+                role="status"
+                aria-live="polite"
+              >
+                No file selected.
+              </p>
+            </div>
+
+            <div class="source-divider" aria-hidden="true"><span>or</span></div>
+
+            <div class="field">
+              <label for="csv-text">
+                Paste CSV data <span class="optional">Optional</span>
+              </label>
+              <p id="csv-text-hint" class="field-hint">
+                A selected file takes priority. Quoted commas and line breaks
+                are supported.
+              </p>
+              <textarea
+                id="csv-text"
+                name="csv-text"
+                rows="10"
+                maxlength="200000"
+                spellcheck="false"
+                aria-describedby="csv-text-hint csv-privacy-hint"></textarea>
+              <p id="csv-privacy-hint" class="privacy-hint">
+                Do not include personal, confidential, regulated, or proprietary
+                information.
+              </p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>02</span>Set the review rules</legend>
+
+            <div class="field">
+              <label for="missing-values">
+                Values that mean “missing” <span class="optional">Optional</span
+                >
+              </label>
+              <p id="missing-values-hint" class="field-hint">
+                Separate values with commas. Blank cells are always treated as
+                missing.
+              </p>
+              <input
+                id="missing-values"
+                name="missing-values"
+                type="text"
+                value="N/A, NA, null, unknown, -"
+                maxlength="300"
+                aria-describedby="missing-values-hint"
+              />
+            </div>
+
+            <fieldset class="choice-group">
+              <legend>
+                How should the first row be treated?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list">
+                <label>
+                  <input
+                    type="radio"
+                    name="header-row"
+                    value="header"
+                    checked
+                    required
+                  />
+                  <span>
+                    <strong>Column headers</strong>
+                    <small>Use the first row as field names.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="header-row" value="data" />
+                  <span>
+                    <strong>Data row</strong>
+                    <small>Create generic field names.</small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>
+              <strong>Nothing is uploaded.</strong> The report is generated locally
+              and disappears when you leave or refresh this page.
+            </p>
+            <button class="button button-primary" type="submit">
+              Review data health
+            </button>
+          </div>
+        </form>
+
+        <noscript>
+          <p class="noscript-note">
+            This local tool needs JavaScript to review the CSV. No data is sent
+            to Cadence Lab.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <section
+      id="data-health-results"
+      class="feedback-results data-health-results"
+      aria-labelledby="results-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow">Your data-health snapshot</p>
+            <h2 id="results-title" tabindex="-1">
+              <span data-output="analysis-name">CRM sample</span>
+            </h2>
+          </div>
+          <div class="results-actions" aria-label="Data-health report actions">
+            <button
+              id="copy-report"
+              class="button button-secondary"
+              type="button"
+            >
+              Copy
+            </button>
+            <button
+              id="download-report"
+              class="button button-secondary"
+              type="button"
+            >
+              Download
+            </button>
+            <button
+              id="print-report"
+              class="button button-secondary"
+              type="button"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+
+        <p
+          id="report-status"
+          class="feedback-status report-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <article class="summary-sheet report-sheet">
+          <header class="sample-summary">
+            <p class="summary-label report-label">Sample snapshot</p>
+            <h3>What the sampler reviewed</h3>
+            <dl>
+              <div><dt>Rows</dt><dd data-output="row-count"></dd></div>
+              <div><dt>Columns</dt><dd data-output="column-count"></dd></div>
+              <div><dt>Findings</dt><dd data-output="finding-count"></dd></div>
+              <div>
+                <dt>Duplicate rows</dt><dd data-output="duplicate-count"></dd>
+              </div>
+            </dl>
+          </header>
+
+          <section aria-labelledby="findings-title">
+            <p class="summary-label report-label">Priority findings</p>
+            <h3 id="findings-title">
+              Signals to inspect before relying on the data
+            </h3>
+            <div id="finding-list" class="theme-list finding-list"></div>
+          </section>
+
+          <section aria-labelledby="profiles-title">
+            <p class="summary-label report-label">Column profiles</p>
+            <h3 id="profiles-title">What is observable in each field</h3>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Column names, filled and missing values, distinct values,
+                  likely formats, and review notes
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Field</th>
+                    <th scope="col">Filled</th>
+                    <th scope="col">Missing</th>
+                    <th scope="col">Distinct</th>
+                    <th scope="col">Likely format</th>
+                    <th scope="col">Review note</th>
+                  </tr>
+                </thead>
+                <tbody id="profile-table-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="duplicates-title">
+            <p class="summary-label report-label">Duplicate evidence</p>
+            <h3 id="duplicates-title">Exact repeated rows</h3>
+            <ul id="duplicate-list"></ul>
+          </section>
+
+          <section aria-labelledby="questions-title">
+            <p class="summary-label report-label">Workflow review</p>
+            <h3 id="questions-title">
+              Questions the sample cannot answer alone
+            </h3>
+            <ul id="review-questions"></ul>
+          </section>
+
+          <footer class="report-limit">
+            <p class="summary-label report-label">Method and limits</p>
+            <p>
+              This report profiles only the rows provided. Format detection is
+              heuristic. Exact duplicates are not the same as duplicate
+              customers, and different records may still describe the same
+              person or organization. The sampler does not validate field
+              definitions, consent, lineage, relationships, business rules, or
+              fitness for migration, automation, reporting, or AI.
+            </p>
+          </footer>
+        </article>
+
+        <div class="results-reset">
+          <button id="start-over" class="button button-text" type="button">
+            Clear the sample and start over
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it inspects</p>
+          <h2 id="method-title">Four visible data risks.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span><p>
+              <strong>Completeness</strong> Which fields are often blank?
+            </p>
+          </li>
+          <li>
+            <span>02</span><p>
+              <strong>Duplication</strong> Which rows repeat exactly?
+            </p>
+          </li>
+          <li>
+            <span>03</span><p>
+              <strong>Consistency</strong> Which fields mix formats or casing?
+            </p>
+          </li>
+          <li>
+            <span>04</span><p>
+              <strong>Workflow fit</strong> Which fields need ownership or business-rule
+              review?
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/crm-data-health-sampler";
+</script>
