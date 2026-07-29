@@ -1,147 +1,104 @@
 /* ==========================================================================
-   cadencelab.co — Type System
-   Graphik (UI, headings) + Tiempos Text (blog body) + Tiempos Headline (accents)
+   cadencelab.co typography system
+   Graphik for interface text, Tiempos Text for prose, and Tiempos Headline
+   for editorial display type. Font files are registered in Layout.astro.
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. Local Font Declarations
-   -------------------------------------------------------------------------- */
-
-/* --- Graphik Font Family --- */
-@font-face {
-  font-family: "Graphik";
-  src: url("../assets/fonts/graphik-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Graphik";
-  src: url("../assets/fonts/graphik-medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Graphik";
-  src: url("../assets/fonts/graphik-semibold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- Tiempos Headline --- */
-@font-face {
-  font-family: "Tiempos Headline";
-  src: url("../assets/fonts/tiempos-headline-light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Headline";
-  src: url("../assets/fonts/tiempos-headline-light-italic.woff2")
-    format("woff2");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- Tiempos Text --- */
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("../assets/fonts/tiempos-text-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("../assets/fonts/tiempos-text-regular-italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("../assets/fonts/tiempos-text-medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Tiempos Text";
-  src: url("../assets/fonts/tiempos-text-medium-italic.woff2") format("woff2");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --------------------------------------------------------------------------
-   2. Typography Tokens & Fluid Scale
-   -------------------------------------------------------------------------- */
-
 :root {
-  /* Font Families */
-  --ff-sans:
-    "Graphik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
-  --ff-serif: "Tiempos Text", Georgia, Cambria, "Times New Roman", Times, serif;
-  --ff-serif-display:
-    "Tiempos Headline", Georgia, Cambria, "Times New Roman", Times, serif;
+  /* Font families */
+  --ff-sans: var(
+    --font-graphik,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif
+  );
+  --ff-serif: var(
+    --font-tiempos-text,
+    Georgia,
+    Cambria,
+    "Times New Roman",
+    Times,
+    serif
+  );
+  --ff-serif-display: var(
+    --font-tiempos-headline,
+    Georgia,
+    Cambria,
+    "Times New Roman",
+    Times,
+    serif
+  );
 
-  /* Font Weights */
+  /* Font weights */
   --fw-light: 300;
+  --fw-display-light: var(--fw-light);
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
 
-  /* OpenType Features */
+  /* OpenType features */
   --fea-graphik: "kern" 1, "liga" 1;
+  --fea-eyebrow: "kern" 1, "liga" 1, "case" 1;
+  --fea-tabular: "kern" 1, "liga" 1, "tnum" 1;
 
-  /* Line Heights */
+  /* Line heights */
   --lh-display: 1.05;
   --lh-h1: 1.1;
+  --lh-heading: var(--lh-h1);
   --lh-h2: 1.15;
   --lh-h3: 1.25;
   --lh-h4: 1.35;
   --lh-body: 1.6;
   --lh-ui: 1.4;
+  --lh-small: 1.4;
+  --lh-post-title: 1.12;
+  --lh-post-body: 1.65;
+  --lh-tight: 1.35;
 
-  /* Measures (Max Widths for Text Readability) */
+  /* Letter spacing */
+  --ls-display: -0.015em;
+  --ls-heading: var(--ls-display);
+  --ls-h2: -0.01em;
+  --ls-h3: -0.005em;
+  --ls-eyebrow: 0.08em;
+
+  /* Measures */
   --measure-heading: 32ch;
   --measure-prose: 68ch;
+  --measure-ui: 60ch;
 
-  /* Font Sizes (Fluid Clamp Scale) */
+  /* Interface scale */
   --fs-eyebrow: 0.8125rem;
   --fs-small: 0.875rem;
   --fs-cta: 0.9375rem;
   --fs-body: 1rem;
+  --fs-body-ui: clamp(1rem, 0.97rem + 0.11vw, 1.0625rem);
   --fs-h4: clamp(1.125rem, 1.5vw, 1.25rem);
   --fs-h3: clamp(1.35rem, 2vw, 1.65rem);
   --fs-h2: clamp(1.75rem, 3vw, 2.25rem);
   --fs-h1: clamp(2.25rem, 4vw, 3.25rem);
   --fs-display: clamp(2.75rem, 6vw, 4.5rem);
-}
 
-/* --------------------------------------------------------------------------
-   3. Editorial & Headline Utilities
-   -------------------------------------------------------------------------- */
+  /* Editorial scale */
+  --fs-post-title: clamp(2rem, 1.69rem + 1.33vw, 2.75rem);
+  --fs-post-h2: clamp(1.375rem, 1.27rem + 0.44vw, 1.625rem);
+  --fs-post-h3: clamp(1.1875rem, 1.16rem + 0.11vw, 1.25rem);
+  --fs-post-body: clamp(1.125rem, 1.1rem + 0.11vw, 1.1875rem);
+  --fs-pullquote: clamp(1.5rem, 1.4rem + 0.44vw, 1.75rem);
+}
 
 .eyebrow {
   margin: 0;
   color: var(--color-text-muted, #6c6f6f);
   font-family: var(--ff-sans);
   font-size: var(--fs-eyebrow);
+  font-feature-settings: var(--fea-eyebrow);
   font-weight: var(--fw-medium);
-  line-height: var(--lh-ui);
-  letter-spacing: 0.05em;
+  line-height: var(--lh-small);
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
 }
 
@@ -150,7 +107,17 @@
   color: var(--color-ink, #000504);
   font-family: var(--ff-serif-display);
   font-size: var(--fs-display);
-  font-weight: var(--fw-light);
+  font-weight: var(--fw-display-light);
   line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
   text-wrap: balance;
+}
+
+@media (max-width: 47.9375rem) {
+  :root {
+    --ls-display: -0.005em;
+    --ls-heading: var(--ls-display);
+    --ls-h2: -0.005em;
+    --ls-h3: 0;
+  }
 }
