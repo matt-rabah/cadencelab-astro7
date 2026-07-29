@@ -245,7 +245,7 @@ h5,
 h6 {
   text-align: left;
   text-wrap: balance;
-  color: var(--color-ink);
+  color: inherit;
   font-family: var(--ff-sans);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-heading);
@@ -283,7 +283,7 @@ figcaption {
 }
 
 p {
-  color: var(--color-text);
+  color: inherit;
 }
 
 small {
@@ -295,7 +295,7 @@ small {
 strong,
 b {
   font-weight: var(--fw-semibold);
-  color: var(--color-ink);
+  color: inherit;
 }
 
 ::selection {
@@ -671,10 +671,13 @@ select:focus-visible {
   h3,
   h4,
   h5,
-  h6,
-  p {
+  h6 {
     text-align: left;
     text-wrap: balance;
+  }
+  p {
+    text-align: left;
+    text-wrap: pretty;
   }
 }
 
