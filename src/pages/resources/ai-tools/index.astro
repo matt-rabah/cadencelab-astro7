@@ -7,14 +7,6 @@ import Layout from "../../../layouts/Layout.astro";
 
 const futureTools = [
   {
-    number: "02",
-    area: "Customer journeys",
-    title: "CX Handoff Mapper",
-    description:
-      "Map the steps, owners, systems, and evidence behind a customer journey. The tool would flag missing owners, duplicate work, weak handoffs, and places where customers are likely to get stuck.",
-    output: "A shareable handoff map with risks and questions to resolve.",
-  },
-  {
     number: "03",
     area: "AI quality",
     title: "AI Evaluation Builder",
@@ -87,8 +79,8 @@ const buildStandards = [
 ---
 
 <Layout
-  title="Free CX and AI Tool Roadmap | Cadence Lab"
-  description="Use the free AI Use Case Stress Test and review the Cadence Lab roadmap for practical CX and AI tools with no signup or email gate."
+  title="Free CX and AI Tools | Cadence Lab"
+  description="Use the free AI Use Case Stress Test and CX Handoff Mapper, then review the Cadence Lab roadmap for practical CX and AI tools with no signup or email gate."
   canonicalURL="/resources/ai-tools/"
   pageType="website"
 >
@@ -118,11 +110,8 @@ const buildStandards = [
           </p>
 
           <div class="hero-actions" aria-label="Free tools actions">
-            <a
-              class="button button-primary"
-              href="/resources/ai-tools/use-case-stress-test/"
-            >
-              Use the first tool
+            <a class="button button-primary" href="#live-tools">
+              Explore live tools
             </a>
             <a class="button button-text" href="#tool-roadmap">
               View the roadmap
@@ -161,7 +150,7 @@ const buildStandards = [
 
     <SectionNav
       items={[
-        { label: "First tool concept", href: "#first-build" },
+        { label: "Live tools", href: "#live-tools" },
         { label: "Tool roadmap", href: "#tool-roadmap" },
         { label: "Build standard", href: "#build-standard" },
         { label: "Privacy", href: "#privacy" },
@@ -170,13 +159,13 @@ const buildStandards = [
     />
 
     <section
-      id="first-build"
+      id="live-tools"
       class="first-build section-block"
       aria-labelledby="first-build-title"
     >
       <div class="page-container first-layout">
         <div class="first-intro">
-          <p class="eyebrow">First free tool</p>
+          <p class="eyebrow">Live tool</p>
           <p class="build-number">01</p>
           <h2 id="first-build-title">AI Use Case Stress Test</h2>
           <p>
@@ -222,6 +211,54 @@ const buildStandards = [
           </a>
         </div>
       </div>
+
+      <div class="page-container first-layout live-tool-secondary">
+        <div class="first-intro">
+          <p class="eyebrow">Live tool</p>
+          <p class="build-number">02</p>
+          <h2>CX Handoff Mapper</h2>
+          <p>
+            Follow a customer journey across people, teams, channels, and
+            systems. The mapper tests whether every step has an owner, usable
+            evidence, a clear commitment, and a handoff the next person can
+            trust.
+          </p>
+        </div>
+
+        <div class="first-detail">
+          <div>
+            <p class="detail-label">You provide</p>
+            <p>
+              The journey outcome and its ordered steps, actors, owners,
+              systems, inputs, outputs, and moments of customer uncertainty.
+            </p>
+          </div>
+          <div>
+            <p class="detail-label">You get</p>
+            <p>
+              A portable handoff map with structural risks, boundary rules, and
+              questions to resolve with customers and the people doing the work.
+            </p>
+          </div>
+          <div>
+            <p class="detail-label">Why it matters</p>
+            <p>
+              Teams can complete every internal task and still leave the
+              customer stuck between them. The map makes those seams visible.
+            </p>
+          </div>
+          <p class="status-line">
+            <span>Status</span>
+            Available now. Free, private, and no signup required.
+          </p>
+          <a
+            class="button button-primary"
+            href="/resources/ai-tools/cx-handoff-mapper/"
+          >
+            Map a customer journey
+          </a>
+        </div>
+      </div>
     </section>
 
     <section
@@ -232,7 +269,7 @@ const buildStandards = [
       <div class="page-container section-stack">
         <div class="section-intro section-intro-inverse">
           <p class="eyebrow eyebrow-inverse">Tool roadmap</p>
-          <h2 id="tool-roadmap-title">Five more problems worth solving.</h2>
+          <h2 id="tool-roadmap-title">Four more problems worth solving.</h2>
           <p>
             These are working directions, not product promises. The order may
             change as real users show which problem is most useful to solve
@@ -597,6 +634,12 @@ const buildStandards = [
   .privacy-layout,
   .beyond-layout {
     align-items: start;
+  }
+
+  .live-tool-secondary {
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding-top: clamp(4rem, 8vw, 7rem);
+    border-top: var(--border-width) solid var(--color-border);
   }
 
   .first-intro,

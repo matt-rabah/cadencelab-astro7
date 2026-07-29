@@ -1,0 +1,652 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/cx-handoff-mapper.css";
+
+const initialSteps = [1, 2, 3];
+---
+
+<Layout
+  title="Free CX Handoff Mapper | Cadence Lab"
+  description="Map a customer journey across people, teams, and systems. Find missing owners, weak handoffs, duplicate work, and places where customers may get stuck."
+  canonicalURL="/resources/ai-tools/cx-handoff-mapper/"
+  pageType="website"
+>
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "CX Handoff Mapper" },
+    ]}
+  />
+
+  <main id="main-content" class="handoff-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li aria-current="page">CX Handoff Mapper</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free journey tool</p>
+          <h1 id="tool-title">
+            Find the gap between “we handled it” and “it worked.”
+          </h1>
+          <p class="hero-lead">
+            Map the people, systems, inputs, and commitments behind a customer
+            journey. The mapper shows where ownership disappears, evidence
+            breaks, work repeats, or the customer is left waiting.
+          </p>
+          <a class="button button-primary" href="#handoff-form">
+            Map a journey
+          </a>
+        </div>
+
+        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p>
+            Your answers stay in this browser. Cadence Lab does not receive,
+            store, or analyze them.
+          </p>
+          <dl>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free</dd>
+            </div>
+            <div>
+              <dt>Signup</dt>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Processing</dt>
+              <dd>On your device</dd>
+            </div>
+            <div>
+              <dt>Output</dt>
+              <dd>Copy, download, or print</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            A journey is only as strong as its handoffs.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            Add the important steps in order. For each one, name who acts, who
+            owns the result, what evidence arrives, and what the next person can
+            rely on.
+          </p>
+          <p>
+            The output is a discussion aid. It cannot prove what customers
+            experience or replace journey research, service data, accessibility
+            review, or conversations with the people doing the work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Build the map</p>
+          <h2 id="workspace-title">Follow the work across the seams.</h2>
+          <p>
+            Start with the moments that change responsibility, channel, or
+            system. Use role names instead of personal names, and do not enter
+            customer, employee, confidential, or regulated information.
+          </p>
+        </div>
+
+        <form
+          id="handoff-form"
+          class="handoff-form"
+          method="post"
+          action="/resources/ai-tools/cx-handoff-mapper/"
+        >
+          <fieldset class="journey-context">
+            <legend>
+              <span>01</span>
+              Define the journey
+            </legend>
+
+            <div class="field">
+              <label for="journey-name">
+                Journey or workflow name <span aria-hidden="true">*</span>
+              </label>
+              <p id="journey-name-hint" class="field-hint">
+                Use a specific moment, such as “Resolve a billing error,” not
+                “Customer service.”
+              </p>
+              <input
+                id="journey-name"
+                name="journey-name"
+                type="text"
+                maxlength="120"
+                aria-describedby="journey-name-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="journey-outcome">
+                What should the customer be able to do or know at the end?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="journey-outcome-hint" class="field-hint">
+                Describe the customer outcome, not an internal completion
+                status.
+              </p>
+              <textarea
+                id="journey-outcome"
+                name="journey-outcome"
+                rows="3"
+                maxlength="500"
+                aria-describedby="journey-outcome-hint"
+                required></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="journey-builder">
+            <legend>
+              <span>02</span>
+              Map the steps
+            </legend>
+            <p id="steps-help" class="builder-help">
+              Add at least two steps. Use Move up and Move down to keep the
+              order accurate for keyboard and screen-reader users.
+            </p>
+
+            <ol
+              id="journey-steps"
+              class="journey-steps"
+              aria-describedby="steps-help"
+            >
+              {
+                initialSteps.map((step) => (
+                  <li class="journey-step" data-step>
+                    <fieldset>
+                      <legend data-step-legend={`Step ${step}`}>
+                        Step {step}
+                      </legend>
+                      <div class="step-toolbar">
+                        <p class="step-position">Journey step {step}</p>
+                        <div
+                          class="step-actions"
+                          aria-label={`Reorder or remove step ${step}`}
+                        >
+                          <button
+                            class="step-action"
+                            type="button"
+                            data-move="up"
+                          >
+                            Move up
+                          </button>
+                          <button
+                            class="step-action"
+                            type="button"
+                            data-move="down"
+                          >
+                            Move down
+                          </button>
+                          <button
+                            class="step-action step-remove"
+                            type="button"
+                            data-remove
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="step-grid">
+                        <div class="field field-wide">
+                          <label
+                            data-field-label="name"
+                            for={`step-${step}-name`}
+                          >
+                            What happens? <span aria-hidden="true">*</span>
+                          </label>
+                          <p id={`step-${step}-name-hint`} class="field-hint">
+                            Use one observable action or decision.
+                          </p>
+                          <input
+                            id={`step-${step}-name`}
+                            name={`step-${step}-name`}
+                            type="text"
+                            maxlength="180"
+                            aria-describedby={`step-${step}-name-hint`}
+                            required
+                            data-field="name"
+                          />
+                        </div>
+
+                        <div class="field">
+                          <label
+                            data-field-label="actor"
+                            for={`step-${step}-actor`}
+                          >
+                            Who acts? <span aria-hidden="true">*</span>
+                          </label>
+                          <input
+                            id={`step-${step}-actor`}
+                            name={`step-${step}-actor`}
+                            type="text"
+                            maxlength="120"
+                            required
+                            data-field="actor"
+                          />
+                        </div>
+
+                        <div class="field">
+                          <label
+                            data-field-label="owner"
+                            for={`step-${step}-owner`}
+                          >
+                            Who owns the result?{" "}
+                            <span class="optional">Optional</span>
+                          </label>
+                          <input
+                            id={`step-${step}-owner`}
+                            name={`step-${step}-owner`}
+                            type="text"
+                            maxlength="120"
+                            data-field="owner"
+                          />
+                        </div>
+
+                        <div class="field">
+                          <label
+                            data-field-label="system"
+                            for={`step-${step}-system`}
+                          >
+                            Channel or system{" "}
+                            <span class="optional">Optional</span>
+                          </label>
+                          <input
+                            id={`step-${step}-system`}
+                            name={`step-${step}-system`}
+                            type="text"
+                            maxlength="120"
+                            data-field="system"
+                          />
+                        </div>
+
+                        <div class="field">
+                          <label
+                            data-field-label="input"
+                            for={`step-${step}-input`}
+                          >
+                            What arrives or proves the work?{" "}
+                            <span class="optional">Optional</span>
+                          </label>
+                          <textarea
+                            id={`step-${step}-input`}
+                            name={`step-${step}-input`}
+                            rows="3"
+                            maxlength="400"
+                            data-field="input"
+                          />
+                        </div>
+
+                        <div class="field">
+                          <label
+                            data-field-label="output"
+                            for={`step-${step}-output`}
+                          >
+                            What can the next person rely on?{" "}
+                            <span class="optional">Optional</span>
+                          </label>
+                          <textarea
+                            id={`step-${step}-output`}
+                            name={`step-${step}-output`}
+                            rows="3"
+                            maxlength="400"
+                            data-field="output"
+                          />
+                        </div>
+
+                        <fieldset
+                          class="choice-group field-wide"
+                          data-field="uncertainty"
+                        >
+                          <legend>
+                            Is the customer waiting or unsure what happens next?
+                            <span aria-hidden="true">*</span>
+                          </legend>
+                          <div class="choice-list">
+                            <label>
+                              <input
+                                type="radio"
+                                name={`step-${step}-uncertainty`}
+                                value="no"
+                                required
+                              />
+                              <span>No</span>
+                            </label>
+                            <label>
+                              <input
+                                type="radio"
+                                name={`step-${step}-uncertainty`}
+                                value="unsure"
+                              />
+                              <span>Not sure</span>
+                            </label>
+                            <label>
+                              <input
+                                type="radio"
+                                name={`step-${step}-uncertainty`}
+                                value="yes"
+                              />
+                              <span>Yes</span>
+                            </label>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </fieldset>
+                  </li>
+                ))
+              }
+            </ol>
+
+            <button id="add-step" class="button button-secondary" type="button">
+              Add another step
+            </button>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>
+              <strong>Nothing is submitted.</strong> Your map is generated locally
+              and disappears when you leave or refresh this page.
+            </p>
+            <button class="button button-primary" type="submit">
+              Build my handoff map
+            </button>
+          </div>
+        </form>
+
+        <p
+          id="builder-status"
+          class="visually-hidden"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <noscript>
+          <p class="noscript-note">
+            This local tool needs JavaScript to add steps and generate the map.
+            No answers are sent to Cadence Lab.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <section
+      id="handoff-results"
+      class="handoff-results"
+      aria-labelledby="results-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow">Your handoff map</p>
+            <h2 id="results-title" tabindex="-1">
+              <span data-output="journey-name">Customer journey</span>
+            </h2>
+          </div>
+          <div class="results-actions" aria-label="Handoff map actions">
+            <button id="copy-map" class="button button-secondary" type="button">
+              Copy
+            </button>
+            <button
+              id="download-map"
+              class="button button-secondary"
+              type="button"
+            >
+              Download
+            </button>
+            <button
+              id="print-map"
+              class="button button-secondary"
+              type="button"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+
+        <p id="map-status" class="map-status" role="status" aria-live="polite">
+        </p>
+
+        <article class="map-sheet">
+          <header class="map-summary">
+            <p class="map-label">Customer outcome</p>
+            <h3>What the journey should deliver</h3>
+            <p data-output="journey-outcome"></p>
+            <dl class="summary-metrics">
+              <div>
+                <dt>Steps mapped</dt>
+                <dd data-output="step-count"></dd>
+              </div>
+              <div>
+                <dt>Handoff risks</dt>
+                <dd data-output="risk-count"></dd>
+              </div>
+              <div>
+                <dt>Questions to resolve</dt>
+                <dd data-output="question-count"></dd>
+              </div>
+            </dl>
+          </header>
+
+          <section aria-labelledby="map-sequence-title">
+            <p class="map-label">Journey sequence</p>
+            <h3 id="map-sequence-title">Who does what, with which evidence</h3>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Ordered journey steps, owners, systems, inputs, and outputs
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Step</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Actor / owner</th>
+                    <th scope="col">System</th>
+                    <th scope="col">Input</th>
+                    <th scope="col">Output</th>
+                  </tr>
+                </thead>
+                <tbody id="map-table-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="risks-title">
+            <p class="map-label">Handoff risks</p>
+            <h3 id="risks-title">Where the journey can break</h3>
+            <ul data-output-list="risks"></ul>
+          </section>
+
+          <section aria-labelledby="rules-title">
+            <p class="map-label">Boundary rules</p>
+            <h3 id="rules-title">What each handoff needs to make explicit</h3>
+            <ol data-output-list="rules"></ol>
+          </section>
+
+          <section aria-labelledby="questions-title">
+            <p class="map-label">Open questions</p>
+            <h3 id="questions-title">What the team should resolve next</h3>
+            <ul data-output-list="questions"></ul>
+          </section>
+
+          <footer class="map-limit">
+            <p class="map-label">Limits</p>
+            <p>
+              This map reflects only the information entered. A blank field is
+              treated as an unresolved dependency, not proof of a failure.
+              Validate the map with customers, frontline teams, operational
+              data, accessibility evidence, and system owners.
+            </p>
+          </footer>
+        </article>
+
+        <div class="results-reset">
+          <button id="start-over" class="button button-text" type="button">
+            Clear the map and start over
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it considers</p>
+          <h2 id="method-title">Five signals behind the map.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span>
+            <p>
+              <strong>Ownership</strong> Is a role accountable for the result?
+            </p>
+          </li>
+          <li>
+            <span>02</span>
+            <p>
+              <strong>Evidence</strong> Does each step receive enough to act?
+            </p>
+          </li>
+          <li>
+            <span>03</span>
+            <p>
+              <strong>Commitment</strong> Is there a usable output for what follows?
+            </p>
+          </li>
+          <li>
+            <span>04</span>
+            <p>
+              <strong>Continuity</strong> Does the handoff connect across owners and
+              systems?
+            </p>
+          </li>
+          <li>
+            <span>05</span>
+            <p>
+              <strong>Customer clarity</strong> Is the customer waiting or unsure?
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <template id="journey-step-template">
+    <li class="journey-step" data-step>
+      <fieldset>
+        <legend data-step-legend>Step</legend>
+        <div class="step-toolbar">
+          <p class="step-position">Journey step</p>
+          <div class="step-actions">
+            <button class="step-action" type="button" data-move="up"
+              >Move up</button
+            >
+            <button class="step-action" type="button" data-move="down"
+              >Move down</button
+            >
+            <button class="step-action step-remove" type="button" data-remove
+              >Remove</button
+            >
+          </div>
+        </div>
+        <div class="step-grid">
+          <div class="field field-wide">
+            <label data-field-label="name"
+              >What happens? <span aria-hidden="true">*</span></label
+            >
+            <p class="field-hint" data-field-hint="name">
+              Use one observable action or decision.
+            </p>
+            <input type="text" maxlength="180" required data-field="name" />
+          </div>
+          <div class="field">
+            <label data-field-label="actor"
+              >Who acts? <span aria-hidden="true">*</span></label
+            >
+            <input type="text" maxlength="120" required data-field="actor" />
+          </div>
+          <div class="field">
+            <label data-field-label="owner"
+              >Who owns the result? <span class="optional">Optional</span
+              ></label
+            >
+            <input type="text" maxlength="120" data-field="owner" />
+          </div>
+          <div class="field">
+            <label data-field-label="system"
+              >Channel or system <span class="optional">Optional</span></label
+            >
+            <input type="text" maxlength="120" data-field="system" />
+          </div>
+          <div class="field">
+            <label data-field-label="input"
+              >What arrives or proves the work? <span class="optional"
+                >Optional</span
+              ></label
+            >
+            <textarea rows="3" maxlength="400" data-field="input"></textarea>
+          </div>
+          <div class="field">
+            <label data-field-label="output"
+              >What can the next person rely on? <span class="optional"
+                >Optional</span
+              ></label
+            >
+            <textarea rows="3" maxlength="400" data-field="output"></textarea>
+          </div>
+          <fieldset class="choice-group field-wide" data-field="uncertainty">
+            <legend
+              >Is the customer waiting or unsure what happens next? <span
+                aria-hidden="true">*</span
+              ></legend
+            >
+            <div class="choice-list">
+              <label
+                ><input type="radio" value="no" required /><span>No</span
+                ></label
+              >
+              <label
+                ><input type="radio" value="unsure" /><span>Not sure</span
+                ></label
+              >
+              <label><input type="radio" value="yes" /><span>Yes</span></label>
+            </div>
+          </fieldset>
+        </div>
+      </fieldset>
+    </li>
+  </template>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/cx-handoff-mapper";
+</script>
