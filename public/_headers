@@ -18,13 +18,6 @@
   Content-Type: application/json
   Access-Control-Allow-Origin: *
 
-/.well-known/oauth-authorization-server
-  Content-Type: application/json
-  Access-Control-Allow-Origin: *
-
-/.well-known/oauth-protected-resource
-  Content-Type: application/json
-  Access-Control-Allow-Origin: *
 # ── Agent skills discovery index ──
 /.well-known/agent-skills/index.json
   Content-Type: application/json
