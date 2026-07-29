@@ -16,10 +16,9 @@ interface Props {
   pageType?: "website" | "article";
 }
 
-const defaultTitle =
-  "Cadence Lab | Customer experience systems and AI adoption";
+const defaultTitle = "Customer Experience Systems for the AI Era | Cadence Lab";
 const defaultDescription =
-  "Cadence Lab helps organizations diagnose customer experience friction, improve workflow adoption, integrate AI responsibly, and build measurable operating systems.";
+  "Cadence Lab helps organizations find and fix onboarding drift, quiet accounts, unreliable CRM workflows, service handoffs, and AI readiness problems.";
 
 const {
   title = defaultTitle,
@@ -80,9 +79,7 @@ const canonicalHref = canonical.toString();
           preference ?? (systemPreference.matches ? "dark" : "light");
 
         root.dataset.theme = resolvedTheme;
-        root.dataset.themePreference = preference ? "pinned" : "system";
         root.classList.toggle("dark", resolvedTheme === "dark");
-        root.classList.toggle("light", resolvedTheme === "light");
 
         if (colorSchemeMeta) {
           colorSchemeMeta.setAttribute("content", preference ?? "light dark");
@@ -171,9 +168,7 @@ const canonicalHref = canonical.toString();
           document.querySelector<HTMLMetaElement>("[data-theme-color]");
 
         root.dataset.theme = resolvedTheme;
-        root.dataset.themePreference = pinnedPreference ? "pinned" : "system";
         root.classList.toggle("dark", resolvedTheme === "dark");
-        root.classList.toggle("light", resolvedTheme === "light");
 
         colorSchemeMeta?.setAttribute(
           "content",

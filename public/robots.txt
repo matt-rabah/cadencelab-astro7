@@ -2,16 +2,19 @@
 Content-Signal: ai-train=no, search=yes, ai-input=no
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 # Explicitly allow major AI crawlers
 User-agent: GPTBot
 Allow: /
+Disallow: /admin/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /admin/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://cadencelab.co/sitemap-index.xml
-Llms-Txt: https://cadencelab.co/llms.txt

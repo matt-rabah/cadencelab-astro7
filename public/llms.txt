@@ -36,7 +36,7 @@ Cadence Lab is an independent customer experience and operating systems practice
 ## Resources and policies
 
 - [Insights](https://cadencelab.co/blog/): Read analysis about customer experience systems, workflows, CRM, service operations, and applied AI.
-- [AI tools resource list](https://cadencelab.co/resources/ai-tools/): Review a curated directory of AI tools and implementation resources.
+- [AI tool roadmap](https://cadencelab.co/resources/ai-tools/): Review the free CX and AI tools Cadence Lab plans to build, including the first tool concept and product standards.
 - [About Cadence Lab](https://cadencelab.co/about/): Learn about the practice and its operating perspective.
 - [System governance](https://cadencelab.co/governance/): Review the site's governance principles.
 - [Privacy policy](https://cadencelab.co/privacy/): Review how the site handles personal information.

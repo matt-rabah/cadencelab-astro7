@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 interface LogoItem {
   name: string;
   src?: string;
+  width?: number;
+  height?: number;
 }
 
 interface Props {
@@ -18,12 +20,42 @@ interface Props {
 const {
   heading = "Enterprise systems and platforms",
   logos = [
-    { name: "Salesforce", src: "/brand/platforms/salesforce.svg" },
-    { name: "HubSpot", src: "/brand/platforms/hubspot.svg" },
-    { name: "Zendesk", src: "/brand/platforms/zendesk.svg" },
-    { name: "Gainsight", src: "/brand/platforms/gainsight.svg" },
-    { name: "Qualtrics", src: "/brand/platforms/qualtrics.svg" },
-    { name: "ServiceNow", src: "/brand/platforms/servicenow.svg" },
+    {
+      name: "Salesforce",
+      src: "/brand/platforms/salesforce.svg",
+      width: 273,
+      height: 191,
+    },
+    {
+      name: "HubSpot",
+      src: "/brand/platforms/hubspot.svg",
+      width: 585,
+      height: 166,
+    },
+    {
+      name: "Zendesk",
+      src: "/brand/platforms/zendesk.svg",
+      width: 84,
+      height: 16,
+    },
+    {
+      name: "Gainsight",
+      src: "/brand/platforms/gainsight.svg",
+      width: 558,
+      height: 121,
+    },
+    {
+      name: "Qualtrics",
+      src: "/brand/platforms/qualtrics.svg",
+      width: 835,
+      height: 363,
+    },
+    {
+      name: "ServiceNow",
+      src: "/brand/platforms/servicenow.svg",
+      width: 685,
+      height: 100,
+    },
   ],
   className = "",
 } = Astro.props;
@@ -75,6 +107,8 @@ const availableLogos = logos.map((item) => ({
                     }}
                     src={item.src}
                     alt={isDuplicate ? "" : item.name}
+                    width={item.width}
+                    height={item.height}
                     loading="lazy"
                     decoding="async"
                   />

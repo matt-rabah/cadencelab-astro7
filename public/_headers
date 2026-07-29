@@ -40,3 +40,7 @@
 /auth.md
   Content-Type: text/markdown; charset=utf-8
   Access-Control-Allow-Origin: *
+
+# ── Keep the CMS application out of search results ──
+/admin/*
+  X-Robots-Tag: noindex, nofollow

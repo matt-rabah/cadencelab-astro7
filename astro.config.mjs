@@ -7,6 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 const excludedSitemapPages = new Set([
   "https://cadencelab.co/404/",
+  "https://cadencelab.co/search/",
   "https://cadencelab.co/thanks/",
 ]);
 
