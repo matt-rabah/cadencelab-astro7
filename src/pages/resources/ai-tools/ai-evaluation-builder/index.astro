@@ -1,0 +1,588 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/ai-evaluation-builder.css";
+
+const failureModes = [
+  {
+    value: "incorrect",
+    title: "Incorrect",
+    description:
+      "The answer contains wrong facts, calculations, or conclusions.",
+  },
+  {
+    value: "incomplete",
+    title: "Incomplete",
+    description: "The answer misses required information, steps, or cases.",
+  },
+  {
+    value: "unsupported",
+    title: "Unsupported",
+    description: "The answer sounds credible but cannot be traced to evidence.",
+  },
+  {
+    value: "unsafe",
+    title: "Unsafe or inappropriate",
+    description:
+      "The answer should refuse, warn, or route the request instead.",
+  },
+  {
+    value: "privacy",
+    title: "Privacy failure",
+    description:
+      "The answer exposes, infers, or retains information it should not.",
+  },
+  {
+    value: "tone",
+    title: "Unclear or off-brand",
+    description:
+      "The answer is hard to use, misleading, or inappropriate in tone.",
+  },
+  {
+    value: "action",
+    title: "Wrong action or routing",
+    description:
+      "The answer sends work, people, or decisions to the wrong place.",
+  },
+];
+---
+
+<Layout
+  title="Free AI Evaluation Builder | Cadence Lab"
+  description="Turn an AI task, desired result, and important failure modes into a practical evaluation rubric, test cases, reviewer rules, and stop conditions."
+  canonicalURL="/resources/ai-tools/ai-evaluation-builder/"
+  pageType="website"
+>
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "AI Evaluation Builder" },
+    ]}
+  />
+
+  <main id="main-content" class="evaluation-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li aria-current="page">AI Evaluation Builder</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free evaluation tool</p>
+          <h1 id="tool-title">
+            Decide what “good” means before you test the AI.
+          </h1>
+          <p class="hero-lead">
+            Turn a task, desired result, and important failure modes into a
+            practical rubric, test set, review rules, and stop conditions your
+            team can challenge.
+          </p>
+          <a class="button button-primary" href="#evaluation-form">
+            Build an evaluation plan
+          </a>
+        </div>
+
+        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p>
+            Your answers stay in this browser. Cadence Lab does not receive,
+            store, or analyze them.
+          </p>
+          <dl>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free</dd>
+            </div>
+            <div>
+              <dt>Signup</dt>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Processing</dt>
+              <dd>On your device</dd>
+            </div>
+            <div>
+              <dt>Output</dt>
+              <dd>Copy, download, or print</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            A demo shows possibility. An evaluation shows evidence.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            Describe the real task, the result people need, and which errors
+            matter. The builder turns that context into observable review
+            criteria and cases that challenge more than the happy path.
+          </p>
+          <p>
+            It does not run a model, judge outputs, approve a system, or replace
+            security, privacy, legal, accessibility, or domain review.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Build the plan</p>
+          <h2 id="workspace-title">
+            Start with the work and its consequences.
+          </h2>
+          <p>
+            Describe categories and roles, not real customer, employee,
+            confidential, regulated, or proprietary information.
+          </p>
+        </div>
+
+        <form
+          id="evaluation-form"
+          class="evaluation-form"
+          method="post"
+          action="/resources/ai-tools/ai-evaluation-builder/"
+        >
+          <fieldset>
+            <legend>
+              <span>01</span>
+              Define the task
+            </legend>
+
+            <div class="field">
+              <label for="evaluation-name">
+                Evaluation name <span aria-hidden="true">*</span>
+              </label>
+              <p id="evaluation-name-hint" class="field-hint">
+                Use a task-based name, such as “Support reply quality.”
+              </p>
+              <input
+                id="evaluation-name"
+                name="evaluation-name"
+                type="text"
+                maxlength="120"
+                aria-describedby="evaluation-name-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="primary-user">
+                Who uses the output? <span aria-hidden="true">*</span>
+              </label>
+              <p id="primary-user-hint" class="field-hint">
+                Name a role or audience, not a person.
+              </p>
+              <input
+                id="primary-user"
+                name="primary-user"
+                type="text"
+                maxlength="160"
+                aria-describedby="primary-user-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="task">
+                What task should the AI perform? <span aria-hidden="true"
+                  >*</span
+                >
+              </label>
+              <p id="task-hint" class="field-hint">
+                Include the starting information and the action expected.
+              </p>
+              <textarea
+                id="task"
+                name="task"
+                rows="4"
+                maxlength="800"
+                aria-describedby="task-hint"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="desired-result">
+                What should a useful result contain or enable?
+                <span aria-hidden="true">*</span>
+              </label>
+              <p id="desired-result-hint" class="field-hint">
+                Describe observable qualities and decisions, not “high quality.”
+              </p>
+              <textarea
+                id="desired-result"
+                name="desired-result"
+                rows="4"
+                maxlength="800"
+                aria-describedby="desired-result-hint"
+                required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="reference-source">
+                What evidence or reference can reviewers use?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="reference-source-hint" class="field-hint">
+                Examples: approved policy, product record, calculation,
+                transcript, or subject-matter review.
+              </p>
+              <textarea
+                id="reference-source"
+                name="reference-source"
+                rows="3"
+                maxlength="600"
+                aria-describedby="reference-source-hint"></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              <span>02</span>
+              Name the failures
+            </legend>
+
+            <fieldset class="choice-group">
+              <legend>Which failures matter for this task?</legend>
+              <p id="failure-modes-hint" class="field-hint">
+                Select every category the evaluation should challenge. If none
+                are selected, the plan will include general quality checks.
+              </p>
+              <div class="failure-grid" aria-describedby="failure-modes-hint">
+                {
+                  failureModes.map((mode) => (
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="failure-mode"
+                        value={mode.value}
+                      />
+                      <span>
+                        <strong>{mode.title}</strong>
+                        <small>{mode.description}</small>
+                      </span>
+                    </label>
+                  ))
+                }
+              </div>
+            </fieldset>
+
+            <fieldset class="choice-group">
+              <legend>
+                What happens if an output is wrong?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <div class="choice-list">
+                <label>
+                  <input type="radio" name="consequence" value="low" required />
+                  <span>
+                    <strong>Low consequence</strong>
+                    <small>An error is easy to notice and correct.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="consequence" value="moderate" />
+                  <span>
+                    <strong>Moderate consequence</strong>
+                    <small>An error creates rework, delay, or confusion.</small>
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="consequence" value="high" />
+                  <span>
+                    <strong>High consequence</strong>
+                    <small>
+                      An error could materially affect a person, commitment,
+                      right, or business outcome.
+                    </small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="known-edge-cases">
+                Which edge cases are already known?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="known-edge-cases-hint" class="field-hint">
+                Put one case per line. Use synthetic or anonymized descriptions.
+              </p>
+              <textarea
+                id="known-edge-cases"
+                name="known-edge-cases"
+                rows="5"
+                maxlength="1200"
+                aria-describedby="known-edge-cases-hint"></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              <span>03</span>
+              Define review
+            </legend>
+
+            <div class="field">
+              <label for="reviewer">
+                Who is qualified to review the output?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="reviewer-hint" class="field-hint">
+                Name a role with the knowledge and authority to challenge it.
+              </p>
+              <input
+                id="reviewer"
+                name="reviewer"
+                type="text"
+                maxlength="180"
+                aria-describedby="reviewer-hint"
+              />
+            </div>
+
+            <div class="field">
+              <label for="review-frequency">
+                How often should outputs be reviewed?
+                <span aria-hidden="true">*</span>
+              </label>
+              <select id="review-frequency" name="review-frequency" required>
+                <option value="">Choose a review pattern</option>
+                <option value="every">Every output before use</option>
+                <option value="sample">A defined sample of outputs</option>
+                <option value="exceptions"
+                  >Exceptions and flagged outputs</option
+                >
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="success-evidence">
+                What evidence would justify continued use?
+                <span class="optional">Optional</span>
+              </label>
+              <p id="success-evidence-hint" class="field-hint">
+                Include output quality, error patterns, human effort, and the
+                effect on people or operations.
+              </p>
+              <textarea
+                id="success-evidence"
+                name="success-evidence"
+                rows="4"
+                maxlength="800"
+                aria-describedby="success-evidence-hint"></textarea>
+            </div>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>
+              <strong>Nothing is submitted.</strong> Your plan is generated locally
+              and disappears when you leave or refresh this page.
+            </p>
+            <button class="button button-primary" type="submit">
+              Build my evaluation plan
+            </button>
+          </div>
+        </form>
+
+        <noscript>
+          <p class="noscript-note">
+            This local tool needs JavaScript to generate the plan. No answers
+            are sent to Cadence Lab.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <section
+      id="evaluation-results"
+      class="evaluation-results"
+      aria-labelledby="results-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow">Your evaluation plan</p>
+            <h2 id="results-title" tabindex="-1">
+              <span data-output="evaluation-name">AI task evaluation</span>
+            </h2>
+          </div>
+          <div class="results-actions" aria-label="Evaluation plan actions">
+            <button
+              id="copy-plan"
+              class="button button-secondary"
+              type="button"
+            >
+              Copy
+            </button>
+            <button
+              id="download-plan"
+              class="button button-secondary"
+              type="button"
+            >
+              Download
+            </button>
+            <button
+              id="print-plan"
+              class="button button-secondary"
+              type="button"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+
+        <p
+          id="plan-status"
+          class="plan-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <article class="plan-sheet">
+          <header class="plan-summary">
+            <p class="plan-label">Evaluation target</p>
+            <h3>The work being tested</h3>
+            <dl class="summary-list">
+              <div>
+                <dt>Primary user</dt>
+                <dd data-output="primary-user"></dd>
+              </div>
+              <div>
+                <dt>AI task</dt>
+                <dd data-output="task"></dd>
+              </div>
+              <div>
+                <dt>Useful result</dt>
+                <dd data-output="desired-result"></dd>
+              </div>
+              <div>
+                <dt>Review evidence</dt>
+                <dd data-output="reference-source"></dd>
+              </div>
+            </dl>
+          </header>
+
+          <section aria-labelledby="rubric-title">
+            <p class="plan-label">Evaluation rubric</p>
+            <h3 id="rubric-title">
+              Observable pass, review, and fail conditions
+            </h3>
+            <div class="table-wrap">
+              <table>
+                <caption>
+                  Evaluation criteria with priority and pass, review, and fail
+                  conditions
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Criterion</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Pass</th>
+                    <th scope="col">Review</th>
+                    <th scope="col">Fail</th>
+                  </tr>
+                </thead>
+                <tbody id="rubric-table-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section aria-labelledby="test-cases-title">
+            <p class="plan-label">Test set</p>
+            <h3 id="test-cases-title">Cases the evaluation should include</h3>
+            <ol data-output-list="test-cases"></ol>
+          </section>
+
+          <section aria-labelledby="review-rules-title">
+            <p class="plan-label">Review rules</p>
+            <h3 id="review-rules-title">How judgments should be made</h3>
+            <ul data-output-list="review-rules"></ul>
+          </section>
+
+          <section aria-labelledby="stop-conditions-title">
+            <p class="plan-label">Stop conditions</p>
+            <h3 id="stop-conditions-title">Pause or stop use when</h3>
+            <ul data-output-list="stop-conditions"></ul>
+          </section>
+
+          <footer class="plan-limit">
+            <p class="plan-label">Limits</p>
+            <p>
+              This plan reflects only the information entered. It does not
+              select a representative dataset, run outputs, establish legal or
+              statistical validity, or replace review by customers, affected
+              people, accessibility specialists, and domain experts.
+            </p>
+          </footer>
+        </article>
+
+        <div class="results-reset">
+          <button id="start-over" class="button button-text" type="button">
+            Clear answers and start over
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it considers</p>
+          <h2 id="method-title">Five parts of a useful evaluation.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span><p>
+              <strong>Task</strong> What real work must the output support?
+            </p>
+          </li>
+          <li>
+            <span>02</span><p>
+              <strong>Evidence</strong> What can a reviewer verify?
+            </p>
+          </li>
+          <li>
+            <span>03</span><p>
+              <strong>Failure</strong> Which errors matter and to whom?
+            </p>
+          </li>
+          <li>
+            <span>04</span><p>
+              <strong>Coverage</strong> Which ordinary and difficult cases must be
+              tested?
+            </p>
+          </li>
+          <li>
+            <span>05</span><p>
+              <strong>Decision</strong> What permits continued use or requires a stop?
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/ai-evaluation-builder";
+</script>

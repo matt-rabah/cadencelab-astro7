@@ -1,0 +1,659 @@
+.evaluation-page {
+  background: var(--color-surface-pure);
+  color: var(--color-ink);
+}
+
+.evaluation-page .page-container {
+  width: min(calc(100% - (2 * var(--page-gutter))), 82rem);
+  margin-inline: auto;
+}
+
+.evaluation-page .tool-hero,
+.evaluation-page .tool-intro,
+.evaluation-page .workspace,
+.evaluation-page .evaluation-results,
+.evaluation-page .method {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.evaluation-page .tool-hero {
+  padding-top: clamp(8rem, 14vw, 12rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.evaluation-page .hero-layout,
+.evaluation-page .intro-layout,
+.evaluation-page .method-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: start;
+}
+
+.evaluation-page .breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 3rem;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+  font-family: var(--ff-sans);
+  font-size: 0.8125rem;
+}
+
+.evaluation-page .breadcrumb li:not(:last-child)::after {
+  margin-inline-start: 0.5rem;
+  content: "/";
+}
+
+.evaluation-page .breadcrumb a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.evaluation-page .eyebrow,
+.evaluation-page .note-label,
+.evaluation-page .plan-label {
+  margin: 0;
+  color: var(--color-blue);
+  font-family: var(--ff-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.evaluation-page .hero-copy h1 {
+  max-width: 13ch;
+  margin: 1rem 0 1.5rem;
+  font-family: var(--ff-serif-display);
+  font-size: clamp(3rem, 7vw, 6.75rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+}
+
+.evaluation-page .hero-lead {
+  max-width: 61ch;
+  margin: 0 0 2rem;
+  color: var(--color-text-muted);
+  font-family: var(--ff-serif-body);
+  font-size: clamp(1.125rem, 2vw, 1.4rem);
+  line-height: 1.55;
+}
+
+.evaluation-page .privacy-card {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 0.25rem solid var(--color-green);
+  background: var(--color-ink);
+  color: var(--color-text-inverse);
+}
+
+.evaluation-page .privacy-card .note-label {
+  color: var(--color-green);
+}
+
+.evaluation-page .privacy-card > p:not(.note-label) {
+  margin: 1rem 0 2rem;
+  font-family: var(--ff-serif-body);
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.evaluation-page .privacy-card dl {
+  margin: 0;
+}
+
+.evaluation-page .privacy-card dl > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-light) 28%, transparent);
+}
+
+.evaluation-page .privacy-card dt,
+.evaluation-page .privacy-card dd {
+  margin: 0;
+  font-family: var(--ff-sans);
+  font-size: 0.875rem;
+}
+
+.evaluation-page .privacy-card dd {
+  text-align: end;
+}
+
+.evaluation-page .tool-intro {
+  background: var(--color-surface-subtle);
+}
+
+.evaluation-page .tool-intro h2,
+.evaluation-page .workspace-heading h2,
+.evaluation-page .method h2 {
+  max-width: 18ch;
+  margin: 0.75rem 0 0;
+  font-family: var(--ff-serif-display);
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.evaluation-page .intro-copy {
+  max-width: 62ch;
+  font-family: var(--ff-serif-body);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.evaluation-page .intro-copy p {
+  margin: 0;
+}
+
+.evaluation-page .intro-copy p + p {
+  margin-top: 1rem;
+}
+
+.evaluation-page .workspace-heading {
+  max-width: 62rem;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.evaluation-page .workspace-heading > p:last-child {
+  max-width: 66ch;
+  margin: 1.5rem 0 0;
+  color: var(--color-text-muted);
+  font-family: var(--ff-serif-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.evaluation-page .evaluation-form {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 68rem;
+}
+
+.evaluation-page .evaluation-form > fieldset {
+  display: grid;
+  gap: 2rem;
+  margin: 0;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-pure);
+}
+
+.evaluation-page .evaluation-form > fieldset > legend {
+  padding-inline: 0.75rem;
+  color: var(--color-ink);
+  font-family: var(--ff-serif-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.evaluation-page .evaluation-form > fieldset > legend span {
+  margin-inline-end: 0.65rem;
+  color: var(--color-blue);
+  font-family: var(--ff-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  vertical-align: middle;
+}
+
+.evaluation-page .field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.evaluation-page .field label,
+.evaluation-page .choice-group > legend {
+  color: var(--color-ink);
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.evaluation-page .field-hint {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--ff-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.evaluation-page .optional {
+  margin-inline-start: 0.35rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.evaluation-page input,
+.evaluation-page textarea,
+.evaluation-page select {
+  width: 100%;
+  min-height: 3rem;
+  box-sizing: border-box;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  background: var(--color-surface-pure);
+  color: var(--color-ink);
+  font: 1rem/1.5 var(--ff-sans);
+}
+
+.evaluation-page textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
+.evaluation-page select {
+  max-width: 32rem;
+}
+
+.evaluation-page :where(input, textarea, select):user-invalid {
+  border-color: var(--color-red);
+}
+
+.evaluation-page :where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+.evaluation-page .choice-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.evaluation-page .choice-group > .field-hint {
+  margin-top: 0.5rem;
+}
+
+.evaluation-page .choice-list,
+.evaluation-page .failure-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.evaluation-page .choice-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.evaluation-page .failure-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.evaluation-page .choice-list label,
+.evaluation-page .failure-grid label {
+  display: flex;
+  min-height: 3rem;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.9rem;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-pure);
+  color: var(--color-ink);
+  font-family: var(--ff-sans);
+  cursor: pointer;
+}
+
+.evaluation-page .choice-list label:has(input:checked),
+.evaluation-page .failure-grid label:has(input:checked) {
+  border-color: var(--color-blue);
+  box-shadow: inset 0 -0.2rem 0 var(--color-blue);
+}
+
+.evaluation-page .choice-list input,
+.evaluation-page .failure-grid input {
+  width: 1.2rem;
+  min-height: 1.2rem;
+  flex: 0 0 auto;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  accent-color: var(--color-blue);
+}
+
+.evaluation-page .choice-list strong,
+.evaluation-page .choice-list small,
+.evaluation-page .failure-grid strong,
+.evaluation-page .failure-grid small {
+  display: block;
+}
+
+.evaluation-page .choice-list small,
+.evaluation-page .failure-grid small {
+  margin-top: 0.3rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.evaluation-page .form-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--color-ink);
+  color: var(--color-text-inverse);
+}
+
+.evaluation-page .form-footer p {
+  max-width: 56ch;
+  margin: 0;
+  font-family: var(--ff-sans);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.evaluation-page .noscript-note {
+  max-width: 68rem;
+  margin: 1.5rem 0 0;
+  padding: 1rem;
+  border-inline-start: 0.25rem solid var(--color-red);
+  background: var(--color-surface-subtle);
+  font-family: var(--ff-sans);
+}
+
+.evaluation-page .evaluation-results {
+  scroll-margin-top: 2rem;
+  background: var(--color-ink);
+  color: var(--color-text-inverse);
+}
+
+.evaluation-page .evaluation-results[hidden] {
+  display: none;
+}
+
+.evaluation-page .results-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.evaluation-page .results-header .eyebrow {
+  color: var(--color-green);
+}
+
+.evaluation-page .results-header h2 {
+  margin: 0.65rem 0 0;
+  color: var(--color-text-inverse);
+  font-family: var(--ff-serif-display);
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.evaluation-page .results-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.evaluation-page .evaluation-results .button-secondary {
+  border-color: color-mix(in srgb, var(--color-light) 55%, transparent);
+  background: transparent;
+  color: var(--color-text-inverse);
+}
+
+.evaluation-page .plan-status {
+  min-height: 1.5rem;
+  margin: 0 0 1rem;
+  color: var(--color-green);
+  font-family: var(--ff-sans);
+  font-size: 0.875rem;
+}
+
+.evaluation-page .plan-sheet {
+  background: var(--color-surface-pure);
+  color: var(--color-ink);
+}
+
+.evaluation-page .plan-sheet > header,
+.evaluation-page .plan-sheet > section,
+.evaluation-page .plan-sheet > footer {
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.evaluation-page .plan-sheet > *:last-child {
+  border-bottom: 0;
+}
+
+.evaluation-page .plan-sheet h3 {
+  margin: 0.6rem 0 1.25rem;
+  font-family: var(--ff-serif-display);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.evaluation-page .summary-list {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.evaluation-page .summary-list > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.evaluation-page .summary-list dt,
+.evaluation-page .summary-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--ff-sans);
+  line-height: 1.55;
+}
+
+.evaluation-page .summary-list dt {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.evaluation-page .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+}
+
+.evaluation-page table {
+  width: 100%;
+  min-width: 68rem;
+  border-collapse: collapse;
+  font-family: var(--ff-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.evaluation-page caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.evaluation-page th,
+.evaluation-page td {
+  padding: 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  overflow-wrap: anywhere;
+  text-align: start;
+  vertical-align: top;
+}
+
+.evaluation-page thead th {
+  background: var(--color-surface-subtle);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.evaluation-page tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.evaluation-page tbody th {
+  color: var(--color-blue);
+}
+
+.evaluation-page .plan-sheet ul,
+.evaluation-page .plan-sheet ol {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 80ch;
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  font-family: var(--ff-sans);
+  line-height: 1.6;
+}
+
+.evaluation-page .plan-limit > p:last-child {
+  max-width: 76ch;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--ff-serif-body);
+  font-size: 1.075rem;
+  line-height: 1.65;
+}
+
+.evaluation-page .results-reset {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.evaluation-page .evaluation-results .button-text {
+  color: var(--color-text-inverse);
+}
+
+.evaluation-page .method {
+  background: var(--color-surface-subtle);
+}
+
+.evaluation-page .method ol {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evaluation-page .method li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--ff-sans);
+}
+
+.evaluation-page .method li span {
+  color: var(--color-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.evaluation-page .method li p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 52rem) {
+  .evaluation-page .hero-layout,
+  .evaluation-page .intro-layout,
+  .evaluation-page .method-layout,
+  .evaluation-page .choice-list,
+  .evaluation-page .failure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-page .form-footer,
+  .evaluation-page .results-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .evaluation-page .summary-list > div {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 34rem) {
+  .evaluation-page .results-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-page .results-actions .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evaluation-page {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .evaluation-page .tool-hero,
+  .evaluation-page .tool-intro,
+  .evaluation-page .workspace,
+  .evaluation-page .method,
+  .evaluation-page .results-actions,
+  .evaluation-page .results-reset,
+  body > header,
+  body > footer {
+    display: none !important;
+  }
+
+  .evaluation-page .evaluation-results {
+    padding: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  .evaluation-page .results-header h2 {
+    color: #000;
+  }
+
+  .evaluation-page .plan-status {
+    display: none;
+  }
+
+  .evaluation-page .plan-sheet {
+    color: #000;
+  }
+
+  .evaluation-page .plan-sheet > header,
+  .evaluation-page .plan-sheet > section,
+  .evaluation-page .plan-sheet > footer {
+    break-inside: avoid;
+  }
+
+  .evaluation-page .table-wrap {
+    overflow: visible;
+  }
+
+  .evaluation-page table {
+    min-width: 0;
+    font-size: 7.5pt;
+  }
+}
