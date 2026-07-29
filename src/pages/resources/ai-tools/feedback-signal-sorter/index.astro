@@ -1,0 +1,377 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/feedback-signal-sorter.css";
+---
+
+<Layout
+  title="Free Customer Feedback Signal Sorter | Cadence Lab"
+  description="Sort anonymized customer comments into recurring themes, mixed signals, and one-off observations with supporting evidence and no signup."
+  canonicalURL="/resources/ai-tools/feedback-signal-sorter/"
+  pageType="website"
+>
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "Feedback Signal Sorter" },
+    ]}
+  />
+
+  <main id="main-content" class="feedback-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li aria-current="page">Feedback Signal Sorter</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free voice-of-customer tool</p>
+          <h1 id="tool-title">Find the signal without flattening the story.</h1>
+          <p class="hero-lead">
+            Paste a small set of anonymized customer comments. The sorter groups
+            recurring themes, shows the evidence behind each one, and keeps
+            mixed or isolated observations visible.
+          </p>
+          <a class="button button-primary" href="#feedback-form">
+            Sort customer feedback
+          </a>
+        </div>
+
+        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p>
+            Your comments stay in this browser. Cadence Lab does not receive,
+            store, or analyze them.
+          </p>
+          <dl>
+            <div><dt>Cost</dt><dd>Free</dd></div>
+            <div><dt>Signup</dt><dd>None</dd></div>
+            <div><dt>Processing</dt><dd>On your device</dd></div>
+            <div><dt>Output</dt><dd>Copy, download, or print</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            Patterns are clues. Comments are evidence.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            The sorter uses a visible set of customer-experience terms to group
+            comments. It counts mentions and shows the original comments so you
+            can challenge every result.
+          </p>
+          <p>
+            It is a rule-based aid, not semantic AI, sentiment research, or a
+            representative customer study. It can organize a sample; it cannot
+            tell you how common an issue is in the wider population.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Sort the sample</p>
+          <h2 id="workspace-title">Use comments you are allowed to analyze.</h2>
+          <p>
+            Remove names, email addresses, account identifiers, health or
+            payment details, and confidential or regulated information before
+            pasting. Put one customer comment on each line.
+          </p>
+        </div>
+
+        <form
+          id="feedback-form"
+          class="feedback-form"
+          method="post"
+          action="/resources/ai-tools/feedback-signal-sorter/"
+        >
+          <fieldset>
+            <legend><span>01</span>Describe the sample</legend>
+
+            <div class="field">
+              <label for="analysis-name">
+                Analysis name <span aria-hidden="true">*</span>
+              </label>
+              <p id="analysis-name-hint" class="field-hint">
+                Use a neutral label, such as “Post-purchase survey sample.”
+              </p>
+              <input
+                id="analysis-name"
+                name="analysis-name"
+                type="text"
+                maxlength="120"
+                aria-describedby="analysis-name-hint"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="feedback-comments">
+                Anonymized customer comments <span aria-hidden="true">*</span>
+              </label>
+              <p id="feedback-comments-hint" class="field-hint">
+                Enter 4–100 comments, one per line. Blank lines are ignored.
+              </p>
+              <textarea
+                id="feedback-comments"
+                name="feedback-comments"
+                rows="12"
+                maxlength="20000"
+                aria-describedby="feedback-comments-hint feedback-privacy-hint"
+                required></textarea>
+              <p id="feedback-privacy-hint" class="privacy-hint">
+                Do not include personal, confidential, regulated, or proprietary
+                information.
+              </p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>02</span>Set the sorting rules</legend>
+
+            <fieldset class="choice-group">
+              <legend>
+                How many mentions make a recurring theme?
+                <span aria-hidden="true">*</span>
+              </legend>
+              <p id="threshold-hint" class="field-hint">
+                A higher threshold reduces noise but may hide early signals.
+              </p>
+              <div class="choice-list" aria-describedby="threshold-hint">
+                <label>
+                  <input
+                    type="radio"
+                    name="minimum-mentions"
+                    value="2"
+                    checked
+                    required
+                  />
+                  <span
+                    ><strong>2 mentions</strong><small>More sensitive</small
+                    ></span
+                  >
+                </label>
+                <label>
+                  <input type="radio" name="minimum-mentions" value="3" />
+                  <span><strong>3 mentions</strong><small>Balanced</small></span
+                  >
+                </label>
+                <label>
+                  <input type="radio" name="minimum-mentions" value="4" />
+                  <span
+                    ><strong>4 mentions</strong><small>More selective</small
+                    ></span
+                  >
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="ignored-terms">
+                Terms to ignore <span class="optional">Optional</span>
+              </label>
+              <p id="ignored-terms-hint" class="field-hint">
+                Separate words with commas. Useful for product names or survey
+                language that appears in nearly every response.
+              </p>
+              <input
+                id="ignored-terms"
+                name="ignored-terms"
+                type="text"
+                maxlength="300"
+                aria-describedby="ignored-terms-hint"
+              />
+            </div>
+          </fieldset>
+
+          <div class="form-footer">
+            <p>
+              <strong>Nothing is submitted.</strong> The analysis is generated locally
+              and disappears when you leave or refresh this page.
+            </p>
+            <button class="button button-primary" type="submit">
+              Sort the feedback
+            </button>
+          </div>
+        </form>
+
+        <noscript>
+          <p class="noscript-note">
+            This local tool needs JavaScript to sort the comments. No answers
+            are sent to Cadence Lab.
+          </p>
+        </noscript>
+      </div>
+    </section>
+
+    <section
+      id="feedback-results"
+      class="feedback-results"
+      aria-labelledby="results-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="results-header">
+          <div>
+            <p class="eyebrow">Your feedback summary</p>
+            <h2 id="results-title" tabindex="-1">
+              <span data-output="analysis-name">Feedback sample</span>
+            </h2>
+          </div>
+          <div class="results-actions" aria-label="Feedback summary actions">
+            <button
+              id="copy-summary"
+              class="button button-secondary"
+              type="button"
+            >
+              Copy
+            </button>
+            <button
+              id="download-summary"
+              class="button button-secondary"
+              type="button"
+            >
+              Download
+            </button>
+            <button
+              id="print-summary"
+              class="button button-secondary"
+              type="button"
+            >
+              Print
+            </button>
+          </div>
+        </div>
+
+        <p
+          id="feedback-status"
+          class="feedback-status"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <article class="summary-sheet">
+          <header class="sample-summary">
+            <p class="summary-label">Sample snapshot</p>
+            <h3>What the sorter found</h3>
+            <dl>
+              <div>
+                <dt>Comments reviewed</dt><dd data-output="comment-count"></dd>
+              </div>
+              <div>
+                <dt>Recurring themes</dt><dd data-output="theme-count"></dd>
+              </div>
+              <div>
+                <dt>Mixed themes</dt><dd data-output="mixed-count"></dd>
+              </div>
+              <div>
+                <dt>Unmatched comments</dt><dd data-output="unmatched-count">
+                </dd>
+              </div>
+            </dl>
+          </header>
+
+          <section aria-labelledby="recurring-title">
+            <p class="summary-label">Recurring themes</p>
+            <h3 id="recurring-title">Patterns that met your threshold</h3>
+            <div id="recurring-themes" class="theme-list"></div>
+          </section>
+
+          <section aria-labelledby="terms-title">
+            <p class="summary-label">Repeated language</p>
+            <h3 id="terms-title">Common terms in this sample</h3>
+            <ul id="repeated-terms" class="term-list"></ul>
+          </section>
+
+          <section aria-labelledby="other-signals-title">
+            <p class="summary-label">Signals kept visible</p>
+            <h3 id="other-signals-title">One-off and unmatched comments</h3>
+            <ul id="other-signals"></ul>
+          </section>
+
+          <section aria-labelledby="questions-title">
+            <p class="summary-label">Next research</p>
+            <h3 id="questions-title">
+              Questions worth taking back to customers
+            </h3>
+            <ul id="research-questions"></ul>
+          </section>
+
+          <footer class="summary-limit">
+            <p class="summary-label">Method and limits</p>
+            <p>
+              This sorter uses fixed keyword groups and simple positive and
+              negative cues. A comment may appear in more than one theme.
+              Unmatched does not mean unimportant. Results do not establish
+              prevalence, causation, statistical significance, or customer
+              priority, and the method may miss context, irony, and domain
+              language.
+            </p>
+          </footer>
+        </article>
+
+        <div class="results-reset">
+          <button id="start-over" class="button button-text" type="button">
+            Clear comments and start over
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it preserves</p>
+          <h2 id="method-title">The pattern and the exception.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span><p>
+              <strong>Frequency</strong> How often did a theme appear?
+            </p>
+          </li>
+          <li>
+            <span>02</span><p>
+              <strong>Evidence</strong> Which comments support the grouping?
+            </p>
+          </li>
+          <li>
+            <span>03</span><p>
+              <strong>Direction</strong> Were the signals positive, negative, mixed,
+              or unclear?
+            </p>
+          </li>
+          <li>
+            <span>04</span><p>
+              <strong>Exceptions</strong> Which comments did not fit a recurring theme?
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/feedback-signal-sorter";
+</script>
