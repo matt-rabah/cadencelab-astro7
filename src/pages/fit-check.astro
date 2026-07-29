@@ -32,7 +32,7 @@ const pageDescription =
 >
   <NavHeader />
 
-  <main id="main-content" class="fit-check-page">
+  <main id="main-content" class="fit-check-page" tabindex="-1">
     <div class="fit-check-container">
       <div class="fit-check-introduction">
         <header class="fit-check-header">
@@ -687,6 +687,28 @@ const pageDescription =
           requestAnimationFrame(() => focusStepHeading(currentStep));
       };
 
+      const isFormControl = (
+        target: EventTarget | null,
+      ): target is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =>
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLSelectElement ||
+        target instanceof HTMLTextAreaElement;
+
+      const markInvalid = (
+        control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+      ) => {
+        control.classList.add("is-invalid");
+        control.setAttribute("aria-invalid", "true");
+      };
+
+      const clearInvalid = (
+        control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+      ) => {
+        if (!control.checkValidity()) return;
+        control.classList.remove("is-invalid");
+        control.removeAttribute("aria-invalid");
+      };
+
       const validateStep = (step: HTMLElement) => {
         const controls = Array.from(
           step.querySelectorAll<
@@ -703,6 +725,22 @@ const pageDescription =
         firstInvalid.focus();
         return false;
       };
+
+      form.addEventListener(
+        "invalid",
+        (event) => {
+          if (isFormControl(event.target)) markInvalid(event.target);
+        },
+        true,
+      );
+
+      form.addEventListener("input", (event) => {
+        if (isFormControl(event.target)) clearInvalid(event.target);
+      });
+
+      form.addEventListener("change", (event) => {
+        if (isFormControl(event.target)) clearInvalid(event.target);
+      });
 
       form.addEventListener("click", (event) => {
         const target = event.target as HTMLElement;
@@ -1161,7 +1199,10 @@ const pageDescription =
 
   input:user-invalid,
   select:user-invalid,
-  textarea:user-invalid {
+  textarea:user-invalid,
+  input.is-invalid,
+  select.is-invalid,
+  textarea.is-invalid {
     border-color: var(--color-error);
     background: color-mix(
       in oklab,
@@ -1172,7 +1213,10 @@ const pageDescription =
 
   input:user-invalid ~ .field-error,
   select:user-invalid ~ .field-error,
-  textarea:user-invalid ~ .field-error {
+  textarea:user-invalid ~ .field-error,
+  input.is-invalid ~ .field-error,
+  select.is-invalid ~ .field-error,
+  textarea.is-invalid ~ .field-error {
     display: block;
   }
 

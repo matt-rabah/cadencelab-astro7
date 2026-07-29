@@ -15,8 +15,8 @@ const {
   title,
   description,
   canonicalURL = "https://cadencelab.co/",
-  image,
-  imageAlt = "Cadence Lab",
+  image = "/brand/cadencelab-social-card.png",
+  imageAlt = "Cadence Lab. CX without the BS.",
   noindex = false,
   pageType = "website",
   siteName = "Cadence Lab",
@@ -116,4 +116,8 @@ const schemaData = {
 }
 
 <!-- Structured JSON-LD Data -->
-<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(schemaData)}
+/>
