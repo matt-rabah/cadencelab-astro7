@@ -17,6 +17,7 @@ interface FitCheckSubmission {
   organization: string;
   role: string;
   additionalContext: string;
+  sendCopy: boolean;
 }
 
 interface ValidationResult {
@@ -202,6 +203,7 @@ function validateSubmission(formData: FormData): ValidationResult {
     errors,
     { required: false, max: 1_000 },
   );
+  const sendCopy = formData.get("send-copy") === "yes";
 
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errors.push("Work email must be a valid email address.");
@@ -225,6 +227,7 @@ function validateSubmission(formData: FormData): ValidationResult {
       organization,
       role,
       additionalContext,
+      sendCopy,
     },
   };
 }
@@ -240,6 +243,7 @@ function formatSubmission(submission: FitCheckSubmission): string {
     `Work email: ${submission.email}`,
     `Organization: ${submission.organization}`,
     `Role: ${submission.role || "Not provided"}`,
+    `Copy sent to submitter: ${submission.sendCopy ? "Yes" : "No"}`,
     "",
     "CURRENT SITUATION",
     `Primary challenge: ${submission.challenge}`,
@@ -256,6 +260,34 @@ function formatSubmission(submission: FitCheckSubmission): string {
     "",
     "ADDITIONAL CONTEXT",
     submission.additionalContext || "Not provided",
+  ].join("\n");
+}
+
+function formatSubmitterCopy(submission: FitCheckSubmission): string {
+  return [
+    `Hi ${submission.name},`,
+    "",
+    "Here is the copy of your Cadence Lab Fit Check answers you requested.",
+    "",
+    "CURRENT SITUATION",
+    `Primary challenge: ${submission.challenge}`,
+    "",
+    `Useful result: ${submission.impact}`,
+    "",
+    "OPERATING ENVIRONMENT",
+    `Environment: ${submission.environment}`,
+    `CRM data usefulness: ${submission.crm}`,
+    "",
+    "READINESS",
+    `Leadership alignment: ${submission.leadership}`,
+    `Willingness to change: ${submission.changeReadiness}`,
+    "",
+    "ADDITIONAL CONTEXT",
+    submission.additionalContext || "Not provided",
+    "",
+    "Cadence Lab received the same answers. This email is a record of your submission, not an assessment or consulting agreement.",
+    "",
+    "You requested this one-time email while submitting the Fit Check. It does not subscribe you to marketing.",
   ].join("\n");
 }
 
@@ -394,22 +426,39 @@ export const onRequest = async ({
 
   const subjectOrganization = submission.organization.replace(/[\r\n]+/g, " ");
   const subjectName = submission.name.replace(/[\r\n]+/g, " ");
+  const internalEmail = {
+    from: env.FIT_CHECK_FROM_EMAIL,
+    to: [env.FIT_CHECK_TO_EMAIL],
+    reply_to: submission.email,
+    subject: `Fit Check: ${subjectOrganization} | ${subjectName}`,
+    text: formatSubmission(submission),
+  };
+  const resendUrl = submission.sendCopy
+    ? "https://api.resend.com/emails/batch"
+    : "https://api.resend.com/emails";
+  const resendBody = submission.sendCopy
+    ? [
+        internalEmail,
+        {
+          from: env.FIT_CHECK_FROM_EMAIL,
+          to: [submission.email],
+          reply_to: env.FIT_CHECK_TO_EMAIL,
+          subject: "Your Cadence Lab Fit Check answers",
+          text: formatSubmitterCopy(submission),
+        },
+      ]
+    : internalEmail;
   let resendResponse: Response;
 
   try {
-    resendResponse = await fetch("https://api.resend.com/emails", {
+    resendResponse = await fetch(resendUrl, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${env.RESEND_API_KEY}`,
         "Content-Type": "application/json",
+        "Idempotency-Key": crypto.randomUUID(),
       },
-      body: JSON.stringify({
-        from: env.FIT_CHECK_FROM_EMAIL,
-        to: [env.FIT_CHECK_TO_EMAIL],
-        reply_to: submission.email,
-        subject: `Fit Check: ${subjectOrganization} | ${subjectName}`,
-        text: formatSubmission(submission),
-      }),
+      body: JSON.stringify(resendBody),
     });
   } catch (error) {
     console.error("Fit Check email delivery request failed.", error);
