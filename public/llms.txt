@@ -36,7 +36,13 @@ Cadence Lab is an independent customer experience and operating systems practice
 ## Resources and policies
 
 - [Insights](https://cadencelab.co/blog/): Read analysis about customer experience systems, workflows, CRM, service operations, and applied AI.
-- [AI tool roadmap](https://cadencelab.co/resources/ai-tools/): Review the free CX and AI tools Cadence Lab plans to build, including the first tool concept and product standards.
+- [Free CX and AI tools](https://cadencelab.co/resources/ai-tools/): Use six practical, browser-based tools without an account, email address, or data upload.
+- [AI Use Case Stress Test](https://cadencelab.co/resources/ai-tools/use-case-stress-test/): Test an AI use case against evidence, workflow, risk, oversight, and measurement requirements.
+- [CX Handoff Mapper](https://cadencelab.co/resources/ai-tools/cx-handoff-mapper/): Map a customer handoff and identify ownership, context, timing, and recovery gaps.
+- [AI Evaluation Builder](https://cadencelab.co/resources/ai-tools/ai-evaluation-builder/): Turn an AI use case into a practical evaluation plan with criteria, evidence, and review rules.
+- [Customer Feedback Signal Sorter](https://cadencelab.co/resources/ai-tools/feedback-signal-sorter/): Sort feedback into signals, themes, evidence needs, and appropriate next actions.
+- [CRM Data Health Sampler](https://cadencelab.co/resources/ai-tools/crm-data-health-sampler/): Review a sample of CRM records for completeness, consistency, usability, and operational risk.
+- [Service Recovery Planner](https://cadencelab.co/resources/ai-tools/service-recovery-planner/): Build a recovery plan around customer impact, urgency, ownership, response, and follow-through.
 - [About Cadence Lab](https://cadencelab.co/about/): Learn about the practice and its operating perspective.
 - [System governance](https://cadencelab.co/governance/): Review the site's governance principles.
 - [Privacy policy](https://cadencelab.co/privacy/): Review how the site handles personal information.
