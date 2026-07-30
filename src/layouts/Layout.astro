@@ -50,6 +50,12 @@ const canonicalHref = canonical.toString();
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#ffffff" data-theme-color />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/brand/cadencelab-favicon-light.svg"
+      data-theme-favicon
+    />
     <script is:inline>
       (() => {
         const root = document.documentElement;
@@ -57,6 +63,7 @@ const canonicalHref = canonical.toString();
           'meta[name="color-scheme"]',
         );
         const themeColorMeta = document.querySelector("[data-theme-color]");
+        const favicon = document.querySelector("[data-theme-favicon]");
         const systemPreference = window.matchMedia(
           "(prefers-color-scheme: dark)",
         );
@@ -91,18 +98,21 @@ const canonicalHref = canonical.toString();
             resolvedTheme === "dark" ? "#0a0c0d" : "#ffffff",
           );
         }
+
+        if (favicon) {
+          favicon.setAttribute(
+            "href",
+            resolvedTheme === "dark"
+              ? "/brand/cadencelab-favicon-dark.svg"
+              : "/brand/cadencelab-favicon-light.svg",
+          );
+        }
       })();
     </script>
 
     <Font cssVariable="--font-graphik" preload />
     <Font cssVariable="--font-tiempos-text" />
     <Font cssVariable="--font-tiempos-headline" />
-
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/brand/cadencelab-favicon.svg"
-    />
 
     {
       /* Inject SEO component for title, meta tags, OG tags, and JSON-LD schema */
@@ -166,6 +176,8 @@ const canonicalHref = canonical.toString();
         );
         const themeColorMeta =
           document.querySelector<HTMLMetaElement>("[data-theme-color]");
+        const favicon =
+          document.querySelector<HTMLLinkElement>("[data-theme-favicon]");
 
         root.dataset.theme = resolvedTheme;
         root.classList.toggle("dark", resolvedTheme === "dark");
@@ -177,6 +189,12 @@ const canonicalHref = canonical.toString();
         themeColorMeta?.setAttribute(
           "content",
           resolvedTheme === "dark" ? "#0a0c0d" : "#ffffff",
+        );
+        favicon?.setAttribute(
+          "href",
+          resolvedTheme === "dark"
+            ? "/brand/cadencelab-favicon-dark.svg"
+            : "/brand/cadencelab-favicon-light.svg",
         );
 
         document
