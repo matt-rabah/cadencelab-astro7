@@ -1,0 +1,12 @@
+{
+  "resource": "https://cadencelab.co",
+  "authorization_servers": [
+    "https://cadencelab.co"
+  ],
+  "scopes_supported": [
+    "read"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ]
+}
