@@ -41,6 +41,17 @@
   Content-Type: text/markdown; charset=utf-8
   Access-Control-Allow-Origin: *
 
+# ── OAuth and agent registration discovery metadata ──
+/.well-known/oauth-protected-resource
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+
 # ── Keep the CMS application out of search results ──
 /admin/*
   X-Robots-Tag: noindex, nofollow

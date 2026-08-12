@@ -21,11 +21,29 @@ including pages, blog posts, diagnostic service descriptions, and
 machine-readable resources, is publicly accessible without authentication,
 API keys, or registration.
 
-For agents that support the Auth.md protocol, we provide anonymous registration metadata. You can discover our configuration via:
-- OAuth Protected Resource Metadata: [/.well-known/oauth-protected-resource](https://cadencelab.co/.well-known/oauth-protected-resource)
-- OAuth Authorization Server Metadata: [/.well-known/oauth-authorization-server](https://cadencelab.co/.well-known/oauth-authorization-server)
+For agents that support the Auth.md protocol, Cadence Lab publishes discovery
+metadata at:
 
-Our `agent_auth` block specifies `identity_types_supported: ["anonymous"]` and `credential_types_supported: ["none"]`.
+- OAuth Protected Resource Metadata:
+  [/.well-known/oauth-protected-resource](https://cadencelab.co/.well-known/oauth-protected-resource)
+- OAuth Authorization Server Metadata:
+  [/.well-known/oauth-authorization-server](https://cadencelab.co/.well-known/oauth-authorization-server)
+
+The `agent_auth` block describes anonymous access with no credential. The
+`register_uri` points back to these instructions because there is no account
+creation or registration request to submit.
+
+## Supported method
+
+- Identity type: `anonymous`
+- Credential type: `none`
+- Supported scopes: none
+- Registration request: none
+- Claim flow: not applicable
+- Revocation flow: not applicable
+
+Do not send credentials or attempt a registration `POST`. Retrieve public
+resources directly with `GET` requests.
 
 ## Available machine-readable resources
 
