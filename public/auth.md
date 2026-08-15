@@ -47,15 +47,15 @@ resources directly with `GET` requests.
 
 ## Available machine-readable resources
 
-| Resource | URL | Format |
-|----------|-----|--------|
-| LLMs.txt | [/llms.txt](https://cadencelab.co/llms.txt) | text/plain |
-| API Catalog | [/.well-known/api-catalog](https://cadencelab.co/.well-known/api-catalog) | application/linkset+json |
-| A2A Agent Card | [/.well-known/agent-card.json](https://cadencelab.co/.well-known/agent-card.json) | application/json |
-| MCP Server Card | [/.well-known/mcp/server-card.json](https://cadencelab.co/.well-known/mcp/server-card.json) | application/json |
-| Agent Skills | [/.well-known/agent-skills/index.json](https://cadencelab.co/.well-known/agent-skills/index.json) | application/json |
-| Sitemap | [/sitemap-index.xml](https://cadencelab.co/sitemap-index.xml) | application/xml |
-| robots.txt | [/robots.txt](https://cadencelab.co/robots.txt) | text/plain |
+| Resource        | URL                                                                                               | Format                   |
+| --------------- | ------------------------------------------------------------------------------------------------- | ------------------------ |
+| LLMs.txt        | [/llms.txt](https://cadencelab.co/llms.txt)                                                       | text/plain               |
+| API Catalog     | [/.well-known/api-catalog](https://cadencelab.co/.well-known/api-catalog)                         | application/linkset+json |
+| A2A Agent Card  | [/.well-known/agent-card.json](https://cadencelab.co/.well-known/agent-card.json)                 | application/json         |
+| MCP Server Card | [/.well-known/mcp/server-card.json](https://cadencelab.co/.well-known/mcp/server-card.json)       | application/json         |
+| Agent Skills    | [/.well-known/agent-skills/index.json](https://cadencelab.co/.well-known/agent-skills/index.json) | application/json         |
+| Sitemap         | [/sitemap.xml](https://cadencelab.co/sitemap.xml)                                                 | application/xml          |
+| robots.txt      | [/robots.txt](https://cadencelab.co/robots.txt)                                                   | text/plain               |
 
 ## Contact
 
