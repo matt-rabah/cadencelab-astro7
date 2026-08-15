@@ -1,5 +1,7 @@
 type Env = {
   UPSTREAM_ORIGIN?: string;
+  AGENT_MARKDOWN_ORIGIN?: string;
+  AGENT_MARKDOWN_PREFIX?: string;
   DEFAULT_CONTENT_SIGNAL?: string;
 };
 
@@ -152,6 +154,50 @@ async function fetchUpstream(request: Request, env: Env): Promise<Response> {
   );
 }
 
+function toArtifactPath(pathname: string): string {
+  const normalized = pathname === "/" ? "/index.md" : pathname.endsWith("/") ? `${pathname}index.md` : `${pathname}.md`;
+  return normalized.replace(/\/+/g, "/");
+}
+
+async function fetchGeneratedMarkdown(request: Request, env: Env): Promise<Response | null> {
+  const url = new URL(request.url);
+  const origin = env.AGENT_MARKDOWN_ORIGIN ?? env.UPSTREAM_ORIGIN ?? DEFAULT_ORIGIN;
+  const prefix = env.AGENT_MARKDOWN_PREFIX ?? "/.agent-md";
+  const artifactUrl = new URL(`${prefix}${toArtifactPath(url.pathname)}`, origin);
+
+  const headers = new Headers();
+  headers.set("accept", "text/markdown, text/plain;q=0.8, */*;q=0.2");
+  headers.set("user-agent", "cadencelab-agent-markdown");
+
+  const artifactResponse = await fetch(new Request(artifactUrl, {
+    method: "GET",
+    headers,
+    redirect: "follow",
+  }));
+
+  if (!artifactResponse.ok) {
+    return null;
+  }
+
+  const markdown = await artifactResponse.text();
+  if (!markdown.trim()) {
+    return null;
+  }
+
+  const responseHeaders = new Headers(artifactResponse.headers);
+  responseHeaders.set("content-type", "text/markdown; charset=utf-8");
+  responseHeaders.set("vary", "Accept");
+  responseHeaders.set("content-signal", env.DEFAULT_CONTENT_SIGNAL ?? DEFAULT_CONTENT_SIGNAL);
+  responseHeaders.set("x-markdown-tokens", String(getEstimatedTokens(markdown)));
+  responseHeaders.set("x-original-tokens", String(getEstimatedTokens(cleanText(markdown))));
+
+  return new Response(markdown, {
+    status: artifactResponse.status,
+    statusText: artifactResponse.statusText,
+    headers: responseHeaders,
+  });
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     if (!isMarkdownRequested(request)) {
@@ -160,6 +206,11 @@ export default {
 
     if (request.method !== "GET" && request.method !== "HEAD") {
       return fetch(request);
+    }
+
+    const generatedMarkdownResponse = await fetchGeneratedMarkdown(request, env);
+    if (generatedMarkdownResponse) {
+      return generatedMarkdownResponse;
     }
 
     const upstreamResponse = await fetchUpstream(request, env);

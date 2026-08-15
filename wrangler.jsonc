@@ -10,6 +10,8 @@
     }
   ],
   "vars": {
-    "UPSTREAM_ORIGIN": "https://cadencelab.co"
+    "UPSTREAM_ORIGIN": "https://cadencelab.co",
+    "AGENT_MARKDOWN_ORIGIN": "https://cadencelab.co",
+    "AGENT_MARKDOWN_PREFIX": "/.agent-md"
   }
 }

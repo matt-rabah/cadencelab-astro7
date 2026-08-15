@@ -1,6 +1,7 @@
 # build output
 dist/
 .wrangler/
+.agent-md/
 
 # generated Astro files
 .astro/

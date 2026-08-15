@@ -1,19 +1,41 @@
 {
-  "resource": "https://cadencelab.co",
-  "authorization_servers": [
-    "https://cadencelab.co"
-  ],
-  "scopes_supported": [],
-  "bearer_methods_supported": [
-    "header"
-  ],
   "issuer": "https://cadencelab.co",
+  "authorization_endpoint": "https://cadencelab.co/auth.md",
+  "token_endpoint": "https://cadencelab.co/auth.md",
+  "jwks_uri": "https://cadencelab.co/auth.md",
+  "registration_endpoint": "https://cadencelab.co/auth.md",
+  "revocation_endpoint": "https://cadencelab.co/auth.md",
+  "introspection_endpoint": "https://cadencelab.co/auth.md",
+  "response_types_supported": [
+    "code"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
+  "scopes_supported": [
+    "public",
+    "read"
+  ],
+  "claims_supported": [
+    "sub",
+    "name",
+    "email"
+  ],
   "agent_auth": {
     "skill": "https://cadencelab.co/auth.md",
     "register_uri": "https://cadencelab.co/auth.md",
     "identity_types_supported": [
       "anonymous"
     ],
+    "credential_types_supported": [
+      "none"
+    ],
+    "claim_uri": "https://cadencelab.co/auth.md",
+    "revocation_uri": "https://cadencelab.co/auth.md",
     "anonymous": {
       "credential_types_supported": [
         "none"
