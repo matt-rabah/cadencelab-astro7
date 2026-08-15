@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cadencelab-markdown-negotiation",
+  "main": "workers/markdown-negotiation.ts",
+  "compatibility_date": "2026-08-15",
+  "routes": [
+    {
+      "pattern": "cadencelab.co/*",
+      "zone_name": "cadencelab.co"
+    }
+  ],
+  "vars": {
+    "UPSTREAM_ORIGIN": "https://cadencelab.co"
+  }
+}
