@@ -3,7 +3,7 @@
   "issuer": "https://cadencelab.co",
   "resource_documentation": "https://cadencelab.co/auth.md",
   "authorization_servers": [
-    "https://cadencelab.co/.well-known/oauth-authorization-server"
+    "https://cadencelab.co"
   ],
   "scopes_supported": [
     "public",
