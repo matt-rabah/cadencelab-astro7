@@ -15,9 +15,6 @@
     "AGENT_MARKDOWN_PREFIX": "/.agent-md"
   },
   "observability": {
-    "logs": {
-      "enabled": true,
-      "invocation_logs": true
-    }
+    "enabled": false
   }
 }
