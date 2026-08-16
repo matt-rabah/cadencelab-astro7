@@ -20,22 +20,22 @@
   ],
   "agent_auth": {
     "skill": "https://cadencelab.co/auth.md",
-    "register_uri": "https://cadencelab.co/auth.md",
+    "register_uri": "https://cadencelab.co/agent/identity",
     "identity_types_supported": [
       "anonymous"
     ],
     "credential_types_supported": [
       "none"
     ],
-    "claim_uri": "https://cadencelab.co/auth.md",
-    "revocation_uri": "https://cadencelab.co/auth.md",
+    "claim_uri": "https://cadencelab.co/agent/identity/claim",
+    "revocation_uri": "https://cadencelab.co/oauth2/revoke",
     "anonymous": {
-      "register_uri": "https://cadencelab.co/auth.md",
+      "register_uri": "https://cadencelab.co/agent/identity",
       "credential_types_supported": [
         "none"
       ],
-      "claim_uri": "https://cadencelab.co/auth.md",
-      "revocation_uri": "https://cadencelab.co/auth.md"
+      "claim_uri": "https://cadencelab.co/agent/identity/claim",
+      "revocation_uri": "https://cadencelab.co/oauth2/revoke"
     }
   }
 }

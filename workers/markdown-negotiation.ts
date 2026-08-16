@@ -8,6 +8,198 @@ type Env = {
 const DEFAULT_ORIGIN = "https://cadencelab.co";
 const DEFAULT_CONTENT_SIGNAL = "ai-train=no, search=yes, ai-input=no";
 
+type JsonRecord = Record<string, unknown>;
+
+function jsonResponse(status: number, payload: JsonRecord, headers?: HeadersInit): Response {
+  const responseHeaders = new Headers(headers);
+  responseHeaders.set("content-type", "application/json; charset=utf-8");
+  responseHeaders.set("cache-control", "no-store");
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: responseHeaders,
+  });
+}
+
+function getOrigin(env: Env, requestUrl: URL): string {
+  if (env.UPSTREAM_ORIGIN) {
+    return env.UPSTREAM_ORIGIN;
+  }
+
+  return `${requestUrl.protocol}//${requestUrl.host}`;
+}
+
+function parseJsonBody(request: Request): Promise<JsonRecord> {
+  return request.json().catch(() => ({} as JsonRecord));
+}
+
+function getBearerToken(request: Request): string | null {
+  const header = request.headers.get("authorization") ?? "";
+  const match = header.match(/^Bearer\s+(.+)$/i);
+  return match?.[1]?.trim() || null;
+}
+
+function unauthorizedWithDiscovery(origin: string, details?: JsonRecord): Response {
+  const headerValue = [
+    'Bearer realm="cadencelab"',
+    `resource_metadata="${origin}/.well-known/oauth-protected-resource"`,
+    'error="invalid_token"',
+    'error_description="A valid bearer token is required for this endpoint."',
+  ].join(", ");
+
+  return jsonResponse(401, {
+    error: "invalid_token",
+    error_description: "A valid bearer token is required for this endpoint.",
+    ...(details ?? {}),
+  }, {
+    "WWW-Authenticate": headerValue,
+  });
+}
+
+async function handleAgentIdentity(request: Request, origin: string): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse(405, {
+      error: "method_not_allowed",
+      message: "Use POST for agent identity registration.",
+    });
+  }
+
+  const body = await parseJsonBody(request);
+  const identityType = body.identity_type;
+  if (identityType !== "anonymous") {
+    return jsonResponse(400, {
+      error: "unsupported_identity_type",
+      identity_types_supported: ["anonymous"],
+    });
+  }
+
+  const assertion = `cadence-anon-${crypto.randomUUID()}`;
+  return jsonResponse(201, {
+    identity_type: "anonymous",
+    identity_assertion: assertion,
+    claim_required: false,
+    token_endpoint: `${origin}/oauth2/token`,
+    revocation_endpoint: `${origin}/oauth2/revoke`,
+    expires_in: 600,
+  });
+}
+
+async function handleAgentClaim(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse(405, {
+      error: "method_not_allowed",
+      message: "Use POST for claim confirmation.",
+    });
+  }
+
+  const body = await parseJsonBody(request);
+  const assertion = typeof body.identity_assertion === "string" ? body.identity_assertion : "";
+  if (!assertion.startsWith("cadence-anon-")) {
+    return jsonResponse(400, {
+      error: "invalid_request",
+      error_description: "identity_assertion must be issued by /agent/identity.",
+    });
+  }
+
+  return jsonResponse(200, {
+    status: "claimed",
+    claimed: true,
+    identity_assertion: assertion,
+  });
+}
+
+async function handleToken(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse(405, {
+      error: "method_not_allowed",
+      message: "Use POST for token exchange.",
+    });
+  }
+
+  const contentType = request.headers.get("content-type") ?? "";
+  let params: URLSearchParams;
+
+  if (contentType.includes("application/x-www-form-urlencoded")) {
+    const form = await request.formData();
+    params = new URLSearchParams();
+    for (const [key, value] of form.entries()) {
+      if (typeof value === "string") {
+        params.set(key, value);
+      }
+    }
+  } else {
+    const body = await parseJsonBody(request);
+    params = new URLSearchParams();
+    for (const [key, value] of Object.entries(body)) {
+      if (typeof value === "string") {
+        params.set(key, value);
+      }
+    }
+  }
+
+  const grantType = params.get("grant_type") ?? "";
+  const assertion = params.get("identity_assertion") ?? params.get("assertion") ?? "";
+
+  if (grantType !== "client_credentials" && grantType !== "urn:workos:agent-auth:grant-type:claim") {
+    return jsonResponse(400, {
+      error: "unsupported_grant_type",
+      grant_types_supported: [
+        "client_credentials",
+        "urn:workos:agent-auth:grant-type:claim",
+      ],
+    });
+  }
+
+  if (grantType === "urn:workos:agent-auth:grant-type:claim" && !assertion.startsWith("cadence-anon-")) {
+    return jsonResponse(400, {
+      error: "invalid_grant",
+      error_description: "Provide an identity_assertion issued by /agent/identity.",
+    });
+  }
+
+  return jsonResponse(200, {
+    token_type: "Bearer",
+    access_token: `cadence-public-${crypto.randomUUID()}`,
+    expires_in: 3600,
+    scope: "public read",
+  });
+}
+
+async function handleRevoke(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse(405, {
+      error: "method_not_allowed",
+      message: "Use POST for token revocation.",
+    });
+  }
+
+  return new Response(null, {
+    status: 200,
+    headers: {
+      "cache-control": "no-store",
+    },
+  });
+}
+
+function handleProtectedExample(request: Request, origin: string): Response {
+  if (request.method !== "GET") {
+    return jsonResponse(405, {
+      error: "method_not_allowed",
+      message: "Use GET for this protected resource.",
+    });
+  }
+
+  const token = getBearerToken(request);
+  if (!token || !token.startsWith("cadence-public-")) {
+    return unauthorizedWithDiscovery(origin);
+  }
+
+  return jsonResponse(200, {
+    ok: true,
+    resource: "agent-protected-example",
+    access: "granted",
+  });
+}
+
 function decodeHtmlEntities(value: string): string {
   return value
     .replace(/&nbsp;/gi, " ")
@@ -200,6 +392,29 @@ async function fetchGeneratedMarkdown(request: Request, env: Env): Promise<Respo
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    const origin = getOrigin(env, url);
+
+    if (url.pathname === "/agent/identity") {
+      return handleAgentIdentity(request, origin);
+    }
+
+    if (url.pathname === "/agent/identity/claim") {
+      return handleAgentClaim(request);
+    }
+
+    if (url.pathname === "/oauth2/token") {
+      return handleToken(request);
+    }
+
+    if (url.pathname === "/oauth2/revoke") {
+      return handleRevoke(request);
+    }
+
+    if (url.pathname === "/agent/protected-resource") {
+      return handleProtectedExample(request, origin);
+    }
+
     if (!isMarkdownRequested(request)) {
       return fetch(request);
     }
