@@ -1,5 +1,6 @@
 {
   "resource": "https://cadencelab.co",
+  "issuer": "https://cadencelab.co",
   "resource_documentation": "https://cadencelab.co/auth.md",
   "authorization_servers": [
     "https://cadencelab.co/.well-known/oauth-authorization-server"
@@ -18,6 +19,7 @@
     "none"
   ],
   "agent_auth": {
+    "skill": "https://cadencelab.co/auth.md",
     "register_uri": "https://cadencelab.co/auth.md",
     "identity_types_supported": [
       "anonymous"
@@ -25,10 +27,15 @@
     "credential_types_supported": [
       "none"
     ],
-    "claims_supported": [
-      "sub",
-      "name",
-      "email"
-    ]
+    "claim_uri": "https://cadencelab.co/auth.md",
+    "revocation_uri": "https://cadencelab.co/auth.md",
+    "anonymous": {
+      "register_uri": "https://cadencelab.co/auth.md",
+      "credential_types_supported": [
+        "none"
+      ],
+      "claim_uri": "https://cadencelab.co/auth.md",
+      "revocation_uri": "https://cadencelab.co/auth.md"
+    }
   }
 }

@@ -37,9 +37,12 @@
     "claim_uri": "https://cadencelab.co/auth.md",
     "revocation_uri": "https://cadencelab.co/auth.md",
     "anonymous": {
+      "register_uri": "https://cadencelab.co/auth.md",
       "credential_types_supported": [
         "none"
-      ]
+      ],
+      "claim_uri": "https://cadencelab.co/auth.md",
+      "revocation_uri": "https://cadencelab.co/auth.md"
     }
   }
 }
