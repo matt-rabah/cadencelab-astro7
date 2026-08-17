@@ -40,6 +40,8 @@ canonical.search = "";
 canonical.hash = "";
 
 const canonicalHref = canonical.toString();
+Astro.csp?.insertScriptResource("https://www.googletagmanager.com");
+Astro.csp?.insertScriptResource("https://static.cloudflareinsights.com");
 ---
 
 <!doctype html>
@@ -48,9 +50,10 @@ const canonicalHref = canonical.toString();
     <!-- Google tag (gtag.js) -->
     <script
       async
+      data-cfasync="false"
       src="https://www.googletagmanager.com/gtag/js?id=G-STT3SDRBXF"
       fetchpriority="low"></script>
-    <script is:inline>
+    <script is:inline data-cfasync="false">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         window.dataLayer.push(arguments);
