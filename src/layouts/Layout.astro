@@ -45,20 +45,6 @@ const canonicalHref = canonical.toString();
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-STT3SDRBXF"
-      fetchpriority="low"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-STT3SDRBXF");
-    </script>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
@@ -190,9 +176,8 @@ const canonicalHref = canonical.toString();
         );
         const themeColorMeta =
           document.querySelector<HTMLMetaElement>("[data-theme-color]");
-        const favicon = document.querySelector<HTMLLinkElement>(
-          "[data-theme-favicon]",
-        );
+        const favicon =
+          document.querySelector<HTMLLinkElement>("[data-theme-favicon]");
 
         root.dataset.theme = resolvedTheme;
         root.classList.toggle("dark", resolvedTheme === "dark");
