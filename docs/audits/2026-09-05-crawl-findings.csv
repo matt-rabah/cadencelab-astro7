@@ -1,0 +1,9 @@
+Finding,URL rows,Apex rows,www rows
+4xx errors,2,1,1
+Broken internal links,4,2,2
+Invalid robots.txt format,1,1,0
+Low text to HTML ratio,16,8,8
+Blocked from crawling,2,1,1
+Orphaned sitemap pages,1,1,0
+Pages with only one internal link,6,0,6
+Content not optimized,7,3,4

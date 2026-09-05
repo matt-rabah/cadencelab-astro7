@@ -1,0 +1,59 @@
+# Cadence Lab buyer-comprehension and crawl audit
+
+Reviewed September 5, 2026. Scope: site audit plus one Experience Foundations pilot. Recommendations elsewhere are not authorization to edit, delete routes, or publish.
+
+## Verified baseline and evidence
+
+- Clean isolated worktree: `/Users/mattrabah/.codex/worktrees/e9b4/cadencelab-astro7`; remote `https://github.com/matt-rabah/cadencelab-astro7.git`.
+- Refreshed `origin/main` and starting HEAD both `e7a9adf4458f417a8cf73f20e462ab72cfd0e28c`. History includes Astro 7.3.1 upgrade #135, dependency update #134, and newer dependency update #136. GitHub's Cloudflare Pages check for this exact commit reports success. This confirms the deployment check, not every production behavior.
+- Branch: `feature/experience-foundations-pilot`. The Downloads checkout is the saved project; the obsolete iCloud checkout was not used.
+- Inputs: `/Users/mattrabah/Downloads/cadencelab.co_mega_export_20260905.csv` and `/Users/mattrabah/Downloads/cadencelab.co_pages_structured_data_20260905.csv`. Both contain 87 URL rows: 45 apex and 42 www. Counts are URL observations, not 87 unique content pages. See [finding counts](2026-09-05-crawl-findings.csv).
+- Live browser inspection: [Experience Foundations](https://cadencelab.co/product/experience-foundations/) and [www privacy](https://www.cadencelab.co/privacy/). Live web reading: [home](https://cadencelab.co/) and [services](https://cadencelab.co/services/). Source inspection covered shared navigation/footer, page templates, product, service, workflow and solution directories, legal pages, search, sitemap and font configuration.
+- Automated public HTTP requests were challenged with 403 on ordinary routes while the browser loaded the inspected pages. Do not classify those responses as general site outages. Direct robots/sitemap browser access was blocked by the inspection tool; production contents remain unverified.
+
+## Priority findings
+
+| Priority | Finding / status | Evidence and next action |
+| --- | --- | --- |
+| High | Confirmed disclosure inconsistency | `src/pages/privacy/index.astro` says there are no site analytics scripts; `src/layouts/Layout.astro` includes Google Analytics (`gtag.js` and configuration). Live privacy repeats that claim. Review actual analytics behavior and disclosure together; do not rewrite legal meaning as an SEO fix. |
+| High | Confirmed buyer-comprehension problem | Experience Foundations has nine substantive sections plus a seven-link section menu. Deliverables follow signals, framework, process, evidence and failures. Several repeat ownership, customer needs and measures. Move concrete deliverables forward and combine overlapping explanations. |
+| Medium | Confirmed sampled www duplication | Browser remains on `https://www.cadencelab.co/privacy/` while its canonical points to apex. Canonicalization exists, but this sample does not redirect. Verify representative root/deep URLs and consider an explicit permanent host redirect separately. Don't multiply content defects by host. |
+| Medium | Confirmed misleading related links | `StructuredCapabilityPage.astro` labels Digital Experiences and AI Experience links “Review the diagnostic.” They lead to capability pages. Give pilot links destination-specific labels; review shared callers separately. |
+| Medium | Confirmed crawler-facing email artifact; working browser email | Both email-protection endpoint rows report 4xx; a direct request reproduced 404 on the apex endpoint. Source legal pages use `mailto:`; browser privacy resolves all three email links to `mailto:hi@cadencelab.co`. Cloudflare rewrites likely explain the crawl flags, but the export does not identify individual broken-link targets. Check terms and no-JavaScript behavior before changing email protection. |
+| Medium | Robots warning needs targeted verification | Source places `Content-Signal` before a user-agent group; this is outside standard robots directives. It also says `ai-train=no` while explicitly allowing GPTBot and other AI agents. Confirm desired crawler policy and deployed Cloudflare additions. `#Cadence Lab` is a valid comment; the sitemap declaration exists. Do not delete crawler policy merely to clear a score. |
+| Low | Intentional search exclusion | `src/pages/search/index.astro` sets `noindex`; Astro excludes search and thanks from generated sitemap. Export “Blocked from crawling” alone does not identify the mechanism. Keep search usable, verify deployed robots separately, and retain deliberate noindex. |
+| Low | Sitemap “orphan” is not an orphan content page | The flagged URL is `/sitemap.xml` itself. It is referenced in source robots.txt. A visitor-facing link to XML is unnecessary. Repository has a static sitemap plus Astro-generated sitemap output: compare coverage rather than adding footer links to XML. |
+| Low | www-only link-count warnings | Six free tools are flagged only on www; their apex versions are not. The resource directory links to those tools in source. Normalize hosts before treating these as discoverability defects. |
+| Low | Score recommendations, not established defects | 16 low text-to-HTML flags and seven vague content-optimization flags are not reasons to add words, remove useful markup, or rewrite terms. Judge readable copy, actual load behavior and meaningful content first. Export has no duplicate title/content, missing H1, or structured-data-error flags. |
+
+The markup CSV inventories detection, not required schema. Its header has one fewer field than the rows (an extra trailing value); avoid inferring a new schema field from it. Missing Book, Recipe, Job, or other irrelevant types is not a defect. Existing schema should describe actual page content; detected Product snippets on a consulting site deserve a separate semantic review, not automatic expansion.
+
+## Navigation, purpose and repetition
+
+| Area | Decision | Reason / proposed direction |
+| --- | --- | --- |
+| Main navigation | Simplify after pilot review | Services, Product and Solutions ask buyers to understand an internal taxonomy. Lead with problems and ways to help; explain diagnostic vs delivery work plainly. Keep existing routes while testing labels. About and Free resources each open a menu for one destination; consider direct links. |
+| Header actions | Simplify | Fit Check, Contact and Start a conversation compete. Make Fit Check the consistent buying action; keep contact as a secondary utility. Explain what a fit check involves. Desktop/mobile navigation copies in HTML are responsive variants, not automatically visible duplication. |
+| Home | Keep core promise; combine process summaries | The problem-led opening is useful, but “onboarding drift,” “CRM signals,” and “human-in-the-loop” need everyday examples. Operating sequence and How the Work Happens repeat process. Keep one short sequence, diagnostic comparison, factual FAQ and fit action. |
+| Services index | Combine duplicated selection content | Four diagnostic tabs and Find your match repeat the same four choices. Put a visible problem-to-offer comparison first; keep optional scope detail beneath it. Preserve actual deliverables and published factual claims. |
+| Service detail pages | Keep scope; simplify repeated lists | Retain the question answered, evidence needed, outputs, fit and next step. Combine questions/evidence/working standards where they repeat the same ownership and measurement language. Do not transfer timing claims from one offer to another. |
+| Product pages | Keep distinct services; pilot one page | Foundations = shared customer understanding and operating decisions; Digital = websites/interfaces and service behind them; Location = physical service; AI = behavior and human boundaries. Replace long taxonomy lists with recognizable situations and tangible work. |
+| Industry/team/use-case directories | Keep routing value; reduce repeated framing | Use-case language is closest to how this audience describes a problem. Industry and team directories can remain secondary routes. Shorten repeated “choose/check/explore” guides and condition lists; keep differences that change the recommendation. |
+| Workflow, AI tooling and governance pages | Keep as supporting depth | These can explain implementation details but need plain examples and one clear route back to the appropriate service. Footer terms such as “Variance tracing” and “PII scrubbing nodes” make specialist material disproportionately prominent. |
+| Footer | Simplify later | Eleven specialist links dominate basic company and service orientation. Favor services, about, resources, contact and legal; retain specialist routes through relevant content links. No route deletion proposed for this pilot. |
+| Resources and insights | Keep; verify discovery | Tools provide practical utility. Link them where a buyer needs them. One published insight makes a large search interface less valuable than clear service navigation; do not remove functional search without usage evidence. |
+| Legal/support/contact | Preserve meaning | Legal accuracy takes priority over content scores. Keep direct contact routes. Review the analytics contradiction separately. |
+
+## Pilot section decisions
+
+Keep a shorter promise and three recognizable problems. Move all four existing deliverables directly after the problems. Combine six framework concepts into those deliverables, the process, and evidence detail. Keep numbered steps, condensing frame/trace and test/run into a readable sequence. Group supporting evidence into three optional tabs. Fold repeated failure warnings into two expandable explanations. Keep sponsor requirements, exclusions and next step visible. Keep three related paths with accurate link labels.
+
+Architecture: opt-in simplified presentation in the existing `StructuredCapabilityPage.astro`, with its legacy presentation retained for eight other callers. Reuse `TabbedPanels.astro` with an optional underline variant; retain its native custom-element keyboard behavior and all-panel fallback. Existing `ui/tabs.tsx` already wraps Base UI and offers a line variant, but replacing this page's Astro tabs with a second React island provides no necessary benefit. Reference: [shadcn Base UI tabs](https://ui.shadcn.com/docs/components/base/tabs).
+
+Fonts: current registration uses local Graphik, Tiempos Text and Tiempos Headline in `src/assets/fonts`, not the older documented public-font path. `--ff-label` currently aliases sans; Produkt is not registered. The capability template uses Graphik for headings as well as body. Record the mismatch with intended roles; no font or unrelated typography migration in this pilot.
+
+## Route and sitemap reconciliation
+
+Production build produces 43 pages: 42 directory-index routes plus the 404 page. The 45 apex export rows cover 41 content routes plus `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and Cloudflare's email-protection endpoint. The only built directory route absent from the export is `/thanks/`, which is intentionally excluded from the generated sitemap. All 40 generated sitemap URLs occur in the apex crawl. This is broad content coverage, not evidence of dozens of missing pages.
+
+**Confirmed source defect, medium priority:** `public/robots.txt` points at the maintained `public/sitemap.xml`, which has only 13 URLs. The generated `dist/sitemap-0.xml` has 40 eligible URLs. The static file omits 30 generated entries, including the pilot, most services, tools and solutions. It also lists `/product/`, `/resources/`, and `/workflows/`, for which the current build has no routes. Thus the overlap is 10 URLs. This is more actionable than the “orphan sitemap” score notice. In a separate approved technical change, use the generated sitemap index as the declared source of truth and reconcile the stale static file. Verify deployed behavior before publication; no sitemap files were edited in this pilot.
