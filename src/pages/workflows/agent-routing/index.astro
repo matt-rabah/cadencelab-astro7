@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/solution-depth.css";
 
 const routingConditions = [
   {
@@ -283,10 +284,7 @@ const strongFit = [
     <SectionNav
       items={[
         { label: "What routing does", href: "#what-routing-does" },
-        { label: "Route conditions", href: "#route-conditions" },
-        { label: "Routing path", href: "#routing-path" },
-        { label: "Context transfer", href: "#context-transfer" },
-        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Explore", href: "#details" },
         { label: "Evidence and outputs", href: "#evidence-outputs" },
         { label: "Fit", href: "#fit" },
       ]}
@@ -320,141 +318,186 @@ const strongFit = [
       </div>
     </section>
 
-    <section
-      id="route-conditions"
-      class="route-conditions"
-      aria-labelledby="route-conditions-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Route conditions</p>
-          <h2 id="route-conditions-title">
-            Define when a person must take control.
-          </h2>
-          <p>
-            The rules depend on the use case. These six conditions are a
-            practical starting point for human control.
-          </p>
-        </div>
+    <div id="details" class="solution-depth-group solution-depth-group-four">
+      <details class="solution-depth" name="routing-details">
+        <summary>
+          <span class="solution-depth-title">When AI should hand off</span>
+          <span class="solution-depth-description"
+            >Define the risk, uncertainty, customer request, policy, and
+            exception conditions that require a person.</span
+          >
+          <span class="solution-depth-action">Explore conditions</span>
+        </summary>
+        <section
+          id="route-conditions"
+          class="route-conditions"
+          aria-labelledby="route-conditions-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">Route conditions</p>
+              <h2 id="route-conditions-title">
+                Define when a person must take control.
+              </h2>
+              <p>
+                The rules depend on the use case. These six conditions are a
+                practical starting point for human control.
+              </p>
+            </div>
 
-        <ol class="condition-grid">
-          {
-            routingConditions.map((condition) => (
-              <li>
-                <p class="item-number">{condition.number}</p>
-                <h3>{condition.title}</h3>
-                <p>{condition.description}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section
-      id="routing-path"
-      class="routing-path section-block"
-      aria-labelledby="routing-path-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-split">
-          <div>
-            <p class="eyebrow">Routing path</p>
-            <h2 id="routing-path-title">
-              Move from a clear boundary to accountable closure.
-            </h2>
+            <ol class="condition-grid">
+              {
+                routingConditions.map((condition) => (
+                  <li>
+                    <p class="item-number">{condition.number}</p>
+                    <h3>{condition.title}</h3>
+                    <p>{condition.description}</p>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
-          <p>
-            At each stage, check whether the workflow preserves context, stops
-            the wrong action, and gives the decision to someone who can act.
-          </p>
-        </div>
+        </section>
+      </details>
 
-        <ol class="path-list">
-          {
-            routingPath.map((stage, index) => (
-              <li>
-                <div class="path-heading">
-                  <p class="path-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="path-phase">{stage.phase}</p>
-                </div>
-                <h3>{stage.question}</h3>
-                <p>{stage.evidence}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section
-      id="context-transfer"
-      class="context-transfer section-block"
-      aria-labelledby="context-transfer-title"
-    >
-      <div class="page-container context-layout">
-        <div class="context-intro">
-          <p class="eyebrow">Context transfer</p>
-          <h2 id="context-transfer-title">
-            Give the person a case, not a transcript.
-          </h2>
-          <p>
-            The person should know why the work arrived, what the customer
-            needs, what already happened, what remains uncertain, and what
-            decision is required.
-          </p>
-        </div>
-
-        <dl class="context-list">
-          {
-            contextRequirements.map((item, index) => (
+      <details class="solution-depth" name="routing-details">
+        <summary>
+          <span class="solution-depth-title">How the route works</span>
+          <span class="solution-depth-description"
+            >Move from a safe pause through priority, acceptance, human action,
+            and accountable closure.</span
+          >
+          <span class="solution-depth-action">Explore the path</span>
+        </summary>
+        <section
+          id="routing-path"
+          class="routing-path section-block"
+          aria-labelledby="routing-path-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-split">
               <div>
-                <dt>
-                  <span aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  {item.label}
-                </dt>
-                <dd>{item.description}</dd>
+                <p class="eyebrow">Routing path</p>
+                <h2 id="routing-path-title">
+                  Move from a clear boundary to accountable closure.
+                </h2>
               </div>
-            ))
-          }
-        </dl>
-      </div>
-    </section>
+              <p>
+                At each stage, check whether the workflow preserves context,
+                stops the wrong action, and gives the decision to someone who
+                can act.
+              </p>
+            </div>
 
-    <section
-      id="failure-patterns"
-      class="failure-patterns"
-      aria-labelledby="failure-patterns-title"
-    >
-      <div class="page-container failure-layout">
-        <div class="failure-intro">
-          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
-          <h2 id="failure-patterns-title">
-            A human in the loop isn't always in control.
-          </h2>
-          <p>
-            These patterns show where an escalation feature fails to create a
-            safe and accountable response.
-          </p>
-        </div>
+            <ol class="path-list">
+              {
+                routingPath.map((stage, index) => (
+                  <li>
+                    <div class="path-heading">
+                      <p class="path-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="path-phase">{stage.phase}</p>
+                    </div>
+                    <h3>{stage.question}</h3>
+                    <p>{stage.evidence}</p>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+      </details>
 
-        <div class="failure-list">
-          {
-            failurePatterns.map((failure, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{failure.cue}</h3>
-                <p>{failure.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="routing-details">
+        <summary>
+          <span class="solution-depth-title">What context must travel</span>
+          <span class="solution-depth-description"
+            >Give the person customer intent, history, prior action,
+            uncertainty, impact, and the decision required.</span
+          >
+          <span class="solution-depth-action">Explore context</span>
+        </summary>
+        <section
+          id="context-transfer"
+          class="context-transfer section-block"
+          aria-labelledby="context-transfer-title"
+        >
+          <div class="page-container context-layout">
+            <div class="context-intro">
+              <p class="eyebrow">Context transfer</p>
+              <h2 id="context-transfer-title">
+                Give the person a case, not a transcript.
+              </h2>
+              <p>
+                The person should know why the work arrived, what the customer
+                needs, what already happened, what remains uncertain, and what
+                decision is required.
+              </p>
+            </div>
+
+            <dl class="context-list">
+              {
+                contextRequirements.map((item, index) => (
+                  <div>
+                    <dt>
+                      <span aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {item.label}
+                    </dt>
+                    <dd>{item.description}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+        </section>
+      </details>
+
+      <details class="solution-depth" name="routing-details">
+        <summary>
+          <span class="solution-depth-title">Where routing fails</span>
+          <span class="solution-depth-description"
+            >Find transfers that preserve a transcript but lose priority,
+            authority, or responsibility.</span
+          >
+          <span class="solution-depth-action">Explore failures</span>
+        </summary>
+        <section
+          id="failure-patterns"
+          class="failure-patterns"
+          aria-labelledby="failure-patterns-title"
+        >
+          <div class="page-container failure-layout">
+            <div class="failure-intro">
+              <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+              <h2 id="failure-patterns-title">
+                A human in the loop isn't always in control.
+              </h2>
+              <p>
+                These patterns show where an escalation feature fails to create
+                a safe and accountable response.
+              </p>
+            </div>
+
+            <div class="failure-list">
+              {
+                failurePatterns.map((failure, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{failure.cue}</h3>
+                    <p>{failure.description}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      </details>
+    </div>
 
     <section
       id="evidence-outputs"

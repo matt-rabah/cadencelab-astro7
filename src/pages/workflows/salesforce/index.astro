@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/solution-depth.css";
 
 const traceStages = [
   {
@@ -208,9 +209,7 @@ const usefulWhen = [
     <SectionNav
       items={[
         { label: "What tracing does", href: "#what-tracing-does" },
-        { label: "Trace stages", href: "#trace-stages" },
-        { label: "Evidence", href: "#evidence" },
-        { label: "Failure modes", href: "#failure-modes" },
+        { label: "Explore", href: "#details" },
         { label: "Outputs", href: "#outputs" },
         { label: "Fit", href: "#fit" },
       ]}
@@ -244,116 +243,152 @@ const usefulWhen = [
       </div>
     </section>
 
-    <section
-      id="trace-stages"
-      class="trace-stages"
-      aria-labelledby="trace-stages-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Trace stages</p>
-          <h2 id="trace-stages-title">
-            Follow the signal from entry to outcome.
-          </h2>
-          <p>
-            At each stage, ask whether the next person or system has enough
-            context, authority, and evidence to act.
-          </p>
-        </div>
+    <div id="details" class="solution-depth-group">
+      <details class="solution-depth" name="salesforce-details">
+        <summary>
+          <span class="solution-depth-title">How the trace works</span>
+          <span class="solution-depth-description"
+            >Follow one customer signal through records, routing, handoffs, and
+            outcomes.</span
+          >
+          <span class="solution-depth-action">Explore stages</span>
+        </summary>
+        <section
+          id="trace-stages"
+          class="trace-stages"
+          aria-labelledby="trace-stages-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">Trace stages</p>
+              <h2 id="trace-stages-title">
+                Follow the signal from entry to outcome.
+              </h2>
+              <p>
+                At each stage, ask whether the next person or system has enough
+                context, authority, and evidence to act.
+              </p>
+            </div>
 
-        <ol class="trace-list">
-          {
-            traceStages.map((stage) => (
-              <li>
-                <div class="trace-marker">
-                  <p>{stage.number}</p>
-                  <span aria-hidden="true" />
-                </div>
-                <div class="trace-content">
-                  <p class="trace-label">{stage.label}</p>
-                  <h3>{stage.question}</h3>
-                  <p>{stage.description}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section
-      id="evidence"
-      class="evidence section-block"
-      aria-labelledby="evidence-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-split">
-          <div>
-            <p class="eyebrow">Evidence</p>
-            <h2 id="evidence-title">
-              Compare the intended workflow with the real one.
-            </h2>
+            <ol class="trace-list">
+              {
+                traceStages.map((stage) => (
+                  <li>
+                    <div class="trace-marker">
+                      <p>{stage.number}</p>
+                      <span aria-hidden="true" />
+                    </div>
+                    <div class="trace-content">
+                      <p class="trace-label">{stage.label}</p>
+                      <h3>{stage.question}</h3>
+                      <p>{stage.description}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
-          <p>
-            Combine Salesforce structure and automation with real records,
-            measures, system handoffs, and the experience of the people doing
-            the work.
-          </p>
-        </div>
+        </section>
+      </details>
 
-        <div class="evidence-grid">
-          {
-            evidenceSources.map((source, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{source.title}</h3>
-                <p>{source.description}</p>
-              </article>
-            ))
-          }
-        </div>
+      <details class="solution-depth" name="salesforce-details">
+        <summary>
+          <span class="solution-depth-title">What evidence matters</span>
+          <span class="solution-depth-description"
+            >Compare Salesforce configuration with real records, team behavior,
+            and operating outcomes.</span
+          >
+          <span class="solution-depth-action">Explore evidence</span>
+        </summary>
+        <section
+          id="evidence"
+          class="evidence section-block"
+          aria-labelledby="evidence-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-split">
+              <div>
+                <p class="eyebrow">Evidence</p>
+                <h2 id="evidence-title">
+                  Compare the intended workflow with the real one.
+                </h2>
+              </div>
+              <p>
+                Combine Salesforce structure and automation with real records,
+                measures, system handoffs, and the experience of the people
+                doing the work.
+              </p>
+            </div>
 
-        <div class="evidence-note">
-          <p class="note-label">Evidence before certainty</p>
-          <p>
-            Separate observed system behavior from team explanations and working
-            assumptions. State where missing records, configuration, or outcome
-            data limit confidence.
-          </p>
-        </div>
-      </div>
-    </section>
+            <div class="evidence-grid">
+              {
+                evidenceSources.map((source, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{source.title}</h3>
+                    <p>{source.description}</p>
+                  </article>
+                ))
+              }
+            </div>
 
-    <section
-      id="failure-modes"
-      class="failure-modes"
-      aria-labelledby="failure-modes-title"
-    >
-      <div class="page-container failure-layout">
-        <div class="failure-intro">
-          <p class="eyebrow eyebrow-inverse">Common failure modes</p>
-          <h2 id="failure-modes-title">
-            A clean record can hide a broken workflow.
-          </h2>
-          <p>
-            Salesforce can look orderly while the work around it remains
-            fragmented. These patterns show where to look more closely.
-          </p>
-        </div>
+            <div class="evidence-note">
+              <p class="note-label">Evidence before certainty</p>
+              <p>
+                Separate observed system behavior from team explanations and
+                working assumptions. State where missing records, configuration,
+                or outcome data limit confidence.
+              </p>
+            </div>
+          </div>
+        </section>
+      </details>
 
-        <div class="failure-list">
-          {
-            failureModes.map((failure, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{failure.cue}</h3>
-                <p>{failure.consequence}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="salesforce-details">
+        <summary>
+          <span class="solution-depth-title">Where workflows fail</span>
+          <span class="solution-depth-description"
+            >See how complete records and correct automation can still hide
+            broken work.</span
+          >
+          <span class="solution-depth-action">Explore failures</span>
+        </summary>
+        <section
+          id="failure-modes"
+          class="failure-modes"
+          aria-labelledby="failure-modes-title"
+        >
+          <div class="page-container failure-layout">
+            <div class="failure-intro">
+              <p class="eyebrow eyebrow-inverse">Common failure modes</p>
+              <h2 id="failure-modes-title">
+                A clean record can hide a broken workflow.
+              </h2>
+              <p>
+                Salesforce can look orderly while the work around it remains
+                fragmented. These patterns show where to look more closely.
+              </p>
+            </div>
+
+            <div class="failure-list">
+              {
+                failureModes.map((failure, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{failure.cue}</h3>
+                    <p>{failure.consequence}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      </details>
+    </div>
 
     <section
       id="outputs"
