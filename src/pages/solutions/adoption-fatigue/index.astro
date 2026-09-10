@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/solution-depth.css";
 
 const visibleSignals = [
   {
@@ -142,7 +143,8 @@ const strongFit = [
   title="User Adoption Fatigue | Cadence Lab"
   description="Find out why people verify, correct, or bypass a workflow. Fix the work before asking for more adoption."
   canonicalURL="/solutions/adoption-fatigue/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema currentName="User adoption fatigue" />
 
@@ -172,8 +174,8 @@ const strongFit = [
             <a class="button button-primary" href="/fit-check/">
               Start a fit check
             </a>
-            <a class="button button-text" href="#signals">
-              Review the signals
+            <a class="button button-text" href="#diagnostic-paths">
+              Find the right diagnostic
               <span aria-hidden="true">&#8594;</span>
             </a>
           </div>
@@ -208,10 +210,8 @@ const strongFit = [
       items={[
         { label: "Problem", href: "#problem" },
         { label: "Signals", href: "#signals" },
-        { label: "Operating causes", href: "#operating-causes" },
-        { label: "Evidence", href: "#evidence" },
-        { label: "Response", href: "#response" },
-        { label: "Diagnostic paths", href: "#diagnostic-paths" },
+        { label: "Explore", href: "#details" },
+        { label: "Choose a diagnostic", href: "#diagnostic-paths" },
         { label: "Fit", href: "#fit" },
       ]}
     />
@@ -219,7 +219,8 @@ const strongFit = [
     <section
       id="problem"
       class="problem section-block"
-      aria-labelledby="problem-heading">
+      aria-labelledby="problem-heading"
+    >
       <div class="page-container problem-layout">
         <div>
           <p class="eyebrow">The problem</p>
@@ -265,116 +266,157 @@ const strongFit = [
       </div>
     </section>
 
-    <section
-      id="operating-causes"
-      class="operating-causes section-block"
-      aria-labelledby="causes-title">
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-split">
-          <div>
-            <p class="eyebrow">Operating causes</p>
-            <h2 id="causes-title">
-              Find the friction before you prescribe training.
-            </h2>
+    <div id="details" class="solution-depth-group">
+      <details class="solution-depth" name="adoption-details">
+        <summary>
+          <span class="solution-depth-title">Why adoption breaks down</span>
+          <span class="solution-depth-description"
+            >Review workflow, input, control, and risk causes before prescribing
+            more training.</span
+          >
+          <span class="solution-depth-action">Explore causes</span>
+        </summary>
+        <section
+          id="operating-causes"
+          class="operating-causes section-block"
+          aria-labelledby="causes-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-split">
+              <div>
+                <p class="eyebrow">Operating causes</p>
+                <h2 id="causes-title">
+                  Find the friction before you prescribe training.
+                </h2>
+              </div>
+              <p>
+                Training helps when people lack skill or practice. It can't
+                repair a workflow that asks them to compensate for bad inputs,
+                weak controls, or unmanaged risk.
+              </p>
+            </div>
+
+            <div class="cause-list">
+              {
+                operatingCauses.map((cause, index) => (
+                  <article>
+                    <div class="cause-heading">
+                      <p class="item-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="cause-label">{cause.label}</p>
+                    </div>
+                    <h3>{cause.question}</h3>
+                    <p>{cause.description}</p>
+                  </article>
+                ))
+              }
+            </div>
           </div>
-          <p>
-            Training helps when people lack skill or practice. It can't repair a
-            workflow that asks them to compensate for bad inputs, weak controls,
-            or unmanaged risk.
-          </p>
-        </div>
+        </section>
+      </details>
 
-        <div class="cause-list">
-          {
-            operatingCauses.map((cause, index) => (
-              <article>
-                <div class="cause-heading">
-                  <p class="item-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="cause-label">{cause.label}</p>
-                </div>
-                <h3>{cause.question}</h3>
-                <p>{cause.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="adoption-details">
+        <summary>
+          <span class="solution-depth-title">What evidence matters</span>
+          <span class="solution-depth-description"
+            >See how observation, rework, exceptions, and outcomes reveal the
+            real cost.</span
+          >
+          <span class="solution-depth-action">Explore evidence</span>
+        </summary>
+        <section
+          id="evidence"
+          class="evidence section-block"
+          aria-labelledby="evidence-title"
+        >
+          <div class="page-container evidence-layout">
+            <div class="evidence-intro">
+              <p class="eyebrow">Evidence</p>
+              <h2 id="evidence-title">Measure what happens after the click.</h2>
+              <p>
+                Review the full task, not just activity inside the tool. The
+                goal is to understand friction and risk, not punish people for
+                finding a safer path.
+              </p>
+              <div class="evidence-principle">
+                <p class="note-label">Evidence principle</p>
+                <p>
+                  Compare the intended workflow with the real one. Keep observed
+                  facts separate from opinions and assumptions.
+                </p>
+              </div>
+            </div>
 
-    <section
-      id="evidence"
-      class="evidence section-block"
-      aria-labelledby="evidence-title">
-      <div class="page-container evidence-layout">
-        <div class="evidence-intro">
-          <p class="eyebrow">Evidence</p>
-          <h2 id="evidence-title">Measure what happens after the click.</h2>
-          <p>
-            Review the full task, not just activity inside the tool. The goal is
-            to understand friction and risk, not punish people for finding a
-            safer path.
-          </p>
-          <div class="evidence-principle">
-            <p class="note-label">Evidence principle</p>
-            <p>
-              Compare the intended workflow with the real one. Keep observed
-              facts separate from opinions and assumptions.
-            </p>
+            <div class="evidence-grid">
+              {
+                evidenceSources.map((source, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{source.title}</h3>
+                    <p>{source.description}</p>
+                  </article>
+                ))
+              }
+            </div>
           </div>
-        </div>
+        </section>
+      </details>
 
-        <div class="evidence-grid">
-          {
-            evidenceSources.map((source, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{source.title}</h3>
-                <p>{source.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="adoption-details">
+        <summary>
+          <span class="solution-depth-title">How to respond</span>
+          <span class="solution-depth-description"
+            >Follow a focused sequence from observing the work through testing
+            the repair.</span
+          >
+          <span class="solution-depth-action">Explore response</span>
+        </summary>
+        <section
+          id="response"
+          class="response"
+          aria-labelledby="response-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">Practical response</p>
+              <h2 id="response-title">
+                Fix the work. Then ask people to adopt it.
+              </h2>
+              <p>
+                Start small, use real cases, and expand only when the evidence
+                says the workflow is better.
+              </p>
+            </div>
 
-    <section id="response" class="response" aria-labelledby="response-title">
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Practical response</p>
-          <h2 id="response-title">
-            Fix the work. Then ask people to adopt it.
-          </h2>
-          <p>
-            Start small, use real cases, and expand only when the evidence says
-            the workflow is better.
-          </p>
-        </div>
-
-        <ol class="response-list">
-          {
-            responseSequence.map((stage, index) => (
-              <li>
-                <div class="response-heading">
-                  <p class="response-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="response-phase">{stage.phase}</p>
-                </div>
-                <h3>{stage.question}</h3>
-                <p>{stage.evidence}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
+            <ol class="response-list">
+              {
+                responseSequence.map((stage, index) => (
+                  <li>
+                    <div class="response-heading">
+                      <p class="response-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="response-phase">{stage.phase}</p>
+                    </div>
+                    <h3>{stage.question}</h3>
+                    <p>{stage.evidence}</p>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+      </details>
+    </div>
 
     <section
       id="diagnostic-paths"
       class="diagnostic-paths section-block"
-      aria-labelledby="paths-title">
+      aria-labelledby="paths-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
