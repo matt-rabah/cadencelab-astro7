@@ -1,0 +1,106 @@
+.solution-depth-group {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+  margin-inline: auto;
+  padding-block: var(--section-space);
+  scroll-margin-top: var(--header-offset);
+}
+
+.solution-depth-group-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.solution-depth {
+  min-width: 0;
+  border-block: var(--border-width) solid var(--color-border-strong);
+  border-inline-end: var(--border-width) solid var(--color-border-strong);
+}
+
+.solution-depth:first-child {
+  border-inline-start: var(--border-width) solid var(--color-border-strong);
+}
+
+.solution-depth[open] {
+  grid-column: 1 / -1;
+  order: 1;
+  border-inline-start: var(--border-width) solid var(--color-border-strong);
+}
+
+.solution-depth > summary {
+  display: flex;
+  min-height: 11rem;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  list-style: none;
+}
+
+.solution-depth > summary::-webkit-details-marker {
+  display: none;
+}
+
+.solution-depth > summary:focus-visible {
+  outline: 0.1875rem solid var(--color-blue);
+  outline-offset: -0.5rem;
+}
+
+.solution-depth-title {
+  display: block;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+}
+
+.solution-depth-description {
+  display: block;
+  max-width: 36ch;
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.solution-depth-action {
+  display: block;
+  color: var(--color-blue);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.solution-depth-action::after {
+  margin-inline-start: 0.5rem;
+  content: "+";
+}
+
+.solution-depth[open] .solution-depth-action::after {
+  content: "−";
+}
+
+.solution-depth > section {
+  border-top: var(--border-width) solid var(--color-border-strong);
+}
+
+@media (max-width: 48rem) {
+  .solution-depth-group {
+    grid-template-columns: 1fr;
+  }
+
+  .solution-depth,
+  .solution-depth:first-child,
+  .solution-depth[open] {
+    grid-column: 1;
+    border-inline: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .solution-depth + .solution-depth {
+    margin-top: calc(-1 * var(--border-width));
+  }
+
+  .solution-depth > summary {
+    min-height: auto;
+  }
+}
