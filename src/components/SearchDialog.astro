@@ -8,7 +8,8 @@ const entries = await getSearchEntries();
   id="site-search-dialog"
   class="search-dialog"
   aria-labelledby="search-dialog-title"
-  data-search-dialog>
+  data-search-dialog
+>
   <div class="search-dialog-panel">
     <header class="search-dialog-header">
       <div>
@@ -25,14 +26,17 @@ const entries = await getSearchEntries();
     </header>
 
     <div class="search-dialog-field">
-      <label for="command-search-input">Search insights</label>
+      <label for="command-search-input"
+        >Search services, tools, and insights</label
+      >
       <div class="search-dialog-control">
         <span class="search-dialog-icon" aria-hidden="true">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2">
+            stroke-width="2"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -58,8 +62,8 @@ const entries = await getSearchEntries();
       <p aria-live="polite" data-command-search-status>
         {
           entries.length === 1
-            ? "1 published insight"
-            : `${entries.length} published insights`
+            ? "1 searchable page"
+            : `${entries.length} searchable pages`
         }
       </p>
       <a href="/search/" data-command-search-full>Open full search</a>
@@ -70,11 +74,12 @@ const entries = await getSearchEntries();
         entries.map((entry) => (
           <article
             data-command-search-entry
-            data-search-text={entry.searchText}>
+            data-search-text={entry.searchText}
+          >
             <div class="search-result-meta">
               <span>{entry.category}</span>
-              <span aria-hidden="true">·</span>
-              <span>{entry.readTime}</span>
+              {entry.detail && <span aria-hidden="true">·</span>}
+              {entry.detail && <span>{entry.detail}</span>}
             </div>
             <h3>
               <a href={entry.href}>{entry.title}</a>
@@ -86,7 +91,7 @@ const entries = await getSearchEntries();
     </div>
 
     <p class="search-dialog-empty" hidden data-command-search-empty>
-      No published insights match that search.
+      No services, tools, or insights match that search.
     </p>
   </div>
 </dialog>
@@ -150,8 +155,8 @@ const entries = await getSearchEntries();
 
       status.textContent = query
         ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"}`
-        : `${entries.length} published ${
-            entries.length === 1 ? "insight" : "insights"
+        : `${entries.length} searchable ${
+            entries.length === 1 ? "page" : "pages"
           }`;
       emptyState.hidden = visibleCount !== 0;
       fullSearchLink.href = query
