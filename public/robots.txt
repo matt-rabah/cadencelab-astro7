@@ -18,3 +18,4 @@ Allow: /
 Disallow: /admin/
 
 Sitemap: https://cadencelab.co/sitemap.xml
+Agentmap: https://cadencelab.co/.well-known/ai-catalog.json

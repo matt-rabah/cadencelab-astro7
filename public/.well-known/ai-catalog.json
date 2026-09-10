@@ -1,0 +1,50 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Cadence Lab",
+    "identifier": "did:web:cadencelab.co"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:cadencelab.co:agent:primary",
+      "displayName": "Cadence Lab Agent",
+      "type": "application/json",
+      "url": "https://cadencelab.co/.well-known/agent-card.json",
+      "representativeQueries": [
+        "what capabilities does Cadence Lab have?",
+        "how can Cadence Lab help with my customer experience?"
+      ]
+    },
+    {
+      "identifier": "urn:air:cadencelab.co:server:mcp",
+      "displayName": "Cadence Lab MCP Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://cadencelab.co/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "what resources does Cadence Lab offer via MCP?",
+        "read Cadence Lab documentation resources"
+      ]
+    },
+    {
+      "identifier": "urn:air:cadencelab.co:skill:cx-diagnostic",
+      "displayName": "CX Systems Diagnostic Skill",
+      "type": "text/markdown",
+      "url": "https://cadencelab.co/.well-known/agent-skills/cx-diagnostic/SKILL.md",
+      "representativeQueries": [
+        "diagnose why our onboarding completion rate dropped",
+        "trace the handoff failures between sales and onboarding",
+        "audit our CRM workflow for data quality issues"
+      ]
+    },
+    {
+      "identifier": "urn:air:cadencelab.co:skill:fit-check",
+      "displayName": "Fit Check Skill",
+      "type": "text/markdown",
+      "url": "https://cadencelab.co/.well-known/agent-skills/fit-check/SKILL.md",
+      "representativeQueries": [
+        "is our retention problem a good fit for a diagnostic?",
+        "start a fit check for our onboarding issues"
+      ]
+    }
+  ]
+}
