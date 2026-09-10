@@ -9,6 +9,11 @@
 /.well-known/api-catalog
   Content-Type: application/linkset+json
 
+# ── ARD Capability Manifest ──
+/.well-known/ai-catalog.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
 # ── Agent card and MCP server card: JSON content type ──
 /.well-known/agent-card.json
   Content-Type: application/json
