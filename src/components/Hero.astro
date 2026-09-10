@@ -17,24 +17,6 @@ const {
   secondaryCta = { text: "Review diagnostic offers", url: "#diagnostics" },
   className = "",
 } = Astro.props;
-
-const operatingSignals = [
-  {
-    number: "01",
-    label: "Diagnose",
-    description: "Friction, lifecycle risk, and signal gaps",
-  },
-  {
-    number: "02",
-    label: "Rebuild",
-    description: "Ownership, handoffs, and CRM workflows",
-  },
-  {
-    number: "03",
-    label: "Prepare",
-    description: "Human oversight, adoption, and measurement",
-  },
-];
 ---
 
 <section class:list={["hero", className]} aria-labelledby="hero-title">
@@ -62,29 +44,6 @@ const operatingSignals = [
         }
       </div>
     </div>
-
-    <aside class="hero-system" aria-labelledby="hero-system-title">
-      <div class="hero-system-heading">
-        <span class="signal-dot" aria-hidden="true"></span>
-        <p id="hero-system-title">Operating sequence</p>
-      </div>
-
-      <ol>
-        {
-          operatingSignals.map((signal) => (
-            <li>
-              <p class="signal-number" aria-hidden="true">
-                {signal.number}
-              </p>
-              <div>
-                <h2>{signal.label}</h2>
-                <p>{signal.description}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </aside>
   </div>
 </section>
 
@@ -106,7 +65,7 @@ const operatingSignals = [
     display: grid;
     width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
     margin-inline: auto;
-    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    grid-template-columns: minmax(0, 1fr);
     align-items: end;
     gap: clamp(3rem, 9vw, 8rem);
   }
@@ -118,9 +77,7 @@ const operatingSignals = [
     align-items: flex-start;
   }
 
-  .hero-eyebrow,
-  .hero-system-heading p,
-  .signal-number {
+  .hero-eyebrow {
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
@@ -197,73 +154,6 @@ const operatingSignals = [
     color: var(--color-ink);
   }
 
-  .hero-system {
-    overflow: clip;
-    border: var(--border-width) solid var(--color-border-strong);
-    border-block-start: 0.25rem solid var(--color-blue);
-    border-radius: var(--radius-lg);
-    background: color-mix(
-      in oklab,
-      var(--color-blue) 4%,
-      var(--color-surface-pure)
-    );
-  }
-
-  .hero-system-heading {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 1.25rem 1.5rem;
-    border-block-end: var(--border-width) solid var(--color-border);
-  }
-
-  .signal-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    flex: 0 0 auto;
-    border-radius: 50%;
-    background: #ffce31;
-  }
-
-  .hero-system ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .hero-system li {
-    display: grid;
-    grid-template-columns: 2.25rem minmax(0, 1fr);
-    gap: 0.75rem;
-    padding: 1.25rem 1.5rem;
-  }
-
-  .hero-system li:not(:last-child) {
-    border-block-end: var(--border-width) solid var(--color-border);
-  }
-
-  .signal-number {
-    color: var(--color-text-muted);
-  }
-
-  .hero-system h2 {
-    margin: 0;
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-semibold);
-    line-height: 1.4;
-  }
-
-  .hero-system li div p {
-    margin: 0.35rem 0 0;
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-small);
-    line-height: 1.55;
-    text-wrap: pretty;
-  }
-
   :where(.button):focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus);
     outline-offset: var(--focus-ring-offset);
@@ -287,24 +177,6 @@ const operatingSignals = [
       align-items: start;
       gap: 3rem;
     }
-
-    .hero-system {
-      width: 100%;
-    }
-
-    .hero-system ol {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .hero-system li {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-system li:not(:last-child) {
-      border-block-end: 0;
-      border-inline-end: var(--border-width) solid var(--color-border);
-    }
   }
 
   @media (max-width: 40rem) {
@@ -316,19 +188,6 @@ const operatingSignals = [
     .button {
       width: 100%;
     }
-
-    .hero-system ol {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-system li {
-      grid-template-columns: 2.25rem minmax(0, 1fr);
-    }
-
-    .hero-system li:not(:last-child) {
-      border-inline-end: 0;
-      border-block-end: var(--border-width) solid var(--color-border);
-    }
   }
 
   @media (pointer: coarse) {
@@ -338,21 +197,12 @@ const operatingSignals = [
   }
 
   @media (forced-colors: active) {
-    .hero,
-    .hero-system,
-    .hero-system-heading,
-    .hero-system li {
+    .hero {
       border-color: CanvasText;
     }
-
     .hero,
-    .hero-system,
     .button-secondary {
       background: Canvas;
-    }
-
-    .signal-dot {
-      background: Highlight;
     }
   }
 </style>

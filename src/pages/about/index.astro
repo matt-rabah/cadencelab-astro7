@@ -52,29 +52,6 @@ const workingPrinciples = [
   },
 ];
 
-const systemLayers = [
-  {
-    label: "Customer reality",
-    description:
-      "What customers are trying to do, where they get stuck, and what the problem costs them.",
-  },
-  {
-    label: "Frontline work",
-    description:
-      "The decisions, handoffs, and service habits that shape what happens next.",
-  },
-  {
-    label: "Systems and signals",
-    description:
-      "The CRM data, workflows, automation, and feedback people rely on to act.",
-  },
-  {
-    label: "Ownership and results",
-    description:
-      "Who makes the decision, who owns the outcome, and how the team knows the change worked.",
-  },
-];
-
 const cadenceLabBrings = [
   "One clear diagnostic question, not a broad consulting exercise.",
   "A view across customer friction, teams, workflows, systems, and ownership.",
@@ -94,7 +71,8 @@ const engagementRequires = [
   title="About Matt Rabah and Cadence Lab | Customer Experience"
   description="Meet Matt Rabah, founder of Cadence Lab. Learn how he helps organizations fix customer experience problems across teams, CRM workflows, lifecycle risk, and AI."
   canonicalURL="/about/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
 
   <main id="main-content" class="about-page" tabindex="-1">
@@ -104,13 +82,15 @@ const engagementRequires = [
           <p class="eyebrow">About Cadence Lab</p>
 
           <h1 id="about-title">
-            Customer problems don’t stay in one department.
+            Work directly with the person doing the work.
           </h1>
 
           <p class="hero-lead">
-            I’m Matt Rabah. I help organizations find where customer experience
-            breaks across teams, systems, and decisions, then turn what we learn
-            into practical change.
+            I’m Matt Rabah, founder of Cadence Lab. I help organizations
+            understand why customer problems keep coming back and improve the
+            work behind them. Cadence Lab is a solo practice, so you’ll work
+            with me from diagnosis through recommendations, workflow design, and
+            measurement planning.
           </p>
 
           <div class="hero-actions" aria-label="About page actions">
@@ -124,31 +104,6 @@ const engagementRequires = [
             </a>
           </div>
         </div>
-
-        <aside class="premise-note" aria-labelledby="premise-note-title">
-          <p id="premise-note-title" class="note-label">The premise</p>
-
-          <p>
-            Customers experience one company, even when the work crosses many
-            teams. That’s why fixing one touchpoint rarely fixes the whole
-            problem.
-          </p>
-
-          <dl>
-            <div>
-              <dt>Start with</dt>
-              <dd>What customers are experiencing</dd>
-            </div>
-            <div>
-              <dt>Make visible</dt>
-              <dd>Where the work breaks down</dd>
-            </div>
-            <div>
-              <dt>Decide</dt>
-              <dd>What to fix first</dd>
-            </div>
-          </dl>
-        </aside>
       </div>
     </section>
 
@@ -157,7 +112,6 @@ const engagementRequires = [
         { label: "Founder", href: "#founder" },
         { label: "Point of view", href: "#point-of-view" },
         { label: "How I work", href: "#working-standard" },
-        { label: "System view", href: "#system-view" },
         { label: "Fit", href: "#engagement-fit" },
       ]}
     />
@@ -165,66 +119,31 @@ const engagementRequires = [
     <section
       id="founder"
       class="founder-profile"
-      aria-labelledby="founder-title">
+      aria-labelledby="official-bio-title"
+    >
       <div class="page-container founder-layout">
-        <div class="founder-card">
-          <figure
-            class="founder-portrait"
-            data-image-slot="founder-portrait"
-            aria-hidden="true">
-            <div class="founder-portrait-frame">
-              <p class="image-slot-label">Future portrait</p>
-              <p class="image-slot-direction">
-                Matt Rabah in a direct, natural working portrait with a quiet
-                background and clear eye contact.
-              </p>
-            </div>
-            <figcaption>Portrait crop · 4:5</figcaption>
-          </figure>
-
-          <div class="founder-summary">
-            <p class="eyebrow">Founder &amp; CXO</p>
-            <h2 id="founder-title">Matt Rabah</h2>
-            <p>
-              I’ve spent 12 years in customer experience and customer success. I
-              started Cadence Lab to help organizations understand why customer
-              problems keep coming back and fix the way the work gets done.
-            </p>
-          </div>
-        </div>
-
         <div class="official-bio" aria-labelledby="official-bio-title">
-          <p class="eyebrow">Official bio</p>
+          <p class="eyebrow">Experience</p>
           <h2 id="official-bio-title">
-            Experience across the full customer journey.
+            Twelve years across customer experience and customer success.
           </h2>
 
           <div class="bio-copy">
             <p>
-              Matt Rabah is the Founder and CXO of Cadence Lab, an independent
-              customer experience practice. He works directly with organizations
-              on service operations, customer lifecycle programs, CRM workflows,
-              and practical AI adoption.
+              My work spans service operations, customer lifecycle programs, CRM
+              workflows, and practical AI adoption.
             </p>
 
             <p>
-              His background includes 12 years in customer experience and
-              customer success. His work has included Salesforce, HubSpot,
-              Gainsight, Zendesk, Delighted, and Oracle.
+              I’ve worked with Salesforce, HubSpot, Gainsight, Zendesk,
+              Delighted, and Oracle.
             </p>
 
             <p>
-              Matt’s AI experience includes ChatGPT, Gemini, Claude, local
-              models, Salesforce Agentforce, and building task-specific agents.
-              He helps organizations choose useful applications, define where
-              people need to stay involved, and prepare the workflows and data
-              those applications need.
-            </p>
-
-            <p>
-              Cadence Lab is a solo practice, and Matt leads every engagement.
-              Clients work with him from the first diagnosis through
-              recommendations, workflow design, and measurement planning.
+              My AI experience includes ChatGPT, Gemini, Claude, local models,
+              Salesforce Agentforce, and task-specific agents. I help teams
+              choose useful applications, define where people stay involved, and
+              prepare the workflows and data those applications need.
             </p>
           </div>
         </div>
@@ -234,7 +153,8 @@ const engagementRequires = [
     <section
       id="point-of-view"
       class="point-of-view"
-      aria-labelledby="point-of-view-title">
+      aria-labelledby="point-of-view-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
@@ -275,7 +195,8 @@ const engagementRequires = [
     <section
       id="working-standard"
       class="working-standard"
-      aria-labelledby="working-standard-title">
+      aria-labelledby="working-standard-title"
+    >
       <div class="page-container standard-layout">
         <div class="standard-intro">
           <p class="eyebrow eyebrow-inverse">How I work</p>
@@ -307,46 +228,10 @@ const engagementRequires = [
     </section>
 
     <section
-      id="system-view"
-      class="system-view"
-      aria-labelledby="system-view-title">
-      <div class="page-container system-layout">
-        <div class="system-intro">
-          <p class="eyebrow">System view</p>
-          <h2 id="system-view-title">
-            Follow the problem from the customer to the root cause.
-          </h2>
-          <p>
-            I trace each problem through four connected layers. This keeps the
-            customer experience visible while we look deeper into the work,
-            technology, ownership, and results.
-          </p>
-        </div>
-
-        <ol class="system-sequence">
-          {
-            systemLayers.map((layer, index) => (
-              <li>
-                <article>
-                  <p class="sequence-number" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <div>
-                    <h3>{layer.label}</h3>
-                    <p>{layer.description}</p>
-                  </div>
-                </article>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section
       id="engagement-fit"
       class="engagement-boundaries"
-      aria-labelledby="boundaries-title">
+      aria-labelledby="boundaries-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
@@ -446,7 +331,7 @@ const engagementRequires = [
 
   .founder-layout {
     display: grid;
-    grid-template-columns: minmax(16rem, 0.68fr) minmax(0, 1.32fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(3rem, 8vw, 8rem);
     align-items: start;
   }
@@ -462,53 +347,6 @@ const engagementRequires = [
 
   .founder-card {
     gap: 1.75rem;
-  }
-
-  .founder-portrait {
-    margin: 0;
-  }
-
-  .founder-portrait-frame {
-    display: flex;
-    min-height: 24rem;
-    aspect-ratio: 4 / 5;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    padding: clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid var(--color-border-strong);
-    background: var(--color-surface-subtle);
-  }
-
-  .image-slot-label,
-  .image-slot-direction,
-  .founder-portrait figcaption {
-    margin: 0;
-    font-family: var(--font-sans);
-  }
-
-  .image-slot-label {
-    color: var(--color-blue);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
-    line-height: 1.4;
-    letter-spacing: var(--ls-eyebrow);
-    text-transform: uppercase;
-  }
-
-  .image-slot-direction {
-    max-width: 30rem;
-    color: var(--color-ink);
-    font-size: var(--fs-small);
-    line-height: 1.5;
-    text-wrap: pretty;
-  }
-
-  .founder-portrait figcaption {
-    margin-top: 0.625rem;
-    color: var(--color-text-muted);
-    font-size: 0.75rem;
-    line-height: 1.4;
   }
 
   .founder-summary {
@@ -552,7 +390,7 @@ const engagementRequires = [
 
   .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.65fr);
+    grid-template-columns: minmax(0, 1fr);
     align-items: end;
     gap: clamp(3rem, 8vw, 8rem);
   }
@@ -1055,10 +893,6 @@ const engagementRequires = [
 
     .founder-card {
       max-width: 38rem;
-    }
-
-    .founder-portrait {
-      max-width: 28rem;
     }
 
     .premise-note {
