@@ -155,8 +155,8 @@ const limitedFit = [
             <a class="button button-primary" href="/fit-check/">
               Start a fit check
             </a>
-            <a class="button button-text" href="#questions">
-              Review the diagnostic
+            <a class="button button-text" href="#outputs">
+              See what you receive
             </a>
           </div>
         </div>
@@ -178,9 +178,8 @@ const limitedFit = [
 
     <SectionNav
       items={[
-        { label: "Questions", href: "#questions" },
-        { label: "Scope", href: "#scope" },
         { label: "Outputs", href: "#outputs" },
+        { label: "Explore", href: "#questions" },
         { label: "Fit", href: "#fit" },
         { label: "Next step", href: "#next-step" },
       ]}
@@ -206,23 +205,29 @@ const limitedFit = [
           </p>
         </div>
 
-        <ol class="question-list" role="list">
-          {
-            diagnosticQuestions.map((item) => (
-              <li>
-                <article class="question">
-                  <p class="item-number" aria-hidden="true">
-                    {item.number}
-                  </p>
-                  <div>
-                    <h3>{item.question}</h3>
-                    <p>{item.explanation}</p>
-                  </div>
-                </article>
-              </li>
-            ))
-          }
-        </ol>
+        <details class="diagnostic-disclosure" name="diagnostic-details">
+          <summary>
+            <span>Questions this diagnostic answers</span>
+            <span class="summary-action">View questions</span>
+          </summary>
+          <ol class="question-list" role="list">
+            {
+              diagnosticQuestions.map((item) => (
+                <li>
+                  <article class="question">
+                    <p class="item-number" aria-hidden="true">
+                      {item.number}
+                    </p>
+                    <div>
+                      <h3>{item.question}</h3>
+                      <p>{item.explanation}</p>
+                    </div>
+                  </article>
+                </li>
+              ))
+            }
+          </ol>
+        </details>
       </div>
     </section>
 
@@ -244,30 +249,36 @@ const limitedFit = [
           </p>
         </div>
 
-        <ul class="evidence-grid" role="list">
-          {
-            evidenceAreas.map((area, index) => (
-              <li>
-                <article>
-                  <p class="item-number" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3>{area.title}</h3>
-                  <p>{area.description}</p>
-                </article>
-              </li>
-            ))
-          }
-        </ul>
+        <details class="diagnostic-disclosure" name="diagnostic-details">
+          <summary>
+            <span>Evidence we review</span>
+            <span class="summary-action">View evidence</span>
+          </summary>
+          <ul class="evidence-grid" role="list">
+            {
+              evidenceAreas.map((area, index) => (
+                <li>
+                  <article>
+                    <p class="item-number" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{area.title}</h3>
+                    <p>{area.description}</p>
+                  </article>
+                </li>
+              ))
+            }
+          </ul>
 
-        <aside class="scope-note" aria-labelledby="scope-note-title">
-          <h3 id="scope-note-title">Signals before scores</h3>
-          <p>
-            A health score is useful only when you understand its inputs and it
-            changes a real decision. The review separates evidence from
-            assumptions and shows where missing data limits confidence.
-          </p>
-        </aside>
+          <aside class="scope-note" aria-labelledby="scope-note-title">
+            <h3 id="scope-note-title">Signals before scores</h3>
+            <p>
+              A health score is useful only when you understand its inputs and
+              it changes a real decision. The review separates evidence from
+              assumptions and shows where missing data limits confidence.
+            </p>
+          </aside>
+        </details>
       </div>
     </section>
 
@@ -612,6 +623,60 @@ const limitedFit = [
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  .diagnostic-disclosure {
+    border-block: var(--border-width) solid var(--color-border-strong);
+  }
+
+  .diagnostic-disclosure + .diagnostic-disclosure {
+    margin-top: calc(-1 * var(--border-width));
+  }
+
+  .diagnostic-disclosure summary {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .diagnostic-disclosure summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary-action {
+    flex: none;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+  }
+
+  .summary-action::after {
+    display: inline-block;
+    margin-left: 0.65rem;
+    content: "+";
+  }
+
+  .diagnostic-disclosure[open] .summary-action::after {
+    content: "−";
+  }
+
+  .diagnostic-disclosure summary:focus-visible {
+    outline: 0.1875rem solid var(--color-blue);
+    outline-offset: 0.35rem;
+  }
+
+  .diagnostic-disclosure .question-list,
+  .diagnostic-disclosure .evidence-grid {
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .question-list {
