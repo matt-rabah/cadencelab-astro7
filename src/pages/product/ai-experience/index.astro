@@ -313,6 +313,37 @@ const page = {
     ],
   },
 };
+
+const simplifiedPage = {
+  ...page,
+  hero: {
+    ...page.hero,
+    primaryCta: { label: "Start a fit check", href: "/fit-check/" },
+    secondaryCta: { label: "See what you receive", href: "#outputs" },
+  },
+  signals: {
+    ...page.signals,
+    items: [
+      page.signals.items[0],
+      page.signals.items[1],
+      page.signals.items[3],
+    ],
+  },
+  framework: undefined,
+  path: {
+    ...page.path,
+    items: [page.path.items[0], page.path.items[2], page.path.items[4]],
+  },
+  evidence: {
+    ...page.evidence,
+    items: [
+      page.evidence.items[0],
+      page.evidence.items[2],
+      page.evidence.items[5],
+    ],
+  },
+  failures: undefined,
+};
 ---
 
-<StructuredCapabilityPage {...page} />
+<StructuredCapabilityPage {...simplifiedPage} simplified />

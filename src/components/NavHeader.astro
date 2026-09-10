@@ -49,9 +49,9 @@ const navigationGroups: NavigationGroup[] = [
     ],
   },
   {
-    label: "Product",
+    label: "Experience design",
     menuId: "product-menu",
-    eyebrow: "Product",
+    eyebrow: "Experience design",
     heading: "Build experiences that work in practice",
     description:
       "Explore focused experience offerings designed around the systems, moments, and decisions that shape how people interact with organizations.",
@@ -156,7 +156,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               class="search-input"
               type="search"
               name="q"
-              placeholder="Search insights and resources"
+              placeholder="Search insights"
               aria-keyshortcuts="Meta+K Control+K"
             />
 
@@ -247,18 +247,6 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
           <ul class="primary-navigation-list" role="list">
             <li>
               <a
-                href="/fit-check/"
-                class="primary-link"
-                aria-current={isCurrentSection("/fit-check/")
-                  ? "page"
-                  : undefined}
-              >
-                Fit Check™
-              </a>
-            </li>
-
-            <li>
-              <a
                 href="/services/"
                 class="primary-link"
                 aria-current={isCurrentSection("/services/")
@@ -270,7 +258,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             </li>
 
             {
-              navigationGroups.slice(0, 3).map((group) => (
+              navigationGroups.slice(1, 3).map((group) => (
                 <li
                   class="navigation-group"
                   data-navigation-group
@@ -377,92 +365,30 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               </a>
             </li>
 
-            {
-              navigationGroups.slice(3).map((group) => (
-                <li
-                  class="navigation-group"
-                  data-navigation-group
-                  data-current-section={
-                    groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
-                  <button
-                    class="navigation-trigger"
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls={group.menuId}
-                  >
-                    <span>{group.label}</span>
-                    {groupIsCurrent(group) && (
-                      <span class="visually-hidden">, current section</span>
-                    )}
-                    <svg
-                      class="expand-icon"
-                      aria-hidden="true"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m5 7.5 5 5 5-5"
-                      />
-                    </svg>
-                  </button>
-
-                  <div
-                    id={group.menuId}
-                    class="mega-menu mega-menu-compact"
-                    data-mega-menu
-                    hidden
-                  >
-                    <div class="mega-menu-inner mega-menu-inner-compact">
-                      <div class="featured-column">
-                        <p class="menu-label">{group.eyebrow}</p>
-                        <p class="menu-heading">{group.heading}</p>
-                        <p class="menu-description">{group.description}</p>
-                      </div>
-
-                      <div class="link-column">
-                        <p class="menu-label">{group.label}</p>
-                        <ul class="menu-link-list" role="list">
-                          {group.items.map((item) => (
-                            <li>
-                              <a
-                                href={item.href}
-                                aria-current={
-                                  isCurrentSection(item.href)
-                                    ? "page"
-                                    : undefined
-                                }
-                              >
-                                <span class="menu-link-label">
-                                  {item.label}
-                                </span>
-                                {item.status && (
-                                  <span class="menu-status">{item.status}</span>
-                                )}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))
-            }
+            <li>
+              <a
+                class="primary-link"
+                href="/about/"
+                aria-current={isCurrentPage("/about/") ? "page" : undefined}
+                >About</a>
+            </li>
+            <li>
+              <a
+                class="primary-link"
+                href="/resources/ai-tools/"
+                aria-current={isCurrentSection("/resources/ai-tools/")
+                  ? "page"
+                  : undefined}>Free resources</a>
+            </li>
           </ul>
         </nav>
 
         <a
-          href="/contact/"
+          href="/fit-check/"
           class="header-cta"
-          aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+          aria-current={isCurrentPage("/fit-check/") ? "page" : undefined}
         >
-          Start a conversation
+          Start a Fit Check
         </a>
       </div>
     </div>
@@ -555,7 +481,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             class="mobile-search-input"
             type="search"
             name="q"
-            placeholder="Search insights and resources"
+            placeholder="Search insights"
           />
           <button class="mobile-search-submit" type="submit">
             <span class="visually-hidden">Submit search</span>
@@ -601,7 +527,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
           </li>
 
           {
-            navigationGroups.slice(0, 3).map((group) => (
+            navigationGroups.slice(1, 3).map((group) => (
               <li>
                 <details
                   class="mobile-navigation-group"
@@ -664,59 +590,21 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             </a>
           </li>
 
-          {
-            navigationGroups.slice(3).map((group) => (
-              <li>
-                <details
-                  class="mobile-navigation-group"
-                  data-current-section={
-                    groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
-                  <summary>
-                    <span>{group.label}</span>
-                    {groupIsCurrent(group) && (
-                      <span class="visually-hidden">, current section</span>
-                    )}
-                    <svg
-                      class="mobile-expand-icon"
-                      aria-hidden="true"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m5 7.5 5 5 5-5"
-                      />
-                    </svg>
-                  </summary>
-
-                  <ul class="mobile-submenu" role="list">
-                    {group.items.map((item) => (
-                      <li>
-                        <a
-                          href={item.href}
-                          aria-current={
-                            isCurrentSection(item.href) ? "page" : undefined
-                          }
-                        >
-                          <span>{item.label}</span>
-                          {item.status && (
-                            <span class="mobile-menu-status">
-                              {item.status}
-                            </span>
-                          )}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-            ))
-          }
+          <li>
+            <a
+              class="mobile-primary-link"
+              href="/about/"
+              aria-current={isCurrentPage("/about/") ? "page" : undefined}
+              >About</a>
+          </li>
+          <li>
+            <a
+              class="mobile-primary-link"
+              href="/resources/ai-tools/"
+              aria-current={isCurrentSection("/resources/ai-tools/")
+                ? "page"
+                : undefined}>Free resources</a>
+          </li>
         </ul>
       </nav>
 

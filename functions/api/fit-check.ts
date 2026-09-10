@@ -81,6 +81,7 @@ const crmOptions: Record<string, string> = {
   "active-limited": "We collect data, but teams do not use it consistently",
   fragmented: "Data quality or ownership varies across teams",
   early: "We are still building how we use the CRM",
+  "no-crm": "We do not use a CRM or central customer record",
   unknown: "We do not know whether the data is reliable enough",
 };
 
@@ -163,7 +164,7 @@ function validateSubmission(formData: FormData): ValidationResult {
   const crm = readChoice(
     formData,
     "crm",
-    "Primary platform",
+    "Customer data usefulness",
     crmOptions,
     errors,
   );
@@ -252,7 +253,7 @@ function formatSubmission(submission: FitCheckSubmission): string {
     "",
     "OPERATING ENVIRONMENT",
     `Environment: ${submission.environment}`,
-    `CRM data usefulness: ${submission.crm}`,
+    `Customer data usefulness: ${submission.crm}`,
     "",
     "READINESS",
     `Leadership alignment: ${submission.leadership}`,
@@ -276,7 +277,7 @@ function formatSubmitterCopy(submission: FitCheckSubmission): string {
     "",
     "OPERATING ENVIRONMENT",
     `Environment: ${submission.environment}`,
-    `CRM data usefulness: ${submission.crm}`,
+    `Customer data usefulness: ${submission.crm}`,
     "",
     "READINESS",
     `Leadership alignment: ${submission.leadership}`,

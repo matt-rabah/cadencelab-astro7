@@ -2,7 +2,6 @@
 import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
-import TabbedPanels from "../../components/TabbedPanels.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const diagnostics = [
@@ -12,12 +11,8 @@ const diagnostics = [
     name: "CX Systems Diagnostic",
     situation:
       "Customers get inconsistent service, repeat themselves, or wait too long, but no team can see where the problem starts.",
-    examines:
-      "Customer and team touchpoints, handoffs, ownership, CRM signals, service rules, and the systems that shape the experience.",
     output:
       "A map of where friction occurs, who owns each part, which issues matter most, and what to fix first.",
-    continuation:
-      "Service redesign, workflow cleanup, better customer signals, or AI-supported routing and summaries.",
     linkLabel: "See the CX Systems Diagnostic",
     href: "/services/cx-systems-diagnostic/",
   },
@@ -27,12 +22,8 @@ const diagnostics = [
     name: "Lifecycle Risk Review",
     situation:
       "Onboarding drifts, accounts become quiet, adoption falls, or renewal risk appears when there is little time left to act.",
-    examines:
-      "Lifecycle stages, risk and health signals, handoffs, escalation paths, response rules, and missing customer context.",
     output:
       "A lifecycle risk model, a list of useful signals, a response map, and clear recommendations for earlier action.",
-    continuation:
-      "Better onboarding, stronger account health, earlier renewal planning, or a more useful customer success rhythm.",
     linkLabel: "See the Lifecycle Risk Review",
     href: "/services/lifecycle-risk-review/",
   },
@@ -42,12 +33,8 @@ const diagnostics = [
     name: "CRM Workflow Audit",
     situation:
       "The CRM contains fields, notes, activity, and dashboards, but teams still rely on spreadsheets, messages, and memory to get the work done.",
-    examines:
-      "How people use the CRM, field and data quality, automation, handoffs, reporting, ownership, and frontline workarounds.",
     output:
       "A map of the current workflow, clear data and adoption findings, a cleanup plan, and requirements for a CRM people can trust.",
-    continuation:
-      "CRM workflow redesign, segmentation, outreach and escalation rules, better reporting, or adoption support.",
     linkLabel: "See the CRM Workflow Audit",
     href: "/services/crm-workflow-audit/",
   },
@@ -57,49 +44,10 @@ const diagnostics = [
     name: "AI Service Readiness Review",
     situation:
       "Your team is considering AI for service, customer success, or operations, but the workflow, data, and human decision rules are not ready.",
-    examines:
-      "Use-case fit, workflow readiness, data needs, human review, governance, adoption risk, trust, and success measures.",
     output:
       "A clear readiness decision, a map of where people stay involved, required guardrails, and a practical order for implementation.",
-    continuation:
-      "AI-assisted summaries, routing support, knowledge workflows, service visibility, or a focused decision-support pilot.",
     linkLabel: "See the AI Service Readiness Review",
     href: "/services/ai-service-readiness-review/",
-  },
-];
-
-const selectionGuide = [
-  {
-    number: "01",
-    cue: "Customers get stuck between teams and systems",
-    choice: "CX Systems Diagnostic",
-    decision: "Where does the problem start, and what should change first?",
-    linkLabel: "Find the source of customer friction",
-    href: "#cx-systems-diagnostic",
-  },
-  {
-    number: "02",
-    cue: "Risk becomes visible too late",
-    choice: "Lifecycle Risk Review",
-    decision: "Which early signals matter, and who should act on them?",
-    linkLabel: "Find earlier risk signals",
-    href: "#lifecycle-risk-review",
-  },
-  {
-    number: "03",
-    cue: "Teams record work in the CRM but do not trust it",
-    choice: "CRM Workflow Audit",
-    decision: "What keeps the CRM from supporting the work?",
-    linkLabel: "Find the CRM workflow gaps",
-    href: "#crm-workflow-audit",
-  },
-  {
-    number: "04",
-    cue: "The AI idea is ahead of the workflow",
-    choice: "AI Service Readiness Review",
-    decision: "Is this use case ready, and what must be fixed first?",
-    linkLabel: "Check AI service readiness",
-    href: "#ai-service-readiness-review",
   },
 ];
 
@@ -157,7 +105,8 @@ const evidenceStandards = [
   title="Customer Experience Diagnostic Services | Cadence Lab"
   description="Compare four Cadence Lab diagnostics for customer experience systems, lifecycle risk, CRM workflows, and AI service readiness. Find what to fix first."
   canonicalURL="/services/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
 
   <main id="main-content" class="services-page" tabindex="-1">
@@ -204,7 +153,6 @@ const evidenceStandards = [
     <SectionNav
       items={[
         { label: "Diagnostics", href: "#diagnostics" },
-        { label: "Find your match", href: "#selection" },
         { label: "How it works", href: "#working-model" },
         { label: "Working standards", href: "#evidence" },
         { label: "Fit check", href: "#fit-check" },
@@ -214,7 +162,8 @@ const evidenceStandards = [
     <section
       id="diagnostics"
       class="diagnostics section-block"
-      aria-labelledby="diagnostics-title">
+      aria-labelledby="diagnostics-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
@@ -231,96 +180,46 @@ const evidenceStandards = [
           </p>
         </div>
 
-        <TabbedPanels
-          idPrefix="services-diagnostics"
-          label="Compare diagnostic services"
-          panels={diagnostics.map((diagnostic) => ({
-            id: diagnostic.id,
-            label: diagnostic.name,
-            number: diagnostic.number,
-            title: diagnostic.name,
-            details: [
-              {
-                label: "Choose this when",
-                value: diagnostic.situation,
-              },
-              {
-                label: "What we examine",
-                value: diagnostic.examines,
-              },
-              {
-                label: "What you receive",
-                value: diagnostic.output,
-              },
-              {
-                label: "What can follow",
-                value: diagnostic.continuation,
-              },
-            ],
-            link: {
-              label: diagnostic.linkLabel,
-              href: diagnostic.href,
-            },
-          }))}
-        />
-      </div>
-    </section>
-
-    <section
-      id="selection"
-      class="selection section-block"
-      aria-labelledby="selection-title">
-      <div class="page-container section-stack section-stack-compact">
-        <div class="section-intro section-intro-split">
-          <div>
-            <p class="eyebrow">Find your match</p>
-            <h2 id="selection-title">
-              Choose the problem you need to understand first.
-            </h2>
-          </div>
-
-          <p>
-            You may recognize more than one problem. Start with the one blocking
-            the most important decision. The first diagnostic can show whether
-            another review is needed later.
-          </p>
-        </div>
-
-        <ul class="selection-list" role="list">
+        <ul class="diagnostic-list" role="list">
           {
-            selectionGuide.map((item) => (
-              <li>
-                <article>
-                  <div class="selection-meta">
-                    <span class="selection-dot" aria-hidden="true" />
-                    <p class="selection-number" aria-hidden="true">
-                      {item.number}
-                    </p>
-                    <p class="selection-cue">{item.cue}</p>
+            diagnostics.map((diagnostic) => (
+              <li id={diagnostic.id}>
+                <article class="diagnostic">
+                  <div class="diagnostic-heading">
+                    <p class="diagnostic-number">{diagnostic.number}</p>
+                    <h3>{diagnostic.name}</h3>
                   </div>
-                  <h3>{item.choice}</h3>
-                  <p class="selection-decision">{item.decision}</p>
-                  <a href={item.href}>
-                    <span>{item.linkLabel}</span>
-                    <span class="selection-arrow" aria-hidden="true">
-                      &#8594;
-                    </span>
+                  <dl class="diagnostic-body">
+                    <div>
+                      <>
+                        <dt>Choose this when</dt>
+                        <dd>{diagnostic.situation}</dd>
+                      </>
+                    </div>
+                    <div>
+                      <>
+                        <dt>What you receive</dt>
+                        <dd>{diagnostic.output}</dd>
+                      </>
+                    </div>
+                  </dl>
+                  <a class="diagnostic-link" href={diagnostic.href}>
+                    {diagnostic.linkLabel}
+                    <span aria-hidden="true">&#8594;</span>
                   </a>
                 </article>
               </li>
             ))
           }
         </ul>
-        <p class="selection-scroll-hint">
-          Scroll to compare <span aria-hidden="true">&#8594;</span>
-        </p>
       </div>
     </section>
 
     <section
       id="working-model"
       class="working-model section-block"
-      aria-labelledby="working-model-title">
+      aria-labelledby="working-model-title"
+    >
       <div class="page-container working-layout">
         <div class="working-intro">
           <p class="eyebrow">How it works</p>
@@ -393,7 +292,8 @@ const evidenceStandards = [
     <section
       id="fit-check"
       class="fit-check section-block"
-      aria-labelledby="fit-check-title">
+      aria-labelledby="fit-check-title"
+    >
       <div class="page-container fit-check-layout">
         <div>
           <p class="eyebrow">Fit check</p>

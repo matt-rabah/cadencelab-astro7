@@ -250,7 +250,7 @@ if (turnstileSiteKey) {
 
           <div class="input-group">
             <span id="crm-label" class="group-label">
-              How useful is your CRM data today?
+              How useful is your customer data today?
             </span>
 
             <div
@@ -275,6 +275,10 @@ if (turnstileSiteKey) {
               <label class="radio-option">
                 <input type="radio" name="crm" value="early" />
                 <span>We are still building how we use the CRM</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="crm" value="no-crm" />
+                <span>We do not use a CRM or central customer record</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="unknown" />
@@ -619,7 +623,7 @@ if (turnstileSiteKey) {
           step: 1,
           fields: [
             ["environment", "How work happens today"],
-            ["crm", "CRM data usefulness"],
+            ["crm", "Customer data usefulness"],
           ],
         },
         {
