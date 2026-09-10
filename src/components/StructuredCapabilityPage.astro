@@ -31,6 +31,7 @@ interface DiagnosticPath {
   title: string;
   href: string;
   useWhen: string;
+  linkLabel?: string;
 }
 
 interface SectionCopy {
@@ -40,6 +41,7 @@ interface SectionCopy {
 }
 
 interface Props {
+  simplified?: boolean;
   meta: {
     title: string;
     description: string;
@@ -52,19 +54,20 @@ interface Props {
     lead: string;
     primaryCta: { label: string; href: string };
     secondaryCta?: { label: string; href: string };
-    trigger: {
+    trigger?: {
       introduction: string;
       items: Array<{ label: string; value: string }>;
     };
   };
   signals: SectionCopy & { items: Card[] };
-  framework: SectionCopy & { items: LabeledCard[] };
+  framework?: SectionCopy & { items: LabeledCard[] };
   path: SectionCopy & { items: PathStage[] };
   evidence: SectionCopy & {
     items: Card[];
     note: { label: string; description: string };
+    supportingDetails?: Card[];
   };
-  failures: SectionCopy & { items: Card[] };
+  failures?: SectionCopy & { items: Card[] };
   outputs: SectionCopy & { items: Output[] };
   fit: SectionCopy & { items: string[] };
   diagnostics: {
@@ -75,6 +78,7 @@ interface Props {
 }
 
 const {
+  simplified = false,
   meta,
   hero,
   signals,
@@ -97,7 +101,11 @@ const {
   <NavHeader />
   <BreadcrumbSchema currentName={hero.breadcrumb} />
 
-  <main id="main-content" class="structured-page" tabindex="-1">
+  <main
+    id="main-content"
+    class:list={["structured-page", { simplified: simplified }]}
+    tabindex="-1"
+  >
     <section class="structured-hero" aria-labelledby="structured-title">
       <div class="page-container hero-layout">
         <div class="hero-copy">
@@ -127,33 +135,54 @@ const {
           </div>
         </div>
 
-        <aside class="trigger-card" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="note-label">Recognizable trigger</p>
-          <p>{hero.trigger.introduction}</p>
-          <dl>
-            {
-              hero.trigger.items.map((item) => (
-                <div>
-                  <dt>{item.label}</dt>
-                  <dd>{item.value}</dd>
-                </div>
-              ))
-            }
-          </dl>
-        </aside>
+        {
+          !simplified && hero.trigger && (
+            <aside class="trigger-card" aria-labelledby="trigger-title">
+              <p id="trigger-title" class="note-label">
+                Recognizable trigger
+              </p>
+              <p>{hero.trigger.introduction}</p>
+              <dl>
+                {hero.trigger.items.map((item) => (
+                  <div>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
+          )
+        }
       </div>
     </section>
 
     <SectionNav
-      items={[
-        { label: "Signals", href: "#signals" },
-        { label: framework.eyebrow, href: "#framework" },
-        { label: path.eyebrow, href: "#operating-path" },
-        { label: "Evidence", href: "#evidence" },
-        { label: "Failure patterns", href: "#failure-patterns" },
-        { label: "Outputs", href: "#outputs" },
-        { label: "Fit", href: "#fit" },
-      ]}
+      items={simplified
+        ? [
+            { label: "When to hire us", href: "#signals" },
+            { label: "What you receive", href: "#outputs" },
+            { label: "How it works", href: "#operating-path" },
+            { label: "What we review", href: "#evidence" },
+            { label: "Fit and next step", href: "#fit" },
+          ]
+        : [
+            { label: "Signals", href: "#signals" },
+            ...(framework
+              ? [{ label: framework.eyebrow, href: "#framework" as const }]
+              : []),
+            { label: path.eyebrow, href: "#operating-path" },
+            { label: "Evidence", href: "#evidence" },
+            ...(failures
+              ? [
+                  {
+                    label: "Failure patterns",
+                    href: "#failure-patterns" as const,
+                  },
+                ]
+              : []),
+            { label: "Outputs", href: "#outputs" },
+            { label: "Fit", href: "#fit" },
+          ]}
     />
 
     <section
@@ -184,33 +213,73 @@ const {
       </div>
     </section>
 
-    <section
-      id="framework"
-      class="framework-section"
-      aria-labelledby="framework-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">{framework.eyebrow}</p>
-          <h2 id="framework-title">{framework.title}</h2>
-          <p>{framework.introduction}</p>
-        </div>
+    {
+      simplified && (
+        <>
+          <section
+            id="outputs"
+            class="outputs section-block"
+            aria-labelledby="outputs-title"
+          >
+            <div class="page-container section-stack">
+              <div class="section-intro">
+                <p class="eyebrow">{outputs.eyebrow}</p>
+                <h2 id="outputs-title">{outputs.title}</h2>
+                <p>{outputs.introduction}</p>
+              </div>
 
-        <TabbedPanels
-          idPrefix="capability-framework"
-          label={framework.eyebrow}
-          theme="dark"
-          panels={framework.items.map((item, index) => ({
-            id: `framework-item-${index + 1}`,
-            label: item.label,
-            number: String(index + 1).padStart(2, "0"),
-            eyebrow: item.label,
-            title: item.question,
-            description: item.description,
-          }))}
-        />
-      </div>
-    </section>
+              <ol class="output-list">
+                {outputs.items.map((item, index) => (
+                  <li>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        </>
+      )
+    }
+
+    {
+      framework && (
+        <>
+          <section
+            id="framework"
+            class="framework-section"
+            aria-labelledby="framework-title"
+          >
+            <div class="page-container section-stack">
+              <div class="section-intro section-intro-inverse">
+                <p class="eyebrow eyebrow-inverse">{framework.eyebrow}</p>
+                <h2 id="framework-title">{framework.title}</h2>
+                <p>{framework.introduction}</p>
+              </div>
+
+              <TabbedPanels
+                idPrefix="capability-framework"
+                label={framework.eyebrow}
+                theme="dark"
+                panels={framework.items.map((item, index) => ({
+                  id: `framework-item-${index + 1}`,
+                  label: item.label,
+                  number: String(index + 1).padStart(2, "0"),
+                  eyebrow: item.label,
+                  title: item.question,
+                  description: item.description,
+                }))}
+              />
+            </div>
+          </section>
+        </>
+      )
+    }
 
     <section
       id="operating-path"
@@ -258,78 +327,118 @@ const {
           <p>{evidence.introduction}</p>
         </div>
 
-        <div class="card-grid">
-          {
-            evidence.items.map((item, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))
-          }
-        </div>
+        {
+          simplified ? (
+            <TabbedPanels
+              idPrefix="foundations-evidence"
+              label={evidence.eyebrow}
+              variant="line"
+              panels={evidence.items.map((item, index) => ({
+                id: `foundations-evidence-${index + 1}`,
+                label: item.title,
+                title: item.title,
+                description: item.description,
+              }))}
+            />
+          ) : (
+            <div class="card-grid">
+              {evidence.items.map((item, index) => (
+                <article>
+                  <p class="item-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          )
+        }
 
         <div class="evidence-note">
           <p class="note-label">{evidence.note.label}</p>
           <p>{evidence.note.description}</p>
         </div>
-      </div>
-    </section>
-
-    <section
-      id="failure-patterns"
-      class="failure-section"
-      aria-labelledby="failure-title"
-    >
-      <div class="page-container failure-layout">
-        <div class="failure-intro">
-          <p class="eyebrow eyebrow-inverse">{failures.eyebrow}</p>
-          <h2 id="failure-title">{failures.title}</h2>
-          <p>{failures.introduction}</p>
-        </div>
-
-        <div class="failure-list">
-          {
-            failures.items.map((item, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section
-      id="outputs"
-      class="outputs section-block"
-      aria-labelledby="outputs-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro">
-          <p class="eyebrow">{outputs.eyebrow}</p>
-          <h2 id="outputs-title">{outputs.title}</h2>
-          <p>{outputs.introduction}</p>
-        </div>
-
-        <ol class="output-list">
-          {
-            outputs.items.map((item, index) => (
-              <li>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <div>
-                  <h3>{item.title}</h3>
+        {
+          evidence.supportingDetails && (
+            <div class="supporting-details">
+              {evidence.supportingDetails.map((item) => (
+                <details>
+                  <summary>{item.title}</summary>
                   <p>{item.description}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
+                </details>
+              ))}
+            </div>
+          )
+        }
       </div>
     </section>
+
+    {
+      failures && (
+        <>
+          <section
+            id="failure-patterns"
+            class="failure-section"
+            aria-labelledby="failure-title"
+          >
+            <div class="page-container failure-layout">
+              <div class="failure-intro">
+                <p class="eyebrow eyebrow-inverse">{failures.eyebrow}</p>
+                <h2 id="failure-title">{failures.title}</h2>
+                <p>{failures.introduction}</p>
+              </div>
+
+              <div class="failure-list">
+                {failures.items.map((item, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      )
+    }
+
+    {
+      !simplified && (
+        <>
+          <section
+            id="outputs"
+            class="outputs section-block"
+            aria-labelledby="outputs-title"
+          >
+            <div class="page-container section-stack">
+              <div class="section-intro">
+                <p class="eyebrow">{outputs.eyebrow}</p>
+                <h2 id="outputs-title">{outputs.title}</h2>
+                <p>{outputs.introduction}</p>
+              </div>
+
+              <ol class="output-list">
+                {outputs.items.map((item, index) => (
+                  <li>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        </>
+      )
+    }
 
     <section id="fit" class="fit-section" aria-labelledby="fit-title">
       <div class="page-container fit-layout">
@@ -365,7 +474,7 @@ const {
                 <h3>{item.title}</h3>
                 <p>{item.useWhen}</p>
                 <a href={item.href}>
-                  Review the diagnostic
+                  {item.linkLabel ?? `Explore ${item.title}`}
                   <span aria-hidden="true">&#8594;</span>
                 </a>
               </article>
@@ -380,6 +489,71 @@ const {
 </Layout>
 
 <style>
+  /* Opt-in pilot; other capability pages keep their existing layout. */
+  .simplified {
+    --section-space: clamp(3.5rem, 6vw, 5rem);
+  }
+  .simplified .hero-layout {
+    grid-template-columns: 1fr;
+  }
+  .simplified .structured-hero {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .simplified h1 {
+    max-width: 22ch;
+  }
+  .simplified .hero-lead {
+    max-width: 65ch;
+  }
+  .simplified .card-grid,
+  .simplified .diagnostic-grid {
+    border-inline-start: 0;
+    gap: 2rem;
+  }
+  .simplified .card-grid article,
+  .simplified .diagnostic-grid article {
+    border-inline-end: 0;
+    padding-inline: 0;
+  }
+  .simplified .path-marker p {
+    border: 0;
+    border-radius: 0;
+  }
+  .simplified .path-marker span {
+    display: none;
+  }
+  .simplified .path-list li {
+    min-height: 0;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .simplified .fit-list {
+    border: 0;
+    padding: 0;
+    background: transparent;
+  }
+  .simplified .evidence .section-stack {
+    gap: 2rem;
+  }
+  .supporting-details details {
+    border-top: 1px solid var(--color-border);
+  }
+  .supporting-details summary {
+    padding-block: 1.25rem;
+    cursor: pointer;
+    font-weight: var(--fw-medium);
+  }
+  .supporting-details p {
+    max-width: var(--measure-ui);
+    margin: 0 0 1.5rem;
+    line-height: var(--lh-ui);
+    color: var(--color-text-muted);
+  }
+  .supporting-details summary:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
   .structured-page {
     width: 100%;
     overflow: clip;

@@ -27,12 +27,19 @@ interface Props {
   label: string;
   panels: TabPanel[];
   theme?: "light" | "dark";
+  variant?: "default" | "line";
 }
 
-const { idPrefix, label, panels, theme = "light" } = Astro.props;
+const {
+  idPrefix,
+  label,
+  panels,
+  theme = "light",
+  variant = "default",
+} = Astro.props;
 ---
 
-<content-tabs class="content-tabs" data-theme={theme}>
+<content-tabs class="content-tabs" data-theme={theme} data-variant={variant}>
   <div class="tab-list-wrap">
     <div class="tab-list" data-tab-list aria-label={label}>
       {
@@ -529,6 +536,28 @@ const { idPrefix, label, panels, theme = "light" } = Astro.props;
 
   .content-tabs[data-theme="dark"] .panel-link span {
     color: var(--color-green);
+  }
+
+  .content-tabs[data-variant="line"] .tab-list-wrap {
+    border: 0;
+    border-bottom: var(--border-width) solid var(--color-border);
+    border-radius: 0;
+    background: transparent;
+  }
+  .content-tabs[data-variant="line"] .tab-trigger {
+    border: 0;
+    background: transparent;
+  }
+  .content-tabs[data-variant="line"] .tab-trigger::before {
+    display: none;
+  }
+  .content-tabs[data-variant="line"] .tab-panels {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .content-tabs[data-variant="line"] .tab-panel {
+    padding: 1.75rem 0;
   }
 
   @media (hover: hover) {
