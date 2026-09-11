@@ -156,7 +156,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               class="search-input"
               type="search"
               name="q"
-              placeholder="Search insights"
+              placeholder="Search the site"
               aria-keyshortcuts="Meta+K Control+K"
             />
 
@@ -370,7 +370,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 class="primary-link"
                 href="/about/"
                 aria-current={isCurrentPage("/about/") ? "page" : undefined}
-                >About</a>
+                >About</a
+              >
             </li>
             <li>
               <a
@@ -378,7 +379,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 href="/resources/ai-tools/"
                 aria-current={isCurrentSection("/resources/ai-tools/")
                   ? "page"
-                  : undefined}>Free resources</a>
+                  : undefined}>Free resources</a
+              >
             </li>
           </ul>
         </nav>
@@ -481,7 +483,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             class="mobile-search-input"
             type="search"
             name="q"
-            placeholder="Search insights"
+            placeholder="Search the site"
           />
           <button class="mobile-search-submit" type="submit">
             <span class="visually-hidden">Submit search</span>
@@ -595,7 +597,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               class="mobile-primary-link"
               href="/about/"
               aria-current={isCurrentPage("/about/") ? "page" : undefined}
-              >About</a>
+              >About</a
+            >
           </li>
           <li>
             <a
@@ -603,7 +606,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               href="/resources/ai-tools/"
               aria-current={isCurrentSection("/resources/ai-tools/")
                 ? "page"
-                : undefined}>Free resources</a>
+                : undefined}>Free resources</a
+            >
           </li>
         </ul>
       </nav>
