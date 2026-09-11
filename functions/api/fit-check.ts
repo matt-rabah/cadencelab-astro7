@@ -261,6 +261,12 @@ function formatSubmission(submission: FitCheckSubmission): string {
     "",
     "ADDITIONAL CONTEXT",
     submission.additionalContext || "Not provided",
+    "",
+    "HUMAN REVIEW: FITCHECK DECISION BRIEF",
+    "Reply with: observed problem; likely problem class; operating complexity; readiness state; primary constraint; evidence and open questions; one next decision; Cadence Lab path only if appropriate.",
+    "Review problem clarity, operating complexity, evidence readiness, and change readiness. Distinguish reported facts from hypotheses. Do not infer readiness from tools alone.",
+    "States: Clarify first / Align first / Evidence first / Stabilize first / Ready to diagnose / Explore implementation. Explain the state; do not assign a numerical score. Implementation requires supporting diagnosis and scope, not just positive intake answers.",
+    "Use docs/fitcheck-decision-brief.md for the review method and reply template. Send a completed brief, not this internal checklist.",
   ].join("\n");
 }
 
@@ -286,7 +292,7 @@ function formatSubmitterCopy(submission: FitCheckSubmission): string {
     "ADDITIONAL CONTEXT",
     submission.additionalContext || "Not provided",
     "",
-    "Cadence Lab received the same answers. This email is a record of your submission, not an assessment or consulting agreement.",
+    "Cadence Lab received the same answers. Matt will review them and email your free FitCheck Decision Brief separately. This receipt is not your assessment or a consulting agreement.",
     "",
     "You requested this one-time email while submitting the Fit Check. It does not subscribe you to marketing.",
   ].join("\n");
