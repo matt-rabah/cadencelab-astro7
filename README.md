@@ -665,6 +665,8 @@ It does not normally prevent the development server or build from running.
 
 ## Documentation
 
+FitCheck submissions are reviewed manually. Use the [FitCheck Decision Brief method and reply template](docs/fitcheck-decision-brief.md) to deliver the free email brief. The optional automated answer receipt is separate from the assessment.
+
 - [Astro documentation](https://docs.astro.build/)
 - [Astro project structure](https://docs.astro.build/en/basics/project-structure/)
 - [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)

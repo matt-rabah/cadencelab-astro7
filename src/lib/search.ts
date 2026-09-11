@@ -234,12 +234,12 @@ const sitePages: SitePage[] = [
     keywords: "security firewall guardrails approval permissions",
   },
   {
-    title: "Fit Check",
+    title: "FitCheck™ Decision Brief",
     description:
-      "Find out whether your customer experience, CRM, or AI initiative is ready for a useful next step.",
+      "Get a free, human-reviewed decision brief on the likely constraint behind your CX, CRM, workflow, or AI problem and what to do next.",
     category: "Start here",
     href: "/fit-check/",
-    keywords: "engagement assessment contact help project readiness",
+    keywords: "fit check engagement assessment contact help project readiness",
   },
   {
     title: "About Matt Rabah and Cadence Lab",
