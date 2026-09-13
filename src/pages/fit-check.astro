@@ -21,6 +21,7 @@ const { title, subtitle, category } = pageData.data;
 const pageTitle = `${title} | Cadence Lab`;
 
 const pageDescription =
+  pageData.data.description ??
   subtitle ??
   "Use the Fit Check to see whether your customer experience, CRM, or AI initiative is ready for a useful next step.";
 
@@ -65,8 +66,10 @@ if (turnstileSiteKey) {
           <p class="fit-check-intro">{subtitle}</p>
 
           <p class="fit-check-context">
-            Tell me what’s going wrong, what’s getting in the way, and what you
-            need to decide. I’ll tell you plainly whether I can help.
+            Describe the problem before choosing a service. Matt reviews your
+            answers and sends a FitCheck™ Decision Brief: what may be blocking
+            progress, what needs clarification, and the smallest useful next
+            step.
           </p>
         </header>
 
@@ -79,7 +82,7 @@ if (turnstileSiteKey) {
             </div>
             <div>
               <dt>What happens next</dt>
-              <dd>I’ll review your answers and reply directly.</dd>
+              <dd>A free decision brief by email, reviewed by Matt.</dd>
             </div>
             <div>
               <dt>Privacy</dt>
@@ -88,6 +91,95 @@ if (turnstileSiteKey) {
           </dl>
         </aside>
       </div>
+
+      <section class="decision-overview" aria-labelledby="decision-title">
+        <h2 id="decision-title">A next decision you can use.</h2>
+        <p>
+          Your recommendation may be a free resource, an internal step, a
+          focused diagnostic, or a discussion about implementation. Sometimes
+          the answer is “not yet.” You keep the brief whether or not we work
+          together.
+        </p>
+        <a href="#fit-check-form-title">Start your FitCheck™ ↓</a>
+        <details>
+          <summary>What goes into your decision brief?</summary>
+          <dl>
+            <div>
+              <dt>Problem clarity</dt><dd>
+                What outcome is failing, and what is still only a suspected
+                cause?
+              </dd>
+            </div>
+            <div>
+              <dt>Operating complexity</dt><dd>
+                Which teams, systems, and handoffs touch the problem?
+              </dd>
+            </div>
+            <div>
+              <dt>Evidence readiness</dt><dd>
+                What information could help distinguish the symptom from its
+                cause?
+              </dd>
+            </div>
+            <div>
+              <dt>Change readiness</dt><dd>
+                Who owns the decision, and can they change how the work happens?
+              </dd>
+            </div>
+          </dl>
+          <p>
+            The brief records the problem as you described it, a likely
+            constraint, a readiness state, the reasoning and open questions, and
+            one recommended next decision. A Cadence Lab service is included
+            only when it fits.
+          </p>
+        </details>
+        <details>
+          <summary>What might your result recommend?</summary>
+          <dl>
+            <div>
+              <dt>Clarify first</dt><dd>
+                Define the affected customer or team and the outcome that needs
+                to change.
+              </dd>
+            </div>
+            <div>
+              <dt>Align first</dt><dd>
+                Agree on decision ownership across the teams involved.
+              </dd>
+            </div>
+            <div>
+              <dt>Evidence first</dt><dd>
+                Gather a small, relevant sample before choosing a cause or
+                solution.
+              </dd>
+            </div>
+            <div>
+              <dt>Stabilize first</dt><dd>
+                Make the current workflow dependable enough to assess or
+                automate.
+              </dd>
+            </div>
+            <div>
+              <dt>Ready to diagnose</dt><dd>
+                There is a meaningful question, an owner, and room to act on the
+                findings.
+              </dd>
+            </div>
+            <div>
+              <dt>Explore implementation</dt><dd>
+                An existing diagnosis may support delivery; confirm its evidence
+                and scope first.
+              </dd>
+            </div>
+          </dl>
+          <p>
+            This is a human assessment of what you share, not a numerical score
+            or a verified root-cause diagnosis. If the evidence is insufficient,
+            the brief will say what is missing.
+          </p>
+        </details>
+      </section>
 
       <form
         class="fit-check-form"
@@ -107,7 +199,7 @@ if (turnstileSiteKey) {
         </div>
 
         <h2 id="fit-check-form-title" class="visually-hidden">
-          Fit check form
+          Start your FitCheck™
         </h2>
 
         <div class="form-progress" data-form-progress hidden>
@@ -905,6 +997,56 @@ if (turnstileSiteKey) {
 </Layout>
 
 <style>
+  @media (min-width: 64.001rem) {
+    .fit-check-introduction {
+      grid-row: span 2;
+    }
+    .fit-check-form {
+      grid-column: 2;
+    }
+  }
+  .decision-overview {
+    display: grid;
+    gap: 1rem;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+  .decision-overview h2,
+  .decision-overview p {
+    margin: 0;
+  }
+  .decision-overview > p {
+    max-width: 70ch;
+  }
+  .decision-overview a {
+    color: var(--color-blue);
+    text-underline-offset: 0.2em;
+  }
+  .decision-overview details {
+    border-block-start: var(--border-width) solid var(--color-border);
+    padding-block: 1rem;
+  }
+  .decision-overview summary {
+    cursor: pointer;
+    font-weight: var(--fw-medium);
+  }
+  .decision-overview summary:focus-visible,
+  .decision-overview a:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 4px;
+  }
+  .decision-overview dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 1.25rem;
+  }
+  .decision-overview dt {
+    font-weight: var(--fw-medium);
+  }
+  .decision-overview dd {
+    margin: 0.25rem 0 0;
+    color: var(--color-text-muted);
+  }
   .fit-check-page {
     width: 100%;
     padding-block: clamp(4rem, 9vw, 7rem);

@@ -9,7 +9,7 @@ const entries = await getSearchEntries();
 
 <Layout
   title="Search | Cadence Lab"
-  description="Search published Cadence Lab insights by customer experience, AI, CRM, data, workflow, or operating problem."
+  description="Search Cadence Lab services, free tools, workflow guides, solutions, and insights by customer experience, AI, CRM, data, or operating problem."
   canonicalURL="/search/"
   noindex={true}
 >
@@ -21,15 +21,15 @@ const entries = await getSearchEntries();
         <p class="search-eyebrow">Search</p>
         <h1>Find the idea you need.</h1>
         <p>
-          Search published insights by problem, topic, or category. Plain
-          language works just fine.
+          Search services, free tools, workflow guides, solutions, and insights
+          by problem or topic. Plain language works just fine.
         </p>
       </header>
 
       <section class="search-interface" aria-labelledby="search-results-title">
         <search>
           <form action="/search/" method="get" class="page-search-form">
-            <label for="page-search-input">Search published insights</label>
+            <label for="page-search-input">Search Cadence Lab</label>
             <p id="page-search-hint">
               Try a problem such as dirty data, AI adoption, or broken handoffs.
             </p>
@@ -81,14 +81,14 @@ const entries = await getSearchEntries();
 
         <div class="search-results-heading">
           <div>
-            <p class="search-results-label">Published content</p>
-            <h2 id="search-results-title">Insights</h2>
+            <p class="search-results-label">Searchable content</p>
+            <h2 id="search-results-title">Results</h2>
           </div>
           <p aria-live="polite" aria-atomic="true" data-page-search-status>
             {
               entries.length === 1
-                ? "1 published insight"
-                : `${entries.length} published insights`
+                ? "1 searchable page"
+                : `${entries.length} searchable pages`
             }
           </p>
         </div>
@@ -103,8 +103,8 @@ const entries = await getSearchEntries();
               >
                 <div class="search-result-meta">
                   <span>{entry.category}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{entry.readTime}</span>
+                  {entry.detail && <span aria-hidden="true">·</span>}
+                  {entry.detail && <span>{entry.detail}</span>}
                 </div>
 
                 <h3>
@@ -123,7 +123,7 @@ const entries = await getSearchEntries();
         <div class="search-empty" hidden data-page-search-empty>
           <h3>No results for that search.</h3>
           <p>Try fewer words, a broader topic, or a different problem.</p>
-          <a href="/blog/">Browse all insights</a>
+          <a href="/services/">Compare diagnostic services</a>
         </div>
       </section>
     </div>
@@ -165,8 +165,8 @@ const entries = await getSearchEntries();
 
     status.textContent = trimmedQuery
       ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"} for “${trimmedQuery}”`
-      : `${entries.length} published ${
-          entries.length === 1 ? "insight" : "insights"
+      : `${entries.length} searchable ${
+          entries.length === 1 ? "page" : "pages"
         }`;
     emptyState.hidden = visibleCount !== 0;
   }

@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/solution-depth.css";
 
 const mapElements = [
   {
@@ -251,9 +252,7 @@ const strongFit = [
     <SectionNav
       items={[
         { label: "What the map does", href: "#what-the-map-does" },
-        { label: "Conditions", href: "#conditions" },
-        { label: "Escalation path", href: "#escalation-path" },
-        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Explore", href: "#details" },
         { label: "Evidence and outputs", href: "#evidence-outputs" },
         { label: "Fit", href: "#fit" },
       ]}
@@ -287,105 +286,141 @@ const strongFit = [
       </div>
     </section>
 
-    <section
-      id="conditions"
-      class="conditions"
-      aria-labelledby="conditions-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Escalation conditions</p>
-          <h2 id="conditions-title">
-            Six things make an escalation actionable.
-          </h2>
-          <p>
-            Each one tests whether the escalation can change the outcome instead
-            of creating another notification.
-          </p>
-        </div>
+    <div id="details" class="solution-depth-group">
+      <details class="solution-depth" name="escalation-details">
+        <summary>
+          <span class="solution-depth-title"
+            >What makes escalation actionable</span
+          >
+          <span class="solution-depth-description"
+            >Review impact, evidence, priority, ownership, authority, and
+            communication conditions.</span
+          >
+          <span class="solution-depth-action">Explore conditions</span>
+        </summary>
+        <section
+          id="conditions"
+          class="conditions"
+          aria-labelledby="conditions-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">Escalation conditions</p>
+              <h2 id="conditions-title">
+                Six things make an escalation actionable.
+              </h2>
+              <p>
+                Each one tests whether the escalation can change the outcome
+                instead of creating another notification.
+              </p>
+            </div>
 
-        <ol class="condition-grid">
-          {
-            mapElements.map((element) => (
-              <li>
-                <p class="item-number">{element.number}</p>
-                <h3>{element.title}</h3>
-                <p>{element.description}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section
-      id="escalation-path"
-      class="escalation-path section-block"
-      aria-labelledby="escalation-path-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-split">
-          <div>
-            <p class="eyebrow">Escalation path</p>
-            <h2 id="escalation-path-title">
-              Follow the issue from detection to learning.
-            </h2>
+            <ol class="condition-grid">
+              {
+                mapElements.map((element) => (
+                  <li>
+                    <p class="item-number">{element.number}</p>
+                    <h3>{element.title}</h3>
+                    <p>{element.description}</p>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
-          <p>
-            See where time, customer context, ownership, or authority weakens as
-            the response moves forward.
-          </p>
-        </div>
+        </section>
+      </details>
 
-        <ol class="path-list">
-          {
-            escalationPath.map((stage, index) => (
-              <li>
-                <div class="path-heading">
-                  <p class="path-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="path-phase">{stage.phase}</p>
-                </div>
-                <h3>{stage.question}</h3>
-                <p>{stage.evidence}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
+      <details class="solution-depth" name="escalation-details">
+        <summary>
+          <span class="solution-depth-title">How to trace the response</span>
+          <span class="solution-depth-description"
+            >Follow the issue from detection and acceptance through action,
+            recovery, and learning.</span
+          >
+          <span class="solution-depth-action">Explore the path</span>
+        </summary>
+        <section
+          id="escalation-path"
+          class="escalation-path section-block"
+          aria-labelledby="escalation-path-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-split">
+              <div>
+                <p class="eyebrow">Escalation path</p>
+                <h2 id="escalation-path-title">
+                  Follow the issue from detection to learning.
+                </h2>
+              </div>
+              <p>
+                See where time, customer context, ownership, or authority
+                weakens as the response moves forward.
+              </p>
+            </div>
 
-    <section
-      id="failure-patterns"
-      class="failure-patterns"
-      aria-labelledby="failure-patterns-title"
-    >
-      <div class="page-container failure-layout">
-        <div class="failure-intro">
-          <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
-          <h2 id="failure-patterns-title">
-            Measuring the response doesn't make it useful.
-          </h2>
-          <p>
-            These patterns show where SLA reporting and customer recovery split
-            apart.
-          </p>
-        </div>
+            <ol class="path-list">
+              {
+                escalationPath.map((stage, index) => (
+                  <li>
+                    <div class="path-heading">
+                      <p class="path-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="path-phase">{stage.phase}</p>
+                    </div>
+                    <h3>{stage.question}</h3>
+                    <p>{stage.evidence}</p>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+      </details>
 
-        <div class="failure-list">
-          {
-            failurePatterns.map((failure, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{failure.cue}</h3>
-                <p>{failure.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="escalation-details">
+        <summary>
+          <span class="solution-depth-title">Where escalation fails</span>
+          <span class="solution-depth-description"
+            >See where SLA reporting, customer communication, authority, and
+            recovery separate.</span
+          >
+          <span class="solution-depth-action">Explore failures</span>
+        </summary>
+        <section
+          id="failure-patterns"
+          class="failure-patterns"
+          aria-labelledby="failure-patterns-title"
+        >
+          <div class="page-container failure-layout">
+            <div class="failure-intro">
+              <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
+              <h2 id="failure-patterns-title">
+                Measuring the response doesn't make it useful.
+              </h2>
+              <p>
+                These patterns show where SLA reporting and customer recovery
+                split apart.
+              </p>
+            </div>
+
+            <div class="failure-list">
+              {
+                failurePatterns.map((failure, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{failure.cue}</h3>
+                    <p>{failure.description}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      </details>
+    </div>
 
     <section
       id="evidence-outputs"

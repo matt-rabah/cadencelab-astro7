@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/solution-depth.css";
 
 const linkRequirements = [
   {
@@ -221,9 +222,7 @@ const strongFit = [
     <SectionNav
       items={[
         { label: "The operating link", href: "#operating-link" },
-        { label: "Link requirements", href: "#link-requirements" },
-        { label: "Handoff path", href: "#handoff-path" },
-        { label: "Failure patterns", href: "#failure-patterns" },
+        { label: "Explore", href: "#details" },
         { label: "Evidence and outputs", href: "#evidence-outputs" },
         { label: "Fit", href: "#fit" },
       ]}
@@ -258,103 +257,137 @@ const strongFit = [
       </div>
     </section>
 
-    <section
-      id="link-requirements"
-      class="link-requirements"
-      aria-labelledby="link-requirements-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Link requirements</p>
-          <h2 id="link-requirements-title">
-            Six things must travel with the work.
-          </h2>
-          <p>
-            A strong link preserves the decision context and makes the next
-            responsibility clear.
-          </p>
-        </div>
+    <div id="details" class="solution-depth-group">
+      <details class="solution-depth" name="handoff-details">
+        <summary>
+          <span class="solution-depth-title">What must travel</span>
+          <span class="solution-depth-description"
+            >See the context, ownership, authority, action, and return signal a
+            handoff needs.</span
+          >
+          <span class="solution-depth-action">Explore requirements</span>
+        </summary>
+        <section
+          id="link-requirements"
+          class="link-requirements"
+          aria-labelledby="link-requirements-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">Link requirements</p>
+              <h2 id="link-requirements-title">
+                Six things must travel with the work.
+              </h2>
+              <p>
+                A strong link preserves the decision context and makes the next
+                responsibility clear.
+              </p>
+            </div>
 
-        <ol class="requirement-grid">
-          {
-            linkRequirements.map((requirement) => (
-              <li>
-                <p class="item-number">{requirement.number}</p>
-                <h3>{requirement.title}</h3>
-                <p>{requirement.description}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
+            <ol class="requirement-grid">
+              {
+                linkRequirements.map((requirement) => (
+                  <li>
+                    <p class="item-number">{requirement.number}</p>
+                    <h3>{requirement.title}</h3>
+                    <p>{requirement.description}</p>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+      </details>
 
-    <section
-      id="handoff-path"
-      class="handoff-path section-block"
-      aria-labelledby="handoff-path-title"
-    >
-      <div class="page-container section-stack">
-        <div class="section-intro">
-          <p class="eyebrow">Handoff path</p>
-          <h2 id="handoff-path-title">
-            Follow the handoff from origin to closure.
-          </h2>
-          <p>
-            At each stage, check whether the customer problem and responsibility
-            remain intact.
-          </p>
-        </div>
+      <details class="solution-depth" name="handoff-details">
+        <summary>
+          <span class="solution-depth-title">How to trace the handoff</span>
+          <span class="solution-depth-description"
+            >Follow responsibility from the original trigger through acceptance,
+            action, and closure.</span
+          >
+          <span class="solution-depth-action">Explore the path</span>
+        </summary>
+        <section
+          id="handoff-path"
+          class="handoff-path section-block"
+          aria-labelledby="handoff-path-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro">
+              <p class="eyebrow">Handoff path</p>
+              <h2 id="handoff-path-title">
+                Follow the handoff from origin to closure.
+              </h2>
+              <p>
+                At each stage, check whether the customer problem and
+                responsibility remain intact.
+              </p>
+            </div>
 
-        <ol class="path-list">
-          {
-            handoffPath.map((item, index) => (
-              <li>
-                <div class="path-heading">
-                  <p class="path-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="path-phase">{item.phase}</p>
-                </div>
-                <h3>{item.question}</h3>
-                <p>{item.evidence}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
+            <ol class="path-list">
+              {
+                handoffPath.map((item, index) => (
+                  <li>
+                    <div class="path-heading">
+                      <p class="path-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="path-phase">{item.phase}</p>
+                    </div>
+                    <h3>{item.question}</h3>
+                    <p>{item.evidence}</p>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+      </details>
 
-    <section
-      id="failure-patterns"
-      class="failure-patterns"
-      aria-labelledby="failure-patterns-title"
-    >
-      <div class="page-container failure-layout">
-        <div class="failure-intro">
-          <p class="eyebrow eyebrow-inverse">Failure patterns</p>
-          <h2 id="failure-patterns-title">
-            Context gets lost when nobody owns the link.
-          </h2>
-          <p>
-            These patterns separate a one-time communication miss from a
-            repeatable operating failure.
-          </p>
-        </div>
+      <details class="solution-depth" name="handoff-details">
+        <summary>
+          <span class="solution-depth-title">Where handoffs fail</span>
+          <span class="solution-depth-description"
+            >Identify repeatable losses of context, ownership, authority,
+            capacity, or closure.</span
+          >
+          <span class="solution-depth-action">Explore failures</span>
+        </summary>
+        <section
+          id="failure-patterns"
+          class="failure-patterns"
+          aria-labelledby="failure-patterns-title"
+        >
+          <div class="page-container failure-layout">
+            <div class="failure-intro">
+              <p class="eyebrow eyebrow-inverse">Failure patterns</p>
+              <h2 id="failure-patterns-title">
+                Context gets lost when nobody owns the link.
+              </h2>
+              <p>
+                These patterns separate a one-time communication miss from a
+                repeatable operating failure.
+              </p>
+            </div>
 
-        <div class="failure-list">
-          {
-            failurePatterns.map((failure, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{failure.cue}</h3>
-                <p>{failure.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+            <div class="failure-list">
+              {
+                failurePatterns.map((failure, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{failure.cue}</h3>
+                    <p>{failure.description}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      </details>
+    </div>
 
     <section
       id="evidence-outputs"

@@ -4,6 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
 import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/solution-depth.css";
 
 const visibleSignals = [
   {
@@ -142,7 +143,8 @@ const strongFit = [
   title="Dirty CRM Data and Siloed Pipelines | Cadence Lab"
   description="Find why CRM data, pipeline stages, integrations, and reports stay unreliable. Fix the workflow that keeps recreating the problem."
   canonicalURL="/solutions/dirty-data/"
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
   <BreadcrumbSchema currentName="Siloed and dirty CRM pipelines" />
 
@@ -169,10 +171,12 @@ const strongFit = [
 
           <div
             class="hero-actions"
-            aria-label="Siloed and dirty CRM pipeline actions">
+            aria-label="Siloed and dirty CRM pipeline actions"
+          >
             <a
               class="button button-primary"
-              href="/services/crm-workflow-audit/">
+              href="/services/crm-workflow-audit/"
+            >
               Review the CRM Workflow Audit
             </a>
             <a class="button button-text" href="/fit-check/">
@@ -211,10 +215,8 @@ const strongFit = [
       items={[
         { label: "Problem", href: "#problem" },
         { label: "Signals", href: "#signals" },
-        { label: "Operating causes", href: "#operating-causes" },
-        { label: "Evidence", href: "#evidence" },
-        { label: "Repair sequence", href: "#repair-sequence" },
-        { label: "Diagnostic paths", href: "#diagnostic-paths" },
+        { label: "Explore", href: "#details" },
+        { label: "Choose a diagnostic", href: "#diagnostic-paths" },
         { label: "Fit", href: "#fit" },
       ]}
     />
@@ -222,7 +224,8 @@ const strongFit = [
     <section
       id="problem"
       class="problem section-block"
-      aria-labelledby="problem-heading">
+      aria-labelledby="problem-heading"
+    >
       <div class="page-container problem-layout">
         <div>
           <p class="eyebrow">The problem</p>
@@ -273,118 +276,159 @@ const strongFit = [
       </div>
     </section>
 
-    <section
-      id="operating-causes"
-      class="operating-causes section-block"
-      aria-labelledby="causes-title">
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-split">
-          <div>
-            <p class="eyebrow">Operating causes</p>
-            <h2 id="causes-title">Find what keeps putting bad data back in.</h2>
+    <div id="details" class="solution-depth-group">
+      <details class="solution-depth" name="data-details">
+        <summary>
+          <span class="solution-depth-title">Why bad data returns</span>
+          <span class="solution-depth-description"
+            >Review definitions, workflows, ownership, and incentives that
+            recreate unreliable records.</span
+          >
+          <span class="solution-depth-action">Explore causes</span>
+        </summary>
+        <section
+          id="operating-causes"
+          class="operating-causes section-block"
+          aria-labelledby="causes-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-split">
+              <div>
+                <p class="eyebrow">Operating causes</p>
+                <h2 id="causes-title">
+                  Find what keeps putting bad data back in.
+                </h2>
+              </div>
+              <p>
+                Duplicates matter. So do the definitions, workflows, and
+                ownership rules that create them again after every cleanup.
+              </p>
+            </div>
+
+            <div class="cause-list">
+              {
+                operatingCauses.map((cause, index) => (
+                  <article>
+                    <div class="cause-heading">
+                      <p class="item-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="cause-label">{cause.label}</p>
+                    </div>
+                    <h3>{cause.question}</h3>
+                    <p>{cause.description}</p>
+                  </article>
+                ))
+              }
+            </div>
           </div>
-          <p>
-            Duplicates matter. So do the definitions, workflows, and ownership
-            rules that create them again after every cleanup.
-          </p>
-        </div>
+        </section>
+      </details>
 
-        <div class="cause-list">
-          {
-            operatingCauses.map((cause, index) => (
-              <article>
-                <div class="cause-heading">
-                  <p class="item-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="cause-label">{cause.label}</p>
-                </div>
-                <h3>{cause.question}</h3>
-                <p>{cause.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="data-details">
+        <summary>
+          <span class="solution-depth-title">What evidence matters</span>
+          <span class="solution-depth-description"
+            >Compare configured records with the spreadsheets, notes, and checks
+            people actually trust.</span
+          >
+          <span class="solution-depth-action">Explore evidence</span>
+        </summary>
+        <section
+          id="evidence"
+          class="evidence section-block"
+          aria-labelledby="evidence-title"
+        >
+          <div class="page-container evidence-layout">
+            <div class="evidence-intro">
+              <p class="eyebrow">Evidence</p>
+              <h2 id="evidence-title">
+                Compare the system you configured with the one people trust.
+              </h2>
+              <p>
+                Inspect the records and the work around them. The spreadsheet,
+                private note, or manual check often explains what the CRM is
+                missing.
+              </p>
+              <div class="evidence-principle">
+                <p class="note-label">Evidence principle</p>
+                <p>
+                  Start with a real decision and the records behind it. A broad
+                  quality score can hide the one missing signal that blocks
+                  action.
+                </p>
+              </div>
+            </div>
 
-    <section
-      id="evidence"
-      class="evidence section-block"
-      aria-labelledby="evidence-title">
-      <div class="page-container evidence-layout">
-        <div class="evidence-intro">
-          <p class="eyebrow">Evidence</p>
-          <h2 id="evidence-title">
-            Compare the system you configured with the one people trust.
-          </h2>
-          <p>
-            Inspect the records and the work around them. The spreadsheet,
-            private note, or manual check often explains what the CRM is
-            missing.
-          </p>
-          <div class="evidence-principle">
-            <p class="note-label">Evidence principle</p>
-            <p>
-              Start with a real decision and the records behind it. A broad
-              quality score can hide the one missing signal that blocks action.
-            </p>
+            <div class="evidence-grid">
+              {
+                evidenceSources.map((source, index) => (
+                  <article>
+                    <p class="item-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{source.title}</h3>
+                    <p>{source.description}</p>
+                  </article>
+                ))
+              }
+            </div>
           </div>
-        </div>
+        </section>
+      </details>
 
-        <div class="evidence-grid">
-          {
-            evidenceSources.map((source, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{source.title}</h3>
-                <p>{source.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+      <details class="solution-depth" name="data-details">
+        <summary>
+          <span class="solution-depth-title">How to repair it</span>
+          <span class="solution-depth-description"
+            >Fix and test one important decision path before expanding the
+            cleanup.</span
+          >
+          <span class="solution-depth-action">Explore sequence</span>
+        </summary>
+        <section
+          id="repair-sequence"
+          class="repair-sequence"
+          aria-labelledby="repair-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">Repair sequence</p>
+              <h2 id="repair-title">
+                Fix one decision path before cleaning everything.
+              </h2>
+              <p>
+                A smaller scope makes the cause visible and gives you a result
+                you can test before expanding.
+              </p>
+            </div>
 
-    <section
-      id="repair-sequence"
-      class="repair-sequence"
-      aria-labelledby="repair-title">
-      <div class="page-container section-stack">
-        <div class="section-intro section-intro-inverse">
-          <p class="eyebrow eyebrow-inverse">Repair sequence</p>
-          <h2 id="repair-title">
-            Fix one decision path before cleaning everything.
-          </h2>
-          <p>
-            A smaller scope makes the cause visible and gives you a result you
-            can test before expanding.
-          </p>
-        </div>
-
-        <ol class="repair-list">
-          {
-            repairSequence.map((stage, index) => (
-              <li>
-                <div class="repair-heading">
-                  <p class="repair-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p class="repair-phase">{stage.phase}</p>
-                </div>
-                <h3>{stage.question}</h3>
-                <p>{stage.evidence}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
+            <ol class="repair-list">
+              {
+                repairSequence.map((stage, index) => (
+                  <li>
+                    <div class="repair-heading">
+                      <p class="repair-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <p class="repair-phase">{stage.phase}</p>
+                    </div>
+                    <h3>{stage.question}</h3>
+                    <p>{stage.evidence}</p>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+      </details>
+    </div>
 
     <section
       id="diagnostic-paths"
       class="diagnostic-paths section-block"
-      aria-labelledby="paths-title">
+      aria-labelledby="paths-title"
+    >
       <div class="page-container section-stack">
         <div class="section-intro section-intro-split">
           <div>
