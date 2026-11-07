@@ -1,16 +1,51 @@
 ---
 // src/components/WebMCP.astro
-// Registers site tools via the WebMCP API (navigator.modelContext)
-// so AI agents can discover and invoke site actions from the browser.
+// Registers site tools via the WebMCP API so AI agents can discover and
+// invoke site actions from the browser. The current spec exposes the API as
+// document.modelContext; older Chrome builds used navigator.modelContext.
 // https://webmachinelearning.github.io/webmcp/
 ---
 
 <script>
-  const registerWebMCPTools = () => {
-    if (!("modelContext" in navigator)) return;
+  type ModelContext = {
+    registerTool: (
+      tool: Record<string, unknown>,
+      options?: { signal?: AbortSignal },
+    ) => Promise<void> | void;
+  };
 
-    const mc = navigator.modelContext as any;
-    if (typeof mc.registerTool !== "function") return;
+  const getModelContext = (): ModelContext | undefined => {
+    const candidates = [
+      (document as Document & { modelContext?: unknown }).modelContext,
+      (navigator as Navigator & { modelContext?: unknown }).modelContext,
+    ];
+    return candidates.find(
+      (candidate): candidate is ModelContext =>
+        typeof (candidate as ModelContext | undefined)?.registerTool ===
+        "function",
+    );
+  };
+
+  const registerWebMCPTools = () => {
+    const modelContext = getModelContext();
+    if (!modelContext) return;
+
+    // registerTool() returns a Promise in the current spec; log rejections
+    // instead of leaving them unhandled.
+    const mc = {
+      registerTool: (
+        tool: Record<string, unknown>,
+        options: { signal: AbortSignal },
+      ) => {
+        Promise.resolve(modelContext.registerTool(tool, options)).catch(
+          (error: unknown) =>
+            console.error(
+              `WebMCP tool "${tool.name}" failed to register`,
+              error,
+            ),
+        );
+      },
+    };
 
     const controller = new AbortController();
     const { signal } = controller;

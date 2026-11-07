@@ -87,6 +87,10 @@ export default defineConfig({
       scriptDirective: {
         resources: [
           { resource: "'none'", kind: "attribute" },
+          // Listing any script-src resource replaces Astro's default 'self',
+          // so it must be listed explicitly. Without it the browser blocks
+          // every same-origin script (the site's own bundles and Rocket Loader).
+          "'self'",
           // Analytics loaded from third-party hosts. Without these, the CSP
           // blocks gtag.js (Layout.astro) and the Cloudflare Web Analytics beacon.
           "https://www.googletagmanager.com",
