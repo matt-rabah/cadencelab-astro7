@@ -45,20 +45,13 @@ const canonicalHref = canonical.toString();
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-STT3SDRBXF"
-      fetchpriority="low"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-STT3SDRBXF");
-    </script>
-
+    {
+      /*
+        Google Analytics (G-STT3SDRBXF) is added by Cloudflare, not here:
+        Cloudflare Zaraz sends it from the edge, or the Cloudflare Google tag
+        gateway injects the tag. A tag in this file would load a second copy.
+      */
+    }
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />

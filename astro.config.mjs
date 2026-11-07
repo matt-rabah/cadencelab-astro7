@@ -91,8 +91,9 @@ export default defineConfig({
           // so it must be listed explicitly. Without it the browser blocks
           // every same-origin script (the site's own bundles and Rocket Loader).
           "'self'",
-          // Analytics loaded from third-party hosts. Without these, the CSP
-          // blocks gtag.js (Layout.astro) and the Cloudflare Web Analytics beacon.
+          // Analytics hosts: the Cloudflare Google tag gateway's health check
+          // loads gtag.js from Google, and Cloudflare Web Analytics loads its
+          // beacon. Remove googletagmanager once analytics runs only in Zaraz.
           "https://www.googletagmanager.com",
           "https://static.cloudflareinsights.com",
         ],
