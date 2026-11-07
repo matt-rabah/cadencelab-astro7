@@ -44,7 +44,7 @@ const sitePages: SitePage[] = [
       "Find where CRM workflows, data, automation, and ownership get in the way of customer work.",
     category: "Diagnostic",
     href: "/services/crm-workflow-audit/",
-    keywords: "salesforce pipeline dirty data handoff",
+    keywords: "crm audit crm data audit salesforce pipeline dirty data handoff",
   },
   {
     title: "AI Service Readiness Review",
