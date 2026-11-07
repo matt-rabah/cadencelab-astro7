@@ -276,7 +276,12 @@ const getPostURL = (post: BlogPost): string => {
 };
 
 export const getSearchEntries = async (): Promise<SearchEntry[]> => {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  // Explicit types keep `tsc` strict-clean even before `astro sync` has
+  // generated `.astro/types.d.ts` (e.g. in a fresh checkout).
+  const posts: BlogPost[] = await getCollection(
+    "blog",
+    ({ data }: BlogPost) => !data.draft,
+  );
 
   const insightEntries = posts
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
