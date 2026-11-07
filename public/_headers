@@ -60,3 +60,7 @@
 # ── Keep the CMS application out of search results ──
 /admin/*
   X-Robots-Tag: noindex, nofollow
+
+# ── Search dialog data: fetched by the ⌘K dialog, not a page to index ──
+/search-index.json
+  X-Robots-Tag: noindex

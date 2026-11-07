@@ -253,6 +253,15 @@ Blog URLs use this pattern:
 
 The year and month are derived from the post’s `date` field.
 
+Because the URL comes from `date` and the filename, changing either after a post is published changes its URL. When that happens, add the old URL to the post's **Previous URLs** field in Tina (`redirectFrom` in frontmatter):
+
+```yaml
+redirectFrom:
+  - /blog/2026/05/adoption-fatigue/
+```
+
+Each previous URL becomes a permanent (301) redirect to the current URL. The build adds these rules to `dist/_redirects` (see `src/pages/blog-redirects.txt.ts` and the `blog-redirects` step in `astro.config.mjs`). The build fails if a previous URL is a live post URL or is listed on two posts. To correct a typo in a date, prefer `updatedDate` for revisions and only change `date` when the original was wrong.
+
 A typical blog post contains frontmatter similar to:
 
 ```yaml
