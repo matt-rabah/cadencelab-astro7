@@ -1,7 +1,5 @@
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-
-type BlogPost = CollectionEntry<"blog">;
+import { getPostURL, type BlogPost } from "./blog";
 
 export interface SearchEntry {
   title: string;
@@ -258,22 +256,6 @@ const sitePages: SitePage[] = [
     keywords: "email conversation get in touch hire",
   },
 ];
-
-const getPostURL = (post: BlogPost): string => {
-  const year = String(post.data.date.getUTCFullYear());
-  const month = String(post.data.date.getUTCMonth() + 1).padStart(2, "0");
-  const slug = post.id
-    .replace(/\.(md|mdx)$/i, "")
-    .split("/")
-    .filter(Boolean)
-    .at(-1);
-
-  if (!slug) {
-    throw new Error(`Unable to determine a slug for blog entry: ${post.id}`);
-  }
-
-  return `/blog/${year}/${month}/${slug}/`;
-};
 
 export const getSearchEntries = async (): Promise<SearchEntry[]> => {
   // Explicit types keep `tsc` strict-clean even before `astro sync` has
