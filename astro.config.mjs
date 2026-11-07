@@ -42,6 +42,30 @@ const blogLastModified = (() => {
   return new Map([...dates].map(([url, date]) => [url, date.toISOString()]));
 })();
 
+// Appends the blog redirect rules (src/pages/blog-redirects.txt.ts) to
+// Cloudflare's dist/_redirects after the build, then removes the generated file.
+const blogRedirects = {
+  name: "blog-redirects",
+  hooks: {
+    "astro:build:done": ({ dir }) => {
+      const rulesFile = new URL("blog-redirects.txt", dir);
+      const redirectsFile = new URL("_redirects", dir);
+      const rules = fs.readFileSync(rulesFile, "utf8");
+      fs.rmSync(rulesFile);
+      if (!rules.trim()) return;
+
+      const existing = fs.existsSync(redirectsFile)
+        ? fs.readFileSync(redirectsFile, "utf8")
+        : "";
+      const separator = existing && !existing.endsWith("\n") ? "\n" : "";
+      fs.writeFileSync(
+        redirectsFile,
+        `${existing}${separator}\n# Blog posts whose URL changed (redirectFrom)\n${rules}`,
+      );
+    },
+  },
+};
+
 const excludedSitemapPages = new Set([
   "https://cadencelab.co/404/",
   "https://cadencelab.co/search/",
@@ -63,6 +87,10 @@ export default defineConfig({
       scriptDirective: {
         resources: [
           { resource: "'none'", kind: "attribute" },
+          // Listing any script-src resource replaces Astro's default 'self',
+          // so it must be listed explicitly. Without it the browser blocks
+          // every same-origin script (the site's own bundles and Rocket Loader).
+          "'self'",
           // Analytics loaded from third-party hosts. Without these, the CSP
           // blocks gtag.js (Layout.astro) and the Cloudflare Web Analytics beacon.
           "https://www.googletagmanager.com",
@@ -158,6 +186,7 @@ export default defineConfig({
   integrations: [
     react(),
     tina(),
+    blogRedirects,
     sitemap({
       filter: (page) => !excludedSitemapPages.has(page),
       serialize(item) {

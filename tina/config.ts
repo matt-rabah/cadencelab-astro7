@@ -173,6 +173,14 @@ export default defineConfig({
             },
           },
           {
+            type: "string",
+            name: "redirectFrom",
+            label: "Previous URLs",
+            list: true,
+            description:
+              "The URL comes from the publication date and file name. If you change either after publishing, add the old URL here (for example /blog/2026/06/old-name/) so it permanently redirects to the new one.",
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",

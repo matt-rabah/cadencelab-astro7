@@ -1,7 +1,7 @@
 ---
-import { getSearchEntries } from "../lib/search";
-
-const entries = await getSearchEntries();
+// Search entries load from /search-index.json the first time the dialog
+// opens (see src/pages/search-index.json.ts), so they are not rendered into
+// every page's HTML.
 ---
 
 <dialog
@@ -59,36 +59,11 @@ const entries = await getSearchEntries();
     </div>
 
     <div class="search-dialog-status">
-      <p aria-live="polite" data-command-search-status>
-        {
-          entries.length === 1
-            ? "1 searchable page"
-            : `${entries.length} searchable pages`
-        }
-      </p>
+      <p aria-live="polite" data-command-search-status></p>
       <a href="/search/" data-command-search-full>Open full search</a>
     </div>
 
-    <div class="search-dialog-results" data-command-search-results>
-      {
-        entries.map((entry) => (
-          <article
-            data-command-search-entry
-            data-search-text={entry.searchText}
-          >
-            <div class="search-result-meta">
-              <span>{entry.category}</span>
-              {entry.detail && <span aria-hidden="true">·</span>}
-              {entry.detail && <span>{entry.detail}</span>}
-            </div>
-            <h3>
-              <a href={entry.href}>{entry.title}</a>
-            </h3>
-            <p>{entry.description}</p>
-          </article>
-        ))
-      }
-    </div>
+    <div class="search-dialog-results" data-command-search-results></div>
 
     <p class="search-dialog-empty" hidden data-command-search-empty>
       No services, tools, or insights match that search.
@@ -97,6 +72,15 @@ const entries = await getSearchEntries();
 </dialog>
 
 <script>
+  type SearchEntry = {
+    title: string;
+    description: string;
+    category: string;
+    detail?: string;
+    href: string;
+    searchText: string;
+  };
+
   type SearchWindow = Window & {
     __cadenceSearchController?: AbortController;
     __cadenceSearchLoader?: EventListener;
@@ -126,14 +110,74 @@ const entries = await getSearchEntries();
     const emptyState = dialog?.querySelector<HTMLElement>(
       "[data-command-search-empty]",
     );
-    const entries = Array.from(
-      dialog?.querySelectorAll<HTMLElement>("[data-command-search-entry]") ??
-        [],
+    const resultsList = dialog?.querySelector<HTMLElement>(
+      "[data-command-search-results]",
     );
 
-    if (!dialog || !input || !status || !fullSearchLink || !emptyState) {
+    if (
+      !dialog ||
+      !input ||
+      !status ||
+      !fullSearchLink ||
+      !emptyState ||
+      !resultsList
+    ) {
       return;
     }
+
+    let entries: HTMLElement[] = [];
+    let loadState: "idle" | "loading" | "loaded" | "failed" = "idle";
+
+    const renderEntry = (entry: SearchEntry): HTMLElement => {
+      const article = document.createElement("article");
+      article.dataset.commandSearchEntry = "";
+      article.dataset.searchText = entry.searchText;
+
+      const meta = document.createElement("div");
+      meta.className = "search-result-meta";
+      const category = document.createElement("span");
+      category.textContent = entry.category;
+      meta.append(category);
+      if (entry.detail) {
+        const separator = document.createElement("span");
+        separator.setAttribute("aria-hidden", "true");
+        separator.textContent = "·";
+        const detail = document.createElement("span");
+        detail.textContent = entry.detail;
+        meta.append(separator, detail);
+      }
+
+      const heading = document.createElement("h3");
+      const link = document.createElement("a");
+      link.href = entry.href;
+      link.textContent = entry.title;
+      heading.append(link);
+
+      const description = document.createElement("p");
+      description.textContent = entry.description;
+
+      article.append(meta, heading, description);
+      return article;
+    };
+
+    const loadEntries = async () => {
+      if (loadState === "loading" || loadState === "loaded") return;
+      loadState = "loading";
+      updateResults();
+      try {
+        const response = await fetch("/search-index.json", { signal });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = (await response.json()) as SearchEntry[];
+        entries = data.map(renderEntry);
+        resultsList.replaceChildren(...entries);
+        loadState = "loaded";
+      } catch (error) {
+        if (signal.aborted) return;
+        loadState = "failed";
+        console.error("Search index failed to load", error);
+      }
+      updateResults();
+    };
 
     const normalizeQuery = (value: string): string =>
       value.trim().toLocaleLowerCase();
@@ -153,12 +197,19 @@ const entries = await getSearchEntries();
         if (isVisible) visibleCount += 1;
       });
 
-      status.textContent = query
-        ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"}`
-        : `${entries.length} searchable ${
-            entries.length === 1 ? "page" : "pages"
-          }`;
-      emptyState.hidden = visibleCount !== 0;
+      if (loadState === "loaded") {
+        status.textContent = query
+          ? `${visibleCount} ${visibleCount === 1 ? "result" : "results"}`
+          : `${entries.length} searchable ${
+              entries.length === 1 ? "page" : "pages"
+            }`;
+      } else {
+        status.textContent =
+          loadState === "failed"
+            ? "Search couldn't load. Use full search instead."
+            : "Loading search…";
+      }
+      emptyState.hidden = loadState !== "loaded" || visibleCount !== 0;
       fullSearchLink.href = query
         ? `/search/?q=${encodeURIComponent(input.value.trim())}`
         : "/search/";
@@ -166,6 +217,7 @@ const entries = await getSearchEntries();
 
     const openDialog = () => {
       if (!dialog.open) dialog.showModal();
+      void loadEntries();
       window.requestAnimationFrame(() => input.focus());
     };
 
@@ -388,7 +440,7 @@ const entries = await getSearchEntries();
     padding: 0 clamp(1.25rem, 4vw, 2rem);
   }
 
-  .search-dialog-results article {
+  .search-dialog-results :global(article) {
     display: flex;
     padding-block: 1.25rem;
     border-bottom: var(--border-width) solid var(--color-border);
@@ -396,7 +448,7 @@ const entries = await getSearchEntries();
     gap: 0.65rem;
   }
 
-  .search-result-meta {
+  .search-dialog-results :global(.search-result-meta) {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
@@ -405,23 +457,23 @@ const entries = await getSearchEntries();
     font-weight: var(--fw-medium);
   }
 
-  .search-dialog-results h3,
-  .search-dialog-results p {
+  .search-dialog-results :global(h3),
+  .search-dialog-results :global(p) {
     margin: 0;
   }
 
-  .search-dialog-results h3 {
+  .search-dialog-results :global(h3) {
     font-size: var(--fs-h4);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-h4);
   }
 
-  .search-dialog-results h3 a {
+  .search-dialog-results :global(h3 a) {
     color: var(--color-ink);
     text-decoration: none;
   }
 
-  .search-dialog-results p {
+  .search-dialog-results :global(p) {
     color: var(--color-text-muted);
     font-size: var(--fs-small);
     line-height: 1.55;
@@ -433,7 +485,7 @@ const entries = await getSearchEntries();
     text-align: center;
   }
 
-  .search-dialog a:focus-visible,
+  .search-dialog :global(a:focus-visible),
   .search-dialog button:focus-visible,
   .search-dialog input:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus);
@@ -471,7 +523,7 @@ const entries = await getSearchEntries();
     .search-dialog-header,
     .search-dialog-field input,
     .search-dialog-status,
-    .search-dialog-results article,
+    .search-dialog-results :global(article),
     kbd {
       border-color: CanvasText;
     }

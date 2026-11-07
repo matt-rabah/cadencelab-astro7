@@ -25,6 +25,19 @@ const blog = defineCollection({
     imageAlt: z.string().min(1).optional(),
 
     draft: z.boolean().default(false),
+
+    // Old URLs of this post (e.g. after its date or file name changed).
+    // Each becomes a 301 redirect to the current URL at build time.
+    redirectFrom: z
+      .array(
+        z
+          .string()
+          .regex(
+            /^\/blog\/[^\s?#]+\/$/,
+            "Previous URLs must look like /blog/2026/06/post-name/",
+          ),
+      )
+      .default([]),
   }),
 });
 
