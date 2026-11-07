@@ -101,6 +101,32 @@ http://localhost:4001/graphql
 
 When Tina displays **local mode**, content changes are written directly to the Markdown files in the local repository.
 
+## Editor MCP servers
+
+The repository defines the Cloudflare MCP servers once, in `mcp_config.json`. That file uses the Windsurf / Antigravity format, where each remote server has a `serverUrl`.
+
+Editor-specific copies are generated from it. Do not edit them by hand:
+
+| File | Editor | Format |
+| --- | --- | --- |
+| `mcp_config.json` | Windsurf, Antigravity (source of truth) | `mcpServers` → `serverUrl` |
+| `.vscode/mcp.json` | VS Code | `servers` → `type: "http"`, `url` |
+| `.cursor/mcp.json` | Cursor | `mcpServers` → `url` |
+
+VS Code and Cursor load their file from the workspace automatically. Windsurf and Antigravity read a global config rather than the repository, so copy the servers from `mcp_config.json` into that file (for Windsurf, `~/.codeium/windsurf/mcp_config.json`). For Claude Code, add a server with `claude mcp add --transport http <name> <url>`.
+
+After changing `mcp_config.json`, regenerate the editor files:
+
+```sh
+npm run mcp:sync
+```
+
+Check that the generated files are current:
+
+```sh
+npm run mcp:check
+```
+
 ## Project structure
 
 ```text
@@ -485,6 +511,8 @@ All commands are run from the project root.
 | `npx tsc --noEmit` | Run TypeScript validation |
 | `npm run format -- <path>` | Format an explicit file or directory with Prettier |
 | `npm run format:check -- <path>` | Check an explicit file or directory without changing it |
+| `npm run mcp:sync` | Regenerate editor MCP configs from `mcp_config.json` |
+| `npm run mcp:check` | Fail if generated editor MCP configs are out of date |
 | `npm run astro -- --help` | Display Astro CLI help |
 | `git status` | Show repository changes |
 | `git diff` | Review unstaged changes |

@@ -13,6 +13,8 @@
     "astro": "astro",
     "format": "prettier --write --ignore-unknown",
     "format:check": "prettier --check --ignore-unknown",
+    "mcp:sync": "node scripts/sync-mcp-config.mjs",
+    "mcp:check": "node scripts/sync-mcp-config.mjs --check",
     "generate-types": "wrangler types"
   },
   "dependencies": {
