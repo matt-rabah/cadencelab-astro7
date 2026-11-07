@@ -79,7 +79,8 @@ const schemaData = {
     ? "noindex, nofollow"
     : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
 />
-<link rel="canonical" href={canonicalURL} />
+{/* A canonical on a noindex page sends Google conflicting signals. */}
+{!noindex && <link rel="canonical" href={canonicalURL} />}
 
 <!-- Open Graph / Social -->
 <meta property="og:locale" content="en_US" />

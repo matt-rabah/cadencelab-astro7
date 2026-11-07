@@ -2,12 +2,14 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
 import ArticleToc from "../../../../components/blog/ArticleToc.astro";
 import AuthorBio from "../../../../components/blog/AuthorBio.astro";
 import Footer from "../../../../components/Footer.astro";
 import NavHeader from "../../../../components/NavHeader.astro";
 import RelatedPosts from "../../../../components/blog/RelatedPosts.astro";
 import Layout from "../../../../layouts/Layout.astro";
+import { getPostURL } from "../../../../lib/blog";
 
 type BlogPost = CollectionEntry<"blog">;
 
@@ -75,22 +77,6 @@ const authorPath =
       ? "/"
       : undefined;
 const canonicalPath = Astro.url.pathname;
-
-const getPostURL = (entry: BlogPost): string => {
-  const year = String(entry.data.date.getUTCFullYear());
-  const month = String(entry.data.date.getUTCMonth() + 1).padStart(2, "0");
-  const slug = entry.id
-    .replace(/\.(md|mdx)$/i, "")
-    .split("/")
-    .filter(Boolean)
-    .at(-1);
-
-  if (!slug) {
-    throw new Error(`Unable to determine a slug for blog entry: ${entry.id}`);
-  }
-
-  return `/blog/${year}/${month}/${slug}/`;
-};
 
 const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
   .filter((entry) => entry.id !== post.id)
@@ -258,6 +244,13 @@ const articleSchema = {
     type="application/ld+json"
     is:inline
     set:html={JSON.stringify(articleSchema)}
+  />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Blog", href: "/blog/" },
+      { name: post.data.title },
+    ]}
   />
 </Layout>
 

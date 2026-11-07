@@ -6,7 +6,7 @@ type Env = {
 };
 
 const DEFAULT_ORIGIN = "https://cadencelab.co";
-const DEFAULT_CONTENT_SIGNAL = "ai-train=no, search=yes, ai-input=no";
+const DEFAULT_CONTENT_SIGNAL = "ai-train=no, search=yes, ai-input=yes";
 
 type JsonRecord = Record<string, unknown>;
 

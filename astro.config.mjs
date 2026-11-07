@@ -1,9 +1,46 @@
+import fs from "node:fs";
+import path from "node:path";
 import { defineConfig, fontProviders } from "astro/config";
 import tina from "@tinacms/astro/integration";
 import { tinaAdminDevRedirect } from "@tinacms/astro/vite";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+
+// <lastmod> for blog URLs in the sitemap, read from post frontmatter
+// (`updatedDate`, falling back to `date`). The blog index gets the newest one.
+// Only blog URLs get a date: other pages have no reliable modified date, and
+// Google ignores sitemaps whose lastmod values are not accurate.
+const blogLastModified = (() => {
+  const dir = "src/content/blog";
+  const dates = new Map();
+  const field = (frontmatter, name) =>
+    frontmatter
+      .match(new RegExp(`^${name}:\\s*["']?([^"'\\n]+)`, "m"))?.[1]
+      ?.trim();
+
+  for (const file of fs.readdirSync(dir)) {
+    if (!/\.mdx?$/.test(file)) continue;
+    const frontmatter =
+      fs.readFileSync(path.join(dir, file), "utf8").split(/^---\s*$/m)[1] ?? "";
+    if (field(frontmatter, "draft") === "true") continue;
+
+    const published = new Date(field(frontmatter, "date") ?? "");
+    if (Number.isNaN(published.getTime())) continue;
+    const updated = new Date(field(frontmatter, "updatedDate") ?? "");
+    const modified = Number.isNaN(updated.getTime()) ? published : updated;
+
+    const year = published.getUTCFullYear();
+    const month = String(published.getUTCMonth() + 1).padStart(2, "0");
+    const slug = file.replace(/\.mdx?$/, "");
+    dates.set(`https://cadencelab.co/blog/${year}/${month}/${slug}/`, modified);
+  }
+
+  const newest = [...dates.values()].sort((a, b) => b - a)[0];
+  if (newest) dates.set("https://cadencelab.co/blog/", newest);
+
+  return new Map([...dates].map(([url, date]) => [url, date.toISOString()]));
+})();
 
 const excludedSitemapPages = new Set([
   "https://cadencelab.co/404/",
@@ -24,7 +61,13 @@ export default defineConfig({
         "object-src 'none'",
       ],
       scriptDirective: {
-        resources: [{ resource: "'none'", kind: "attribute" }],
+        resources: [
+          { resource: "'none'", kind: "attribute" },
+          // Analytics loaded from third-party hosts. Without these, the CSP
+          // blocks gtag.js (Layout.astro) and the Cloudflare Web Analytics beacon.
+          "https://www.googletagmanager.com",
+          "https://static.cloudflareinsights.com",
+        ],
       },
       styleDirective: {
         resources: [{ resource: "'unsafe-inline'", kind: "attribute" }],
@@ -117,6 +160,11 @@ export default defineConfig({
     tina(),
     sitemap({
       filter: (page) => !excludedSitemapPages.has(page),
+      serialize(item) {
+        const lastmod = blogLastModified.get(item.url);
+        if (lastmod) item.lastmod = lastmod;
+        return item;
+      },
     }),
   ],
 
