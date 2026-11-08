@@ -1,4 +1,6 @@
 ---
+import { FOUNDER } from "../../lib/founder";
+
 interface Props {
   author: string;
 }
@@ -39,6 +41,15 @@ const isCadenceLab = author.trim().toLowerCase() === "cadence lab";
         <a href="/about/">
           About Matt and Cadence Lab
           <span aria-hidden="true">→</span>
+        </a>
+      )
+    }
+
+    {
+      isMattRabah && (
+        <a href={FOUNDER.linkedIn} rel="me noopener">
+          Matt on LinkedIn
+          <span aria-hidden="true">↗</span>
         </a>
       )
     }

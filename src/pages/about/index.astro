@@ -3,6 +3,7 @@ import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Layout from "../../layouts/Layout.astro";
+import { FOUNDER } from "../../lib/founder";
 
 const pointsOfView = [
   {
@@ -144,6 +145,13 @@ const engagementRequires = [
               Salesforce Agentforce, and task-specific agents. I help teams
               choose useful applications, define where people stay involved, and
               prepare the workflows and data those applications need.
+            </p>
+
+            <p>
+              <a href={FOUNDER.linkedIn} rel="me noopener">
+                Connect with Matt on LinkedIn{" "}
+                <span aria-hidden="true">↗</span>
+              </a>
             </p>
           </div>
         </div>
