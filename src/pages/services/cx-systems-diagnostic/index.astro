@@ -11,25 +11,25 @@ const diagnosticQuestions = [
     number: "01",
     question: "Where does customer friction start?",
     explanation:
-      "Follow the problem across teams, systems, rules, handoffs, and decisions to find its source.",
+      "Follow the problem across teams, systems, rules, and handoffs until you hit the source. Not the symptom. The source.",
   },
   {
     number: "02",
     question: "Which breakdowns matter most?",
     explanation:
-      "Separate one-time issues from repeated problems that hurt service, trust, retention, revenue, or team capacity.",
+      "Separate the one-off from the repeat offender. Then name what it’s costing you: revenue, retention, cost to serve, or risk.",
   },
   {
     number: "03",
     question: "Who owns the decision and the work?",
     explanation:
-      "Find gaps in ownership, unclear decision rights, and handoffs where context or urgency gets lost.",
+      "Find the gaps in ownership, the fuzzy decision rights, and the handoffs where context or urgency gets dropped.",
   },
   {
     number: "04",
-    question: "What should you change first?",
+    question: "What should you change first, and how will you prove it worked?",
     explanation:
-      "Set a practical order for workflow, data, ownership, and system changes before you fund a larger program.",
+      "Pick the business value you’re moving before you design anything. Then put the workflow, data, ownership, and system changes in order.",
   },
 ];
 
@@ -57,12 +57,12 @@ const evidenceAreas = [
   {
     title: "Frontline operating reality",
     description:
-      "How teams use tools, interpret rules, handle exceptions, and work around processes that do not support the job.",
+      "How people really use the tools, read the rules, handle exceptions, and work around processes that don’t fit the job.",
   },
   {
     title: "Measurement and review",
     description:
-      "What you measure today, what is missing, how often leaders review it, and whether the numbers show outcomes or just activity.",
+      "What you measure today, what’s missing, how often anyone looks, and whether the numbers show outcomes or just activity.",
   },
 ];
 
@@ -73,7 +73,7 @@ const deliverables = [
     description:
       "A shared view of the customer problem across touchpoints, teams, systems, decisions, and dependencies.",
     decision:
-      "Where to focus instead of treating each symptom as a separate problem.",
+      "Where to focus, instead of treating every symptom like its own problem.",
   },
   {
     number: "02",
@@ -86,7 +86,7 @@ const deliverables = [
     number: "03",
     title: "Prioritized operating issues",
     description:
-      "A focused set of findings ranked by customer impact, business impact, strength of evidence, and dependencies.",
+      "Findings ranked by customer impact, the business value at stake, how strong the evidence is, and what depends on what.",
     decision:
       "Which issues need action now, which need more evidence, and which can wait.",
   },
@@ -94,24 +94,24 @@ const deliverables = [
     number: "04",
     title: "Practical improvement sequence",
     description:
-      "A recommended order for changes to workflows, ownership, data, measurement, and technology.",
+      "The order to change workflows, ownership, data, measurement, and technology, with the business result each step should move.",
     decision:
-      "What to do next, who needs to take part, and what must be true before the work expands.",
+      "What to do next, who needs to be in the room, and what has to be true before you scale it.",
   },
 ];
 
 const strongFit = [
   "Customer friction crosses teams, systems, or stages of the experience.",
-  "You see the same problems repeat but do not know what is causing them.",
+  "You keep seeing the same problems and nobody can say what’s causing them.",
   "A sponsor can bring the right business, service, operations, and technical people together.",
-  "Leaders are willing to change ownership or workflows when the evidence supports it.",
+  "Your leaders are willing to change ownership or workflows when the evidence says so.",
 ];
 
 const limitedFit = [
-  "The answer has already been chosen and the review is only meant to support a planned purchase.",
+  "The answer’s already been chosen and the review is just there to justify a purchase.",
   "The problem is limited to one clear task that a focused process fix can solve.",
-  "The right teams, evidence, or decision-makers cannot take part.",
-  "Success is defined only by launching technology, not by improving the customer or team experience.",
+  "The right teams, evidence, or decision-makers can’t take part.",
+  "Success means launching technology, not improving things for customers or your team.",
 ];
 
 const relatedPaths = [
@@ -182,10 +182,11 @@ const relatedPaths = [
           <p class="eyebrow">Diagnostic 01</p>
           <h1 id="diagnostic-title">Find what’s causing customer friction.</h1>
           <p class="hero-lead">
-            The CX Systems Diagnostic follows repeated customer problems across
-            workflows, ownership, CRM signals, service rules, and team handoffs.
-            You’ll see where the friction starts, why it keeps happening, and
-            what to fix first.
+            Your customers don’t care which team dropped the ball. They just
+            feel it. This diagnostic follows a repeated problem across
+            workflows, ownership, CRM signals, service rules, and handoffs, so
+            you can see where it starts, why it keeps happening, and what to fix
+            first.
           </p>
 
           <div class="hero-actions" aria-label="CX Systems Diagnostic actions">
@@ -202,11 +203,13 @@ const relatedPaths = [
           <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
             Customers get different answers, repeat themselves, or wait too
-            long. Each team sees only one part of the problem.
+            long. Every team sees its own slice of the problem. Nobody sees the
+            whole thing.
           </p>
           <p>
-            You have data, improvement projects, and local fixes, but no shared
-            view of where the friction starts or which issue matters most.
+            You’ve got data, projects, and local fixes. What you don’t have is
+            one shared view of where the friction starts, or which problem is
+            worth the most to fix.
           </p>
         </aside>
       </div>
@@ -235,8 +238,8 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            We start with what customers experience, then follow the evidence
-            until the next useful move becomes clear.
+            I start with what customers go through. Then I follow the evidence
+            until the next move is obvious.
           </p>
         </div>
 
@@ -278,9 +281,9 @@ const relatedPaths = [
             <h2 id="scope-title">Look at how the work really gets done.</h2>
           </div>
           <p>
-            The evidence depends on the problem and what your team can share. I
-            use the available sources to test patterns, compare the intended
-            process with the real one, and point out where the evidence is weak.
+            What I look at depends on the problem and what you can share. I test
+            the patterns, compare the process on paper with the one people
+            actually run, and tell you where the evidence is thin.
           </p>
         </div>
 
@@ -308,9 +311,10 @@ const relatedPaths = [
           <aside class="scope-note" aria-labelledby="scope-note-title">
             <h3 id="scope-note-title">Evidence before assumptions</h3>
             <p>
-              The diagnostic separates what we can prove from what people
-              believe and what still needs testing. Every recommendation shows
-              the evidence behind it and where missing data limits confidence.
+              You’ll know what’s proven, what’s just believed, and what still
+              needs testing. Every recommendation shows its evidence, and where
+              missing data means you should hold your confidence a little
+              looser.
             </p>
           </aside>
         </details>
@@ -330,8 +334,9 @@ const relatedPaths = [
             See what’s broken, why it matters, and what to do next.
           </h2>
           <p>
-            You’ll get more than a list of findings. Each deliverable helps your
-            team make a specific decision and move forward in the right order.
+            A list of findings isn’t much use on its own. Each deliverable
+            answers a specific decision, so your team can move in the right
+            order.
           </p>
         </div>
 
@@ -369,9 +374,9 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            A useful diagnostic needs access to the people, systems, and
-            evidence around the work. Your team also needs to be open to a cause
-            or solution that may differ from the first assumption.
+            I’ll need access to the people, systems, and evidence around the
+            work. And your team needs to be open to an answer that isn’t the one
+            everyone assumed going in.
           </p>
         </div>
 
@@ -413,10 +418,10 @@ const relatedPaths = [
 
         <div class="next-step-copy">
           <p>
-            Share the repeated problem, the teams and systems involved, the
-            evidence you have, and the decision you need to make. I’ll tell you
-            plainly whether this diagnostic is the right place to start or if a
-            simpler path makes more sense.
+            Tell me about the problem that keeps coming back, who’s involved,
+            what evidence you have, and the decision you need to make. I’ll tell
+            you straight whether this is the right place to start, or whether
+            something simpler would do.
           </p>
 
           <dl class="next-step-details">

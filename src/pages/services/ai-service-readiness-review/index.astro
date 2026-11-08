@@ -11,25 +11,25 @@ const diagnosticQuestions = [
     number: "01",
     question: "Is AI right for this problem?",
     explanation:
-      "Define the customer or business decision AI should support, who it affects, what could improve, and whether AI is the right tool.",
+      "Name the decision AI should support, who it affects, and the business value it should move. Then ask the honest question: is AI even the right tool?",
   },
   {
     number: "02",
     question: "Is the workflow ready?",
     explanation:
-      "Review the current work, ownership, exceptions, data, and decision rules to see whether the process is clear enough for AI support.",
+      "Look at the current work, owners, exceptions, data, and rules. If people can’t describe the process clearly, AI won’t either.",
   },
   {
     number: "03",
     question: "Where do people stay in control?",
     explanation:
-      "Define where people must review, approve, correct, override, or escalate AI-supported work and who remains accountable for the outcome.",
+      "Decide where people review, approve, correct, override, or escalate, and who’s still accountable when it goes wrong.",
   },
   {
     number: "04",
     question: "How will you know it works?",
     explanation:
-      "Set the evidence, adoption needs, performance measures, risk signals, and review points required before the work expands.",
+      "Set the measures, adoption needs, risk signals, and review points before launch, so you can prove the value before you scale it.",
   },
 ];
 
@@ -71,7 +71,7 @@ const deliverables = [
     number: "01",
     title: "Readiness decision",
     description:
-      "An evidence-based answer on whether the use case is ready, needs operating changes first, should be narrowed, or should stop.",
+      "A straight answer backed by evidence: ready, fix the operation first, narrow it, or stop.",
     decision:
       "Whether to proceed, fix the missing conditions, reshape the use case, or choose another approach.",
   },
@@ -97,7 +97,7 @@ const deliverables = [
     description:
       "A practical order for operating changes, a focused pilot, adoption support, measurement, review, and any justified expansion.",
     decision:
-      "What to change first, what the first release should include, and what evidence should guide the next investment.",
+      "What to change first, what the first release should include, and the evidence that earns the next round of investment.",
   },
 ];
 
@@ -105,14 +105,14 @@ const strongFit = [
   "An AI proposal has support, but the workflow, governance, adoption needs, or success measures are still unclear.",
   "The use case affects customer service, success, or operations across teams, systems, or decisions.",
   "A sponsor can involve process owners, frontline users, data and knowledge owners, risk partners, and technical teams.",
-  "Your organization is willing to delay, narrow, or reshape the use case when important conditions are missing.",
+  "You’re willing to delay, narrow, or reshape the idea when something important is missing.",
 ];
 
 const limitedFit = [
-  "You only need vendor selection or implementation of a chosen solution, with no readiness decision.",
+  "You only need a vendor picked or a chosen tool implemented, with no readiness decision.",
   "AI is expected to cover for a broken workflow without changing ownership, process, or decision rules.",
-  "Process owners, frontline users, data or knowledge owners, risk partners, or accountable leaders cannot take part.",
-  "Success is measured only by launch, use, or automation volume, not by useful work and customer outcomes.",
+  "The process owners, frontline users, data owners, risk partners, or accountable leaders can’t take part.",
+  "Success means launching, usage, or automation volume, not better work and better customer outcomes.",
 ];
 
 const relatedPaths = [
@@ -185,10 +185,11 @@ const relatedPaths = [
             Know if your AI use case is ready before you build it.
           </h1>
           <p class="hero-lead">
-            The AI Service Readiness Review tests the use case, workflow, data,
-            human oversight, governance, adoption needs, and success measures.
-            You’ll get a clear decision to proceed, fix the gaps first, narrow
-            the idea, or stop.
+            Only 7% of consumers forgive AI more than they forgive a person. So
+            getting it wrong costs more than you think. This review tests the
+            use case, workflow, data, human oversight, governance, adoption, and
+            how you’ll measure success. You’ll get a clear call: go, fix the
+            gaps first, narrow it, or stop.
           </p>
 
           <div
@@ -207,12 +208,13 @@ const relatedPaths = [
         <aside class="trigger" aria-labelledby="trigger-title">
           <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
-            An AI idea has support, but the workflow, data, human oversight,
-            governance, adoption needs, or success measures are still unclear.
+            Someone’s excited about an AI idea. But the workflow, data,
+            oversight, governance, adoption plan, or success measures are still
+            fuzzy.
           </p>
           <p>
-            Leaders need a clear answer before a pilot becomes a larger
-            commitment of money, time, and customer trust.
+            Leadership needs a clear answer before a pilot turns into a big bet
+            of money, time, and customer trust.
           </p>
         </aside>
       </div>
@@ -241,9 +243,9 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            We start with the customer and business problem. Then we check
-            whether the right conditions exist before you compare platforms or
-            plan automation.
+            I start with the customer problem and the business value at stake.
+            Then I check whether the right conditions exist, before anyone
+            compares platforms or plans automation.
           </p>
         </div>
 
@@ -285,9 +287,9 @@ const relatedPaths = [
             <h2 id="scope-title">Check the work before you automate it.</h2>
           </div>
           <p>
-            The evidence depends on the decision and what your team can share. I
-            compare the proposed AI behavior with the real workflow, available
-            context, human judgment, risks, and measures needed to run it well.
+            What I look at depends on the decision and what you can share. I
+            compare what the AI is supposed to do with the real workflow, the
+            context it’ll have, the judgment calls people make, and the risks.
           </p>
         </div>
 
@@ -315,9 +317,9 @@ const relatedPaths = [
           <aside class="scope-note" aria-labelledby="scope-note-title">
             <h3 id="scope-note-title">Readiness before automation</h3>
             <p>
-              AI should not automate confusion. The review shows where
+              AI doesn’t fix confusion. It scales it. You’ll see where
               workflows, knowledge, decision rights, or accountability need to
-              become clearer before AI can support the work responsibly.
+              get clearer before AI touches the work.
             </p>
           </aside>
         </details>
@@ -337,9 +339,9 @@ const relatedPaths = [
             Get a readiness decision and a responsible path forward.
           </h2>
           <p>
-            You’ll get more than a list of AI risks. Each deliverable shows
-            whether the use case should proceed, what must shape it, and which
-            evidence should guide any expansion.
+            A list of AI risks won’t help you decide. Each deliverable tells you
+            whether to go ahead, what has to shape it, and what evidence should
+            drive the next step.
           </p>
         </div>
 
@@ -377,9 +379,9 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            A useful review needs access to the people, workflow, data,
-            knowledge, and risks around the use case. Your organization must
-            also be open to the answer that AI is not the right move yet.
+            I’ll need access to the people, workflow, data, and knowledge around
+            the use case. And you’ll need to be open to hearing that AI isn’t
+            the right move yet.
           </p>
         </div>
 
@@ -421,10 +423,9 @@ const relatedPaths = [
 
         <div class="next-step-copy">
           <p>
-            Share the customer or business problem, workflow and users involved,
-            available data and knowledge, known risks, sponsor, and decision you
-            need to make. I’ll tell you plainly whether this review is the right
-            place to start or if another path makes more sense.
+            Tell me the problem, the workflow and people involved, what data you
+            have, the risks you already know about, and the decision you need to
+            make. I’ll tell you straight whether this review is the right start.
           </p>
 
           <dl class="next-step-details">
