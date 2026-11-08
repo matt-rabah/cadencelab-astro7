@@ -4,6 +4,79 @@ import NavHeader from "../../components/NavHeader.astro";
 import SectionNav from "../../components/SectionNav.astro";
 import Layout from "../../layouts/Layout.astro";
 import { FOUNDER } from "../../lib/founder";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// Photos live in src/assets/about/. Each block renders only when its file
+// exists, so the page works before the photos are added.
+const photoFiles = import.meta.glob<{ default: ImageMetadata }>(
+  "../../assets/about/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const photo = (name: string): ImageMetadata | undefined =>
+  Object.entries(photoFiles).find(([path]) =>
+    path.split("/").pop()?.startsWith(`${name}.`),
+  )?.[1].default;
+
+const headshot = photo("matt-rabah-headshot");
+
+const results = [
+  {
+    figure: "14%",
+    text: "Average lift in early adoption and repeat engagement across six Cadence Lab client lifecycle redesigns.",
+  },
+  {
+    figure: "18%",
+    text: "Faster time-to-value after rebuilding sales-to-service handoffs in Salesforce for Cadence Lab clients.",
+  },
+  {
+    figure: "4 hrs",
+    text: "Back every week for each team member at a multi-location client, from HubSpot lifecycle automation.",
+  },
+  {
+    figure: "32% → 86%",
+    text: "CRM-driven outreach across 1,100 accounts at Shinola, without putting high-touch coverage on every account.",
+  },
+  {
+    figure: "35%",
+    text: "Fewer escalations at Shinola after tracing broken customer handoffs and rewriting the service workflows behind them.",
+  },
+  {
+    figure: "95%",
+    text: "Multi-year client retention at NeuroSync, built on CRM stage gates, mutual action plans, and clean sales-to-implementation handoffs.",
+  },
+];
+
+const talks = [
+  {
+    event: "1 Million Cups Detroit",
+    topic: "CX decisions and designing systems for AI adoption",
+    date: "September 2026",
+    photo: photo("1-million-cups-detroit"),
+    alt: "Matt Rabah presenting at 1 Million Cups Detroit",
+  },
+  {
+    event: "Creative Mornings Detroit",
+    topic: "Systems Thinking in Customer Experience",
+    date: "May 2024",
+    photo: photo("creative-mornings-detroit"),
+    alt: "Matt Rabah speaking at Creative Mornings Detroit",
+  },
+  {
+    event: "MSU CXM360 Conference",
+    topic: "Loyalty Programs in Luxury Retail",
+    date: "October 2023",
+    photo: undefined,
+    alt: "",
+  },
+  {
+    event: "University of Michigan",
+    topic: "Customer Experience Operations",
+    date: "July 2022",
+    photo: undefined,
+    alt: "",
+  },
+];
 
 const pointsOfView = [
   {
@@ -87,7 +160,10 @@ const engagementRequires = [
           </h1>
 
           <p class="hero-lead">
-            I’m Matt Rabah, and Cadence Lab is me. I help companies figure out why customer problems keep coming back, then fix the work behind them. You’ll work with me directly, from the first question through the plan, the workflow design, and how we’ll measure what changed.
+            I’m Matt Rabah, and Cadence Lab is me. I help companies figure out
+            why customer problems keep coming back, then fix the work behind
+            them. You’ll work with me directly, from the first question through
+            the plan, the workflow design, and how we’ll measure what changed.
           </p>
 
           <div class="hero-actions" aria-label="About page actions">
@@ -106,7 +182,9 @@ const engagementRequires = [
 
     <SectionNav
       items={[
-        { label: "Founder", href: "#founder" },
+        { label: "Official bio", href: "#founder" },
+        { label: "Results", href: "#results" },
+        { label: "Speaking", href: "#speaking" },
         { label: "Point of view", href: "#point-of-view" },
         { label: "How I work", href: "#working-standard" },
         { label: "Fit", href: "#engagement-fit" },
@@ -118,26 +196,76 @@ const engagementRequires = [
       class="founder-profile"
       aria-labelledby="official-bio-title"
     >
-      <div class="page-container founder-layout">
+      <div
+        class:list={[
+          "page-container",
+          "founder-layout",
+          { "has-photo": headshot },
+        ]}
+      >
+        {
+          headshot && (
+            <figure class="headshot">
+              <Image
+                src={headshot}
+                alt="Matt Rabah, founder of Cadence Lab"
+                widths={[480, 720, 960]}
+                sizes="(min-width: 64rem) 28rem, 100vw"
+                loading="eager"
+              />
+              <figcaption>
+                <strong>Matt Rabah</strong>
+                Founder, Cadence Lab. Detroit, Michigan.
+              </figcaption>
+            </figure>
+          )
+        }
         <div class="official-bio" aria-labelledby="official-bio-title">
-          <p class="eyebrow">Experience</p>
+          <p class="eyebrow">Official bio</p>
           <h2 id="official-bio-title">
             Twelve years across customer experience and customer success.
           </h2>
 
           <div class="bio-copy">
             <p>
-              My work spans service operations, customer lifecycle programs, CRM workflows, and practical AI adoption. Different labels, same job: understand the customer’s problem, decide what’s worth building, ship it, and prove it worked.
+              Matt Rabah is a customer experience strategist and the founder of
+              Cadence Lab, a Detroit practice that helps companies fix the
+              systems behind customer friction. He holds an M.S. in Customer
+              Experience Management from Michigan State University’s Eli Broad
+              College of Business and is a Salesforce Certified Agentforce
+              Specialist.
             </p>
 
             <p>
-              I’ve worked with Salesforce, HubSpot, Gainsight, Zendesk,
-              Delighted, and Oracle.
+              Before Cadence Lab, he led customer experience at{" "}
+              <a href="https://www.shinola.com/" rel="noopener">Shinola</a>, the
+              Detroit luxury brand, for its flagship location and an $8M
+              corporate portfolio. Before that, he was Vice President of Sales
+              at{" "}
+              <a href="https://www.neurosync.health/" rel="noopener"
+                >NeuroSync</a
+              >, an AI-enabled health technology company, where he owned
+              post-implementation customer success across clinical and legal
+              accounts.
             </p>
 
             <p>
-              My AI experience includes ChatGPT, Gemini, Claude, local models,
-              Salesforce Agentforce, and task-specific agents. I help teams pick the use cases worth building, decide where people stay in the loop, and get the workflows and data ready before launch.
+              His work spans service operations, customer lifecycle programs,
+              CRM workflows, and practical AI adoption. Different labels, same
+              job: understand the customer’s problem, decide what’s worth
+              building, ship it, and prove it worked.
+            </p>
+
+            <p>
+              He’s worked hands-on with Salesforce, HubSpot, Gainsight,
+              ChurnZero, Zendesk, Delighted, and Oracle.
+            </p>
+
+            <p>
+              His AI work includes ChatGPT, Gemini, Claude, local models,
+              Salesforce Agentforce, and task-specific agents. He helps teams
+              pick the use cases worth building, decide where people stay in the
+              loop, and get the workflows and data ready before launch.
             </p>
 
             <p>
@@ -148,6 +276,66 @@ const engagementRequires = [
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="results" class="about-results" aria-labelledby="results-title">
+      <div class="page-container results-stack">
+        <div class="results-intro">
+          <p class="eyebrow">Results</p>
+          <h2 id="results-title">Numbers I can stand behind.</h2>
+          <p>
+            Every number here comes from real work. No projections, no borrowed
+            case studies. Same pattern every time: find the problem, ship the
+            change, measure what moved.
+          </p>
+        </div>
+
+        <ul class="results-grid" role="list">
+          {
+            results.map((result) => (
+              <li>
+                <p class="result-figure">{result.figure}</p>
+                <p class="result-text">{result.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section
+      id="speaking"
+      class="about-speaking"
+      aria-labelledby="speaking-title"
+    >
+      <div class="page-container speaking-stack">
+        <div class="results-intro">
+          <p class="eyebrow">Speaking</p>
+          <h2 id="speaking-title">Where I’ve talked about this work.</h2>
+        </div>
+
+        <ul class="talk-list" role="list">
+          {
+            talks.map((talk) => (
+              <li class:list={{ "has-photo": talk.photo }}>
+                {talk.photo && (
+                  <Image
+                    src={talk.photo}
+                    alt={talk.alt}
+                    widths={[640, 960, 1280]}
+                    sizes="(min-width: 64rem) 40rem, 100vw"
+                  />
+                )}
+                <div class="talk-copy">
+                  <p class="talk-date">{talk.date}</p>
+                  <h3>{talk.event}</h3>
+                  <p>{talk.topic}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </section>
 
@@ -244,7 +432,8 @@ const engagementRequires = [
           </div>
 
           <p>
-            This works best when your team wants to understand the problem before picking a solution, and is ready to act on what we find.
+            This works best when your team wants to understand the problem
+            before picking a solution, and is ready to act on what we find.
           </p>
         </div>
 
@@ -281,7 +470,9 @@ const engagementRequires = [
 
         <div class="close-action">
           <p>
-            Tell me what customers are going through, who’s involved, and what needs to change. I’ll read it and tell you straight whether I can help.
+            Tell me what customers are going through, who’s involved, and what
+            needs to change. I’ll read it and tell you straight whether I can
+            help.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
@@ -370,6 +561,159 @@ const engagementRequires = [
 
   .official-bio {
     gap: 1rem;
+  }
+
+  .founder-layout.has-photo {
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .headshot {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .headshot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  .headshot figcaption {
+    display: grid;
+    gap: 0.25rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .headshot figcaption strong {
+    color: var(--color-ink);
+  }
+
+  .about-results,
+  .about-speaking {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .about-results {
+    background: var(--color-surface-subtle);
+  }
+
+  .results-stack,
+  .speaking-stack {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .results-intro {
+    display: grid;
+    max-width: 46rem;
+    gap: 1rem;
+  }
+
+  .results-intro p:not(.eyebrow) {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .results-grid,
+  .talk-list {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.25rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .results-grid li,
+  .talk-list li {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+    box-shadow: var(--shadow-card);
+  }
+
+  .result-figure {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .result-text,
+  .talk-copy p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .talk-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .talk-list li.has-photo {
+    padding: 0;
+    overflow: clip;
+  }
+
+  .talk-list li.has-photo .talk-copy {
+    padding: 0 clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .talk-list img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .talk-copy {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .talk-copy h3 {
+    margin: 0;
+    font-size: var(--fs-h4);
+  }
+
+  .talk-copy .talk-date {
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 64rem) {
+    .founder-layout.has-photo,
+    .results-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .founder-layout.has-photo,
+    .results-grid,
+    .talk-list {
+      grid-template-columns: 1fr;
+    }
   }
 
   .official-bio h2 {
