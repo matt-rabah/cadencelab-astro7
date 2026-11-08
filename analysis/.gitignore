@@ -1,0 +1,4 @@
+SECRETS.local.md
+*.local.patch
+# Raw scanner output and findings stay local: this repository is public.
+.npm-audit.json
