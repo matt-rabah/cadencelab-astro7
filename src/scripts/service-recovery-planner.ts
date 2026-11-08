@@ -58,7 +58,7 @@ const readValue = (data: FormData, name: string) =>
 const severityLabel: Record<Severity, string> = {
   inconvenience: "Inconvenience",
   material: "Material impact",
-  serious: "Serious impact — prompt specialist review needed",
+  serious: "Serious impact: prompt specialist review needed",
 };
 
 const setOutput = (name: string, value: string) => {
@@ -240,7 +240,7 @@ const renderPlan = (plan: RecoveryPlan) => {
   renderList(communicationPrompts, plan.communicationPrompts);
   renderList(
     remedyList,
-    plan.remedies.map((item) => `${item} — subject to approval or policy.`),
+    plan.remedies.map((item) => `${item} (subject to approval or policy).`),
   );
   renderList(recoveryChecklist, plan.checklist);
   renderList(escalationTriggers, plan.escalationTriggers);
@@ -285,7 +285,7 @@ Still unknown: ${plan.unknowns}
 COMMUNICATION PROMPTS
 ${bullets(plan.communicationPrompts)}
 
-POSSIBLE REMEDIES — SUBJECT TO APPROVAL OR POLICY
+POSSIBLE REMEDIES (SUBJECT TO APPROVAL OR POLICY)
 ${bullets(plan.remedies)}
 
 DO NOT PROMISE

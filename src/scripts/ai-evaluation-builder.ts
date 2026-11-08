@@ -353,7 +353,7 @@ const planAsText = (plan: EvaluationPlan) => {
   plan.criteria.forEach((criterion, index) => {
     lines.push(
       "",
-      `${index + 1}. ${criterion.name} — ${criterion.priority}`,
+      `${index + 1}. ${criterion.name}: ${criterion.priority}`,
       `Pass: ${criterion.pass}`,
       `Review: ${criterion.review}`,
       `Fail: ${criterion.fail}`,

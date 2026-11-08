@@ -547,7 +547,7 @@ const summaryAsText = (summary: FeedbackSummary) => {
     summary.recurringThemes.forEach((theme) => {
       lines.push(
         "",
-        `${theme.name} — ${theme.comments.length} mentions — ${theme.direction}`,
+        `${theme.name}: ${theme.comments.length} mentions, ${theme.direction}`,
         theme.description,
         ...theme.comments.slice(0, 4).map((comment) => `- “${comment}”`),
       );
