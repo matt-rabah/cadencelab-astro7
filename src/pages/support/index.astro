@@ -625,9 +625,9 @@ const usefulContext = [
     align-items: center;
     justify-content: center;
     padding: 0.875rem 1.25rem;
-    border: var(--border-width) solid var(--color-blue);
+    border: var(--border-width) solid var(--color-ink);
     border-radius: var(--radius-md);
-    background: var(--color-blue);
+    background: var(--color-ink);
     color: var(--color-light);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
@@ -635,9 +635,10 @@ const usefulContext = [
     text-decoration: none;
   }
 
+  /* Same as every other page: black, blue on hover. */
   .button-primary:hover {
-    border-color: var(--color-ink);
-    background: var(--color-ink);
+    border-color: var(--color-blue);
+    background: var(--color-blue);
   }
 
   .support-page a:focus-visible {

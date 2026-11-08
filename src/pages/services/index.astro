@@ -257,7 +257,12 @@ const evidenceStandards = [
       </div>
     </section>
 
-    <section id="evidence" class="evidence" aria-labelledby="evidence-title">
+    <section
+      data-band
+      id="evidence"
+      class="evidence"
+      aria-labelledby="evidence-title"
+    >
       <div class="page-container section-stack">
         <div class="evidence-intro">
           <p class="eyebrow eyebrow-inverse">Working standards</p>
@@ -619,12 +624,7 @@ const evidenceStandards = [
   }
 
   .selection {
-    background: linear-gradient(
-      180deg,
-      var(--color-surface) 0%,
-      color-mix(in oklab, var(--color-blue) 3%, var(--color-surface-subtle))
-        100%
-    );
+    background: var(--color-surface-subtle);
   }
 
   .selection-list {
@@ -635,39 +635,17 @@ const evidenceStandards = [
     gap: clamp(0.875rem, 2vw, 1.25rem);
   }
 
-  .selection-list > li:nth-child(1) {
-    --selection-accent: var(--color-blue);
-  }
-
-  .selection-list > li:nth-child(2) {
-    --selection-accent: #11683f;
-  }
-
-  .selection-list > li:nth-child(3) {
-    --selection-accent: #5940a8;
-  }
-
-  .selection-list > li:nth-child(4) {
-    --selection-accent: #9a4b00;
-  }
-
+  /* One accent for every card; see Stats.astro. */
   .selection-list > li {
+    --selection-accent: var(--color-blue);
+
     min-width: 0;
     overflow: clip;
     border: var(--border-width) solid var(--color-border-strong);
-    border-block-start: 0.25rem solid var(--selection-accent);
+    border-block-start: 0.125rem solid var(--color-ink);
     border-radius: var(--radius-lg);
-    background:
-      linear-gradient(
-        135deg,
-        transparent 55%,
-        color-mix(in oklab, var(--selection-accent) 7%, transparent) 100%
-      ),
-      color-mix(in oklab, var(--selection-accent) 4%, var(--color-surface-pure));
-    transition:
-      border-color var(--transition-standard),
-      background-color var(--transition-standard),
-      translate var(--transition-standard);
+    background: var(--color-surface-pure);
+    transition: border-color var(--transition-standard);
   }
 
   .selection-list article {
@@ -769,7 +747,6 @@ const evidenceStandards = [
   @media (hover: hover) {
     .selection-list > li:has(a:hover) {
       border-color: var(--selection-accent);
-      translate: 0 -0.25rem;
     }
 
     .selection-list a:hover {

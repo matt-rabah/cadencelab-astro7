@@ -79,7 +79,7 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
       </a>
 
       <p class="privacy-note">
-        Responses are used only to assess fit and reply. Review the
+        Responses are used only to assess fit and reply. Review the{" "}
         <a href="/privacy/">privacy policy</a>.
       </p>
     </aside>
@@ -90,13 +90,7 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
   .fit-check {
     padding-block: var(--section-space);
     border-block-end: var(--border-width) solid var(--color-border);
-    background:
-      linear-gradient(
-        135deg,
-        color-mix(in oklab, var(--color-blue) 6%, transparent),
-        transparent 48%
-      ),
-      var(--color-surface);
+    background: var(--color-surface);
   }
 
   .fit-check-container {
@@ -179,11 +173,7 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
     border: var(--border-width) solid var(--color-border-strong);
     border-block-start: 0.25rem solid var(--color-blue);
     border-radius: var(--radius-lg);
-    background: color-mix(
-      in oklab,
-      var(--color-blue) 4%,
-      var(--color-surface-pure)
-    );
+    background: var(--color-surface-pure);
   }
 
   .action-heading {

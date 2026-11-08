@@ -51,13 +51,7 @@ const {
   .hero {
     padding-block: clamp(4.5rem, 10vw, 8rem);
     border-block-end: var(--border-width) solid var(--color-border);
-    background:
-      linear-gradient(
-        135deg,
-        color-mix(in oklab, var(--color-blue) 5%, transparent),
-        transparent 42%
-      ),
-      var(--color-surface);
+    background: var(--color-surface);
     color: var(--color-text);
   }
 
@@ -146,11 +140,7 @@ const {
 
   .button-secondary {
     border-color: var(--color-border-strong);
-    background: color-mix(
-      in oklab,
-      var(--color-blue) 3%,
-      var(--color-surface-pure)
-    );
+    background: var(--color-surface-pure);
     color: var(--color-ink);
   }
 
