@@ -95,6 +95,12 @@ export default defineConfig({
           // Zaraz (server-side; its loader is served from /cdn-cgi/zaraz/), so
           // no Google script host is needed.
           "https://static.cloudflareinsights.com",
+          // Microsoft Clarity (src/components/Clarity.astro): the project tag
+          // and the clarity.js it loads. Clarity's uploads (g.clarity.ms) and
+          // pixels (c.clarity.ms) need no entry: the CSP sets no connect-src,
+          // img-src, or default-src.
+          "https://www.clarity.ms",
+          "https://scripts.clarity.ms",
           // Allows the inline <script type="speculationrules"> in Layout.astro
           // (Astro does not hash it). Covers speculation rules only, never
           // executable inline script.
