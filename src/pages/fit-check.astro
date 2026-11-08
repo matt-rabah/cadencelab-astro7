@@ -318,6 +318,32 @@ if (turnstileSiteKey) {
         </details>
       </section>
 
+      <section class="pricing-note" aria-labelledby="pricing-note-title">
+        <h2 id="pricing-note-title">Why there’s no price on this page.</h2>
+        <div class="pricing-note-copy">
+          <p>
+            No rate card. It isn’t a secret. What this costs depends on what the
+            problem is costing you, and neither of us knows that yet.
+          </p>
+          <p>
+            Most people compare the price of fixing a problem to zero. Wrong
+            comparison. The real one is what it costs to keep it: the customers
+            who leave without a word, the hours your team spends working around
+            it, the AI pilot that stalls. That number is almost always bigger
+            than anyone has worked out. So FitCheck™ starts there.
+          </p>
+          <p>
+            I don’t bill by the hour, and I don’t discount. If the problem and
+            the budget don’t line up, we cut the scope to what matters most, or
+            I point you to someone who fits. Either way, you keep the brief.
+          </p>
+        </div>
+        <p class="guarantee">
+          <strong>My guarantee.</strong> Every diagnostic ends with a specific constraint
+          and a next decision you can act on. If it doesn’t, you don’t pay for it.
+        </p>
+      </section>
+
       <form
         class="fit-check-form"
         method="post"
@@ -543,8 +569,117 @@ if (turnstileSiteKey) {
         <fieldset class="form-section" data-form-step="3">
           <legend tabindex="-1">
             <span class="section-number" aria-hidden="true">03</span>
-            Readiness and ownership
+            What it’s worth and who owns it
           </legend>
+
+          <div class="input-group">
+            <span id="cost-area-label" class="group-label">
+              Where is this costing you the most right now?
+            </span>
+
+            <div
+              class="radio-group"
+              role="radiogroup"
+              aria-labelledby="cost-area-label"
+            >
+              <label class="radio-option">
+                <input type="radio" name="cost-area" value="revenue" required />
+                <span>Revenue: churn, missed renewals, or lost deals</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="cost-area" value="hours" />
+                <span>Team hours spent working around it</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="cost-area" value="risk" />
+                <span>Risk to compliance, brand, or customer trust</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="cost-area" value="unknown" />
+                <span>We haven’t put a number on it yet</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <span id="monthly-cost-label" class="group-label">
+              If you had to guess, roughly what is it costing per month?
+            </span>
+
+            <div
+              class="radio-group"
+              role="radiogroup"
+              aria-labelledby="monthly-cost-label"
+            >
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="monthly-cost"
+                  value="under-5k"
+                  required
+                />
+                <span>Under $5k</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="monthly-cost" value="5k-25k" />
+                <span>$5k to $25k</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="monthly-cost" value="25k-100k" />
+                <span>$25k to $100k</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="monthly-cost" value="over-100k" />
+                <span>Over $100k</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="monthly-cost" value="unknown" />
+                <span>No idea yet</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="cost-of-inaction">
+              What happens if nothing changes for another 12 months?
+            </label>
+            <textarea
+              id="cost-of-inaction"
+              name="cost-of-inaction"
+              rows="3"
+              autocomplete="off"
+              maxlength="600"
+              placeholder="One or two sentences is plenty."></textarea>
+          </div>
+
+          <div class="input-group">
+            <span id="budget-label" class="group-label">
+              Is there budget set aside to fix it?
+            </span>
+
+            <div
+              class="radio-group"
+              role="radiogroup"
+              aria-labelledby="budget-label"
+            >
+              <label class="radio-option">
+                <input type="radio" name="budget" value="yes" required />
+                <span>Yes</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="budget" value="coming" />
+                <span>Not yet, but there will be</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="budget" value="make-case" />
+                <span>I need help making the case internally</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="budget" value="no" />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
 
           <div class="input-group">
             <span id="leadership-label" class="group-label">
@@ -900,9 +1035,13 @@ if (turnstileSiteKey) {
           ],
         },
         {
-          title: "Readiness and ownership",
+          title: "What it’s worth and who owns it",
           step: 2,
           fields: [
+            ["cost-area", "Biggest cost"],
+            ["monthly-cost", "Rough monthly cost"],
+            ["cost-of-inaction", "If nothing changes"],
+            ["budget", "Budget set aside"],
             ["leadership", "Accountable leadership"],
             ["change-readiness", "Willingness to change"],
           ],
@@ -2330,5 +2469,41 @@ if (turnstileSiteKey) {
     .starting-card[aria-current="true"] {
       border-color: CanvasText;
     }
+  }
+
+  .pricing-note {
+    display: grid;
+    gap: 1rem;
+    margin-block: clamp(2rem, 5vw, 3rem);
+    padding-block: clamp(1.5rem, 4vw, 2rem);
+    border-block: var(--border-width) solid var(--color-border);
+  }
+
+  .pricing-note h2 {
+    margin: 0;
+    font-size: var(--fs-h3);
+  }
+
+  .pricing-note-copy {
+    display: grid;
+    gap: 0.875rem;
+    max-width: 68ch;
+  }
+
+  .pricing-note-copy p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .guarantee {
+    max-width: 68ch;
+    margin: 0.5rem 0 0;
+    padding: 1rem 1.25rem;
+    border-inline-start: 0.25rem solid var(--color-yellow);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-subtle);
+    color: var(--color-ink);
+    line-height: 1.6;
   }
 </style>
