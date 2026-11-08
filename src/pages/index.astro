@@ -5,6 +5,7 @@ import NavHeader from "../components/NavHeader.astro";
 import Hero from "../components/Hero.astro";
 import Logos from "../components/Logos.astro";
 import Stats from "../components/Stats.astro";
+import Evidence from "../components/Evidence.astro";
 import OperatingModel from "../components/OperatingModel.astro";
 import FAQ from "../components/FAQ.astro";
 import FitCheckForm from "../components/FitCheckForm.astro";
@@ -66,6 +67,31 @@ const fitBenefits = [
     />
 
     <Logos />
+
+    <Evidence
+      eyebrow="CX in 2026"
+      heading="Teams think it's getting better. Customers don't."
+      intro="That gap is where the work is. Most of it isn't a technology problem. It's what happens between teams, systems, and the moment a customer needs help."
+      findings={[
+        {
+          figure: "66% vs 17%",
+          text: "66% of CX practitioners believe experiences are improving. Only 17% of consumers agree.",
+        },
+        {
+          figure: "44%",
+          text: "of customers had to give the same information more than once during their last interaction.",
+        },
+        {
+          figure: "30–40%",
+          text: "of departments don't act on CX recommendations. An insight nobody acts on is just a report.",
+        },
+        {
+          figure: "7%",
+          text: "of consumers forgive AI more than they forgive a person. Get the AI handoff wrong and they'll notice.",
+        },
+      ]}
+      source="Source: Medallia, The 2026 State of Customer Experience Report (552 CX practitioners, 1,522 consumers, and 600+ enterprise CX programs)."
+    />
 
     <Stats
       eyebrow="Diagnostic Services"
