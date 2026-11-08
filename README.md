@@ -24,7 +24,7 @@ The project supports:
 
 ## Requirements
 
-- Node.js 22.12 or newer
+- Node.js 22.23.4 or newer (Astro 7.4 refuses to run on older versions)
 - npm
 
 Check the installed versions:
