@@ -23,7 +23,7 @@ const pageTitle = `${title} | Cadence Lab`;
 const pageDescription =
   pageData.data.description ??
   subtitle ??
-  "Use the Fit Check to see whether your customer experience, CRM, or AI initiative is ready for a useful next step.";
+  "Use the FitCheck™ to see whether your customer experience, CRM, or AI initiative is ready for a useful next step.";
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
@@ -207,7 +207,7 @@ if (turnstileSiteKey) {
           <p class="progress-status" data-progress-status aria-live="polite">
             Step 1 of 5
           </p>
-          <ol aria-label="Fit check progress">
+          <ol aria-label="FitCheck™ progress">
             <li aria-current="step">Problem</li>
             <li>Environment</li>
             <li>Readiness</li>
@@ -595,7 +595,7 @@ if (turnstileSiteKey) {
               <p class="section-number" aria-hidden="true">05</p>
               <h3 id="review-title" tabindex="-1">Review your answers</h3>
             </div>
-            <p>Check your answers before you send the fit check.</p>
+            <p>Check your answers before you send the FitCheck™.</p>
           </div>
 
           <div class="review-groups" data-review-groups></div>
@@ -666,7 +666,7 @@ if (turnstileSiteKey) {
             </p>
 
             <button type="submit" class="submit-button">
-              Send my fit check
+              Send my FitCheck™
             </button>
           </div>
         </div>
@@ -980,7 +980,7 @@ if (turnstileSiteKey) {
           event.preventDefault();
           if (turnstileStatus) {
             turnstileStatus.textContent =
-              "Complete the security check before sending your fit check.";
+              "Complete the security check before sending your FitCheck™.";
           }
           return;
         }
@@ -996,7 +996,7 @@ if (turnstileSiteKey) {
       window.addEventListener("pageshow", () => {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = "Send my fit check";
+          submitButton.textContent = "Send my FitCheck™";
         }
       });
 
