@@ -55,6 +55,13 @@ const canonicalHref = canonical.toString();
     }
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {
+      /*
+        Follow the visitor's OS text size (Dynamic Type, Android font scale).
+        Type is sized in rem, so do not set font-size on html or :root.
+      */
+    }
+    <meta name="text-scale" content="scale" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#ffffff" data-theme-color />
@@ -142,6 +149,37 @@ const canonicalHref = canonical.toString();
     />
 
     <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
+
+    {
+      /*
+        Prefetch same-site pages when a visitor hovers a link (Chromium only;
+        other browsers ignore this). Cloudflare Speed Brain already prefetches
+        on pointerdown; this starts earlier. Prefetch only, not prerender, so
+        analytics never count a page the visitor did not open.
+      */
+    }
+    <script is:inline type="speculationrules">
+      {
+        "prefetch": [
+          {
+            "tag": "cadencelab-hover",
+            "eagerness": "moderate",
+            "where": {
+              "and": [
+                { "href_matches": "/*" },
+                { "not": { "href_matches": "/admin/*" } },
+                { "not": { "href_matches": "/api/*" } },
+                { "not": { "href_matches": "/cdn-cgi/*" } },
+                { "not": { "href_matches": "/thanks/" } },
+                { "not": { "selector_matches": "[rel~=nofollow]" } },
+                { "not": { "selector_matches": "[download]" } },
+                { "not": { "selector_matches": "[data-no-prefetch]" } }
+              ]
+            }
+          }
+        ]
+      }
+    </script>
 
     <slot name="head" />
   </head>

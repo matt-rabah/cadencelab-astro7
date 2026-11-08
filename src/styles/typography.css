@@ -78,11 +78,11 @@
   --fs-cta: 0.9375rem;
   --fs-body: 1rem;
   --fs-body-ui: clamp(1rem, 0.97rem + 0.11vw, 1.0625rem);
-  --fs-h4: clamp(1.125rem, 1.5vw, 1.25rem);
-  --fs-h3: clamp(1.35rem, 2vw, 1.65rem);
-  --fs-h2: clamp(1.75rem, 3vw, 2.25rem);
-  --fs-h1: clamp(2.25rem, 4vw, 3.25rem);
-  --fs-display: clamp(2.75rem, 6vw, 4.5rem);
+  --fs-h4: clamp(1.125rem, 0.682rem + 0.682vw, 1.25rem);
+  --fs-h3: clamp(1.35rem, 0.66rem + 1.2vw, 1.65rem);
+  --fs-h2: clamp(1.75rem, 0.844rem + 1.875vw, 2.25rem);
+  --fs-h1: clamp(2.25rem, 0.929rem + 2.857vw, 3.25rem);
+  --fs-display: clamp(2.75rem, 1.149rem + 4.468vw, 4.5rem);
 
   /* Editorial scale */
   --fs-post-title: clamp(2rem, 1.69rem + 1.33vw, 2.75rem);

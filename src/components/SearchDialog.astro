@@ -7,6 +7,7 @@
 <dialog
   id="site-search-dialog"
   class="search-dialog"
+  closedby="any"
   aria-labelledby="search-dialog-title"
   data-search-dialog
 >
@@ -237,13 +238,24 @@
 
     input.addEventListener("input", updateResults, { signal });
 
-    dialog.addEventListener(
-      "click",
-      (event) => {
-        if (event.target === dialog) dialog.close();
-      },
-      { signal },
-    );
+    // closedby="any" closes the dialog on a backdrop click. Safari does not
+    // support it yet, so close it here when a click lands outside the panel.
+    if (!("closedBy" in HTMLDialogElement.prototype)) {
+      dialog.addEventListener(
+        "click",
+        (event) => {
+          if (event.target !== dialog) return;
+          const rect = dialog.getBoundingClientRect();
+          const insideDialog =
+            rect.top <= event.clientY &&
+            event.clientY <= rect.bottom &&
+            rect.left <= event.clientX &&
+            event.clientX <= rect.right;
+          if (!insideDialog) dialog.close();
+        },
+        { signal },
+      );
+    }
 
     dialog.addEventListener(
       "close",
@@ -285,7 +297,15 @@
     font-feature-settings: var(--fea-graphik);
   }
 
+  /* Keep scroll gestures inside the dialog or over the backdrop from
+     scrolling the page underneath. */
+  .search-dialog:modal {
+    overscroll-behavior: contain;
+  }
+
   .search-dialog::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
     background: rgb(0 5 4 / 58%);
   }
 
