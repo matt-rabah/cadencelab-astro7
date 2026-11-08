@@ -207,11 +207,7 @@ const {
     border: var(--border-width) solid var(--color-border-strong);
     border-bottom: 0;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    background: color-mix(
-      in oklab,
-      var(--tabs-accent) 4%,
-      var(--color-surface-muted)
-    );
+    background: var(--color-surface-muted);
     scrollbar-width: thin;
   }
 
@@ -282,13 +278,7 @@ const {
     overflow: clip;
     border: var(--border-width) solid var(--color-border-strong);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    background:
-      linear-gradient(
-        135deg,
-        color-mix(in oklab, var(--tabs-accent) 5%, transparent),
-        transparent 42%
-      ),
-      var(--color-surface-pure);
+    background: var(--color-surface-pure);
   }
 
   .tab-panel {
@@ -431,11 +421,7 @@ const {
     padding: 0.75rem 1rem;
     border: var(--border-width) solid var(--color-border-strong);
     border-radius: var(--radius-md);
-    background: color-mix(
-      in oklab,
-      var(--tabs-accent) 5%,
-      var(--color-surface-pure)
-    );
+    background: var(--color-surface-pure);
     color: var(--color-ink);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);

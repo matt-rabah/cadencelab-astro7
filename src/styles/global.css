@@ -571,8 +571,8 @@ select:focus-visible {
 
   --color-ink: #f4f5f7;
   --color-light: #0a0c0d;
-  --color-blue: #a3aaff;
-  --color-blue-hover: #c0c5ff;
+  --color-blue: #7fb0ff;
+  --color-blue-hover: #a9c8ff;
   --color-blue-foreground: #0a0c0d;
   --color-green: #75c870;
   --color-yellow: #ffce31;
@@ -590,7 +590,7 @@ select:focus-visible {
   --color-border: rgb(244 245 247 / 14%);
   --color-border-strong: rgb(244 245 247 / 28%);
   --color-border-inverse: rgb(0 0 0 / 22%);
-  --color-focus: #b7bdff;
+  --color-focus: #a9c8ff;
   --color-error: #ff958a;
   --color-success: #77d3a5;
   --color-warning: #f0bd62;
@@ -617,8 +617,8 @@ select:focus-visible {
 
     --color-ink: #f4f5f7;
     --color-light: #0a0c0d;
-    --color-blue: #a3aaff;
-    --color-blue-hover: #c0c5ff;
+    --color-blue: #7fb0ff;
+    --color-blue-hover: #a9c8ff;
     --color-blue-foreground: #0a0c0d;
     --color-green: #75c870;
     --color-yellow: #ffce31;
@@ -636,7 +636,7 @@ select:focus-visible {
     --color-border: rgb(244 245 247 / 14%);
     --color-border-strong: rgb(244 245 247 / 28%);
     --color-border-inverse: rgb(0 0 0 / 22%);
-    --color-focus: #b7bdff;
+    --color-focus: #a9c8ff;
     --color-error: #ff958a;
     --color-success: #77d3a5;
     --color-warning: #f0bd62;
@@ -649,6 +649,38 @@ select:focus-visible {
 
 :root[data-theme="dark"] {
   color-scheme: dark;
+}
+
+/*
+  Section bands. Pages mark their black feature sections with [data-band].
+  Those sections paint their background with --color-ink or
+  --color-surface-inverse and their text with the inverse tokens, all of
+  which flip to light values in dark mode, so the bands would turn into
+  bright light-gray blocks in the middle of a dark page. In dark mode, keep
+  them black with light text instead.
+*/
+:root[data-theme="dark"] [data-band] {
+  --color-ink: #000000;
+  --color-surface-inverse: #000000;
+  --color-light: #f4f5f7;
+  --color-text-inverse: #f4f5f7;
+  --color-text-inverse-muted: #b7bec6;
+  --color-border-inverse: rgb(244 245 247 / 14%);
+
+  border-block: var(--border-width) solid var(--color-border);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) [data-band] {
+    --color-ink: #000000;
+    --color-surface-inverse: #000000;
+    --color-light: #f4f5f7;
+    --color-text-inverse: #f4f5f7;
+    --color-text-inverse-muted: #b7bec6;
+    --color-border-inverse: rgb(244 245 247 / 14%);
+
+    border-block: var(--border-width) solid var(--color-border);
+  }
 }
 
 /* Base layer CSS using pure CSS variables to prevent Tailwind v4 build errors */

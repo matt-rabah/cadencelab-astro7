@@ -110,7 +110,8 @@ const isCurrentPage = (href: string): boolean =>
           href="/"
           class="footer-logo-link"
           aria-label="Cadence Lab home"
-          aria-current={isCurrentPage("/") ? "page" : undefined}>
+          aria-current={isCurrentPage("/") ? "page" : undefined}
+        >
           <img
             src="/brand/cadencelab-wordmark-dark.svg"
             alt="Cadence Lab"
@@ -130,14 +131,16 @@ const isCurrentPage = (href: string): boolean =>
         <a
           href="/contact/"
           class="footer-contact-link"
-          aria-current={isCurrentPage("/contact/") ? "page" : undefined}>
+          aria-current={isCurrentPage("/contact/") ? "page" : undefined}
+        >
           <span>Start a conversation</span>
           <svg
             aria-hidden="true"
             viewBox="0 0 16 16"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.5">
+            stroke-width="1.5"
+          >
             <path d="M2.5 8h10"></path>
             <path d="m8.75 4.25 3.75 3.75-3.75 3.75"></path>
           </svg>
@@ -156,9 +159,8 @@ const isCurrentPage = (href: string): boolean =>
                 <li>
                   <a
                     href={link.href}
-                    aria-current={
-                      isCurrentPage(link.href) ? "page" : undefined
-                    }>
+                    aria-current={isCurrentPage(link.href) ? "page" : undefined}
+                  >
                     {link.label}
                   </a>
                 </li>
@@ -182,7 +184,8 @@ const isCurrentPage = (href: string): boolean =>
               <li>
                 <a
                   href={link.href}
-                  aria-current={isCurrentPage(link.href) ? "page" : undefined}>
+                  aria-current={isCurrentPage(link.href) ? "page" : undefined}
+                >
                   {link.label}
                 </a>
               </li>
@@ -203,7 +206,7 @@ const isCurrentPage = (href: string): boolean =>
     --footer-muted: #aeb9b6; /* APCA $Lc 78 on #000504 */
     --footer-subtle: #8e9b98;
     --footer-border: rgb(252 254 255 / 18%);
-    --footer-accent: #a3aaff;
+    --footer-accent: #7fb0ff;
     --footer-focus: #ffffff;
 
     width: 100%;

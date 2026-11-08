@@ -104,12 +104,7 @@ const {
   .diagnostics {
     padding-block: var(--section-space);
     border-block-end: var(--border-width) solid var(--color-border);
-    background: linear-gradient(
-      180deg,
-      var(--color-surface) 0%,
-      color-mix(in oklab, var(--color-blue) 3%, var(--color-surface-subtle))
-        100%
-    );
+    background: var(--color-surface-subtle);
   }
 
   .diagnostics-container {
@@ -169,33 +164,17 @@ const {
     list-style: none;
   }
 
-  .diagnostic-list > li:nth-child(1) {
-    --diagnostic-accent: var(--color-blue);
-  }
-
-  .diagnostic-list > li:nth-child(2) {
-    --diagnostic-accent: var(--color-success);
-  }
-
-  .diagnostic-list > li:nth-child(3) {
-    --diagnostic-accent: #5940a8;
-  }
-
-  .diagnostic-list > li:nth-child(4) {
-    --diagnostic-accent: #9a4b00;
-  }
-
+  /* One accent for every card. Per-card colours (blue, green, purple,
+     orange) read as a template rather than a system. */
   .diagnostic-list > li {
+    --diagnostic-accent: var(--color-blue);
+
     min-width: 0;
     overflow: clip;
     border: var(--border-width) solid var(--color-border-strong);
-    border-block-start: 0.25rem solid var(--diagnostic-accent);
+    border-block-start: 0.125rem solid var(--color-ink);
     border-radius: var(--radius-lg);
-    background: color-mix(
-      in oklab,
-      var(--diagnostic-accent) 4%,
-      var(--color-surface-pure)
-    );
+    background: var(--color-surface-pure);
   }
 
   article {
