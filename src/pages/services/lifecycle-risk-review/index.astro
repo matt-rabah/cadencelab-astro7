@@ -11,25 +11,25 @@ const diagnosticQuestions = [
     number: "01",
     question: "Where does risk show up first?",
     explanation:
-      "Find the early signs across onboarding, adoption, service activity, account behavior, and customer feedback before a renewal is in danger.",
+      "Find the early signs in onboarding, adoption, service activity, account behavior, and feedback. Before the renewal’s in danger, not after.",
   },
   {
     number: "02",
     question: "Which signals matter enough to act on?",
     explanation:
-      "Separate meaningful changes in customer behavior from normal variation, incomplete data, and activity that does not reveal real risk.",
+      "Separate a real change in behavior from normal noise, missing data, and activity that looks busy but tells you nothing.",
   },
   {
     number: "03",
     question: "Who should respond, and when?",
     explanation:
-      "Set clear ownership, response rules, escalation paths, and the context each team needs before the best response window closes.",
+      "Set who owns it, what triggers a response, where it escalates, and what context each team needs while there’s still time to act.",
   },
   {
     number: "04",
     question: "How will you know the response worked?",
     explanation:
-      "Connect earlier action to customer, adoption, workflow, and business measures so your team can see whether the response helped.",
+      "Name the business value up front (retention, expansion, or cost to serve). Then tie every response back to it, so you can prove it helped.",
   },
 ];
 
@@ -42,7 +42,7 @@ const evidenceAreas = [
   {
     title: "Customer and account signals",
     description:
-      "Product or service use, changes in engagement, support patterns, feedback, stakeholder changes, and other signs that conditions are shifting.",
+      "Product or service use, shifts in engagement, support patterns, feedback, and who’s left or joined on the customer side.",
   },
   {
     title: "Handoffs and intervention paths",
@@ -81,7 +81,7 @@ const deliverables = [
     description:
       "A review of available signals, the strength of their evidence, known gaps, age, ownership, and value for a specific decision.",
     decision:
-      "Which signals can guide action now, which need work, and which are not reliable enough to use.",
+      "Which signals you can act on today, which need work, and which you shouldn’t trust yet.",
   },
   {
     number: "03",
@@ -97,7 +97,7 @@ const deliverables = [
     description:
       "An ordered set of changes to lifecycle definitions, data, workflows, reviews, and measurement based on impact and dependencies.",
     decision:
-      "What to improve first and what needs to be ready before adding automation or predictive tools.",
+      "What to improve first, and what has to be ready before you add automation or predictive tools.",
   },
 ];
 
@@ -105,14 +105,14 @@ const strongFit = [
   "Onboarding slips, adoption falls, accounts go quiet, or renewal risk appears too late for an effective response.",
   "Customer context and risk signals are spread across teams, systems, or account reviews.",
   "A sponsor can bring customer-facing, operations, data, and commercial owners together.",
-  "Your organization is willing to change lifecycle definitions, workflows, and ownership.",
+  "You’re willing to change lifecycle definitions, workflows, and who owns what.",
 ];
 
 const limitedFit = [
   "The goal is only to buy a predictive tool without changing how teams understand and respond to risk.",
   "You need an urgent recovery plan for one known account.",
-  "The needed customer, account, workflow, or outcome evidence is not available.",
-  "No accountable owner can change response rules, escalation paths, or cross-team work.",
+  "The customer, account, workflow, or outcome evidence just isn’t available.",
+  "Nobody accountable can change response rules, escalation paths, or how teams work together.",
 ];
 
 const relatedPaths = [
@@ -167,10 +167,11 @@ const relatedPaths = [
             See customer risk before it’s too late to act.
           </h1>
           <p class="hero-lead">
-            The Lifecycle Risk Review finds early warning signs across
-            onboarding, adoption, account health, customer feedback, and
-            renewal. You’ll see which signals matter, who should respond, and
-            what needs to change before the risk becomes urgent.
+            Most unhappy customers won’t tell you. They just go quiet, then
+            leave. This review finds the early warning signs across onboarding,
+            adoption, account health, feedback, and renewal, so you know which
+            signals matter, who should act, and what has to change while there’s
+            still time.
           </p>
 
           <div class="hero-actions" aria-label="Lifecycle Risk Review actions">
@@ -186,13 +187,13 @@ const relatedPaths = [
         <aside class="trigger" aria-labelledby="trigger-title">
           <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
-            Onboarding slips, adoption falls, key contacts disengage, or
-            accounts go quiet without a clear response from the team.
+            Onboarding slips. Adoption dips. Your main contact stops replying.
+            And nobody’s sure whose move it is.
           </p>
           <p>
-            The risk becomes clear only when there is little time left to act.
-            Signals, ownership, and customer context are spread across teams and
-            systems.
+            By the time the risk is obvious, the window’s nearly closed. The
+            signals, the ownership, and the customer context are scattered
+            across teams and systems.
           </p>
         </aside>
       </div>
@@ -221,9 +222,9 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            We start with the decisions your team needs to make. Then we test
-            whether your signals and workflows support timely, accountable
-            action.
+            I start with the decisions your team needs to make. Then I test
+            whether your signals and workflows let someone act in time, and own
+            it.
           </p>
         </div>
 
@@ -265,9 +266,9 @@ const relatedPaths = [
             <h2 id="scope-title">See how risk is tracked and handled today.</h2>
           </div>
           <p>
-            The evidence depends on your customer model and what your team can
-            share. I compare the intended lifecycle process with the signals,
-            decisions, and responses that happen in practice.
+            What I look at depends on how your customer lifecycle works and what
+            you can share. Then I compare the process on paper with what
+            actually happens when a signal shows up.
           </p>
         </div>
 
@@ -295,9 +296,9 @@ const relatedPaths = [
           <aside class="scope-note" aria-labelledby="scope-note-title">
             <h3 id="scope-note-title">Signals before scores</h3>
             <p>
-              A health score is useful only when you understand its inputs and
-              it changes a real decision. The review separates evidence from
-              assumptions and shows where missing data limits confidence.
+              A health score is only useful if you know what’s in it and it
+              changes a real decision. You’ll see what’s evidence, what’s
+              assumption, and where missing data should make you careful.
             </p>
           </aside>
         </details>
@@ -317,9 +318,9 @@ const relatedPaths = [
             Know what to watch, who acts, and what happens next.
           </h2>
           <p>
-            You’ll get a practical system for turning lifecycle evidence into
-            action. Each deliverable makes the signals, ownership, response, and
-            next improvement clear.
+            You’ll get a working system for turning signals into action. Each
+            deliverable makes it clear what to watch, who acts, how they
+            respond, and what to improve next.
           </p>
         </div>
 
@@ -355,10 +356,9 @@ const relatedPaths = [
             <h2 id="fit-title">Use this review when risk shows up too late.</h2>
           </div>
           <p>
-            A useful review needs access to the teams, customer context,
-            lifecycle data, and decisions behind the response. Your organization
-            must also be open to changing how risk is defined, owned, and
-            reviewed.
+            I’ll need access to the teams, customer context, lifecycle data, and
+            the decisions behind your response. And you’ll need to be open to
+            changing how risk gets defined, owned, and reviewed.
           </p>
         </div>
 
@@ -400,10 +400,10 @@ const relatedPaths = [
 
         <div class="next-step-copy">
           <p>
-            Share when risk becomes visible, which lifecycle stages are
-            affected, the teams and systems involved, and the signals you
-            already have. I’ll tell you plainly whether this review is the right
-            place to start or if another path makes more sense.
+            Tell me when risk usually shows up, which stages it hits, who’s
+            involved, and what signals you already have. I’ll tell you straight
+            whether this review is the right start, or whether another path
+            makes more sense.
           </p>
 
           <dl class="next-step-details">

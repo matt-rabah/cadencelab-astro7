@@ -11,25 +11,25 @@ const diagnosticQuestions = [
     number: "01",
     question: "Where does the CRM stop helping?",
     explanation:
-      "Follow the real customer workflow through records, fields, queues, handoffs, approvals, and outside tools to find where the system gets in the way.",
+      "Follow the real customer workflow through records, fields, queues, handoffs, approvals, and the side tools people use. Find exactly where the system gets in the way.",
   },
   {
     number: "02",
     question: "Which data can your teams trust?",
     explanation:
-      "Check whether the information is clear, current, used the same way across teams, and connected to real decisions.",
+      "Is it clear? Is it current? Does every team use it the same way? And does anyone actually make a decision with it?",
   },
   {
     number: "03",
     question: "What creates extra work?",
     explanation:
-      "Find routing gaps, duplicate effort, unclear ownership, weak automation, and process rules that push teams outside the CRM.",
+      "Find the routing gaps, the double handling, the unclear owners, and the rules that quietly push people out of the CRM.",
   },
   {
     number: "04",
-    question: "What should you fix first?",
+    question: "What should you fix first, and what’s it worth?",
     explanation:
-      "Set the right order for workflow, data, ownership, reporting, and configuration changes without adding more complexity.",
+      "Tie every fix to the business value it moves (revenue, retention, cost to serve, or risk). Then put the fixes in order, without adding complexity.",
   },
 ];
 
@@ -87,9 +87,9 @@ const deliverables = [
     number: "03",
     title: "Prioritized remediation plan",
     description:
-      "An ordered set of workflow, data, automation, reporting, and governance changes ranked by impact and dependency.",
+      "Workflow, data, automation, reporting, and governance changes, ranked by the business value they move and what depends on what.",
     decision:
-      "What to fix first, what can wait, and which low-value complexity to remove.",
+      "What to fix first, what can wait, what to remove, and how you’ll prove it worked.",
   },
   {
     number: "04",
@@ -102,14 +102,14 @@ const deliverables = [
 ];
 
 const strongFit = [
-  "The CRM records activity but does not help teams coordinate customer work.",
+  "Your CRM records activity, but it doesn’t help teams coordinate customer work.",
   "Teams depend on spreadsheets, messages, manual checks, or memory to complete important workflows.",
   "A sponsor can bring business, customer-facing, operations, data, and technical owners together.",
-  "Your organization is willing to change the process and ownership, not just fields, dashboards, or automation.",
+  "You’re willing to change the process and who owns it, not just fields, dashboards, or automation.",
 ];
 
 const limitedFit = [
-  "You only need a planned configuration built and do not want to review the workflow behind it.",
+  "You only need a planned configuration built and don’t want to look at the workflow behind it.",
   "The issue is one technical defect with a known owner and a tested fix.",
   "Frontline users, process owners, CRM administrators, or needed records cannot be part of the review.",
   "Success is measured only by features, completed fields, or logins, not by useful work and customer outcomes.",
@@ -165,10 +165,10 @@ const relatedPaths = [
           <p class="eyebrow">Diagnostic 03</p>
           <h1 id="diagnostic-title">Make your CRM support the work.</h1>
           <p class="hero-lead">
-            The CRM Workflow Audit is a CRM audit built around the work, not the
-            configuration. It shows where workflows, data, automation, handoffs,
-            and ownership break down. You’ll see why teams work around the
-            system and what to fix first so the CRM helps them do the job.
+            Most CRM audits look at the configuration. This one looks at the
+            work. You’ll see where workflows, data, automation, handoffs, and
+            ownership break down, why your team works around the system, and
+            what to fix first so the CRM finally earns its keep.
           </p>
 
           <div class="hero-actions" aria-label="CRM Workflow Audit actions">
@@ -185,12 +185,12 @@ const relatedPaths = [
           <p id="trigger-title" class="trigger-label">You may be seeing this</p>
           <p>
             Your CRM is full of fields, notes, activity, dashboards, and
-            automation. Your teams still rely on spreadsheets, messages, and
-            memory to move customer work forward.
+            automation. And your team still runs the real work on spreadsheets,
+            messages, and memory.
           </p>
           <p>
-            Records show what happened, but not the next decision, who owns it,
-            or what another team needs to act.
+            The records tell you what happened. They don’t tell you what happens
+            next, who owns it, or what the next team needs to act.
           </p>
         </aside>
       </div>
@@ -219,9 +219,9 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            We start with the work your teams need to complete and the decisions
-            the CRM should support. Then we trace where the process, data,
-            configuration, and ownership fall short.
+            I start with the work your team needs to get done and the decisions
+            the CRM should support. Then I trace where the process, data, setup,
+            and ownership fall short.
           </p>
         </div>
 
@@ -263,9 +263,9 @@ const relatedPaths = [
             <h2 id="scope-title">See how the CRM works in real life.</h2>
           </div>
           <p>
-            The evidence depends on the workflow and what your team can share. I
-            compare the official process and system design with real records,
-            behavior, handoffs, and decisions.
+            What I look at depends on the workflow and what you can share. Then
+            I compare the official process with what actually happens: real
+            records, real behavior, real handoffs.
           </p>
         </div>
 
@@ -293,10 +293,9 @@ const relatedPaths = [
           <aside class="scope-note" aria-labelledby="scope-note-title">
             <h3 id="scope-note-title">Workflow before configuration</h3>
             <p>
-              A valid configuration can still support the wrong process. The
-              audit separates real workflow needs from platform habits so every
-              change supports useful work, clear ownership, and reliable
-              customer context.
+              A perfectly valid configuration can still support the wrong
+              process. The audit separates what the work needs from what the
+              platform got used to, so every change earns its place.
             </p>
           </aside>
         </details>
@@ -316,9 +315,9 @@ const relatedPaths = [
             Get a clear workflow and a practical repair plan.
           </h2>
           <p>
-            You’ll get more than a list of system issues. Each deliverable shows
-            where work breaks, why teams compensate, what the CRM should
-            support, and which changes matter most.
+            This isn’t a list of system bugs. Each deliverable shows where work
+            breaks, why people compensate, what the CRM should do, and which
+            changes are worth the most.
           </p>
         </div>
 
@@ -356,10 +355,9 @@ const relatedPaths = [
             </h2>
           </div>
           <p>
-            A useful audit needs access to frontline users, process owners, CRM
-            administrators, records, and the decisions behind customer work.
-            Your organization must also be open to changing the process, not
-            only the system.
+            I’ll need time with frontline users, process owners, CRM admins, and
+            the records behind the work. And you’ll need to be open to changing
+            the process, not just the system.
           </p>
         </div>
 
@@ -401,10 +399,10 @@ const relatedPaths = [
 
         <div class="next-step-copy">
           <p>
-            Share the customer workflow, teams involved, current CRM behavior,
-            known workarounds, and the decision you need to improve. I’ll tell
-            you plainly whether this audit is the right place to start or if a
-            smaller technical fix makes more sense.
+            Tell me about the workflow, the teams involved, the workarounds, and
+            the decision you need to get better at. I’ll tell you straight
+            whether this audit is the right start, or whether a smaller fix
+            makes more sense.
           </p>
 
           <dl class="next-step-details">
