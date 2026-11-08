@@ -17,6 +17,12 @@ Cadence Lab content pages remain publicly readable without authentication.
 Agent registration endpoints are available for protocol-compliant discovery and
 token exchange.
 
+> **Demonstration only.** These endpoints show the Auth.md and OAuth discovery
+> flow; they do not protect anything. Tokens are issued to any caller, are not
+> stored, and are not cryptographically verified. The protected example
+> resource returns no non-public data. Do not treat a token from these
+> endpoints as proof of identity or authorization.
+
 For agents that support the Auth.md protocol, Cadence Lab publishes discovery
 metadata at:
 

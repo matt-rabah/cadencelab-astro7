@@ -1,0 +1,4 @@
+# Everything in analysis/ stays local: this repository is public and these
+# files describe security findings. Share them directly, never via git.
+*
+!.gitignore

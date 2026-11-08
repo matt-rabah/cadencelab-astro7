@@ -120,5 +120,5 @@ const schemaData = {
 <script
   type="application/ld+json"
   is:inline
-  set:html={JSON.stringify(schemaData)}
+  set:html={JSON.stringify(schemaData).replace(/</g, "\\u003c")}
 />

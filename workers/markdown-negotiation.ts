@@ -180,6 +180,11 @@ async function handleRevoke(request: Request): Promise<Response> {
   });
 }
 
+// DEMONSTRATION ONLY. The agent identity/token endpoints show the Auth.md and
+// OAuth discovery flow; they authenticate nothing. Tokens are issued to any
+// caller, never stored, and this check only looks at the prefix. Never put
+// non-public data or actions behind this check: real protection needs issued
+// tokens that are stored or signed and then verified.
 function handleProtectedExample(request: Request, origin: string): Response {
   if (request.method !== "GET") {
     return jsonResponse(405, {
