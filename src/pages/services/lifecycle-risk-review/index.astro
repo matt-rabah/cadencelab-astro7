@@ -1,5 +1,6 @@
 ---
 import BreadcrumbSchema from "../../../components/BreadcrumbSchema.astro";
+import RelatedPaths from "../../../components/RelatedPaths.astro";
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
@@ -112,6 +113,27 @@ const limitedFit = [
   "You need an urgent recovery plan for one known account.",
   "The needed customer, account, workflow, or outcome evidence is not available.",
   "No accountable owner can change response rules, escalation paths, or cross-team work.",
+];
+
+const relatedPaths = [
+  {
+    title: "SLA Escalation Maps",
+    href: "/workflows/escalation/",
+    description:
+      "Map the conditions, authority, and response needed before a service issue becomes a failure.",
+  },
+  {
+    title: "Dirty CRM Data and Siloed Pipelines",
+    href: "/solutions/dirty-data/",
+    description:
+      "Find the workflow that keeps recreating unreliable CRM data, pipeline stages, and reports.",
+  },
+  {
+    title: "Solutions by Use Case",
+    href: "/solutions/use-case/",
+    description:
+      "Find the right CX, CRM, lifecycle, digital, location, or AI path for the problem in front of you.",
+  },
 ];
 ---
 
@@ -354,6 +376,11 @@ const limitedFit = [
         </div>
       </div>
     </section>
+
+    <RelatedPaths
+      title="Go deeper on the risks this review looks for."
+      items={relatedPaths}
+    />
 
     <section
       id="next-step"

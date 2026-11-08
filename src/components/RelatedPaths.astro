@@ -1,0 +1,171 @@
+---
+// src/components/RelatedPaths.astro
+//
+// A "Related" link grid for the diagnostic service pages. Capability pages
+// (StructuredCapabilityPage) already link up to the services through their
+// "Related diagnostic paths" section; this links back down to them, so each
+// capability page is reachable from page content and not only the nav.
+// The visual treatment matches that section.
+
+interface RelatedPath {
+  title: string;
+  href: string;
+  description: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  items: RelatedPath[];
+}
+
+const { eyebrow = "Related work", title, items } = Astro.props;
+---
+
+<section class="related-paths" aria-labelledby="related-paths-title">
+  <div class="page-container related-stack">
+    <div class="related-intro">
+      <p class="related-eyebrow">{eyebrow}</p>
+      <h2 id="related-paths-title">{title}</h2>
+    </div>
+
+    <ul class="related-grid" role="list">
+      {
+        items.map((item) => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <a href={item.href}>
+              Explore {item.title}
+              <span aria-hidden="true">&#8594;</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .related-paths {
+    padding-block: var(--section-space);
+    border-top: var(--border-width) solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .related-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 6vw, 5rem);
+  }
+
+  .related-intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .related-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+  }
+
+  h2,
+  h3,
+  p {
+    margin-block: 0;
+  }
+
+  h2,
+  h3 {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h2 {
+    max-width: 19ch;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+  }
+
+  h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) solid var(--color-border);
+    border-inline-start: var(--border-width) solid var(--color-border);
+    list-style: none;
+  }
+
+  .related-grid li {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-inline-end: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .related-grid p {
+    margin: 0.75rem 0 1.5rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .related-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    color: var(--color-blue);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+  }
+
+  .related-grid a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  @media (hover: hover) {
+    .related-grid a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  @media (max-width: 64rem) {
+    .related-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .related-paths,
+    .related-grid,
+    .related-grid li {
+      border-color: CanvasText;
+    }
+  }
+</style>
