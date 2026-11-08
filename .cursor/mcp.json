@@ -14,6 +14,12 @@
     },
     "cloudflare-observability": {
       "url": "https://observability.mcp.cloudflare.com/mcp"
+    },
+    "astro-docs": {
+      "url": "https://mcp.docs.astro.build/mcp"
+    },
+    "mdn": {
+      "url": "https://mcp.mdn.mozilla.net/"
     }
   }
 }
