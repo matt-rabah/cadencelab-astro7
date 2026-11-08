@@ -1,5 +1,6 @@
 ---
 // src/components/Hero.astro
+import BrandHeading from "./BrandHeading.astro";
 interface Props {
   eyebrow?: string;
   heading?: string;
@@ -22,8 +23,11 @@ const {
 <section class:list={["hero", className]} aria-labelledby="hero-title">
   <div class="hero-container">
     <div class="hero-copy">
-      <p class="hero-eyebrow">{eyebrow}</p>
-      <h1 id="hero-title">{heading}</h1>
+      <p class="hero-eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        {eyebrow}
+      </p>
+      <h1 id="hero-title"><BrandHeading text={heading} /></h1>
       <p class="hero-description">{description}</p>
 
       <div class="hero-actions" aria-label="Homepage actions">
@@ -72,6 +76,9 @@ const {
   }
 
   .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
@@ -80,6 +87,13 @@ const {
     line-height: var(--lh-ui);
     letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  .eyebrow-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-yellow);
   }
 
   h1 {

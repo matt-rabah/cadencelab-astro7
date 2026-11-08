@@ -1,5 +1,6 @@
 ---
 // src/components/Stats.astro
+import BrandHeading from "./BrandHeading.astro";
 import { cn } from "@/lib/utils";
 
 interface StatItem {
@@ -69,7 +70,7 @@ const {
     <div class="diagnostics-intro">
       <div>
         <p class="eyebrow">{eyebrow}</p>
-        <h2 id="diagnostics-title">{heading}</h2>
+        <h2 id="diagnostics-title"><BrandHeading text={heading} /></h2>
       </div>
       <p>{subheading}</p>
     </div>
@@ -172,8 +173,8 @@ const {
     min-width: 0;
     overflow: clip;
     border: var(--border-width) solid var(--color-border-strong);
-    border-block-start: 0.125rem solid var(--color-ink);
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
     background: var(--color-surface-pure);
   }
 

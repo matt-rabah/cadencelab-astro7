@@ -50,10 +50,10 @@
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Executive Palette */
-  --color-ink: #000000; /* Pure black for high-contrast executive text */
+  --color-ink: #111827; /* DESIGN.md --text-strong / --secondary */
   --color-light: #ffffff; /* Clean white background surface */
-  --color-blue: #1823c9; /* Brand Accent Blue */
-  --color-blue-hover: #111aab;
+  --color-blue: #4f46e5; /* DESIGN.md --primary */
+  --color-blue-hover: #4338ca;
   --color-blue-foreground: #ffffff;
   --color-green: #2e8b2b; /* Calibrated status green */
   --color-yellow: #ffce31;
@@ -62,35 +62,37 @@
   /* Semantic Surfaces */
   --color-surface: var(--color-light);
   --color-surface-pure: #ffffff;
-  --color-surface-subtle: #f8f9fa; /* Subtle off-white section background */
+  --color-surface-subtle: #f8fafc; /* DESIGN.md --surface-page */
   --color-surface-muted: #f1f3f4;
   --color-surface-inverse: var(--color-ink);
 
   /* Semantic Typography */
-  --color-text: #111111;
-  --color-text-muted: #4a5056; /* APCA Lc 82 compliant subtext */
+  --color-text: #111827;
+  --color-text-muted: #6b7280; /* DESIGN.md --text-muted */
   --color-text-subtle: #6c757d;
   --color-text-inverse: #ffffff;
   --color-text-inverse-muted: #d0dad7;
 
   /* Non-Harsh Soft Dividers (Deloitte Style) */
-  --color-border: rgba(0, 0, 0, 0.08); /* Soft 8% opacity divider line */
+  --color-border: #e5e7eb; /* DESIGN.md --border-default */
   --color-border-strong: rgba(0, 0, 0, 0.16);
   --color-border-inverse: rgb(255 255 255 / 28%);
   --color-focus: var(--color-blue);
-  --color-error: #9f1c12;
-  --color-success: #11683f;
-  --color-warning: #7e5200;
+  --color-error: #dc2626;
+  --color-success: #15803d;
+  --color-warning: #d97706;
 
   /* Sharp Corporate Radii (No rounded bubble cards) */
   --border-width: 1px;
-  --radius-sm: 0.125rem; /* 2px minimal radius */
-  --radius-md: 0.25rem; /* 4px crisp radius */
-  --radius-lg: 0.25rem;
-  --radius-pill: 0.25rem; /* Square corporate buttons over pills */
+  --radius-sm: 0.75rem; /* 12px: buttons, inputs, alerts */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1.125rem; /* 18px: cards */
+  --radius-pill: 0.75rem;
 
   /* Restrained elevation for the few components that need separation */
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%), 0 1px 3px rgb(0 0 0 / 7%);
+  --shadow-sm: 0 6px 14px rgb(17 24 39 / 6%); /* DESIGN.md .shadow-card */
+  --shadow-card: 0 6px 14px rgb(17 24 39 / 6%);
+  --shadow-overlay: 0 18px 30px rgb(17 24 39 / 12%);
 
   /* Layout Containers & Generous Executive Whitespace */
   --page-gutter: clamp(1.5rem, 5vw, 4.5rem);
@@ -149,7 +151,7 @@
   --border: rgba(0, 0, 0, 0.08);
   --input: rgba(0, 0, 0, 0.12);
   --ring: oklch(0.35 0.22 264);
-  --radius: 0.125rem;
+  --radius: 0.75rem;
 }
 
 /* ==========================================================================
@@ -732,4 +734,22 @@ select:focus-visible {
   ::view-transition-group(root) {
     animation-duration: 180ms;
   }
+}
+
+/* DESIGN.md inputs: 12px radius, primary border and soft ring on focus. */
+:where(
+  input:not([type="checkbox"], [type="radio"], [type="file"]),
+  select,
+  textarea
+) {
+  border-radius: var(--radius-sm);
+}
+
+:where(
+  input:not([type="checkbox"], [type="radio"]),
+  select,
+  textarea
+):focus-visible {
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgb(79 70 229 / 14%);
 }
