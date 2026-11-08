@@ -103,7 +103,15 @@ When Tina displays **local mode**, content changes are written directly to the M
 
 ## Editor MCP servers
 
-The repository defines the Cloudflare MCP servers once, in `mcp_config.json`. That file uses the Windsurf / Antigravity format, where each remote server has a `serverUrl`.
+The repository defines its MCP servers once, in `mcp_config.json`. That file uses the Windsurf / Antigravity format, where each remote server has a `serverUrl`.
+
+| Server | Use it for |
+| --- | --- |
+| `cloudflare`, `cloudflare-docs`, `cloudflare-bindings`, `cloudflare-builds`, `cloudflare-observability` | Cloudflare account, docs, bindings, builds, and logs |
+| `astro-docs` | Searching the current Astro documentation |
+| `mdn` | MDN web docs and browser compatibility (Baseline) data. MDN describes this server as experimental. |
+
+`AGENTS.md` ("Reference sources") tells coding agents which server to use for which question.
 
 Editor-specific copies are generated from it. Do not edit them by hand:
 
@@ -113,7 +121,26 @@ Editor-specific copies are generated from it. Do not edit them by hand:
 | `.vscode/mcp.json` | VS Code | `servers` → `type: "http"`, `url` |
 | `.cursor/mcp.json` | Cursor | `mcpServers` → `url` |
 
-VS Code and Cursor load their file from the workspace automatically. Windsurf and Antigravity read a global config rather than the repository, so copy the servers from `mcp_config.json` into that file (for Windsurf, `~/.codeium/windsurf/mcp_config.json`). For Claude Code, add a server with `claude mcp add --transport http <name> <url>`.
+VS Code and Cursor load their file from the workspace automatically. Windsurf and Antigravity read a global config rather than the repository, so copy the servers from `mcp_config.json` into that file (for Windsurf, `~/.codeium/windsurf/mcp_config.json`).
+
+Claude Code and Codex keep MCP servers in your user settings, not in this repository. Add the documentation servers once per machine.
+
+Claude Code:
+
+```sh
+claude mcp add --transport http --scope user astro-docs https://mcp.docs.astro.build/mcp
+claude mcp add --transport http --scope user mdn https://mcp.mdn.mozilla.net/
+claude mcp list
+```
+
+Codex:
+
+```sh
+codex mcp add astro-docs --url https://mcp.docs.astro.build/mcp
+codex mcp add mdn --url https://mcp.mdn.mozilla.net/
+```
+
+Use `--scope user` for Claude Code. Do not use `--scope project`, which writes a `.mcp.json` file outside the `mcp_config.json` workflow.
 
 After changing `mcp_config.json`, regenerate the editor files:
 

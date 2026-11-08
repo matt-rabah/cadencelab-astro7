@@ -528,6 +528,29 @@ Before opening or merging a pull request:
 
 Prefer **Squash and merge** for branches containing multiple intermediate cleanup or repair commits.
 
+## Reference sources
+
+Check current documentation before relying on memory. Use the source that matches the question:
+
+| Question about                                                                          | Source                                                                               |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Astro APIs, configuration, content collections, endpoints, integrations, `security.csp` | Astro Docs MCP (`astro-docs`, tool `search_astro_docs`), or https://docs.astro.build |
+| HTML, CSS, JavaScript, Web APIs, HTTP headers, accessibility, browser support           | MDN MCP (`mdn`), or https://developer.mozilla.org                                    |
+| Cloudflare Pages, Workers, Zaraz, DNS, redirects, security settings                     | Cloudflare skills or https://developers.cloudflare.com                               |
+| TinaCMS schema and editing                                                              | https://tina.io/docs                                                                 |
+| Draft web standards not yet on MDN (for example WebMCP)                                 | The specification itself                                                             |
+
+Rules:
+
+- Before using a CSS, HTML, JavaScript, or HTTP feature that may be new or unevenly supported, check its browser compatibility and Baseline status on MDN. Note the result in the pull-request description.
+- When an Astro API looks unfamiliar or may have changed between versions, search the Astro docs before writing code.
+- Check how a setting is applied, not only what it means. Astro, Cloudflare, and Tina can change the output a standard describes (for example, listing any `scriptDirective.resources` entry replaces Astro's default `'self'` in `script-src`).
+- Do not send secrets, tokens, or client details in documentation queries. These servers are remote services.
+- If an MCP server is unavailable, fall back to the website it serves.
+- Documentation does not replace validation. Run `npx tsc --noEmit` and `npm run build`, and test changed behaviour in a browser.
+
+The servers are listed in `mcp_config.json`. See the README section "Editor MCP servers" for setup in each tool.
+
 ## Validation requirements
 
 Every meaningful code change must pass:

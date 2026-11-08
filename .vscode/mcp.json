@@ -19,6 +19,14 @@
     "cloudflare-observability": {
       "type": "http",
       "url": "https://observability.mcp.cloudflare.com/mcp"
+    },
+    "astro-docs": {
+      "type": "http",
+      "url": "https://mcp.docs.astro.build/mcp"
+    },
+    "mdn": {
+      "type": "http",
+      "url": "https://mcp.mdn.mozilla.net/"
     }
   }
 }
