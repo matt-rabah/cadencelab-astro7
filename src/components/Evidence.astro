@@ -1,0 +1,154 @@
+---
+// src/components/Evidence.astro
+//
+// Cited industry findings. Every figure here must come from a named,
+// published source; keep the source line in sync when figures change.
+import BrandHeading from "./BrandHeading.astro";
+
+interface Finding {
+  figure: string;
+  text: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  intro?: string;
+  findings: Finding[];
+  source: string;
+}
+
+const { eyebrow, heading, intro, findings, source } = Astro.props;
+---
+
+<section class="evidence" aria-labelledby="evidence-title">
+  <div class="evidence-container">
+    <div class="evidence-intro">
+      {eyebrow && <p class="evidence-eyebrow">{eyebrow}</p>}
+      <h2 id="evidence-title"><BrandHeading text={heading} /></h2>
+      {intro && <p class="evidence-lead">{intro}</p>}
+    </div>
+
+    <ul class="evidence-grid" role="list">
+      {
+        findings.map((finding) => (
+          <li>
+            <p class="evidence-figure">{finding.figure}</p>
+            <p class="evidence-text">{finding.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="evidence-source">{source}</p>
+  </div>
+</section>
+
+<style>
+  .evidence {
+    padding-block: var(--section-space);
+    border-block-end: var(--border-width) solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .evidence-container {
+    display: grid;
+    width: min(calc(100% - (2 * var(--page-gutter))), var(--container-page));
+    margin-inline: auto;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .evidence-intro {
+    display: grid;
+    max-width: 46rem;
+    gap: 1rem;
+  }
+
+  .evidence-eyebrow {
+    margin: 0;
+    color: var(--color-blue);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .evidence-lead {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.25rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .evidence-grid li {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+    box-shadow: var(--shadow-card);
+  }
+
+  .evidence-figure {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .evidence-text {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .evidence-source {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 64rem) {
+    .evidence-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .evidence-grid li {
+      border-color: CanvasText;
+    }
+  }
+</style>

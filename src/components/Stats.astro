@@ -1,5 +1,6 @@
 ---
 // src/components/Stats.astro
+import BrandHeading from "./BrandHeading.astro";
 import { cn } from "@/lib/utils";
 
 interface StatItem {
@@ -27,7 +28,7 @@ const {
       value: "01",
       label: "CX Systems Diagnostic",
       description:
-        "Find where customers get stuck between teams and systems, and decide what to fix first.",
+        "Find where customers get stuck between teams and systems. Then decide what to fix first.",
       href: "/services/cx-systems-diagnostic/",
       linkLabel: "Explore the systems diagnostic",
     },
@@ -35,7 +36,7 @@ const {
       value: "02",
       label: "Lifecycle Risk Review",
       description:
-        "Identify where onboarding stalls or accounts go quiet, and plan earlier action.",
+        "Spot where onboarding stalls and accounts go quiet, while there’s still time to act.",
       href: "/services/lifecycle-risk-review/",
       linkLabel: "Explore the lifecycle review",
     },
@@ -43,7 +44,7 @@ const {
       value: "03",
       label: "CRM Workflow Audit",
       description:
-        "Identify workarounds and unreliable CRM data, with a practical cleanup plan.",
+        "Find the workarounds and the data nobody trusts. Leave with a cleanup plan your team can actually run.",
       href: "/services/crm-workflow-audit/",
       linkLabel: "Explore the CRM audit",
     },
@@ -51,7 +52,7 @@ const {
       value: "04",
       label: "AI Service Readiness Review",
       description:
-        "Assess whether the workflow is ready for AI and where people need to stay involved.",
+        "Is the workflow ready for AI? Find out, and decide where people need to stay in the loop.",
       href: "/services/ai-service-readiness-review/",
       linkLabel: "Explore AI readiness",
     },
@@ -69,7 +70,7 @@ const {
     <div class="diagnostics-intro">
       <div>
         <p class="eyebrow">{eyebrow}</p>
-        <h2 id="diagnostics-title">{heading}</h2>
+        <h2 id="diagnostics-title"><BrandHeading text={heading} /></h2>
       </div>
       <p>{subheading}</p>
     </div>
@@ -172,8 +173,8 @@ const {
     min-width: 0;
     overflow: clip;
     border: var(--border-width) solid var(--color-border-strong);
-    border-block-start: 0.125rem solid var(--color-ink);
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
     background: var(--color-surface-pure);
   }
 

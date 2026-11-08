@@ -1,0 +1,50 @@
+---
+// src/components/BrandHeading.astro
+//
+// Renders heading text so a closing period becomes the brand's yellow dot,
+// echoing the "Cadence Lab." logo. The real period stays in the text for
+// screen readers and copy/paste; only its glyph is replaced visually.
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const endsWithPeriod = text.trimEnd().endsWith(".");
+const body = endsWithPeriod ? text.trimEnd().slice(0, -1) : text;
+---
+
+{body}{
+  endsWithPeriod && (
+    <span class="brand-dot">
+      <span class="brand-dot-text">.</span>
+    </span>
+  )
+}
+
+<style>
+  .brand-dot {
+    position: relative;
+    display: inline-block;
+    width: 0.2em;
+    height: 0.2em;
+    margin-inline-start: 0.06em;
+    border-radius: 50%;
+    background: var(--color-yellow);
+    vertical-align: baseline;
+  }
+
+  /* Keep the period in the accessibility tree and selection, invisibly. */
+  .brand-dot-text {
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    overflow: hidden;
+  }
+
+  @media (forced-colors: active) {
+    .brand-dot {
+      background: CanvasText;
+      forced-color-adjust: none;
+    }
+  }
+</style>
