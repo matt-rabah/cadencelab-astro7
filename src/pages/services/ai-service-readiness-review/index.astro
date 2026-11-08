@@ -1,5 +1,6 @@
 ---
 import BreadcrumbSchema from "../../../components/BreadcrumbSchema.astro";
+import RelatedPaths from "../../../components/RelatedPaths.astro";
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
@@ -112,6 +113,45 @@ const limitedFit = [
   "AI is expected to cover for a broken workflow without changing ownership, process, or decision rules.",
   "Process owners, frontline users, data or knowledge owners, risk partners, or accountable leaders cannot take part.",
   "Success is measured only by launch, use, or automation volume, not by useful work and customer outcomes.",
+];
+
+const relatedPaths = [
+  {
+    title: "AI Copilot Design",
+    href: "/ai-tooling/co-pilot/",
+    description:
+      "Bring trusted context into a real workflow while people stay accountable for the outcome.",
+  },
+  {
+    title: "PII Scrubbing for AI Workflows",
+    href: "/ai-tooling/compliance/",
+    description:
+      "Keep unnecessary personal data out of AI workflows with clear boundaries and tested transformations.",
+  },
+  {
+    title: "AI Hallucination and Variance Testing",
+    href: "/ai-tooling/hallucination/",
+    description:
+      "Trace unreliable outputs across sources, retrieval, models, tools, and human review.",
+  },
+  {
+    title: "Prompt Injection Controls",
+    href: "/ai-tooling/prompt-guard/",
+    description:
+      "Limit prompt injection risk with trust boundaries, narrow permissions, human approval, and adversarial testing.",
+  },
+  {
+    title: "AI-to-human Routing",
+    href: "/workflows/agent-routing/",
+    description:
+      "Decide when AI pauses, what context moves with the customer, and who holds authority next.",
+  },
+  {
+    title: "AI Customer Experience Design",
+    href: "/product/ai-experience/",
+    description:
+      "Design AI experiences with clear roles, useful controls, complete handoffs, and safe recovery.",
+  },
 ];
 ---
 
@@ -357,6 +397,11 @@ const limitedFit = [
         </div>
       </div>
     </section>
+
+    <RelatedPaths
+      title="Go deeper on the AI work this review covers."
+      items={relatedPaths}
+    />
 
     <section
       id="next-step"

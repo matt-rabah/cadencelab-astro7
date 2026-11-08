@@ -1,5 +1,6 @@
 ---
 import BreadcrumbSchema from "../../../components/BreadcrumbSchema.astro";
+import RelatedPaths from "../../../components/RelatedPaths.astro";
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
@@ -111,6 +112,45 @@ const limitedFit = [
   "The problem is limited to one clear task that a focused process fix can solve.",
   "The right teams, evidence, or decision-makers cannot take part.",
   "Success is defined only by launching technology, not by improving the customer or team experience.",
+];
+
+const relatedPaths = [
+  {
+    title: "Cross-functional Links",
+    href: "/workflows/cross-functional/",
+    description:
+      "Repair the handoffs where customer context, ownership, or urgency gets lost between teams.",
+  },
+  {
+    title: "Customer Experience Foundations",
+    href: "/product/experience-foundations/",
+    description:
+      "Agree on what customers need, who owns each step, and what to fix first.",
+  },
+  {
+    title: "On-Site Customer Experience Design",
+    href: "/product/cx-on-location/",
+    description:
+      "Connect arrival, physical space, frontline service, digital touchpoints, and follow-up.",
+  },
+  {
+    title: "Executive Misalignment",
+    href: "/solutions/misalignment/",
+    description:
+      "Turn competing executive priorities into one decision, clear ownership, and a working sequence.",
+  },
+  {
+    title: "AI and CX System Governance",
+    href: "/governance/",
+    description:
+      "Set decisions, owners, evidence, and review for AI, CRM, automation, and customer workflows.",
+  },
+  {
+    title: "Solutions by Use Case",
+    href: "/solutions/use-case/",
+    description:
+      "Find the right CX, CRM, lifecycle, digital, location, or AI path for the problem in front of you.",
+  },
 ];
 ---
 
@@ -349,6 +389,11 @@ const limitedFit = [
         </div>
       </div>
     </section>
+
+    <RelatedPaths
+      title="Go deeper on the systems this diagnostic maps."
+      items={relatedPaths}
+    />
 
     <section
       id="next-step"

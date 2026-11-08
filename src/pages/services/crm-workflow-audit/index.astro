@@ -1,5 +1,6 @@
 ---
 import BreadcrumbSchema from "../../../components/BreadcrumbSchema.astro";
+import RelatedPaths from "../../../components/RelatedPaths.astro";
 import Footer from "../../../components/Footer.astro";
 import NavHeader from "../../../components/NavHeader.astro";
 import SectionNav from "../../../components/SectionNav.astro";
@@ -113,6 +114,27 @@ const limitedFit = [
   "Frontline users, process owners, CRM administrators, or needed records cannot be part of the review.",
   "Success is measured only by features, completed fields, or logins, not by useful work and customer outcomes.",
 ];
+
+const relatedPaths = [
+  {
+    title: "Salesforce Tracing",
+    href: "/workflows/salesforce/",
+    description:
+      "Follow customer work through records, automation, ownership, and handoffs to find where it breaks.",
+  },
+  {
+    title: "Dirty CRM Data and Siloed Pipelines",
+    href: "/solutions/dirty-data/",
+    description:
+      "Find the workflow that keeps recreating unreliable CRM data, pipeline stages, and reports.",
+  },
+  {
+    title: "AI and CX System Governance",
+    href: "/governance/",
+    description:
+      "Set decisions, owners, evidence, and review for AI, CRM, automation, and customer workflows.",
+  },
+];
 ---
 
 <Layout
@@ -143,10 +165,10 @@ const limitedFit = [
           <p class="eyebrow">Diagnostic 03</p>
           <h1 id="diagnostic-title">Make your CRM support the work.</h1>
           <p class="hero-lead">
-            The CRM Workflow Audit is a CRM audit built around the work, not
-            the configuration. It shows where workflows, data, automation,
-            handoffs, and ownership break down. You’ll see why teams work around
-            the system and what to fix first so the CRM helps them do the job.
+            The CRM Workflow Audit is a CRM audit built around the work, not the
+            configuration. It shows where workflows, data, automation, handoffs,
+            and ownership break down. You’ll see why teams work around the
+            system and what to fix first so the CRM helps them do the job.
           </p>
 
           <div class="hero-actions" aria-label="CRM Workflow Audit actions">
@@ -355,6 +377,11 @@ const limitedFit = [
         </div>
       </div>
     </section>
+
+    <RelatedPaths
+      title="Go deeper on the CRM problems this audit traces."
+      items={relatedPaths}
+    />
 
     <section
       id="next-step"
