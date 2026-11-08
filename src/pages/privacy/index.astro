@@ -3,7 +3,7 @@ import Footer from "../../components/Footer.astro";
 import NavHeader from "../../components/NavHeader.astro";
 import Layout from "../../layouts/Layout.astro";
 
-const effectiveDate = "July 28, 2026";
+const effectiveDate = "November 8, 2026";
 
 const policySections = [
   { label: "Scope", href: "#scope" },
@@ -154,14 +154,44 @@ const policySections = [
             in the ordinary course of loading that page.
           </p>
 
-          <h3>Cookies and tracking</h3>
+          <h3>Cookies, analytics, and session recording</h3>
           <p>
-            Cadence Lab does not currently include third-party advertising
-            trackers or site analytics scripts in the public website. Cloudflare
-            may use cookies or similar technologies when necessary to provide
-            security, traffic management, and reliable delivery. Browser
-            controls can be used to manage cookies, although blocking necessary
-            technologies may affect site operation.
+            Cadence Lab does not include third-party advertising trackers in the
+            public website. To understand how the site is used and improve it,
+            the site uses:
+          </p>
+
+          <ul>
+            <li>
+              Google Analytics, run through Cloudflare Zaraz, to measure page
+              views and Fit Check submissions
+            </li>
+            <li>Cloudflare Web Analytics, which counts visits without cookies</li>
+            <li>
+              Microsoft Clarity, which records how visitors use the site through
+              behavioral metrics, heatmaps, and session replay
+            </li>
+          </ul>
+
+          <p>
+            Cadence Lab partners with Microsoft Clarity to capture how you use
+            and interact with the website. Website usage data is captured using
+            first- and third-party cookies and other tracking technologies to
+            determine the popularity of pages and online activity, and it is
+            used for site optimization. Clarity masks form fields, and
+            recordings of the Fit Check and the free AI tools mask the page
+            content, so what you type into them is not captured. For more
+            information about how Microsoft collects and uses your data, see the
+            <a href="https://www.microsoft.com/privacy/privacystatement"
+              >Microsoft Privacy Statement</a
+            >.
+          </p>
+
+          <p>
+            Cloudflare may also use cookies or similar technologies when
+            necessary to provide security, traffic management, and reliable
+            delivery. Browser controls can be used to manage cookies, although
+            blocking necessary technologies may affect site operation.
           </p>
         </section>
 
@@ -213,8 +243,8 @@ const policySections = [
           <h2 id="service-providers-title">Service providers and disclosure</h2>
 
           <p>
-            Cadence Lab uses a small number of providers to run this website and
-            deliver Fit Check submissions:
+            Cadence Lab uses a small number of providers to run this website,
+            understand how it is used, and deliver Fit Check submissions:
           </p>
 
           <div class="provider-list">
@@ -231,6 +261,35 @@ const policySections = [
                 rel="external"
               >
                 Review Cloudflare’s privacy policy
+              </a>
+            </article>
+
+            <article>
+              <p class="provider-name">Microsoft Clarity</p>
+              <h3>Heatmaps and session recordings</h3>
+              <p>
+                Clarity records how visitors scroll, click, and move through the
+                site so Cadence Lab can find confusing pages and broken
+                interactions. Form fields are masked in recordings.
+              </p>
+              <a
+                href="https://www.microsoft.com/privacy/privacystatement"
+                rel="external"
+              >
+                Review Microsoft’s privacy statement
+              </a>
+            </article>
+
+            <article>
+              <p class="provider-name">Google Analytics</p>
+              <h3>Site measurement</h3>
+              <p>
+                Google Analytics, sent through Cloudflare Zaraz, measures page
+                views and Fit Check submissions so Cadence Lab can see which
+                pages are useful.
+              </p>
+              <a href="https://policies.google.com/privacy" rel="external">
+                Review Google’s privacy policy
               </a>
             </article>
 
@@ -642,8 +701,13 @@ const policySections = [
     gap: 0.8rem;
   }
 
-  .provider-list article + article {
+  /* Two-column grid: rule between columns, and between rows. */
+  .provider-list article:nth-child(even) {
     border-inline-start: var(--border-width) solid var(--color-border);
+  }
+
+  .provider-list article:nth-child(n + 3) {
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .provider-list h3 {
@@ -745,6 +809,9 @@ const policySections = [
 
     .provider-list article + article {
       border-block-start: var(--border-width) solid var(--color-border);
+    }
+
+    .provider-list article:nth-child(even) {
       border-inline-start: 0;
     }
 

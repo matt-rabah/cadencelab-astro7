@@ -4,6 +4,7 @@
 import { Font } from "astro:assets";
 import SEO from "../components/SEO.astro";
 import WebMCP from "../components/WebMCP.astro";
+import Clarity from "../components/Clarity.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -14,6 +15,8 @@ interface Props {
   imageAlt?: string;
   noindex?: boolean;
   pageType?: "website" | "article";
+  /** Mask the whole page in Microsoft Clarity recordings (pages with forms or tool input). */
+  maskSessionRecording?: boolean;
 }
 
 const defaultTitle = "Customer Experience Systems for the AI Era | Cadence Lab";
@@ -28,6 +31,7 @@ const {
   imageAlt = "Cadence Lab",
   noindex = false,
   pageType = "website",
+  maskSessionRecording = false,
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL("https://cadencelab.co");
@@ -184,7 +188,10 @@ const canonicalHref = canonical.toString();
     <slot name="head" />
   </head>
 
-  <body data-page-type={pageType}>
+  <body
+    data-page-type={pageType}
+    data-clarity-mask={maskSessionRecording ? "true" : undefined}
+  >
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <slot />
@@ -296,5 +303,7 @@ const canonicalHref = canonical.toString();
       document.addEventListener("astro:page-load", applyTheme);
       applyTheme();
     </script>
+
+    <Clarity />
   </body>
 </html>

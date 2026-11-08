@@ -1,0 +1,62 @@
+---
+// src/components/Clarity.astro
+//
+// Microsoft Clarity (heatmaps and session recordings), project zagzhe818n.
+// Production builds only, so `npm run dev` and Tina editing are never recorded.
+//
+// The loader waits for the page's load event and then an idle period before
+// it requests Clarity, so the script never competes with the first render
+// (LCP) or adds blocking time during load. Clarity still records the session
+// from the moment it starts.
+//
+// script-src in astro.config.mjs must allow https://www.clarity.ms (the tag)
+// and https://scripts.clarity.ms (clarity.js, which the tag loads).
+//
+// Pages that collect visitor input pass `maskSessionRecording` to Layout,
+// which masks the whole page in recordings (data-clarity-mask).
+const enabled = import.meta.env.PROD;
+---
+
+{
+  enabled && (
+    <script>
+      type ClarityQueue = {
+        (...args: unknown[]): void;
+        q?: ArrayLike<unknown>[];
+      };
+
+      const CLARITY_PROJECT_ID = "zagzhe818n";
+      const clarityWindow = window as Window & { clarity?: ClarityQueue };
+
+      const loadClarity = () => {
+        if (clarityWindow.clarity) return;
+
+        // Same queue stub as Clarity's own snippet: calls made before
+        // clarity.js arrives are stored and replayed once it loads.
+        const clarity: ClarityQueue = function (...args: unknown[]) {
+          (clarity.q ??= []).push(args);
+        };
+        clarityWindow.clarity = clarity;
+
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}?ref=bwt`;
+        document.head.append(script);
+      };
+
+      const scheduleClarity = () => {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadClarity, { timeout: 4000 });
+        } else {
+          window.setTimeout(loadClarity, 2000);
+        }
+      };
+
+      if (document.readyState === "complete") {
+        scheduleClarity();
+      } else {
+        window.addEventListener("load", scheduleClarity, { once: true });
+      }
+    </script>
+  )
+}
