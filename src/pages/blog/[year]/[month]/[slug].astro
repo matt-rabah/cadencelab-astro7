@@ -243,7 +243,7 @@ const articleSchema = {
   <script
     type="application/ld+json"
     is:inline
-    set:html={JSON.stringify(articleSchema)}
+    set:html={JSON.stringify(articleSchema).replace(/</g, "\\u003c")}
   />
   <BreadcrumbSchema
     items={[

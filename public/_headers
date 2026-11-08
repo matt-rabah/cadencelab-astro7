@@ -64,3 +64,11 @@
 # ── Search dialog data: fetched by the ⌘K dialog, not a page to index ──
 /search-index.json
   X-Robots-Tag: noindex
+
+# ── All pages: block framing by other sites (clickjacking) ──
+# 'self' (not 'none') keeps TinaCMS visual editing working: the admin frames
+# site pages from the same origin. A <meta> CSP cannot set frame-ancestors,
+# so it must be sent as a header.
+/*
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN

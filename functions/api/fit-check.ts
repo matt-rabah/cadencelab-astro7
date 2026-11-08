@@ -270,16 +270,16 @@ function formatSubmission(submission: FitCheckSubmission): string {
   ].join("\n");
 }
 
+// The receipt goes to whatever address was typed into the form, so it must
+// not repeat any free text the submitter wrote (name, challenge, impact,
+// additional context). Otherwise anyone could use this form to send their own
+// message from Cadence Lab's domain to a stranger. Only the multiple-choice
+// answers, which are mapped to fixed labels server-side, are included.
 function formatSubmitterCopy(submission: FitCheckSubmission): string {
   return [
-    `Hi ${submission.name},`,
+    "Hello,",
     "",
-    "Here is the copy of your Cadence Lab Fit Check answers you requested.",
-    "",
-    "CURRENT SITUATION",
-    `Primary challenge: ${submission.challenge}`,
-    "",
-    `Useful result: ${submission.impact}`,
+    "Cadence Lab received your Fit Check. Here is a summary of your multiple-choice answers.",
     "",
     "OPERATING ENVIRONMENT",
     `Environment: ${submission.environment}`,
@@ -289,13 +289,42 @@ function formatSubmitterCopy(submission: FitCheckSubmission): string {
     `Leadership alignment: ${submission.leadership}`,
     `Willingness to change: ${submission.changeReadiness}`,
     "",
-    "ADDITIONAL CONTEXT",
-    submission.additionalContext || "Not provided",
+    "Your written answers were received in full and are not repeated here. Matt will review your submission and email your free FitCheck Decision Brief separately. This receipt is not your assessment or a consulting agreement.",
     "",
-    "Cadence Lab received the same answers. Matt will review them and email your free FitCheck Decision Brief separately. This receipt is not your assessment or a consulting agreement.",
+    "If you did not submit a Fit Check, you can ignore this email. No account was created.",
     "",
     "You requested this one-time email while submitting the Fit Check. It does not subscribe you to marketing.",
   ].join("\n");
+}
+
+async function readBodyWithinLimit(
+  request: Request,
+  limit: number,
+): Promise<Uint8Array<ArrayBuffer> | null> {
+  if (!request.body) return new Uint8Array();
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > limit) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+
+  const body = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return body;
 }
 
 function textResponse(
@@ -341,9 +370,18 @@ export const onRequest = async ({
     return textResponse("Unsupported submission format.", 415);
   }
 
+  // Content-Length can be absent (chunked uploads), so enforce the limit on
+  // the bytes actually read rather than trusting the header.
+  const body = await readBodyWithinLimit(request, MAX_BODY_BYTES);
+  if (body === null) {
+    return textResponse("Submission is too large.", 413);
+  }
+
   let formData: FormData;
   try {
-    formData = await request.formData();
+    formData = await new Response(body, {
+      headers: { "Content-Type": contentType },
+    }).formData();
   } catch {
     return textResponse(
       "The submission could not be read. Please go back and try again.",
@@ -387,9 +425,10 @@ export const onRequest = async ({
     );
   }
 
-  const hostnameIsValid =
-    requestUrl.hostname !== "cadencelab.co" ||
-    turnstileResult.hostname === requestUrl.hostname;
+  // The token must have been issued for the host that received this request.
+  // Checking every host (not only the apex) stops a token minted on another
+  // hostname from being replayed against a preview or www deployment.
+  const hostnameIsValid = turnstileResult.hostname === requestUrl.hostname;
 
   if (
     !turnstileResult.success ||
