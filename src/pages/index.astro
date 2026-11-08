@@ -15,38 +15,38 @@ const operatingStages = [
     step: "01",
     title: "Find what's really happening",
     description:
-      "Follow the customer problem through teams, systems, data, handoffs, and frontline work.",
+      "Follow one customer problem through your teams, systems, data, and handoffs. Watch where it breaks.",
   },
   {
     step: "02",
-    title: "Agree on what needs to change",
+    title: "Agree on what has to change",
     description:
-      "Set the outcome, owner, boundaries, and order of work before implementation starts.",
+      "Name the outcome, the owner, and the order of work before anyone builds anything.",
   },
   {
     step: "03",
-    title: "Fix the way work gets done",
+    title: "Fix how the work gets done",
     description:
-      "Turn the decision into better handoffs, CRM workflows, team practices, governance, and AI support.",
+      "Turn that decision into better handoffs, CRM workflows, team habits, governance, and AI support.",
   },
   {
     step: "04",
     title: "Track what changes",
     description:
-      "Measure customer results, team adoption, and workflow performance. Then adjust based on what the data shows.",
+      "Measure customer results, adoption, and workflow performance. Then adjust to what the data tells you.",
   },
 ];
 
 const fitBenefits = [
-  "A human review of the problem, evidence, ownership, and ability to act.",
-  "A decision brief with the likely constraint and one useful next step.",
-  "A recommendation you can keep, including when consulting isn't needed yet.",
+  "A real person reviews the problem, the evidence, who owns it, and whether you can act on it.",
+  "A short decision brief with the likely constraint and one useful next step.",
+  "Advice you can keep, even when the answer is that you don't need a consultant yet.",
 ];
 ---
 
 <Layout
   title="Customer Experience Systems for the AI Era | Cadence Lab"
-  description="Cadence Lab helps organizations find and fix onboarding drift, quiet accounts, unreliable CRM workflows, service handoffs, and AI readiness problems."
+  description="Customers repeat themselves. Onboarding stalls. Nobody trusts the CRM. Cadence Lab helps you find the cause, fix it in the right order, and get ready for AI."
   canonicalURL="/"
   pageType="website"
 >
@@ -60,7 +60,7 @@ const fitBenefits = [
     <Hero
       eyebrow="CX without the BS."
       heading="Fix the systems behind customer friction."
-      description="Customers repeat themselves. Onboarding stalls. Teams work around tools they don’t trust. Cadence Lab helps you find what’s causing the problem and decide what to fix first—with clear owners and a practical plan."
+      description="Your customers repeat themselves. Onboarding stalls. Your team works around tools nobody trusts. Sound familiar? I’ll help you find what’s really causing it and decide what to fix first, with real owners and a plan you can use."
       primaryCta={{ text: "Start the Fit Check™", url: "/fit-check/" }}
       secondaryCta={{ text: "See the diagnostic offers", url: "#diagnostics" }}
     />
@@ -70,26 +70,26 @@ const fitBenefits = [
     <Stats
       eyebrow="Diagnostic Services"
       heading="Start with the problem, not the platform."
-      subheading="Each diagnostic answers one important question: What is causing the problem, and what should your team fix first?"
+      subheading="New software won’t fix a broken handoff. Each diagnostic answers two questions: what’s really causing the problem, and what should you fix first?"
     />
 
     <OperatingModel
-      eyebrow="How the Work Happens"
-      heading="Find the cause. Make the next move clear."
-      subheading="We connect strategy to the people, systems, and decisions that shape the customer experience."
+      eyebrow="How the work happens"
+      heading="Find the cause. Make the next move obvious."
+      subheading="Strategy only matters when it changes how people work. So I start with the people, systems, and decisions behind your customer experience."
       steps={operatingStages}
     />
 
     <FAQ
-      eyebrow="Common Questions"
-      heading="What to expect from a diagnostic"
-      description="Clear answers about timing, access, deliverables, and what happens after the review."
+      eyebrow="Common questions"
+      heading="What to expect from a diagnostic."
+      description="Timing, access, deliverables, and what happens after. No surprises."
     />
 
     <FitCheckForm
       badge="FitCheck™ · Free decision brief"
       heading="Before you fund the solution, check the fit."
-      description="Unsure where to start? Describe the problem. Matt reviews your answers and recommends the smallest useful next decision: a resource, an internal step, a diagnostic, or a conversation about implementation."
+      description="Not sure where to start? Tell me what’s going on. I’ll read your answers myself and recommend the smallest useful next step. That might be a free resource, something your team can handle on its own, a diagnostic, or a conversation about implementation."
       benefits={fitBenefits}
     />
   </main>
