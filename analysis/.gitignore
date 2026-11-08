@@ -1,4 +1,4 @@
-SECRETS.local.md
-*.local.patch
-# Raw scanner output and findings stay local: this repository is public.
-.npm-audit.json
+# Everything in analysis/ stays local: this repository is public and these
+# files describe security findings. Share them directly, never via git.
+*
+!.gitignore
