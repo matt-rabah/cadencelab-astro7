@@ -237,7 +237,7 @@ const sitePages: SitePage[] = [
       "Get a free, human-reviewed decision brief on the likely constraint behind your CX, CRM, workflow, or AI problem and what to do next.",
     category: "Start here",
     href: "/fit-check/",
-    keywords: "fit check engagement assessment contact help project readiness",
+    keywords: "FitCheck™ fitcheck fit check engagement assessment contact help project readiness",
   },
   {
     title: "About Matt Rabah and Cadence Lab",
