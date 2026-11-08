@@ -329,6 +329,18 @@ astro.config.mjs
 src/styles/
 ```
 
+## Writing and voice
+
+All site copy, form messages, emails, and FitCheck™ Decision Briefs follow:
+
+```text
+docs/voice.md
+```
+
+Read it before writing or editing any visible text. Key rules: first person
+as Matt, contractions, no em dashes, no invented facts or numbers, every
+statistic sourced on the page, and FitCheck™ spelled exactly that way.
+
 ## Styling conventions
 
 Preserve the current Cadence Lab visual direction:
