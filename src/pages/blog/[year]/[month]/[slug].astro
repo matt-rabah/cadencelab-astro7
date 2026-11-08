@@ -10,6 +10,7 @@ import NavHeader from "../../../../components/NavHeader.astro";
 import RelatedPosts from "../../../../components/blog/RelatedPosts.astro";
 import Layout from "../../../../layouts/Layout.astro";
 import { getPostURL } from "../../../../lib/blog";
+import { FOUNDER } from "../../../../lib/founder";
 
 type BlogPost = CollectionEntry<"blog">;
 
@@ -125,6 +126,11 @@ const articleSchema = {
   author: {
     "@type": normalizedAuthor === "cadence lab" ? "Organization" : "Person",
     name: author,
+    // Ties the post to the site-wide Person node (SEO.astro), which carries
+    // the founder's job title and LinkedIn profile.
+    ...(normalizedAuthor === FOUNDER.name.toLowerCase()
+      ? { "@id": FOUNDER.schemaId }
+      : {}),
     ...(authorPath
       ? {
           url: new URL(authorPath, "https://cadencelab.co").href,

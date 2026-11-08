@@ -1,5 +1,6 @@
 ---
 // src/components/SEO.astro
+import { FOUNDER } from "../lib/founder";
 interface Props {
   title: string;
   description: string;
@@ -46,6 +47,16 @@ const schemaData = {
           siteRoot,
         ).toString(),
       },
+      founder: { "@id": FOUNDER.schemaId },
+    },
+    {
+      "@type": "Person",
+      "@id": FOUNDER.schemaId,
+      name: FOUNDER.name,
+      jobTitle: FOUNDER.jobTitle,
+      url: new URL(FOUNDER.aboutPath, siteRoot).toString(),
+      worksFor: { "@id": organizationId },
+      sameAs: [FOUNDER.linkedIn],
     },
     {
       "@type": "WebSite",
