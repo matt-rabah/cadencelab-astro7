@@ -92,6 +92,10 @@ const availableLogos = logos.map((item) => ({
   >
     <div class="logo-track">
       {
+        // The second list repeats the logos so the marquee loops seamlessly.
+        // It is hidden from assistive technology, so its alt text is never
+        // announced twice, but the images keep their names because crawlers
+        // (for example Bing Webmaster Tools) flag empty alt attributes.
         [false, true].map((isDuplicate) => (
           <ul role="list" aria-hidden={isDuplicate ? "true" : undefined}>
             {availableLogos.map((item) => (
@@ -106,7 +110,7 @@ const availableLogos = logos.map((item) => ({
                       ].includes(item.name),
                     }}
                     src={item.src}
-                    alt={isDuplicate ? "" : item.name}
+                    alt={item.name}
                     width={item.width}
                     height={item.height}
                     loading="lazy"
