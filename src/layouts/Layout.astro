@@ -47,9 +47,10 @@ const canonicalHref = canonical.toString();
   <head>
     {
       /*
-        Google Analytics (G-STT3SDRBXF) is added by Cloudflare, not here:
-        Cloudflare Zaraz sends it from the edge, or the Cloudflare Google tag
-        gateway injects the tag. A tag in this file would load a second copy.
+        Google Analytics (G-STT3SDRBXF) runs in Cloudflare Zaraz, which sends
+        it from Cloudflare's servers (Web tag management > Zaraz). Do not add a
+        Google tag here: it would load Google's script in every visitor's
+        browser and count each page view twice.
       */
     }
     <meta charset="utf-8" />

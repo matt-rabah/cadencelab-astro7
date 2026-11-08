@@ -91,10 +91,9 @@ export default defineConfig({
           // so it must be listed explicitly. Without it the browser blocks
           // every same-origin script (the site's own bundles and Rocket Loader).
           "'self'",
-          // Analytics hosts: the Cloudflare Google tag gateway's health check
-          // loads gtag.js from Google, and Cloudflare Web Analytics loads its
-          // beacon. Remove googletagmanager once analytics runs only in Zaraz.
-          "https://www.googletagmanager.com",
+          // Cloudflare Web Analytics beacon. Google Analytics runs in Cloudflare
+          // Zaraz (server-side; its loader is served from /cdn-cgi/zaraz/), so
+          // no Google script host is needed.
           "https://static.cloudflareinsights.com",
         ],
       },
