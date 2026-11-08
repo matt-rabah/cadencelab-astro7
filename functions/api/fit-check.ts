@@ -18,6 +18,10 @@ interface FitCheckSubmission {
   role: string;
   additionalContext: string;
   startingPoint: string;
+  costArea: string;
+  monthlyCost: string;
+  costOfInaction: string;
+  budget: string;
   sendCopy: boolean;
 }
 
@@ -76,6 +80,28 @@ const startingPointOptions: Record<string, string> = {
   "insight-action": "We have the insights. Nothing changes",
   "silent-churn": "Customers leave without telling us",
   "ai-trust": "We're rolling out AI and can't get it wrong",
+};
+
+const costAreaOptions: Record<string, string> = {
+  revenue: "Revenue: churn, missed renewals, or lost deals",
+  hours: "Team hours spent working around it",
+  risk: "Risk to compliance, brand, or customer trust",
+  unknown: "Not quantified yet",
+};
+
+const monthlyCostOptions: Record<string, string> = {
+  "under-5k": "Under $5k a month",
+  "5k-25k": "$5k to $25k a month",
+  "25k-100k": "$25k to $100k a month",
+  "over-100k": "Over $100k a month",
+  unknown: "No idea yet",
+};
+
+const budgetOptions: Record<string, string> = {
+  yes: "Yes",
+  coming: "Not yet, but there will be",
+  "make-case": "Needs help making the case internally",
+  no: "No",
 };
 
 const environmentOptions: Record<string, string> = {
@@ -214,6 +240,34 @@ function validateSubmission(formData: FormData): ValidationResult {
     errors,
     { required: false, max: 1_000 },
   );
+  const costArea = readChoice(
+    formData,
+    "cost-area",
+    "Biggest cost",
+    costAreaOptions,
+    errors,
+  );
+  const monthlyCost = readChoice(
+    formData,
+    "monthly-cost",
+    "Rough monthly cost",
+    monthlyCostOptions,
+    errors,
+  );
+  const costOfInaction = readText(
+    formData,
+    "cost-of-inaction",
+    "If nothing changes",
+    errors,
+    { required: false, max: 600 },
+  );
+  const budget = readChoice(
+    formData,
+    "budget",
+    "Budget set aside",
+    budgetOptions,
+    errors,
+  );
   const rawStartingPoint = formData.get("starting-point");
   const startingPoint =
     typeof rawStartingPoint === "string" &&
@@ -245,6 +299,10 @@ function validateSubmission(formData: FormData): ValidationResult {
       role,
       additionalContext,
       startingPoint,
+      costArea,
+      monthlyCost,
+      costOfInaction,
+      budget,
       sendCopy,
     },
   };
@@ -252,7 +310,7 @@ function validateSubmission(formData: FormData): ValidationResult {
 
 function formatSubmission(submission: FitCheckSubmission): string {
   return [
-    "New Cadence Lab Fit Check submission",
+    "New Cadence Lab FitCheck™ submission",
     "",
     `Submitted: ${new Date().toISOString()}`,
     "",
@@ -273,6 +331,12 @@ function formatSubmission(submission: FitCheckSubmission): string {
     "OPERATING ENVIRONMENT",
     `Environment: ${submission.environment}`,
     `Customer data usefulness: ${submission.crm}`,
+    "",
+    "VALUE AND COMMITMENT (cost of inaction)",
+    `Biggest cost: ${submission.costArea}`,
+    `Rough monthly cost: ${submission.monthlyCost}`,
+    `If nothing changes in 12 months: ${submission.costOfInaction || "Not provided"}`,
+    `Budget set aside: ${submission.budget}`,
     "",
     "READINESS",
     `Leadership alignment: ${submission.leadership}`,
@@ -298,7 +362,7 @@ function formatSubmitterCopy(submission: FitCheckSubmission): string {
   return [
     "Hello,",
     "",
-    "Cadence Lab received your Fit Check. Here is a summary of your multiple-choice answers.",
+    "Cadence Lab received your FitCheck™. Here is a summary of your multiple-choice answers.",
     "",
     "OPERATING ENVIRONMENT",
     `Environment: ${submission.environment}`,
@@ -310,9 +374,9 @@ function formatSubmitterCopy(submission: FitCheckSubmission): string {
     "",
     "Your written answers were received in full and are not repeated here. Matt will review your submission and email your free FitCheck Decision Brief separately. This receipt is not your assessment or a consulting agreement.",
     "",
-    "If you did not submit a Fit Check, you can ignore this email. No account was created.",
+    "If you did not submit a FitCheck™, you can ignore this email. No account was created.",
     "",
-    "You requested this one-time email while submitting the Fit Check. It does not subscribe you to marketing.",
+    "You requested this one-time email while submitting the FitCheck™. It does not subscribe you to marketing.",
   ].join("\n");
 }
 
@@ -416,7 +480,7 @@ export const onRequest = async ({
   if (!env.TURNSTILE_SECRET_KEY) {
     console.error("Fit Check Turnstile verification is not configured.");
     return textResponse(
-      "The Fit Check is temporarily unavailable. Your information was not sent. Please try again later.",
+      "The FitCheck™ is temporarily unavailable. Your information was not sent. Please try again later.",
       503,
     );
   }
@@ -424,7 +488,7 @@ export const onRequest = async ({
   const turnstileToken = formData.get("cf-turnstile-response");
   if (typeof turnstileToken !== "string" || !turnstileToken.trim()) {
     return textResponse(
-      "Please complete the security check, then submit the Fit Check again.",
+      "Please complete the security check, then submit the FitCheck™ again.",
       400,
     );
   }
@@ -484,7 +548,7 @@ export const onRequest = async ({
       "Fit Check email delivery is missing required environment variables.",
     );
     return textResponse(
-      "The Fit Check is temporarily unavailable. Your information was not sent. Please try again later.",
+      "The FitCheck™ is temporarily unavailable. Your information was not sent. Please try again later.",
       503,
     );
   }
@@ -495,7 +559,7 @@ export const onRequest = async ({
     from: env.FIT_CHECK_FROM_EMAIL,
     to: [env.FIT_CHECK_TO_EMAIL],
     reply_to: submission.email,
-    subject: `Fit Check: ${subjectOrganization} | ${subjectName}`,
+    subject: `FitCheck™: ${subjectOrganization} | ${subjectName}`,
     text: formatSubmission(submission),
   };
   const resendUrl = submission.sendCopy
@@ -508,7 +572,7 @@ export const onRequest = async ({
           from: env.FIT_CHECK_FROM_EMAIL,
           to: [submission.email],
           reply_to: env.FIT_CHECK_TO_EMAIL,
-          subject: "Your Cadence Lab Fit Check answers",
+          subject: "Your Cadence Lab FitCheck™ answers",
           text: formatSubmitterCopy(submission),
         },
       ]
@@ -528,7 +592,7 @@ export const onRequest = async ({
   } catch (error) {
     console.error("Fit Check email delivery request failed.", error);
     return textResponse(
-      "We could not send your Fit Check. Your information was not delivered. Please go back and try again.",
+      "We could not send your FitCheck™. Your information was not delivered. Please go back and try again.",
       502,
     );
   }
@@ -539,7 +603,7 @@ export const onRequest = async ({
       requestId: resendResponse.headers.get("x-request-id"),
     });
     return textResponse(
-      "We could not send your Fit Check. Your information was not delivered. Please go back and try again.",
+      "We could not send your FitCheck™. Your information was not delivered. Please go back and try again.",
       502,
     );
   }
