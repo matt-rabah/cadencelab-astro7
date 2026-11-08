@@ -900,6 +900,16 @@ if (turnstileSiteKey) {
         true,
       );
 
+      // Set aria-invalid at the moment the red :user-invalid style appears
+      // (after the visitor leaves a field), so screen readers hear the same
+      // state sighted visitors see, and never before they have typed.
+      form.addEventListener("focusout", (event) => {
+        if (!isFormControl(event.target)) return;
+        if (event.target.matches(":user-invalid")) {
+          event.target.setAttribute("aria-invalid", "true");
+        }
+      });
+
       form.addEventListener("input", (event) => {
         if (isFormControl(event.target)) clearInvalid(event.target);
       });

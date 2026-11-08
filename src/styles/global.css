@@ -686,3 +686,18 @@ select:focus-visible {
     scroll-behavior: auto;
   }
 }
+
+/*
+  Cross-document view transitions: a short cross-fade between pages in
+  browsers that support it (others navigate normally). Off when the visitor
+  asks for reduced motion.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: 180ms;
+  }
+}

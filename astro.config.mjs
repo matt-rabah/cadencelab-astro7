@@ -95,6 +95,10 @@ export default defineConfig({
           // Zaraz (server-side; its loader is served from /cdn-cgi/zaraz/), so
           // no Google script host is needed.
           "https://static.cloudflareinsights.com",
+          // Allows the inline <script type="speculationrules"> in Layout.astro
+          // (Astro does not hash it). Covers speculation rules only, never
+          // executable inline script.
+          "'inline-speculation-rules'",
         ],
       },
       styleDirective: {

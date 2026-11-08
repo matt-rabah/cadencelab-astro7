@@ -15,7 +15,7 @@ The project uses:
 - Tailwind CSS
 - Local Graphik and Tiempos web fonts
 - npm
-- Node.js 22.12 or newer
+- Node.js 22.23.4 or newer
 
 The repository has a single application root.
 
@@ -87,6 +87,8 @@ http://localhost:4001/graphql
 ```
 
 Do not start a separate plain `astro dev` process unless the task specifically requires isolating Astro from TinaCMS.
+
+The `dev` script runs `astro dev --ignore-lock` on purpose. Astro moves `astro dev` to a background process when it detects an AI agent, and `tinacms dev` then shuts down the Tina GraphQL API because its child command exited. `--ignore-lock` keeps Astro in the foreground. Do not remove it.
 
 ## Project structure
 
