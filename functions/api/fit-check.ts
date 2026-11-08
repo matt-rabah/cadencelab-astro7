@@ -17,6 +17,7 @@ interface FitCheckSubmission {
   organization: string;
   role: string;
   additionalContext: string;
+  startingPoint: string;
   sendCopy: boolean;
 }
 
@@ -67,6 +68,15 @@ async function verifyTurnstile(
 
   return (await response.json()) as TurnstileVerificationResult;
 }
+
+// Optional: the card picked under "Pick your starting point". Unknown or
+// missing values are recorded as not chosen; they never block a submission.
+const startingPointOptions: Record<string, string> = {
+  "prove-value": "We can't prove CX is worth the budget",
+  "insight-action": "We have the insights. Nothing changes",
+  "silent-churn": "Customers leave without telling us",
+  "ai-trust": "We're rolling out AI and can't get it wrong",
+};
 
 const environmentOptions: Record<string, string> = {
   fragmented: "Teams use disconnected systems and inconsistent workflows",
@@ -204,6 +214,12 @@ function validateSubmission(formData: FormData): ValidationResult {
     errors,
     { required: false, max: 1_000 },
   );
+  const rawStartingPoint = formData.get("starting-point");
+  const startingPoint =
+    typeof rawStartingPoint === "string" &&
+    Object.hasOwn(startingPointOptions, rawStartingPoint)
+      ? (startingPointOptions[rawStartingPoint] ?? "Not chosen")
+      : "Not chosen";
   const sendCopy = formData.get("send-copy") === "yes";
 
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -228,6 +244,7 @@ function validateSubmission(formData: FormData): ValidationResult {
       organization,
       role,
       additionalContext,
+      startingPoint,
       sendCopy,
     },
   };
@@ -247,6 +264,8 @@ function formatSubmission(submission: FitCheckSubmission): string {
     `Copy sent to submitter: ${submission.sendCopy ? "Yes" : "No"}`,
     "",
     "CURRENT SITUATION",
+    `Starting point: ${submission.startingPoint}`,
+    "",
     `Primary challenge: ${submission.challenge}`,
     "",
     `Useful result: ${submission.impact}`,

@@ -6,6 +6,73 @@ import { getEntry } from "astro:content";
 import Footer from "../components/Footer.astro";
 import NavHeader from "../components/NavHeader.astro";
 import Layout from "../layouts/Layout.astro";
+import BrandHeading from "../components/BrandHeading.astro";
+
+// "Pick your starting point". Each card is a problem validated by Medallia's
+// 2026 State of Customer Experience Report, with an illustrative (not client)
+// sample Decision Brief. The chosen id is sent as the optional
+// "starting-point" field (see functions/api/fit-check.ts).
+const startingPoints = [
+  {
+    id: "prove-value",
+    title: "We can’t prove CX is worth the budget.",
+    figure: "1 in 3",
+    fact: "CX practitioners can’t link survey metrics to financial outcomes.",
+    brief: {
+      problem:
+        "Leadership is questioning the CX budget. We report NPS every quarter, but nobody can say what it’s worth.",
+      constraint:
+        "The CX metrics aren’t tied to a business value stream. Scores move, but nothing connects them to retention, revenue, or cost to serve.",
+      value: "Retention, and the budget itself.",
+      readiness: "Evidence first",
+      next: "Pick one value stream and one journey. Line up a year of CX scores against renewal data for that journey before you buy another tool.",
+    },
+  },
+  {
+    id: "insight-action",
+    title: "We have the insights. Nothing changes.",
+    figure: "30–40%",
+    fact: "of departments don’t act on CX recommendations.",
+    brief: {
+      problem:
+        "Every quarter we present the same feedback themes. Everyone nods. Nothing changes.",
+      constraint:
+        "Nobody owns the decision. The insight lands in a meeting, not in a workflow with an owner and a deadline.",
+      value: "Cost to serve and retention.",
+      readiness: "Align first",
+      next: "Give the top theme one owner, one change, and one measure within 30 days. Then trace the handoff that keeps creating it.",
+    },
+  },
+  {
+    id: "silent-churn",
+    title: "Customers leave without telling us.",
+    figure: "60%",
+    fact: "of customers question whether it’s worth telling you when something goes wrong.",
+    brief: {
+      problem:
+        "Renewals are slipping, and the accounts that leave never complained first.",
+      constraint:
+        "You’re listening through surveys alone. The early signals (usage drops, support patterns, contact changes) sit in systems nobody watches together.",
+      value: "Retention and expansion.",
+      readiness: "Evidence first",
+      next: "Take the last ten lost accounts and line up what each did in the 90 days before it left. Build the warning signal from what they share.",
+    },
+  },
+  {
+    id: "ai-trust",
+    title: "We’re rolling out AI and can’t get it wrong.",
+    figure: "7%",
+    fact: "of consumers forgive AI more than they forgive a person.",
+    brief: {
+      problem: "Leadership wants an AI agent in support this quarter.",
+      constraint:
+        "The workflow the agent would run isn’t defined yet. Exceptions, owners, and the handoff back to a person still live in people’s heads.",
+      value: "Cost to serve, with customer trust at risk.",
+      readiness: "Stabilize first",
+      next: "Map the top three contact reasons end to end, decide where a person must take over, then pilot the agent on the cleanest one.",
+    },
+  },
+];
 
 const pageData = await getEntry("page", "fit-check");
 
@@ -62,15 +129,17 @@ if (turnstileSiteKey) {
         <header class="fit-check-header">
           <p class="fit-check-eyebrow">{category}</p>
 
-          <h1 class="fit-check-title">{title}</h1>
+          <h1 class="fit-check-title">
+            <BrandHeading
+              text="Your customers aren’t difficult. Your handoffs are."
+            />
+          </h1>
 
           <p class="fit-check-intro">{subtitle}</p>
 
           <p class="fit-check-context">
-            Describe the problem before choosing a service. Matt reviews your
-            answers and sends a FitCheck™ Decision Brief: what may be blocking
-            progress, what needs clarification, and the smallest useful next
-            step.
+            No sales call. No pitch deck. If the honest answer is “you don’t
+            need me,” that’s exactly what the brief will say.
           </p>
         </header>
 
@@ -92,6 +161,73 @@ if (turnstileSiteKey) {
           </dl>
         </aside>
       </div>
+
+      <section class="starting-points" aria-labelledby="starting-points-title">
+        <div class="starting-head">
+          <p class="starting-label" id="starting-points-title">
+            Pick your starting point
+          </p>
+          <p class="starting-source">
+            Figures: Medallia, The 2026 State of Customer Experience Report.
+          </p>
+        </div>
+
+        <div class="instrument">
+          <ul class="starting-list" role="list">
+            {
+              startingPoints.map((point, index) => (
+                <li>
+                  <a
+                    class="starting-card"
+                    href={`?start=${point.id}#fit-check-form-title`}
+                    data-start={point.id}
+                    aria-current={index === 0 ? "true" : undefined}
+                  >
+                    <span class="starting-figure">{point.figure}</span>
+                    <span class="starting-title">{point.title}</span>
+                    <span class="starting-fact">{point.fact}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="sample-brief" aria-live="polite">
+            <p class="sample-label">
+              Sample Decision Brief <span>Illustrative, not a client</span>
+            </p>
+            {
+              startingPoints.map((point, index) => (
+                <dl data-brief={point.id} hidden={index !== 0}>
+                  <div>
+                    <dt>The problem, as you described it</dt>
+                    <dd>{point.brief.problem}</dd>
+                  </div>
+                  <div>
+                    <dt>Likely constraint</dt>
+                    <dd>{point.brief.constraint}</dd>
+                  </div>
+                  <div>
+                    <dt>Business value at stake</dt>
+                    <dd>{point.brief.value}</dd>
+                  </div>
+                  <div>
+                    <dt>Readiness</dt>
+                    <dd>{point.brief.readiness}</dd>
+                  </div>
+                  <div class="sample-next">
+                    <dt>Your next decision</dt>
+                    <dd>{point.brief.next}</dd>
+                  </div>
+                </dl>
+              ))
+            }
+            <a class="sample-cta" href="#fit-check-form-title">
+              Send me my Decision Brief <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <section class="decision-overview" aria-labelledby="decision-title">
         <h2 id="decision-title">A next decision you can use.</h2>
@@ -198,6 +334,12 @@ if (turnstileSiteKey) {
             autocomplete="off"
           />
         </div>
+        <input
+          type="hidden"
+          name="starting-point"
+          value=""
+          data-starting-input
+        />
 
         <h2 id="fit-check-form-title" class="visually-hidden">
           Start your FitCheck™
@@ -675,6 +817,44 @@ if (turnstileSiteKey) {
   </main>
 
   <Footer />
+
+  <script>
+    // Starting point: a card click (or ?start= in the URL) shows the matching
+    // sample brief and records the choice in the form's hidden field.
+    const startCards =
+      document.querySelectorAll<HTMLAnchorElement>("[data-start]");
+    const startInput = document.querySelector<HTMLInputElement>(
+      "[data-starting-input]",
+    );
+
+    const selectStart = (id: string): void => {
+      const known = [...startCards].some((card) => card.dataset.start === id);
+      if (!known) return;
+      startCards.forEach((card) =>
+        card.dataset.start === id
+          ? card.setAttribute("aria-current", "true")
+          : card.removeAttribute("aria-current"),
+      );
+      document
+        .querySelectorAll<HTMLElement>("[data-brief]")
+        .forEach((brief) => {
+          brief.hidden = brief.dataset.brief !== id;
+        });
+      if (startInput) startInput.value = id;
+    };
+
+    startCards.forEach((card) =>
+      card.addEventListener("click", (event) => {
+        event.preventDefault();
+        const id = card.dataset.start ?? "";
+        selectStart(id);
+        history.replaceState(null, "", `?start=${id}`);
+      }),
+    );
+
+    const initialStart = new URLSearchParams(location.search).get("start");
+    if (initialStart) selectStart(initialStart);
+  </script>
 
   <script>
     const form = document.querySelector<HTMLFormElement>(".fit-check-form");
@@ -1181,11 +1361,12 @@ if (turnstileSiteKey) {
   }
 
   .fit-check-title {
-    max-width: 12ch;
+    max-width: 16ch;
     margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: var(--fs-display);
+    /* Sentence-length headline in the narrow intro column. */
+    font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-display);
     letter-spacing: var(--ls-display);
@@ -1964,6 +2145,190 @@ if (turnstileSiteKey) {
     .fit-check-eyebrow::before {
       border: 1px solid CanvasText;
       background: CanvasText;
+    }
+  }
+
+  /* Pick your starting point: cards and sample brief read as one instrument. */
+  .starting-points {
+    display: grid;
+    gap: 1.25rem;
+    margin-block: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .starting-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .starting-label {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
+  }
+
+  .starting-source {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+  }
+
+  .instrument {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    overflow: clip;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-pure);
+    box-shadow: var(--shadow-card);
+  }
+
+  .starting-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-inline-end: var(--border-width) solid var(--color-border);
+  }
+
+  .starting-list li + li {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .starting-card {
+    display: grid;
+    grid-template-columns: 6.25rem minmax(0, 1fr);
+    gap: 0.25rem 1rem;
+    padding: 1.25rem 1.5rem;
+    color: inherit;
+    text-decoration: none;
+    border-inline-start: 0.25rem solid transparent;
+  }
+
+  .starting-card[aria-current="true"] {
+    border-inline-start-color: var(--color-yellow);
+    background: var(--color-surface-subtle);
+  }
+
+  .starting-card:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: calc(-1 * var(--focus-ring-width));
+  }
+
+  .starting-figure {
+    grid-row: span 2;
+    white-space: nowrap;
+    color: var(--color-blue);
+    font-size: 1.5rem;
+    font-weight: var(--fw-semibold);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .starting-title {
+    color: var(--color-ink);
+    font-weight: var(--fw-semibold);
+    line-height: 1.35;
+  }
+
+  .starting-fact {
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .sample-brief {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .sample-label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
+  }
+
+  .sample-label span {
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .sample-brief dl {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .sample-brief dl[hidden] {
+    display: none;
+  }
+
+  .sample-brief dt {
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .sample-brief dd {
+    margin: 0.25rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    line-height: 1.55;
+  }
+
+  .sample-next {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-subtle);
+  }
+
+  .sample-cta {
+    justify-self: start;
+    padding: 0.8rem 1.15rem;
+    border-radius: var(--radius-md);
+    background: var(--color-blue);
+    color: var(--color-blue-foreground);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+  }
+
+  .sample-cta:hover {
+    background: var(--color-blue-hover);
+  }
+
+  @media (max-width: 52rem) {
+    .instrument {
+      grid-template-columns: 1fr;
+    }
+
+    .starting-list {
+      border-inline-end: 0;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .instrument,
+    .starting-card[aria-current="true"] {
+      border-color: CanvasText;
     }
   }
 </style>
