@@ -50,7 +50,11 @@ const initialSteps = [1, 2, 3];
           </a>
         </div>
 
-        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+        <aside
+          data-band
+          class="privacy-card"
+          aria-labelledby="privacy-card-title"
+        >
           <p id="privacy-card-title" class="note-label">Private by default</p>
           <p>
             Your answers stay in this browser. Cadence Lab doesn’t receive,
@@ -369,7 +373,7 @@ const initialSteps = [1, 2, 3];
             </button>
           </fieldset>
 
-          <div class="form-footer">
+          <div data-band class="form-footer">
             <p>
               <strong>Nothing is submitted.</strong> Your map is generated locally
               and disappears when you leave or refresh this page.
@@ -398,6 +402,7 @@ const initialSteps = [1, 2, 3];
     </section>
 
     <section
+      data-band
       id="handoff-results"
       class="handoff-results"
       aria-labelledby="results-title"

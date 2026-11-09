@@ -68,8 +68,8 @@
 
   /* Semantic Typography */
   --color-text: #111827;
-  --color-text-muted: #6b7280; /* DESIGN.md --text-muted */
-  --color-text-subtle: #6c757d;
+  --color-text-muted: #636b78; /* DESIGN.md #6b7280, darkened to pass 4.5:1 on the muted surface */
+  --color-text-subtle: #626a73; /* passes 4.5:1 on the subtle surface */
   --color-text-inverse: #ffffff;
   --color-text-inverse-muted: #d0dad7;
 
@@ -663,6 +663,19 @@ select:focus-visible {
 
 :root[data-theme="dark"] {
   color-scheme: dark;
+}
+
+/*
+  Accents inside dark section bands, in every theme. The light-mode accent
+  colors (#2e8b2b green, #4f46e5 indigo) are tuned for white and fail
+  contrast on the near-black band, so bands use the light-on-dark values.
+*/
+[data-band] {
+  --color-green: #75c870;
+  --color-blue: #7fb0ff;
+  --color-blue-hover: #a9c8ff;
+  --color-focus: #a9c8ff;
+  --color-link: #7fb0ff;
 }
 
 /*
