@@ -91,7 +91,11 @@ const failureModes = [
           </a>
         </div>
 
-        <aside class="privacy-card" aria-labelledby="privacy-card-title">
+        <aside
+          data-band
+          class="privacy-card"
+          aria-labelledby="privacy-card-title"
+        >
           <p id="privacy-card-title" class="note-label">Private by default</p>
           <p>
             Your answers stay in this browser. Cadence Lab doesn’t receive,
@@ -390,7 +394,7 @@ const failureModes = [
             </div>
           </fieldset>
 
-          <div class="form-footer">
+          <div data-band class="form-footer">
             <p>
               <strong>Nothing is submitted.</strong> Your plan is generated locally
               and disappears when you leave or refresh this page.
@@ -411,6 +415,7 @@ const failureModes = [
     </section>
 
     <section
+      data-band
       id="evaluation-results"
       class="evaluation-results"
       aria-labelledby="results-title"

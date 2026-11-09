@@ -473,7 +473,12 @@ const buildStandards = [
       </div>
     </section>
 
-    <section id="privacy" class="privacy" aria-labelledby="privacy-title">
+    <section
+      data-band
+      id="privacy"
+      class="privacy"
+      aria-labelledby="privacy-title"
+    >
       <div class="page-container privacy-layout">
         <div>
           <p class="eyebrow eyebrow-inverse">Privacy</p>
@@ -846,12 +851,13 @@ const buildStandards = [
     line-height: var(--lh-ui);
   }
 
+  /* Light button on the dark roadmap band (global button text uses !important). */
   .roadmap-action {
     width: fit-content;
     margin-top: 0.75rem;
-    border-color: var(--color-green);
-    background: var(--color-green);
-    color: var(--color-ink);
+    border-color: var(--color-text-inverse);
+    background: var(--color-text-inverse);
+    color: #111827 !important;
   }
 
   .standard-list {
