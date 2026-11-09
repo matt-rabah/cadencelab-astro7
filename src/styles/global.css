@@ -90,9 +90,21 @@
   --radius-pill: 0.75rem;
 
   /* Restrained elevation for the few components that need separation */
-  --shadow-sm: 0 6px 14px rgb(17 24 39 / 6%); /* DESIGN.md .shadow-card */
-  --shadow-card: 0 6px 14px rgb(17 24 39 / 6%);
-  --shadow-overlay: 0 18px 30px rgb(17 24 39 / 12%);
+  /*
+    Depth: a 1px hairline ring stacked with soft ambient shadows. Cards that
+    already draw a 1px border use --shadow-card-ambient (no ring) so the edge
+    isn't doubled; borderless cards use --shadow-card.
+  */
+  --shadow-hairline: 0 0 0 1px var(--color-border);
+  --shadow-card-ambient:
+    0 1px 2px rgb(17 24 39 / 4%), 0 6px 14px rgb(17 24 39 / 6%);
+  --shadow-card: var(--shadow-hairline), var(--shadow-card-ambient);
+  --shadow-overlay:
+    var(--shadow-hairline), 0 4px 8px rgb(17 24 39 / 6%),
+    0 18px 30px rgb(17 24 39 / 12%);
+  --shadow-sm: var(--shadow-card-ambient);
+  /* Concentric corners: radius for an element nested in a padded card. */
+  --radius-inner: max(0px, calc(var(--radius-lg) - 1rem));
 
   /* Layout Containers & Generous Executive Whitespace */
   --page-gutter: clamp(1.5rem, 5vw, 4.5rem);
