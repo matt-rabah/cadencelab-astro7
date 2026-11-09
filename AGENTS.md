@@ -329,20 +329,64 @@ astro.config.mjs
 src/styles/
 ```
 
+## Writing and voice
+
+All site copy, form messages, emails, and FitCheck™ Decision Briefs follow:
+
+```text
+docs/voice.md
+```
+
+Read it before writing or editing any visible text. Key rules: first person
+as Matt, contractions, no em dashes, no invented facts or numbers, every
+statistic sourced on the page, and FitCheck™ spelled exactly that way.
+
 ## Styling conventions
 
 Preserve the current Cadence Lab visual direction:
 
-- clinical editorial presentation
-- square or nearly square corners
-- restrained use of color
-- no unnecessary shadows
-- strong typography hierarchy
-- readable desktop and mobile layouts
-- semantic HTML
-- accessible focus states
+- clean editorial presentation with a strong typography hierarchy
+- restrained color: indigo primary, near-black ink, the logo's yellow dot as
+  the only accent
+- readable desktop and mobile layouts, light and dark mode
+- semantic HTML and accessible focus states
 
-Avoid generic SaaS styling, excessive rounded cards, decorative gradients, or unrelated UI frameworks unless explicitly requested.
+Avoid decorative gradients, purple or lavender tints, per-card accent colors,
+hover lift on cards, and unrelated UI frameworks.
+
+### Corners, borders, and depth
+
+Use the design tokens in `src/styles/global.css`. Don't hard-code values.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--radius-sm` / `--radius-md` | 12px | Buttons, inputs, alerts, small panels |
+| `--radius-lg` | 18px | Cards and grouped panels |
+| `--shadow-card` | hairline + ambient | Resting cards |
+| `--shadow-overlay` | hairline + deeper ambient | Menus, dialogs, popovers |
+| `--shadow-hairline` | 1px ring only | A crisp edge without a border |
+
+Best practices:
+
+- **Crisp hairlines.** For a new card without a `border`, draw the edge with
+  `box-shadow: var(--shadow-hairline)` (a `0 0 0 1px` ring). Unlike a
+  `border`, it doesn't change the box size and stays sharp on low-DPI
+  screens. Don't combine a 1px `border` and the hairline ring on one element.
+- **Layered depth.** `--shadow-card` and `--shadow-overlay` stack a hairline
+  with a faint, blurred ambient shadow. Keep shadows subtle; never colored.
+- **No corner bleed.** A rounded container that holds images, colored
+  headers, or full-bleed children needs `overflow: clip` (Baseline since
+  2022) so nothing spills past the curve. Don't clip containers that hold
+  menus, tooltips, or focus rings that must extend outside them.
+- **Concentric corners.** A rounded element inside a rounded element with
+  padding uses `border-radius: max(0px, calc(outer-radius - padding))` (or
+  `--radius-inner`), so the gap stays even around the curve. See MDN:
+  https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+- **Dark mode.** Shadows barely read on dark surfaces; rely on the hairline
+  and surface contrast there.
+- **Forced colors.** Shadows disappear in Windows high contrast mode, so any
+  card that has no `border` needs `border: 1px solid CanvasText` inside
+  `@media (forced-colors: active)`.
 
 ## TypeScript
 
