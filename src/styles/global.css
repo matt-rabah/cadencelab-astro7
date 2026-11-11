@@ -50,7 +50,12 @@
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Executive Palette */
-  --color-ink: #111827; /* DESIGN.md --text-strong / --secondary */
+  /* One near-black for every dark surface (nav, footer, feature bands),
+     the same in light and dark mode. Text keeps --color-ink. */
+  --color-surface-dark: #000504;
+  /* Near-black ink for text and dark buttons. Was DESIGN.md #111827, which
+     read navy next to the black footer and nav. */
+  --color-ink: var(--color-surface-dark);
   --color-light: #ffffff; /* Clean white background surface */
   --color-blue: #4f46e5; /* DESIGN.md --primary */
   --color-blue-hover: #4338ca;
@@ -67,7 +72,7 @@
   --color-surface-inverse: var(--color-ink);
 
   /* Semantic Typography */
-  --color-text: #111827;
+  --color-text: var(--color-surface-dark);
   --color-text-muted: #636b78; /* DESIGN.md #6b7280, darkened to pass 4.5:1 on the muted surface */
   --color-text-subtle: #626a73; /* passes 4.5:1 on the subtle surface */
   --color-text-inverse: #ffffff;
@@ -97,11 +102,11 @@
   */
   --shadow-hairline: 0 0 0 1px var(--color-border);
   --shadow-card-ambient:
-    0 1px 2px rgb(17 24 39 / 4%), 0 6px 14px rgb(17 24 39 / 6%);
+    0 1px 2px rgb(0 5 4 / 4%), 0 6px 14px rgb(0 5 4 / 6%);
   --shadow-card: var(--shadow-hairline), var(--shadow-card-ambient);
   --shadow-overlay:
-    var(--shadow-hairline), 0 4px 8px rgb(17 24 39 / 6%),
-    0 18px 30px rgb(17 24 39 / 12%);
+    var(--shadow-hairline), 0 4px 8px rgb(0 5 4 / 6%),
+    0 18px 30px rgb(0 5 4 / 12%);
   --shadow-sm: var(--shadow-card-ambient);
   /* Concentric corners: radius for an element nested in a padded card. */
   --radius-inner: max(0px, calc(var(--radius-lg) - 1rem));
@@ -671,6 +676,8 @@ select:focus-visible {
   contrast on the near-black band, so bands use the light-on-dark values.
 */
 [data-band] {
+  --color-ink: var(--color-surface-dark);
+  --color-surface-inverse: var(--color-surface-dark);
   --color-green: #75c870;
   --color-blue: #7fb0ff;
   --color-blue-hover: #a9c8ff;
@@ -687,8 +694,8 @@ select:focus-visible {
   them black with light text instead.
 */
 :root[data-theme="dark"] [data-band] {
-  --color-ink: #000000;
-  --color-surface-inverse: #000000;
+  --color-ink: var(--color-surface-dark);
+  --color-surface-inverse: var(--color-surface-dark);
   --color-light: #f4f5f7;
   --color-text-inverse: #f4f5f7;
   --color-text-inverse-muted: #b7bec6;
@@ -699,8 +706,8 @@ select:focus-visible {
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) [data-band] {
-    --color-ink: #000000;
-    --color-surface-inverse: #000000;
+    --color-ink: var(--color-surface-dark);
+    --color-surface-inverse: var(--color-surface-dark);
     --color-light: #f4f5f7;
     --color-text-inverse: #f4f5f7;
     --color-text-inverse-muted: #b7bec6;
