@@ -48,7 +48,7 @@ const {
 <section class={cn("faq", className)} id="faq" aria-labelledby="faq-title">
   <div class="faq-container">
     <div class="faq-intro">
-      <p class="eyebrow">{eyebrow}</p>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h2 id="faq-title">{heading}</h2>
       <p>{description}</p>
     </div>
@@ -75,6 +75,10 @@ const {
 </section>
 
 <style>
+  h2:first-child {
+    margin-top: 0;
+  }
+
   .faq {
     padding-block: var(--section-space);
     border-block-end: var(--border-width) solid var(--color-border);

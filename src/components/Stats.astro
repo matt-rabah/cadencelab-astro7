@@ -4,11 +4,13 @@ import BrandHeading from "./BrandHeading.astro";
 import { cn } from "@/lib/utils";
 
 interface StatItem {
-  value: string;
-  label: string;
+  /** FitCheck™ starting-point id (see src/pages/fit-check.astro). */
+  id: string;
+  problem: string;
   description: string;
+  valueStream: string;
+  service: string;
   href: string;
-  linkLabel: string;
 }
 
 interface Props {
@@ -19,42 +21,49 @@ interface Props {
   className?: string;
 }
 
+// Each card is one of the four value pillars. The order doesn't matter, so
+// the cards aren't numbered. Each names the business value stream it
+// protects before naming the diagnostic.
 const {
-  eyebrow = "Diagnostic Impact",
-  heading = "Choose the operating problem before choosing the technology.",
-  subheading = "Each diagnostic starts with one consequential operating question, builds a shared evidence base, and ends with a practical decision.",
+  eyebrow = "",
+  heading = "Start with the problem, not the platform.",
+  subheading = "New software won’t fix a broken handoff. Pick the problem that sounds like yours.",
   stats = [
     {
-      value: "01",
-      label: "CX Systems Diagnostic",
+      id: "prove-value",
+      problem: "We can’t prove CX is worth the budget.",
       description:
-        "Find where customers get stuck between teams and systems. Then decide what to fix first.",
-      href: "/services/cx-systems-diagnostic/",
-      linkLabel: "Explore the systems diagnostic",
-    },
-    {
-      value: "02",
-      label: "Lifecycle Risk Review",
-      description:
-        "Spot where onboarding stalls and accounts go quiet, while there’s still time to act.",
-      href: "/services/lifecycle-risk-review/",
-      linkLabel: "Explore the lifecycle review",
-    },
-    {
-      value: "03",
-      label: "CRM Workflow Audit",
-      description:
-        "Find the workarounds and the data nobody trusts. Leave with a cleanup plan your team can actually run.",
+        "Scores go up and down, and nobody can say what they’re worth. I tie your CX data to the revenue and retention data in your CRM so the case holds up.",
+      valueStream: "Retention and budget",
+      service: "CRM Workflow Audit",
       href: "/services/crm-workflow-audit/",
-      linkLabel: "Explore the CRM audit",
     },
     {
-      value: "04",
-      label: "AI Service Readiness Review",
+      id: "insight-action",
+      problem: "We have the insights. Nothing changes.",
       description:
-        "Is the workflow ready for AI? Find out, and decide where people need to stay in the loop.",
+        "The same themes show up every quarter because nobody owns the fix. I find the handoff that keeps creating them and give it an owner.",
+      valueStream: "Cost to serve and retention",
+      service: "CX Systems Diagnostic",
+      href: "/services/cx-systems-diagnostic/",
+    },
+    {
+      id: "silent-churn",
+      problem: "Customers leave without telling us.",
+      description:
+        "Onboarding stalls and accounts go quiet long before they cancel. I find the warning signs while there’s still time to act.",
+      valueStream: "Retention and expansion",
+      service: "Lifecycle Risk Review",
+      href: "/services/lifecycle-risk-review/",
+    },
+    {
+      id: "ai-trust",
+      problem: "We’re rolling out AI and can’t get it wrong.",
+      description:
+        "Is the workflow ready for AI? Find out, and decide where people need to stay in the loop before customers find the gaps for you.",
+      valueStream: "Cost to serve and customer trust",
+      service: "AI Service Readiness Review",
       href: "/services/ai-service-readiness-review/",
-      linkLabel: "Explore AI readiness",
     },
   ],
   className = "",
@@ -69,7 +78,7 @@ const {
   <div class="diagnostics-container">
     <div class="diagnostics-intro">
       <div>
-        <p class="eyebrow">{eyebrow}</p>
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
         <h2 id="diagnostics-title"><BrandHeading text={heading} /></h2>
       </div>
       <p>{subheading}</p>
@@ -79,16 +88,33 @@ const {
       {
         stats.map((stat) => (
           <li>
-            <article>
-              <p class="diagnostic-number">{stat.value}</p>
-              <h3>{stat.label}</h3>
+            <article aria-labelledby={`diagnostic-${stat.id}`}>
+              <h3 id={`diagnostic-${stat.id}`}>{stat.problem}</h3>
               <p class="diagnostic-description">{stat.description}</p>
-              <a href={stat.href}>
-                <span>{stat.linkLabel}</span>
-                <span class="arrow" aria-hidden="true">
-                  &#8594;
-                </span>
-              </a>
+              <dl class="diagnostic-meta">
+                <div>
+                  <dt>Protects</dt>
+                  <dd>{stat.valueStream}</dd>
+                </div>
+                <div>
+                  <dt>Diagnostic</dt>
+                  <dd>{stat.service}</dd>
+                </div>
+              </dl>
+              <div class="diagnostic-links">
+                <a href={stat.href}>
+                  <span>See the {stat.service}</span>
+                  <span class="arrow" aria-hidden="true">
+                    &#8594;
+                  </span>
+                </a>
+                <a
+                  class="diagnostic-start"
+                  href={`/fit-check/?start=${stat.id}#fit-check-form-title`}
+                >
+                  Start the FitCheck™ here
+                </a>
+              </div>
             </article>
           </li>
         ))
@@ -102,6 +128,10 @@ const {
 </section>
 
 <style>
+  h2:first-child {
+    margin-top: 0;
+  }
+
   .diagnostics {
     padding-block: var(--section-space);
     border-block-end: var(--border-width) solid var(--color-border);
@@ -122,8 +152,7 @@ const {
     gap: clamp(2.5rem, 8vw, 7rem);
   }
 
-  .eyebrow,
-  .diagnostic-number {
+  .eyebrow {
     margin: 0;
     color: var(--color-blue);
     font-family: var(--font-sans);
@@ -187,17 +216,48 @@ const {
     padding: clamp(1.5rem, 4vw, 2.5rem);
   }
 
-  .diagnostic-number {
-    color: var(--color-text-muted);
-  }
-
   h3 {
-    margin: 1.5rem 0 0;
+    margin: 0;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--fs-h4);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-h4);
+    text-wrap: balance;
+  }
+
+  .diagnostic-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    width: 100%;
+    margin: 1.5rem 0 0;
+    padding-top: 1.25rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .diagnostic-meta dt {
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .diagnostic-meta dd {
+    margin: 0.25rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+  }
+
+  .diagnostic-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 1.5rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
   }
 
   .diagnostic-description {
@@ -215,8 +275,6 @@ const {
     min-height: var(--control-min-size);
     align-items: center;
     gap: 0.55rem;
-    margin-top: auto;
-    padding-top: 1.5rem;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--fs-small);
@@ -228,6 +286,12 @@ const {
     transition:
       color var(--transition-fast),
       gap var(--transition-fast);
+  }
+
+  .diagnostic-start {
+    color: var(--color-text-muted);
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 0.06em;
   }
 
   .arrow {
