@@ -239,19 +239,14 @@ const {
                 <p>{outputs.introduction}</p>
               </div>
 
-              <ol class="output-list">
-                {outputs.items.map((item, index) => (
+              <ul class="output-list" role="list">
+                {outputs.items.map((item) => (
                   <li>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
-                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </li>
                 ))}
-              </ol>
+              </ul>
             </div>
           </section>
         </>
@@ -428,19 +423,14 @@ const {
                 <p>{outputs.introduction}</p>
               </div>
 
-              <ol class="output-list">
-                {outputs.items.map((item, index) => (
+              <ul class="output-list" role="list">
+                {outputs.items.map((item) => (
                   <li>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
-                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </li>
                 ))}
-              </ol>
+              </ul>
             </div>
           </section>
         </>
@@ -635,7 +625,6 @@ const {
 
   .eyebrow,
   .note-label,
-  .item-number,
   .framework-number,
   .framework-label,
   .path-phase,
@@ -965,9 +954,6 @@ const {
     margin-top: 2rem;
   }
 
-  .failure-list .item-number {
-    color: var(--color-green);
-  }
 
   .path-layout,
   .failure-layout,
@@ -1051,15 +1037,16 @@ const {
 
   .output-list li {
     display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr);
+    grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.3fr);
+    align-items: baseline;
     gap: clamp(1.5rem, 4vw, 3rem);
     padding-block: clamp(1.5rem, 4vw, 2.25rem);
     border-bottom: var(--border-width) solid var(--color-border);
   }
 
-  .output-list li > div > p {
+  .output-list li > p {
     max-width: var(--measure-ui);
-    margin: 0.75rem 0 0;
+    margin: 0;
     color: var(--color-text-muted);
     font-size: var(--fs-body-ui);
     line-height: var(--lh-ui);
@@ -1223,7 +1210,8 @@ const {
     }
 
     .output-list li {
-      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
     }
   }
 
