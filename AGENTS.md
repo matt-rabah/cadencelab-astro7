@@ -365,6 +365,7 @@ Use the design tokens in `src/styles/global.css`. Don't hard-code values.
 | `--shadow-card` | hairline + ambient | Resting cards |
 | `--shadow-overlay` | hairline + deeper ambient | Menus, dialogs, popovers |
 | `--shadow-hairline` | 1px ring only | A crisp edge without a border |
+| `--color-surface-dark` | #000504 | Every dark surface: nav, footer, `[data-band]` sections, dark buttons. Never a navy or second black. |
 
 Best practices:
 
