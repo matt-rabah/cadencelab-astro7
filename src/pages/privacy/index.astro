@@ -474,14 +474,13 @@ const policySections = [
   .provider-name,
   .policy-navigation nav > p {
     margin: 0;
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: var(--ls-eyebrow);
+    letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
-    text-transform: uppercase;
   }
 
   h1,
@@ -527,7 +526,7 @@ const policySections = [
   .policy-summary {
     padding: clamp(1.5rem, 4vw, 2.25rem);
     border: var(--border-width) solid var(--color-border);
-    border-top: 0.1875rem solid var(--color-blue);
+    border-top: 2px solid var(--color-text);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card-ambient);
     background: var(--color-surface-pure);
@@ -583,7 +582,7 @@ const policySections = [
 
   .policy-navigation nav {
     padding-top: 1.25rem;
-    border-top: 0.1875rem solid var(--color-blue);
+    border-top: 2px solid var(--color-text);
   }
 
   .policy-navigation ol {
@@ -737,7 +736,7 @@ const policySections = [
     margin-top: 1.5rem;
     padding: 1.5rem;
     border: var(--border-width) solid var(--color-border);
-    border-top: 0.1875rem solid var(--color-blue);
+    border-top: 2px solid var(--color-text);
     background: var(--color-surface-subtle);
     flex-direction: column;
     gap: 0.4rem;

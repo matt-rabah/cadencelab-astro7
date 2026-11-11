@@ -56,13 +56,12 @@
 .feedback-page .note-label,
 .feedback-page .summary-label {
   margin: 0;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.4;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .feedback-page .hero-copy h1 {
@@ -220,8 +219,7 @@
   color: var(--color-text-muted);
   font-size: 0.75rem;
   font-weight: 400;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .feedback-page .field-hint,
@@ -410,7 +408,7 @@
 }
 
 .feedback-page .feedback-results .eyebrow {
-  color: var(--color-green);
+  color: var(--color-text-muted);
 }
 
 .feedback-page .results-header h2 {
@@ -518,11 +516,10 @@
 
 .feedback-page .theme-count {
   margin: 0;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.8125rem;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 .feedback-page .theme-description,
@@ -543,8 +540,7 @@
   margin: 1.5rem 0 0.75rem;
   font-family: var(--ff-sans);
   font-size: 0.8125rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .feedback-page .theme-card ul,

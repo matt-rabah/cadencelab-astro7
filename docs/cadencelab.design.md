@@ -1,7 +1,7 @@
 ---
 name: Cadence Lab Design System
 version: 0.2.0
-status: review-draft
+status: superseded by /DESIGN.md (v2.0, 2026-11-11)
 updated: 2026-07-19
 scope: cadencelab.co marketing, insights, and engagement-intake experiences
 authority:

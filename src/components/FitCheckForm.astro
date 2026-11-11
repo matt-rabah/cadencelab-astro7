@@ -54,7 +54,6 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
 
     <aside class="fit-check-action" aria-labelledby="fit-check-action-title">
       <div class="action-heading">
-        <span class="signal-dot" aria-hidden="true"></span>
         <p id="fit-check-action-title">Before you begin</p>
       </div>
 
@@ -105,13 +104,12 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
   .eyebrow,
   .action-heading p {
     margin: 0;
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: var(--lh-ui);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0;
   }
 
   h2 {
@@ -171,7 +169,7 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
   .fit-check-action {
     overflow: clip;
     border: var(--border-width) solid var(--color-border-strong);
-    border-block-start: 0.25rem solid var(--color-blue);
+    border-block-start: 2px solid var(--color-text);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card-ambient);
     background: var(--color-surface-pure);

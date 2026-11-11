@@ -538,18 +538,17 @@ const usefulWhen = [
   .trace-label,
   .trace-marker p {
     margin: 0;
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: var(--ls-eyebrow);
+    letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
-    text-transform: uppercase;
   }
 
   .eyebrow-inverse {
-    color: var(--color-green);
+    color: var(--color-text-muted);
   }
 
   h1,
@@ -625,7 +624,7 @@ const usefulWhen = [
   .trigger-card {
     padding: clamp(1.5rem, 4vw, 2.25rem);
     border: var(--border-width) solid var(--color-border);
-    border-top: 0.1875rem solid var(--color-blue);
+    border-top: 2px solid var(--color-text);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card-ambient);
     background: var(--color-surface-pure);
@@ -888,7 +887,7 @@ const usefulWhen = [
   }
 
   .failure-list .item-number {
-    color: var(--color-green);
+    color: var(--color-text-muted);
   }
 
   .failure-list h3 {
@@ -968,7 +967,7 @@ const usefulWhen = [
   .fit-list {
     padding: clamp(1.5rem, 4vw, 2rem);
     border: var(--border-width) solid var(--color-border);
-    border-top: 0.1875rem solid var(--color-blue);
+    border-top: 2px solid var(--color-text);
     background: var(--color-surface-pure);
   }
 

@@ -56,13 +56,12 @@
 .handoff-page .note-label,
 .handoff-page .map-label {
   margin: 0;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   line-height: 1.4;
-  text-transform: uppercase;
 }
 
 .handoff-page .hero-copy h1 {
@@ -306,12 +305,11 @@
 
 .handoff-page .step-position {
   margin: 0;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .handoff-page .step-actions {
@@ -440,7 +438,7 @@
 }
 
 .handoff-page .results-header .eyebrow {
-  color: var(--color-green);
+  color: var(--color-text-muted);
 }
 
 .handoff-page .results-header h2 {
@@ -580,8 +578,7 @@
 .handoff-page thead th {
   background: var(--color-surface-subtle);
   font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .handoff-page tbody tr:last-child > * {

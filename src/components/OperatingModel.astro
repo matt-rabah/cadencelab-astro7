@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 
 interface Stage {
   step: string;
+  /** Friction Trace annotation: what this step produces (DESIGN.md, section 5). */
+  label?: string;
   title: string;
   description: string;
 }
@@ -63,15 +65,18 @@ const {
       <p>{subheading}</p>
     </div>
 
-    <ol class="stage-list">
+    <ol class="stage-list trace">
       {
         steps.map((stage) => (
           <li>
-            <p class="stage-number" aria-hidden="true">
+            <span class="trace-node" aria-hidden="true">
               {stage.step}
-            </p>
-            <h3>{stage.title}</h3>
-            <p>{stage.description}</p>
+            </span>
+            <div class="trace-body">
+              {stage.label && <p class="trace-label">{stage.label}</p>}
+              <h3>{stage.title}</h3>
+              <p class="trace-copy">{stage.description}</p>
+            </div>
           </li>
         ))
       }
@@ -105,16 +110,13 @@ const {
     top: calc(var(--header-offset) + 2rem);
   }
 
-  .eyebrow,
-  .stage-number {
+  .eyebrow {
     margin: 0;
-    color: var(--color-green);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: var(--lh-ui);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
   }
 
   h2 {
@@ -139,25 +141,82 @@ const {
     text-wrap: pretty;
   }
 
-  .stage-list {
+  /* Friction Trace: one continuous path, square numbered nodes, and an
+     annotation naming what each step produces. The logo dot marks where the
+     work starts, once. */
+  .trace {
     display: grid;
     margin: 0;
     padding: 0;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-block-start: var(--border-width) solid var(--color-border-inverse);
-    border-inline-start: var(--border-width) solid var(--color-border-inverse);
     list-style: none;
   }
 
-  .stage-list li {
-    min-width: 0;
-    padding: clamp(1.5rem, 4vw, 2.25rem);
-    border-inline-end: var(--border-width) solid var(--color-border-inverse);
-    border-block-end: var(--border-width) solid var(--color-border-inverse);
+  .trace li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: clamp(1rem, 3vw, 1.75rem);
+    padding-bottom: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .trace li:last-child {
+    padding-bottom: 0;
+  }
+
+  .trace li::before {
+    position: absolute;
+    top: 2.5rem;
+    bottom: 0;
+    left: calc(1.25rem - 0.5px);
+    width: 1px;
+    background: var(--color-border-strong);
+    content: "";
+  }
+
+  .trace li:last-child::before {
+    display: none;
+  }
+
+  .trace-node {
+    position: relative;
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-pure);
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .trace li:first-child .trace-node::after {
+    position: absolute;
+    top: -0.3125rem;
+    right: -0.3125rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: var(--color-yellow);
+    box-shadow: 0 0 0 2px var(--color-surface-subtle);
+    content: "";
+  }
+
+  .trace-label {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   h3 {
-    margin: 1.5rem 0 0;
+    margin: 0.375rem 0 0;
     color: var(--color-light);
     font-family: var(--font-sans);
     font-size: var(--fs-h4);
@@ -166,11 +225,12 @@ const {
     text-wrap: balance;
   }
 
-  .stage-list li > p:last-child {
-    margin: 0.75rem 0 0;
+  .trace-copy {
+    max-width: 52ch;
+    margin: 0.5rem 0 0;
     color: var(--color-text-inverse-muted);
     font-family: var(--font-sans);
-    font-size: var(--fs-small);
+    font-size: var(--fs-body);
     line-height: 1.6;
     text-wrap: pretty;
   }
@@ -185,19 +245,16 @@ const {
     }
   }
 
-  @media (max-width: 40rem) {
-    .stage-list {
-      grid-template-columns: 1fr;
-    }
-  }
-
   @media (forced-colors: active) {
     .operating-model,
-    .stage-list,
-    .stage-list li {
+    .trace-node {
       border-color: CanvasText;
       background: Canvas;
       color: CanvasText;
+    }
+
+    .trace li::before {
+      background: CanvasText;
     }
   }
 </style>

@@ -49,50 +49,53 @@
   --font-mono:
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* Executive Palette */
-  /* One near-black for every dark surface (nav, footer, feature bands),
-     the same in light and dark mode. Text keeps --color-ink. */
-  --color-surface-dark: #000504;
-  /* Near-black ink for text and dark buttons. Was DESIGN.md #111827, which
-     read navy next to the black footer and nav. */
-  --color-ink: var(--color-surface-dark);
-  --color-light: #ffffff; /* Clean white background surface */
-  --color-blue: #4f46e5; /* DESIGN.md --primary */
-  --color-blue-hover: #4338ca;
+  /*
+    Cadence Lab palette (DESIGN.md, section 2). Warm paper and warm graphite
+    instead of pure white and pure black, one action blue, and the logo's
+    yellow dot as the only accent. Three surface levels per theme:
+    page (0), inset (1), paper (2). Neighbouring areas always differ in tone.
+  */
+  --color-graphite: #22201c; /* warm near-black: text, dark buttons, footer */
+  --color-ink: var(--color-graphite);
+  --color-light: #f6f4ef; /* warm paper */
+  --color-blue: #2a53db; /* action blue: links, focus, primary nav CTA */
+  --color-blue-hover: #2147c2;
   --color-blue-foreground: #ffffff;
-  --color-green: #2e8b2b; /* Calibrated status green */
-  --color-yellow: #ffce31;
+  --color-green: #256b23; /* status green, text-safe on every light surface */
+  --color-yellow: #ffce31; /* logo dot only */
   --color-link: var(--color-blue);
 
-  /* Semantic Surfaces */
-  --color-surface: var(--color-light);
-  --color-surface-pure: #ffffff;
-  --color-surface-subtle: #f8fafc; /* DESIGN.md --surface-page */
-  --color-surface-muted: #f1f3f4;
-  --color-surface-inverse: var(--color-ink);
+  /* Surfaces */
+  --color-surface: var(--color-light); /* level 0: page */
+  --color-surface-subtle: #edeae3; /* level 1: inset sections, bands */
+  --color-surface-muted: #e4e0d7; /* stronger separation */
+  --color-surface-pure: #ffffff; /* level 2: paper panels, cards, forms */
+  --color-surface-inverse: var(--color-graphite);
+  --color-surface-anchor: var(--color-graphite); /* footer */
 
-  /* Semantic Typography */
-  --color-text: var(--color-surface-dark);
-  --color-text-muted: #636b78; /* DESIGN.md #6b7280, darkened to pass 4.5:1 on the muted surface */
-  --color-text-subtle: #626a73; /* passes 4.5:1 on the subtle surface */
-  --color-text-inverse: #ffffff;
-  --color-text-inverse-muted: #d0dad7;
+  /* Text */
+  --color-text: var(--color-graphite);
+  --color-text-muted: #57524a;
+  --color-text-subtle: #635d54; /* passes 4.5:1 on every light surface */
+  --color-text-inverse: #f6f4ef;
+  --color-text-inverse-muted: #c9c2b6;
 
-  /* Non-Harsh Soft Dividers (Deloitte Style) */
-  --color-border: #e5e7eb; /* DESIGN.md --border-default */
-  --color-border-strong: rgba(0, 0, 0, 0.16);
-  --color-border-inverse: rgb(255 255 255 / 28%);
+  /* Rules */
+  --color-border: #ddd8ce;
+  --color-border-strong: #b9b2a5;
+  --color-border-inverse: rgb(246 244 239 / 22%);
   --color-focus: var(--color-blue);
-  --color-error: #dc2626;
-  --color-success: #15803d;
-  --color-warning: #d97706;
+  --color-error: #b42318;
+  --color-success: #13683f;
+  --color-warning: #8a5200;
 
   /* Sharp Corporate Radii (No rounded bubble cards) */
   --border-width: 1px;
-  --radius-sm: 0.75rem; /* 12px: buttons, inputs, alerts */
-  --radius-md: 0.75rem; /* 12px */
-  --radius-lg: 1.125rem; /* 18px: cards */
-  --radius-pill: 0.75rem;
+  /* Square and quietly rounded, never bubbles (DESIGN.md, section 4). */
+  --radius-sm: 0.25rem; /* 4px: buttons, inputs, chips */
+  --radius-md: 0.25rem; /* 4px */
+  --radius-lg: 0.5rem; /* 8px: panels and the few real cards */
+  --radius-pill: 0.25rem;
 
   /* Restrained elevation for the few components that need separation */
   /*
@@ -101,15 +104,15 @@
     isn't doubled; borderless cards use --shadow-card.
   */
   --shadow-hairline: 0 0 0 1px var(--color-border);
-  --shadow-card-ambient:
-    0 1px 2px rgb(0 5 4 / 4%), 0 6px 14px rgb(0 5 4 / 6%);
+  /* Static content gets no elevation; tone and rules separate it. */
+  --shadow-card-ambient: 0 0 #0000;
   --shadow-card: var(--shadow-hairline), var(--shadow-card-ambient);
   --shadow-overlay:
-    var(--shadow-hairline), 0 4px 8px rgb(0 5 4 / 6%),
-    0 18px 30px rgb(0 5 4 / 12%);
+    var(--shadow-hairline), 0 4px 8px rgb(34 32 28 / 6%),
+    0 18px 30px rgb(34 32 28 / 12%);
   --shadow-sm: var(--shadow-card-ambient);
   /* Concentric corners: radius for an element nested in a padded card. */
-  --radius-inner: max(0px, calc(var(--radius-lg) - 1rem));
+  --radius-inner: max(2px, calc(var(--radius-lg) - 0.25rem));
 
   /* Layout Containers & Generous Executive Whitespace */
   --page-gutter: clamp(1.5rem, 5vw, 4.5rem);
@@ -149,26 +152,26 @@
   /* Shadcn / System Compatibility Tokens */
   --header-offset: 6rem;
   --z-skip-link: 1000;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.08 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.08 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.08 0 0);
-  --primary: oklch(0.25 0.22 264);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.08 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.4 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.08 0 0);
-  --destructive: oklch(0.55 0.24 27);
-  --destructive-foreground: oklch(1 0 0);
-  --border: rgba(0, 0, 0, 0.08);
-  --input: rgba(0, 0, 0, 0.12);
-  --ring: oklch(0.35 0.22 264);
-  --radius: 0.75rem;
+  --background: #f6f4ef;
+  --foreground: #22201c;
+  --card: #ffffff;
+  --card-foreground: #22201c;
+  --popover: #ffffff;
+  --popover-foreground: #22201c;
+  --primary: #22201c;
+  --primary-foreground: #f6f4ef;
+  --secondary: #edeae3;
+  --secondary-foreground: #22201c;
+  --muted: #edeae3;
+  --muted-foreground: #57524a;
+  --accent: #edeae3;
+  --accent-foreground: #22201c;
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --border: #ddd8ce;
+  --input: #b9b2a5;
+  --ring: #2a53db;
+  --radius: 0.25rem;
 }
 
 /* ==========================================================================
@@ -465,6 +468,18 @@ summary:focus-visible,
   background: var(--color-blue);
 }
 
+/* The action blue, for the one FitCheck(TM) action in a section. */
+.button-accent {
+  border: 1px solid var(--color-blue);
+  background: var(--color-blue);
+  color: var(--color-blue-foreground) !important;
+}
+
+.button-accent:hover {
+  border-color: var(--color-blue-hover);
+  background: var(--color-blue-hover);
+}
+
 .button-secondary {
   background: var(--color-surface-pure);
   color: var(--color-ink) !important;
@@ -571,93 +586,145 @@ select:focus-visible {
    ========================================================================== */
 
 :root[data-theme="dark"] {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.08 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.72 0 0);
-  --destructive-foreground: oklch(1 0 0);
-  --border: rgba(255, 255, 255, 0.12);
-  --input: rgba(255, 255, 255, 0.16);
-  --ring: oklch(0.65 0.22 264);
+  --background: #14120f;
+  --foreground: #f3efe7;
+  --card: #27231e;
+  --card-foreground: #f3efe7;
+  --popover: #27231e;
+  --popover-foreground: #f3efe7;
+  --primary: #f3efe7;
+  --primary-foreground: #14120f;
+  --secondary: #1d1a16;
+  --secondary-foreground: #f3efe7;
+  --muted: #1d1a16;
+  --muted-foreground: #bdb5a8;
+  --destructive-foreground: #14120f;
+  --border: #3a352e;
+  --input: #514a40;
+  --ring: #9fb3ff;
 
-  --color-ink: #f4f5f7;
-  --color-light: #0a0c0d;
-  --color-blue: #7fb0ff;
-  --color-blue-hover: #a9c8ff;
-  --color-blue-foreground: #0a0c0d;
+  --color-ink: #f3efe7;
+
+  --color-light: #14120f;
+
+  --color-blue: #9fb3ff;
+
+  --color-blue-hover: #c2cfff;
+
+  --color-blue-foreground: #14120f;
+
   --color-green: #75c870;
+
   --color-yellow: #ffce31;
+
   --color-link: var(--color-blue);
-  --color-surface: #0a0c0d;
-  --color-surface-pure: #111418;
-  --color-surface-subtle: #171b20;
-  --color-surface-muted: #20252b;
-  --color-surface-inverse: #f4f5f7;
-  --color-text: #f4f5f7;
-  --color-text-muted: #b7bec6;
-  --color-text-subtle: #929aa3;
-  --color-text-inverse: #0a0c0d;
-  --color-text-inverse-muted: #3f474f;
-  --color-border: rgb(244 245 247 / 14%);
-  --color-border-strong: rgb(244 245 247 / 28%);
-  --color-border-inverse: rgb(0 0 0 / 22%);
-  --color-focus: #a9c8ff;
+
+  --color-surface: #14120f;
+
+  --color-surface-subtle: #1d1a16;
+
+  --color-surface-muted: #27231e;
+
+  --color-surface-pure: #27231e;
+
+  --color-surface-inverse: #f3efe7;
+
+  --color-surface-anchor: #0d0c0a;
+
+  --color-text: #f3efe7;
+
+  --color-text-muted: #bdb5a8;
+
+  --color-text-subtle: #a39b8e;
+
+  --color-text-inverse: #14120f;
+
+  --color-text-inverse-muted: #4a443b;
+
+  --color-border: #3a352e;
+
+  --color-border-strong: #514a40;
+
+  --color-border-inverse: rgb(20 18 15 / 22%);
+
+  --color-focus: #9fb3ff;
+
   --color-error: #ff958a;
+
   --color-success: #77d3a5;
+
   --color-warning: #f0bd62;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --background: oklch(0.08 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.12 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.12 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.08 0 0);
-    --secondary: oklch(0.18 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.18 0 0);
-    --muted-foreground: oklch(0.72 0 0);
-    --destructive-foreground: oklch(1 0 0);
-    --border: rgba(255, 255, 255, 0.12);
-    --input: rgba(255, 255, 255, 0.16);
-    --ring: oklch(0.65 0.22 264);
+    --background: #14120f;
+    --foreground: #f3efe7;
+    --card: #27231e;
+    --card-foreground: #f3efe7;
+    --popover: #27231e;
+    --popover-foreground: #f3efe7;
+    --primary: #f3efe7;
+    --primary-foreground: #14120f;
+    --secondary: #1d1a16;
+    --secondary-foreground: #f3efe7;
+    --muted: #1d1a16;
+    --muted-foreground: #bdb5a8;
+    --destructive-foreground: #14120f;
+    --border: #3a352e;
+    --input: #514a40;
+    --ring: #9fb3ff;
 
-    --color-ink: #f4f5f7;
-    --color-light: #0a0c0d;
-    --color-blue: #7fb0ff;
-    --color-blue-hover: #a9c8ff;
-    --color-blue-foreground: #0a0c0d;
+    --color-ink: #f3efe7;
+
+    --color-light: #14120f;
+
+    --color-blue: #9fb3ff;
+
+    --color-blue-hover: #c2cfff;
+
+    --color-blue-foreground: #14120f;
+
     --color-green: #75c870;
+
     --color-yellow: #ffce31;
+
     --color-link: var(--color-blue);
-    --color-surface: #0a0c0d;
-    --color-surface-pure: #111418;
-    --color-surface-subtle: #171b20;
-    --color-surface-muted: #20252b;
-    --color-surface-inverse: #f4f5f7;
-    --color-text: #f4f5f7;
-    --color-text-muted: #b7bec6;
-    --color-text-subtle: #929aa3;
-    --color-text-inverse: #0a0c0d;
-    --color-text-inverse-muted: #3f474f;
-    --color-border: rgb(244 245 247 / 14%);
-    --color-border-strong: rgb(244 245 247 / 28%);
-    --color-border-inverse: rgb(0 0 0 / 22%);
-    --color-focus: #a9c8ff;
+
+    --color-surface: #14120f;
+
+    --color-surface-subtle: #1d1a16;
+
+    --color-surface-muted: #27231e;
+
+    --color-surface-pure: #27231e;
+
+    --color-surface-inverse: #f3efe7;
+
+    --color-surface-anchor: #0d0c0a;
+
+    --color-text: #f3efe7;
+
+    --color-text-muted: #bdb5a8;
+
+    --color-text-subtle: #a39b8e;
+
+    --color-text-inverse: #14120f;
+
+    --color-text-inverse-muted: #4a443b;
+
+    --color-border: #3a352e;
+
+    --color-border-strong: #514a40;
+
+    --color-border-inverse: rgb(20 18 15 / 22%);
+
+    --color-focus: #9fb3ff;
+
     --color-error: #ff958a;
+
     --color-success: #77d3a5;
+
     --color-warning: #f0bd62;
   }
 }
@@ -671,49 +738,38 @@ select:focus-visible {
 }
 
 /*
-  Accents inside dark section bands, in every theme. The light-mode accent
-  colors (#2e8b2b green, #4f46e5 indigo) are tuned for white and fail
-  contrast on the near-black band, so bands use the light-on-dark values.
+  Section bands. Components mark their feature sections with [data-band] and
+  paint them with --color-ink / --color-surface-inverse and the inverse text
+  tokens (they were dark blocks). DESIGN.md asks for tonal levels instead of
+  black blocks, so a band is the inset surface (level 1) with normal text in
+  both themes, separated from the page by tone and a rule.
 */
 [data-band] {
-  --color-ink: var(--color-surface-dark);
-  --color-surface-inverse: var(--color-surface-dark);
-  --color-green: #75c870;
-  --color-blue: #7fb0ff;
-  --color-blue-hover: #a9c8ff;
-  --color-focus: #a9c8ff;
-  --color-link: #7fb0ff;
-}
-
-/*
-  Section bands. Pages mark their black feature sections with [data-band].
-  Those sections paint their background with --color-ink or
-  --color-surface-inverse and their text with the inverse tokens, all of
-  which flip to light values in dark mode, so the bands would turn into
-  bright light-gray blocks in the middle of a dark page. In dark mode, keep
-  them black with light text instead.
-*/
-:root[data-theme="dark"] [data-band] {
-  --color-ink: var(--color-surface-dark);
-  --color-surface-inverse: var(--color-surface-dark);
-  --color-light: #f4f5f7;
-  --color-text-inverse: #f4f5f7;
-  --color-text-inverse-muted: #b7bec6;
-  --color-border-inverse: rgb(244 245 247 / 14%);
+  --color-ink: var(--color-surface-subtle);
+  --color-surface-inverse: var(--color-surface-subtle);
+  --color-light: var(--color-text);
+  --color-text-inverse: var(--color-text);
+  --color-text-inverse-muted: var(--color-text-muted);
+  --color-border-inverse: var(--color-border);
 
   border-block: var(--border-width) solid var(--color-border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) [data-band] {
-    --color-ink: var(--color-surface-dark);
-    --color-surface-inverse: var(--color-surface-dark);
-    --color-light: #f4f5f7;
-    --color-text-inverse: #f4f5f7;
-    --color-text-inverse-muted: #b7bec6;
-    --color-border-inverse: rgb(244 245 247 / 14%);
+/* Buttons in a band paint with the theme's primary pair, which bands don't
+   remap, so a primary action keeps its fill on the inset surface. */
+[data-band] .button.button-primary,
+[data-band] button.button-primary {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground) !important;
+}
 
-    border-block: var(--border-width) solid var(--color-border);
+@media (hover: hover) {
+  [data-band] .button.button-primary:hover,
+  [data-band] button.button-primary:hover {
+    border-color: var(--color-blue);
+    background: var(--color-blue);
+    color: var(--color-blue-foreground) !important;
   }
 }
 

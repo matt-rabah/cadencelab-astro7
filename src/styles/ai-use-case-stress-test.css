@@ -56,13 +56,12 @@
 .note-label,
 .brief-label {
   margin: 0;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   line-height: 1.4;
-  text-transform: uppercase;
 }
 
 .hero-copy h1 {
@@ -221,8 +220,7 @@
   color: var(--color-text-muted);
   font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .field-hint {
@@ -414,7 +412,7 @@
 }
 
 .verdict {
-  border-top: 0.35rem solid var(--color-blue);
+  border-top: 2px solid var(--color-text);
 }
 
 .verdict > p:last-child,
@@ -445,8 +443,7 @@
   font-family: var(--ff-sans);
   font-size: 0.8125rem;
   font-weight: 650;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .brief-limit {
@@ -481,7 +478,7 @@
 }
 
 .method .eyebrow {
-  color: var(--color-green);
+  color: var(--color-text-muted);
 }
 
 .method ol {

@@ -100,8 +100,7 @@
   font-feature-settings: var(--fea-eyebrow);
   font-weight: var(--fw-medium);
   line-height: var(--lh-small);
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .display-heading {
