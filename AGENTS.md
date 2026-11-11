@@ -584,6 +584,12 @@ Check current documentation before relying on memory. Use the source that matche
 | TinaCMS schema and editing                                                              | https://tina.io/docs                                                                 |
 | Draft web standards not yet on MDN (for example WebMCP)                                 | The specification itself                                                             |
 
+This project's Baseline target is Baseline Widely available. Use features
+that have worked across all major browsers for at least 30 months; anything
+newer needs a fallback or progressive enhancement. The Modern Web Guidance
+skill reads this line, and `npx modern-web-guidance@latest legacy-scan src`
+checks existing code for legacy patterns (it reported 0 findings on v1.0.0).
+
 Rules:
 
 - Before using a CSS, HTML, JavaScript, or HTTP feature that may be new or unevenly supported, check its browser compatibility and Baseline status on MDN. Note the result in the pull-request description.
