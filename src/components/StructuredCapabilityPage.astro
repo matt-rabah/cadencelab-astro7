@@ -40,8 +40,19 @@ interface SectionCopy {
   introduction: string;
 }
 
+/**
+ * Layout variants keep the nine capability pages from reading as one
+ * template. They change how the Signals and Evidence sections are arranged,
+ * never the content:
+ * - grid: hairline card grid (default).
+ * - checklist: Signals as a "sound familiar?" list marked with the brand dot.
+ * - editorial: section intro sticks on the left, items stack on the right.
+ */
+type Layout = "grid" | "checklist" | "editorial";
+
 interface Props {
   simplified?: boolean;
+  layout?: Layout;
   meta: {
     title: string;
     description: string;
@@ -79,6 +90,7 @@ interface Props {
 
 const {
   simplified = false,
+  layout = "grid",
   meta,
   hero,
   signals,
@@ -103,7 +115,7 @@ const {
 
   <main
     id="main-content"
-    class:list={["structured-page", { simplified: simplified }]}
+    class:list={["structured-page", `layout-${layout}`, { simplified }]}
     tabindex="-1"
   >
     <section class="structured-hero" aria-labelledby="structured-title">
@@ -201,9 +213,8 @@ const {
 
         <div class="card-grid">
           {
-            signals.items.map((item, index) => (
+            signals.items.map((item) => (
               <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </article>
@@ -343,11 +354,8 @@ const {
             />
           ) : (
             <div class="card-grid">
-              {evidence.items.map((item, index) => (
+              {evidence.items.map((item) => (
                 <article>
-                  <p class="item-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </article>
@@ -392,11 +400,8 @@ const {
               </div>
 
               <div class="failure-list">
-                {failures.items.map((item, index) => (
+                {failures.items.map((item) => (
                   <article>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </article>
@@ -839,7 +844,65 @@ const {
 
   .card-grid h3,
   .failure-list h3 {
-    margin-top: 1.5rem;
+    margin-top: 0;
+  }
+
+  /* Checklist: Signals read as a list the visitor ticks off in their head. */
+  .layout-checklist .signals .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(2rem, 6vw, 5rem);
+    border: 0;
+  }
+
+  .layout-checklist .signals .card-grid article {
+    position: relative;
+    padding: 1.5rem 0 1.5rem 1.75rem;
+    border: 0;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .layout-checklist .signals .card-grid article::before {
+    position: absolute;
+    top: calc(1.5rem + 0.55em);
+    left: 0;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: var(--color-yellow);
+    box-shadow: var(--shadow-hairline);
+    content: "";
+  }
+
+  /* Editorial: the intro holds its place while the items scroll past. */
+  .layout-editorial :is(.signals, .evidence) .section-stack {
+    grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
+    align-items: start;
+    column-gap: clamp(3rem, 8vw, 7rem);
+  }
+
+  .layout-editorial :is(.signals, .evidence) .section-intro-split {
+    position: sticky;
+    top: calc(var(--header-offset, 6rem) + 2rem);
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .layout-editorial :is(.signals, .evidence) .section-intro-split > p {
+    align-self: start;
+  }
+
+  .layout-editorial :is(.signals, .evidence) .card-grid {
+    grid-template-columns: 1fr;
+    border-inline-start: 0;
+  }
+
+  .layout-editorial :is(.signals, .evidence) .card-grid article {
+    padding-inline: 0;
+    border-inline-end: 0;
+  }
+
+  .layout-editorial .evidence :is(.evidence-note, .supporting-details) {
+    grid-column: 2;
   }
 
   .card-grid article > p:last-child,
@@ -1088,6 +1151,18 @@ const {
   }
 
   @media (max-width: 64rem) {
+    .layout-editorial :is(.signals, .evidence) .section-stack {
+      grid-template-columns: 1fr;
+    }
+
+    .layout-editorial :is(.signals, .evidence) .section-intro-split {
+      position: static;
+    }
+
+    .layout-editorial .evidence :is(.evidence-note, .supporting-details) {
+      grid-column: auto;
+    }
+
     .hero-layout,
     .section-intro-split,
     .path-layout,
@@ -1132,7 +1207,8 @@ const {
     .card-grid,
     .framework-grid,
     .failure-list,
-    .diagnostic-grid {
+    .diagnostic-grid,
+    .layout-checklist .signals .card-grid {
       grid-template-columns: 1fr;
     }
 
