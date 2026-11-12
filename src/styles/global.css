@@ -50,14 +50,14 @@
     "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 
   /*
-    Cadence Lab palette (DESIGN.md, section 2). Warm paper and warm graphite
-    instead of pure white and pure black, one action blue, and the logo's
+    Cadence Lab palette (DESIGN.md, section 2). Neutral paper and graphite
+    instead of pure white and pure black (no warm or cool tint), one action blue, and the logo's
     yellow dot as the only accent. Three surface levels per theme:
     page (0), inset (1), paper (2). Neighbouring areas always differ in tone.
   */
-  --color-graphite: #22201c; /* warm near-black: text, dark buttons, footer */
+  --color-graphite: #1f1f1f; /* neutral near-black: text, dark buttons, header, footer */
   --color-ink: var(--color-graphite);
-  --color-light: #faf9f6; /* warm paper */
+  --color-light: #fafafa; /* off-white paper */
   --color-blue: #2a53db; /* action blue: links, focus, primary nav CTA */
   --color-blue-hover: #2147c2;
   --color-blue-foreground: #ffffff;
@@ -67,23 +67,23 @@
 
   /* Surfaces */
   --color-surface: var(--color-light); /* level 0: page */
-  --color-surface-subtle: #edeae3; /* level 1: inset sections, bands */
-  --color-surface-muted: #e4e0d7; /* stronger separation */
+  --color-surface-subtle: #f0f0f0; /* level 1: inset sections, bands */
+  --color-surface-muted: #e6e6e6; /* stronger separation */
   --color-surface-pure: #ffffff; /* level 2: paper panels, cards, forms */
   --color-surface-inverse: var(--color-graphite);
   --color-surface-anchor: var(--color-graphite); /* header and footer */
 
   /* Text */
   --color-text: var(--color-graphite);
-  --color-text-muted: #57524a;
-  --color-text-subtle: #635d54; /* passes 4.5:1 on every light surface */
-  --color-text-inverse: #f6f4ef;
-  --color-text-inverse-muted: #c9c2b6;
+  --color-text-muted: #555555;
+  --color-text-subtle: #616161; /* passes 4.5:1 on every light surface */
+  --color-text-inverse: #f5f5f5;
+  --color-text-inverse-muted: #c8c8c8;
 
   /* Rules */
-  --color-border: #ddd8ce;
-  --color-border-strong: #b9b2a5;
-  --color-border-inverse: rgb(246 244 239 / 22%);
+  --color-border: #dedede;
+  --color-border-strong: #b5b5b5;
+  --color-border-inverse: rgb(245 245 245 / 22%);
   --color-focus: var(--color-blue);
   --color-error: #b42318;
   --color-success: #13683f;
@@ -108,8 +108,8 @@
   --shadow-card-ambient: 0 0 #0000;
   --shadow-card: var(--shadow-hairline), var(--shadow-card-ambient);
   --shadow-overlay:
-    var(--shadow-hairline), 0 4px 8px rgb(34 32 28 / 6%),
-    0 18px 30px rgb(34 32 28 / 12%);
+    var(--shadow-hairline), 0 4px 8px rgb(0 0 0 / 6%),
+    0 18px 30px rgb(0 0 0 / 12%);
   --shadow-sm: var(--shadow-card-ambient);
   /* Concentric corners: radius for an element nested in a padded card. */
   --radius-inner: max(2px, calc(var(--radius-lg) - 0.25rem));
@@ -152,24 +152,24 @@
   /* Shadcn / System Compatibility Tokens */
   --header-offset: 6rem;
   --z-skip-link: 1000;
-  --background: #faf9f6;
-  --foreground: #22201c;
+  --background: #fafafa;
+  --foreground: #1f1f1f;
   --card: #ffffff;
-  --card-foreground: #22201c;
+  --card-foreground: #1f1f1f;
   --popover: #ffffff;
-  --popover-foreground: #22201c;
-  --primary: #22201c;
-  --primary-foreground: #f6f4ef;
-  --secondary: #edeae3;
-  --secondary-foreground: #22201c;
-  --muted: #edeae3;
-  --muted-foreground: #57524a;
-  --accent: #edeae3;
-  --accent-foreground: #22201c;
+  --popover-foreground: #1f1f1f;
+  --primary: #1f1f1f;
+  --primary-foreground: #f5f5f5;
+  --secondary: #f0f0f0;
+  --secondary-foreground: #1f1f1f;
+  --muted: #f0f0f0;
+  --muted-foreground: #555555;
+  --accent: #f0f0f0;
+  --accent-foreground: #1f1f1f;
   --destructive: #b42318;
   --destructive-foreground: #ffffff;
-  --border: #ddd8ce;
-  --input: #b9b2a5;
+  --border: #dedede;
+  --input: #b5b5b5;
   --ring: #2a53db;
   --radius: 0.25rem;
 }
@@ -586,32 +586,32 @@ select:focus-visible {
    ========================================================================== */
 
 :root[data-theme="dark"] {
-  --background: #14120f;
-  --foreground: #f3efe7;
-  --card: #27231e;
-  --card-foreground: #f3efe7;
-  --popover: #27231e;
-  --popover-foreground: #f3efe7;
-  --primary: #f3efe7;
-  --primary-foreground: #14120f;
-  --secondary: #1d1a16;
-  --secondary-foreground: #f3efe7;
-  --muted: #1d1a16;
-  --muted-foreground: #bdb5a8;
-  --destructive-foreground: #14120f;
-  --border: #3a352e;
-  --input: #514a40;
+  --background: #212121;
+  --foreground: #f2f2f2;
+  --card: #333333;
+  --card-foreground: #f2f2f2;
+  --popover: #333333;
+  --popover-foreground: #f2f2f2;
+  --primary: #f2f2f2;
+  --primary-foreground: #212121;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #f2f2f2;
+  --muted: #2a2a2a;
+  --muted-foreground: #bbbbbb;
+  --destructive-foreground: #212121;
+  --border: #3d3d3d;
+  --input: #545454;
   --ring: #9fb3ff;
 
-  --color-ink: #f3efe7;
+  --color-ink: #f2f2f2;
 
-  --color-light: #14120f;
+  --color-light: #212121;
 
   --color-blue: #9fb3ff;
 
   --color-blue-hover: #c2cfff;
 
-  --color-blue-foreground: #14120f;
+  --color-blue-foreground: #212121;
 
   --color-green: #75c870;
 
@@ -619,33 +619,33 @@ select:focus-visible {
 
   --color-link: var(--color-blue);
 
-  --color-surface: #14120f;
+  --color-surface: #212121;
 
-  --color-surface-subtle: #1d1a16;
+  --color-surface-subtle: #2a2a2a;
 
-  --color-surface-muted: #27231e;
+  --color-surface-muted: #333333;
 
-  --color-surface-pure: #27231e;
+  --color-surface-pure: #333333;
 
-  --color-surface-inverse: #f3efe7;
+  --color-surface-inverse: #f2f2f2;
 
-  --color-surface-anchor: #0d0c0a;
+  --color-surface-anchor: #0e0e0e;
 
-  --color-text: #f3efe7;
+  --color-text: #f2f2f2;
 
-  --color-text-muted: #bdb5a8;
+  --color-text-muted: #bbbbbb;
 
-  --color-text-subtle: #a39b8e;
+  --color-text-subtle: #a3a3a3;
 
-  --color-text-inverse: #14120f;
+  --color-text-inverse: #212121;
 
-  --color-text-inverse-muted: #4a443b;
+  --color-text-inverse-muted: #4a4a4a;
 
-  --color-border: #3a352e;
+  --color-border: #3d3d3d;
 
-  --color-border-strong: #514a40;
+  --color-border-strong: #545454;
 
-  --color-border-inverse: rgb(20 18 15 / 22%);
+  --color-border-inverse: rgb(0 0 0 / 22%);
 
   --color-focus: #9fb3ff;
 
@@ -658,32 +658,32 @@ select:focus-visible {
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --background: #14120f;
-    --foreground: #f3efe7;
-    --card: #27231e;
-    --card-foreground: #f3efe7;
-    --popover: #27231e;
-    --popover-foreground: #f3efe7;
-    --primary: #f3efe7;
-    --primary-foreground: #14120f;
-    --secondary: #1d1a16;
-    --secondary-foreground: #f3efe7;
-    --muted: #1d1a16;
-    --muted-foreground: #bdb5a8;
-    --destructive-foreground: #14120f;
-    --border: #3a352e;
-    --input: #514a40;
+    --background: #212121;
+    --foreground: #f2f2f2;
+    --card: #333333;
+    --card-foreground: #f2f2f2;
+    --popover: #333333;
+    --popover-foreground: #f2f2f2;
+    --primary: #f2f2f2;
+    --primary-foreground: #212121;
+    --secondary: #2a2a2a;
+    --secondary-foreground: #f2f2f2;
+    --muted: #2a2a2a;
+    --muted-foreground: #bbbbbb;
+    --destructive-foreground: #212121;
+    --border: #3d3d3d;
+    --input: #545454;
     --ring: #9fb3ff;
 
-    --color-ink: #f3efe7;
+    --color-ink: #f2f2f2;
 
-    --color-light: #14120f;
+    --color-light: #212121;
 
     --color-blue: #9fb3ff;
 
     --color-blue-hover: #c2cfff;
 
-    --color-blue-foreground: #14120f;
+    --color-blue-foreground: #212121;
 
     --color-green: #75c870;
 
@@ -691,33 +691,33 @@ select:focus-visible {
 
     --color-link: var(--color-blue);
 
-    --color-surface: #14120f;
+    --color-surface: #212121;
 
-    --color-surface-subtle: #1d1a16;
+    --color-surface-subtle: #2a2a2a;
 
-    --color-surface-muted: #27231e;
+    --color-surface-muted: #333333;
 
-    --color-surface-pure: #27231e;
+    --color-surface-pure: #333333;
 
-    --color-surface-inverse: #f3efe7;
+    --color-surface-inverse: #f2f2f2;
 
-    --color-surface-anchor: #0d0c0a;
+    --color-surface-anchor: #0e0e0e;
 
-    --color-text: #f3efe7;
+    --color-text: #f2f2f2;
 
-    --color-text-muted: #bdb5a8;
+    --color-text-muted: #bbbbbb;
 
-    --color-text-subtle: #a39b8e;
+    --color-text-subtle: #a3a3a3;
 
-    --color-text-inverse: #14120f;
+    --color-text-inverse: #212121;
 
-    --color-text-inverse-muted: #4a443b;
+    --color-text-inverse-muted: #4a4a4a;
 
-    --color-border: #3a352e;
+    --color-border: #3d3d3d;
 
-    --color-border-strong: #514a40;
+    --color-border-strong: #545454;
 
-    --color-border-inverse: rgb(20 18 15 / 22%);
+    --color-border-inverse: rgb(0 0 0 / 22%);
 
     --color-focus: #9fb3ff;
 
