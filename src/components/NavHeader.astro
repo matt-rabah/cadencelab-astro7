@@ -936,28 +936,42 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 </script>
 
 <style>
-  /* Wordmark visibility follows the resolved document theme. */
-  .wordmark-dark {
-    display: none !important;
-  }
+  /* The header shares the footer's dark anchor in both themes, so it always
+     shows the light-on-dark wordmark. */
   .wordmark-light {
-    display: block !important;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme])) .wordmark-dark {
-      display: block !important;
-    }
-    :global(:root:not([data-theme])) .wordmark-light {
-      display: none !important;
-    }
-  }
-
-  :global(:root[data-theme="dark"]) .wordmark-dark {
-    display: block !important;
-  }
-  :global(:root[data-theme="dark"]) .wordmark-light {
     display: none !important;
+  }
+  .wordmark-dark {
+    display: block !important;
+  }
+
+  /* Dark tokens for the header and everything inside it (menus, mobile
+     drawer, search). The surface is --color-surface-anchor, the same as the
+     footer: graphite in light mode, the deepest charcoal in dark mode. */
+  .site-header {
+    --color-ink: #f3efe7;
+    --color-light: #14120f;
+    --color-blue: #9fb3ff;
+    --color-blue-hover: #c2cfff;
+    --color-blue-foreground: #14120f;
+    --color-green: #75c870;
+    --color-link: var(--color-blue);
+    --color-surface: var(--color-surface-anchor, #22201c);
+    --color-surface-pure: #2c2823;
+    --color-surface-subtle: #2c2823;
+    --color-surface-muted: #36312a;
+    --color-surface-inverse: #f3efe7;
+    --color-text: #f3efe7;
+    --color-text-muted: #c9c2b6;
+    --color-text-subtle: #a39b8e;
+    --color-text-inverse: #14120f;
+    --color-text-inverse-muted: #4a443b;
+    --color-border: rgb(246 244 239 / 14%);
+    --color-border-strong: rgb(246 244 239 / 28%);
+    --color-border-inverse: rgb(20 18 15 / 22%);
+    --color-focus: #9fb3ff;
+
+    color-scheme: dark;
   }
 
   .site-header {

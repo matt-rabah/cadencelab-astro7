@@ -36,11 +36,11 @@ These are the values in `src/styles/global.css`. Where a historical value later 
 
 | Role | Light | Dark |
 |---|---|---|
-| Level 0 · page (`--color-surface`) | `#F6F4EF` warm paper | `#14120F` |
+| Level 0 · page (`--color-surface`) | `#FAF9F6` warm paper | `#14120F` |
 | Level 1 · inset, bands (`--color-surface-subtle`) | `#EDEAE3` | `#1D1A16` |
 | Stronger separation (`--color-surface-muted`) | `#E4E0D7` | `#27231E` |
 | Level 2 · paper, panels, forms (`--color-surface-pure`) | `#FFFFFF` | `#27231E` |
-| Footer anchor (`--color-surface-anchor`) | `#22201C` graphite | `#0D0C0A` |
+| Header and footer anchor (`--color-surface-anchor`) | `#22201C` graphite | `#0D0C0A` |
 | Text (`--color-text`) | `#22201C` | `#F3EFE7` |
 | Muted text | `#57524A` | `#BDB5A8` |
 | Rules | `#DDD8CE` / strong `#B9B2A5` | `#3A352E` / strong `#514A40` |
@@ -54,9 +54,9 @@ Every text pair passes WCAG AA on every surface it sits on in both themes; the s
 1. **Marker:** the checked-in wordmark's yellow dot is the source of truth. No blue marker.
 2. **Action color:** a single blue (`#2A53DB`), darker than the historical `#3565FF` so small links pass 4.5:1 on tinted surfaces. Indigo `#4F46E5` is retired.
 3. **Type:** Graphik only, for every role. Tiempos is out of scope for now.
-4. **Header:** a calm document header on the page surface with a bottom rule, in both themes. No dark toolbar.
+4. **Header:** shares the footer's dark anchor in both themes (Matt's call), so the page is framed top and bottom by the same graphite. Menus and the mobile drawer use dark tokens.
 
-**Surfaces:** sections marked `[data-band]` render as level 1 with normal text in both themes, separated from the page by tone and a rule, never as black blocks. The footer is the one deliberate inverse surface.
+**Surfaces:** sections marked `[data-band]` render as level 1 with normal text in both themes, separated from the page by tone and a rule, never as black blocks. The header and footer are the two deliberate inverse surfaces, always the same color.
 
 **Geometry:** `--radius-sm`/`--radius-md` 4px, `--radius-lg` 8px. No pills. Static content has no shadow; overlays keep `--shadow-overlay`.
 

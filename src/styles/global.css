@@ -57,7 +57,7 @@
   */
   --color-graphite: #22201c; /* warm near-black: text, dark buttons, footer */
   --color-ink: var(--color-graphite);
-  --color-light: #f6f4ef; /* warm paper */
+  --color-light: #faf9f6; /* warm paper */
   --color-blue: #2a53db; /* action blue: links, focus, primary nav CTA */
   --color-blue-hover: #2147c2;
   --color-blue-foreground: #ffffff;
@@ -71,7 +71,7 @@
   --color-surface-muted: #e4e0d7; /* stronger separation */
   --color-surface-pure: #ffffff; /* level 2: paper panels, cards, forms */
   --color-surface-inverse: var(--color-graphite);
-  --color-surface-anchor: var(--color-graphite); /* footer */
+  --color-surface-anchor: var(--color-graphite); /* header and footer */
 
   /* Text */
   --color-text: var(--color-graphite);
@@ -152,7 +152,7 @@
   /* Shadcn / System Compatibility Tokens */
   --header-offset: 6rem;
   --z-skip-link: 1000;
-  --background: #f6f4ef;
+  --background: #faf9f6;
   --foreground: #22201c;
   --card: #ffffff;
   --card-foreground: #22201c;
