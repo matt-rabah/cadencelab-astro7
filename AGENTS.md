@@ -346,7 +346,7 @@ statistic sourced on the page, and FitCheck™ spelled exactly that way.
 `DESIGN.md` at the repository root is the design contract. Read section 0.1
 (implemented decisions) before any visual change. In short:
 
-- warm paper and warm graphite, never pure black blocks or navy
+- neutral paper and graphite (no brown or navy tint), never pure black blocks
 - one action blue (`--color-blue`), the logo's yellow dot as the only accent
 - Graphik for every role
 - three tonal surface levels per theme; neighbouring areas always differ

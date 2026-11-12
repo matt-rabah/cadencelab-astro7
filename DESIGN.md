@@ -32,18 +32,18 @@
 
 These are the values in `src/styles/global.css`. Where a historical value later in this file differs, this section wins.
 
-**Palette: warm paper and warm graphite.** Cadence-specific warm neutrals replace pure white and pure black. They take one principle from Mailchimp (warm ink, not black; white paper on a tinted page) but none of its values, yellow, fonts or shapes.
+**Palette: neutral paper and graphite.** True neutral grays, with no warm (brown) or cool (navy) tint, replace pure white and pure black. A warm palette was tried and rejected as brownish. One principle is kept from the Mailchimp study (a softened near-black instead of black; white paper on a slightly tinted page), but none of its values, yellow, fonts or shapes.
 
 | Role | Light | Dark |
 |---|---|---|
-| Level 0 · page (`--color-surface`) | `#FAF9F6` warm paper | `#14120F` |
-| Level 1 · inset, bands (`--color-surface-subtle`) | `#EDEAE3` | `#1D1A16` |
-| Stronger separation (`--color-surface-muted`) | `#E4E0D7` | `#27231E` |
-| Level 2 · paper, panels, forms (`--color-surface-pure`) | `#FFFFFF` | `#27231E` |
-| Header and footer anchor (`--color-surface-anchor`) | `#22201C` graphite | `#0D0C0A` |
-| Text (`--color-text`) | `#22201C` | `#F3EFE7` |
-| Muted text | `#57524A` | `#BDB5A8` |
-| Rules | `#DDD8CE` / strong `#B9B2A5` | `#3A352E` / strong `#514A40` |
+| Level 0 · page (`--color-surface`) | `#FAFAFA` off-white | `#212121`, lifted so the header and footer frame it |
+| Level 1 · inset, bands (`--color-surface-subtle`) | `#F0F0F0` | `#2A2A2A` |
+| Stronger separation (`--color-surface-muted`) | `#E6E6E6` | `#333333` |
+| Level 2 · paper, panels, forms (`--color-surface-pure`) | `#FFFFFF` | `#333333` |
+| Header and footer anchor (`--color-surface-anchor`) | `#1F1F1F` graphite | `#0E0E0E` |
+| Text (`--color-text`) | `#1F1F1F` | `#F2F2F2` |
+| Muted text | `#555555` | `#BBBBBB` |
+| Rules | `#DEDEDE` / strong `#B5B5B5` | `#3D3D3D` / strong `#545454` |
 | Action blue: links, focus, FitCheck™ CTA | `#2A53DB` | `#9FB3FF` |
 | Logo dot (marker only) | `#FFCE31` | `#FFCE31` |
 

@@ -198,16 +198,16 @@ const isCurrentPage = (href: string): boolean =>
 
 <style>
   .site-footer {
-    /* Warm graphite anchor in light mode, deeper than the page in dark mode
-       (--color-surface-anchor). Text ratios measured on #22201c and #0d0c0a. */
-    --footer-background: var(--color-surface-anchor, #22201c);
-    --footer-heading: #f6f4ef;
-    --footer-text: #ddd7cc; /* 11:1 on #22201c */
-    --footer-muted: #c9c2b6; /* 9.2:1 */
-    --footer-subtle: #a39b8e;
-    --footer-border: rgb(246 244 239 / 16%);
+    /* Graphite anchor in light mode, deeper than the page in dark mode
+       (--color-surface-anchor). Text ratios measured on #1f1f1f and #0e0e0e. */
+    --footer-background: var(--color-surface-anchor, #1f1f1f);
+    --footer-heading: #f5f5f5;
+    --footer-text: #dcdcdc; /* 12:1 on #1f1f1f */
+    --footer-muted: #c8c8c8; /* 9.8:1 */
+    --footer-subtle: #a3a3a3;
+    --footer-border: rgb(245 245 245 / 16%);
     --footer-accent: #9fb3ff;
-    --footer-focus: #f6f4ef;
+    --footer-focus: #f5f5f5;
 
     width: 100%;
     padding: clamp(4rem, 10vw, 7.5rem) var(--page-gutter, 1.5rem)
