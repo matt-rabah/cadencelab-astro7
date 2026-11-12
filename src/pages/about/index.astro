@@ -185,6 +185,7 @@ const engagementRequires = [
         { label: "Official bio", href: "#founder" },
         { label: "Results", href: "#results" },
         { label: "Speaking", href: "#speaking" },
+        { label: "Client words", href: "#client-words" },
         { label: "Point of view", href: "#point-of-view" },
         { label: "How I work", href: "#working-standard" },
         { label: "Fit", href: "#engagement-fit" },
@@ -336,6 +337,50 @@ const engagementRequires = [
             ))
           }
         </ul>
+      </div>
+    </section>
+
+    <section
+      id="client-words"
+      class="client-words"
+      aria-labelledby="client-words-title"
+    >
+      <div class="page-container client-words-layout">
+        <h2 id="client-words-title">In a client’s words.</h2>
+
+        <figure class="testimonial">
+          <blockquote>
+            <p class="testimonial-body">
+              Matt and I met 2 years ago when I was looking for a partner for an
+              Executive Development Program that S&amp;P Global was running in
+              Detroit. At the time, Matt worked at the Shinola store and
+              immediately understood the connection we were trying to build
+              between how the Employee Experience leads to better outcomes for
+              the Customer Experience (EX = CX). He is a strategic thinker who
+              helped us build out a session with Shinola’s CEO and other
+              leadership team members who talked about Shinola’s strategy to
+              engage both employees at their various retail stores around the
+              world and their customers. This presentation was followed by an
+              immersive shopping experience where our participants were able to
+              engage with the Shinola team members to make purchases.
+            </p>
+            <p class="testimonial-pull">
+              Matt is an incredible partner who truly understands how to build
+              cultures that engage both employees and customers.
+            </p>
+          </blockquote>
+          <figcaption>
+            <strong>Stephanie Fritz, EdD</strong>
+            <span>
+              Talent Development &amp; Performance Management, Organizational
+              Effectiveness &amp; Change, Leadership Coach
+            </span>
+            <span class="testimonial-source">
+              Client, S&amp;P Global Executive Development Program. LinkedIn
+              recommendation, December 3, 2025.
+            </span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1295,6 +1340,90 @@ const engagementRequires = [
 
     .system-sequence li:not(:last-child)::after {
       inset-inline-start: 0;
+    }
+  }
+
+  /* Client words: one real recommendation, verbatim and attributed. */
+  .client-words {
+    padding-block: var(--section-space);
+    border-block-start: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .client-words-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: start;
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+
+  .client-words h2 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .testimonial {
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--color-text);
+  }
+
+  .testimonial blockquote {
+    margin: 0;
+  }
+
+  .testimonial-body {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  .testimonial-pull {
+    max-width: 34ch;
+    margin: 1.75rem 0 0;
+    color: var(--color-text);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h3);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .testimonial figcaption {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 1.75rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .testimonial figcaption strong {
+    color: var(--color-text);
+    font-weight: var(--fw-semibold);
+  }
+
+  .testimonial-source {
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 54rem) {
+    .client-words-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .testimonial {
+      border-top-color: CanvasText;
     }
   }
 </style>
