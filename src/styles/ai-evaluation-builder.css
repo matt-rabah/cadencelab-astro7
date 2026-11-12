@@ -56,13 +56,12 @@
 .evaluation-page .note-label,
 .evaluation-page .plan-label {
   margin: 0;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   line-height: 1.4;
-  text-transform: uppercase;
 }
 
 .evaluation-page .hero-copy h1 {
@@ -381,7 +380,7 @@
 }
 
 .evaluation-page .results-header .eyebrow {
-  color: var(--color-green);
+  color: var(--color-text-muted);
 }
 
 .evaluation-page .results-header h2 {
@@ -500,8 +499,7 @@
 .evaluation-page thead th {
   background: var(--color-surface-subtle);
   font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .evaluation-page tbody tr:last-child > * {

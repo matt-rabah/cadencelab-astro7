@@ -622,18 +622,17 @@ const buildStandards = [
   .item-number,
   .status-line span {
     margin: 0;
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
     line-height: 1.4;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     font-feature-settings: var(--fea-graphik);
-    text-transform: uppercase;
   }
 
   .eyebrow-inverse {
-    color: var(--color-green);
+    color: var(--color-text-muted);
   }
 
   h1,
@@ -729,7 +728,7 @@ const buildStandards = [
   .privacy-layout aside {
     padding: clamp(1.5rem, 4vw, 2.25rem);
     border: var(--border-width) solid var(--color-border);
-    border-top: 0.1875rem solid var(--color-blue);
+    border-top: 2px solid var(--color-text);
     background: var(--color-surface-pure);
   }
 
@@ -851,13 +850,14 @@ const buildStandards = [
     line-height: var(--lh-ui);
   }
 
-  /* Light button on the dark roadmap band (global button text uses !important). */
+  /* Primary button on the roadmap band. Bands remap the ink tokens, so use
+     the theme's primary pair (global button text uses !important). */
   .roadmap-action {
     width: fit-content;
     margin-top: 0.75rem;
-    border-color: var(--color-text-inverse);
-    background: var(--color-text-inverse);
-    color: var(--color-surface-dark) !important;
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--primary-foreground) !important;
   }
 
   .standard-list {

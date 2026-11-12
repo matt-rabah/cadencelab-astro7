@@ -198,15 +198,16 @@ const isCurrentPage = (href: string): boolean =>
 
 <style>
   .site-footer {
-    /* APCA Contrast Tokens ($Lc 90+ for text, $Lc 45+ for boundaries) */
-    --footer-background: var(--color-surface-dark, #000504);
-    --footer-heading: #ffffff;
-    --footer-text: #d0dad7; /* APCA $Lc 88 on #000504 */
-    --footer-muted: #aeb9b6; /* APCA $Lc 78 on #000504 */
-    --footer-subtle: #8e9b98;
-    --footer-border: rgb(252 254 255 / 18%);
-    --footer-accent: #7fb0ff;
-    --footer-focus: #ffffff;
+    /* Warm graphite anchor in light mode, deeper than the page in dark mode
+       (--color-surface-anchor). Text ratios measured on #22201c and #0d0c0a. */
+    --footer-background: var(--color-surface-anchor, #22201c);
+    --footer-heading: #f6f4ef;
+    --footer-text: #ddd7cc; /* 11:1 on #22201c */
+    --footer-muted: #c9c2b6; /* 9.2:1 */
+    --footer-subtle: #a39b8e;
+    --footer-border: rgb(246 244 239 / 16%);
+    --footer-accent: #9fb3ff;
+    --footer-focus: #f6f4ef;
 
     width: 100%;
     padding: clamp(4rem, 10vw, 7.5rem) var(--page-gutter, 1.5rem)
@@ -292,7 +293,7 @@ const isCurrentPage = (href: string): boolean =>
   }
 
   .footer-contact-link:hover {
-    color: #ffffff;
+    color: var(--footer-heading);
   }
 
   .footer-contact-link:hover svg {
@@ -306,8 +307,7 @@ const isCurrentPage = (href: string): boolean =>
     font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.4;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0;
     text-align: left;
   }
 

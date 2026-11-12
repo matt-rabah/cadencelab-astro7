@@ -131,7 +131,7 @@ import Layout from "../layouts/Layout.astro";
     padding: 0.5rem 0.75rem;
     border: 1px solid
       color-mix(in srgb, var(--color-green) 45%, var(--color-border));
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
     background: color-mix(
       in srgb,
       var(--color-green) 8%,
@@ -236,7 +236,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .step-number {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: var(--fw-medium);

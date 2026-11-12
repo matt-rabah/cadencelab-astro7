@@ -343,16 +343,20 @@ statistic sourced on the page, and FitCheck™ spelled exactly that way.
 
 ## Styling conventions
 
-Preserve the current Cadence Lab visual direction:
+`DESIGN.md` at the repository root is the design contract. Read section 0.1
+(implemented decisions) before any visual change. In short:
 
-- clean editorial presentation with a strong typography hierarchy
-- restrained color: indigo primary, near-black ink, the logo's yellow dot as
-  the only accent
-- readable desktop and mobile layouts, light and dark mode
-- semantic HTML and accessible focus states
+- warm paper and warm graphite, never pure black blocks or navy
+- one action blue (`--color-blue`), the logo's yellow dot as the only accent
+- Graphik for every role
+- three tonal surface levels per theme; neighbouring areas always differ
+- 4px controls, 8px panels, no pills, no shadows on static content
+- sentence-case, muted labels; no forced uppercase or letter-spacing
+- the Friction Trace as the signature diagram grammar
 
-Avoid decorative gradients, purple or lavender tints, per-card accent colors,
-hover lift on cards, and unrelated UI frameworks.
+Avoid decorative gradients, glass blur, purple or lavender tints, per-card
+accent colors, colored top borders, hover lift on cards, card walls where a
+list or rows would do, and unrelated UI frameworks.
 
 ### Corners, borders, and depth
 
@@ -360,12 +364,13 @@ Use the design tokens in `src/styles/global.css`. Don't hard-code values.
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--radius-sm` / `--radius-md` | 12px | Buttons, inputs, alerts, small panels |
-| `--radius-lg` | 18px | Cards and grouped panels |
-| `--shadow-card` | hairline + ambient | Resting cards |
-| `--shadow-overlay` | hairline + deeper ambient | Menus, dialogs, popovers |
+| `--radius-sm` / `--radius-md` | 4px | Buttons, inputs, chips, small panels |
+| `--radius-lg` | 8px | Panels and the few real cards |
+| `--color-surface` / `-subtle` / `-pure` | levels 0 / 1 / 2 | Page, inset sections and bands, paper panels |
+| `--color-surface-anchor` | graphite | Footer only |
+| `--shadow-card` | hairline only | Resting cards (no ambient shadow) |
+| `--shadow-overlay` | hairline + ambient | Menus, dialogs, popovers |
 | `--shadow-hairline` | 1px ring only | A crisp edge without a border |
-| `--color-surface-dark` | #000504 | Every dark surface: nav, footer, `[data-band]` sections, dark buttons. Never a navy or second black. |
 
 Best practices:
 
@@ -373,8 +378,8 @@ Best practices:
   `box-shadow: var(--shadow-hairline)` (a `0 0 0 1px` ring). Unlike a
   `border`, it doesn't change the box size and stays sharp on low-DPI
   screens. Don't combine a 1px `border` and the hairline ring on one element.
-- **Layered depth.** `--shadow-card` and `--shadow-overlay` stack a hairline
-  with a faint, blurred ambient shadow. Keep shadows subtle; never colored.
+- **Depth by tone.** Static content separates by surface level and rules.
+  Only overlays (`--shadow-overlay`) get a blurred shadow; never colored.
 - **No corner bleed.** A rounded container that holds images, colored
   headers, or full-bleed children needs `overflow: clip` (Baseline since
   2022) so nothing spills past the curve. Don't clip containers that hold
