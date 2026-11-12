@@ -367,7 +367,7 @@ Use the design tokens in `src/styles/global.css`. Don't hard-code values.
 | `--radius-sm` / `--radius-md` | 4px | Buttons, inputs, chips, small panels |
 | `--radius-lg` | 8px | Panels and the few real cards |
 | `--color-surface` / `-subtle` / `-pure` | levels 0 / 1 / 2 | Page, inset sections and bands, paper panels |
-| `--color-surface-anchor` | graphite | Footer only |
+| `--color-surface-anchor` | graphite | Header and footer, always the same |
 | `--shadow-card` | hairline only | Resting cards (no ambient shadow) |
 | `--shadow-overlay` | hairline + ambient | Menus, dialogs, popovers |
 | `--shadow-hairline` | 1px ring only | A crisp edge without a border |
