@@ -116,6 +116,8 @@ import "../../../../styles/ai-use-case-stress-test.css";
           class="stress-test-form"
           method="post"
           action="/resources/ai-tools/use-case-stress-test/"
+          toolname="use_case_stress_test"
+          tooldescription="Stress-test an AI use case against real operational constraints and failure modes"
         >
           <fieldset>
             <legend>
@@ -136,6 +138,7 @@ import "../../../../styles/ai-use-case-stress-test.css";
                 type="text"
                 maxlength="100"
                 aria-describedby="use-case-name-hint"
+                toolparamdescription="Working label for the AI use case (e.g. Account renewal risk triage)"
                 required
               />
             </div>

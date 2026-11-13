@@ -163,6 +163,8 @@ const failureModes = [
           class="evaluation-form"
           method="post"
           action="/resources/ai-tools/ai-evaluation-builder/"
+          toolname="ai_evaluation_builder"
+          tooldescription="Build evaluation criteria and quality rubrics for AI customer service workflows"
         >
           <fieldset>
             <legend>
@@ -183,6 +185,7 @@ const failureModes = [
                 type="text"
                 maxlength="120"
                 aria-describedby="evaluation-name-hint"
+                toolparamdescription="Task-based evaluation name (e.g. Support reply quality)"
                 required
               />
             </div>

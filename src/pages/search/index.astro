@@ -28,7 +28,13 @@ const entries = await getSearchEntries();
 
       <section class="search-interface" aria-labelledby="search-results-title">
         <search>
-          <form action="/search/" method="get" class="page-search-form">
+          <form
+            action="/search/"
+            method="get"
+            class="page-search-form"
+            toolname="search_directory"
+            tooldescription="Search the Cadence Lab directory for diagnostic services, solutions, workflows, and resources"
+          >
             <label for="page-search-input">Search Cadence Lab</label>
             <p id="page-search-hint">
               Try a problem such as dirty data, AI adoption, or broken handoffs.
@@ -44,6 +50,7 @@ const entries = await getSearchEntries();
                 autocapitalize="none"
                 enterkeyhint="search"
                 spellcheck="false"
+                toolparamdescription="Search query to locate customer experience diagnostic services, frameworks, and insights"
                 data-page-search-input
               />
 

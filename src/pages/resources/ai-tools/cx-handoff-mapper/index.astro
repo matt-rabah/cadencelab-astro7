@@ -122,6 +122,8 @@ const initialSteps = [1, 2, 3];
           class="handoff-form"
           method="post"
           action="/resources/ai-tools/cx-handoff-mapper/"
+          toolname="cx_handoff_mapper"
+          tooldescription="Map and analyze handoff friction between customer-facing teams"
         >
           <fieldset class="journey-context">
             <legend>
@@ -143,6 +145,7 @@ const initialSteps = [1, 2, 3];
                 type="text"
                 maxlength="120"
                 aria-describedby="journey-name-hint"
+                toolparamdescription="Journey or workflow name (e.g. Resolve a billing error)"
                 required
               />
             </div>

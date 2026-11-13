@@ -106,6 +106,8 @@ import "../../../../styles/feedback-signal-sorter.css";
           class="feedback-form"
           method="post"
           action="/resources/ai-tools/feedback-signal-sorter/"
+          toolname="feedback_signal_sorter"
+          tooldescription="Sort and categorize customer feedback signals into operating failure themes"
         >
           <fieldset>
             <legend><span>01</span>Describe the sample</legend>
@@ -123,6 +125,7 @@ import "../../../../styles/feedback-signal-sorter.css";
                 type="text"
                 maxlength="120"
                 aria-describedby="analysis-name-hint"
+                toolparamdescription="Analysis name (e.g. Post-purchase survey sample)"
                 required
               />
             </div>

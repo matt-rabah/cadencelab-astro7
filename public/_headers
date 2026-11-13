@@ -65,10 +65,22 @@
 /search-index.json
   X-Robots-Tag: noindex
 
-# ── All pages: block framing by other sites (clickjacking) ──
+# ── All pages: block framing by other sites (clickjacking) and content negotiation ──
 # 'self' (not 'none') keeps TinaCMS visual editing working: the admin frames
 # site pages from the same origin. A <meta> CSP cannot set frame-ancestors,
 # so it must be sent as a header.
 /*
   Content-Security-Policy: frame-ancestors 'self'
   X-Frame-Options: SAMEORIGIN
+  Vary: Accept
+
+# ── Pre-rendered agent markdown paths ──
+/.agent-md/*
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Vary: Accept
+
+/markdown/*
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Vary: Accept

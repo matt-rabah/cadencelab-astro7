@@ -349,6 +349,8 @@ if (turnstileSiteKey) {
         method="post"
         action="/api/fit-check"
         aria-labelledby="fit-check-form-title"
+        toolname="fit_check_assessment"
+        tooldescription="Submit an operating problem and team environment to receive a FitCheck™ diagnostic decision brief"
       >
         <div class="honeypot" aria-hidden="true">
           <label for="website">Website</label>
@@ -410,6 +412,7 @@ if (turnstileSiteKey) {
               aria-describedby="challenge-hint challenge-error"
               aria-errormessage="challenge-error"
               placeholder="Describe what customers or teams experience and where the work gets stuck."
+              toolparamdescription="Describe the customer experience or workflow problem you are trying to solve (minimum 40 characters)"
               required></textarea>
             <p id="challenge-hint" class="field-hint">
               Include who is affected, which teams are involved, and why the
@@ -433,6 +436,7 @@ if (turnstileSiteKey) {
               aria-describedby="impact-hint impact-error"
               aria-errormessage="impact-error"
               placeholder="Examples: reduce repeat contacts, improve adoption, lower service effort, or spot risk earlier."
+              toolparamdescription="Describe what a useful result or outcome would look like (minimum 20 characters)"
               required></textarea>
             <p id="impact-hint" class="field-hint">
               Name a customer, team, or business result you could see or
@@ -480,6 +484,7 @@ if (turnstileSiteKey) {
                   type="radio"
                   name="environment"
                   value="fragmented"
+                  toolparamdescription="Current operating environment: fragmented, transitioning, modern-siloed, established, or uncertain"
                   required
                 />
                 <span
@@ -520,7 +525,13 @@ if (turnstileSiteKey) {
               aria-labelledby="crm-label"
             >
               <label class="radio-option">
-                <input type="radio" name="crm" value="measured" required />
+                <input
+                  type="radio"
+                  name="crm"
+                  value="measured"
+                  toolparamdescription="Usefulness of customer data: measured, active-limited, fragmented, early, no-crm, or unknown"
+                  required
+                />
                 <span>It supports workflows and performance decisions</span>
               </label>
               <label class="radio-option">
@@ -583,7 +594,13 @@ if (turnstileSiteKey) {
               aria-labelledby="cost-area-label"
             >
               <label class="radio-option">
-                <input type="radio" name="cost-area" value="revenue" required />
+                <input
+                  type="radio"
+                  name="cost-area"
+                  value="revenue"
+                  toolparamdescription="Where the problem costs the most: revenue, hours, risk, or unknown"
+                  required
+                />
                 <span>Revenue: churn, missed renewals, or lost deals</span>
               </label>
               <label class="radio-option">
@@ -616,6 +633,7 @@ if (turnstileSiteKey) {
                   type="radio"
                   name="monthly-cost"
                   value="under-5k"
+                  toolparamdescription="Estimated monthly cost: under-5k, 5k-25k, 25k-100k, over-100k, or unknown"
                   required
                 />
                 <span>Under $5k</span>
@@ -649,7 +667,8 @@ if (turnstileSiteKey) {
               rows="3"
               autocomplete="off"
               maxlength="600"
-              placeholder="One or two sentences is plenty."></textarea>
+              placeholder="One or two sentences is plenty."
+              toolparamdescription="Consequences if the problem remains unaddressed for 12 months"></textarea>
           </div>
 
           <div class="input-group">
@@ -663,7 +682,13 @@ if (turnstileSiteKey) {
               aria-labelledby="budget-label"
             >
               <label class="radio-option">
-                <input type="radio" name="budget" value="yes" required />
+                <input
+                  type="radio"
+                  name="budget"
+                  value="yes"
+                  toolparamdescription="Budget status: yes, coming, make-case, or no"
+                  required
+                />
                 <span>Yes</span>
               </label>
               <label class="radio-option">
@@ -692,7 +717,13 @@ if (turnstileSiteKey) {
               aria-labelledby="leadership-label"
             >
               <label class="radio-option">
-                <input type="radio" name="leadership" value="yes" required />
+                <input
+                  type="radio"
+                  name="leadership"
+                  value="yes"
+                  toolparamdescription="Leadership sponsorship across teams: yes, developing, or no"
+                  required
+                />
                 <span>Yes, an accountable sponsor is involved</span>
               </label>
 
@@ -724,6 +755,7 @@ if (turnstileSiteKey) {
                   type="radio"
                   name="change-readiness"
                   value="yes"
+                  toolparamdescription="Organizational willingness to change workflows: yes, limited, or no"
                   required
                 />
                 <span>Yes, workflow changes are within scope</span>
@@ -775,6 +807,7 @@ if (turnstileSiteKey) {
                 type="text"
                 autocomplete="name"
                 maxlength="100"
+                toolparamdescription="Contact person full name"
                 required
               />
             </div>
@@ -791,6 +824,7 @@ if (turnstileSiteKey) {
                 maxlength="254"
                 aria-describedby="email-hint email-error"
                 aria-errormessage="email-error"
+                toolparamdescription="Work email address for receiving the FitCheck™ decision brief"
                 required
               />
               <p id="email-hint" class="field-hint">
@@ -812,6 +846,7 @@ if (turnstileSiteKey) {
                 type="text"
                 autocomplete="organization"
                 maxlength="120"
+                toolparamdescription="Company or organization name"
                 required
               />
             </div>
@@ -825,6 +860,7 @@ if (turnstileSiteKey) {
                 type="text"
                 autocomplete="organization-title"
                 maxlength="120"
+                toolparamdescription="Job role or title"
               />
             </div>
           </div>
@@ -840,7 +876,8 @@ if (turnstileSiteKey) {
               name="additional-context"
               rows="4"
               maxlength="1000"
-              autocomplete="off"></textarea>
+              autocomplete="off"
+              toolparamdescription="Additional context about systems, timing, or constraints (optional)"></textarea>
           </div>
 
           <div class="step-actions">

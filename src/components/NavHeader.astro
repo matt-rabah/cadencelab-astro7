@@ -146,7 +146,13 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     <div class="header-navigation">
       <div class="utility-row">
         <search class="site-search">
-          <form class="search-form" action="/search/" method="get">
+          <form
+            class="search-form"
+            action="/search/"
+            method="get"
+            toolname="site_search"
+            tooldescription="Search Cadence Lab across services, solutions, diagnostic workflows, and insights"
+          >
             <label class="visually-hidden" for="desktop-site-search">
               Search Cadence Lab
             </label>
@@ -158,6 +164,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               name="q"
               placeholder="Search the site"
               aria-keyshortcuts="Meta+K Control+K"
+              toolparamdescription="Search keyword or phrase across customer experience operating problems, frameworks, and diagnostic services"
             />
 
             <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
@@ -474,7 +481,13 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
   >
     <div class="mobile-navigation-inner">
       <search class="mobile-search">
-        <form class="mobile-search-form" action="/search/" method="get">
+        <form
+          class="mobile-search-form"
+          action="/search/"
+          method="get"
+          toolname="mobile_site_search"
+          tooldescription="Search Cadence Lab for diagnostic services, solutions, and insights"
+        >
           <label class="visually-hidden" for="mobile-site-search">
             Search Cadence Lab
           </label>
@@ -484,6 +497,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             type="search"
             name="q"
             placeholder="Search the site"
+            toolparamdescription="Search keyword or topic"
           />
           <button class="mobile-search-submit" type="submit">
             <span class="visually-hidden">Submit search</span>

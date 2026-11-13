@@ -109,6 +109,8 @@ import "../../../../styles/service-recovery-planner.css";
           class="feedback-form recovery-form"
           method="post"
           action="/resources/ai-tools/service-recovery-planner/"
+          toolname="service_recovery_planner"
+          tooldescription="Plan operational recovery workflows for customer experience and service failures"
         >
           <fieldset>
             <legend><span>01</span>Describe the failure</legend>
@@ -126,6 +128,7 @@ import "../../../../styles/service-recovery-planner.css";
                 type="text"
                 maxlength="120"
                 aria-describedby="plan-name-hint"
+                toolparamdescription="Recovery plan name (e.g. Delayed onboarding recovery)"
                 required
               />
             </div>
