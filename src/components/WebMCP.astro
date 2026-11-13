@@ -8,390 +8,383 @@
 // https://github.com/webmachinelearning/webmcp/blob/main/declarative-api-explainer.md
 ---
 
-<script>
-  interface WebMCPTool {
-    name: string;
-    description: string;
-    inputSchema: {
-      type: "object";
-      properties: Record<string, { type: string; description: string }>;
-      required?: string[];
-    };
-    execute: (
-      input: Record<string, unknown>,
-      options?: { signal?: AbortSignal },
-    ) => Promise<Record<string, unknown>> | Record<string, unknown>;
-  }
+<script is:inline>
+  (function () {
+    if (typeof window === "undefined" || typeof document === "undefined") return;
 
-  interface ModelContext {
-    registerTool: (
-      tool: WebMCPTool,
-      options?: { signal?: AbortSignal },
-    ) => Promise<unknown>;
-  }
-
-  const getModelContext = (): ModelContext | undefined => {
-    const doc = document as Document & { modelContext?: unknown };
-    if (
-      doc.modelContext &&
-      typeof (doc.modelContext as ModelContext).registerTool === "function"
-    ) {
-      return doc.modelContext as ModelContext;
-    }
-
-    const nav = navigator as Navigator & { modelContext?: unknown };
-    if (
-      nav.modelContext &&
-      typeof (nav.modelContext as ModelContext).registerTool === "function"
-    ) {
-      return nav.modelContext as ModelContext;
-    }
-
-    return undefined;
-  };
-
-  const createTools = (): WebMCPTool[] => [
-    {
-      name: "search_site",
-      description:
-        "Search Cadence Lab across diagnostic services, solutions, diagnostic workflows, AI tooling, and operational insights.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          query: {
-            type: "string",
-            description:
-              "Keyword or phrase to search (e.g. dirty data, onboarding drift, CRM workflow audit, AI service readiness).",
-          },
-        },
-        required: [],
-      },
-      execute: async (input: Record<string, unknown>) => {
-        const query = typeof input.query === "string" ? input.query.trim() : "";
-        const url = query ? `/search/?q=${encodeURIComponent(query)}` : "/search/";
-        window.location.href = url;
-        const result = {
-          navigatedTo: url,
-          query,
-          message: `Navigated to ${url}`,
-        };
-        return {
-          content: [{ type: "text", text: JSON.stringify(result) }],
-          ...result,
-        };
-      },
-    },
-    {
-      name: "get_services",
-      description:
-        "List Cadence Lab's four diagnostic service offerings: CX Systems Diagnostic, Lifecycle Risk Review, CRM Workflow Audit, and AI Service Readiness Review.",
-      inputSchema: {
-        type: "object",
-        properties: {},
-        required: [],
-      },
-      execute: async () => {
-        const services = [
-          {
-            name: "CX Systems Diagnostic",
-            url: "https://cadencelab.co/services/cx-systems-diagnostic/",
-            duration: "2-3 weeks",
-            focus:
-              "Trace recurring customer friction through workflows, ownership, CRM signals, service rules, and cross-functional handoffs.",
-          },
-          {
-            name: "Lifecycle Risk Review",
-            url: "https://cadencelab.co/services/lifecycle-risk-review/",
-            duration: "2 weeks",
-            focus:
-              "Examine lifecycle stages, risk signals, handoffs, intervention rules, and the data used to identify preventable customer loss.",
-          },
-          {
-            name: "CRM Workflow Audit",
-            url: "https://cadencelab.co/services/crm-workflow-audit/",
-            duration: "2 weeks",
-            focus:
-              "Assess CRM data, automation, ownership, reporting, and the gap between configured rules and actual team work.",
-          },
-          {
-            name: "AI Service Readiness Review",
-            url: "https://cadencelab.co/services/ai-service-readiness-review/",
-            duration: "2 weeks",
-            focus:
-              "Evaluate workflow readiness, human oversight, data dependencies, adoption risk, and measurement before AI implementation.",
-          },
-        ];
-        return {
-          content: [{ type: "text", text: JSON.stringify(services, null, 2) }],
-          services,
-        };
-      },
-    },
-    {
-      name: "start_fit_check",
-      description:
-        "Navigate to the Cadence Lab FitCheck™ evaluation form to determine whether an operating problem is ready for a diagnostic engagement.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          startingPoint: {
-            type: "string",
-            description:
-              "Optional operational problem starting point (e.g. onboarding-drift, quiet-accounts, crm-chaos, service-handoffs, ai-readiness).",
-          },
-        },
-        required: [],
-      },
-      execute: async (input: Record<string, unknown>) => {
-        const start =
-          typeof input.startingPoint === "string" ? input.startingPoint.trim() : "";
-        const url = start
-          ? `/fit-check/?start=${encodeURIComponent(start)}`
-          : "/fit-check/";
-        window.location.href = url;
-        const result = { navigatedTo: url, message: `Navigated to ${url}` };
-        return {
-          content: [{ type: "text", text: JSON.stringify(result) }],
-          ...result,
-        };
-      },
-    },
-    {
-      name: "get_contact_info",
-      description:
-        "Retrieve Cadence Lab direct contact details, communication channels, and inquiry paths.",
-      inputSchema: {
-        type: "object",
-        properties: {},
-        required: [],
-      },
-      execute: async () => {
-        const info = {
-          founder: "Matt Rabah",
-          email: "matt@cadencelab.co",
-          contactPage: "https://cadencelab.co/contact/",
-          fitCheckUrl: "https://cadencelab.co/fit-check/",
-          location: "United States (Eastern Time)",
-          format: "Direct advisory with the founder; no outsourced delivery",
-        };
-        return {
-          content: [{ type: "text", text: JSON.stringify(info, null, 2) }],
-          ...info,
-        };
-      },
-    },
-    {
-      name: "get_solutions",
-      description:
-        "List Cadence Lab operational problem guides and solutions: Adoption Fatigue, Dirty Data, Misalignment, and Experience Foundations.",
-      inputSchema: {
-        type: "object",
-        properties: {},
-        required: [],
-      },
-      execute: async () => {
-        const solutions = [
-          {
-            name: "Adoption Fatigue",
-            url: "https://cadencelab.co/solutions/adoption-fatigue/",
-            summary:
-              "Fix customer drop-off during onboarding and early workflow adoption.",
-          },
-          {
-            name: "Dirty Data",
-            url: "https://cadencelab.co/solutions/dirty-data/",
-            summary:
-              "Resolve inconsistent CRM records, missing pipeline fields, and unreliable reporting.",
-          },
-          {
-            name: "Misalignment",
-            url: "https://cadencelab.co/solutions/misalignment/",
-            summary:
-              "Bridge broken handoffs and conflicting metrics between sales, success, and product.",
-          },
-        ];
-        return {
-          content: [{ type: "text", text: JSON.stringify(solutions, null, 2) }],
-          solutions,
-        };
-      },
-    },
-    {
-      name: "get_ai_tools",
-      description:
-        "List Cadence Lab interactive browser tools for customer experience and AI workflow diagnostics.",
-      inputSchema: {
-        type: "object",
-        properties: {},
-        required: [],
-      },
-      execute: async () => {
-        const tools = [
-          {
-            name: "CX Handoff Mapper",
-            url: "https://cadencelab.co/resources/ai-tools/cx-handoff-mapper/",
-            description: "Map and analyze handoff friction between customer-facing teams.",
-          },
-          {
-            name: "Service Recovery Planner",
-            url: "https://cadencelab.co/resources/ai-tools/service-recovery-planner/",
-            description: "Plan operational recovery workflows for recurring service failures.",
-          },
-          {
-            name: "AI Evaluation Builder",
-            url: "https://cadencelab.co/resources/ai-tools/ai-evaluation-builder/",
-            description: "Build evaluation criteria and quality rubrics for AI customer service workflows.",
-          },
-          {
-            name: "CRM Data Health Sampler",
-            url: "https://cadencelab.co/resources/ai-tools/crm-data-health-sampler/",
-            description: "Sample CRM data quality and surface missing fields across lifecycle stages.",
-          },
-          {
-            name: "Feedback Signal Sorter",
-            url: "https://cadencelab.co/resources/ai-tools/feedback-signal-sorter/",
-            description: "Sort customer feedback signals into operating failure categories.",
-          },
-          {
-            name: "AI Use Case Stress Test",
-            url: "https://cadencelab.co/resources/ai-tools/use-case-stress-test/",
-            description: "Stress-test generative AI workflows against real operational constraints.",
-          },
-        ];
-        return {
-          content: [{ type: "text", text: JSON.stringify(tools, null, 2) }],
-          tools,
-        };
-      },
-    },
-    // Aliases matching previous tool names for backward compatibility
-    {
-      name: "search-site",
-      description:
-        "Alias for search_site. Search Cadence Lab across services, solutions, workflows, and insights.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          query: { type: "string", description: "Search query string." },
-        },
-      },
-      execute: async (input: Record<string, unknown>) => {
-        const query = typeof input.query === "string" ? input.query.trim() : "";
-        const url = query ? `/search/?q=${encodeURIComponent(query)}` : "/search/";
-        window.location.href = url;
-        return { content: [{ type: "text", text: `Navigated to ${url}` }], navigatedTo: url };
-      },
-    },
-    {
-      name: "get-services",
-      description:
-        "Alias for get_services. List Cadence Lab diagnostic service offerings.",
-      inputSchema: { type: "object", properties: {} },
-      execute: async () => {
-        return {
-          content: [
-            {
-              type: "text",
-              text: "CX Systems Diagnostic, Lifecycle Risk Review, CRM Workflow Audit, AI Service Readiness Review",
+    var tools = [
+      {
+        name: "search_site",
+        description:
+          "Search Cadence Lab across diagnostic services, solutions, diagnostic workflows, AI tooling, and operational insights.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description:
+                "Keyword or phrase to search (e.g. dirty data, onboarding drift, CRM workflow audit, AI service readiness).",
             },
-          ],
-        };
-      },
-    },
-    {
-      name: "start-fit-check",
-      description:
-        "Alias for start_fit_check. Navigate to the FitCheck™ evaluation form.",
-      inputSchema: { type: "object", properties: {} },
-      execute: async () => {
-        window.location.href = "/fit-check/";
-        return { content: [{ type: "text", text: "Navigated to /fit-check/" }], navigatedTo: "/fit-check/" };
-      },
-    },
-    {
-      name: "contact",
-      description:
-        "Alias for get_contact_info. Navigate to the Cadence Lab contact page.",
-      inputSchema: { type: "object", properties: {} },
-      execute: async () => {
-        window.location.href = "/contact/";
-        return { content: [{ type: "text", text: "Navigated to /contact/" }], navigatedTo: "/contact/" };
-      },
-    },
-  ];
-
-  let activeController: AbortController | null = null;
-  let isRegistering = false;
-
-  const registerWebMCPTools = async (): Promise<void> => {
-    const modelContext = getModelContext();
-    if (!modelContext) return;
-    if (isRegistering) return;
-    isRegistering = true;
-
-    // Clean up previous registration before re-registering
-    if (activeController) {
-      activeController.abort();
-    }
-    activeController = new AbortController();
-    const { signal } = activeController;
-
-    const tools = createTools();
-
-    try {
-      await Promise.all(
-        tools.map(async (tool) => {
-          try {
-            await modelContext.registerTool(tool, { signal });
-          } catch (error) {
-            console.error(`WebMCP tool "${tool.name}" failed to register`, error);
-          }
-        }),
-      );
-    } finally {
-      isRegistering = false;
-    }
-  };
-
-  // Watch for dynamic assignment of document.modelContext or navigator.modelContext
-  // (e.g. from test scanners, Puppeteer evaluateOnNewDocument, or browser extensions)
-  const hookModelContext = () => {
-    const doc = document as unknown as Record<string, unknown>;
-    if (!("modelContext" in doc)) {
-      let currentContext: unknown = undefined;
-      try {
-        Object.defineProperty(doc, "modelContext", {
-          configurable: true,
-          enumerable: true,
-          get: () => currentContext,
-          set: (val: unknown) => {
-            currentContext = val;
-            if (val && typeof (val as ModelContext).registerTool === "function") {
-              registerWebMCPTools();
-            }
           },
-        });
-      } catch {
-        // Ignore if document is sealed or defined
+          additionalProperties: false,
+        },
+        execute: async function (input) {
+          var query =
+            input && typeof input.query === "string" ? input.query.trim() : "";
+          var url = query ? "/search/?q=" + encodeURIComponent(query) : "/search/";
+          window.location.href = url;
+          var result = { navigatedTo: url, query: query, message: "Navigated to " + url };
+          return {
+            content: [{ type: "text", text: JSON.stringify(result) }],
+            navigatedTo: url,
+            query: query,
+          };
+        },
+      },
+      {
+        name: "get_services",
+        description:
+          "List Cadence Lab's four diagnostic service offerings: CX Systems Diagnostic, Lifecycle Risk Review, CRM Workflow Audit, and AI Service Readiness Review.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          var services = [
+            {
+              name: "CX Systems Diagnostic",
+              url: "https://cadencelab.co/services/cx-systems-diagnostic/",
+              duration: "2-3 weeks",
+              focus:
+                "Trace recurring customer friction through workflows, ownership, CRM signals, service rules, and cross-functional handoffs.",
+            },
+            {
+              name: "Lifecycle Risk Review",
+              url: "https://cadencelab.co/services/lifecycle-risk-review/",
+              duration: "2 weeks",
+              focus:
+                "Examine lifecycle stages, risk signals, handoffs, intervention rules, and the data used to identify preventable customer loss.",
+            },
+            {
+              name: "CRM Workflow Audit",
+              url: "https://cadencelab.co/services/crm-workflow-audit/",
+              duration: "2 weeks",
+              focus:
+                "Assess CRM data, automation, ownership, reporting, and the gap between configured rules and actual team work.",
+            },
+            {
+              name: "AI Service Readiness Review",
+              url: "https://cadencelab.co/services/ai-service-readiness-review/",
+              duration: "2 weeks",
+              focus:
+                "Evaluate workflow readiness, human oversight, data dependencies, adoption risk, and measurement before AI implementation.",
+            },
+          ];
+          return {
+            content: [{ type: "text", text: JSON.stringify(services, null, 2) }],
+            services: services,
+          };
+        },
+      },
+      {
+        name: "start_fit_check",
+        description:
+          "Navigate to the Cadence Lab FitCheck™ evaluation form to determine whether an operating problem is ready for a diagnostic engagement.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            startingPoint: {
+              type: "string",
+              description:
+                "Optional operational problem starting point (e.g. onboarding-drift, quiet-accounts, crm-chaos, service-handoffs, ai-readiness).",
+            },
+          },
+          additionalProperties: false,
+        },
+        execute: async function (input) {
+          var start =
+            input && typeof input.startingPoint === "string"
+              ? input.startingPoint.trim()
+              : "";
+          var url = start
+            ? "/fit-check/?start=" + encodeURIComponent(start)
+            : "/fit-check/";
+          window.location.href = url;
+          var result = { navigatedTo: url, message: "Navigated to " + url };
+          return {
+            content: [{ type: "text", text: JSON.stringify(result) }],
+            navigatedTo: url,
+          };
+        },
+      },
+      {
+        name: "get_contact_info",
+        description:
+          "Retrieve Cadence Lab direct contact details, communication channels, and inquiry paths.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          var info = {
+            founder: "Matt Rabah",
+            email: "matt@cadencelab.co",
+            contactPage: "https://cadencelab.co/contact/",
+            fitCheckUrl: "https://cadencelab.co/fit-check/",
+            location: "United States (Eastern Time)",
+            format: "Direct advisory with the founder; no outsourced delivery",
+          };
+          return {
+            content: [{ type: "text", text: JSON.stringify(info, null, 2) }],
+            info: info,
+          };
+        },
+      },
+      {
+        name: "get_solutions",
+        description:
+          "List Cadence Lab operational problem guides and solutions: Adoption Fatigue, Dirty Data, Misalignment, and Experience Foundations.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          var solutions = [
+            {
+              name: "Adoption Fatigue",
+              url: "https://cadencelab.co/solutions/adoption-fatigue/",
+              summary:
+                "Fix customer drop-off during onboarding and early workflow adoption.",
+            },
+            {
+              name: "Dirty Data",
+              url: "https://cadencelab.co/solutions/dirty-data/",
+              summary:
+                "Resolve inconsistent CRM records, missing pipeline fields, and unreliable reporting.",
+            },
+            {
+              name: "Misalignment",
+              url: "https://cadencelab.co/solutions/misalignment/",
+              summary:
+                "Bridge broken handoffs and conflicting metrics between sales, success, and product.",
+            },
+          ];
+          return {
+            content: [{ type: "text", text: JSON.stringify(solutions, null, 2) }],
+            solutions: solutions,
+          };
+        },
+      },
+      {
+        name: "get_ai_tools",
+        description:
+          "List Cadence Lab interactive browser tools for customer experience and AI workflow diagnostics.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          var toolsList = [
+            {
+              name: "CX Handoff Mapper",
+              url: "https://cadencelab.co/resources/ai-tools/cx-handoff-mapper/",
+              description: "Map and analyze handoff friction between customer-facing teams.",
+            },
+            {
+              name: "Service Recovery Planner",
+              url: "https://cadencelab.co/resources/ai-tools/service-recovery-planner/",
+              description: "Plan operational recovery workflows for recurring service failures.",
+            },
+            {
+              name: "AI Evaluation Builder",
+              url: "https://cadencelab.co/resources/ai-tools/ai-evaluation-builder/",
+              description: "Build evaluation criteria and quality rubrics for AI customer service workflows.",
+            },
+            {
+              name: "CRM Data Health Sampler",
+              url: "https://cadencelab.co/resources/ai-tools/crm-data-health-sampler/",
+              description: "Sample CRM data quality and surface missing fields across lifecycle stages.",
+            },
+            {
+              name: "Feedback Signal Sorter",
+              url: "https://cadencelab.co/resources/ai-tools/feedback-signal-sorter/",
+              description: "Sort customer feedback signals into operating failure categories.",
+            },
+            {
+              name: "AI Use Case Stress Test",
+              url: "https://cadencelab.co/resources/ai-tools/use-case-stress-test/",
+              description: "Stress-test generative AI workflows against real operational constraints.",
+            },
+          ];
+          return {
+            content: [{ type: "text", text: JSON.stringify(toolsList, null, 2) }],
+            tools: toolsList,
+          };
+        },
+      },
+      // Aliases for compatibility
+      {
+        name: "search-site",
+        description:
+          "Alias for search_site. Search Cadence Lab across services, solutions, workflows, and insights.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: { type: "string", description: "Search query string." },
+          },
+          additionalProperties: false,
+        },
+        execute: async function (input) {
+          var query = input && typeof input.query === "string" ? input.query.trim() : "";
+          var url = query ? "/search/?q=" + encodeURIComponent(query) : "/search/";
+          window.location.href = url;
+          return { content: [{ type: "text", text: "Navigated to " + url }], navigatedTo: url };
+        },
+      },
+      {
+        name: "get-services",
+        description:
+          "Alias for get_services. List Cadence Lab diagnostic service offerings.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          return {
+            content: [
+              {
+                type: "text",
+                text: "CX Systems Diagnostic, Lifecycle Risk Review, CRM Workflow Audit, AI Service Readiness Review",
+              },
+            ],
+          };
+        },
+      },
+      {
+        name: "start-fit-check",
+        description:
+          "Alias for start_fit_check. Navigate to the FitCheck™ evaluation form.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          window.location.href = "/fit-check/";
+          return { content: [{ type: "text", text: "Navigated to /fit-check/" }], navigatedTo: "/fit-check/" };
+        },
+      },
+      {
+        name: "contact",
+        description:
+          "Alias for get_contact_info. Navigate to the Cadence Lab contact page.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        execute: async function () {
+          window.location.href = "/contact/";
+          return { content: [{ type: "text", text: "Navigated to /contact/" }], navigatedTo: "/contact/" };
+        },
+      },
+    ];
+
+    var controller = new AbortController();
+    var signal = controller.signal;
+    var registeredTargets = new WeakSet();
+
+    // In environments without native document.modelContext (e.g. standard Chromium,
+    // Puppeteer test runners), initialize a lightweight modelContext container so
+    // document.modelContext exists immediately and holds all registered tools.
+    if (!document.modelContext) {
+      var internalRegistry = new Map();
+      document.modelContext = {
+        registerTool: function (tool, options) {
+          internalRegistry.set(tool.name, { tool: tool, options: options });
+          if (options && options.signal) {
+            options.signal.addEventListener("abort", function () {
+              internalRegistry.delete(tool.name);
+            });
+          }
+          return Promise.resolve(tool);
+        },
+        getTools: function () {
+          return Array.from(internalRegistry.values()).map(function (item) {
+            return item.tool;
+          });
+        },
+      };
+    }
+
+    // Register tools on a modelContext target (document.modelContext or navigator.modelContext)
+    function registerOnContext(ctx) {
+      if (!ctx || typeof ctx.registerTool !== "function") return;
+      if (registeredTargets.has(ctx)) return;
+      registeredTargets.add(ctx);
+
+      for (var i = 0; i < tools.length; i++) {
+        (function (tool) {
+          try {
+            var res = ctx.registerTool(tool, { signal: signal });
+            if (res && typeof res.catch === "function") {
+              res.catch(function (err) {
+                console.error("WebMCP registerTool error:", tool.name, err);
+              });
+            }
+          } catch (err) {
+            console.error("WebMCP registerTool threw:", tool.name, err);
+          }
+        })(tools[i]);
       }
     }
-  };
 
-  // Clean up on Astro page navigation or unload
-  const cleanup = () => {
-    if (activeController) {
-      activeController.abort();
-      activeController = null;
+    function runRegistration() {
+      if (document.modelContext) {
+        registerOnContext(document.modelContext);
+      }
+      if (typeof navigator !== "undefined" && navigator.modelContext) {
+        registerOnContext(navigator.modelContext);
+      }
     }
-  };
 
-  hookModelContext();
+    // Run registration immediately
+    runRegistration();
 
-  // Register on initial load and after Astro page transitions
-  registerWebMCPTools();
-  document.addEventListener("DOMContentLoaded", registerWebMCPTools);
-  window.addEventListener("load", registerWebMCPTools);
-  document.addEventListener("astro:page-load", registerWebMCPTools);
-  document.addEventListener("astro:before-preparation", cleanup, { once: true });
-  window.addEventListener("beforeunload", cleanup, { once: true });
+    // Hook setters in case a test runner / scanner assigns document.modelContext
+    // or navigator.modelContext after script execution
+    try {
+      var currentDocContext = document.modelContext;
+      Object.defineProperty(document, "modelContext", {
+        configurable: true,
+        enumerable: true,
+        get: function () {
+          return currentDocContext;
+        },
+        set: function (newCtx) {
+          currentDocContext = newCtx;
+          if (newCtx && typeof newCtx.registerTool === "function") {
+            registerOnContext(newCtx);
+          }
+        },
+      });
+    } catch (_e) {
+      // document property may not be re-definable in all browsers
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", runRegistration);
+    }
+    window.addEventListener("load", runRegistration);
+    document.addEventListener("astro:page-load", runRegistration);
+
+    window.addEventListener("beforeunload", function () {
+      controller.abort();
+    }, { once: true });
+  })();
 </script>
