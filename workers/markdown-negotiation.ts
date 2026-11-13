@@ -1,7 +1,5 @@
 type Env = {
   UPSTREAM_ORIGIN?: string;
-  AGENT_MARKDOWN_ORIGIN?: string;
-  AGENT_MARKDOWN_PREFIX?: string;
   DEFAULT_CONTENT_SIGNAL?: string;
 };
 
@@ -180,11 +178,6 @@ async function handleRevoke(request: Request): Promise<Response> {
   });
 }
 
-// DEMONSTRATION ONLY. The agent identity/token endpoints show the Auth.md and
-// OAuth discovery flow; they authenticate nothing. Tokens are issued to any
-// caller, never stored, and this check only looks at the prefix. Never put
-// non-public data or actions behind this check: real protection needs issued
-// tokens that are stored or signed and then verified.
 function handleProtectedExample(request: Request, origin: string): Response {
   if (request.method !== "GET") {
     return jsonResponse(405, {
@@ -245,8 +238,15 @@ function extractMetaValue(html: string, name: string): string | null {
 }
 
 function extractFrontmatter(html: string): string {
-  const title = extractMetaValue(html, "title") ?? extractMetaValue(html, "og:title") ?? "";
-  const description = extractMetaValue(html, "description") ?? extractMetaValue(html, "og:description") ?? "";
+  const title =
+    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/<[^>]+>/g, "").trim() ||
+    extractMetaValue(html, "title") ||
+    extractMetaValue(html, "og:title") ||
+    "";
+  const description =
+    extractMetaValue(html, "description") ||
+    extractMetaValue(html, "og:description") ||
+    "";
   const image = extractMetaValue(html, "og:image") ?? "";
 
   const rows: string[] = [];
@@ -329,72 +329,6 @@ function isMarkdownRequested(request: Request): boolean {
   return /text\/markdown/i.test(accept);
 }
 
-async function fetchUpstream(request: Request, env: Env): Promise<Response> {
-  const url = new URL(request.url);
-  const upstreamOrigin = env.UPSTREAM_ORIGIN ?? DEFAULT_ORIGIN;
-  const upstreamUrl = new URL(url.pathname + url.search, upstreamOrigin);
-
-  const headers = new Headers(request.headers);
-  headers.set("accept", "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8");
-  headers.delete("host");
-
-  return fetch(
-    new Request(upstreamUrl, {
-      method: request.method,
-      headers,
-      body:
-        request.method === "GET" || request.method === "HEAD"
-          ? undefined
-          : request.body,
-      redirect: "follow",
-    }),
-  );
-}
-
-function toArtifactPath(pathname: string): string {
-  const normalized = pathname === "/" ? "/index.md" : pathname.endsWith("/") ? `${pathname}index.md` : `${pathname}.md`;
-  return normalized.replace(/\/+/g, "/");
-}
-
-async function fetchGeneratedMarkdown(request: Request, env: Env): Promise<Response | null> {
-  const url = new URL(request.url);
-  const origin = env.AGENT_MARKDOWN_ORIGIN ?? env.UPSTREAM_ORIGIN ?? DEFAULT_ORIGIN;
-  const prefix = env.AGENT_MARKDOWN_PREFIX ?? "/.agent-md";
-  const artifactUrl = new URL(`${prefix}${toArtifactPath(url.pathname)}`, origin);
-
-  const headers = new Headers();
-  headers.set("accept", "text/markdown, text/plain;q=0.8, */*;q=0.2");
-  headers.set("user-agent", "cadencelab-agent-markdown");
-
-  const artifactResponse = await fetch(new Request(artifactUrl, {
-    method: "GET",
-    headers,
-    redirect: "follow",
-  }));
-
-  if (!artifactResponse.ok) {
-    return null;
-  }
-
-  const markdown = await artifactResponse.text();
-  if (!markdown.trim()) {
-    return null;
-  }
-
-  const responseHeaders = new Headers(artifactResponse.headers);
-  responseHeaders.set("content-type", "text/markdown; charset=utf-8");
-  responseHeaders.set("vary", "Accept");
-  responseHeaders.set("content-signal", env.DEFAULT_CONTENT_SIGNAL ?? DEFAULT_CONTENT_SIGNAL);
-  responseHeaders.set("x-markdown-tokens", String(getEstimatedTokens(markdown)));
-  responseHeaders.set("x-original-tokens", String(getEstimatedTokens(cleanText(markdown))));
-
-  return new Response(markdown, {
-    status: artifactResponse.status,
-    statusText: artifactResponse.statusText,
-    headers: responseHeaders,
-  });
-}
-
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -420,45 +354,43 @@ export default {
       return handleProtectedExample(request, origin);
     }
 
-    if (!isMarkdownRequested(request)) {
+    // Normal browser requests or non-safe methods pass directly through to origin
+    if (!isMarkdownRequested(request) || (request.method !== "GET" && request.method !== "HEAD")) {
       return fetch(request);
     }
 
-    if (request.method !== "GET" && request.method !== "HEAD") {
-      return fetch(request);
+    // Pass the request to the origin (Cloudflare Pages), which executes functions/_middleware.ts
+    // or serves the page. Using fetch(request) preserves Cloudflare internal routing without
+    // triggering WAF 403 subrequest loops.
+    const originResponse = await fetch(request);
+
+    // If origin already responded with markdown (via functions/_middleware.ts or static markdown),
+    // return it directly!
+    const contentType = originResponse.headers.get("content-type") ?? "";
+    if (contentType.includes("text/markdown")) {
+      return originResponse;
     }
 
-    const generatedMarkdownResponse = await fetchGeneratedMarkdown(request, env);
-    if (generatedMarkdownResponse) {
-      return generatedMarkdownResponse;
+    // If origin succeeded with HTML, convert HTML to clean Markdown fallback
+    if (originResponse.ok && /text\/html|application\/xhtml\+xml/i.test(contentType)) {
+      const html = await originResponse.text();
+      const markdown = `${extractFrontmatter(html)}${convertHtmlToMarkdown(html)}${extractJsonLdBlocks(html).join("\n")}`.trim() + "\n";
+      const strippedText = cleanText(html);
+      const headers = new Headers(originResponse.headers);
+
+      headers.set("content-type", "text/markdown; charset=utf-8");
+      headers.set("vary", "Accept");
+      headers.set("content-signal", env.DEFAULT_CONTENT_SIGNAL ?? DEFAULT_CONTENT_SIGNAL);
+      headers.set("x-markdown-tokens", String(getEstimatedTokens(markdown)));
+      headers.set("x-original-tokens", String(getEstimatedTokens(strippedText)));
+
+      return new Response(request.method === "HEAD" ? null : markdown, {
+        status: originResponse.status,
+        statusText: originResponse.statusText,
+        headers,
+      });
     }
 
-    const upstreamResponse = await fetchUpstream(request, env);
-
-    if (!upstreamResponse.ok) {
-      return upstreamResponse;
-    }
-
-    const contentType = upstreamResponse.headers.get("content-type") ?? "";
-    if (!/text\/html|application\/xhtml\+xml/i.test(contentType)) {
-      return upstreamResponse;
-    }
-
-    const html = await upstreamResponse.text();
-    const markdown = `${extractFrontmatter(html)}${convertHtmlToMarkdown(html)}${extractJsonLdBlocks(html).join("\n")}`.trim();
-    const strippedText = cleanText(html);
-    const headers = new Headers(upstreamResponse.headers);
-
-    headers.set("content-type", "text/markdown; charset=utf-8");
-    headers.set("vary", "Accept");
-    headers.set("content-signal", env.DEFAULT_CONTENT_SIGNAL ?? DEFAULT_CONTENT_SIGNAL);
-    headers.set("x-markdown-tokens", String(getEstimatedTokens(markdown)));
-    headers.set("x-original-tokens", String(getEstimatedTokens(strippedText)));
-
-    return new Response(markdown, {
-      status: upstreamResponse.status,
-      statusText: upstreamResponse.statusText,
-      headers,
-    });
+    return originResponse;
   },
 };
