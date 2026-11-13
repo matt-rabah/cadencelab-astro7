@@ -110,6 +110,8 @@ import "../../../../styles/crm-data-health-sampler.css";
           class="feedback-form data-health-form"
           method="post"
           action="/resources/ai-tools/crm-data-health-sampler/"
+          toolname="crm_data_health_sampler"
+          tooldescription="Sample and assess CRM data quality, consistency, and field completion"
         >
           <fieldset>
             <legend><span>01</span>Add the sample</legend>
@@ -127,6 +129,7 @@ import "../../../../styles/crm-data-health-sampler.css";
                 type="text"
                 maxlength="120"
                 aria-describedby="analysis-name-hint"
+                toolparamdescription="Analysis name (e.g. Opportunity export sample)"
                 required
               />
             </div>
