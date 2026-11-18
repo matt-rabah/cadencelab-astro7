@@ -173,32 +173,45 @@ if (turnstileSiteKey) {
         </div>
 
         <div class="instrument">
-          <ul class="starting-list" role="list">
+          <div
+            class="starting-list"
+            role="tablist"
+            aria-labelledby="starting-points-title"
+            aria-orientation="vertical"
+          >
             {
               startingPoints.map((point, index) => (
-                <li>
-                  <a
-                    class="starting-card"
-                    href={`?start=${point.id}#fit-check-form-title`}
-                    data-start={point.id}
-                    aria-current={index === 0 ? "true" : undefined}
-                  >
-                    <span class="starting-figure">{point.figure}</span>
-                    <span class="starting-title">{point.title}</span>
-                    <span class="starting-fact">{point.fact}</span>
-                  </a>
-                </li>
+                <button
+                  id={`start-tab-${point.id}`}
+                  type="button"
+                  role="tab"
+                  class="starting-card"
+                  data-start={point.id}
+                  aria-selected={index === 0 ? "true" : "false"}
+                  aria-controls={`start-panel-${point.id}`}
+                  tabindex={index === 0 ? 0 : -1}
+                >
+                  <span class="starting-figure">{point.figure}</span>
+                  <span class="starting-title">{point.title}</span>
+                  <span class="starting-fact">{point.fact}</span>
+                </button>
               ))
             }
-          </ul>
+          </div>
 
-          <div class="sample-brief" aria-live="polite">
+          <div class="sample-brief">
             <p class="sample-label">
               Sample Decision Brief <span>Illustrative, not a client</span>
             </p>
             {
               startingPoints.map((point, index) => (
-                <dl data-brief={point.id} hidden={index !== 0}>
+                <dl
+                  id={`start-panel-${point.id}`}
+                  role="tabpanel"
+                  aria-labelledby={`start-tab-${point.id}`}
+                  data-brief={point.id}
+                  hidden={index !== 0}
+                >
                   <div>
                     <dt>The problem, as you described it</dt>
                     <dd>{point.brief.problem}</dd>
@@ -365,7 +378,7 @@ if (turnstileSiteKey) {
         <input
           type="hidden"
           name="starting-point"
-          value=""
+          value={startingPoints[0].id}
           data-starting-input
         />
 
@@ -999,38 +1012,61 @@ if (turnstileSiteKey) {
   <Footer />
 
   <script>
-    // Starting point: a card click (or ?start= in the URL) shows the matching
-    // sample brief and records the choice in the form's hidden field.
-    const startCards =
-      document.querySelectorAll<HTMLAnchorElement>("[data-start]");
+    // Starting point tabs: selecting a card (or ?start= in the URL) shows the
+    // matching sample brief and syncs the form's hidden starting-point field.
+    const startCards = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-start]"),
+    );
     const startInput = document.querySelector<HTMLInputElement>(
       "[data-starting-input]",
     );
 
-    const selectStart = (id: string): void => {
-      const known = [...startCards].some((card) => card.dataset.start === id);
-      if (!known) return;
-      startCards.forEach((card) =>
-        card.dataset.start === id
-          ? card.setAttribute("aria-current", "true")
-          : card.removeAttribute("aria-current"),
+    const selectStart = (id: string, focusTab = false): void => {
+      const targetIndex = startCards.findIndex(
+        (card) => card.dataset.start === id,
       );
+      if (targetIndex < 0) return;
+
+      startCards.forEach((card, index) => {
+        const active = index === targetIndex;
+        card.setAttribute("aria-selected", String(active));
+        card.tabIndex = active ? 0 : -1;
+      });
       document
         .querySelectorAll<HTMLElement>("[data-brief]")
         .forEach((brief) => {
           brief.hidden = brief.dataset.brief !== id;
         });
       if (startInput) startInput.value = id;
+      if (focusTab) startCards[targetIndex]?.focus();
     };
 
-    startCards.forEach((card) =>
-      card.addEventListener("click", (event) => {
-        event.preventDefault();
+    startCards.forEach((card, index) => {
+      card.addEventListener("click", () => {
         const id = card.dataset.start ?? "";
         selectStart(id);
         history.replaceState(null, "", `?start=${id}`);
-      }),
-    );
+      });
+
+      card.addEventListener("keydown", (event) => {
+        let nextIndex = index;
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          nextIndex = (index + 1) % startCards.length;
+        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+          nextIndex = (index - 1 + startCards.length) % startCards.length;
+        } else if (event.key === "Home") {
+          nextIndex = 0;
+        } else if (event.key === "End") {
+          nextIndex = startCards.length - 1;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        const nextId = startCards[nextIndex]?.dataset.start ?? "";
+        selectStart(nextId, true);
+        history.replaceState(null, "", `?start=${nextId}`);
+      });
+    });
 
     const initialStart = new URLSearchParams(location.search).get("start");
     if (initialStart) selectStart(initialStart);
@@ -1236,7 +1272,12 @@ if (turnstileSiteKey) {
         });
 
         if (progressStatus) {
-          progressStatus.textContent = `Step ${currentStep + 1} of ${steps.length + 1}`;
+          const stepLabel = progressItems[currentStep]?.textContent?.trim();
+          const stepNum = String(currentStep + 1).padStart(2, "0");
+          const totalNum = String(steps.length + 1).padStart(2, "0");
+          progressStatus.textContent = stepLabel
+            ? `${stepNum} / ${totalNum} — ${stepLabel}`
+            : `${stepNum} / ${totalNum}`;
         }
 
         if (isReviewing) buildReview();
@@ -2469,25 +2510,29 @@ if (turnstileSiteKey) {
     display: grid;
     margin: 0;
     padding: 0;
-    list-style: none;
     border-inline-end: var(--border-width) solid var(--color-border);
   }
 
-  .starting-list li + li {
+  .starting-card + .starting-card {
     border-top: var(--border-width) solid var(--color-border);
   }
 
   .starting-card {
     display: grid;
+    width: 100%;
     grid-template-columns: 6.25rem minmax(0, 1fr);
     gap: 0.25rem 1rem;
     padding: 1.25rem 1.5rem;
-    color: inherit;
-    text-decoration: none;
+    border: 0;
     border-inline-start: 0.25rem solid transparent;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
   }
 
-  .starting-card[aria-current="true"] {
+  .starting-card[aria-selected="true"] {
     border-inline-start-color: var(--color-yellow);
     background: var(--color-surface-subtle);
   }
@@ -2602,7 +2647,7 @@ if (turnstileSiteKey) {
 
   @media (forced-colors: active) {
     .instrument,
-    .starting-card[aria-current="true"] {
+    .starting-card[aria-selected="true"] {
       border-color: CanvasText;
     }
   }

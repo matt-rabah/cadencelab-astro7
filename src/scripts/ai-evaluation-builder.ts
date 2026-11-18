@@ -19,7 +19,13 @@ type EvaluationPlan = {
   stopConditions: string[];
 };
 
-export {};
+import {
+  downloadTextFile,
+  readValue,
+  setList,
+  setOutput,
+  slugifyFilename,
+} from "../lib/tool-helpers";
 
 const form = document.querySelector<HTMLFormElement>("#evaluation-form");
 const results = document.querySelector<HTMLElement>("#evaluation-results");
@@ -34,32 +40,6 @@ const printButton = document.querySelector<HTMLButtonElement>("#print-plan");
 const resetButton = document.querySelector<HTMLButtonElement>("#start-over");
 
 let currentPlan: EvaluationPlan | null = null;
-
-const readValue = (data: FormData, name: string) =>
-  String(data.get(name) ?? "").trim();
-
-const setOutput = (name: string, value: string) => {
-  document
-    .querySelectorAll<HTMLElement>(`[data-output="${name}"]`)
-    .forEach((element) => {
-      element.textContent = value;
-    });
-};
-
-const setList = (name: string, items: string[]) => {
-  const list = document.querySelector<HTMLElement>(
-    `[data-output-list="${name}"]`,
-  );
-  if (!list) return;
-
-  list.replaceChildren(
-    ...items.map((item) => {
-      const listItem = document.createElement("li");
-      listItem.textContent = item;
-      return listItem;
-    }),
-  );
-};
 
 const criterionForFailure = (
   failure: string,
@@ -402,20 +382,8 @@ copyButton?.addEventListener("click", async () => {
 
 downloadButton?.addEventListener("click", () => {
   if (!currentPlan || !planStatus) return;
-  const blob = new Blob([planAsText(currentPlan)], {
-    type: "text/plain;charset=utf-8",
-  });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  const filename =
-    currentPlan.name
-      .toLocaleLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "") || "ai-evaluation";
-  link.href = url;
-  link.download = `${filename}-plan.txt`;
-  link.click();
-  URL.revokeObjectURL(url);
+  const filename = slugifyFilename(currentPlan.name, "ai-evaluation");
+  downloadTextFile(`${filename}-plan.txt`, planAsText(currentPlan));
   planStatus.textContent = "Evaluation plan downloaded.";
 });
 

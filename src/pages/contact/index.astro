@@ -140,9 +140,7 @@ const usefulContext = [
   }
 
   .contact-hero,
-  .contact-paths,
-  .useful-context,
-  .contact-close {
+  .useful-context {
     padding-block: var(--section-space);
   }
 
@@ -336,61 +334,8 @@ const usefulContext = [
     content: "";
   }
 
-  .contact-paths {
-    border-top: 1px solid var(--color-border);
-    background: var(--color-surface);
-  }
-
-  .paths-layout {
-    display: grid;
-    gap: clamp(2.5rem, 6vw, 5rem);
-  }
-
-  .section-intro {
-    max-width: 48rem;
-    gap: 1rem;
-  }
-
-  .section-intro h2 {
-    max-width: 17ch;
-  }
-
-  .path-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card-ambient);
-    overflow: hidden;
-    background: var(--color-surface-pure);
-  }
-
-  .path-card {
-    display: flex;
-    min-width: 0;
-    min-height: 24rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: clamp(1.75rem, 5vw, 3.5rem);
-  }
-
-  .path-card + .path-card {
-    border-inline-start: 1px solid var(--color-border);
-  }
-
-  .path-card-primary {
-    background: var(--color-surface-subtle);
-  }
-
-  .path-copy {
-    gap: 1rem;
-  }
-
-  .path-copy p,
   .context-heading > p:not(.eyebrow),
-  .context-list p,
-  .close-action p {
+  .context-list p {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -398,30 +343,8 @@ const usefulContext = [
     text-wrap: pretty;
   }
 
-  .path-copy p,
-  .context-heading > p:not(.eyebrow),
-  .close-action p {
+  .context-heading > p:not(.eyebrow) {
     font-size: var(--fs-body-ui);
-  }
-
-  .path-link {
-    display: inline-flex;
-    min-height: var(--control-min-size);
-    margin-top: auto;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-blue);
-    font-family: var(--font-sans);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-    line-height: 1.3;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
-  }
-
-  .path-link:hover {
-    color: var(--color-ink);
   }
 
   .useful-context {
@@ -473,51 +396,7 @@ const usefulContext = [
     font-size: var(--fs-small);
   }
 
-  .contact-close {
-    border-top: 1px solid var(--color-border);
-    background: var(--color-surface-inverse);
-    color: var(--color-text-inverse);
-  }
 
-  .close-panel {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
-    gap: clamp(3rem, 8vw, 8rem);
-  }
-
-  .close-panel > div:first-child {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .close-panel h2 {
-    max-width: 21ch;
-    color: var(--color-text-inverse);
-  }
-
-  .close-panel .eyebrow {
-    color: var(--color-text-muted);
-  }
-
-  .close-action {
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .close-action p {
-    color: var(--color-text-inverse-muted);
-  }
-
-  .close-action .button-primary {
-    border-color: var(--color-light);
-    background: var(--color-light);
-    color: var(--color-ink);
-  }
-
-  .close-action .button-primary:hover {
-    border-color: var(--color-green);
-    background: var(--color-green);
-  }
 
   @media (max-width: 56rem) {
     .hero-layout,

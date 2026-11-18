@@ -15,6 +15,6 @@
     "AGENT_MARKDOWN_PREFIX": "/.agent-md"
   },
   "observability": {
-    "enabled": false
+    "enabled": true
   }
 }
