@@ -822,7 +822,7 @@ select:focus-visible {
   }
 }
 
-/* DESIGN.md inputs: 12px radius, primary border and soft ring on focus. */
+/* Input corners and focus ring aligned to Cadence Lab action blue. */
 :where(
   input:not([type="checkbox"], [type="radio"], [type="file"]),
   select,
@@ -836,6 +836,7 @@ select:focus-visible {
   select,
   textarea
 ):focus-visible {
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgb(79 70 229 / 14%);
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px
+    color-mix(in oklab, var(--color-focus) 18%, transparent);
 }

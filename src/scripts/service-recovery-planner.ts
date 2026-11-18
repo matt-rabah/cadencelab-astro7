@@ -21,7 +21,13 @@ type RecoveryPlan = {
   escalationTriggers: string[];
 };
 
-export {};
+import {
+  downloadTextFile,
+  readValue,
+  renderList,
+  setOutput,
+  slugifyFilename,
+} from "../lib/tool-helpers";
 
 const form = document.querySelector<HTMLFormElement>("#recovery-form");
 const results = document.querySelector<HTMLElement>("#recovery-results");
@@ -52,35 +58,10 @@ const remedyInputs = Array.from(
 
 let currentPlan: RecoveryPlan | null = null;
 
-const readValue = (data: FormData, name: string) =>
-  String(data.get(name) ?? "").trim();
-
 const severityLabel: Record<Severity, string> = {
   inconvenience: "Inconvenience",
   material: "Material impact",
   serious: "Serious impact: prompt specialist review needed",
-};
-
-const setOutput = (name: string, value: string) => {
-  document
-    .querySelectorAll<HTMLElement>(`[data-output="${name}"]`)
-    .forEach((element) => {
-      element.textContent = value;
-    });
-};
-
-const renderList = (
-  element: HTMLOListElement | HTMLUListElement | null,
-  items: string[],
-) => {
-  if (!element) return;
-  element.replaceChildren(
-    ...items.map((item) => {
-      const listItem = document.createElement("li");
-      listItem.textContent = item;
-      return listItem;
-    }),
-  );
 };
 
 const buildChecklist = (
@@ -356,19 +337,8 @@ copyButton?.addEventListener("click", async () => {
 
 downloadButton?.addEventListener("click", () => {
   if (!currentPlan) return;
-  const blob = new Blob([planAsText(currentPlan)], {
-    type: "text/plain;charset=utf-8",
-  });
-  const link = document.createElement("a");
-  const fileName =
-    currentPlan.name
-      .toLocaleLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "") || "service-recovery-plan";
-  link.href = URL.createObjectURL(blob);
-  link.download = `${fileName}.txt`;
-  link.click();
-  URL.revokeObjectURL(link.href);
+  const fileName = slugifyFilename(currentPlan.name, "service-recovery-plan");
+  downloadTextFile(`${fileName}.txt`, planAsText(currentPlan));
   if (planStatus) planStatus.textContent = "Recovery plan downloaded.";
 });
 

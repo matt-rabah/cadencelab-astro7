@@ -34,21 +34,6 @@ const isCurrentSection = (href: string): boolean => {
 
 const navigationGroups: NavigationGroup[] = [
   {
-    label: "About",
-    menuId: "about-menu",
-    eyebrow: "About Cadence Lab",
-    heading: "Meet the person behind it",
-    description:
-      "Who I am, how I work, and why I always start with the problem.",
-    compact: true,
-    items: [
-      {
-        label: "Bio",
-        href: "/about/",
-      },
-    ],
-  },
-  {
     label: "Experience design",
     menuId: "product-menu",
     eyebrow: "Experience design",
@@ -96,21 +81,6 @@ const navigationGroups: NavigationGroup[] = [
       },
     ],
   },
-  {
-    label: "Free resources",
-    menuId: "resources-menu",
-    eyebrow: "Free resources",
-    heading: "Free tools that do real work",
-    description:
-      "Use them on a real CX, data, or AI problem today. No fluff.",
-    compact: true,
-    items: [
-      {
-        label: "Free CX and AI tools",
-        href: "/resources/ai-tools/",
-      },
-    ],
-  },
 ];
 
 const groupIsCurrent = (group: NavigationGroup): boolean =>
@@ -127,18 +97,11 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         aria-current={isCurrentPage("/") ? "page" : undefined}
       >
         <img
-          src="/brand/cadencelab-wordmark-light.svg"
-          alt="Cadence Lab."
-          width="3858"
-          height="500"
-          class="desktop-wordmark wordmark-light"
-        />
-        <img
           src="/brand/cadencelab-wordmark-dark.svg"
           alt="Cadence Lab."
           width="3858"
           height="500"
-          class="desktop-wordmark wordmark-dark"
+          class="desktop-wordmark"
         />
       </a>
     </div>
@@ -265,7 +228,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             </li>
 
             {
-              navigationGroups.slice(1, 3).map((group) => (
+              navigationGroups.map((group) => (
                 <li
                   class="navigation-group"
                   data-navigation-group
@@ -448,18 +411,11 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       aria-current={isCurrentPage("/") ? "page" : undefined}
     >
       <img
-        src="/brand/cadencelab-wordmark-light.svg"
-        alt="Cadence Lab."
-        width="3858"
-        height="500"
-        class="mobile-wordmark wordmark-light"
-      />
-      <img
         src="/brand/cadencelab-wordmark-dark.svg"
         alt="Cadence Lab."
         width="3858"
         height="500"
-        class="mobile-wordmark wordmark-dark"
+        class="mobile-wordmark"
       />
     </a>
 
@@ -543,7 +499,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
           </li>
 
           {
-            navigationGroups.slice(1, 3).map((group) => (
+            navigationGroups.map((group) => (
               <li>
                 <details
                   class="mobile-navigation-group"
@@ -950,14 +906,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 </script>
 
 <style>
-  /* The header shares the footer's dark anchor in both themes, so it always
-     shows the light-on-dark wordmark. */
-  .wordmark-light {
-    display: none !important;
-  }
-  .wordmark-dark {
-    display: block !important;
-  }
+
 
   /* Dark tokens for the header and everything inside it (menus, mobile
      drawer, search). The surface is --color-surface-anchor, the same as the
