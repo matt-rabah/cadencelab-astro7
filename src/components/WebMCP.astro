@@ -96,8 +96,9 @@
           properties: {
             startingPoint: {
               type: "string",
+              enum: ["prove-value", "insight-action", "silent-churn", "ai-trust"],
               description:
-                "Optional operational problem starting point (e.g. onboarding-drift, quiet-accounts, crm-chaos, service-handoffs, ai-readiness).",
+                "Optional operational problem starting point: prove-value, insight-action, silent-churn, or ai-trust.",
             },
           },
           additionalProperties: false,
@@ -130,7 +131,7 @@
         execute: async function () {
           var info = {
             founder: "Matt Rabah",
-            email: "matt@cadencelab.co",
+            email: "hi@cadencelab.co",
             contactPage: "https://cadencelab.co/contact/",
             fitCheckUrl: "https://cadencelab.co/fit-check/",
             location: "United States (Eastern Time)",
