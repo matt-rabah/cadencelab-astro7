@@ -190,11 +190,34 @@ const isCurrentPage = (href: string): boolean =>
               </li>
             ))
           }
+          <li>
+            <button
+              type="button"
+              class="legal-link-button"
+              data-analytics-preferences
+            >
+              Analytics preferences
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
   </div>
 </footer>
+
+<script>
+  document.addEventListener("click", (event) => {
+    if (
+      !(event.target instanceof Element) ||
+      !event.target.closest("[data-analytics-preferences]")
+    ) {
+      return;
+    }
+    window.dispatchEvent(
+      new CustomEvent("cadencelab:open-analytics-preferences"),
+    );
+  });
+</script>
 
 <style>
   .site-footer {
@@ -399,26 +422,34 @@ const isCurrentPage = (href: string): boolean =>
     background: var(--footer-subtle);
   }
 
-  .legal-link-list a {
+  .legal-link-list a,
+  .legal-link-button {
     display: inline-flex;
     align-items: center;
     min-height: var(--control-min-size, 3rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
     color: var(--footer-muted);
+    font-family: inherit;
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.4;
     text-decoration: underline;
     text-decoration-color: transparent;
+    cursor: pointer;
     transition: color var(--transition-fast, 150ms ease);
   }
 
   .legal-link-list a:hover,
-  .legal-link-list a[aria-current="page"] {
+  .legal-link-list a[aria-current="page"],
+  .legal-link-button:hover {
     color: var(--footer-heading);
     text-decoration-color: var(--footer-accent);
   }
 
-  .site-footer a:focus-visible {
+  .site-footer a:focus-visible,
+  .site-footer button:focus-visible {
     outline: 2px solid var(--footer-focus);
     outline-offset: 3px;
   }
