@@ -972,6 +972,14 @@ if (turnstileSiteKey) {
               )
             }
 
+            <div
+              class="submit-error"
+              role="alert"
+              tabindex="-1"
+              data-submit-error
+              hidden
+            ></div>
+
             <p
               class="turnstile-status"
               data-turnstile-status
@@ -1052,6 +1060,32 @@ if (turnstileSiteKey) {
       const turnstileStatus = form.querySelector<HTMLElement>(
         "[data-turnstile-status]",
       );
+      const submitError = form.querySelector<HTMLElement>(
+        "[data-submit-error]",
+      );
+      const renderSubmitError = (message: string, details?: string[]) => {
+        if (!submitError) return;
+        submitError.replaceChildren();
+        const summary = document.createElement("p");
+        summary.textContent = message;
+        submitError.append(summary);
+        if (details && details.length > 0) {
+          const list = document.createElement("ul");
+          details.forEach((detail) => {
+            const item = document.createElement("li");
+            item.textContent = detail;
+            list.append(item);
+          });
+          submitError.append(list);
+        }
+        submitError.hidden = false;
+        submitError.focus();
+      };
+      const clearSubmitError = () => {
+        if (!submitError) return;
+        submitError.hidden = true;
+        submitError.replaceChildren();
+      };
       let currentStep = 0;
 
       const reviewSections = [
@@ -1298,7 +1332,10 @@ if (turnstileSiteKey) {
         }
       });
 
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearSubmitError();
+
         const firstInvalid = Array.from(form.elements).find(
           (
             element,
@@ -1312,7 +1349,6 @@ if (turnstileSiteKey) {
         );
 
         if (firstInvalid) {
-          event.preventDefault();
           const invalidStep = steps.findIndex((step) =>
             step.contains(firstInvalid),
           );
@@ -1323,7 +1359,6 @@ if (turnstileSiteKey) {
         }
 
         if (currentStep !== steps.length) {
-          event.preventDefault();
           showStep(steps.length);
           return;
         }
@@ -1333,7 +1368,6 @@ if (turnstileSiteKey) {
         );
 
         if (!turnstileResponse?.value) {
-          event.preventDefault();
           if (turnstileStatus) {
             turnstileStatus.textContent =
               "Complete the security check before sending your FitCheck™.";
@@ -1346,6 +1380,44 @@ if (turnstileSiteKey) {
         if (submitButton) {
           submitButton.disabled = true;
           submitButton.textContent = "Submitting…";
+        }
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+          const payload = (await response.json().catch(() => null)) as {
+            ok?: boolean;
+            redirect?: string;
+            error?: string;
+            errors?: string[];
+          } | null;
+
+          if (response.ok && payload?.redirect) {
+            window.location.assign(payload.redirect);
+            return;
+          }
+
+          renderSubmitError(
+            payload?.error ??
+              "We could not send your FitCheck™. Your answers are still here—please try again.",
+            payload?.errors,
+          );
+          const turnstileApi = (
+            window as Window & { turnstile?: { reset?: () => void } }
+          ).turnstile;
+          turnstileApi?.reset?.();
+        } catch {
+          renderSubmitError(
+            "Could not reach the server. Your answers are still here—check your connection and try again.",
+          );
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Send my FitCheck™";
+          }
         }
       });
 
@@ -2119,6 +2191,37 @@ if (turnstileSiteKey) {
 
   .turnstile-status:not(:empty) {
     color: var(--color-error);
+  }
+
+  .submit-error {
+    max-width: 24rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--color-error);
+    border-radius: var(--radius-sm);
+    background: color-mix(
+      in oklab,
+      var(--color-error) 6%,
+      var(--color-surface-pure)
+    );
+    color: var(--color-error);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    line-height: 1.5;
+    text-align: start;
+  }
+
+  .submit-error[hidden] {
+    display: none;
+  }
+
+  .submit-error p {
+    margin: 0;
+    font-weight: var(--fw-semibold);
+  }
+
+  .submit-error ul {
+    margin: 0.5rem 0 0;
+    padding-inline-start: 1.15rem;
   }
 
   .is-enhanced .form-footer {

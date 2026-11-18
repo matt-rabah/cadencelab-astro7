@@ -426,23 +426,79 @@ function textResponse(
   });
 }
 
+function errorResponse(
+  wantsJson: boolean,
+  message: string,
+  status: number,
+  {
+    headers = {},
+    errors,
+  }: { headers?: Record<string, string>; errors?: string[] } = {},
+): Response {
+  if (wantsJson) {
+    return new Response(
+      JSON.stringify({
+        ok: false,
+        error: message,
+        ...(errors ? { errors } : {}),
+      }),
+      {
+        status,
+        headers: {
+          "Cache-Control": "no-store",
+          "Content-Type": "application/json; charset=utf-8",
+          "X-Content-Type-Options": "nosniff",
+          ...headers,
+        },
+      },
+    );
+  }
+
+  return textResponse(message, status, headers);
+}
+
+function successRedirect(wantsJson: boolean, requestUrl: string): Response {
+  const redirectPath = "/thanks/";
+  if (wantsJson) {
+    return new Response(
+      JSON.stringify({ ok: true, redirect: redirectPath }),
+      {
+        status: 200,
+        headers: {
+          "Cache-Control": "no-store",
+          "Content-Type": "application/json; charset=utf-8",
+          "X-Content-Type-Options": "nosniff",
+        },
+      },
+    );
+  }
+
+  return Response.redirect(new URL(redirectPath, requestUrl), 303);
+}
+
 export const onRequest = async ({
   request,
   env,
 }: PagesContext): Promise<Response> => {
+  const wantsJson = /\bapplication\/json\b/i.test(
+    request.headers.get("Accept") ?? "",
+  );
+
   if (request.method !== "POST") {
-    return textResponse("Method not allowed.", 405, { Allow: "POST" });
+    return errorResponse(wantsJson, "Method not allowed.", 405, {
+      headers: { Allow: "POST" },
+    });
   }
 
   const requestUrl = new URL(request.url);
   const requestOrigin = request.headers.get("Origin");
   if (requestOrigin && requestOrigin !== requestUrl.origin) {
-    return textResponse("Forbidden.", 403);
+    return errorResponse(wantsJson, "Forbidden.", 403);
   }
 
   const contentLength = Number(request.headers.get("Content-Length") || "0");
   if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
-    return textResponse("Submission is too large.", 413);
+    return errorResponse(wantsJson, "Submission is too large.", 413);
   }
 
   const contentType = request.headers.get("Content-Type") || "";
@@ -450,14 +506,14 @@ export const onRequest = async ({
     !contentType.startsWith("application/x-www-form-urlencoded") &&
     !contentType.startsWith("multipart/form-data")
   ) {
-    return textResponse("Unsupported submission format.", 415);
+    return errorResponse(wantsJson, "Unsupported submission format.", 415);
   }
 
   // Content-Length can be absent (chunked uploads), so enforce the limit on
   // the bytes actually read rather than trusting the header.
   const body = await readBodyWithinLimit(request, MAX_BODY_BYTES);
   if (body === null) {
-    return textResponse("Submission is too large.", 413);
+    return errorResponse(wantsJson, "Submission is too large.", 413);
   }
 
   let formData: FormData;
@@ -466,20 +522,22 @@ export const onRequest = async ({
       headers: { "Content-Type": contentType },
     }).formData();
   } catch {
-    return textResponse(
-      "The submission could not be read. Please go back and try again.",
+    return errorResponse(
+      wantsJson,
+      "The submission could not be read. Please check your answers and try again.",
       400,
     );
   }
 
   const honeypot = formData.get("website");
   if (typeof honeypot === "string" && honeypot.trim()) {
-    return Response.redirect(new URL("/thanks/", request.url), 303);
+    return successRedirect(wantsJson, request.url);
   }
 
   if (!env.TURNSTILE_SECRET_KEY) {
     console.error("Fit Check Turnstile verification is not configured.");
-    return textResponse(
+    return errorResponse(
+      wantsJson,
       "The FitCheck™ is temporarily unavailable. Your information was not sent. Please try again later.",
       503,
     );
@@ -487,7 +545,8 @@ export const onRequest = async ({
 
   const turnstileToken = formData.get("cf-turnstile-response");
   if (typeof turnstileToken !== "string" || !turnstileToken.trim()) {
-    return textResponse(
+    return errorResponse(
+      wantsJson,
       "Please complete the security check, then submit the FitCheck™ again.",
       400,
     );
@@ -502,7 +561,8 @@ export const onRequest = async ({
     );
   } catch (error) {
     console.error("Fit Check Turnstile verification failed.", error);
-    return textResponse(
+    return errorResponse(
+      wantsJson,
       "The security check is temporarily unavailable. Your information was not sent. Please try again.",
       503,
     );
@@ -523,19 +583,24 @@ export const onRequest = async ({
       hostname: turnstileResult.hostname,
       errorCodes: turnstileResult["error-codes"],
     });
-    return textResponse(
-      "The security check expired or could not be verified. Please go back and try again.",
+    return errorResponse(
+      wantsJson,
+      "The security check expired or could not be verified. Please complete it again and resubmit.",
       400,
     );
   }
 
   const { submission, errors } = validateSubmission(formData);
   if (!submission) {
-    return textResponse(
-      `The submission needs attention:\n\n${errors
-        .map((error) => `- ${error}`)
-        .join("\n")}\n\nUse your browser's back button to correct it.`,
+    return errorResponse(
+      wantsJson,
+      wantsJson
+        ? "Please fix the following before sending your FitCheck™:"
+        : `The submission needs attention:\n\n${errors
+            .map((error) => `- ${error}`)
+            .join("\n")}\n\nUse your browser's back button to correct it.`,
       400,
+      { errors },
     );
   }
 
@@ -547,7 +612,8 @@ export const onRequest = async ({
     console.error(
       "Fit Check email delivery is missing required environment variables.",
     );
-    return textResponse(
+    return errorResponse(
+      wantsJson,
       "The FitCheck™ is temporarily unavailable. Your information was not sent. Please try again later.",
       503,
     );
@@ -588,11 +654,13 @@ export const onRequest = async ({
         "Idempotency-Key": crypto.randomUUID(),
       },
       body: JSON.stringify(resendBody),
+      signal: AbortSignal.timeout(10_000),
     });
   } catch (error) {
     console.error("Fit Check email delivery request failed.", error);
-    return textResponse(
-      "We could not send your FitCheck™. Your information was not delivered. Please go back and try again.",
+    return errorResponse(
+      wantsJson,
+      "We could not send your FitCheck™. Your information was not delivered. Please try again.",
       502,
     );
   }
@@ -602,11 +670,12 @@ export const onRequest = async ({
       status: resendResponse.status,
       requestId: resendResponse.headers.get("x-request-id"),
     });
-    return textResponse(
-      "We could not send your FitCheck™. Your information was not delivered. Please go back and try again.",
+    return errorResponse(
+      wantsJson,
+      "We could not send your FitCheck™. Your information was not delivered. Please try again.",
       502,
     );
   }
 
-  return Response.redirect(new URL("/thanks/", request.url), 303);
+  return successRedirect(wantsJson, request.url);
 };

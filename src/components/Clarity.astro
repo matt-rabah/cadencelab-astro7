@@ -4,13 +4,10 @@
 // Microsoft Clarity (heatmaps and session recordings), project zagzhe818n.
 // Production builds only, so `npm run dev` and Tina editing are never recorded.
 //
-// The loader waits for the page's load event and then an idle period before
-// it requests Clarity, so the script never competes with the first render
-// (LCP) or adds blocking time during load. Clarity still records the session
-// from the moment it starts.
-//
-// script-src in astro.config.mjs must allow https://www.clarity.ms (the tag)
-// and https://scripts.clarity.ms (clarity.js, which the tag loads).
+// Respects Global Privacy Control (GPC), Do Not Track (DNT), and explicit
+// visitor consent stored in localStorage ("cadencelab-analytics-consent").
+// Clarity never loads until the visitor explicitly allows it, keeping cookies
+// and session replay aligned with the Privacy Policy.
 //
 // Pages that collect visitor input pass `maskSessionRecording` to Layout,
 // which masks the whole page in recordings (data-clarity-mask).
@@ -19,44 +16,284 @@ const enabled = import.meta.env.PROD;
 
 {
   enabled && (
-    <script>
-      type ClarityQueue = {
-        (...args: unknown[]): void;
-        q?: ArrayLike<unknown>[];
-      };
+    <>
+      <aside
+        class="consent-banner"
+        role="region"
+        aria-label="Analytics preferences"
+        data-clarity-banner
+        hidden
+      >
+        <p class="consent-copy">
+          This site uses Microsoft Clarity to see how pages are used. Forms and
+          free tools are masked.{" "}
+          <a href="/privacy/">Privacy policy</a>.
+        </p>
+        <div class="consent-actions">
+          <button
+            type="button"
+            class="consent-button consent-button-secondary"
+            data-clarity-decline
+          >
+            Decline
+          </button>
+          <button
+            type="button"
+            class="consent-button consent-button-primary"
+            data-clarity-allow
+          >
+            Allow
+          </button>
+        </div>
+      </aside>
 
-      const CLARITY_PROJECT_ID = "zagzhe818n";
-      const clarityWindow = window as Window & { clarity?: ClarityQueue };
-
-      const loadClarity = () => {
-        if (clarityWindow.clarity) return;
-
-        // Same queue stub as Clarity's own snippet: calls made before
-        // clarity.js arrives are stored and replayed once it loads.
-        const clarity: ClarityQueue = function (...args: unknown[]) {
-          (clarity.q ??= []).push(args);
+      <script>
+        type ClarityQueue = {
+          (...args: unknown[]): void;
+          q?: ArrayLike<unknown>[];
         };
-        clarityWindow.clarity = clarity;
 
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}?ref=bwt`;
-        document.head.append(script);
-      };
+        type ClarityWindow = Window & {
+          clarity?: ClarityQueue;
+          __cadenceClarityInitialized?: boolean;
+        };
 
-      const scheduleClarity = () => {
-        if ("requestIdleCallback" in window) {
-          window.requestIdleCallback(loadClarity, { timeout: 4000 });
-        } else {
-          window.setTimeout(loadClarity, 2000);
+        type PrivacyNavigator = Navigator & {
+          globalPrivacyControl?: boolean;
+        };
+
+        const CLARITY_PROJECT_ID = "zagzhe818n";
+        const CONSENT_STORAGE_KEY = "cadencelab-analytics-consent";
+        const clarityWindow = window as ClarityWindow;
+        const privacyNav = navigator as PrivacyNavigator;
+
+        const hasBrowserOptOut = (): boolean =>
+          privacyNav.globalPrivacyControl === true ||
+          navigator.doNotTrack === "1";
+
+        const readConsent = (): "granted" | "denied" | null => {
+          try {
+            const value = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+            return value === "granted" || value === "denied" ? value : null;
+          } catch {
+            return null;
+          }
+        };
+
+        const writeConsent = (value: "granted" | "denied"): void => {
+          try {
+            window.localStorage.setItem(CONSENT_STORAGE_KEY, value);
+          } catch {
+            // Storage may be unavailable in restricted contexts.
+          }
+        };
+
+        const loadClarity = (): void => {
+          if (clarityWindow.clarity) {
+            clarityWindow.clarity("consent", true);
+            return;
+          }
+
+          const clarity: ClarityQueue = function (...args: unknown[]) {
+            (clarity.q ??= []).push(args);
+          };
+          clarityWindow.clarity = clarity;
+          clarity("consent", true);
+
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}?ref=bwt`;
+          document.head.append(script);
+        };
+
+        const scheduleClarity = (): void => {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(loadClarity, { timeout: 4000 });
+          } else {
+            window.setTimeout(loadClarity, 2000);
+          }
+        };
+
+        const startClarityIfReady = (): void => {
+          if (document.readyState === "complete") {
+            scheduleClarity();
+          } else {
+            window.addEventListener("load", scheduleClarity, { once: true });
+          }
+        };
+
+        const initConsent = (): void => {
+          const banner = document.querySelector<HTMLElement>(
+            "[data-clarity-banner]",
+          );
+          const allowButton = banner?.querySelector<HTMLButtonElement>(
+            "[data-clarity-allow]",
+          );
+          const declineButton = banner?.querySelector<HTMLButtonElement>(
+            "[data-clarity-decline]",
+          );
+
+          const hideBanner = () => {
+            if (banner) banner.hidden = true;
+          };
+
+          const showBanner = () => {
+            if (banner) banner.hidden = false;
+          };
+
+          const saved = readConsent();
+
+          if (saved === "granted" && !hasBrowserOptOut()) {
+            hideBanner();
+            startClarityIfReady();
+          } else if (saved === "denied" || hasBrowserOptOut()) {
+            hideBanner();
+            clarityWindow.clarity?.("consent", false);
+          } else {
+            showBanner();
+          }
+
+          if (clarityWindow.__cadenceClarityInitialized) return;
+          clarityWindow.__cadenceClarityInitialized = true;
+
+          allowButton?.addEventListener("click", () => {
+            writeConsent("granted");
+            hideBanner();
+            startClarityIfReady();
+          });
+
+          declineButton?.addEventListener("click", () => {
+            writeConsent("denied");
+            hideBanner();
+            clarityWindow.clarity?.("consent", false);
+          });
+
+          window.addEventListener("cadencelab:open-analytics-preferences", () => {
+            showBanner();
+            allowButton?.focus();
+          });
+        };
+
+        initConsent();
+      </script>
+
+      <style>
+        .consent-banner {
+          position: fixed;
+          inset-block-end: 1.25rem;
+          inset-inline-end: 1.25rem;
+          z-index: 900;
+          display: grid;
+          gap: 0.875rem;
+          inline-size: min(calc(100% - 2.5rem), 24rem);
+          padding: 1.125rem 1.25rem;
+          border: var(--border-width, 1px) solid var(--color-border-strong);
+          border-top: 2px solid var(--color-ink);
+          border-radius: var(--radius-lg, 0.5rem);
+          background: var(--color-surface-pure);
+          color: var(--color-text);
+          box-shadow: var(--shadow-overlay);
+          font-family: var(--ff-sans);
+          font-feature-settings: var(--fea-graphik);
         }
-      };
 
-      if (document.readyState === "complete") {
-        scheduleClarity();
-      } else {
-        window.addEventListener("load", scheduleClarity, { once: true });
-      }
-    </script>
+        .consent-banner[hidden] {
+          display: none;
+        }
+
+        .consent-copy {
+          margin: 0;
+          color: var(--color-text-muted);
+          font-size: var(--fs-small, 0.875rem);
+          line-height: 1.5;
+          text-wrap: pretty;
+        }
+
+        .consent-copy a {
+          color: var(--color-blue);
+          text-underline-offset: 0.2em;
+        }
+
+        .consent-actions {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+          gap: 0.625rem;
+        }
+
+        .consent-button {
+          display: inline-flex;
+          min-block-size: 2.5rem;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem 0.9rem;
+          border: var(--border-width, 1px) solid var(--color-ink);
+          border-radius: var(--radius-sm, 0.25rem);
+          font-family: inherit;
+          font-size: var(--fs-small, 0.875rem);
+          font-weight: var(--fw-semibold, 600);
+          line-height: 1.2;
+          cursor: pointer;
+          transition:
+            background-color var(--transition-fast),
+            border-color var(--transition-fast),
+            color var(--transition-fast);
+        }
+
+        .consent-button-primary {
+          background: var(--color-ink);
+          color: var(--color-light);
+        }
+
+        .consent-button-primary:hover {
+          border-color: var(--color-blue);
+          background: var(--color-blue);
+          color: var(--color-blue-foreground);
+        }
+
+        .consent-button-secondary {
+          border-color: var(--color-border-strong);
+          background: transparent;
+          color: var(--color-ink);
+        }
+
+        .consent-button-secondary:hover {
+          border-color: var(--color-blue);
+          color: var(--color-blue);
+        }
+
+        .consent-button:focus-visible,
+        .consent-copy a:focus-visible {
+          outline: var(--focus-ring-width, 2px) solid var(--color-focus);
+          outline-offset: var(--focus-ring-offset, 3px);
+        }
+
+        @media (max-width: 40rem) {
+          .consent-banner {
+            inset-block-end: 1rem;
+            inset-inline: 1rem;
+            inline-size: auto;
+          }
+
+          .consent-actions {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .consent-button {
+            transition: none;
+          }
+        }
+
+        @media (forced-colors: active) {
+          .consent-banner,
+          .consent-button {
+            border-color: CanvasText;
+          }
+        }
+      </style>
+    </>
   )
 }

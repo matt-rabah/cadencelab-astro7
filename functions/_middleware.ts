@@ -155,7 +155,8 @@ export const onRequest = async (context: EventContext): Promise<Response> => {
         headers: { accept: "text/markdown" },
       });
       const candidateResponse = await next(mdRequest);
-      if (candidateResponse.ok) {
+      const candidateType = candidateResponse.headers.get("content-type") ?? "";
+      if (candidateResponse.ok && !/text\/html|application\/xhtml\+xml/i.test(candidateType)) {
         const text = await candidateResponse.text();
         if (text.trim()) {
           const tokens = estimateTokens(text);

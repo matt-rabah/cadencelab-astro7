@@ -3,65 +3,19 @@
 > Cadence Lab is a public informational site. No authentication is required
 > to access any content.
 
-This file provides access guidance for automated tools and links to
-machine-readable registration and OAuth endpoints.
+This file provides access guidance for automated tools and lists
+machine-readable discovery resources.
 
 ## Agent audience
 
 AI agents, LLM-based crawlers, and automated tools that discover and interact
 with web services.
 
-## Agent registration
+## Authentication policy
 
-Cadence Lab content pages remain publicly readable without authentication.
-Agent registration endpoints are available for protocol-compliant discovery and
-token exchange.
-
-> **Demonstration only.** These endpoints show the Auth.md and OAuth discovery
-> flow; they do not protect anything. Tokens are issued to any caller, are not
-> stored, and are not cryptographically verified. The protected example
-> resource returns no non-public data. Do not treat a token from these
-> endpoints as proof of identity or authorization.
-
-For agents that support the Auth.md protocol, Cadence Lab publishes discovery
-metadata at:
-
-- OAuth Protected Resource Metadata:
-  [/.well-known/oauth-protected-resource](https://cadencelab.co/.well-known/oauth-protected-resource)
-- OAuth Authorization Server Metadata:
-  [/.well-known/oauth-authorization-server](https://cadencelab.co/.well-known/oauth-authorization-server)
-
-The `agent_auth` block describes anonymous access with no long-lived
-credential.
-
-Registration and OAuth endpoints:
-
-- Register identity: `POST https://cadencelab.co/agent/identity`
-- Confirm claim: `POST https://cadencelab.co/agent/identity/claim`
-- Exchange token: `POST https://cadencelab.co/oauth2/token`
-- Revoke token: `POST https://cadencelab.co/oauth2/revoke`
-- Protected example resource: `GET https://cadencelab.co/agent/protected-resource`
-
-## Supported method
-
-- Identity type: `anonymous`
-- Credential type: `none` (for registration)
-- Supported token scopes: `public`, `read`
-- Registration request: `POST /agent/identity` with JSON body
-  `{"identity_type":"anonymous"}`
-- Claim flow: optional `POST /agent/identity/claim` with
-  `identity_assertion`
-- Revocation flow: `POST /oauth2/revoke`
-
-Token exchange request examples:
-
-- `grant_type=client_credentials`
-- `grant_type=urn:workos:agent-auth:grant-type:claim` with an
-  `identity_assertion` issued by `/agent/identity`
-
-Unauthorized requests to protected resources return `401` with a
-`WWW-Authenticate` header that points to
-`/.well-known/oauth-protected-resource`.
+All public Cadence Lab pages and machine-readable manifests are readable
+without credentials, tokens, or OAuth registration. No protected API
+endpoints are exposed on this domain.
 
 ## Available machine-readable resources
 
