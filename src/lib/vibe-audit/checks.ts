@@ -141,16 +141,20 @@ function metaContent(html: string, key: string, attr = "name"): string | null {
 }
 
 function visibleText(html: string): string {
-  return html
-    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
-    .replace(/<noscript\b[\s\S]*?<\/noscript>/gi, " ")
-    .replace(/<template\b[\s\S]*?<\/template>/gi, " ")
-    .replace(/<!--[\s\S]*?-->/g, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;|&#160;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  return (
+    html
+      // End tags may carry whitespace or junk before ">" (</script >), and
+      // comments may close with "--!>", the way browsers parse them.
+      .replace(/<script\b[\s\S]*?<\/script\b[^>]*>/gi, " ")
+      .replace(/<style\b[\s\S]*?<\/style\b[^>]*>/gi, " ")
+      .replace(/<noscript\b[\s\S]*?<\/noscript\b[^>]*>/gi, " ")
+      .replace(/<template\b[\s\S]*?<\/template\b[^>]*>/gi, " ")
+      .replace(/<!--[\s\S]*?--!?>/g, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;|&#160;/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
 }
 
 function header(input: AuditInput, name: string): string {
@@ -1060,7 +1064,9 @@ export function runAudit(input: AuditInput): AuditResult {
     (t) => t.slice(1).toLowerCase(),
   );
   const text = visibleText(input.html);
-  const titleMatch = input.html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
+  const titleMatch = input.html.match(
+    /<title\b[^>]*>([\s\S]*?)<\/title\b[^>]*>/i,
+  );
   let host = "";
   try {
     host = new URL(input.finalUrl).host;
