@@ -408,7 +408,7 @@ const engagementRequires = [
               <details class="disclosure" name="point-of-view">
                 <summary>
                   <h3 class="disclosure-title">
-                    <span class="row-number" aria-hidden="true">
+                    <span class="seq-number row-number" aria-hidden="true">
                       {item.number}
                     </span>
                     {item.title}
@@ -449,7 +449,7 @@ const engagementRequires = [
               <details class="disclosure" name="working-principle">
                 <summary>
                   <h3 class="disclosure-title">
-                    <span class="row-number" aria-hidden="true">
+                    <span class="seq-number row-number" aria-hidden="true">
                       {principle.number}
                     </span>
                     {principle.title}
@@ -1044,10 +1044,6 @@ const engagementRequires = [
   .row-number {
     display: inline-block;
     min-width: 2.5rem;
-    color: var(--color-text-muted);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-regular);
-    font-variant-numeric: tabular-nums;
   }
 
   .view-list .disclosure-body,

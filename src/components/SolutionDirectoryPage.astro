@@ -177,11 +177,11 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
         <ol class="selection-list">
           {selection.items.map((item, index) => (
             <li>
-              <p class="selection-number">
+              <p class="seq-number selection-number">
                 {String(index + 1).padStart(2, "0")}
               </p>
               <div>
-                <p class="selection-label">{item.title}</p>
+                <p class="seq-label selection-label">{item.title}</p>
                 <h3>{item.question}</h3>
                 <p>{item.description}</p>
               </div>
@@ -322,10 +322,7 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
 
   .eyebrow,
   .note-label,
-  .item-number,
-  .entry-eyebrow,
-  .selection-number,
-  .selection-label {
+  .entry-eyebrow {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -336,9 +333,16 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
     font-feature-settings: var(--fea-eyebrow);
   }
 
-  .eyebrow-inverse,
-  .selection-number,
   .selection-label {
+    margin: 0;
+  }
+
+  .item-number,
+  .selection-number {
+    margin: 0;
+  }
+
+  .eyebrow-inverse {
     color: var(--color-text-muted);
   }
 
@@ -706,7 +710,7 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
     }
 
     .selection-list li {
-      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-columns: 3rem minmax(0, 1fr);
       gap: 1rem;
     }
 

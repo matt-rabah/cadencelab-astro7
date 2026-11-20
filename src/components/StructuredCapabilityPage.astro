@@ -298,11 +298,10 @@ const {
           {path.items.map((item, index) => (
             <li>
               <div class="path-marker">
-                <p>{String(index + 1).padStart(2, "0")}</p>
-                <span aria-hidden="true" />
+                <p class="seq-number">{String(index + 1).padStart(2, "0")}</p>
               </div>
               <div class="path-content">
-                <p class="path-phase">{item.phase}</p>
+                <p class="seq-label path-phase">{item.phase}</p>
                 <h3>{item.question}</h3>
                 <p>{item.evidence}</p>
               </div>
@@ -519,18 +518,6 @@ const {
     border-inline-end: 0;
     padding-inline: 0;
   }
-  .simplified .path-marker p {
-    border: 0;
-    border-radius: 0;
-  }
-  .simplified .path-marker span {
-    display: none;
-  }
-  .simplified .path-list li {
-    min-height: 0;
-    padding-block: 1.5rem;
-    border-top: 1px solid var(--color-border);
-  }
   .simplified .fit-list {
     border: 0;
     padding: 0;
@@ -634,18 +621,6 @@ const {
   .note-label,
   .framework-number,
   .framework-label,
-  .path-phase,
-  .path-marker p {
-    margin: 0;
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-eyebrow);
-    font-weight: var(--fw-medium);
-    line-height: 1.4;
-    letter-spacing: 0;
-    font-feature-settings: var(--fea-eyebrow);
-  }
-
   .eyebrow-inverse,
   .framework-number,
   .framework-label {
@@ -863,8 +838,7 @@ const {
     width: 0.625rem;
     height: 0.625rem;
     border-radius: 50%;
-    background: var(--color-yellow);
-    box-shadow: var(--shadow-hairline);
+    background: var(--color-text-subtle);
     content: "";
   }
 
@@ -981,38 +955,10 @@ const {
 
   .path-list li {
     display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: clamp(1.25rem, 3vw, 2rem);
-    min-height: 9rem;
-  }
-
-  .path-marker {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .path-marker p {
-    display: grid;
-    width: 3rem;
-    height: 3rem;
-    border: var(--border-width) solid var(--color-blue);
-    border-radius: 50%;
-    place-items: center;
-  }
-
-  .path-marker span {
-    width: var(--border-width);
-    flex: 1;
-    background: var(--color-border);
-  }
-
-  .path-list li:last-child .path-marker span {
-    display: none;
-  }
-
-  .path-content {
-    padding-bottom: 2.25rem;
+    padding-block: 1.5rem;
+    border-top: var(--border-width) solid var(--color-border);
   }
 
   .path-content h3 {
@@ -1209,11 +1155,6 @@ const {
       gap: 1rem;
     }
 
-    .path-marker p {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-
     .output-list li {
       grid-template-columns: 1fr;
       gap: 0.75rem;
@@ -1227,7 +1168,6 @@ const {
     .card-grid article,
     .framework-grid,
     .framework-grid article,
-    .path-marker p,
     .evidence,
     .evidence-note,
     .failure-list,

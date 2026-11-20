@@ -613,10 +613,12 @@
 }
 
 .feedback-page .method li span {
-  color: var(--color-blue);
-  font-family: var(--ff-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
 }
 
 .feedback-page .method li p {

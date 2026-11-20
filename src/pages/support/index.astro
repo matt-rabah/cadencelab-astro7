@@ -165,7 +165,7 @@ const usefulContext = [
         <ol class="context-list">
           {usefulContext.map((item) => (
             <li>
-              <p class="context-number" aria-hidden="true">
+              <p class="seq-number context-number" aria-hidden="true">
                 {item.number}
               </p>
               <div>
@@ -303,8 +303,7 @@ const usefulContext = [
   }
 
   .eyebrow,
-  .note-label,
-  .context-number {
+  .note-label {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -313,6 +312,10 @@ const usefulContext = [
     line-height: 1.4;
     letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
+  }
+
+  .context-number {
+    margin: 0;
   }
 
   .eyebrow-inverse {
@@ -407,7 +410,7 @@ const usefulContext = [
   }
 
   .route-note dt {
-    color: var(--color-blue);
+    color: var(--color-text);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
   }
@@ -468,7 +471,8 @@ const usefulContext = [
   }
 
   .route-meta span:first-child {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
   }
 
   .route-copy {
@@ -534,7 +538,7 @@ const usefulContext = [
 
   .context-list li {
     display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: 1.25rem;
     padding-block: 1.5rem;
     border-top: var(--border-width) solid var(--color-border-inverse);

@@ -29,7 +29,8 @@ import Layout from "../layouts/Layout.astro";
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="m5 12 4 4L19 6"></path>
+            d="m5 12 4 4L19 6"
+          ></path>
         </svg>
 
         <p>FitCheck™ received</p>
@@ -51,7 +52,9 @@ import Layout from "../layouts/Layout.astro";
 
         <ol class="steps">
           <li class="step">
-            <span class="step-number" aria-hidden="true">01</span>
+            <span class="seq-number step-number" aria-hidden="true">
+              01
+            </span>
 
             <div>
               <h3>I review what you shared</h3>
@@ -64,7 +67,9 @@ import Layout from "../layouts/Layout.astro";
           </li>
 
           <li class="step">
-            <span class="step-number" aria-hidden="true">02</span>
+            <span class="seq-number step-number" aria-hidden="true">
+              02
+            </span>
 
             <div>
               <h3>You receive a decision brief</h3>
@@ -78,7 +83,9 @@ import Layout from "../layouts/Layout.astro";
           </li>
 
           <li class="step">
-            <span class="step-number" aria-hidden="true">03</span>
+            <span class="seq-number step-number" aria-hidden="true">
+              03
+            </span>
 
             <div>
               <h3>You decide what to do next</h3>
@@ -94,7 +101,9 @@ import Layout from "../layouts/Layout.astro";
       </section>
 
       <div class="thanks-actions">
-        <a href="/" class="primary-link">Go to the home page</a>
+        <a href="/" class="primary-link">
+          Go to the home page
+        </a>
 
         <a href="/contact/" class="secondary-link">
           Contact Cadence Lab
@@ -226,22 +235,13 @@ import Layout from "../layouts/Layout.astro";
 
   .step {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: 1rem;
     padding-block: 1.5rem;
   }
 
   .step + .step {
     border-top: 1px solid var(--color-border);
-  }
-
-  .step-number {
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: var(--fw-medium);
-    line-height: 1.4;
-    font-feature-settings: var(--fea-tabular);
   }
 
   .step div {
@@ -352,11 +352,6 @@ import Layout from "../layouts/Layout.astro";
 
     .next-steps {
       padding: 1.25rem;
-    }
-
-    .step {
-      grid-template-columns: 1fr;
-      gap: 0.625rem;
     }
 
     .thanks-actions {

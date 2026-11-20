@@ -14,7 +14,7 @@
 2. Accessibility, semantic behavior, security, performance, and usable mobile layouts.
 3. This document's Cadence-specific visual and content rules.
 4. Relevant established components and existing implementation conventions.
-5. External references (Notion, IBM Carbon, The Information, Linear, etc.) as *principles*, never source code, brand assets, visual clones, or alternative color schemes.
+5. External references (Notion, IBM Carbon, The Information, Linear, etc.) as _principles_, never source code, brand assets, visual clones, or alternative color schemes.
 
 **Preserve, do not replace:**
 
@@ -24,7 +24,7 @@
 - Existing content model, service names, truthful claims, citations, FitCheck™ identity, and site routes.
 - Existing framework and architecture (Astro where currently used). Do not add React, shadcn/ui, heavy animation libraries, or design-system dependencies merely because a reference site uses them.
 
-**Brand marker conflict resolution:** Recent design direction refers to a **yellow dot**, while an older Cadence Lab stylesheet and logo references used **blue**. **Do not guess a yellow hex value, recolor the existing SVG, or silently pick one.** Use the currently approved, checked-in logo/dot asset as the source of truth. Expose `--cl-brand-marker` only if the implementation needs a CSS-controlled marker; it must match the actual approved asset. The dot is an identity element, *not* a universal CTA color or substitute for status labels.
+**Brand marker conflict resolution:** Recent design direction refers to a **yellow dot**, while an older Cadence Lab stylesheet and logo references used **blue**. **Do not guess a yellow hex value, recolor the existing SVG, or silently pick one.** Use the currently approved, checked-in logo/dot asset as the source of truth. Expose `--cl-brand-marker` only if the implementation needs a CSS-controlled marker; it must match the actual approved asset. The dot is an identity element, _not_ a universal CTA color or substitute for status labels.
 
 **Hard exclusions:** No purple/lavender palettes; no imported brand colors; no generic three-up SaaS feature grids across every section; no decorative gradients, glassmorphism, glowing orbs, fake terminals, floating dashboards, pointless 3D illustrations, cartoon mascots, or AI-generated corporate handshakes. No indiscriminate rounded pills; no fake evidence, metrics, quotes, testimonials, client relationships, or case studies. Never sacrifice contrast or comprehension for aesthetic minimalism.
 
@@ -34,18 +34,18 @@ These are the values in `src/styles/global.css`. Where a historical value later 
 
 **Palette: neutral paper and graphite.** True neutral grays, with no warm (brown) or cool (navy) tint, replace pure white and pure black. A warm palette was tried and rejected as brownish. One principle is kept from the Mailchimp study (a softened near-black instead of black; white paper on a slightly tinted page), but none of its values, yellow, fonts or shapes.
 
-| Role | Light | Dark |
-|---|---|---|
-| Level 0 · page (`--color-surface`) | `#FAFAFA` off-white | `#212121`, lifted so the header and footer frame it |
-| Level 1 · inset, bands (`--color-surface-subtle`) | `#F0F0F0` | `#2A2A2A` |
-| Stronger separation (`--color-surface-muted`) | `#E6E6E6` | `#333333` |
-| Level 2 · paper, panels, forms (`--color-surface-pure`) | `#FFFFFF` | `#333333` |
-| Header and footer anchor (`--color-surface-anchor`) | `#1F1F1F` graphite | `#0E0E0E` |
-| Text (`--color-text`) | `#1F1F1F` | `#F2F2F2` |
-| Muted text | `#555555` | `#BBBBBB` |
-| Rules | `#DEDEDE` / strong `#B5B5B5` | `#3D3D3D` / strong `#545454` |
-| Action blue: links, focus, FitCheck™ CTA | `#2A53DB` | `#9FB3FF` |
-| Logo dot (marker only) | `#FFCE31` | `#FFCE31` |
+| Role                                                    | Light                        | Dark                                                |
+| ------------------------------------------------------- | ---------------------------- | --------------------------------------------------- |
+| Level 0 · page (`--color-surface`)                      | `#FAFAFA` off-white          | `#212121`, lifted so the header and footer frame it |
+| Level 1 · inset, bands (`--color-surface-subtle`)       | `#F0F0F0`                    | `#2A2A2A`                                           |
+| Stronger separation (`--color-surface-muted`)           | `#E6E6E6`                    | `#333333`                                           |
+| Level 2 · paper, panels, forms (`--color-surface-pure`) | `#FFFFFF`                    | `#333333`                                           |
+| Header and footer anchor (`--color-surface-anchor`)     | `#1F1F1F` graphite           | `#0E0E0E`                                           |
+| Text (`--color-text`)                                   | `#1F1F1F`                    | `#F2F2F2`                                           |
+| Muted text                                              | `#555555`                    | `#BBBBBB`                                           |
+| Rules                                                   | `#DEDEDE` / strong `#B5B5B5` | `#3D3D3D` / strong `#545454`                        |
+| Action blue: links, focus, FitCheck™ CTA                | `#2A53DB`                    | `#9FB3FF`                                           |
+| Logo dot (marker only)                                  | `#FFCE31`                    | `#FFCE31`                                           |
 
 Every text pair passes WCAG AA on every surface it sits on in both themes; the site-wide contrast scan reports 0 failures.
 
@@ -60,9 +60,15 @@ Every text pair passes WCAG AA on every surface it sits on in both themes; the s
 
 **Geometry:** `--radius-sm`/`--radius-md` 4px, `--radius-lg` 8px. No pills. Static content has no shadow; overlays keep `--shadow-overlay`.
 
-**Labels:** sentence case, muted, no forced uppercase or tracking. Uppercase is reserved for the short Friction Trace annotations (Observation, Decision, Owner, Measure).
+**Labels:** sentence case, muted, no forced uppercase or tracking, anywhere.
 
-**Signature:** the home method section is a numbered Friction Trace; the diagnostics index is rule-separated editorial rows; evidence stats are open columns on a 2px rule.
+**Signature:** the diagnostics index is rule-separated editorial rows; evidence stats are open columns on a 2px rule.
+
+**Same feature, same style:** a pattern that appears on more than one page looks identical on every page, so visitors learn it once.
+
+- **Numbered sequences** (steps, stages, ordered items, including the home method): rule-separated rows, the number in a left column with the global `.seq-number` style (two digits, muted, medium, tabular, no box, circle, color or connector), then an optional muted sentence-case label, heading and copy. Long sequences use the `.disclosure` rows instead. Only a real sequence is numbered; unordered sets are not.
+- **Expandable rows:** the global `.disclosure` pattern only.
+- **The yellow dot** means one thing besides the logo and brand period: the item that is open or selected right now (open disclosure row, selected tab, chosen FitCheck™ starting point). Never a decorative bullet or label ornament.
 
 ---
 
@@ -91,15 +97,15 @@ The home page expresses its position directly:
 
 ### Reference synthesis — principles only
 
-| Source | Borrow | Reject |
-|---|---|---|
-| **Notion** | Calm editorial space, thoughtful content hierarchy, border-first components | Purple palette, workspace/product mockups, Notion font, pastel-card overload |
-| **IBM Carbon** | Repeatable grid, accessibility rigor, states, information hierarchy, disciplined component logic | IBM blue/branding, strict institutional rigidity, Carbon-specific React package |
-| **The Information** | Strong editorial rules, typographic roles, visual economy, unapologetic information hierarchy | Magenta, newspaper density, multi-font imitation, paywall marketing patterns |
-| **Linear** | Precise micro-interactions, quiet confidence, restrained surfaces, control of density | Dark-app aesthetic, indigo accent, project-management UI metaphors |
-| **Basecamp** | Direct, plainspoken, human explanations | Nostalgic cream-and-green styling, playful task-app interface |
+| Source              | Borrow                                                                                           | Reject                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Notion**          | Calm editorial space, thoughtful content hierarchy, border-first components                      | Purple palette, workspace/product mockups, Notion font, pastel-card overload    |
+| **IBM Carbon**      | Repeatable grid, accessibility rigor, states, information hierarchy, disciplined component logic | IBM blue/branding, strict institutional rigidity, Carbon-specific React package |
+| **The Information** | Strong editorial rules, typographic roles, visual economy, unapologetic information hierarchy    | Magenta, newspaper density, multi-font imitation, paywall marketing patterns    |
+| **Linear**          | Precise micro-interactions, quiet confidence, restrained surfaces, control of density            | Dark-app aesthetic, indigo accent, project-management UI metaphors              |
+| **Basecamp**        | Direct, plainspoken, human explanations                                                          | Nostalgic cream-and-green styling, playful task-app interface                   |
 
-**Cohesion rule:** These references provide different *jobs*, not five simultaneous themes. Every Cadence page uses **one common token system, one typographic system, one component grammar, and one diagram grammar**.
+**Cohesion rule:** These references provide different _jobs_, not five simultaneous themes. Every Cadence page uses **one common token system, one typographic system, one component grammar, and one diagram grammar**.
 
 ---
 
@@ -109,26 +115,26 @@ The home page expresses its position directly:
 
 The following legacy values were present in a **July 2026 Cadence Lab `global.css`**. Treat them as a **verified historical baseline**, not an instruction to overwrite current production values. **Before modifying CSS, inspect the current repo and its actual tokens.** If approved values differ, preserve them and adapt only semantic aliases, accessibility variants, and surface relationships.
 
-| Historical token | Reference value | Intended role |
-|---|---|---|
-| `--color-ink` | `#010302` | Near-black anchor |
-| `--color-light` | `#FCFEFF` | Ice-white anchor |
-| `--color-blue` | `#3565FF` | Existing brand/interactive blue |
-| `--color-green` | `#4FD34A` | Existing positive/signal green |
-| `--color-surface` | `#FCFEFF` | Light reading canvas |
-| `--color-surface-pure` | `#FFFFFF` | Distinct raised or paper surface |
-| `--color-surface-subtle` | `#F4F7F8` | Quiet section contrast |
-| `--color-surface-muted` | `#EAF0F2` | Stronger neutral separation |
-| `--color-text-muted` | `#515B59` | Secondary body copy |
-| `--color-text-subtle` | `#707A77` | Tertiary metadata; **not** automatically safe for small text |
-| `--color-border` | `#D8E0DF` | Structural rule |
-| `--color-border-strong` | `#AAB5B2` | Emphasized separation |
-| `--color-error` | `#B42318` | Error text/icon |
-| `--color-success` | `#16794A` | Success text/icon |
+| Historical token         | Reference value | Intended role                                                |
+| ------------------------ | --------------- | ------------------------------------------------------------ |
+| `--color-ink`            | `#010302`       | Near-black anchor                                            |
+| `--color-light`          | `#FCFEFF`       | Ice-white anchor                                             |
+| `--color-blue`           | `#3565FF`       | Existing brand/interactive blue                              |
+| `--color-green`          | `#4FD34A`       | Existing positive/signal green                               |
+| `--color-surface`        | `#FCFEFF`       | Light reading canvas                                         |
+| `--color-surface-pure`   | `#FFFFFF`       | Distinct raised or paper surface                             |
+| `--color-surface-subtle` | `#F4F7F8`       | Quiet section contrast                                       |
+| `--color-surface-muted`  | `#EAF0F2`       | Stronger neutral separation                                  |
+| `--color-text-muted`     | `#515B59`       | Secondary body copy                                          |
+| `--color-text-subtle`    | `#707A77`       | Tertiary metadata; **not** automatically safe for small text |
+| `--color-border`         | `#D8E0DF`       | Structural rule                                              |
+| `--color-border-strong`  | `#AAB5B2`       | Emphasized separation                                        |
+| `--color-error`          | `#B42318`       | Error text/icon                                              |
+| `--color-success`        | `#16794A`       | Success text/icon                                            |
 
 ### Semantic tokens
 
-Maintain *raw brand tokens* separately from *semantic roles*. Do not color components with arbitrary raw values. Suggested alias vocabulary:
+Maintain _raw brand tokens_ separately from _semantic roles_. Do not color components with arbitrary raw values. Suggested alias vocabulary:
 
 ```css
 /* Names/relationships to implement or map onto the existing theme.
@@ -154,10 +160,10 @@ Maintain *raw brand tokens* separately from *semantic roles*. Do not color compo
 
 Use a deliberate **three-level surface language** in each theme:
 
-| Surface | Light scheme | Dark scheme | Use |
-|---|---|---|---|
-| Level 0 / page | ice-white | deepest near-black | Main scroll canvas |
-| Level 1 / inset | subtle neutral, visibly distinct | charcoal one step above page | Method, evidence, sidebars |
+| Surface         | Light scheme                             | Dark scheme                   | Use                                                   |
+| --------------- | ---------------------------------------- | ----------------------------- | ----------------------------------------------------- |
+| Level 0 / page  | ice-white                                | deepest near-black            | Main scroll canvas                                    |
+| Level 1 / inset | subtle neutral, visibly distinct         | charcoal one step above page  | Method, evidence, sidebars                            |
 | Level 2 / panel | paper white or selected stronger neutral | charcoal one step above inset | FitCheck forms, interactive overlays, evidence panels |
 
 **Do not solve hierarchy only with shadows.** Separate neighboring surfaces with tone, a structural 1px rule, white space, and typographic roles. In dark mode, adjacent levels must be distinguishable on real displays; never use black-on-black sections with invisible borders.
@@ -165,8 +171,8 @@ Use a deliberate **three-level surface language** in each theme:
 ### Dark mode requirements
 
 - Keep the dark page rooted in Cadence's established near-black (`#000504` or `#010302` if those remain current), with approved off-white reading text (historically `#F6F8FF` / `#FCFEFF`).
-- Proposed **neutral-only** structural ramps, *subject to existing-token reconciliation*: dark page `#000504`, inset `#111717`, panel `#1B2323`, stronger rules `#394443`, muted copy `#B4C0BC`. These are **candidate functional neutrals**, not new brand colors; do not apply blindly over an existing approved ramp.
-- Brand blue `#3565FF` is not sufficiently legible for small body links on the deepest dark surface; use a tested lighter *functional tint* (for example `#9FB3FF`) or the current approved accessible dark-link token. Do not call that tint a new brand color.
+- Proposed **neutral-only** structural ramps, _subject to existing-token reconciliation_: dark page `#000504`, inset `#111717`, panel `#1B2323`, stronger rules `#394443`, muted copy `#B4C0BC`. These are **candidate functional neutrals**, not new brand colors; do not apply blindly over an existing approved ramp.
+- Brand blue `#3565FF` is not sufficiently legible for small body links on the deepest dark surface; use a tested lighter _functional tint_ (for example `#9FB3FF`) or the current approved accessible dark-link token. Do not call that tint a new brand color.
 - Signal green `#4FD34A` can work as an icon/signal on dark but cannot serve as small text on the ice-white page. Status must also include a textual name or shape.
 - Never create a separate purple/blue-gradient visual identity for dark mode.
 - Use `color-scheme` to style native controls and keep forms, focus, selection, illustrations, and logos compatible with both modes.
@@ -185,32 +191,32 @@ Use a deliberate **three-level surface language** in each theme:
 
 ### Type roles
 
-| Role | Font | Behavior |
-|---|---|---|
-| Logo | Existing approved SVG / Graphik Semibold geometry | **Never retype the brand mark** or alter dot kerning/spacing |
-| Display / H1–H4 | **Graphik** | Precise, direct, readable; use actual installed weights |
-| Body, navigation, cards, CTA, forms | **Graphik** | Default across site; consistent weights and optical spacing |
-| Long-form insights / article prose | **Tiempos Text** | Selectively for extended reading; never for forms or navigation |
-| Rare editorial pull quote | **Tiempos Headline** if installed and context warrants | One exception, not a second full heading system |
-| Numeric / systems labels | Graphik with tabular figures; system mono if truly needed | Avoid fake-terminal visuals and arbitrary mono labels |
+| Role                                | Font                                                      | Behavior                                                        |
+| ----------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------- |
+| Logo                                | Existing approved SVG / Graphik Semibold geometry         | **Never retype the brand mark** or alter dot kerning/spacing    |
+| Display / H1–H4                     | **Graphik**                                               | Precise, direct, readable; use actual installed weights         |
+| Body, navigation, cards, CTA, forms | **Graphik**                                               | Default across site; consistent weights and optical spacing     |
+| Long-form insights / article prose  | **Tiempos Text**                                          | Selectively for extended reading; never for forms or navigation |
+| Rare editorial pull quote           | **Tiempos Headline** if installed and context warrants    | One exception, not a second full heading system                 |
+| Numeric / systems labels            | Graphik with tabular figures; system mono if truly needed | Avoid fake-terminal visuals and arbitrary mono labels           |
 
 **Do not** introduce Inter, Geist, IBM Plex, Notion Sans, Suisse, another imported headline font, or additional family without an explicit identity decision. Never ship font files in public downloads outside properly licensed website assets.
 
 ### Type scale (responsive, aspirational ranges)
 
-The exact weight/size should be reconciled with current CSS; use these as starting *roles*, not a blanket regression of existing approved headings.
+The exact weight/size should be reconciled with current CSS; use these as starting _roles_, not a blanket regression of existing approved headings.
 
-| Role | Desktop target | Mobile target | Line-height | Weight |
-|---|---:|---:|---:|---:|
-| Display / home hero | 64–76px | 40–48px | 0.98–1.08 | 600 |
-| H1 on interior page | 52–64px | 36–44px | 1.03–1.12 | 600 |
-| H2 / section thesis | 40–52px | 30–38px | 1.08–1.16 | 400–600 |
-| H3 / problem heading | 26–32px | 23–28px | 1.15–1.25 | 500–600 |
-| H4 / panel title | 19–23px | 18–21px | 1.25–1.35 | 500–600 |
-| Lead paragraph | 19–22px | 17–19px | 1.45–1.6 | 400 |
-| Standard body | 16–18px | 16px | 1.55–1.7 | 400 |
-| Metadata / labels | 13–14px | 13–14px | 1.4–1.5 | 500 |
-| Short technical annotation | 12–14px | 12–14px | ≥ 1.4 | 400–500 |
+| Role                       | Desktop target | Mobile target | Line-height |  Weight |
+| -------------------------- | -------------: | ------------: | ----------: | ------: |
+| Display / home hero        |        64–76px |       40–48px |   0.98–1.08 |     600 |
+| H1 on interior page        |        52–64px |       36–44px |   1.03–1.12 |     600 |
+| H2 / section thesis        |        40–52px |       30–38px |   1.08–1.16 | 400–600 |
+| H3 / problem heading       |        26–32px |       23–28px |   1.15–1.25 | 500–600 |
+| H4 / panel title           |        19–23px |       18–21px |   1.25–1.35 | 500–600 |
+| Lead paragraph             |        19–22px |       17–19px |    1.45–1.6 |     400 |
+| Standard body              |        16–18px |          16px |    1.55–1.7 |     400 |
+| Metadata / labels          |        13–14px |       13–14px |     1.4–1.5 |     500 |
+| Short technical annotation |        12–14px |       12–14px |       ≥ 1.4 | 400–500 |
 
 - Use fluid CSS (`clamp`) for display tiers; don't shrink an H1 to an unreadable fixed size or stretch it beyond the viewport.
 - Line breaks are **content-aware**, not forced after every adjective. Aim 8–12 words for a prominent headline where natural; use no hard `<br>` layout hacks for mobile.
@@ -256,15 +262,15 @@ Preserve the site's historical layout values unless current code differs:
 --container-copy: 66ch;
 
 /* 4px-root rhythm; optional jumps by use case */
---space-1: .25rem;  /* 4px */
---space-2: .5rem;   /* 8px */
---space-3: .75rem;  /* 12px */
---space-4: 1rem;    /* 16px */
---space-6: 1.5rem;  /* 24px */
---space-8: 2rem;    /* 32px */
---space-12: 3rem;   /* 48px */
---space-16: 4rem;   /* 64px */
---space-24: 6rem;   /* 96px */
+--space-1: 0.25rem; /* 4px */
+--space-2: 0.5rem; /* 8px */
+--space-3: 0.75rem; /* 12px */
+--space-4: 1rem; /* 16px */
+--space-6: 1.5rem; /* 24px */
+--space-8: 2rem; /* 32px */
+--space-12: 3rem; /* 48px */
+--space-16: 4rem; /* 64px */
+--space-24: 6rem; /* 96px */
 ```
 
 - Desktop: up to 12 logical columns; content and page grids need not expose physical guides.
@@ -285,22 +291,22 @@ Preserve the site's historical layout values unless current code differs:
 
 ## 5. Cadence's ownable visual language: the Friction Trace
 
-**This is the differentiation mechanism.** The website should make *how Cadence thinks* visible. Reuse a proprietary **Friction Trace** grammar in diagnostic illustrations, service introductions, case studies, and explanatory visuals—not as decorative wallpaper.
+**This is the differentiation mechanism.** The website should make _how Cadence thinks_ visible. Reuse a proprietary **Friction Trace** grammar in diagnostic illustrations, service introductions, case studies, and explanatory visuals—not as decorative wallpaper.
 
 ### Diagram vocabulary
 
 A Friction Trace depicts how one customer outcome travels through a sequence of people, systems, and decisions.
 
-| Element | Form | Meaning |
-|---|---|---|
-| **Path** | Thin continuous rule | A customer's journey or operational workflow |
-| **Node** | Compact outlined rectangle, number or small dot | A team, tool, touchpoint or decision |
-| **Handoff** | Rule connecting nodes | Transfer of information or ownership |
-| **Break** | Interrupted/dashed segment plus label | Observed friction, missing context, delayed decision |
-| **Owner** | Short label attached to node or resolution | Person/team accountable for corrective action |
-| **Measure** | Aligned numeric value or before/after qualifier | Observed result, baseline or target |
-| **Marker** | Existing approved Cadence dot used sparingly | Point under attention; not an unlabeled status |
-| **Annotation** | Small Graphik note in margin or rail | What the evidence means and what to do next |
+| Element        | Form                                            | Meaning                                                      |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------------ |
+| **Path**       | Thin continuous rule                            | A customer's journey or operational workflow                 |
+| **Node**       | Compact outlined rectangle, number or small dot | A team, tool, touchpoint or decision                         |
+| **Handoff**    | Rule connecting nodes                           | Transfer of information or ownership                         |
+| **Break**      | Interrupted/dashed segment plus label           | Observed friction, missing context, delayed decision         |
+| **Owner**      | Short label attached to node or resolution      | Person/team accountable for corrective action                |
+| **Measure**    | Aligned numeric value or before/after qualifier | Observed result, baseline or target                          |
+| **Marker**     | Existing approved Cadence dot used sparingly    | The item open or selected right now; never static decoration |
+| **Annotation** | Small Graphik note in margin or rail            | What the evidence means and what to do next                  |
 
 ### Example: a genuine CX diagnostic story
 
@@ -317,7 +323,7 @@ Service team --- handoff missing account context --- Customer Success
              MEASURE: repeated-contact rate
 ```
 
-**Agent rule:** This is a *grammar*, not a pre-approved business claim. The above is illustrative. For published examples, label them as examples; for actual client cases, use approved evidence and explicitly state scope, data source, and owner.
+**Agent rule:** This is a _grammar_, not a pre-approved business claim. The above is illustrative. For published examples, label them as examples; for actual client cases, use approved evidence and explicitly state scope, data source, and owner.
 
 ### Visual treatment
 
@@ -367,7 +373,7 @@ The four existing diagnostic pathways should be recognizable and comparable:
 ### Method/process
 
 - Existing method: **Find what's really happening → Agree on what has to change → Fix how the work gets done → Track what changes**.
-- Show as a **numbered Friction Trace** or editorial vertical sequence; each step has one actionable sentence.
+- Show as the site's standard numbered sequence (see "Same feature, same style"); each step has one actionable sentence.
 - Use real progress semantics only when an actual process state exists; decorative numbered steps should not impersonate an interactive wizard.
 
 ### Evidence and metrics
@@ -401,19 +407,19 @@ Avoid giant, abstract “capabilities” grids; every section must help a prospe
 
 ### Common controls
 
-| Control | Requirement |
-|---|---|
-| Primary button | Solid, compact shape, clear verb, visible focus and hover; one per decision area |
-| Secondary action | Text or outlined button; never visually compete with primary CTA |
-| Links | Distinguishable beyond color when embedded in copy (underline or equivalent persistent affordance) |
-| Cards | Reserve for genuinely bounded information or interaction; avoid card-ifying prose |
-| Accordion | Semantic `<details>` or equivalent accessible control, stable focus, clear expanded state |
-| Tables | Real `<table>` for tabular evidence; proper headers; responsive overflow that remains discoverable |
-| Inputs | Persistent visible labels; errors associated with controls; autocomplete where appropriate |
-| Dialog/search | Focus management, inert background, Escape behavior, return focus on close |
-| Tooltips | Supplemental only; core information visible without hover |
-| Icons | Consistent stroke and size; decorative icons hidden from assistive tech |
-| Brand/platform logos | Accurate assets, accessible names, no implied customer endorsement |
+| Control              | Requirement                                                                                        |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
+| Primary button       | Solid, compact shape, clear verb, visible focus and hover; one per decision area                   |
+| Secondary action     | Text or outlined button; never visually compete with primary CTA                                   |
+| Links                | Distinguishable beyond color when embedded in copy (underline or equivalent persistent affordance) |
+| Cards                | Reserve for genuinely bounded information or interaction; avoid card-ifying prose                  |
+| Accordion            | Semantic `<details>` or equivalent accessible control, stable focus, clear expanded state          |
+| Tables               | Real `<table>` for tabular evidence; proper headers; responsive overflow that remains discoverable |
+| Inputs               | Persistent visible labels; errors associated with controls; autocomplete where appropriate         |
+| Dialog/search        | Focus management, inert background, Escape behavior, return focus on close                         |
+| Tooltips             | Supplemental only; core information visible without hover                                          |
+| Icons                | Consistent stroke and size; decorative icons hidden from assistive tech                            |
+| Brand/platform logos | Accurate assets, accessible names, no implied customer endorsement                                 |
 
 ---
 
@@ -421,12 +427,12 @@ Avoid giant, abstract “capabilities” grids; every section must help a prospe
 
 ### Breakpoint intent
 
-| Range | Typical layout behavior |
-|---|---|
-| **< 640px** | One editorial column, stacked trace nodes, simple navigation, no horizontal text overflow |
-| **640–959px** | Flexible 2-column modules only when content fits; no tiny captions or cramped diagrams |
-| **960–1279px** | Wider editorial layouts and selective split compositions |
-| **≥ 1280px** | Full page grid with 1–2 purposeful side rails; text columns still capped |
+| Range          | Typical layout behavior                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| **< 640px**    | One editorial column, stacked trace nodes, simple navigation, no horizontal text overflow |
+| **640–959px**  | Flexible 2-column modules only when content fits; no tiny captions or cramped diagrams    |
+| **960–1279px** | Wider editorial layouts and selective split compositions                                  |
+| **≥ 1280px**   | Full page grid with 1–2 purposeful side rails; text columns still capped                  |
 
 Breakpoints are **content-driven**, not a prescription to add framework-specific classes everywhere. Respect browser text zoom to 200% and reflow at an effective 320 CSS px viewport without losing content or functionality (except legitimately two-dimensional data).
 
@@ -468,12 +474,12 @@ Breakpoints are **content-driven**, not a prescription to add framework-specific
 1. **Thesis:** “Fix the systems behind customer friction.” Short explanation and FitCheck™ action.
 2. **Evidence:** a concise, sourced observation showing why the current way of working fails.
 3. **Problem paths:** editorial comparison of the four diagnostic entry points.
-4. **Method:** a signature Friction Trace with a numbered sequence of the actual approach.
+4. **Method:** the standard numbered sequence of the actual approach.
 5. **What the buyer receives:** evidence, decision, owner, sequenced next step; use an annotated decision brief mockup only if it accurately reflects a real deliverable.
 6. **FitCheck™:** high-trust intake explanation and clear, direct action.
 7. **Footer:** useful navigation, legal/privacy information, and concise point of view.
 
-**Variation rule:** Don't render all seven sections as identical bands. Alternate between an open editorial statement, a structured comparison, one standout graphic, and a quiet conversion section. The difference should be in *composition*, not in introducing new colors or UI languages.
+**Variation rule:** Don't render all seven sections as identical bands. Alternate between an open editorial statement, a structured comparison, one standout graphic, and a quiet conversion section. The difference should be in _composition_, not in introducing new colors or UI languages.
 
 ### Service page — business case format
 
@@ -496,7 +502,7 @@ Title and thesis → useful executive summary → documented evidence → clear 
 - Use **customer**, **team**, **system**, **handoff**, **owner**, **risk**, **evidence**, **decision**, **measure** when these are accurate. Define specialized terminology on first use.
 - Be explicit when something is a hypothesis rather than a proven cause.
 - Keep headlines short and specific. Use clear verbs; no breathless superlatives or invented urgency.
-- Describe what happens *after* the engagement as carefully as what happens at the beginning.
+- Describe what happens _after_ the engagement as carefully as what happens at the beginning.
 - Do not imply Cadence Lab operates or owns the platforms named in the enterprise logo strip, nor imply endorsement or formal partnership without evidence.
 - Match claim to proof: dated external citation, approved client metrics, clearly labeled example, or identified judgment. Don't silently substitute one for another.
 - Avoid “AI-powered” as decoration; explain the responsible handoff, governance boundary, human review, and practical business consequence.
@@ -591,4 +597,4 @@ validate both themes, mobile, keyboard interactions, contrast, and build.
 
 ---
 
-**One-line standard:** *A calm, rigorous website that makes customer friction visible, its cause understandable, and the next accountable action obvious.*
+**One-line standard:** _A calm, rigorous website that makes customer friction visible, its cause understandable, and the next accountable action obvious._

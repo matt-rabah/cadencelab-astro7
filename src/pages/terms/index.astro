@@ -86,7 +86,7 @@ const termsSections = [
 
       <article class="terms-content">
         <section id="scope" aria-labelledby="scope-title">
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             01
           </p>
           <h2 id="scope-title">Scope and acceptance</h2>
@@ -122,7 +122,7 @@ const termsSections = [
           id="website-information"
           aria-labelledby="website-information-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             02
           </p>
           <h2 id="website-information-title">
@@ -156,7 +156,7 @@ const termsSections = [
           id="inquiries-engagements"
           aria-labelledby="inquiries-engagements-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             03
           </p>
           <h2 id="inquiries-engagements-title">
@@ -189,7 +189,7 @@ const termsSections = [
         </section>
 
         <section id="acceptable-use" aria-labelledby="acceptable-use-title">
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             04
           </p>
           <h2 id="acceptable-use-title">Acceptable use</h2>
@@ -244,7 +244,7 @@ const termsSections = [
           id="intellectual-property"
           aria-labelledby="intellectual-property-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             05
           </p>
           <h2 id="intellectual-property-title">Intellectual property</h2>
@@ -294,7 +294,7 @@ const termsSections = [
           id="third-party-services"
           aria-labelledby="third-party-services-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             06
           </p>
           <h2 id="third-party-services-title">
@@ -321,7 +321,7 @@ const termsSections = [
           id="availability-liability"
           aria-labelledby="availability-liability-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             07
           </p>
           <h2 id="availability-liability-title">
@@ -365,7 +365,7 @@ const termsSections = [
         </section>
 
         <section id="changes-contact" aria-labelledby="changes-contact-title">
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             08
           </p>
           <h2 id="changes-contact-title">Changes and contact</h2>
@@ -441,7 +441,6 @@ const termsSections = [
 
   .eyebrow,
   .summary-label,
-  .section-number,
   .note-label,
   .terms-navigation nav > p {
     margin: 0;
@@ -452,6 +451,10 @@ const termsSections = [
     line-height: 1.4;
     letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
+  }
+
+  .section-number {
+    margin: 0;
   }
 
   h1,

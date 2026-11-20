@@ -279,11 +279,10 @@ const usefulWhen = [
               {traceStages.map((stage) => (
                 <li>
                   <div class="trace-marker">
-                    <p>{stage.number}</p>
-                    <span aria-hidden="true" />
+                    <p class="seq-number">{stage.number}</p>
                   </div>
                   <div class="trace-content">
-                    <p class="trace-label">{stage.label}</p>
+                    <p class="seq-label trace-label">{stage.label}</p>
                     <h3>{stage.question}</h3>
                     <p>{stage.description}</p>
                   </div>
@@ -526,10 +525,7 @@ const usefulWhen = [
   }
 
   .eyebrow,
-  .note-label,
-  .item-number,
-  .trace-label,
-  .trace-marker p {
+  .note-label {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -538,6 +534,14 @@ const usefulWhen = [
     line-height: 1.4;
     letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
+  }
+
+  .trace-label {
+    margin: 0;
+  }
+
+  .item-number {
+    margin: 0;
   }
 
   .eyebrow-inverse {
@@ -747,48 +751,16 @@ const usefulWhen = [
     display: grid;
     margin: 0;
     padding: 0;
+    border-bottom: var(--border-width) solid var(--color-border);
     list-style: none;
   }
 
   .trace-list li {
     display: grid;
-    grid-template-columns: 5rem minmax(0, 1fr);
-    gap: clamp(1.5rem, 4vw, 3rem);
-    min-height: 10rem;
-  }
-
-  .trace-marker {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .trace-marker p {
-    display: grid;
-    width: 3rem;
-    height: 3rem;
-    border: var(--border-width) solid var(--color-green);
-    border-radius: 50%;
-    color: var(--color-green);
-    place-items: center;
-  }
-
-  .trace-marker span {
-    width: var(--border-width);
-    flex: 1;
-    background: rgb(252 254 255 / 22%);
-  }
-
-  .trace-list li:last-child .trace-marker span {
-    display: none;
-  }
-
-  .trace-content {
-    padding-bottom: 2.5rem;
-  }
-
-  .trace-label {
-    color: var(--color-green);
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+    padding-block: 1.5rem;
+    border-top: var(--border-width) solid var(--color-border);
   }
 
   .trace-content h3 {
@@ -877,10 +849,6 @@ const usefulWhen = [
     padding: clamp(1.5rem, 4vw, 2rem);
     border-inline-end: var(--border-width) solid var(--color-border-inverse);
     border-bottom: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .failure-list .item-number {
-    color: var(--color-text-muted);
   }
 
   .failure-list h3 {
@@ -1063,11 +1031,6 @@ const usefulWhen = [
     .trace-list li {
       grid-template-columns: 3rem minmax(0, 1fr);
       gap: 1rem;
-    }
-
-    .trace-marker p {
-      width: 2.5rem;
-      height: 2.5rem;
     }
 
     .evidence-grid,

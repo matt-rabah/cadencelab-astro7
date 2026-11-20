@@ -193,11 +193,12 @@
 }
 
 .stress-test-form > fieldset > legend span {
-  display: block;
-  margin-bottom: 0.5rem;
+  margin-inline-end: 0.75rem;
   color: var(--color-text-muted);
-  font-family: var(--ff-label);
+  font-family: var(--ff-sans);
   font-size: 0.75rem;
+  font-weight: var(--fw-medium);
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
 
@@ -496,9 +497,12 @@
 }
 
 .method li > span {
-  color: var(--color-green);
-  font-family: var(--ff-label);
-  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
 }
 
 .method li p {

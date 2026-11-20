@@ -85,7 +85,7 @@ const policySections = [
 
       <article class="policy-content">
         <section id="scope" aria-labelledby="scope-title">
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             01
           </p>
           <h2 id="scope-title">Scope and responsibility</h2>
@@ -109,7 +109,7 @@ const policySections = [
           id="information-collected"
           aria-labelledby="information-collected-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             02
           </p>
           <h2 id="information-collected-title">Information we collect</h2>
@@ -206,7 +206,7 @@ const policySections = [
           id="how-information-is-used"
           aria-labelledby="how-information-is-used-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             03
           </p>
           <h2 id="how-information-is-used-title">How information is used</h2>
@@ -248,7 +248,7 @@ const policySections = [
           id="service-providers"
           aria-labelledby="service-providers-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             04
           </p>
           <h2 id="service-providers-title">Service providers and disclosure</h2>
@@ -336,7 +336,7 @@ const policySections = [
           id="retention-security"
           aria-labelledby="retention-security-title"
         >
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             05
           </p>
           <h2 id="retention-security-title">Retention and security</h2>
@@ -381,7 +381,7 @@ const policySections = [
         </section>
 
         <section id="your-choices" aria-labelledby="your-choices-title">
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             06
           </p>
           <h2 id="your-choices-title">Your choices and privacy rights</h2>
@@ -425,7 +425,7 @@ const policySections = [
         </section>
 
         <section id="contact" aria-labelledby="contact-title">
-          <p class="section-number" aria-hidden="true">
+          <p class="seq-number section-number" aria-hidden="true">
             07
           </p>
           <h2 id="contact-title">Contact Cadence Lab</h2>
@@ -484,7 +484,6 @@ const policySections = [
 
   .eyebrow,
   .summary-label,
-  .section-number,
   .note-label,
   .provider-name,
   .policy-navigation nav > p {
@@ -496,6 +495,10 @@ const policySections = [
     line-height: 1.4;
     letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
+  }
+
+  .section-number {
+    margin: 0;
   }
 
   h1,
