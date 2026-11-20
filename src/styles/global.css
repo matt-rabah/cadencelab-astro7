@@ -771,6 +771,156 @@ select:focus-visible {
   }
 }
 
+/*
+  Disclosure rows (DESIGN.md: progressive disclosure, not a card wall).
+  Native <details>: works without JavaScript, keyboard and screen reader
+  semantics come for free, and closed content is still indexed. Rows that
+  share a `name` close each other where the browser supports it (exclusive
+  accordions are newer than Baseline Widely available; elsewhere several
+  rows can be open, which is harmless).
+
+  <ul class="disclosure-list" role="list">
+    <li><details class="disclosure" name="group">
+      <summary><span class="disclosure-title">Title</span>
+        <span class="disclosure-icon" aria-hidden="true"></span></summary>
+      <div class="disclosure-body">…</div>
+    </details></li>
+  </ul>
+*/
+.disclosure-list {
+  margin: 0;
+  padding: 0;
+  border-top: var(--border-width) solid var(--color-border);
+  list-style: none;
+}
+
+.disclosure {
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.disclosure > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: var(--control-min-size, 2.75rem);
+  padding-block: 1.125rem;
+  color: var(--color-text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Two classes deep so a component's bare h3/p rule (one class plus the
+   scoping attribute) can't override the title or body colour, e.g. inside a
+   band where --color-ink is the band's own background. */
+.disclosure .disclosure-title {
+  position: relative;
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+/* The logo's dot marks the open row: the point under attention. */
+.disclosure[open] .disclosure-title::before {
+  position: absolute;
+  top: 0.55em;
+  left: -1.125rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  box-shadow: var(--shadow-hairline);
+  content: "";
+}
+
+.disclosure-icon {
+  position: relative;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 auto;
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.disclosure-icon::before,
+.disclosure-icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.75rem;
+  height: 1.5px;
+  background: var(--color-text);
+  content: "";
+  transform: translate(-50%, -50%);
+  transition: transform var(--transition-fast, 150ms ease);
+}
+
+.disclosure-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.disclosure[open] .disclosure-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.disclosure .disclosure-body,
+.disclosure .disclosure-body p {
+  color: var(--color-text-muted);
+}
+
+.disclosure-body {
+  max-width: 64ch;
+  padding: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.disclosure-body > :first-child {
+  margin-top: 0;
+}
+
+.disclosure-body > :last-child {
+  margin-bottom: 0;
+}
+
+.disclosure > summary:focus-visible {
+  outline: var(--focus-ring-width, 3px) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .disclosure > summary:hover .disclosure-icon {
+    border-color: var(--color-text);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disclosure-icon::before,
+  .disclosure-icon::after {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .disclosure-icon {
+    border-color: CanvasText;
+  }
+
+  .disclosure-icon::before,
+  .disclosure-icon::after {
+    background: CanvasText;
+  }
+}
+
 /* Base layer CSS using pure CSS variables to prevent Tailwind v4 build errors */
 @layer base {
   * {
@@ -837,6 +987,5 @@ select:focus-visible {
   textarea
 ):focus-visible {
   border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px
-    color-mix(in oklab, var(--color-focus) 18%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-focus) 18%, transparent);
 }

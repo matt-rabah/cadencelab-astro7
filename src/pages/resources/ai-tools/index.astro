@@ -37,6 +37,136 @@ const buildStandards = [
       "Build for keyboard use, screen readers, zoom, clear language, and useful results on mobile and desktop.",
   },
 ];
+// Live tools, shown as compact rows: the name, what it does and the button
+// stay visible; what you provide and get opens on demand.
+const liveTools = [
+  {
+    name: "AI Use Case Stress Test",
+    summary:
+      "Describe an AI idea before the platform, pilot, or vendor decision is locked in. The tool tests whether the work, data, ownership, human judgment, controls, and expected outcome are clear enough to support a responsible next step.",
+    details: [
+      {
+        label: "You provide",
+        text: "The user, task, desired outcome, available data, decision being supported, and consequence of a bad result.",
+      },
+      {
+        label: "You get",
+        text: "A one-page decision brief with readiness gaps, key dependencies, human-ownership questions, failure points, and the smallest useful test.",
+      },
+      {
+        label: "Why this comes first",
+        text: "It helps before teams spend money, asks for little sensitive data, and turns a broad AI idea into a decision people can discuss.",
+      },
+    ],
+    href: "/resources/ai-tools/use-case-stress-test/",
+    cta: "Stress-test an AI use case",
+  },
+  {
+    name: "CX Handoff Mapper",
+    summary:
+      "Follow a customer journey across people, teams, channels, and systems. The mapper tests whether every step has an owner, usable evidence, a clear commitment, and a handoff the next person can trust.",
+    details: [
+      {
+        label: "You provide",
+        text: "The journey outcome and its ordered steps, actors, owners, systems, inputs, outputs, and moments of customer uncertainty.",
+      },
+      {
+        label: "You get",
+        text: "A portable handoff map with structural risks, boundary rules, and questions to resolve with customers and the people doing the work.",
+      },
+      {
+        label: "Why it matters",
+        text: "Teams can complete every internal task and still leave the customer stuck between them. The map makes those seams visible.",
+      },
+    ],
+    href: "/resources/ai-tools/cx-handoff-mapper/",
+    cta: "Map a customer journey",
+  },
+  {
+    name: "AI Evaluation Builder",
+    summary:
+      "Define what a useful AI result must do before a demo or pilot shapes the standard. The builder turns the task, evidence, failure exposure, and review model into observable evaluation criteria.",
+    details: [
+      {
+        label: "You provide",
+        text: "The real task, intended user, useful result, available evidence, important failure modes, consequence, and review approach.",
+      },
+      {
+        label: "You get",
+        text: "A portable evaluation plan with pass, review, and fail conditions, test cases, reviewer rules, and stop conditions.",
+      },
+      {
+        label: "Why it matters",
+        text: "A polished output can still be wrong, unsupported, unsafe, or unusable. Shared criteria make those disagreements testable.",
+      },
+    ],
+    href: "/resources/ai-tools/ai-evaluation-builder/",
+    cta: "Build an AI evaluation plan",
+  },
+  {
+    name: "Feedback Signal Sorter",
+    summary:
+      "Organize a small set of anonymized customer comments without hiding the evidence. The sorter groups recurring themes, notes mixed signals, and keeps one-off observations visible.",
+    details: [
+      {
+        label: "You provide",
+        text: "Four or more anonymized customer comments, a recurrence threshold, and any product or survey terms the sorter should ignore.",
+      },
+      {
+        label: "You get",
+        text: "A portable theme summary with mention counts, supporting comments, mixed signals, repeated language, and next-research questions.",
+      },
+      {
+        label: "Why it matters",
+        text: "A repeated issue can disappear inside a spreadsheet, while a dramatic outlier can look like a trend. The sorter keeps both in view without claiming more than the sample can prove.",
+      },
+    ],
+    href: "/resources/ai-tools/feedback-signal-sorter/",
+    cta: "Sort customer feedback",
+  },
+  {
+    name: "CRM Data Health Sampler",
+    summary:
+      "Review a small, anonymized CSV before migration, automation, or reporting decisions rely on it. The sampler profiles observable gaps without uploading the file.",
+    details: [
+      {
+        label: "You provide",
+        text: "A CSV file or pasted CSV sample, the missing-value labels used in the dataset, and whether the first row contains field names.",
+      },
+      {
+        label: "You get",
+        text: "A portable report covering missing values, exact duplicate rows, inconsistent formats, spacing and casing variants, and column profiles.",
+      },
+      {
+        label: "Why it matters",
+        text: "A file can import successfully while its fields still fail the workflows, reports, and customer commitments people expect it to support.",
+      },
+    ],
+    href: "/resources/ai-tools/crm-data-health-sampler/",
+    cta: "Review a CRM data sample",
+  },
+  {
+    name: "Service Recovery Planner",
+    summary:
+      "Turn a customer failure into a practical response without inventing promises or hiding uncertainty. The planner separates confirmed facts, ownership, timing, remedy boundaries, and closure evidence.",
+    details: [
+      {
+        label: "You provide",
+        text: "The failure, affected group, impact, confirmed facts, unknowns, owners, response timing, possible remedies, and limits on what can be promised.",
+      },
+      {
+        label: "You get",
+        text: "A portable recovery plan with communication prompts, ownership, response timing, escalation triggers, a checklist, and follow-up evidence.",
+      },
+      {
+        label: "Why it matters",
+        text: "Customers can accept that something failed. What breaks trust is silence, conflicting answers, vague ownership, or a promise the next team can’t keep.",
+      },
+    ],
+    href: "/resources/ai-tools/service-recovery-planner/",
+    cta: "Plan a service recovery",
+  },
+];
 ---
 
 <Layout
@@ -125,292 +255,45 @@ const buildStandards = [
 
     <section
       id="live-tools"
-      class="first-build section-block"
-      aria-labelledby="first-build-title"
+      class="live-tools section-block"
+      aria-labelledby="live-tools-title"
     >
-      <div class="page-container first-layout">
-        <div class="first-intro">
-          <p class="eyebrow">Live tool</p>
-          <h2 id="first-build-title">AI Use Case Stress Test</h2>
+      <div class="page-container live-layout">
+        <div class="live-intro">
+          <h2 id="live-tools-title">Six free tools, ready when you are.</h2>
           <p>
-            Describe an AI idea before the platform, pilot, or vendor decision
-            is locked in. The tool tests whether the work, data, ownership,
-            human judgment, controls, and expected outcome are clear enough to
-            support a responsible next step.
+            Each one is available now. Free, private, and no signup required.
+            Pick the problem in front of you and open the tool.
           </p>
         </div>
 
-        <div class="first-detail">
-          <div>
-            <p class="detail-label">You provide</p>
-            <p>
-              The user, task, desired outcome, available data, decision being
-              supported, and consequence of a bad result.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">You get</p>
-            <p>
-              A one-page decision brief with readiness gaps, key dependencies,
-              human-ownership questions, failure points, and the smallest useful
-              test.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">Why this comes first</p>
-            <p>
-              It helps before teams spend money, asks for little sensitive data,
-              and turns a broad AI idea into a decision people can discuss.
-            </p>
-          </div>
-          <p class="status-line">
-            <span>Status</span>
-            Available now. Free, private, and no signup required.
-          </p>
-          <a
-            class="button button-primary"
-            href="/resources/ai-tools/use-case-stress-test/"
-          >
-            Stress-test an AI use case
-          </a>
-        </div>
-      </div>
-
-      <div class="page-container first-layout live-tool-secondary">
-        <div class="first-intro">
-          <p class="eyebrow">Live tool</p>
-          <h2>CX Handoff Mapper</h2>
-          <p>
-            Follow a customer journey across people, teams, channels, and
-            systems. The mapper tests whether every step has an owner, usable
-            evidence, a clear commitment, and a handoff the next person can
-            trust.
-          </p>
-        </div>
-
-        <div class="first-detail">
-          <div>
-            <p class="detail-label">You provide</p>
-            <p>
-              The journey outcome and its ordered steps, actors, owners,
-              systems, inputs, outputs, and moments of customer uncertainty.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">You get</p>
-            <p>
-              A portable handoff map with structural risks, boundary rules, and
-              questions to resolve with customers and the people doing the work.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">Why it matters</p>
-            <p>
-              Teams can complete every internal task and still leave the
-              customer stuck between them. The map makes those seams visible.
-            </p>
-          </div>
-          <p class="status-line">
-            <span>Status</span>
-            Available now. Free, private, and no signup required.
-          </p>
-          <a
-            class="button button-primary"
-            href="/resources/ai-tools/cx-handoff-mapper/"
-          >
-            Map a customer journey
-          </a>
-        </div>
-      </div>
-
-      <div class="page-container first-layout live-tool-secondary">
-        <div class="first-intro">
-          <p class="eyebrow">Live tool</p>
-          <h2>AI Evaluation Builder</h2>
-          <p>
-            Define what a useful AI result must do before a demo or pilot shapes
-            the standard. The builder turns the task, evidence, failure
-            exposure, and review model into observable evaluation criteria.
-          </p>
-        </div>
-
-        <div class="first-detail">
-          <div>
-            <p class="detail-label">You provide</p>
-            <p>
-              The real task, intended user, useful result, available evidence,
-              important failure modes, consequence, and review approach.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">You get</p>
-            <p>
-              A portable evaluation plan with pass, review, and fail conditions,
-              test cases, reviewer rules, and stop conditions.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">Why it matters</p>
-            <p>
-              A polished output can still be wrong, unsupported, unsafe, or
-              unusable. Shared criteria make those disagreements testable.
-            </p>
-          </div>
-          <p class="status-line">
-            <span>Status</span>
-            Available now. Free, private, and no signup required.
-          </p>
-          <a
-            class="button button-primary"
-            href="/resources/ai-tools/ai-evaluation-builder/"
-          >
-            Build an AI evaluation plan
-          </a>
-        </div>
-      </div>
-
-      <div class="page-container first-layout live-tool-secondary">
-        <div class="first-intro">
-          <p class="eyebrow">Live tool</p>
-          <h2>Feedback Signal Sorter</h2>
-          <p>
-            Organize a small set of anonymized customer comments without hiding
-            the evidence. The sorter groups recurring themes, notes mixed
-            signals, and keeps one-off observations visible.
-          </p>
-        </div>
-
-        <div class="first-detail">
-          <div>
-            <p class="detail-label">You provide</p>
-            <p>
-              Four or more anonymized customer comments, a recurrence threshold,
-              and any product or survey terms the sorter should ignore.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">You get</p>
-            <p>
-              A portable theme summary with mention counts, supporting comments,
-              mixed signals, repeated language, and next-research questions.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">Why it matters</p>
-            <p>
-              A repeated issue can disappear inside a spreadsheet, while a
-              dramatic outlier can look like a trend. The sorter keeps both in
-              view without claiming more than the sample can prove.
-            </p>
-          </div>
-          <p class="status-line">
-            <span>Status</span>
-            Available now. Free, private, and no signup required.
-          </p>
-          <a
-            class="button button-primary"
-            href="/resources/ai-tools/feedback-signal-sorter/"
-          >
-            Sort customer feedback
-          </a>
-        </div>
-      </div>
-
-      <div class="page-container first-layout live-tool-secondary">
-        <div class="first-intro">
-          <p class="eyebrow">Live tool</p>
-          <h2>CRM Data Health Sampler</h2>
-          <p>
-            Review a small, anonymized CSV before migration, automation, or
-            reporting decisions rely on it. The sampler profiles observable gaps
-            without uploading the file.
-          </p>
-        </div>
-
-        <div class="first-detail">
-          <div>
-            <p class="detail-label">You provide</p>
-            <p>
-              A CSV file or pasted CSV sample, the missing-value labels used in
-              the dataset, and whether the first row contains field names.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">You get</p>
-            <p>
-              A portable report covering missing values, exact duplicate rows,
-              inconsistent formats, spacing and casing variants, and column
-              profiles.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">Why it matters</p>
-            <p>
-              A file can import successfully while its fields still fail the
-              workflows, reports, and customer commitments people expect it to
-              support.
-            </p>
-          </div>
-          <p class="status-line">
-            <span>Status</span>
-            Available now. Free, private, and no signup required.
-          </p>
-          <a
-            class="button button-primary"
-            href="/resources/ai-tools/crm-data-health-sampler/"
-          >
-            Review a CRM data sample
-          </a>
-        </div>
-      </div>
-
-      <div class="page-container first-layout live-tool-secondary">
-        <div class="first-intro">
-          <p class="eyebrow">Live tool</p>
-          <h2>Service Recovery Planner</h2>
-          <p>
-            Turn a customer failure into a practical response without inventing
-            promises or hiding uncertainty. The planner separates confirmed
-            facts, ownership, timing, remedy boundaries, and closure evidence.
-          </p>
-        </div>
-
-        <div class="first-detail">
-          <div>
-            <p class="detail-label">You provide</p>
-            <p>
-              The failure, affected group, impact, confirmed facts, unknowns,
-              owners, response timing, possible remedies, and limits on what can
-              be promised.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">You get</p>
-            <p>
-              A portable recovery plan with communication prompts, ownership,
-              response timing, escalation triggers, a checklist, and follow-up
-              evidence.
-            </p>
-          </div>
-          <div>
-            <p class="detail-label">Why it matters</p>
-            <p>
-              Customers can accept that something failed. What breaks trust is
-              silence, conflicting answers, vague ownership, or a promise the
-              next team can’t keep.
-            </p>
-          </div>
-          <p class="status-line">
-            <span>Status</span>
-            Available now. Free, private, and no signup required.
-          </p>
-          <a
-            class="button button-primary"
-            href="/resources/ai-tools/service-recovery-planner/"
-          >
-            Plan a service recovery
-          </a>
-        </div>
+        <ul class="tool-list" role="list">
+          {liveTools.map((tool) => (
+            <li class="tool-row">
+              <div class="tool-row-main">
+                <h3>{tool.name}</h3>
+                <p>{tool.summary}</p>
+              </div>
+              <a class="button button-primary tool-row-cta" href={tool.href}>
+                {tool.cta}
+              </a>
+              <details class="disclosure tool-row-details" name="live-tool">
+                <summary>
+                  <span class="tool-row-toggle">What you provide and get</span>
+                  <span class="disclosure-icon" aria-hidden="true" />
+                </summary>
+                <dl class="disclosure-body tool-facts">
+                  {tool.details.map((detail) => (
+                    <div>
+                      <dt>{detail.label}</dt>
+                      <dd>{detail.text}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </details>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
@@ -455,16 +338,21 @@ const buildStandards = [
           </p>
         </div>
 
-        <ol class="standard-list">
-          {buildStandards.map((standard, index) => (
+        <ul class="disclosure-list standard-list" role="list">
+          {buildStandards.map((standard) => (
             <li>
-              <div>
-                <h3>{standard.title}</h3>
-                <p>{standard.description}</p>
-              </div>
+              <details class="disclosure" name="build-standard">
+                <summary>
+                  <h3 class="disclosure-title">{standard.title}</h3>
+                  <span class="disclosure-icon" aria-hidden="true" />
+                </summary>
+                <div class="disclosure-body">
+                  <p>{standard.description}</p>
+                </div>
+              </details>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
 
@@ -562,7 +450,6 @@ const buildStandards = [
   }
 
   .hero-layout,
-  .first-layout,
   .standard-layout,
   .privacy-layout,
   .beyond-layout {
@@ -612,10 +499,7 @@ const buildStandards = [
 
   .eyebrow,
   .note-label,
-  .build-number,
-  .detail-label,
-  .item-number,
-  .status-line span {
+  .item-number {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -674,7 +558,7 @@ const buildStandards = [
   }
 
   .hero-lead,
-  .first-intro > p:last-child,
+  .live-intro > p,
   .standard-intro > p:last-child,
   .privacy-layout > div > p:last-child,
   .beyond-copy > p {
@@ -765,56 +649,494 @@ const buildStandards = [
     font-weight: var(--fw-medium);
   }
 
-  .first-layout,
   .standard-layout,
   .privacy-layout,
   .beyond-layout {
     align-items: start;
   }
 
-  .live-tool-secondary {
-    margin-top: clamp(4rem, 8vw, 7rem);
-    padding-top: clamp(4rem, 8vw, 7rem);
-    border-top: var(--border-width) solid var(--color-border);
+  /* Live tools: compact rows. Name, purpose and the button stay visible;
+     "What you provide and get" opens on demand (global .disclosure). */
+  .live-layout {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
   }
 
-  .first-intro,
+  .live-intro {
+    display: grid;
+    max-width: 52rem;
+    gap: 1rem;
+  }
+
+  .live-intro h2 {
+    max-width: 20ch;
+  }
+
   .standard-intro {
     display: grid;
     gap: 1rem;
   }
 
-  .build-number {
-    margin-top: 1rem;
-    color: var(--color-text-muted);
-    font-size: var(--fs-h3);
+  .tool-list {
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid var(--color-text);
+    list-style: none;
   }
 
-  .first-detail {
-    border-top: var(--border-width) solid var(--color-border-strong);
-  }
-
-  .first-detail > div {
-    padding-block: 1.5rem;
+  .tool-row {
+    display: grid;
+    grid-template-areas:
+      "main cta"
+      "details details";
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(1.5rem, 5vw, 4rem);
+    padding-top: clamp(1.5rem, 3vw, 2rem);
     border-bottom: var(--border-width) solid var(--color-border);
   }
 
-  .first-detail > div > p:last-child {
-    margin: 0.6rem 0 0;
-    color: var(--color-text);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
+  .tool-row-main {
+    grid-area: main;
+    max-width: 62ch;
   }
 
-  .status-line {
-    margin: 1.5rem 0 0;
+  .tool-row-main h3 {
+    margin: 0;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: -0.015em;
+  }
+
+  .tool-row-main p {
+    margin: 0.5rem 0 0;
     color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .tool-row-cta {
+    grid-area: cta;
+    align-self: start;
+    white-space: nowrap;
+  }
+
+  /* The row's own bottom rule separates tools, so the disclosure has none. */
+  .tool-row-details {
+    grid-area: details;
+    border-bottom: 0;
+  }
+
+  .tool-row-details > summary {
+    width: fit-content;
+    min-height: 2.75rem;
+    padding-block: 0.75rem;
+  }
+
+  .tool-row-toggle {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .tool-row-details .disclosure-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .tool-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    max-width: none;
+    margin: 0;
+  }
+
+  .tool-facts dt {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
+    line-height: 1.4;
+  }
+
+  .tool-facts dd {
+    margin: 0.4rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+  }
+
+  .tool-roadmap {
+    background: var(--color-ink);
+  }
+
+  .section-stack {
+    display: grid;
+    gap: clamp(3rem, 7vw, 5rem);
+  }
+
+  .section-intro {
+    display: grid;
+    max-width: 58rem;
+    gap: 1rem;
+  }
+
+  .section-intro h2 {
+    max-width: 18ch;
+    color: var(--color-light);
+  }
+
+  .section-intro > p:not(.eyebrow) {
+    max-width: var(--measure-prose);
+    margin: 0;
+    color: var(--color-text-inverse-muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-ui);
+  }
+
+  /* Primary button on the roadmap band. Bands remap the ink tokens, so use
+     the theme's primary pair (global button text uses !important). */
+  .roadmap-action {
+    width: fit-content;
+    margin-top: 0.75rem;
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--primary-foreground) !important;
+  }
+
+  .privacy {
+    padding-block: var(--section-space);
+  }
+
+  .tools-hero {
+    padding-block: var(--section-space);
+    border-bottom: var(--border-width) solid var(--color-border);
+    background: var(--color-surface-subtle);
+  }
+
+  .hero-layout,
+  .standard-layout,
+  .privacy-layout,
+  .beyond-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .hero-layout {
+    align-items: end;
+  }
+
+  .hero-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li {
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .breadcrumb li + li::before {
+    margin-inline-end: 0.5rem;
+    color: var(--color-border-strong);
+    content: "/";
+  }
+
+  .breadcrumb a {
+    color: var(--color-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .eyebrow,
+  .note-label,
+  .item-number {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    letter-spacing: 0;
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  .eyebrow-inverse {
+    color: var(--color-text-muted);
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  dt,
+  dd {
+    font-family: var(--font-sans);
+    font-feature-settings: var(--fea-graphik);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  h1 {
+    max-width: 16ch;
+    font-size: var(--fs-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h2);
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h4);
+    letter-spacing: -0.01em;
+  }
+
+  .hero-lead,
+  .live-intro > p,
+  .standard-intro > p:last-child,
+  .privacy-layout > div > p:last-child,
+  .beyond-copy > p {
+    max-width: var(--measure-prose);
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    line-height: var(--lh-ui);
+    text-wrap: pretty;
+  }
+
+  .hero-actions,
+  .beyond-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: var(--control-min-size);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-light);
+  }
+
+  .button-text {
+    color: var(--color-blue);
+  }
+
+  .promise-card,
+  .privacy-layout aside {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 2px solid var(--color-text);
+    background: var(--color-surface-pure);
+  }
+
+  .promise-card > p:not(.note-label),
+  .privacy-layout aside > p:not(.note-label) {
+    margin: 1rem 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
+  }
+
+  .promise-card dl {
+    display: grid;
+    margin: 1.5rem 0 0;
+  }
+
+  .promise-card dl > div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .promise-card dt,
+  .promise-card dd {
     font-size: var(--fs-small);
     line-height: 1.5;
   }
 
-  .status-line span {
-    margin-inline-end: 0.75rem;
+  .promise-card dt {
+    color: var(--color-text-muted);
+  }
+
+  .promise-card dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: var(--fw-medium);
+  }
+
+  .standard-layout,
+  .privacy-layout,
+  .beyond-layout {
+    align-items: start;
+  }
+
+  /* Live tools: compact rows. Name, purpose and the button stay visible;
+     "What you provide and get" opens on demand (global .disclosure). */
+  .live-layout {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .live-intro {
+    display: grid;
+    max-width: 52rem;
+    gap: 1rem;
+  }
+
+  .live-intro h2 {
+    max-width: 20ch;
+  }
+
+  .standard-intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .tool-list {
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid var(--color-text);
+    list-style: none;
+  }
+
+  .tool-row {
+    display: grid;
+    grid-template-areas:
+      "main cta"
+      "details details";
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(1.5rem, 5vw, 4rem);
+    padding-top: clamp(1.5rem, 3vw, 2rem);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .tool-row-main {
+    grid-area: main;
+    max-width: 62ch;
+  }
+
+  .tool-row-main h3 {
+    margin: 0;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-h3);
+    letter-spacing: -0.015em;
+  }
+
+  .tool-row-main p {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .tool-row-cta {
+    grid-area: cta;
+    align-self: start;
+    white-space: nowrap;
+  }
+
+  /* The row's own bottom rule separates tools, so the disclosure has none. */
+  .tool-row-details {
+    grid-area: details;
+    border-bottom: 0;
+  }
+
+  .tool-row-details > summary {
+    width: fit-content;
+    min-height: 2.75rem;
+    padding-block: 0.75rem;
+  }
+
+  .tool-row-toggle {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-medium);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .tool-row-details .disclosure-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .tool-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    max-width: none;
+    margin: 0;
+  }
+
+  .tool-facts dt {
+    color: var(--color-text);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
+    line-height: 1.4;
+  }
+
+  .tool-facts dd {
+    margin: 0.4rem 0 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.6;
   }
 
   .tool-roadmap {
@@ -933,9 +1255,27 @@ const buildStandards = [
     text-decoration-thickness: 0.125rem;
   }
 
+  @media (max-width: 54rem) {
+    .tool-row {
+      grid-template-areas:
+        "main"
+        "cta"
+        "details";
+      grid-template-columns: 1fr;
+      row-gap: 1rem;
+    }
+
+    .tool-row-cta {
+      justify-self: start;
+    }
+
+    .tool-facts {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 64rem) {
     .hero-layout,
-    .first-layout,
     .standard-layout,
     .privacy-layout,
     .beyond-layout {
