@@ -9,10 +9,11 @@
     "dev": "tinacms dev -c \"astro dev --ignore-lock\"",
     "build": "tinacms build --content=local --skip-cloud-checks --skip-indexing && astro build && node scripts/generate-agent-markdown.mjs",
     "check": "tinacms build --content=local --skip-cloud-checks --skip-indexing && astro check",
+    "build:ci": "tinacms build --local --skip-indexing --skip-cloud-checks && astro build && node scripts/generate-agent-markdown.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write --ignore-unknown",
-    "format:check": "prettier --check --ignore-unknown",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
     "mcp:sync": "node scripts/sync-mcp-config.mjs",
     "mcp:check": "node scripts/sync-mcp-config.mjs --check",
     "generate-types": "wrangler types"

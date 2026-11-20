@@ -5,6 +5,7 @@ import {
   estimateTokens,
   extractFrontmatter,
   extractJsonLdBlocks,
+  markdownHeaders,
 } from "../src/lib/html-to-markdown";
 
 type Env = {
@@ -49,10 +50,7 @@ export default {
         `${extractFrontmatter(html, { includeImage: true })}${convertHtmlToMarkdown(html)}${extractJsonLdBlocks(html).join("\n")}`.trim() +
         "\n";
       const strippedText = cleanText(html);
-      const headers = new Headers(originResponse.headers);
-
-      headers.set("content-type", "text/markdown; charset=utf-8");
-      headers.set("vary", "Accept");
+      const headers = markdownHeaders(originResponse.headers);
       headers.set(
         "content-signal",
         env.DEFAULT_CONTENT_SIGNAL ?? DEFAULT_CONTENT_SIGNAL,

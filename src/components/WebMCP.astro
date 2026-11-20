@@ -10,7 +10,8 @@
 
 <script is:inline>
   (function () {
-    if (typeof window === "undefined" || typeof document === "undefined") return;
+    if (typeof window === "undefined" || typeof document === "undefined")
+      return;
 
     var tools = [
       {
@@ -31,9 +32,15 @@
         execute: async function (input) {
           var query =
             input && typeof input.query === "string" ? input.query.trim() : "";
-          var url = query ? "/search/?q=" + encodeURIComponent(query) : "/search/";
+          var url = query
+            ? "/search/?q=" + encodeURIComponent(query)
+            : "/search/";
           window.location.href = url;
-          var result = { navigatedTo: url, query: query, message: "Navigated to " + url };
+          var result = {
+            navigatedTo: url,
+            query: query,
+            message: "Navigated to " + url,
+          };
           return {
             content: [{ type: "text", text: JSON.stringify(result) }],
             navigatedTo: url,
@@ -82,7 +89,9 @@
             },
           ];
           return {
-            content: [{ type: "text", text: JSON.stringify(services, null, 2) }],
+            content: [
+              { type: "text", text: JSON.stringify(services, null, 2) },
+            ],
             services: services,
           };
         },
@@ -96,7 +105,12 @@
           properties: {
             startingPoint: {
               type: "string",
-              enum: ["prove-value", "insight-action", "silent-churn", "ai-trust"],
+              enum: [
+                "prove-value",
+                "insight-action",
+                "silent-churn",
+                "ai-trust",
+              ],
               description:
                 "Optional operational problem starting point: prove-value, insight-action, silent-churn, or ai-trust.",
             },
@@ -174,7 +188,9 @@
             },
           ];
           return {
-            content: [{ type: "text", text: JSON.stringify(solutions, null, 2) }],
+            content: [
+              { type: "text", text: JSON.stringify(solutions, null, 2) },
+            ],
             solutions: solutions,
           };
         },
@@ -193,105 +209,46 @@
             {
               name: "CX Handoff Mapper",
               url: "https://cadencelab.co/resources/ai-tools/cx-handoff-mapper/",
-              description: "Map and analyze handoff friction between customer-facing teams.",
+              description:
+                "Map and analyze handoff friction between customer-facing teams.",
             },
             {
               name: "Service Recovery Planner",
               url: "https://cadencelab.co/resources/ai-tools/service-recovery-planner/",
-              description: "Plan operational recovery workflows for recurring service failures.",
+              description:
+                "Plan operational recovery workflows for recurring service failures.",
             },
             {
               name: "AI Evaluation Builder",
               url: "https://cadencelab.co/resources/ai-tools/ai-evaluation-builder/",
-              description: "Build evaluation criteria and quality rubrics for AI customer service workflows.",
+              description:
+                "Build evaluation criteria and quality rubrics for AI customer service workflows.",
             },
             {
               name: "CRM Data Health Sampler",
               url: "https://cadencelab.co/resources/ai-tools/crm-data-health-sampler/",
-              description: "Sample CRM data quality and surface missing fields across lifecycle stages.",
+              description:
+                "Sample CRM data quality and surface missing fields across lifecycle stages.",
             },
             {
               name: "Feedback Signal Sorter",
               url: "https://cadencelab.co/resources/ai-tools/feedback-signal-sorter/",
-              description: "Sort customer feedback signals into operating failure categories.",
+              description:
+                "Sort customer feedback signals into operating failure categories.",
             },
             {
               name: "AI Use Case Stress Test",
               url: "https://cadencelab.co/resources/ai-tools/use-case-stress-test/",
-              description: "Stress-test generative AI workflows against real operational constraints.",
+              description:
+                "Stress-test generative AI workflows against real operational constraints.",
             },
           ];
           return {
-            content: [{ type: "text", text: JSON.stringify(toolsList, null, 2) }],
+            content: [
+              { type: "text", text: JSON.stringify(toolsList, null, 2) },
+            ],
             tools: toolsList,
           };
-        },
-      },
-      // Aliases for compatibility
-      {
-        name: "search-site",
-        description:
-          "Alias for search_site. Search Cadence Lab across services, solutions, workflows, and insights.",
-        inputSchema: {
-          type: "object",
-          properties: {
-            query: { type: "string", description: "Search query string." },
-          },
-          additionalProperties: false,
-        },
-        execute: async function (input) {
-          var query = input && typeof input.query === "string" ? input.query.trim() : "";
-          var url = query ? "/search/?q=" + encodeURIComponent(query) : "/search/";
-          window.location.href = url;
-          return { content: [{ type: "text", text: "Navigated to " + url }], navigatedTo: url };
-        },
-      },
-      {
-        name: "get-services",
-        description:
-          "Alias for get_services. List Cadence Lab diagnostic service offerings.",
-        inputSchema: {
-          type: "object",
-          properties: {},
-          additionalProperties: false,
-        },
-        execute: async function () {
-          return {
-            content: [
-              {
-                type: "text",
-                text: "CX Systems Diagnostic, Lifecycle Risk Review, CRM Workflow Audit, AI Service Readiness Review",
-              },
-            ],
-          };
-        },
-      },
-      {
-        name: "start-fit-check",
-        description:
-          "Alias for start_fit_check. Navigate to the FitCheck™ evaluation form.",
-        inputSchema: {
-          type: "object",
-          properties: {},
-          additionalProperties: false,
-        },
-        execute: async function () {
-          window.location.href = "/fit-check/";
-          return { content: [{ type: "text", text: "Navigated to /fit-check/" }], navigatedTo: "/fit-check/" };
-        },
-      },
-      {
-        name: "contact",
-        description:
-          "Alias for get_contact_info. Navigate to the Cadence Lab contact page.",
-        inputSchema: {
-          type: "object",
-          properties: {},
-          additionalProperties: false,
-        },
-        execute: async function () {
-          window.location.href = "/contact/";
-          return { content: [{ type: "text", text: "Navigated to /contact/" }], navigatedTo: "/contact/" };
         },
       },
     ];
@@ -299,29 +256,6 @@
     var controller = new AbortController();
     var signal = controller.signal;
     var registeredTargets = new WeakSet();
-
-    // In environments without native document.modelContext (e.g. standard Chromium,
-    // Puppeteer test runners), initialize a lightweight modelContext container so
-    // document.modelContext exists immediately and holds all registered tools.
-    if (!document.modelContext) {
-      var internalRegistry = new Map();
-      document.modelContext = {
-        registerTool: function (tool, options) {
-          internalRegistry.set(tool.name, { tool: tool, options: options });
-          if (options && options.signal) {
-            options.signal.addEventListener("abort", function () {
-              internalRegistry.delete(tool.name);
-            });
-          }
-          return Promise.resolve(tool);
-        },
-        getTools: function () {
-          return Array.from(internalRegistry.values()).map(function (item) {
-            return item.tool;
-          });
-        },
-      };
-    }
 
     // Register tools on a modelContext target (document.modelContext or navigator.modelContext)
     function registerOnContext(ctx) {
@@ -357,8 +291,9 @@
     // Run registration immediately
     runRegistration();
 
-    // Hook setters in case a test runner / scanner assigns document.modelContext
-    // or navigator.modelContext after script execution
+    // Register on a modelContext that a browser or extension provides after
+    // this script runs. No stand-in API is created: if the browser has no
+    // WebMCP support, the tools simply aren't registered.
     try {
       var currentDocContext = document.modelContext;
       Object.defineProperty(document, "modelContext", {
@@ -384,8 +319,12 @@
     window.addEventListener("load", runRegistration);
     document.addEventListener("astro:page-load", runRegistration);
 
-    window.addEventListener("beforeunload", function () {
-      controller.abort();
-    }, { once: true });
+    window.addEventListener(
+      "beforeunload",
+      function () {
+        controller.abort();
+      },
+      { once: true },
+    );
   })();
 </script>

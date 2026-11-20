@@ -109,17 +109,15 @@ if (turnstileSiteKey) {
   canonicalURL="/fit-check/"
   maskSessionRecording
 >
-  {
-    turnstileSiteKey && (
-      <script
-        slot="head"
-        is:inline
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        data-cfasync="false"
-        defer
-      />
-    )
-  }
+  {turnstileSiteKey && (
+    <script
+      slot="head"
+      is:inline
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      data-cfasync="false"
+      defer
+    />
+  )}
 
   <NavHeader />
 
@@ -130,9 +128,7 @@ if (turnstileSiteKey) {
           <p class="fit-check-eyebrow">{category}</p>
 
           <h1 class="fit-check-title">
-            <BrandHeading
-              text="Your customers aren’t difficult. Your handoffs are."
-            />
+            <BrandHeading text="Your customers aren’t difficult. Your handoffs are." />
           </h1>
 
           <p class="fit-check-intro">{subtitle}</p>
@@ -179,62 +175,58 @@ if (turnstileSiteKey) {
             aria-labelledby="starting-points-title"
             aria-orientation="vertical"
           >
-            {
-              startingPoints.map((point, index) => (
-                <button
-                  id={`start-tab-${point.id}`}
-                  type="button"
-                  role="tab"
-                  class="starting-card"
-                  data-start={point.id}
-                  aria-selected={index === 0 ? "true" : "false"}
-                  aria-controls={`start-panel-${point.id}`}
-                  tabindex={index === 0 ? 0 : -1}
-                >
-                  <span class="starting-figure">{point.figure}</span>
-                  <span class="starting-title">{point.title}</span>
-                  <span class="starting-fact">{point.fact}</span>
-                </button>
-              ))
-            }
+            {startingPoints.map((point, index) => (
+              <button
+                id={`start-tab-${point.id}`}
+                type="button"
+                role="tab"
+                class="starting-card"
+                data-start={point.id}
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-controls={`start-panel-${point.id}`}
+                tabindex={index === 0 ? 0 : -1}
+              >
+                <span class="starting-figure">{point.figure}</span>
+                <span class="starting-title">{point.title}</span>
+                <span class="starting-fact">{point.fact}</span>
+              </button>
+            ))}
           </div>
 
           <div class="sample-brief">
             <p class="sample-label">
               Sample Decision Brief <span>Illustrative, not a client</span>
             </p>
-            {
-              startingPoints.map((point, index) => (
-                <dl
-                  id={`start-panel-${point.id}`}
-                  role="tabpanel"
-                  aria-labelledby={`start-tab-${point.id}`}
-                  data-brief={point.id}
-                  hidden={index !== 0}
-                >
-                  <div>
-                    <dt>The problem, as you described it</dt>
-                    <dd>{point.brief.problem}</dd>
-                  </div>
-                  <div>
-                    <dt>Likely constraint</dt>
-                    <dd>{point.brief.constraint}</dd>
-                  </div>
-                  <div>
-                    <dt>Business value at stake</dt>
-                    <dd>{point.brief.value}</dd>
-                  </div>
-                  <div>
-                    <dt>Readiness</dt>
-                    <dd>{point.brief.readiness}</dd>
-                  </div>
-                  <div class="sample-next">
-                    <dt>Your next decision</dt>
-                    <dd>{point.brief.next}</dd>
-                  </div>
-                </dl>
-              ))
-            }
+            {startingPoints.map((point, index) => (
+              <dl
+                id={`start-panel-${point.id}`}
+                role="tabpanel"
+                aria-labelledby={`start-tab-${point.id}`}
+                data-brief={point.id}
+                hidden={index !== 0}
+              >
+                <div>
+                  <dt>The problem, as you described it</dt>
+                  <dd>{point.brief.problem}</dd>
+                </div>
+                <div>
+                  <dt>Likely constraint</dt>
+                  <dd>{point.brief.constraint}</dd>
+                </div>
+                <div>
+                  <dt>Business value at stake</dt>
+                  <dd>{point.brief.value}</dd>
+                </div>
+                <div>
+                  <dt>Readiness</dt>
+                  <dd>{point.brief.readiness}</dd>
+                </div>
+                <div class="sample-next">
+                  <dt>Your next decision</dt>
+                  <dd>{point.brief.next}</dd>
+                </div>
+              </dl>
+            ))}
             <a class="sample-cta" href="#fit-check-form-title">
               Send me my Decision Brief <span aria-hidden="true">↓</span>
             </a>
@@ -255,24 +247,26 @@ if (turnstileSiteKey) {
           <summary>What goes into your decision brief?</summary>
           <dl>
             <div>
-              <dt>Problem clarity</dt><dd>
+              <dt>Problem clarity</dt>
+              <dd>
                 What outcome is failing, and what is still only a suspected
                 cause?
               </dd>
             </div>
             <div>
-              <dt>Operating complexity</dt><dd>
-                Which teams, systems, and handoffs touch the problem?
-              </dd>
+              <dt>Operating complexity</dt>
+              <dd>Which teams, systems, and handoffs touch the problem?</dd>
             </div>
             <div>
-              <dt>Evidence readiness</dt><dd>
+              <dt>Evidence readiness</dt>
+              <dd>
                 What information could help distinguish the symptom from its
                 cause?
               </dd>
             </div>
             <div>
-              <dt>Change readiness</dt><dd>
+              <dt>Change readiness</dt>
+              <dd>
                 Who owns the decision, and can they change how the work happens?
               </dd>
             </div>
@@ -288,36 +282,40 @@ if (turnstileSiteKey) {
           <summary>What might your result recommend?</summary>
           <dl>
             <div>
-              <dt>Clarify first</dt><dd>
+              <dt>Clarify first</dt>
+              <dd>
                 Define the affected customer or team and the outcome that needs
                 to change.
               </dd>
             </div>
             <div>
-              <dt>Align first</dt><dd>
-                Agree on decision ownership across the teams involved.
-              </dd>
+              <dt>Align first</dt>
+              <dd>Agree on decision ownership across the teams involved.</dd>
             </div>
             <div>
-              <dt>Evidence first</dt><dd>
+              <dt>Evidence first</dt>
+              <dd>
                 Gather a small, relevant sample before choosing a cause or
                 solution.
               </dd>
             </div>
             <div>
-              <dt>Stabilize first</dt><dd>
+              <dt>Stabilize first</dt>
+              <dd>
                 Make the current workflow dependable enough to assess or
                 automate.
               </dd>
             </div>
             <div>
-              <dt>Ready to diagnose</dt><dd>
+              <dt>Ready to diagnose</dt>
+              <dd>
                 There is a meaningful question, an owner, and room to act on the
                 findings.
               </dd>
             </div>
             <div>
-              <dt>Explore implementation</dt><dd>
+              <dt>Explore implementation</dt>
+              <dd>
                 An existing diagnosis may support delivery; confirm its evidence
                 and scope first.
               </dd>
@@ -352,8 +350,9 @@ if (turnstileSiteKey) {
           </p>
         </div>
         <p class="guarantee">
-          <strong>My guarantee.</strong> Every diagnostic ends with a specific constraint
-          and a next decision you can act on. If it doesn’t, you don’t pay for it.
+          <strong>My guarantee.</strong> Every diagnostic ends with a specific
+          constraint and a next decision you can act on. If it doesn’t, you
+          don’t pay for it.
         </p>
       </section>
 
@@ -378,7 +377,7 @@ if (turnstileSiteKey) {
         <input
           type="hidden"
           name="starting-point"
-          value={startingPoints[0].id}
+          value=""
           data-starting-input
         />
 
@@ -401,7 +400,9 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="1">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">01</span>
+            <span class="section-number" aria-hidden="true">
+              01
+            </span>
             Problem and outcome
           </legend>
 
@@ -426,7 +427,8 @@ if (turnstileSiteKey) {
               aria-errormessage="challenge-error"
               placeholder="Describe what customers or teams experience and where the work gets stuck."
               toolparamdescription="Describe the customer experience or workflow problem you are trying to solve (minimum 40 characters)"
-              required></textarea>
+              required
+            ></textarea>
             <p id="challenge-hint" class="field-hint">
               Include who is affected, which teams are involved, and why the
               problem matters.
@@ -450,7 +452,8 @@ if (turnstileSiteKey) {
               aria-errormessage="impact-error"
               placeholder="Examples: reduce repeat contacts, improve adoption, lower service effort, or spot risk earlier."
               toolparamdescription="Describe what a useful result or outcome would look like (minimum 20 characters)"
-              required></textarea>
+              required
+            ></textarea>
             <p id="impact-hint" class="field-hint">
               Name a customer, team, or business result you could see or
               measure.
@@ -473,7 +476,9 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="2">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">02</span>
+            <span class="section-number" aria-hidden="true">
+              02
+            </span>
             Your operating environment
           </legend>
 
@@ -500,9 +505,9 @@ if (turnstileSiteKey) {
                   toolparamdescription="Current operating environment: fragmented, transitioning, modern-siloed, established, or uncertain"
                   required
                 />
-                <span
-                  >Teams use disconnected systems and inconsistent workflows</span
-                >
+                <span>
+                  Teams use disconnected systems and inconsistent workflows
+                </span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="transitioning" />
@@ -510,15 +515,15 @@ if (turnstileSiteKey) {
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="modern-siloed" />
-                <span
-                  >The tools are modern, but teams or workflows remain siloed</span
-                >
+                <span>
+                  The tools are modern, but teams or workflows remain siloed
+                </span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="established" />
-                <span
-                  >Core systems and workflows are in place but need improvement</span
-                >
+                <span>
+                  Core systems and workflows are in place but need improvement
+                </span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="environment" value="uncertain" />
@@ -549,9 +554,9 @@ if (turnstileSiteKey) {
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="active-limited" />
-                <span
-                  >We collect data, but teams do not use it consistently</span
-                >
+                <span>
+                  We collect data, but teams do not use it consistently
+                </span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="crm" value="fragmented" />
@@ -592,7 +597,9 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="3">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">03</span>
+            <span class="section-number" aria-hidden="true">
+              03
+            </span>
             What it’s worth and who owns it
           </legend>
 
@@ -681,7 +688,8 @@ if (turnstileSiteKey) {
               autocomplete="off"
               maxlength="600"
               placeholder="One or two sentences is plenty."
-              toolparamdescription="Consequences if the problem remains unaddressed for 12 months"></textarea>
+              toolparamdescription="Consequences if the problem remains unaddressed for 12 months"
+            ></textarea>
           </div>
 
           <div class="input-group">
@@ -806,7 +814,9 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="4">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">04</span>
+            <span class="section-number" aria-hidden="true">
+              04
+            </span>
             Contact information
           </legend>
 
@@ -890,7 +900,8 @@ if (turnstileSiteKey) {
               rows="4"
               maxlength="1000"
               autocomplete="off"
-              toolparamdescription="Additional context about systems, timing, or constraints (optional)"></textarea>
+              toolparamdescription="Additional context about systems, timing, or constraints (optional)"
+            ></textarea>
           </div>
 
           <div class="step-actions">
@@ -919,8 +930,12 @@ if (turnstileSiteKey) {
         >
           <div class="review-heading">
             <div>
-              <p class="section-number" aria-hidden="true">05</p>
-              <h3 id="review-title" tabindex="-1">Review your answers</h3>
+              <p class="section-number" aria-hidden="true">
+                05
+              </p>
+              <h3 id="review-title" tabindex="-1">
+                Review your answers
+              </h3>
             </div>
             <p>Check your answers before you send the FitCheck™.</p>
           </div>
@@ -966,24 +981,22 @@ if (turnstileSiteKey) {
           </div>
 
           <div class="form-submit">
-            {
-              turnstileSiteKey ? (
-                <div
-                  class="cf-turnstile"
-                  data-sitekey={turnstileSiteKey}
-                  data-action="fit-check"
-                  data-appearance="interaction-only"
-                  data-theme="auto"
-                  data-size="flexible"
-                  data-retry="auto"
-                  data-refresh-expired="auto"
-                />
-              ) : (
-                <p class="turnstile-configuration" role="status">
-                  The security check is unavailable in this environment.
-                </p>
-              )
-            }
+            {turnstileSiteKey ? (
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-action="fit-check"
+                data-appearance="interaction-only"
+                data-theme="auto"
+                data-size="flexible"
+                data-retry="auto"
+                data-refresh-expired="auto"
+              />
+            ) : (
+              <p class="turnstile-configuration" role="status">
+                The security check is unavailable in this environment.
+              </p>
+            )}
 
             <div
               class="submit-error"
@@ -997,8 +1010,7 @@ if (turnstileSiteKey) {
               class="turnstile-status"
               data-turnstile-status
               aria-live="polite"
-            >
-            </p>
+            ></p>
 
             <button type="submit" class="submit-button">
               Send my FitCheck™
@@ -1276,7 +1288,7 @@ if (turnstileSiteKey) {
           const stepNum = String(currentStep + 1).padStart(2, "0");
           const totalNum = String(steps.length + 1).padStart(2, "0");
           progressStatus.textContent = stepLabel
-            ? `${stepNum} / ${totalNum} — ${stepLabel}`
+            ? `${stepNum} / ${totalNum}: ${stepLabel}`
             : `${stepNum} / ${totalNum}`;
         }
 
@@ -1443,7 +1455,7 @@ if (turnstileSiteKey) {
 
           renderSubmitError(
             payload?.error ??
-              "We could not send your FitCheck™. Your answers are still here—please try again.",
+              "We couldn’t send your FitCheck™. Your answers are still here, so please try again.",
             payload?.errors,
           );
           const turnstileApi = (
@@ -1452,7 +1464,7 @@ if (turnstileSiteKey) {
           turnstileApi?.reset?.();
         } catch {
           renderSubmitError(
-            "Could not reach the server. Your answers are still here—check your connection and try again.",
+            "I couldn’t reach the server. Your answers are still here. Check your connection and try again.",
           );
         } finally {
           if (submitButton) {
@@ -1610,7 +1622,7 @@ if (turnstileSiteKey) {
   }
 
   .fit-check-assurance dt {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
@@ -1806,7 +1818,7 @@ if (turnstileSiteKey) {
   }
 
   .section-number {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-size: 0.75rem;
     font-weight: var(--fw-medium);
     font-feature-settings: var(--fea-tabular);
@@ -2522,9 +2534,9 @@ if (turnstileSiteKey) {
     width: 100%;
     grid-template-columns: 6.25rem minmax(0, 1fr);
     gap: 0.25rem 1rem;
+    position: relative;
     padding: 1.25rem 1.5rem;
     border: 0;
-    border-inline-start: 0.25rem solid transparent;
     background: transparent;
     color: inherit;
     font: inherit;
@@ -2532,9 +2544,22 @@ if (turnstileSiteKey) {
     cursor: pointer;
   }
 
+  /* The selected card is marked with the logo's dot (a point under attention,
+     DESIGN.md section 5) rather than a colored stripe. */
   .starting-card[aria-selected="true"] {
-    border-inline-start-color: var(--color-yellow);
     background: var(--color-surface-subtle);
+  }
+
+  .starting-card[aria-selected="true"]::before {
+    position: absolute;
+    top: 1.75rem;
+    left: 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-yellow);
+    box-shadow: var(--shadow-hairline);
+    content: "";
   }
 
   .starting-card:focus-visible {
@@ -2545,8 +2570,9 @@ if (turnstileSiteKey) {
   .starting-figure {
     grid-row: span 2;
     white-space: nowrap;
-    color: var(--color-blue);
+    color: var(--color-text);
     font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
     font-weight: var(--fw-semibold);
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -2680,11 +2706,9 @@ if (turnstileSiteKey) {
   .guarantee {
     max-width: 68ch;
     margin: 0.5rem 0 0;
-    padding: 1rem 1.25rem;
-    border-inline-start: 0.25rem solid var(--color-yellow);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-subtle);
-    color: var(--color-ink);
+    padding: 1rem 0 0;
+    border-top: 2px solid var(--color-text);
+    color: var(--color-text);
     line-height: 1.6;
   }
 </style>

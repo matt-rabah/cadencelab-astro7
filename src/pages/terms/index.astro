@@ -38,7 +38,9 @@ const termsSections = [
         </div>
 
         <aside class="terms-summary" aria-labelledby="terms-summary-title">
-          <p id="terms-summary-title" class="summary-label">Quick summary</p>
+          <p id="terms-summary-title" class="summary-label">
+            Quick summary
+          </p>
           <dl>
             <div>
               <dt>Effective</dt>
@@ -68,25 +70,25 @@ const termsSections = [
         <nav aria-label="Terms of service contents">
           <p>On this page</p>
           <ol>
-            {
-              termsSections.map((section, index) => (
-                <li>
-                  <a href={section.href}>
-                    <span aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {section.label}
-                  </a>
-                </li>
-              ))
-            }
+            {termsSections.map((section, index) => (
+              <li>
+                <a href={section.href}>
+                  <span aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {section.label}
+                </a>
+              </li>
+            ))}
           </ol>
         </nav>
       </aside>
 
       <article class="terms-content">
         <section id="scope" aria-labelledby="scope-title">
-          <p class="section-number" aria-hidden="true">01</p>
+          <p class="section-number" aria-hidden="true">
+            01
+          </p>
           <h2 id="scope-title">Scope and acceptance</h2>
 
           <p>
@@ -120,7 +122,9 @@ const termsSections = [
           id="website-information"
           aria-labelledby="website-information-title"
         >
-          <p class="section-number" aria-hidden="true">02</p>
+          <p class="section-number" aria-hidden="true">
+            02
+          </p>
           <h2 id="website-information-title">
             Website content is general information
           </h2>
@@ -152,7 +156,9 @@ const termsSections = [
           id="inquiries-engagements"
           aria-labelledby="inquiries-engagements-title"
         >
-          <p class="section-number" aria-hidden="true">03</p>
+          <p class="section-number" aria-hidden="true">
+            03
+          </p>
           <h2 id="inquiries-engagements-title">
             An inquiry does not create an engagement
           </h2>
@@ -183,7 +189,9 @@ const termsSections = [
         </section>
 
         <section id="acceptable-use" aria-labelledby="acceptable-use-title">
-          <p class="section-number" aria-hidden="true">04</p>
+          <p class="section-number" aria-hidden="true">
+            04
+          </p>
           <h2 id="acceptable-use-title">Acceptable use</h2>
 
           <p>
@@ -236,7 +244,9 @@ const termsSections = [
           id="intellectual-property"
           aria-labelledby="intellectual-property-title"
         >
-          <p class="section-number" aria-hidden="true">05</p>
+          <p class="section-number" aria-hidden="true">
+            05
+          </p>
           <h2 id="intellectual-property-title">Intellectual property</h2>
 
           <p>
@@ -284,7 +294,9 @@ const termsSections = [
           id="third-party-services"
           aria-labelledby="third-party-services-title"
         >
-          <p class="section-number" aria-hidden="true">06</p>
+          <p class="section-number" aria-hidden="true">
+            06
+          </p>
           <h2 id="third-party-services-title">
             Third-party services and links
           </h2>
@@ -309,7 +321,9 @@ const termsSections = [
           id="availability-liability"
           aria-labelledby="availability-liability-title"
         >
-          <p class="section-number" aria-hidden="true">07</p>
+          <p class="section-number" aria-hidden="true">
+            07
+          </p>
           <h2 id="availability-liability-title">
             Availability, disclaimers, and liability
           </h2>
@@ -351,7 +365,9 @@ const termsSections = [
         </section>
 
         <section id="changes-contact" aria-labelledby="changes-contact-title">
-          <p class="section-number" aria-hidden="true">08</p>
+          <p class="section-number" aria-hidden="true">
+            08
+          </p>
           <h2 id="changes-contact-title">Changes and contact</h2>
 
           <h3>Changes to these Terms</h3>
@@ -622,7 +638,7 @@ const termsSections = [
   }
 
   .terms-content li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .terms-note {

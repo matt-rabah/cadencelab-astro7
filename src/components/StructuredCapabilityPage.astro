@@ -123,7 +123,9 @@ const {
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">{hero.breadcrumb}</li>
             </ol>
           </nav>
@@ -136,65 +138,63 @@ const {
             <a class="button button-primary" href={hero.primaryCta.href}>
               {hero.primaryCta.label}
             </a>
-            {
-              hero.secondaryCta && (
-                <a class="button button-text" href={hero.secondaryCta.href}>
-                  {hero.secondaryCta.label}
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              )
-            }
+            {hero.secondaryCta && (
+              <a class="button button-text" href={hero.secondaryCta.href}>
+                {hero.secondaryCta.label}
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            )}
           </div>
         </div>
 
-        {
-          !simplified && hero.trigger && (
-            <aside class="trigger-card" aria-labelledby="trigger-title">
-              <p id="trigger-title" class="note-label">
-                Recognizable trigger
-              </p>
-              <p>{hero.trigger.introduction}</p>
-              <dl>
-                {hero.trigger.items.map((item) => (
-                  <div>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
-          )
-        }
+        {!simplified && hero.trigger && (
+          <aside class="trigger-card" aria-labelledby="trigger-title">
+            <p id="trigger-title" class="note-label">
+              Recognizable trigger
+            </p>
+            <p>{hero.trigger.introduction}</p>
+            <dl>
+              {hero.trigger.items.map((item) => (
+                <div>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        )}
       </div>
     </section>
 
     <SectionNav
-      items={simplified
-        ? [
-            { label: "When to hire us", href: "#signals" },
-            { label: "What you receive", href: "#outputs" },
-            { label: "How it works", href: "#operating-path" },
-            { label: "What we review", href: "#evidence" },
-            { label: "Fit and next step", href: "#fit" },
-          ]
-        : [
-            { label: "Signals", href: "#signals" },
-            ...(framework
-              ? [{ label: framework.eyebrow, href: "#framework" as const }]
-              : []),
-            { label: path.eyebrow, href: "#operating-path" },
-            { label: "Evidence", href: "#evidence" },
-            ...(failures
-              ? [
-                  {
-                    label: "Failure patterns",
-                    href: "#failure-patterns" as const,
-                  },
-                ]
-              : []),
-            { label: "Outputs", href: "#outputs" },
-            { label: "Fit", href: "#fit" },
-          ]}
+      items={
+        simplified
+          ? [
+              { label: "When to hire us", href: "#signals" },
+              { label: "What you receive", href: "#outputs" },
+              { label: "How it works", href: "#operating-path" },
+              { label: "What we review", href: "#evidence" },
+              { label: "Fit and next step", href: "#fit" },
+            ]
+          : [
+              { label: "Signals", href: "#signals" },
+              ...(framework
+                ? [{ label: framework.eyebrow, href: "#framework" as const }]
+                : []),
+              { label: path.eyebrow, href: "#operating-path" },
+              { label: "Evidence", href: "#evidence" },
+              ...(failures
+                ? [
+                    {
+                      label: "Failure patterns",
+                      href: "#failure-patterns" as const,
+                    },
+                  ]
+                : []),
+              { label: "Outputs", href: "#outputs" },
+              { label: "Fit", href: "#fit" },
+            ]
+      }
     />
 
     <section
@@ -212,81 +212,75 @@ const {
         </div>
 
         <div class="card-grid">
-          {
-            signals.items.map((item) => (
-              <article>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))
-          }
+          {signals.items.map((item) => (
+            <article>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    {
-      simplified && (
-        <>
-          <section
-            id="outputs"
-            class="outputs section-block"
-            aria-labelledby="outputs-title"
-          >
-            <div class="page-container section-stack">
-              <div class="section-intro">
-                <p class="eyebrow">{outputs.eyebrow}</p>
-                <h2 id="outputs-title">{outputs.title}</h2>
-                <p>{outputs.introduction}</p>
-              </div>
-
-              <ul class="output-list" role="list">
-                {outputs.items.map((item) => (
-                  <li>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </li>
-                ))}
-              </ul>
+    {simplified && (
+      <>
+        <section
+          id="outputs"
+          class="outputs section-block"
+          aria-labelledby="outputs-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro">
+              <p class="eyebrow">{outputs.eyebrow}</p>
+              <h2 id="outputs-title">{outputs.title}</h2>
+              <p>{outputs.introduction}</p>
             </div>
-          </section>
-        </>
-      )
-    }
 
-    {
-      framework && (
-        <>
-          <section
-            data-band
-            id="framework"
-            class="framework-section"
-            aria-labelledby="framework-title"
-          >
-            <div class="page-container section-stack">
-              <div class="section-intro section-intro-inverse">
-                <p class="eyebrow eyebrow-inverse">{framework.eyebrow}</p>
-                <h2 id="framework-title">{framework.title}</h2>
-                <p>{framework.introduction}</p>
-              </div>
+            <ul class="output-list" role="list">
+              {outputs.items.map((item) => (
+                <li>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </>
+    )}
 
-              <TabbedPanels
-                idPrefix="capability-framework"
-                label={framework.eyebrow}
-                theme="dark"
-                panels={framework.items.map((item, index) => ({
-                  id: `framework-item-${index + 1}`,
-                  label: item.label,
-                  number: String(index + 1).padStart(2, "0"),
-                  eyebrow: item.label,
-                  title: item.question,
-                  description: item.description,
-                }))}
-              />
+    {framework && (
+      <>
+        <section
+          data-band
+          id="framework"
+          class="framework-section"
+          aria-labelledby="framework-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro section-intro-inverse">
+              <p class="eyebrow eyebrow-inverse">{framework.eyebrow}</p>
+              <h2 id="framework-title">{framework.title}</h2>
+              <p>{framework.introduction}</p>
             </div>
-          </section>
-        </>
-      )
-    }
+
+            <TabbedPanels
+              idPrefix="capability-framework"
+              label={framework.eyebrow}
+              theme="dark"
+              panels={framework.items.map((item, index) => ({
+                id: `framework-item-${index + 1}`,
+                label: item.label,
+                number: String(index + 1).padStart(2, "0"),
+                eyebrow: item.label,
+                title: item.question,
+                description: item.description,
+              }))}
+            />
+          </div>
+        </section>
+      </>
+    )}
 
     <section
       id="operating-path"
@@ -301,21 +295,19 @@ const {
         </div>
 
         <ol class="path-list">
-          {
-            path.items.map((item, index) => (
-              <li>
-                <div class="path-marker">
-                  <p>{String(index + 1).padStart(2, "0")}</p>
-                  <span aria-hidden="true" />
-                </div>
-                <div class="path-content">
-                  <p class="path-phase">{item.phase}</p>
-                  <h3>{item.question}</h3>
-                  <p>{item.evidence}</p>
-                </div>
-              </li>
-            ))
-          }
+          {path.items.map((item, index) => (
+            <li>
+              <div class="path-marker">
+                <p>{String(index + 1).padStart(2, "0")}</p>
+                <span aria-hidden="true" />
+              </div>
+              <div class="path-content">
+                <p class="path-phase">{item.phase}</p>
+                <h3>{item.question}</h3>
+                <p>{item.evidence}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -334,108 +326,100 @@ const {
           <p>{evidence.introduction}</p>
         </div>
 
-        {
-          simplified ? (
-            <TabbedPanels
-              idPrefix="foundations-evidence"
-              label={evidence.eyebrow}
-              variant="line"
-              panels={evidence.items.map((item, index) => ({
-                id: `foundations-evidence-${index + 1}`,
-                label: item.title,
-                title: item.title,
-                description: item.description,
-              }))}
-            />
-          ) : (
-            <div class="card-grid">
-              {evidence.items.map((item) => (
+        {simplified ? (
+          <TabbedPanels
+            idPrefix="foundations-evidence"
+            label={evidence.eyebrow}
+            variant="line"
+            panels={evidence.items.map((item, index) => ({
+              id: `foundations-evidence-${index + 1}`,
+              label: item.title,
+              title: item.title,
+              description: item.description,
+            }))}
+          />
+        ) : (
+          <div class="card-grid">
+            {evidence.items.map((item) => (
+              <article>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        )}
+
+        <div class="evidence-note">
+          <p class="note-label">{evidence.note.label}</p>
+          <p>{evidence.note.description}</p>
+        </div>
+        {evidence.supportingDetails && (
+          <div class="supporting-details">
+            {evidence.supportingDetails.map((item) => (
+              <details>
+                <summary>{item.title}</summary>
+                <p>{item.description}</p>
+              </details>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    {failures && (
+      <>
+        <section
+          data-band
+          id="failure-patterns"
+          class="failure-section"
+          aria-labelledby="failure-title"
+        >
+          <div class="page-container failure-layout">
+            <div class="failure-intro">
+              <p class="eyebrow eyebrow-inverse">{failures.eyebrow}</p>
+              <h2 id="failure-title">{failures.title}</h2>
+              <p>{failures.introduction}</p>
+            </div>
+
+            <div class="failure-list">
+              {failures.items.map((item) => (
                 <article>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </article>
               ))}
             </div>
-          )
-        }
+          </div>
+        </section>
+      </>
+    )}
 
-        <div class="evidence-note">
-          <p class="note-label">{evidence.note.label}</p>
-          <p>{evidence.note.description}</p>
-        </div>
-        {
-          evidence.supportingDetails && (
-            <div class="supporting-details">
-              {evidence.supportingDetails.map((item) => (
-                <details>
-                  <summary>{item.title}</summary>
+    {!simplified && (
+      <>
+        <section
+          id="outputs"
+          class="outputs section-block"
+          aria-labelledby="outputs-title"
+        >
+          <div class="page-container section-stack">
+            <div class="section-intro">
+              <p class="eyebrow">{outputs.eyebrow}</p>
+              <h2 id="outputs-title">{outputs.title}</h2>
+              <p>{outputs.introduction}</p>
+            </div>
+
+            <ul class="output-list" role="list">
+              {outputs.items.map((item) => (
+                <li>
+                  <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                </details>
+                </li>
               ))}
-            </div>
-          )
-        }
-      </div>
-    </section>
-
-    {
-      failures && (
-        <>
-          <section
-            data-band
-            id="failure-patterns"
-            class="failure-section"
-            aria-labelledby="failure-title"
-          >
-            <div class="page-container failure-layout">
-              <div class="failure-intro">
-                <p class="eyebrow eyebrow-inverse">{failures.eyebrow}</p>
-                <h2 id="failure-title">{failures.title}</h2>
-                <p>{failures.introduction}</p>
-              </div>
-
-              <div class="failure-list">
-                {failures.items.map((item) => (
-                  <article>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        </>
-      )
-    }
-
-    {
-      !simplified && (
-        <>
-          <section
-            id="outputs"
-            class="outputs section-block"
-            aria-labelledby="outputs-title"
-          >
-            <div class="page-container section-stack">
-              <div class="section-intro">
-                <p class="eyebrow">{outputs.eyebrow}</p>
-                <h2 id="outputs-title">{outputs.title}</h2>
-                <p>{outputs.introduction}</p>
-              </div>
-
-              <ul class="output-list" role="list">
-                {outputs.items.map((item) => (
-                  <li>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        </>
-      )
-    }
+            </ul>
+          </div>
+        </section>
+      </>
+    )}
 
     <section id="fit" class="fit-section" aria-labelledby="fit-title">
       <div class="page-container fit-layout">
@@ -449,9 +433,13 @@ const {
         </div>
 
         <aside class="fit-list" aria-labelledby="fit-list-title">
-          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <p id="fit-list-title" class="note-label">
+            Strong fit
+          </p>
           <ul>
-            {fit.items.map((item) => <li>{item}</li>)}
+            {fit.items.map((item) => (
+              <li>{item}</li>
+            ))}
           </ul>
         </aside>
       </div>
@@ -465,18 +453,16 @@ const {
         </div>
 
         <div class="diagnostic-grid">
-          {
-            diagnostics.items.map((item) => (
-              <article>
-                <h3>{item.title}</h3>
-                <p>{item.useWhen}</p>
-                <a href={item.href}>
-                  {item.linkLabel ?? `Explore ${item.title}`}
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              </article>
-            ))
-          }
+          {diagnostics.items.map((item) => (
+            <article>
+              <h3>{item.title}</h3>
+              <p>{item.useWhen}</p>
+              <a href={item.href}>
+                {item.linkLabel ?? `Explore ${item.title}`}
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -953,7 +939,6 @@ const {
     margin-top: 2rem;
   }
 
-
   .path-layout,
   .failure-layout,
   .fit-layout {
@@ -1074,7 +1059,7 @@ const {
   }
 
   .fit-list li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .diagnostic-section {

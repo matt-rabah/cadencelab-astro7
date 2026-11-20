@@ -130,7 +130,9 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               toolparamdescription="Search keyword or phrase across customer experience operating problems, frameworks, and diagnostic services"
             />
 
-            <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+            <kbd class="search-shortcut" aria-hidden="true">
+              ⌘K
+            </kbd>
 
             <button class="search-submit" type="submit">
               <span class="visually-hidden">Submit search</span>
@@ -219,111 +221,105 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               <a
                 href="/services/"
                 class="primary-link"
-                aria-current={isCurrentSection("/services/")
-                  ? "page"
-                  : undefined}
+                aria-current={
+                  isCurrentSection("/services/") ? "page" : undefined
+                }
               >
                 Services
               </a>
             </li>
 
-            {
-              navigationGroups.map((group) => (
-                <li
-                  class="navigation-group"
-                  data-navigation-group
-                  data-current-section={
-                    groupIsCurrent(group) ? "true" : undefined
-                  }
+            {navigationGroups.map((group) => (
+              <li
+                class="navigation-group"
+                data-navigation-group
+                data-current-section={
+                  groupIsCurrent(group) ? "true" : undefined
+                }
+              >
+                <button
+                  class="navigation-trigger"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={group.menuId}
                 >
-                  <button
-                    class="navigation-trigger"
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls={group.menuId}
+                  <span>{group.label}</span>
+                  {groupIsCurrent(group) && (
+                    <span class="visually-hidden">, current section</span>
+                  )}
+                  <svg
+                    class="expand-icon"
+                    aria-hidden="true"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
                   >
-                    <span>{group.label}</span>
-                    {groupIsCurrent(group) && (
-                      <span class="visually-hidden">, current section</span>
-                    )}
-                    <svg
-                      class="expand-icon"
-                      aria-hidden="true"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m5 7.5 5 5 5-5"
-                      />
-                    </svg>
-                  </button>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m5 7.5 5 5 5-5"
+                    />
+                  </svg>
+                </button>
 
+                <div
+                  id={group.menuId}
+                  class:list={[
+                    "mega-menu",
+                    { "mega-menu-compact": group.compact },
+                  ]}
+                  data-mega-menu
+                  hidden
+                >
                   <div
-                    id={group.menuId}
                     class:list={[
-                      "mega-menu",
-                      { "mega-menu-compact": group.compact },
+                      "mega-menu-inner",
+                      { "mega-menu-inner-compact": group.compact },
                     ]}
-                    data-mega-menu
-                    hidden
                   >
-                    <div
-                      class:list={[
-                        "mega-menu-inner",
-                        { "mega-menu-inner-compact": group.compact },
-                      ]}
-                    >
-                      <div class="featured-column">
-                        <p class="menu-label">{group.eyebrow}</p>
-                        <p class="menu-heading">{group.heading}</p>
-                        <p class="menu-description">{group.description}</p>
-                      </div>
+                    <div class="featured-column">
+                      <p class="menu-label">{group.eyebrow}</p>
+                      <p class="menu-heading">{group.heading}</p>
+                      <p class="menu-description">{group.description}</p>
+                    </div>
 
-                      <div class="link-column">
-                        <p class="menu-label">
-                          {group.compact
-                            ? group.label
-                            : `Explore ${group.label.toLowerCase()}`}
-                        </p>
+                    <div class="link-column">
+                      <p class="menu-label">
+                        {group.compact
+                          ? group.label
+                          : `Explore ${group.label.toLowerCase()}`}
+                      </p>
 
-                        <ul
-                          class:list={[
-                            "menu-link-list",
-                            { "menu-link-grid": !group.compact },
-                          ]}
-                          role="list"
-                        >
-                          {group.items.map((item) => (
-                            <li>
-                              <a
-                                href={item.href}
-                                aria-current={
-                                  isCurrentSection(item.href)
-                                    ? "page"
-                                    : undefined
-                                }
-                              >
-                                <span class="menu-link-label">
-                                  {item.label}
-                                </span>
+                      <ul
+                        class:list={[
+                          "menu-link-list",
+                          { "menu-link-grid": !group.compact },
+                        ]}
+                        role="list"
+                      >
+                        {group.items.map((item) => (
+                          <li>
+                            <a
+                              href={item.href}
+                              aria-current={
+                                isCurrentSection(item.href) ? "page" : undefined
+                              }
+                            >
+                              <span class="menu-link-label">{item.label}</span>
 
-                                {item.status && (
-                                  <span class="menu-status">{item.status}</span>
-                                )}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                              {item.status && (
+                                <span class="menu-status">{item.status}</span>
+                              )}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-                </li>
-              ))
-            }
+                </div>
+              </li>
+            ))}
 
             <li>
               <a
@@ -340,17 +336,20 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 class="primary-link"
                 href="/about/"
                 aria-current={isCurrentPage("/about/") ? "page" : undefined}
-                >About</a
               >
+                About
+              </a>
             </li>
             <li>
               <a
                 class="primary-link"
                 href="/resources/ai-tools/"
-                aria-current={isCurrentSection("/resources/ai-tools/")
-                  ? "page"
-                  : undefined}>Free resources</a
+                aria-current={
+                  isCurrentSection("/resources/ai-tools/") ? "page" : undefined
+                }
               >
+                Free resources
+              </a>
             </li>
           </ul>
         </nav>
@@ -386,7 +385,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"></path>
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
       </svg>
 
       <svg
@@ -400,7 +400,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="m6 6 12 12M18 6 6 18"></path>
+          d="m6 6 12 12M18 6 6 18"
+        ></path>
       </svg>
     </button>
 
@@ -480,9 +481,9 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             <a
               href="/fit-check/"
               class="mobile-primary-link"
-              aria-current={isCurrentSection("/fit-check/")
-                ? "page"
-                : undefined}
+              aria-current={
+                isCurrentSection("/fit-check/") ? "page" : undefined
+              }
             >
               FitCheck™
             </a>
@@ -498,59 +499,55 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
             </a>
           </li>
 
-          {
-            navigationGroups.map((group) => (
-              <li>
-                <details
-                  class="mobile-navigation-group"
-                  data-current-section={
-                    groupIsCurrent(group) ? "true" : undefined
-                  }
-                >
-                  <summary>
-                    <span>{group.label}</span>
-                    {groupIsCurrent(group) && (
-                      <span class="visually-hidden">, current section</span>
-                    )}
-                    <svg
-                      class="mobile-expand-icon"
-                      aria-hidden="true"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m5 7.5 5 5 5-5"
-                      />
-                    </svg>
-                  </summary>
+          {navigationGroups.map((group) => (
+            <li>
+              <details
+                class="mobile-navigation-group"
+                data-current-section={
+                  groupIsCurrent(group) ? "true" : undefined
+                }
+              >
+                <summary>
+                  <span>{group.label}</span>
+                  {groupIsCurrent(group) && (
+                    <span class="visually-hidden">, current section</span>
+                  )}
+                  <svg
+                    class="mobile-expand-icon"
+                    aria-hidden="true"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m5 7.5 5 5 5-5"
+                    />
+                  </svg>
+                </summary>
 
-                  <ul class="mobile-submenu" role="list">
-                    {group.items.map((item) => (
-                      <li>
-                        <a
-                          href={item.href}
-                          aria-current={
-                            isCurrentSection(item.href) ? "page" : undefined
-                          }
-                        >
-                          <span>{item.label}</span>
-                          {item.status && (
-                            <span class="mobile-menu-status">
-                              {item.status}
-                            </span>
-                          )}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-            ))
-          }
+                <ul class="mobile-submenu" role="list">
+                  {group.items.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        aria-current={
+                          isCurrentSection(item.href) ? "page" : undefined
+                        }
+                      >
+                        <span>{item.label}</span>
+                        {item.status && (
+                          <span class="mobile-menu-status">{item.status}</span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ))}
 
           <li>
             <a
@@ -567,17 +564,20 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               class="mobile-primary-link"
               href="/about/"
               aria-current={isCurrentPage("/about/") ? "page" : undefined}
-              >About</a
             >
+              About
+            </a>
           </li>
           <li>
             <a
               class="mobile-primary-link"
               href="/resources/ai-tools/"
-              aria-current={isCurrentSection("/resources/ai-tools/")
-                ? "page"
-                : undefined}>Free resources</a
+              aria-current={
+                isCurrentSection("/resources/ai-tools/") ? "page" : undefined
+              }
             >
+              Free resources
+            </a>
           </li>
         </ul>
       </nav>
@@ -603,7 +603,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="M16.5 12.5A7 7 0 0 1 7.5 3.5 7 7 0 1 0 16.5 12.5Z"></path>
+                  d="M16.5 12.5A7 7 0 0 1 7.5 3.5 7 7 0 1 0 16.5 12.5Z"
+                ></path>
               </svg>
               <svg
                 class="theme-icon theme-icon-sun"
@@ -622,8 +623,12 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
               <span data-theme-toggle-label>Theme</span>
             </button>
           </li>
-          <li><a href="/support/">Support</a></li>
-          <li><a href="/contact/">Contact</a></li>
+          <li>
+            <a href="/support/">Support</a>
+          </li>
+          <li>
+            <a href="/contact/">Contact</a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -906,8 +911,6 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 </script>
 
 <style>
-
-
   /* Dark tokens for the header and everything inside it (menus, mobile
      drawer, search). The surface is --color-surface-anchor, the same as the
      footer: graphite in light mode, the deepest charcoal in dark mode. */
@@ -1260,7 +1263,7 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     inline-size: 100%;
     border-block: var(--border-width, 1px) solid var(--color-border, #9eb0ac);
     background: var(--color-surface-pure, #ffffff);
-    box-shadow: 0 4px 12px rgb(0 5 4 / 8%);
+    box-shadow: var(--shadow-overlay);
     transition: inset-block-start var(--transition-standard, 220ms ease);
   }
 

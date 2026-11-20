@@ -228,7 +228,9 @@ const strongFit = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">AI-to-human routing</li>
             </ol>
           </nav>
@@ -258,7 +260,9 @@ const strongFit = [
         </div>
 
         <aside class="trigger-card" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p id="trigger-title" class="note-label">
+            Recognizable trigger
+          </p>
           <p>
             AI can answer, classify, recommend, or act, but nobody can clearly
             say when it must stop, who takes over, or what that person needs.
@@ -322,10 +326,10 @@ const strongFit = [
       <details class="solution-depth" name="routing-details">
         <summary>
           <span class="solution-depth-title">When AI should hand off</span>
-          <span class="solution-depth-description"
-            >Define the risk, uncertainty, customer request, policy, and
-            exception conditions that require a person.</span
-          >
+          <span class="solution-depth-description">
+            Define the risk, uncertainty, customer request, policy, and
+            exception conditions that require a person.
+          </span>
           <span class="solution-depth-action">Explore conditions</span>
         </summary>
         <section
@@ -347,15 +351,12 @@ const strongFit = [
             </div>
 
             <ol class="condition-grid">
-              {
-                routingConditions.map((condition) => (
-                  <li>
-                    <p class="item-number">{condition.number}</p>
-                    <h3>{condition.title}</h3>
-                    <p>{condition.description}</p>
-                  </li>
-                ))
-              }
+              {routingConditions.map((condition) => (
+                <li>
+                  <h3>{condition.title}</h3>
+                  <p>{condition.description}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -364,10 +365,10 @@ const strongFit = [
       <details class="solution-depth" name="routing-details">
         <summary>
           <span class="solution-depth-title">How the route works</span>
-          <span class="solution-depth-description"
-            >Move from a safe pause through priority, acceptance, human action,
-            and accountable closure.</span
-          >
+          <span class="solution-depth-description">
+            Move from a safe pause through priority, acceptance, human action,
+            and accountable closure.
+          </span>
           <span class="solution-depth-action">Explore the path</span>
         </summary>
         <section
@@ -391,20 +392,18 @@ const strongFit = [
             </div>
 
             <ol class="path-list">
-              {
-                routingPath.map((stage, index) => (
-                  <li>
-                    <div class="path-heading">
-                      <p class="path-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <p class="path-phase">{stage.phase}</p>
-                    </div>
-                    <h3>{stage.question}</h3>
-                    <p>{stage.evidence}</p>
-                  </li>
-                ))
-              }
+              {routingPath.map((stage, index) => (
+                <li>
+                  <div class="path-heading">
+                    <p class="path-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <p class="path-phase">{stage.phase}</p>
+                  </div>
+                  <h3>{stage.question}</h3>
+                  <p>{stage.evidence}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -413,10 +412,10 @@ const strongFit = [
       <details class="solution-depth" name="routing-details">
         <summary>
           <span class="solution-depth-title">What context must travel</span>
-          <span class="solution-depth-description"
-            >Give the person customer intent, history, prior action,
-            uncertainty, impact, and the decision required.</span
-          >
+          <span class="solution-depth-description">
+            Give the person customer intent, history, prior action, uncertainty,
+            impact, and the decision required.
+          </span>
           <span class="solution-depth-action">Explore context</span>
         </summary>
         <section
@@ -438,19 +437,17 @@ const strongFit = [
             </div>
 
             <dl class="context-list">
-              {
-                contextRequirements.map((item, index) => (
-                  <div>
-                    <dt>
-                      <span aria-hidden="true">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      {item.label}
-                    </dt>
-                    <dd>{item.description}</dd>
-                  </div>
-                ))
-              }
+              {contextRequirements.map((item, index) => (
+                <div>
+                  <dt>
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {item.label}
+                  </dt>
+                  <dd>{item.description}</dd>
+                </div>
+              ))}
             </dl>
           </div>
         </section>
@@ -459,10 +456,10 @@ const strongFit = [
       <details class="solution-depth" name="routing-details">
         <summary>
           <span class="solution-depth-title">Where routing fails</span>
-          <span class="solution-depth-description"
-            >Find transfers that preserve a transcript but lose priority,
-            authority, or responsibility.</span
-          >
+          <span class="solution-depth-description">
+            Find transfers that preserve a transcript but lose priority,
+            authority, or responsibility.
+          </span>
           <span class="solution-depth-action">Explore failures</span>
         </summary>
         <section
@@ -484,17 +481,12 @@ const strongFit = [
             </div>
 
             <div class="failure-list">
-              {
-                failurePatterns.map((failure, index) => (
-                  <article>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <h3>{failure.cue}</h3>
-                    <p>{failure.description}</p>
-                  </article>
-                ))
-              }
+              {failurePatterns.map((failure, index) => (
+                <article>
+                  <h3>{failure.cue}</h3>
+                  <p>{failure.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -520,15 +512,12 @@ const strongFit = [
         </div>
 
         <div class="evidence-grid">
-          {
-            evidenceSources.map((source, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{source.title}</h3>
-                <p>{source.description}</p>
-              </article>
-            ))
-          }
+          {evidenceSources.map((source, index) => (
+            <article>
+              <h3>{source.title}</h3>
+              <p>{source.description}</p>
+            </article>
+          ))}
         </div>
 
         <div class="output-block">
@@ -538,17 +527,14 @@ const strongFit = [
           </div>
 
           <ol class="output-list">
-            {
-              routingOutputs.map((output) => (
-                <li>
-                  <p class="item-number">{output.number}</p>
-                  <div>
-                    <h3>{output.title}</h3>
-                    <p>{output.description}</p>
-                  </div>
-                </li>
-              ))
-            }
+            {routingOutputs.map((output) => (
+              <li>
+                <div>
+                  <h3>{output.title}</h3>
+                  <p>{output.description}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </div>
@@ -574,9 +560,13 @@ const strongFit = [
         </div>
 
         <aside class="fit-list" aria-labelledby="fit-list-title">
-          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <p id="fit-list-title" class="note-label">
+            Strong fit
+          </p>
           <ul>
-            {strongFit.map((condition) => <li>{condition}</li>)}
+            {strongFit.map((condition) => (
+              <li>{condition}</li>
+            ))}
           </ul>
         </aside>
       </div>
@@ -877,16 +867,16 @@ const strongFit = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
     list-style: none;
   }
 
   .condition-grid li {
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .condition-grid .item-number,
@@ -1034,15 +1024,15 @@ const strongFit = [
   .failure-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
   }
 
   .failure-list article {
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .evidence-grid {
@@ -1160,7 +1150,7 @@ const strongFit = [
   }
 
   .fit-list li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .routing-page a:focus-visible {

@@ -187,7 +187,9 @@ const strongFit = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">Executive misalignment</li>
             </ol>
           </nav>
@@ -217,7 +219,9 @@ const strongFit = [
         </div>
 
         <aside class="problem-card" aria-labelledby="problem-title">
-          <p id="problem-title" class="note-label">Recognizable pattern</p>
+          <p id="problem-title" class="note-label">
+            Recognizable pattern
+          </p>
           <p>
             Every leader supports the transformation. Each function is still
             solving a different problem and protecting a different definition of
@@ -293,15 +297,12 @@ const strongFit = [
         </div>
 
         <ol class="signal-grid">
-          {
-            visibleSignals.map((signal) => (
-              <li>
-                <p class="item-number">{signal.number}</p>
-                <h3>{signal.title}</h3>
-                <p>{signal.description}</p>
-              </li>
-            ))
-          }
+          {visibleSignals.map((signal) => (
+            <li>
+              <h3>{signal.title}</h3>
+              <p>{signal.description}</p>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -310,10 +311,10 @@ const strongFit = [
       <details class="solution-depth" name="alignment-details">
         <summary>
           <span class="solution-depth-title">What needs agreement</span>
-          <span class="solution-depth-description"
-            >Clarify shared outcomes, boundaries, ownership, measures, and
-            escalation rules.</span
-          >
+          <span class="solution-depth-description">
+            Clarify shared outcomes, boundaries, ownership, measures, and
+            escalation rules.
+          </span>
           <span class="solution-depth-action">Explore conditions</span>
         </summary>
         <section
@@ -336,20 +337,15 @@ const strongFit = [
             </div>
 
             <div class="condition-list">
-              {
-                alignmentConditions.map((condition, index) => (
-                  <article>
-                    <div class="condition-heading">
-                      <p class="item-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <p class="condition-label">{condition.label}</p>
-                    </div>
-                    <h3>{condition.question}</h3>
-                    <p>{condition.description}</p>
-                  </article>
-                ))
-              }
+              {alignmentConditions.map((condition, index) => (
+                <article>
+                  <div class="condition-heading">
+                    <p class="condition-label">{condition.label}</p>
+                  </div>
+                  <h3>{condition.question}</h3>
+                  <p>{condition.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -358,10 +354,10 @@ const strongFit = [
       <details class="solution-depth" name="alignment-details">
         <summary>
           <span class="solution-depth-title">How to close the decision</span>
-          <span class="solution-depth-description"
-            >Move from framing the disagreement to assigning owners and testing
-            the choice.</span
-          >
+          <span class="solution-depth-description">
+            Move from framing the disagreement to assigning owners and testing
+            the choice.
+          </span>
           <span class="solution-depth-action">Explore the path</span>
         </summary>
         <section
@@ -383,20 +379,18 @@ const strongFit = [
             </div>
 
             <ol class="path-list">
-              {
-                decisionPath.map((stage, index) => (
-                  <li>
-                    <div class="path-heading">
-                      <p class="path-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <p class="path-phase">{stage.phase}</p>
-                    </div>
-                    <h3>{stage.question}</h3>
-                    <p>{stage.evidence}</p>
-                  </li>
-                ))
-              }
+              {decisionPath.map((stage, index) => (
+                <li>
+                  <div class="path-heading">
+                    <p class="path-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <p class="path-phase">{stage.phase}</p>
+                  </div>
+                  <h3>{stage.question}</h3>
+                  <p>{stage.evidence}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -405,10 +399,10 @@ const strongFit = [
       <details class="solution-depth" name="alignment-details">
         <summary>
           <span class="solution-depth-title">What evidence matters</span>
-          <span class="solution-depth-description"
-            >Separate observed facts from assumptions across customers, teams,
-            systems, and risk.</span
-          >
+          <span class="solution-depth-description">
+            Separate observed facts from assumptions across customers, teams,
+            systems, and risk.
+          </span>
           <span class="solution-depth-action">Explore evidence</span>
         </summary>
         <section
@@ -436,17 +430,12 @@ const strongFit = [
             </div>
 
             <div class="evidence-grid">
-              {
-                evidenceSources.map((source, index) => (
-                  <article>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <h3>{source.title}</h3>
-                    <p>{source.description}</p>
-                  </article>
-                ))
-              }
+              {evidenceSources.map((source, index) => (
+                <article>
+                  <h3>{source.title}</h3>
+                  <p>{source.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -455,10 +444,10 @@ const strongFit = [
       <details class="solution-depth" name="alignment-details">
         <summary>
           <span class="solution-depth-title">What you leave with</span>
-          <span class="solution-depth-description"
-            >See the decisions, owners, measures, and next actions produced by
-            the work.</span
-          >
+          <span class="solution-depth-description">
+            See the decisions, owners, measures, and next actions produced by
+            the work.
+          </span>
           <span class="solution-depth-action">Explore outputs</span>
         </summary>
         <section
@@ -477,17 +466,14 @@ const strongFit = [
             </div>
 
             <ol class="output-list">
-              {
-                alignmentOutputs.map((output) => (
-                  <li>
-                    <p class="item-number">{output.number}</p>
-                    <div>
-                      <h3>{output.title}</h3>
-                      <p>{output.description}</p>
-                    </div>
-                  </li>
-                ))
-              }
+              {alignmentOutputs.map((output) => (
+                <li>
+                  <div>
+                    <h3>{output.title}</h3>
+                    <p>{output.description}</p>
+                  </div>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -514,19 +500,16 @@ const strongFit = [
         </div>
 
         <div class="diagnostic-grid">
-          {
-            diagnosticPaths.map((path, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{path.title}</h3>
-                <p>{path.useWhen}</p>
-                <a href={path.href}>
-                  Review the diagnostic
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              </article>
-            ))
-          }
+          {diagnosticPaths.map((path, index) => (
+            <article>
+              <h3>{path.title}</h3>
+              <p>{path.useWhen}</p>
+              <a href={path.href}>
+                Review the diagnostic
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -551,9 +534,13 @@ const strongFit = [
         </div>
 
         <aside class="fit-list" aria-labelledby="fit-list-title">
-          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <p id="fit-list-title" class="note-label">
+            Strong fit
+          </p>
           <ul>
-            {strongFit.map((condition) => <li>{condition}</li>)}
+            {strongFit.map((condition) => (
+              <li>{condition}</li>
+            ))}
           </ul>
         </aside>
       </div>
@@ -851,16 +838,16 @@ const strongFit = [
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
     list-style: none;
   }
 
   .signal-grid li {
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .signal-grid .item-number {
@@ -868,7 +855,7 @@ const strongFit = [
   }
 
   .signal-grid h3 {
-    margin-top: 1.5rem;
+    margin-top: 0;
     color: var(--color-light);
     font-size: var(--fs-h4);
     font-weight: var(--fw-medium);
@@ -926,19 +913,19 @@ const strongFit = [
     grid-template-columns: repeat(4, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: 0.1875rem solid var(--color-green);
+    border-top: 2px solid var(--color-text);
     list-style: none;
   }
 
   .path-list li {
     min-width: 0;
     padding: clamp(1.25rem, 3vw, 1.75rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .path-list li:first-child {
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
   }
 
   .path-heading {
@@ -1176,7 +1163,7 @@ const strongFit = [
   }
 
   .fit-list li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .alignment-page a:focus-visible {

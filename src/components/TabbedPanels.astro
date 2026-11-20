@@ -42,74 +42,70 @@ const {
 <content-tabs class="content-tabs" data-theme={theme} data-variant={variant}>
   <div class="tab-list-wrap">
     <div class="tab-list" data-tab-list aria-label={label}>
-      {
-        panels.map((panel) => (
-          <button
-            id={`${idPrefix}-tab-${panel.id}`}
-            class="tab-trigger"
-            type="button"
-            data-tab
-            aria-controls={panel.id}
-          >
-            {panel.number && <span aria-hidden="true">{panel.number}</span>}
-            <span>{panel.label}</span>
-          </button>
-        ))
-      }
+      {panels.map((panel) => (
+        <button
+          id={`${idPrefix}-tab-${panel.id}`}
+          class="tab-trigger"
+          type="button"
+          data-tab
+          aria-controls={panel.id}
+        >
+          {panel.number && <span aria-hidden="true">{panel.number}</span>}
+          <span>{panel.label}</span>
+        </button>
+      ))}
     </div>
   </div>
 
   <div class="tab-panels">
-    {
-      panels.map((panel) => (
-        <article
-          id={panel.id}
-          class="tab-panel"
-          data-panel
-          aria-labelledby={`${idPrefix}-tab-${panel.id}`}
-        >
-          <div class="panel-heading">
-            <div class="panel-meta">
-              {panel.number && <p class="panel-number">{panel.number}</p>}
-              {panel.eyebrow && <p class="panel-eyebrow">{panel.eyebrow}</p>}
-            </div>
-            <h3>{panel.title}</h3>
-            {panel.description && (
-              <p class="panel-description">{panel.description}</p>
-            )}
+    {panels.map((panel) => (
+      <article
+        id={panel.id}
+        class="tab-panel"
+        data-panel
+        aria-labelledby={`${idPrefix}-tab-${panel.id}`}
+      >
+        <div class="panel-heading">
+          <div class="panel-meta">
+            {panel.number && <p class="panel-number">{panel.number}</p>}
+            {panel.eyebrow && <p class="panel-eyebrow">{panel.eyebrow}</p>}
           </div>
+          <h3>{panel.title}</h3>
+          {panel.description && (
+            <p class="panel-description">{panel.description}</p>
+          )}
+        </div>
 
-          {panel.details && panel.details.length > 0 && (
-            <dl class="panel-details">
-              {panel.details.map((detail) => (
-                <div>
-                  <dt>{detail.label}</dt>
-                  <dd>{detail.value}</dd>
-                </div>
+        {panel.details && panel.details.length > 0 && (
+          <dl class="panel-details">
+            {panel.details.map((detail) => (
+              <div>
+                <dt>{detail.label}</dt>
+                <dd>{detail.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        {panel.items && panel.items.length > 0 && (
+          <div class="panel-list">
+            {panel.listLabel && <p>{panel.listLabel}</p>}
+            <ul>
+              {panel.items.map((item) => (
+                <li>{item}</li>
               ))}
-            </dl>
-          )}
+            </ul>
+          </div>
+        )}
 
-          {panel.items && panel.items.length > 0 && (
-            <div class="panel-list">
-              {panel.listLabel && <p>{panel.listLabel}</p>}
-              <ul>
-                {panel.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {panel.link && (
-            <a class="panel-link" href={panel.link.href}>
-              {panel.link.label}
-              <span aria-hidden="true">&#8594;</span>
-            </a>
-          )}
-        </article>
-      ))
-    }
+        {panel.link && (
+          <a class="panel-link" href={panel.link.href}>
+            {panel.link.label}
+            <span aria-hidden="true">&#8594;</span>
+          </a>
+        )}
+      </article>
+    ))}
   </div>
 </content-tabs>
 
@@ -189,7 +185,7 @@ const {
 
 <style>
   .content-tabs {
-    --tabs-accent: var(--color-blue);
+    --tabs-accent: var(--color-text);
     --tabs-signal: #ffce31;
 
     display: block;
@@ -408,7 +404,7 @@ const {
   }
 
   .panel-list li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .panel-link {
@@ -455,73 +451,76 @@ const {
     background: var(--color-surface-pure);
   }
 
+  /* "dark" tabs sit inside [data-band] sections, which are now the inset
+     surface in both themes (DESIGN.md, section 0.1). They use the surface and
+     text tokens directly, so the selected tab never becomes a black block. */
   .content-tabs[data-theme="dark"] {
-    color: var(--color-light);
+    color: var(--color-text);
   }
 
   .content-tabs[data-theme="dark"] .tab-list-wrap {
-    border-color: rgb(252 254 255 / 28%);
-    background: rgb(252 254 255 / 8%);
+    border-color: var(--color-border);
+    background: var(--color-surface-pure);
   }
 
   .content-tabs[data-theme="dark"] .tab-trigger {
-    border-color: rgb(252 254 255 / 18%);
-    color: var(--color-text-inverse-muted);
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
   }
 
   .content-tabs[data-theme="dark"]
     .tab-trigger
     > span:first-child:not(:last-child) {
-    color: var(--color-green);
+    color: var(--color-text-subtle);
   }
 
   .content-tabs[data-theme="dark"] .tab-trigger[aria-selected="true"] {
-    box-shadow: inset 0 -0.1875rem var(--color-green);
-    background: var(--color-light);
-    color: var(--color-ink);
+    box-shadow: inset 0 -2px var(--color-text);
+    background: var(--color-surface-pure);
+    color: var(--color-text);
   }
 
   .content-tabs[data-theme="dark"] .tab-panels,
   .content-tabs[data-theme="dark"]:not([data-ready="true"]) .tab-panel {
-    border-color: rgb(252 254 255 / 28%);
-    background: rgb(252 254 255 / 6%);
+    border-color: var(--color-border);
+    background: var(--color-surface-pure);
   }
 
   .content-tabs[data-theme="dark"] .panel-number,
   .content-tabs[data-theme="dark"] .panel-list > p {
-    color: var(--color-green);
+    color: var(--color-text-muted);
   }
 
   .content-tabs[data-theme="dark"] .panel-eyebrow,
   .content-tabs[data-theme="dark"] .panel-description,
   .content-tabs[data-theme="dark"] .panel-details dd {
-    color: var(--color-text-inverse-muted);
+    color: var(--color-text-muted);
   }
 
   .content-tabs[data-theme="dark"] .tab-panel h3,
   .content-tabs[data-theme="dark"] .panel-details dt,
   .content-tabs[data-theme="dark"] .panel-list li {
-    color: var(--color-light);
+    color: var(--color-text);
   }
 
   .content-tabs[data-theme="dark"] .panel-details,
   .content-tabs[data-theme="dark"] .panel-details > div,
   .content-tabs[data-theme="dark"] .panel-list {
-    border-color: rgb(252 254 255 / 22%);
+    border-color: var(--color-border);
   }
 
   .content-tabs[data-theme="dark"] .panel-list li::marker {
-    color: var(--color-green);
+    color: var(--color-text-subtle);
   }
 
   .content-tabs[data-theme="dark"] .panel-link {
-    border-color: rgb(252 254 255 / 36%);
-    background: rgb(252 254 255 / 10%);
-    color: var(--color-light);
+    border-color: var(--color-border-strong);
+    background: transparent;
+    color: var(--color-text);
   }
 
   .content-tabs[data-theme="dark"] .panel-link span {
-    color: var(--color-green);
+    color: var(--color-blue);
   }
 
   .content-tabs[data-variant="line"] .tab-list-wrap {
@@ -553,15 +552,15 @@ const {
     }
 
     .content-tabs[data-theme="dark"] .tab-trigger:hover {
-      background: rgb(252 254 255 / 12%);
-      color: var(--color-light);
+      background: var(--color-surface-subtle);
+      color: var(--color-text);
     }
 
     .panel-link:hover {
       gap: 0.75rem;
       border-color: var(--tabs-accent);
       background: var(--tabs-accent);
-      color: var(--color-light);
+      color: var(--color-surface-pure);
     }
 
     .panel-link:hover span {
@@ -569,9 +568,9 @@ const {
     }
 
     .content-tabs[data-theme="dark"] .panel-link:hover {
-      border-color: var(--color-light);
-      background: var(--color-light);
-      color: var(--color-ink);
+      border-color: var(--color-text);
+      background: var(--color-text);
+      color: var(--color-surface-pure);
     }
   }
 

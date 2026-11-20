@@ -5,6 +5,25 @@
 
 export const DEFAULT_CONTENT_SIGNAL = "ai-train=no, search=yes, ai-input=yes";
 
+// Headers for a Markdown body built from another response. The source's
+// length, encoding and validators describe a different body, so drop them:
+// a stale Content-Length truncates or stalls the download, and a shared ETag
+// lets caches serve one representation for the other.
+export function markdownHeaders(source: Headers): Headers {
+  const headers = new Headers(source);
+  for (const name of [
+    "content-length",
+    "content-encoding",
+    "etag",
+    "last-modified",
+  ]) {
+    headers.delete(name);
+  }
+  headers.set("content-type", "text/markdown; charset=utf-8");
+  headers.set("vary", "Accept");
+  return headers;
+}
+
 export function estimateTokens(value: string): number {
   const words = value.trim().split(/\s+/).filter(Boolean);
   return Math.max(1, Math.ceil(words.length * 1.2));
@@ -19,7 +38,11 @@ export function decodeHtmlEntities(value: string): string {
     .replace(/&#39;/gi, "'")
     .replace(/&quot;/gi, '"')
     .replace(/&#x27;/gi, "'")
-    .replace(/&apos;/gi, "'");
+    .replace(/&apos;/gi, "'")
+    .replace(/&#(\d+);/g, (_m, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_m, code) =>
+      String.fromCodePoint(parseInt(code, 16)),
+    );
 }
 
 export function cleanText(value: string): string {
@@ -81,7 +104,8 @@ export function extractFrontmatter(
 
   const rows: string[] = [];
   if (title) rows.push(`title: ${title.replace(/\n+/g, " ")}`);
-  if (description) rows.push(`description: ${description.replace(/\n+/g, " ")}`);
+  if (description)
+    rows.push(`description: ${description.replace(/\n+/g, " ")}`);
   if (image) rows.push(`image: ${image}`);
 
   return rows.length > 0 ? `---\n${rows.join("\n")}\n---\n\n` : "";
@@ -101,8 +125,16 @@ export function extractJsonLdBlocks(html: string): string[] {
   return blocks;
 }
 
+// The page content lives in <main>; everything outside it (the <head> title,
+// skip link, site header and search dialog, footer, consent banner) is chrome.
+function extractMainContent(html: string): string {
+  const main = html.match(/<main\b[^>]*>([\s\S]*)<\/main>/i)?.[1];
+  if (main) return main;
+  return html.replace(/<head\b[\s\S]*?<\/head>/i, " ");
+}
+
 export function convertHtmlToMarkdown(html: string): string {
-  let body = html
+  let body = extractMainContent(html)
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
@@ -111,6 +143,15 @@ export function convertHtmlToMarkdown(html: string): string {
     .replace(/<nav[\s\S]*?<\/nav>/gi, " ")
     .replace(/<aside[\s\S]*?<\/aside>/gi, " ")
     .replace(/<form[\s\S]*?<\/form>/gi, " ")
+    // Links first, so the paragraph, list and heading passes below (which
+    // flatten inner tags) keep them as Markdown links.
+    .replace(
+      /<a\s+[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi,
+      (_match, href, text) => {
+        const label = cleanText(text);
+        return label && href ? `[${label}](${href})` : label || "";
+      },
+    )
     .replace(
       /<h1[^>]*>([\s\S]*?)<\/h1>/gi,
       (_match, text) => `\n\n# ${cleanText(text)}\n\n`,
@@ -148,13 +189,6 @@ export function convertHtmlToMarkdown(html: string): string {
       (_match, text) => `\n\n${cleanText(text)}\n\n`,
     )
     .replace(
-      /<a\s+[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi,
-      (_match, href, text) => {
-        const label = cleanText(text);
-        return label && href ? `[${label}](${href})` : label || "";
-      },
-    )
-    .replace(
       /<strong[^>]*>([\s\S]*?)<\/strong>/gi,
       (_match, text) => `**${cleanText(text)}**`,
     )
@@ -177,9 +211,12 @@ export function convertHtmlToMarkdown(html: string): string {
     .replace(/<br\s*\/?>/gi, "\n")
     .replace(/<[^>]+>/g, " ");
 
-  body = body
+  body = decodeHtmlEntities(body)
     .replace(/&nbsp;/gi, " ")
     .replace(/\u00a0/g, " ")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n[ \t]+/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
     .replace(/\n\s*\n\s*-/g, "\n-")
     .replace(/\n\s*\n\s*\*/g, "\n*")

@@ -91,7 +91,9 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">{hero.breadcrumb}</li>
             </ol>
           </nav>
@@ -102,17 +104,17 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
         </div>
 
         <aside class="guide-card" aria-labelledby="guide-title">
-          <p id="guide-title" class="note-label">How to use this page</p>
+          <p id="guide-title" class="note-label">
+            How to use this page
+          </p>
           <p>{hero.guide.introduction}</p>
           <dl>
-            {
-              hero.guide.items.map((item) => (
-                <div>
-                  <dt>{item.label}</dt>
-                  <dd>{item.value}</dd>
-                </div>
-              ))
-            }
+            {hero.guide.items.map((item) => (
+              <div>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
           </dl>
         </aside>
       </div>
@@ -173,20 +175,18 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
         </div>
 
         <ol class="selection-list">
-          {
-            selection.items.map((item, index) => (
-              <li>
-                <p class="selection-number">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <div>
-                  <p class="selection-label">{item.title}</p>
-                  <h3>{item.question}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </li>
-            ))
-          }
+          {selection.items.map((item, index) => (
+            <li>
+              <p class="selection-number">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <div>
+                <p class="selection-label">{item.title}</p>
+                <h3>{item.question}</h3>
+                <p>{item.description}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -204,19 +204,16 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
         </div>
 
         <div class="related-grid">
-          {
-            related.items.map((item, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <a href={item.href}>
-                  {item.label}
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              </article>
-            ))
-          }
+          {related.items.map((item, index) => (
+            <article>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <a href={item.href}>
+                {item.label}
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -237,14 +234,12 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
             <a class="button button-primary" href={nextStep.primaryCta.href}>
               {nextStep.primaryCta.label}
             </a>
-            {
-              nextStep.secondaryCta && (
-                <a class="button button-text" href={nextStep.secondaryCta.href}>
-                  {nextStep.secondaryCta.label}
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              )
-            }
+            {nextStep.secondaryCta && (
+              <a class="button button-text" href={nextStep.secondaryCta.href}>
+                {nextStep.secondaryCta.label}
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -532,7 +527,7 @@ const { meta, hero, directory, selection, related, nextStep } = Astro.props;
   }
 
   .entry-conditions li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .entry-link,

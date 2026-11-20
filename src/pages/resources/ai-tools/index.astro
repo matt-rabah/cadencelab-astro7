@@ -54,7 +54,9 @@ const buildStandards = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">Free CX and AI tools</li>
             </ol>
           </nav>
@@ -82,7 +84,9 @@ const buildStandards = [
         </div>
 
         <aside class="promise-card" aria-labelledby="promise-title">
-          <p id="promise-title" class="note-label">The deal</p>
+          <p id="promise-title" class="note-label">
+            The deal
+          </p>
           <p>
             These tools are meant to earn trust by being useful. They aren’t
             calculators that hide the answer behind a lead form.
@@ -127,7 +131,6 @@ const buildStandards = [
       <div class="page-container first-layout">
         <div class="first-intro">
           <p class="eyebrow">Live tool</p>
-          <p class="build-number">01</p>
           <h2 id="first-build-title">AI Use Case Stress Test</h2>
           <p>
             Describe an AI idea before the platform, pilot, or vendor decision
@@ -176,7 +179,6 @@ const buildStandards = [
       <div class="page-container first-layout live-tool-secondary">
         <div class="first-intro">
           <p class="eyebrow">Live tool</p>
-          <p class="build-number">02</p>
           <h2>CX Handoff Mapper</h2>
           <p>
             Follow a customer journey across people, teams, channels, and
@@ -224,7 +226,6 @@ const buildStandards = [
       <div class="page-container first-layout live-tool-secondary">
         <div class="first-intro">
           <p class="eyebrow">Live tool</p>
-          <p class="build-number">03</p>
           <h2>AI Evaluation Builder</h2>
           <p>
             Define what a useful AI result must do before a demo or pilot shapes
@@ -271,7 +272,6 @@ const buildStandards = [
       <div class="page-container first-layout live-tool-secondary">
         <div class="first-intro">
           <p class="eyebrow">Live tool</p>
-          <p class="build-number">04</p>
           <h2>Feedback Signal Sorter</h2>
           <p>
             Organize a small set of anonymized customer comments without hiding
@@ -319,7 +319,6 @@ const buildStandards = [
       <div class="page-container first-layout live-tool-secondary">
         <div class="first-intro">
           <p class="eyebrow">Live tool</p>
-          <p class="build-number">05</p>
           <h2>CRM Data Health Sampler</h2>
           <p>
             Review a small, anonymized CSV before migration, automation, or
@@ -368,7 +367,6 @@ const buildStandards = [
       <div class="page-container first-layout live-tool-secondary">
         <div class="first-intro">
           <p class="eyebrow">Live tool</p>
-          <p class="build-number">06</p>
           <h2>Service Recovery Planner</h2>
           <p>
             Turn a customer failure into a practical response without inventing
@@ -458,17 +456,14 @@ const buildStandards = [
         </div>
 
         <ol class="standard-list">
-          {
-            buildStandards.map((standard, index) => (
-              <li>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <div>
-                  <h3>{standard.title}</h3>
-                  <p>{standard.description}</p>
-                </div>
-              </li>
-            ))
-          }
+          {buildStandards.map((standard, index) => (
+            <li>
+              <div>
+                <h3>{standard.title}</h3>
+                <p>{standard.description}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -905,7 +900,7 @@ const buildStandards = [
 
   .privacy-layout aside {
     border-color: var(--color-border-inverse);
-    border-top-color: var(--color-green);
+    border-top-color: var(--color-text);
     background: color-mix(in srgb, var(--color-ink) 92%, var(--color-light));
   }
 
