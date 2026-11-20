@@ -937,6 +937,14 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     --color-border-inverse: rgb(0 0 0 / 22%);
     --color-focus: #9fb3ff;
 
+    /* The FitCheck(TM) button keeps Matt's brand blue in both themes. The
+       header's other blue accents use the light #9fb3ff so they read on the
+       dark header; the button doesn't need to, since its text is light.
+       #f4f5f7 on #1a27c9 is 8.8:1; on the #2433dc hover, 7.5:1. */
+    --header-cta-bg: #1a27c9;
+    --header-cta-hover: #2433dc;
+    --header-cta-text: #f4f5f7;
+
     color-scheme: dark;
   }
 
@@ -1245,8 +1253,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
     align-items: center;
     justify-content: center;
     padding-inline: clamp(1.25rem, 2.5vw, 2.5rem);
-    background: var(--color-blue);
-    color: var(--color-blue-foreground) !important;
+    background: var(--header-cta-bg);
+    color: var(--header-cta-text) !important;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.015em;
@@ -1431,8 +1439,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
 
     .header-cta:hover,
     .mobile-cta:hover {
-      background: var(--color-blue-hover);
-      color: var(--color-blue-foreground) !important;
+      background: var(--header-cta-hover);
+      color: var(--header-cta-text) !important;
     }
 
     .menu-link-list a:hover {
@@ -1501,8 +1509,8 @@ const groupIsCurrent = (group: NavigationGroup): boolean =>
       justify-content: center;
       padding-inline: 1rem;
       border-radius: var(--radius-sm, 0.25rem);
-      background: var(--color-blue);
-      color: var(--color-blue-foreground) !important;
+      background: var(--header-cta-bg);
+      color: var(--header-cta-text) !important;
       font-size: 0.8125rem;
       font-weight: 600;
       line-height: 1;
