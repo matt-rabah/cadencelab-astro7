@@ -1,0 +1,366 @@
+---
+import BreadcrumbSchema from "../../../../components/BreadcrumbSchema.astro";
+import Footer from "../../../../components/Footer.astro";
+import NavHeader from "../../../../components/NavHeader.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import "../../../../styles/feedback-signal-sorter.css";
+import "../../../../styles/vibe-code-audit.css";
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+if (turnstileSiteKey) {
+  Astro.csp?.insertScriptResource("'self'");
+  Astro.csp?.insertScriptResource("https://challenges.cloudflare.com");
+  Astro.csp?.insertDirective(
+    "frame-src 'self' https://challenges.cloudflare.com",
+  );
+}
+---
+
+<Layout
+  title="Free Vibe Code Audit: Score Any Site Out of 100 | Cadence Lab"
+  description="Scan a public website for signs it was vibe coded with an AI app builder. Get a score out of 100 and copy-ready prompts to fix each issue in the coding tool you use."
+  canonicalURL="/resources/ai-tools/vibe-code-audit/"
+  pageType="website"
+>
+  {turnstileSiteKey && (
+    <script
+      slot="head"
+      is:inline
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      data-cfasync="false"
+      defer
+    />
+  )}
+
+  <NavHeader />
+  <BreadcrumbSchema
+    items={[
+      { name: "Home", href: "/" },
+      { name: "Free CX and AI tools", href: "/resources/ai-tools/" },
+      { name: "Vibe Code Audit" },
+    ]}
+  />
+
+  <main id="main-content" class="feedback-page vibe-page" tabindex="-1">
+    <section class="tool-hero" aria-labelledby="tool-title">
+      <div class="page-container hero-layout">
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/resources/ai-tools/">Free tools</a>
+              </li>
+              <li aria-current="page">Vibe Code Audit</li>
+            </ol>
+          </nav>
+
+          <p class="eyebrow">Free website audit</p>
+          <h1 id="tool-title">
+            Was this site vibe coded? Find out, then fix it.
+          </h1>
+          <p class="hero-lead">
+            Paste a website address. You get a score out of 100, the issues
+            behind it, and a ready-to-paste prompt for each fix that works in
+            Claude, ChatGPT, Cursor, Copilot, or any coding tool you use.
+          </p>
+          <a class="button button-primary" href="#audit-form">
+            Scan a site
+          </a>
+        </div>
+
+        <aside
+          data-band
+          class="privacy-card"
+          aria-labelledby="privacy-card-title"
+        >
+          <p id="privacy-card-title" class="note-label">
+            What it reads
+          </p>
+          <p>
+            Only what any visitor’s browser can see: the page, its scripts and
+            styles, robots.txt, and the sitemap. It doesn’t log in, submit
+            forms, or test anyone’s servers. Nothing is stored.
+          </p>
+          <dl>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free</dd>
+            </div>
+            <div>
+              <dt>Signup</dt>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Checks</dt>
+              <dd>32 signals</dd>
+            </div>
+            <div>
+              <dt>Results</dt>
+              <dd>Not saved</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tool-intro" aria-labelledby="how-it-works-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-it-works-title">
+            A score is only useful if it shows you the next step.
+          </h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            “Vibe coding” means building a site mostly by prompting an AI tool
+            like Lovable, Bolt, v0, or Replit. It’s fast, and it often ships
+            with the same gaps: empty app shells, missing security headers,
+            builder badges, public source code, and keys that should be secret.
+          </p>
+          <p>
+            The audit checks 32 of those signals across four areas. Each issue
+            comes with a prompt you can paste into your coding tool, one at a
+            time or all at once.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="page-container">
+        <div class="workspace-heading">
+          <p class="eyebrow">Scan a site</p>
+          <h2 id="workspace-title">Enter any public website.</h2>
+          <p>
+            Use the full address or just the domain, like example.com. Scan
+            sites you own or have permission to review.
+          </p>
+        </div>
+
+        <form
+          id="audit-form"
+          class="feedback-form vibe-form"
+          novalidate
+          toolname="vibe_code_audit"
+          tooldescription="Scan a public website for vibe-coded build signals and get fix prompts"
+        >
+          <div class="field">
+            <label for="audit-url">Website address</label>
+            <p id="audit-url-hint" class="field-hint">
+              Public sites only. Local, private, and IP addresses can’t be
+              scanned.
+            </p>
+            <div class="vibe-input-row">
+              <input
+                id="audit-url"
+                name="url"
+                type="text"
+                inputmode="url"
+                autocomplete="url"
+                spellcheck="false"
+                placeholder="example.com"
+                maxlength="2000"
+                aria-describedby="audit-url-hint audit-error"
+                toolparamdescription="Public website URL to audit"
+                required
+              />
+              <button
+                class="button button-primary"
+                type="submit"
+                data-scan-button
+              >
+                Scan
+              </button>
+            </div>
+          </div>
+
+          {turnstileSiteKey ? (
+            <div
+              class="cf-turnstile"
+              data-sitekey={turnstileSiteKey}
+              data-action="vibe-audit"
+              data-appearance="interaction-only"
+              data-theme="auto"
+              data-size="flexible"
+              data-retry="auto"
+              data-refresh-expired="auto"
+            />
+          ) : (
+            <p class="field-hint" role="status">
+              The security check is unavailable in this environment, so scans
+              won’t run here.
+            </p>
+          )}
+
+          <p id="audit-error" class="vibe-error" role="alert" hidden></p>
+          <p
+            class="vibe-status"
+            role="status"
+            aria-live="polite"
+            data-scan-status
+          ></p>
+        </form>
+      </div>
+    </section>
+
+    <section
+      data-band
+      id="audit-results"
+      class="feedback-results vibe-results"
+      aria-labelledby="results-title"
+      hidden
+    >
+      <div class="page-container">
+        <div class="vibe-summary">
+          <div class="vibe-score" data-rating="">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="vibe-score-track" cx="60" cy="60" r="52"></circle>
+              <circle
+                class="vibe-score-value"
+                cx="60"
+                cy="60"
+                r="52"
+                data-score-ring
+              ></circle>
+            </svg>
+            <p class="vibe-score-number">
+              <span data-out="score">0</span>
+              <span class="vibe-score-out">/ 100</span>
+            </p>
+          </div>
+          <div class="vibe-summary-copy">
+            <p class="eyebrow">Results for</p>
+            <h2 id="results-title" tabindex="-1" data-out="url">
+              example.com
+            </h2>
+            <p class="vibe-rating">
+              Build quality: <strong data-out="rating">Fair</strong>
+            </p>
+            <p class="vibe-likelihood">
+              Vibe-coding likelihood: <strong data-out="likelihood">Low</strong>
+              . <span data-out="likelihood-reason"></span>
+            </p>
+            <div class="vibe-summary-actions">
+              <button class="button button-primary" type="button" data-improve>
+                Improve the score{" "}
+                <span class="vibe-count" data-out="issue-count">
+                  0
+                </span>
+              </button>
+              <button class="button button-text" type="button" data-rescan>
+                Scan another site
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="vibe-section-title">Breakdown</h3>
+        <ul class="vibe-categories" role="list" data-categories></ul>
+
+        <div data-issues></div>
+
+        <details class="disclosure vibe-passed">
+          <summary class="disclosure-summary">
+            <span class="disclosure-title">
+              Checks this site passed (<span data-out="passed-count">0</span>)
+            </span>
+          </summary>
+          <div class="disclosure-body">
+            <ul data-passed></ul>
+          </div>
+        </details>
+
+        <div class="vibe-limits">
+          <p class="note-label">What the score can’t see</p>
+          <ul data-limits></ul>
+          <p>
+            The score comes from public signals, so treat it as an informed
+            estimate, not proof of how a site was built.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <dialog
+      class="vibe-dialog"
+      aria-labelledby="improve-title"
+      data-improve-dialog
+    >
+      <div class="vibe-dialog-header">
+        <h2 id="improve-title">How to improve your score</h2>
+        <button
+          class="vibe-dialog-close"
+          type="button"
+          data-close-dialog
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <p class="vibe-dialog-lead">
+        Copy these instructions and paste them into the AI coding tool you use
+        (Claude Code, Cursor, Windsurf, Copilot, ChatGPT, or another). It works
+        through the fixes in order, most serious first.
+      </p>
+      <pre class="vibe-prompt" tabindex="0" data-all-prompt></pre>
+      <div class="vibe-dialog-footer">
+        <button class="button button-primary" type="button" data-copy-all>
+          Copy all instructions
+        </button>
+        <p class="vibe-dialog-meta">
+          <span data-out="dialog-count">0</span> issues found
+        </p>
+      </div>
+    </dialog>
+
+    <section class="method" aria-labelledby="method-title">
+      <div class="page-container method-layout">
+        <div>
+          <p class="eyebrow">What it inspects</p>
+          <h2 id="method-title">Four areas, 32 checks.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span>
+            <p>
+              <strong>Structure</strong> Real headings, landmarks, labels, alt
+              text, and buttons that work with a keyboard.
+            </p>
+          </li>
+          <li>
+            <span>02</span>
+            <p>
+              <strong>Content</strong> A real title and description, sharing
+              tags, text in the HTML, and no placeholder copy.
+            </p>
+          </li>
+          <li>
+            <span>03</span>
+            <p>
+              <strong>Tech stack and build</strong> AI builder fingerprints, a
+              proper production build, private source maps, and crawl files.
+            </p>
+          </li>
+          <li>
+            <span>04</span>
+            <p>
+              <strong>Security and backend signals</strong> Security headers,
+              HTTPS, server details, and secret keys exposed in public code.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import "../../../../scripts/vibe-code-audit";
+</script>

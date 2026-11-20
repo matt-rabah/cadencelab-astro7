@@ -749,6 +749,13 @@ select:focus-visible {
   border-block: var(--border-width) solid var(--color-border);
 }
 
+/* Secondary buttons use --color-ink for their label, which a band remaps
+   to its own background; restate the label in the band's text color. */
+[data-band] .button.button-secondary,
+[data-band] button.button-secondary {
+  color: var(--color-text) !important;
+}
+
 /* Buttons in a band paint with the theme's primary pair, which bands don't
    remap, so a primary action keeps its fill on the inset surface. */
 [data-band] .button.button-primary,
