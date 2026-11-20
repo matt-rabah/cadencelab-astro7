@@ -38,7 +38,7 @@
   padding: 0;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   list-style: none;
 }
 
@@ -318,12 +318,12 @@
 }
 
 .feedback-page .choice-list strong {
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .feedback-page .choice-list small {
   color: var(--color-text-muted);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.4;
 }
 
@@ -483,7 +483,7 @@
   margin: 0 0 0.5rem;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .feedback-page .sample-summary dd {
@@ -519,7 +519,7 @@
   margin: 0;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 700;
 }
 
@@ -540,7 +540,7 @@
 .feedback-page .theme-card h5 {
   margin: 1.5rem 0 0.75rem;
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   letter-spacing: 0;
 }
 
@@ -571,7 +571,7 @@
 
 .feedback-page .term-list strong {
   color: var(--color-text-muted);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .feedback-page .summary-limit {

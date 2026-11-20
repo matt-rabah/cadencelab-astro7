@@ -33,7 +33,7 @@
   margin: 0;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
@@ -70,7 +70,7 @@
   padding: 0.25rem 0.5rem;
   border: 1px solid currentcolor;
   font-family: var(--ff-sans);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.3;
@@ -102,7 +102,7 @@
   min-width: 58rem;
   border-collapse: collapse;
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
@@ -126,7 +126,7 @@
 .data-health-page thead th {
   background: var(--color-surface-subtle);
   color: var(--color-text-muted);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: 0;
 }
 

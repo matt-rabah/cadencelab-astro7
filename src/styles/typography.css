@@ -35,15 +35,15 @@
   --fea-tabular: "kern" 1, "liga" 1, "tnum" 1;
 
   /* Line heights */
-  --lh-display: 1.05;
-  --lh-h1: 1.1;
+  --lh-display: 1.04; /* 70/72 */
+  --lh-h1: 1.167; /* 48/56 */
   --lh-heading: var(--lh-h1);
-  --lh-h2: 1.15;
-  --lh-h3: 1.25;
-  --lh-h4: 1.35;
-  --lh-body: 1.6;
-  --lh-ui: 1.4;
-  --lh-small: 1.4;
+  --lh-h2: 1.2; /* 40/48 */
+  --lh-h3: 1.333; /* 24/32 */
+  --lh-h4: 1.4; /* 20/28 */
+  --lh-body: 1.55; /* 16/24.8 */
+  --lh-ui: 1.5; /* 16/24 */
+  --lh-small: 1.43; /* 14/20 */
   --lh-post-title: 1.12;
   --lh-post-body: 1.65;
   --lh-tight: 1.35;
@@ -60,17 +60,18 @@
   --measure-prose: 68ch;
   --measure-ui: 60ch;
 
-  /* Interface scale */
-  --fs-eyebrow: 0.8125rem;
+  /* Interface scale: steps follow the Salesforce marketing scale (70, 48, 40,
+     24, 20 / 18, 16, 14) with tighter heading leading; weights stay ours. */
+  --fs-eyebrow: 0.875rem; /* label 14 */
   --fs-small: 0.875rem;
-  --fs-cta: 0.9375rem;
+  --fs-cta: 1rem; /* button 16 */
   --fs-body: 1rem;
-  --fs-body-ui: clamp(1rem, 0.97rem + 0.11vw, 1.0625rem);
-  --fs-h4: clamp(1.125rem, 0.682rem + 0.682vw, 1.25rem);
-  --fs-h3: clamp(1.35rem, 0.66rem + 1.2vw, 1.65rem);
-  --fs-h2: clamp(1.75rem, 0.844rem + 1.875vw, 2.25rem);
-  --fs-h1: clamp(2.25rem, 0.929rem + 2.857vw, 3.25rem);
-  --fs-display: clamp(2.75rem, 1.149rem + 4.468vw, 4.5rem);
+  --fs-body-ui: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem); /* lead 18/28 */
+  --fs-h4: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem); /* 20/28 */
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); /* 24/32 */
+  --fs-h2: clamp(1.875rem, 1.45rem + 1.4vw, 2.5rem); /* 40/48 */
+  --fs-h1: clamp(2.25rem, 1.7rem + 1.8vw, 3rem); /* 48/56 */
+  --fs-display: clamp(2.5rem, 1.45rem + 3.4vw, 4.375rem); /* 70/72 */
 
   /* Editorial scale */
   --fs-post-title: clamp(2rem, 1.69rem + 1.33vw, 2.75rem);

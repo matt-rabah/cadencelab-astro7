@@ -253,10 +253,9 @@ const relatedPaths = [
           </p>
         </div>
 
-        <details class="diagnostic-disclosure" name="diagnostic-details">
-          <summary>
+        <details class="diagnostic-disclosure" name="diagnostic-details" open>
+          <summary class="disclosure-summary">
             <span>Questions this diagnostic answers</span>
-            <span class="summary-action">View questions</span>
           </summary>
           <ol class="question-list" role="list">
             {diagnosticQuestions.map((item) => (
@@ -296,9 +295,8 @@ const relatedPaths = [
         </div>
 
         <details class="diagnostic-disclosure" name="diagnostic-details">
-          <summary>
+          <summary class="disclosure-summary">
             <span>Evidence we review</span>
-            <span class="summary-action">View evidence</span>
           </summary>
           <ul class="evidence-grid" role="list">
             {evidenceAreas.map((area, index) => (
@@ -343,17 +341,16 @@ const relatedPaths = [
         </div>
 
         <ol class="disclosure-list output-list" role="list">
-          {deliverables.map((deliverable) => (
+          {deliverables.map((deliverable, index) => (
             <li>
-              <details class="disclosure" name="deliverable">
-                <summary>
+              <details class="disclosure" name="deliverable" open={index === 0}>
+                <summary class="disclosure-summary">
                   <h3 class="disclosure-title">
                     <span class="seq-number output-number" aria-hidden="true">
                       {deliverable.number}
                     </span>
                     {deliverable.title}
                   </h3>
-                  <span class="disclosure-icon" aria-hidden="true" />
                 </summary>
                 <div class="disclosure-body output-body">
                   <p class="output-description">{deliverable.description}</p>
@@ -683,52 +680,20 @@ const relatedPaths = [
   }
 
   .diagnostic-disclosure {
-    border-block: var(--border-width) solid var(--color-border-strong);
+    border-bottom: var(--border-width) solid var(--color-border);
   }
-
-  .diagnostic-disclosure + .diagnostic-disclosure {
-    margin-top: calc(-1 * var(--border-width));
+  .diagnostic-disclosure:first-of-type {
+    border-top: var(--border-width) solid var(--color-border);
   }
-
   .diagnostic-disclosure summary {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    justify-content: space-between;
-    padding-block: clamp(1.25rem, 3vw, 1.75rem);
-    color: var(--color-ink);
+    --chevron-offset: calc((var(--fs-h3) * var(--lh-h3) - 0.5rem) / 2);
+
+    padding-block: 1.5rem;
+    color: var(--color-text);
     font-family: var(--font-sans);
     font-size: var(--fs-h3);
     font-weight: var(--fw-medium);
     line-height: var(--lh-h3);
-    cursor: pointer;
-    list-style: none;
-  }
-
-  .diagnostic-disclosure summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .summary-action {
-    flex: none;
-    color: var(--color-blue);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-medium);
-  }
-
-  .summary-action::after {
-    display: inline-block;
-    margin-left: 0.65rem;
-    content: "+";
-  }
-
-  .diagnostic-disclosure[open] .summary-action::after {
-    content: "−";
-  }
-
-  .diagnostic-disclosure summary:focus-visible {
-    outline: 0.1875rem solid var(--color-blue);
-    outline-offset: 0.35rem;
   }
 
   .diagnostic-disclosure .question-list,
@@ -748,11 +713,15 @@ const relatedPaths = [
     display: grid;
     grid-template-columns: 3rem minmax(0, 1fr);
     gap: clamp(1rem, 3vw, 2rem);
-    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+    padding-block: 1.5rem;
   }
 
   .question h3 {
-    max-width: 31ch;
+    max-width: 40ch;
+    margin: 0;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-h4);
   }
 
   .question div > p {
@@ -856,7 +825,7 @@ const relatedPaths = [
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(1.5rem, 4vw, 3rem);
     max-width: none;
-    padding-inline-start: 2.5rem;
+    padding-inline-start: calc(1rem + 0.875rem + 2.5rem);
     align-items: start;
   }
 
@@ -1122,5 +1091,14 @@ const relatedPaths = [
     .fit-panel li::before {
       background: CanvasText;
     }
+  }
+
+  .output-list .disclosure-title {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .output-list .disclosure-title > .output-number {
+    flex: 0 0 2.5rem;
   }
 </style>

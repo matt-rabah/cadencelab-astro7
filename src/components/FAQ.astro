@@ -53,24 +53,20 @@ const {
       <p>{description}</p>
     </div>
 
-    <div class="faq-list">
-      {
-        items.map((item, index) => (
-          <details name="homepage-faq" open={index === 0}>
-            <summary>
-              <span>{item.question}</span>
-              <span class="faq-icon" aria-hidden="true">
-                <span class="icon-closed">+</span>
-                <span class="icon-open">&#8722;</span>
-              </span>
+    <ul class="disclosure-list faq-list" role="list">
+      {items.map((item, index) => (
+        <li>
+          <details class="disclosure" name="homepage-faq" open={index === 0}>
+            <summary class="disclosure-summary">
+              <span class="disclosure-title">{item.question}</span>
             </summary>
-            <div class="faq-answer">
+            <div class="disclosure-body">
               <p>{item.answer}</p>
             </div>
           </details>
-        ))
-      }
-    </div>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -131,94 +127,6 @@ const {
     text-wrap: pretty;
   }
 
-  .faq-list {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  details {
-    overflow: clip;
-    border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card-ambient);
-    background: var(--color-surface-pure);
-  }
-
-  details[open] {
-    border-block-start: 2px solid var(--color-text);
-    background: var(--color-surface-pure);
-  }
-
-  summary {
-    display: flex;
-    min-height: var(--control-min-size);
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.25rem 1.5rem;
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-size: var(--fs-body);
-    font-weight: var(--fw-semibold);
-    line-height: 1.45;
-    cursor: pointer;
-  }
-
-  summary::marker {
-    content: "";
-  }
-
-  .faq-icon {
-    display: grid;
-    width: 2rem;
-    height: 2rem;
-    flex: 0 0 auto;
-    border: var(--border-width) solid var(--color-border-strong);
-    border-radius: var(--radius-md);
-    background: var(--color-surface-subtle);
-    color: var(--color-blue);
-    font-size: 1.25rem;
-    line-height: 1;
-    place-items: center;
-  }
-
-  .icon-open {
-    display: none;
-  }
-
-  details[open] .icon-closed {
-    display: none;
-  }
-
-  details[open] .icon-open {
-    display: inline;
-  }
-
-  .faq-answer {
-    padding: 0 4.5rem 1.5rem 1.5rem;
-  }
-
-  .faq-answer p {
-    max-width: 62ch;
-    margin: 0;
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: var(--fs-small);
-    line-height: 1.65;
-    text-wrap: pretty;
-  }
-
-  summary:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus);
-    outline-offset: calc(-1 * var(--focus-ring-width));
-  }
-
-  @media (hover: hover) {
-    details:not([open]) summary:hover {
-      color: var(--color-blue);
-    }
-  }
-
   @media (max-width: 58rem) {
     .faq-container {
       grid-template-columns: 1fr;
@@ -229,26 +137,8 @@ const {
     }
   }
 
-  @media (max-width: 40rem) {
-    summary {
-      padding: 1rem;
-    }
-
-    .faq-answer {
-      padding: 0 3.75rem 1.25rem 1rem;
-    }
-  }
-
-  @media (pointer: coarse) {
-    summary {
-      min-height: 3rem;
-    }
-  }
-
   @media (forced-colors: active) {
-    .faq,
-    details,
-    .faq-icon {
+    .faq {
       border-color: CanvasText;
       background: Canvas;
     }

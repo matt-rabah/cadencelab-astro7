@@ -39,7 +39,7 @@
   list-style: none;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .breadcrumb li:not(:last-child)::after {
@@ -293,13 +293,13 @@
 }
 
 .choice-list strong {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.35;
 }
 
 .choice-list small {
   color: var(--color-text-muted);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
@@ -442,7 +442,7 @@
 .summary-list dt {
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 650;
   letter-spacing: 0;
 }

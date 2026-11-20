@@ -124,7 +124,9 @@ const isCurrentPage = (href: string): boolean =>
         </a>
 
         <p class="footer-description">
-          I help companies fix the systems behind customer friction: the workflows, teams, data, and AI your customers never see but always feel.
+          I help companies fix the systems behind customer friction: the
+          workflows, teams, data, and AI your customers never see but always
+          feel.
         </p>
 
         <a
@@ -146,28 +148,26 @@ const isCurrentPage = (href: string): boolean =>
         </a>
       </div>
 
-      {
-        footerSections.map((section) => (
-          <nav class="footer-section" aria-labelledby={section.id}>
-            <h2 id={section.id} class="footer-section-label">
-              {section.title}
-            </h2>
+      {footerSections.map((section) => (
+        <nav class="footer-section" aria-labelledby={section.id}>
+          <h2 id={section.id} class="footer-section-label">
+            {section.title}
+          </h2>
 
-            <ul class="footer-link-list">
-              {section.links.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    aria-current={isCurrentPage(link.href) ? "page" : undefined}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))
-      }
+          <ul class="footer-link-list">
+            {section.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={isCurrentPage(link.href) ? "page" : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
     </div>
 
     <div class="footer-secondary">
@@ -178,18 +178,16 @@ const isCurrentPage = (href: string): boolean =>
 
       <nav class="footer-legal" aria-label="Legal">
         <ul class="legal-link-list">
-          {
-            legalLinks.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  aria-current={isCurrentPage(link.href) ? "page" : undefined}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
+          {legalLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={isCurrentPage(link.href) ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
           <li>
             <button
               type="button"
@@ -283,7 +281,7 @@ const isCurrentPage = (href: string): boolean =>
     max-width: 32rem;
     margin: 1.25rem 0 0;
     color: var(--footer-text);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.7;
     text-align: left;
@@ -298,7 +296,7 @@ const isCurrentPage = (href: string): boolean =>
     min-height: var(--control-min-size, 3rem);
     margin-top: 1.5rem;
     color: var(--footer-heading);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.4;
     text-decoration: underline;
@@ -394,7 +392,7 @@ const isCurrentPage = (href: string): boolean =>
     gap: 0.25rem 0.5rem;
     margin: 0;
     color: var(--footer-muted);
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.5;
     text-align: left;
@@ -432,7 +430,7 @@ const isCurrentPage = (href: string): boolean =>
     background: transparent;
     color: var(--footer-muted);
     font-family: inherit;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.4;
     text-decoration: underline;

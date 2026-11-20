@@ -92,39 +92,35 @@ const entries = await getSearchEntries();
             <h2 id="search-results-title">Results</h2>
           </div>
           <p aria-live="polite" aria-atomic="true" data-page-search-status>
-            {
-              entries.length === 1
-                ? "1 searchable page"
-                : `${entries.length} searchable pages`
-            }
+            {entries.length === 1
+              ? "1 searchable page"
+              : `${entries.length} searchable pages`}
           </p>
         </div>
 
         <div class="search-results" data-page-search-results>
-          {
-            entries.map((entry) => (
-              <article
-                class="search-result"
-                data-page-search-entry
-                data-search-text={entry.searchText}
-              >
-                <div class="search-result-meta">
-                  <span>{entry.category}</span>
-                  {entry.detail && <span aria-hidden="true">·</span>}
-                  {entry.detail && <span>{entry.detail}</span>}
-                </div>
+          {entries.map((entry) => (
+            <article
+              class="search-result"
+              data-page-search-entry
+              data-search-text={entry.searchText}
+            >
+              <div class="search-result-meta">
+                <span>{entry.category}</span>
+                {entry.detail && <span aria-hidden="true">·</span>}
+                {entry.detail && <span>{entry.detail}</span>}
+              </div>
 
-                <h3>
-                  <a href={entry.href}>
-                    {entry.title}
-                    <span aria-hidden="true">&#8594;</span>
-                  </a>
-                </h3>
+              <h3>
+                <a href={entry.href}>
+                  {entry.title}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </h3>
 
-                <p>{entry.description}</p>
-              </article>
-            ))
-          }
+              <p>{entry.description}</p>
+            </article>
+          ))}
         </div>
 
         <div class="search-empty" hidden data-page-search-empty>
@@ -410,7 +406,7 @@ const entries = await getSearchEntries();
   .search-empty {
     padding: clamp(2rem, 6vw, 4rem);
     border: var(--border-width) solid var(--color-border);
-    text-align: center;
+    text-align: start;
     font-family: var(--font-sans);
   }
 

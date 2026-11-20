@@ -67,8 +67,11 @@ Every text pair passes WCAG AA on every surface it sits on in both themes; the s
 **Same feature, same style:** a pattern that appears on more than one page looks identical on every page, so visitors learn it once.
 
 - **Numbered sequences** (steps, stages, ordered items, including the home method): rule-separated rows, the number in a left column with the global `.seq-number` style (two digits, muted, medium, tabular, no box, circle, color or connector), then an optional muted sentence-case label, heading and copy. Long sequences use the `.disclosure` rows instead. Only a real sequence is numbered; unordered sets are not.
-- **Expandable rows:** the global `.disclosure` pattern only.
-- **The yellow dot** means one thing besides the logo and brand period: the item that is open or selected right now (open disclosure row, selected tab, chosen FitCheck™ starting point). Never a decorative bullet or label ornament.
+- **Expandable content (accordions):** every `<details>` that expands content uses `.disclosure-summary` (global.css), following the SLDS 2 accordion pattern: a chevron on the left that points right when closed and down when open, the title in action blue on hover and underlined on keyboard focus, rule-separated rows, the first row of each group open on load, and one row open at a time (`name`). Titles stay sentence case (our label rule wins over SLDS title case). Row lists use `.disclosure`; whole-section disclosures (`.solution-depth`, `.diagnostic-disclosure`) use the same control with an h3-size title.
+- **The yellow dot** means one thing besides the logo and brand period: the option selected right now (selected tab, chosen FitCheck™ starting point). Accordions show open and closed with the chevron, not the dot. Never a decorative bullet or label ornament.
+- **Alignment:** all text is left-aligned with a ragged right edge, at every width. No centered headings, paragraphs or sections, and no justified text.
+
+**Type scale and layout (from the Salesforce marketing scale, in our fonts and weights):** display 70/72, h1 48/56, h2 40/48, h3 24/32, h4 20/28, lead 18/28, body 16, small and labels 14/20, caption 12. Every size is a token in `typography.css`; components use the tokens, and sizes off this scale are not allowed. Content width 1280px (`--container-page: 80rem`), 40px desktop gutters, 64 to 96px between sections. Buttons keep 4px corners with 16px labels.
 
 ---
 
