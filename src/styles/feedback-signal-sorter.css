@@ -235,7 +235,7 @@
 
 .feedback-page .privacy-hint {
   padding: 0.8rem 1rem;
-  border-inline-start: 0.2rem solid var(--color-blue);
+  border-inline-start: 2px solid var(--color-text);
   background: var(--color-surface-subtle);
 }
 

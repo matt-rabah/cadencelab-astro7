@@ -339,14 +339,21 @@ const {
             }))}
           />
         ) : (
-          <div class="card-grid">
+          <ul class="disclosure-list" role="list">
             {evidence.items.map((item) => (
-              <article>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
+              <li>
+                <details class="disclosure" name="evidence">
+                  <summary>
+                    <h3 class="disclosure-title">{item.title}</h3>
+                    <span class="disclosure-icon" aria-hidden="true" />
+                  </summary>
+                  <div class="disclosure-body">
+                    <p>{item.description}</p>
+                  </div>
+                </details>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
         <div class="evidence-note">
@@ -381,14 +388,21 @@ const {
               <p>{failures.introduction}</p>
             </div>
 
-            <div class="failure-list">
+            <ul class="disclosure-list" role="list">
               {failures.items.map((item) => (
-                <article>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
+                <li>
+                  <details class="disclosure" name="failure">
+                    <summary>
+                      <h3 class="disclosure-title">{item.title}</h3>
+                      <span class="disclosure-icon" aria-hidden="true" />
+                    </summary>
+                    <div class="disclosure-body">
+                      <p>{item.description}</p>
+                    </div>
+                  </details>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
       </>
@@ -408,11 +422,18 @@ const {
               <p>{outputs.introduction}</p>
             </div>
 
-            <ul class="output-list" role="list">
+            <ul class="disclosure-list" role="list">
               {outputs.items.map((item) => (
                 <li>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  <details class="disclosure" name="output">
+                    <summary>
+                      <h3 class="disclosure-title">{item.title}</h3>
+                      <span class="disclosure-icon" aria-hidden="true" />
+                    </summary>
+                    <div class="disclosure-body">
+                      <p>{item.description}</p>
+                    </div>
+                  </details>
                 </li>
               ))}
             </ul>
@@ -1007,7 +1028,7 @@ const {
   .evidence-note {
     max-width: 52rem;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-start: 0.1875rem solid var(--color-blue);
+    border-inline-start: 2px solid var(--color-text);
     background: var(--color-surface-pure);
   }
 

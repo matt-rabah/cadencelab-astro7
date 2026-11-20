@@ -72,44 +72,41 @@ const canonicalURL = `/${slug}/`;
   title={`${title} | Cadence Lab`}
   description={description}
   canonicalURL={canonicalURL}
-  pageType="website">
+  pageType="website"
+>
   <NavHeader />
 
   <main id="main-content" class="content-page" tabindex="-1">
     <article class="content-container">
       <header class="content-header">
-        {
-          page.category && (
-            <p
-              class="content-eyebrow"
-              data-tina-field={tinaField(page, "category")}>
-              {page.category}
-            </p>
-          )
-        }
+        {page.category && (
+          <p
+            class="content-eyebrow"
+            data-tina-field={tinaField(page, "category")}
+          >
+            {page.category}
+          </p>
+        )}
 
         <h1 class="content-title" data-tina-field={tinaField(page, "title")}>
           {page.title}
         </h1>
 
-        {
-          page.subtitle && (
-            <p
-              class="content-subtitle"
-              data-tina-field={tinaField(page, "subtitle")}>
-              {page.subtitle}
-            </p>
-          )
-        }
+        {page.subtitle && (
+          <p
+            class="content-subtitle"
+            data-tina-field={tinaField(page, "subtitle")}
+          >
+            {page.subtitle}
+          </p>
+        )}
       </header>
 
-      {
-        page.body && (
-          <div class="content-body" data-tina-field={tinaField(page, "body")}>
-            <TinaMarkdown content={page.body} />
-          </div>
-        )
-      }
+      {page.body && (
+        <div class="content-body" data-tina-field={tinaField(page, "body")}>
+          <TinaMarkdown content={page.body} />
+        </div>
+      )}
     </article>
   </main>
 
@@ -259,7 +256,7 @@ const canonicalURL = `/${slug}/`;
   .content-body :global(blockquote) {
     margin: 2.5rem 0;
     padding-left: clamp(1.25rem, 3vw, 2rem);
-    border-left: 0.25rem solid var(--color-blue);
+    border-inline-start: 2px solid var(--color-text);
     color: var(--color-ink);
   }
 
