@@ -15,28 +15,16 @@
     Roboto,
     sans-serif
   );
-  --ff-serif: var(
-    --font-tiempos-text,
-    Georgia,
-    Cambria,
-    "Times New Roman",
-    Times,
-    serif
-  );
-  --ff-serif-display: var(
-    --font-tiempos-headline,
-    Georgia,
-    Cambria,
-    "Times New Roman",
-    Times,
-    serif
-  );
+  /* Graphik for every role (DESIGN.md, section 0.1). The serif aliases stay
+     so older styles keep working, but they resolve to Graphik. */
+  --ff-serif: var(--ff-sans);
+  --ff-serif-display: var(--ff-sans);
   --ff-serif-body: var(--ff-serif);
   --ff-label: var(--ff-sans);
 
   /* Font weights */
   --fw-light: 300;
-  --fw-display-light: var(--fw-light);
+  --fw-display-light: var(--fw-semibold);
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;

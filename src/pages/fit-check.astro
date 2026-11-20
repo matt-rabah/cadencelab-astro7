@@ -1622,7 +1622,7 @@ if (turnstileSiteKey) {
   }
 
   .fit-check-assurance dt {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-family: var(--font-sans);
     font-size: var(--fs-eyebrow);
     font-weight: var(--fw-medium);
@@ -1818,7 +1818,7 @@ if (turnstileSiteKey) {
   }
 
   .section-number {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-size: 0.75rem;
     font-weight: var(--fw-medium);
     font-feature-settings: var(--fea-tabular);
@@ -2534,9 +2534,9 @@ if (turnstileSiteKey) {
     width: 100%;
     grid-template-columns: 6.25rem minmax(0, 1fr);
     gap: 0.25rem 1rem;
+    position: relative;
     padding: 1.25rem 1.5rem;
     border: 0;
-    border-inline-start: 0.25rem solid transparent;
     background: transparent;
     color: inherit;
     font: inherit;
@@ -2544,9 +2544,22 @@ if (turnstileSiteKey) {
     cursor: pointer;
   }
 
+  /* The selected card is marked with the logo's dot (a point under attention,
+     DESIGN.md section 5) rather than a colored stripe. */
   .starting-card[aria-selected="true"] {
-    border-inline-start-color: var(--color-yellow);
     background: var(--color-surface-subtle);
+  }
+
+  .starting-card[aria-selected="true"]::before {
+    position: absolute;
+    top: 1.75rem;
+    left: 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-yellow);
+    box-shadow: var(--shadow-hairline);
+    content: "";
   }
 
   .starting-card:focus-visible {
@@ -2557,8 +2570,9 @@ if (turnstileSiteKey) {
   .starting-figure {
     grid-row: span 2;
     white-space: nowrap;
-    color: var(--color-blue);
+    color: var(--color-text);
     font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
     font-weight: var(--fw-semibold);
     line-height: 1.1;
     letter-spacing: -0.03em;
@@ -2692,11 +2706,9 @@ if (turnstileSiteKey) {
   .guarantee {
     max-width: 68ch;
     margin: 0.5rem 0 0;
-    padding: 1rem 1.25rem;
-    border-inline-start: 0.25rem solid var(--color-yellow);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-subtle);
-    color: var(--color-ink);
+    padding: 1rem 0 0;
+    border-top: 2px solid var(--color-text);
+    color: var(--color-text);
     line-height: 1.6;
   }
 </style>

@@ -166,7 +166,9 @@ const strongFit = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">Cross-functional links</li>
             </ol>
           </nav>
@@ -196,7 +198,9 @@ const strongFit = [
         </div>
 
         <aside class="trigger-card" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p id="trigger-title" class="note-label">
+            Recognizable trigger
+          </p>
           <p>
             Customers repeat the story, teams receive incomplete context, and
             important work becomes visible to everyone but owned by no one.
@@ -261,10 +265,10 @@ const strongFit = [
       <details class="solution-depth" name="handoff-details">
         <summary>
           <span class="solution-depth-title">What must travel</span>
-          <span class="solution-depth-description"
-            >See the context, ownership, authority, action, and return signal a
-            handoff needs.</span
-          >
+          <span class="solution-depth-description">
+            See the context, ownership, authority, action, and return signal a
+            handoff needs.
+          </span>
           <span class="solution-depth-action">Explore requirements</span>
         </summary>
         <section
@@ -286,15 +290,12 @@ const strongFit = [
             </div>
 
             <ol class="requirement-grid">
-              {
-                linkRequirements.map((requirement) => (
-                  <li>
-                    <p class="item-number">{requirement.number}</p>
-                    <h3>{requirement.title}</h3>
-                    <p>{requirement.description}</p>
-                  </li>
-                ))
-              }
+              {linkRequirements.map((requirement) => (
+                <li>
+                  <h3>{requirement.title}</h3>
+                  <p>{requirement.description}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -303,10 +304,10 @@ const strongFit = [
       <details class="solution-depth" name="handoff-details">
         <summary>
           <span class="solution-depth-title">How to trace the handoff</span>
-          <span class="solution-depth-description"
-            >Follow responsibility from the original trigger through acceptance,
-            action, and closure.</span
-          >
+          <span class="solution-depth-description">
+            Follow responsibility from the original trigger through acceptance,
+            action, and closure.
+          </span>
           <span class="solution-depth-action">Explore the path</span>
         </summary>
         <section
@@ -327,20 +328,18 @@ const strongFit = [
             </div>
 
             <ol class="path-list">
-              {
-                handoffPath.map((item, index) => (
-                  <li>
-                    <div class="path-heading">
-                      <p class="path-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <p class="path-phase">{item.phase}</p>
-                    </div>
-                    <h3>{item.question}</h3>
-                    <p>{item.evidence}</p>
-                  </li>
-                ))
-              }
+              {handoffPath.map((item, index) => (
+                <li>
+                  <div class="path-heading">
+                    <p class="path-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <p class="path-phase">{item.phase}</p>
+                  </div>
+                  <h3>{item.question}</h3>
+                  <p>{item.evidence}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -349,10 +348,10 @@ const strongFit = [
       <details class="solution-depth" name="handoff-details">
         <summary>
           <span class="solution-depth-title">Where handoffs fail</span>
-          <span class="solution-depth-description"
-            >Identify repeatable losses of context, ownership, authority,
-            capacity, or closure.</span
-          >
+          <span class="solution-depth-description">
+            Identify repeatable losses of context, ownership, authority,
+            capacity, or closure.
+          </span>
           <span class="solution-depth-action">Explore failures</span>
         </summary>
         <section
@@ -374,17 +373,12 @@ const strongFit = [
             </div>
 
             <div class="failure-list">
-              {
-                failurePatterns.map((failure, index) => (
-                  <article>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <h3>{failure.cue}</h3>
-                    <p>{failure.description}</p>
-                  </article>
-                ))
-              }
+              {failurePatterns.map((failure, index) => (
+                <article>
+                  <h3>{failure.cue}</h3>
+                  <p>{failure.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -416,20 +410,19 @@ const strongFit = [
             <h3>Follow the work wherever people actually do it.</h3>
           </div>
           <ul>
-            {evidenceSources.map((source) => <li>{source}</li>)}
+            {evidenceSources.map((source) => (
+              <li>{source}</li>
+            ))}
           </ul>
         </div>
 
         <div class="output-grid">
-          {
-            linkOutputs.map((output, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{output.title}</h3>
-                <p>{output.description}</p>
-              </article>
-            ))
-          }
+          {linkOutputs.map((output, index) => (
+            <article>
+              <h3>{output.title}</h3>
+              <p>{output.description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -453,9 +446,13 @@ const strongFit = [
         </div>
 
         <aside class="fit-list" aria-labelledby="fit-list-title">
-          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <p id="fit-list-title" class="note-label">
+            Strong fit
+          </p>
           <ul>
-            {strongFit.map((condition) => <li>{condition}</li>)}
+            {strongFit.map((condition) => (
+              <li>{condition}</li>
+            ))}
           </ul>
         </aside>
       </div>
@@ -753,16 +750,16 @@ const strongFit = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
     list-style: none;
   }
 
   .requirement-grid li {
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .requirement-grid .item-number,
@@ -850,14 +847,14 @@ const strongFit = [
   .failure-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
   }
 
   .failure-list article {
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .evidence-panel {
@@ -892,7 +889,7 @@ const strongFit = [
   }
 
   .evidence-panel li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .output-grid {
@@ -972,7 +969,7 @@ const strongFit = [
   }
 
   .fit-list li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .links-page a:focus-visible {

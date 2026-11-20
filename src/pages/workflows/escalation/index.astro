@@ -195,7 +195,9 @@ const strongFit = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
               <li aria-current="page">SLA escalation maps</li>
             </ol>
           </nav>
@@ -225,7 +227,9 @@ const strongFit = [
         </div>
 
         <aside class="trigger-card" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="note-label">Recognizable trigger</p>
+          <p id="trigger-title" class="note-label">
+            Recognizable trigger
+          </p>
           <p>
             You have SLA targets, priority fields, queues, and reports.
             Important work still becomes urgent only after the best time to act
@@ -289,13 +293,13 @@ const strongFit = [
     <div id="details" class="solution-depth-group">
       <details class="solution-depth" name="escalation-details">
         <summary>
-          <span class="solution-depth-title"
-            >What makes escalation actionable</span
-          >
-          <span class="solution-depth-description"
-            >Review impact, evidence, priority, ownership, authority, and
-            communication conditions.</span
-          >
+          <span class="solution-depth-title">
+            What makes escalation actionable
+          </span>
+          <span class="solution-depth-description">
+            Review impact, evidence, priority, ownership, authority, and
+            communication conditions.
+          </span>
           <span class="solution-depth-action">Explore conditions</span>
         </summary>
         <section
@@ -317,15 +321,12 @@ const strongFit = [
             </div>
 
             <ol class="condition-grid">
-              {
-                mapElements.map((element) => (
-                  <li>
-                    <p class="item-number">{element.number}</p>
-                    <h3>{element.title}</h3>
-                    <p>{element.description}</p>
-                  </li>
-                ))
-              }
+              {mapElements.map((element) => (
+                <li>
+                  <h3>{element.title}</h3>
+                  <p>{element.description}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -334,10 +335,10 @@ const strongFit = [
       <details class="solution-depth" name="escalation-details">
         <summary>
           <span class="solution-depth-title">How to trace the response</span>
-          <span class="solution-depth-description"
-            >Follow the issue from detection and acceptance through action,
-            recovery, and learning.</span
-          >
+          <span class="solution-depth-description">
+            Follow the issue from detection and acceptance through action,
+            recovery, and learning.
+          </span>
           <span class="solution-depth-action">Explore the path</span>
         </summary>
         <section
@@ -360,20 +361,18 @@ const strongFit = [
             </div>
 
             <ol class="path-list">
-              {
-                escalationPath.map((stage, index) => (
-                  <li>
-                    <div class="path-heading">
-                      <p class="path-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <p class="path-phase">{stage.phase}</p>
-                    </div>
-                    <h3>{stage.question}</h3>
-                    <p>{stage.evidence}</p>
-                  </li>
-                ))
-              }
+              {escalationPath.map((stage, index) => (
+                <li>
+                  <div class="path-heading">
+                    <p class="path-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <p class="path-phase">{stage.phase}</p>
+                  </div>
+                  <h3>{stage.question}</h3>
+                  <p>{stage.evidence}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
@@ -382,10 +381,10 @@ const strongFit = [
       <details class="solution-depth" name="escalation-details">
         <summary>
           <span class="solution-depth-title">Where escalation fails</span>
-          <span class="solution-depth-description"
-            >See where SLA reporting, customer communication, authority, and
-            recovery separate.</span
-          >
+          <span class="solution-depth-description">
+            See where SLA reporting, customer communication, authority, and
+            recovery separate.
+          </span>
           <span class="solution-depth-action">Explore failures</span>
         </summary>
         <section
@@ -407,17 +406,12 @@ const strongFit = [
             </div>
 
             <div class="failure-list">
-              {
-                failurePatterns.map((failure, index) => (
-                  <article>
-                    <p class="item-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <h3>{failure.cue}</h3>
-                    <p>{failure.description}</p>
-                  </article>
-                ))
-              }
+              {failurePatterns.map((failure, index) => (
+                <article>
+                  <h3>{failure.cue}</h3>
+                  <p>{failure.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -445,15 +439,12 @@ const strongFit = [
         </div>
 
         <div class="evidence-grid">
-          {
-            evidenceSources.map((source, index) => (
-              <article>
-                <p class="item-number">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{source.title}</h3>
-                <p>{source.description}</p>
-              </article>
-            ))
-          }
+          {evidenceSources.map((source, index) => (
+            <article>
+              <h3>{source.title}</h3>
+              <p>{source.description}</p>
+            </article>
+          ))}
         </div>
 
         <div class="output-block">
@@ -463,17 +454,14 @@ const strongFit = [
           </div>
 
           <ol class="output-list">
-            {
-              mapOutputs.map((output) => (
-                <li>
-                  <p class="item-number">{output.number}</p>
-                  <div>
-                    <h3>{output.title}</h3>
-                    <p>{output.description}</p>
-                  </div>
-                </li>
-              ))
-            }
+            {mapOutputs.map((output) => (
+              <li>
+                <div>
+                  <h3>{output.title}</h3>
+                  <p>{output.description}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </div>
@@ -498,9 +486,13 @@ const strongFit = [
         </div>
 
         <aside class="fit-list" aria-labelledby="fit-list-title">
-          <p id="fit-list-title" class="note-label">Strong fit</p>
+          <p id="fit-list-title" class="note-label">
+            Strong fit
+          </p>
           <ul>
-            {strongFit.map((condition) => <li>{condition}</li>)}
+            {strongFit.map((condition) => (
+              <li>{condition}</li>
+            ))}
           </ul>
         </aside>
       </div>
@@ -799,16 +791,16 @@ const strongFit = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
     list-style: none;
   }
 
   .condition-grid li {
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .condition-grid .item-number,
@@ -897,15 +889,15 @@ const strongFit = [
   .failure-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-inline-start: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
+    border-inline-start: var(--border-width) solid var(--color-border-inverse);
   }
 
   .failure-list article {
     min-width: 0;
     padding: clamp(1.5rem, 4vw, 2rem);
-    border-inline-end: var(--border-width) solid rgb(252 254 255 / 22%);
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 22%);
+    border-inline-end: var(--border-width) solid var(--color-border-inverse);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .evidence-grid {
@@ -1023,7 +1015,7 @@ const strongFit = [
   }
 
   .fit-list li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .escalation-page a:focus-visible {

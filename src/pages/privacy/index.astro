@@ -37,7 +37,9 @@ const policySections = [
         </div>
 
         <aside class="policy-summary" aria-labelledby="policy-summary-title">
-          <p id="policy-summary-title" class="summary-label">Quick summary</p>
+          <p id="policy-summary-title" class="summary-label">
+            Quick summary
+          </p>
           <dl>
             <div>
               <dt>Effective</dt>
@@ -67,25 +69,25 @@ const policySections = [
         <nav aria-label="Privacy policy contents">
           <p>On this page</p>
           <ol>
-            {
-              policySections.map((section, index) => (
-                <li>
-                  <a href={section.href}>
-                    <span aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {section.label}
-                  </a>
-                </li>
-              ))
-            }
+            {policySections.map((section, index) => (
+              <li>
+                <a href={section.href}>
+                  <span aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {section.label}
+                </a>
+              </li>
+            ))}
           </ol>
         </nav>
       </aside>
 
       <article class="policy-content">
         <section id="scope" aria-labelledby="scope-title">
-          <p class="section-number" aria-hidden="true">01</p>
+          <p class="section-number" aria-hidden="true">
+            01
+          </p>
           <h2 id="scope-title">Scope and responsibility</h2>
 
           <p>
@@ -107,7 +109,9 @@ const policySections = [
           id="information-collected"
           aria-labelledby="information-collected-title"
         >
-          <p class="section-number" aria-hidden="true">02</p>
+          <p class="section-number" aria-hidden="true">
+            02
+          </p>
           <h2 id="information-collected-title">Information we collect</h2>
 
           <h3>Information you provide</h3>
@@ -184,9 +188,10 @@ const policySections = [
             recordings of the FitCheck™ and the free AI tools mask the page
             content, so what you type into them is not captured. For more
             information about how Microsoft collects and uses your data, see the
-            <a href="https://www.microsoft.com/privacy/privacystatement"
-              >Microsoft Privacy Statement</a
-            >.
+            <a href="https://www.microsoft.com/privacy/privacystatement">
+              Microsoft Privacy Statement
+            </a>
+            .
           </p>
 
           <p>
@@ -201,7 +206,9 @@ const policySections = [
           id="how-information-is-used"
           aria-labelledby="how-information-is-used-title"
         >
-          <p class="section-number" aria-hidden="true">03</p>
+          <p class="section-number" aria-hidden="true">
+            03
+          </p>
           <h2 id="how-information-is-used-title">How information is used</h2>
 
           <p>Cadence Lab uses information to:</p>
@@ -241,7 +248,9 @@ const policySections = [
           id="service-providers"
           aria-labelledby="service-providers-title"
         >
-          <p class="section-number" aria-hidden="true">04</p>
+          <p class="section-number" aria-hidden="true">
+            04
+          </p>
           <h2 id="service-providers-title">Service providers and disclosure</h2>
 
           <p>
@@ -327,7 +336,9 @@ const policySections = [
           id="retention-security"
           aria-labelledby="retention-security-title"
         >
-          <p class="section-number" aria-hidden="true">05</p>
+          <p class="section-number" aria-hidden="true">
+            05
+          </p>
           <h2 id="retention-security-title">Retention and security</h2>
 
           <h3>Retention</h3>
@@ -370,7 +381,9 @@ const policySections = [
         </section>
 
         <section id="your-choices" aria-labelledby="your-choices-title">
-          <p class="section-number" aria-hidden="true">06</p>
+          <p class="section-number" aria-hidden="true">
+            06
+          </p>
           <h2 id="your-choices-title">Your choices and privacy rights</h2>
 
           <p>
@@ -412,7 +425,9 @@ const policySections = [
         </section>
 
         <section id="contact" aria-labelledby="contact-title">
-          <p class="section-number" aria-hidden="true">07</p>
+          <p class="section-number" aria-hidden="true">
+            07
+          </p>
           <h2 id="contact-title">Contact Cadence Lab</h2>
 
           <p>
@@ -668,7 +683,7 @@ const policySections = [
   }
 
   .policy-content li::marker {
-    color: var(--color-blue);
+    color: var(--color-text-subtle);
   }
 
   .policy-note {

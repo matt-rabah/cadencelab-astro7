@@ -157,7 +157,9 @@ const relatedPaths = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/services/">Services</a></li>
+              <li>
+                <a href="/services/">Services</a>
+              </li>
               <li aria-current="page">CRM Workflow Audit</li>
             </ol>
           </nav>
@@ -182,7 +184,9 @@ const relatedPaths = [
         </div>
 
         <aside class="trigger" aria-labelledby="trigger-title">
-          <p id="trigger-title" class="trigger-label">You may be seeing this</p>
+          <p id="trigger-title" class="trigger-label">
+            You may be seeing this
+          </p>
           <p>
             Your CRM is full of fields, notes, activity, dashboards, and
             automation. And your team still runs the real work on spreadsheets,
@@ -231,21 +235,19 @@ const relatedPaths = [
             <span class="summary-action">View questions</span>
           </summary>
           <ol class="question-list" role="list">
-            {
-              diagnosticQuestions.map((item) => (
-                <li>
-                  <article class="question">
-                    <p class="item-number" aria-hidden="true">
-                      {item.number}
-                    </p>
-                    <div>
-                      <h3>{item.question}</h3>
-                      <p>{item.explanation}</p>
-                    </div>
-                  </article>
-                </li>
-              ))
-            }
+            {diagnosticQuestions.map((item) => (
+              <li>
+                <article class="question">
+                  <p class="item-number" aria-hidden="true">
+                    {item.number}
+                  </p>
+                  <div>
+                    <h3>{item.question}</h3>
+                    <p>{item.explanation}</p>
+                  </div>
+                </article>
+              </li>
+            ))}
           </ol>
         </details>
       </div>
@@ -275,19 +277,14 @@ const relatedPaths = [
             <span class="summary-action">View evidence</span>
           </summary>
           <ul class="evidence-grid" role="list">
-            {
-              evidenceAreas.map((area, index) => (
-                <li>
-                  <article>
-                    <p class="item-number" aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <h3>{area.title}</h3>
-                    <p>{area.description}</p>
-                  </article>
-                </li>
-              ))
-            }
+            {evidenceAreas.map((area, index) => (
+              <li>
+                <article>
+                  <h3>{area.title}</h3>
+                  <p>{area.description}</p>
+                </article>
+              </li>
+            ))}
           </ul>
 
           <aside class="scope-note" aria-labelledby="scope-note-title">
@@ -322,25 +319,23 @@ const relatedPaths = [
         </div>
 
         <ol class="output-list" role="list">
-          {
-            deliverables.map((deliverable) => (
-              <li>
-                <article class="output">
-                  <div class="output-heading">
-                    <p class="output-number" aria-hidden="true">
-                      {deliverable.number}
-                    </p>
-                    <h3>{deliverable.title}</h3>
-                  </div>
-                  <p class="output-description">{deliverable.description}</p>
-                  <p class="output-decision">
-                    <span>Supports the decision</span>
-                    {deliverable.decision}
+          {deliverables.map((deliverable) => (
+            <li>
+              <article class="output">
+                <div class="output-heading">
+                  <p class="output-number" aria-hidden="true">
+                    {deliverable.number}
                   </p>
-                </article>
-              </li>
-            ))
-          }
+                  <h3>{deliverable.title}</h3>
+                </div>
+                <p class="output-description">{deliverable.description}</p>
+                <p class="output-decision">
+                  <span>Supports the decision</span>
+                  {deliverable.decision}
+                </p>
+              </article>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -366,7 +361,9 @@ const relatedPaths = [
             <p class="fit-label">Strong fit</p>
             <h3>This is likely a good fit when</h3>
             <ul role="list">
-              {strongFit.map((criterion) => <li>{criterion}</li>)}
+              {strongFit.map((criterion) => (
+                <li>{criterion}</li>
+              ))}
             </ul>
           </article>
 
@@ -374,7 +371,9 @@ const relatedPaths = [
             <p class="fit-label fit-label-muted">Limited fit</p>
             <h3>Another path may work better when</h3>
             <ul role="list">
-              {limitedFit.map((criterion) => <li>{criterion}</li>)}
+              {limitedFit.map((criterion) => (
+                <li>{criterion}</li>
+              ))}
             </ul>
           </article>
         </div>
@@ -830,11 +829,11 @@ const relatedPaths = [
   }
 
   .output-list {
-    border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
   }
 
   .output-list > li {
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 28%);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .output {
@@ -867,7 +866,7 @@ const relatedPaths = [
 
   .output-decision {
     padding-left: clamp(1rem, 3vw, 2rem);
-    border-left: var(--border-width) solid rgb(252 254 255 / 28%);
+    border-left: var(--border-width) solid var(--color-border-inverse);
   }
 
   .output-decision span {
@@ -945,7 +944,7 @@ const relatedPaths = [
   }
 
   .fit-panel-strong li::before {
-    background: var(--color-blue);
+    background: var(--color-text-subtle);
   }
 
   .next-step-layout {
@@ -1061,7 +1060,7 @@ const relatedPaths = [
       grid-column: 1;
       padding-top: 1rem;
       padding-left: 0;
-      border-top: var(--border-width) solid rgb(252 254 255 / 28%);
+      border-top: var(--border-width) solid var(--color-border-inverse);
       border-left: 0;
     }
   }

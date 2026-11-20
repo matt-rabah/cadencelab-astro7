@@ -120,7 +120,9 @@ const evidenceStandards = [
           </h1>
 
           <p class="hero-lead">
-            Four focused diagnostics: customer experience, lifecycle risk, CRM workflows, and AI readiness. Each one shows you where the work is breaking, what it’s costing you, and what to fix first.
+            Four focused diagnostics: customer experience, lifecycle risk, CRM
+            workflows, and AI readiness. Each one shows you where the work is
+            breaking, what it’s costing you, and what to fix first.
           </p>
 
           <div class="hero-actions" aria-label="Services page actions">
@@ -134,9 +136,12 @@ const evidenceStandards = [
         </div>
 
         <aside class="hero-note" aria-labelledby="hero-note-title">
-          <p id="hero-note-title" class="hero-note-label">How to start</p>
+          <p id="hero-note-title" class="hero-note-label">
+            How to start
+          </p>
           <p>
-            Start with the problem you need to understand. Don’t pick the technology until the evidence points to the next move.
+            Start with the problem you need to understand. Don’t pick the
+            technology until the evidence points to the next move.
           </p>
           <ul role="list">
             <li>One clear question</li>
@@ -171,41 +176,40 @@ const evidenceStandards = [
           </div>
 
           <p>
-            Each one looks at a different kind of customer or business risk. Every engagement ends the same way: the problem, the evidence, the business value at stake, and the next useful change.
+            Each one looks at a different kind of customer or business risk.
+            Every engagement ends the same way: the problem, the evidence, the
+            business value at stake, and the next useful change.
           </p>
         </div>
 
         <ul class="diagnostic-list" role="list">
-          {
-            diagnostics.map((diagnostic) => (
-              <li id={diagnostic.id}>
-                <article class="diagnostic">
-                  <div class="diagnostic-heading">
-                    <p class="diagnostic-number">{diagnostic.number}</p>
-                    <h3>{diagnostic.name}</h3>
+          {diagnostics.map((diagnostic) => (
+            <li id={diagnostic.id}>
+              <article class="diagnostic">
+                <div class="diagnostic-heading">
+                  <h3>{diagnostic.name}</h3>
+                </div>
+                <dl class="diagnostic-body">
+                  <div>
+                    <>
+                      <dt>Choose this when</dt>
+                      <dd>{diagnostic.situation}</dd>
+                    </>
                   </div>
-                  <dl class="diagnostic-body">
-                    <div>
-                      <>
-                        <dt>Choose this when</dt>
-                        <dd>{diagnostic.situation}</dd>
-                      </>
-                    </div>
-                    <div>
-                      <>
-                        <dt>What you receive</dt>
-                        <dd>{diagnostic.output}</dd>
-                      </>
-                    </div>
-                  </dl>
-                  <a class="diagnostic-link" href={diagnostic.href}>
-                    {diagnostic.linkLabel}
-                    <span aria-hidden="true">&#8594;</span>
-                  </a>
-                </article>
-              </li>
-            ))
-          }
+                  <div>
+                    <>
+                      <dt>What you receive</dt>
+                      <dd>{diagnostic.output}</dd>
+                    </>
+                  </div>
+                </dl>
+                <a class="diagnostic-link" href={diagnostic.href}>
+                  {diagnostic.linkLabel}
+                  <span aria-hidden="true">&#8594;</span>
+                </a>
+              </article>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
@@ -222,30 +226,30 @@ const evidenceStandards = [
             A diagnostic tells you where to start.
           </h2>
           <p>
-            Findings only matter if they change a decision, a workflow, who owns something, or how you measure success. So the work stays connected from diagnosis all the way through launch and review.
+            Findings only matter if they change a decision, a workflow, who owns
+            something, or how you measure success. So the work stays connected
+            from diagnosis all the way through launch and review.
           </p>
         </div>
 
         <ol class="stage-list" role="list">
-          {
-            workingStages.map((stage) => (
-              <li>
-                <article class="stage">
-                  <p class="stage-number" aria-hidden="true">
-                    {stage.number}
+          {workingStages.map((stage) => (
+            <li>
+              <article class="stage">
+                <p class="stage-number" aria-hidden="true">
+                  {stage.number}
+                </p>
+                <div class="stage-copy">
+                  <h3>{stage.title}</h3>
+                  <p>{stage.description}</p>
+                  <p class="stage-artifact">
+                    <span>Produces</span>
+                    {stage.artifact}
                   </p>
-                  <div class="stage-copy">
-                    <h3>{stage.title}</h3>
-                    <p>{stage.description}</p>
-                    <p class="stage-artifact">
-                      <span>Produces</span>
-                      {stage.artifact}
-                    </p>
-                  </div>
-                </article>
-              </li>
-            ))
-          }
+                </div>
+              </article>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -263,24 +267,21 @@ const evidenceStandards = [
             You should be able to trace every recommendation.
           </h2>
           <p>
-            Workshops and launches aren’t results. Every recommendation should show its evidence, who owns it, and how you’ll know it worked. If you can’t prove it, you can’t defend the budget next year.
+            Workshops and launches aren’t results. Every recommendation should
+            show its evidence, who owns it, and how you’ll know it worked. If
+            you can’t prove it, you can’t defend the budget next year.
           </p>
         </div>
 
         <ul class="evidence-grid" role="list">
-          {
-            evidenceStandards.map((standard, index) => (
-              <li>
-                <article>
-                  <p class="evidence-number" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3>{standard.title}</h3>
-                  <p>{standard.description}</p>
-                </article>
-              </li>
-            ))
-          }
+          {evidenceStandards.map((standard, index) => (
+            <li>
+              <article>
+                <h3>{standard.title}</h3>
+                <p>{standard.description}</p>
+              </article>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
@@ -300,7 +301,9 @@ const evidenceStandards = [
 
         <div class="fit-check-copy">
           <p>
-            Tell me what customers are going through, which teams and systems are involved, and what needs to change. I’ll point you to the right diagnostic, or tell you straight if something else makes more sense.
+            Tell me what customers are going through, which teams and systems
+            are involved, and what needs to change. I’ll point you to the right
+            diagnostic, or tell you straight if something else makes more sense.
           </p>
 
           <dl class="fit-check-expectations">
@@ -498,7 +501,7 @@ const evidenceStandards = [
     width: 0.3125rem;
     height: 0.3125rem;
     border-radius: 50%;
-    background: var(--color-blue);
+    background: var(--color-text-subtle);
     content: "";
   }
 

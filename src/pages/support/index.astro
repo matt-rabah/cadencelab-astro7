@@ -92,7 +92,9 @@ const usefulContext = [
         </div>
 
         <aside class="route-note" aria-labelledby="route-note-title">
-          <p id="route-note-title" class="note-label">Start here</p>
+          <p id="route-note-title" class="note-label">
+            Start here
+          </p>
           <p>Are we already working together?</p>
           <dl>
             <div>
@@ -122,24 +124,22 @@ const usefulContext = [
         </header>
 
         <div class="route-grid">
-          {
-            supportPaths.map((path) => (
-              <article class="route-card">
-                <div class="route-meta">
-                  <span aria-hidden="true">{path.number}</span>
-                  <span>{path.label}</span>
-                </div>
-                <div class="route-copy">
-                  <h3>{path.title}</h3>
-                  <p>{path.description}</p>
-                </div>
-                <a href={path.href}>
-                  {path.action}
-                  <span aria-hidden="true">&#8594;</span>
-                </a>
-              </article>
-            ))
-          }
+          {supportPaths.map((path) => (
+            <article class="route-card">
+              <div class="route-meta">
+                <span aria-hidden="true">{path.number}</span>
+                <span>{path.label}</span>
+              </div>
+              <div class="route-copy">
+                <h3>{path.title}</h3>
+                <p>{path.description}</p>
+              </div>
+              <a href={path.href}>
+                {path.action}
+                <span aria-hidden="true">&#8594;</span>
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -163,19 +163,17 @@ const usefulContext = [
         </header>
 
         <ol class="context-list">
-          {
-            usefulContext.map((item) => (
-              <li>
-                <p class="context-number" aria-hidden="true">
-                  {item.number}
-                </p>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </li>
-            ))
-          }
+          {usefulContext.map((item) => (
+            <li>
+              <p class="context-number" aria-hidden="true">
+                {item.number}
+              </p>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -226,7 +224,9 @@ const usefulContext = [
             Share the problem, who it affects, and the outcome that needs to
             change. I’ll tell you straight whether a diagnostic makes sense.
           </p>
-          <a class="button-primary" href="/fit-check/">Start a FitCheck™</a>
+          <a class="button-primary" href="/fit-check/">
+            Start a FitCheck™
+          </a>
         </div>
       </div>
     </section>
@@ -537,11 +537,11 @@ const usefulContext = [
     grid-template-columns: 2.5rem minmax(0, 1fr);
     gap: 1.25rem;
     padding-block: 1.5rem;
-    border-top: var(--border-width) solid rgb(252 254 255 / 20%);
+    border-top: var(--border-width) solid var(--color-border-inverse);
   }
 
   .context-list li:last-child {
-    border-bottom: var(--border-width) solid rgb(252 254 255 / 20%);
+    border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
   .context-list li > div {
@@ -603,7 +603,7 @@ const usefulContext = [
     inset-inline-start: 0;
     width: 0.35rem;
     height: 0.35rem;
-    background: var(--color-blue);
+    background: var(--color-text-subtle);
     content: "";
   }
 

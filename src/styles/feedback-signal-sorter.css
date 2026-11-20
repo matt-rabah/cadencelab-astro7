@@ -67,25 +67,25 @@
 .feedback-page .hero-copy h1 {
   max-width: 13ch;
   margin: 1rem 0 1.5rem;
-  font-family: var(--ff-serif-display);
+  font-family: var(--ff-sans);
   font-size: clamp(3rem, 1.062rem + 5.899vw, 6.75rem);
-  font-weight: 400;
+  font-weight: var(--fw-semibold);
   line-height: 0.94;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
 }
 
 .feedback-page .hero-lead {
   max-width: 61ch;
   margin: 0 0 2rem;
   color: var(--color-text-muted);
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   font-size: clamp(1.125rem, 0.589rem + 1.158vw, 1.4rem);
   line-height: 1.55;
 }
 
 .feedback-page .privacy-card {
   padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-top: 0.25rem solid var(--color-green);
+  border-top: 2px solid var(--color-text);
   background: var(--color-ink);
   color: var(--color-text-inverse);
 }
@@ -96,7 +96,7 @@
 
 .feedback-page .privacy-card > p:not(.note-label) {
   margin: 1rem 0 2rem;
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   font-size: 1.125rem;
   line-height: 1.55;
 }
@@ -134,16 +134,16 @@
 .feedback-page .method h2 {
   max-width: 18ch;
   margin: 0.75rem 0 0;
-  font-family: var(--ff-serif-display);
+  font-family: var(--ff-sans);
   font-size: clamp(2.25rem, 0.818rem + 4.091vw, 4.5rem);
-  font-weight: 400;
+  font-weight: var(--fw-semibold);
   line-height: 1;
   letter-spacing: -0.035em;
 }
 
 .feedback-page .intro-copy {
   max-width: 62ch;
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   font-size: 1.125rem;
   line-height: 1.65;
 }
@@ -165,7 +165,7 @@
   max-width: 66ch;
   margin: 1.5rem 0 0;
   color: var(--color-text-muted);
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   font-size: 1.125rem;
   line-height: 1.6;
 }
@@ -187,18 +187,19 @@
 
 .feedback-page .feedback-form > fieldset > legend {
   padding-inline: 0.5rem;
-  font-family: var(--ff-serif-display);
+  font-family: var(--ff-sans);
   font-size: clamp(1.5rem, 0.643rem + 2.143vw, 2.25rem);
   line-height: 1.1;
 }
 
 .feedback-page .feedback-form > fieldset > legend span {
   margin-inline-end: 0.75rem;
-  color: var(--color-blue);
+  color: var(--color-text-muted);
   font-family: var(--ff-sans);
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: var(--fw-medium);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
 }
 
 .feedback-page .field {
@@ -415,9 +416,9 @@
   max-width: 18ch;
   margin: 0.75rem 0 0;
   color: var(--color-text-inverse);
-  font-family: var(--ff-serif-display);
+  font-family: var(--ff-sans);
   font-size: clamp(2.5rem, 0.864rem + 4.091vw, 4.75rem);
-  font-weight: 400;
+  font-weight: var(--fw-semibold);
   line-height: 1;
   letter-spacing: -0.035em;
 }
@@ -458,9 +459,9 @@
 
 .feedback-page .summary-sheet h3 {
   margin: 0.6rem 0 1.5rem;
-  font-family: var(--ff-serif-display);
+  font-family: var(--ff-sans);
   font-size: clamp(1.75rem, 0.656rem + 2.734vw, 3rem);
-  font-weight: 400;
+  font-weight: var(--fw-semibold);
   line-height: 1.05;
 }
 
@@ -487,7 +488,7 @@
 
 .feedback-page .sample-summary dd {
   margin: 0;
-  font-family: var(--ff-serif-display);
+  font-family: var(--ff-sans);
   font-size: 2.25rem;
 }
 
@@ -527,7 +528,7 @@
 .feedback-page .empty-note {
   max-width: 70ch;
   color: var(--color-text-muted);
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   line-height: 1.6;
 }
 
@@ -549,7 +550,7 @@
   gap: 0.75rem;
   margin: 0;
   padding-inline-start: 1.25rem;
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   line-height: 1.55;
 }
 
@@ -581,7 +582,7 @@
   max-width: 75ch;
   margin: 0.75rem 0 0;
   color: var(--color-text-muted);
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   line-height: 1.6;
 }
 
@@ -620,7 +621,7 @@
 
 .feedback-page .method li p {
   margin: 0;
-  font-family: var(--ff-serif-body);
+  font-family: var(--ff-sans);
   line-height: 1.5;
 }
 

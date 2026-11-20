@@ -204,23 +204,21 @@ const engagementRequires = [
           { "has-photo": headshot },
         ]}
       >
-        {
-          headshot && (
-            <figure class="headshot">
-              <Image
-                src={headshot}
-                alt="Matt Rabah, founder of Cadence Lab"
-                widths={[480, 720, 960]}
-                sizes="(min-width: 64rem) 28rem, 100vw"
-                loading="eager"
-              />
-              <figcaption>
-                <strong>Matt Rabah</strong>
-                Founder, Cadence Lab. Detroit, Michigan.
-              </figcaption>
-            </figure>
-          )
-        }
+        {headshot && (
+          <figure class="headshot">
+            <Image
+              src={headshot}
+              alt="Matt Rabah, founder of Cadence Lab"
+              widths={[480, 720, 960]}
+              sizes="(min-width: 64rem) 28rem, 100vw"
+              loading="eager"
+            />
+            <figcaption>
+              <strong>Matt Rabah</strong>
+              Founder, Cadence Lab. Detroit, Michigan.
+            </figcaption>
+          </figure>
+        )}
         <div class="official-bio" aria-labelledby="official-bio-title">
           <p class="eyebrow">Official bio</p>
           <h2 id="official-bio-title">
@@ -239,13 +237,16 @@ const engagementRequires = [
 
             <p>
               Before Cadence Lab, he led customer experience at{" "}
-              <a href="https://www.shinola.com/" rel="noopener">Shinola</a>, the
-              Detroit luxury brand, for its flagship location and an $8M
+              <a href="https://www.shinola.com/" rel="noopener">
+                Shinola
+              </a>
+              , the Detroit luxury brand, for its flagship location and an $8M
               corporate portfolio. Before that, he was Vice President of Sales
               at{" "}
-              <a href="https://www.neurosync.health/" rel="noopener"
-                >NeuroSync</a
-              >, an AI-enabled health technology company, where he owned
+              <a href="https://www.neurosync.health/" rel="noopener">
+                NeuroSync
+              </a>
+              , an AI-enabled health technology company, where he owned
               post-implementation customer success across clinical and legal
               accounts.
             </p>
@@ -271,8 +272,7 @@ const engagementRequires = [
 
             <p>
               <a href={FOUNDER.linkedIn} rel="me noopener">
-                Connect with Matt on LinkedIn{" "}
-                <span aria-hidden="true">↗</span>
+                Connect with Matt on LinkedIn <span aria-hidden="true">↗</span>
               </a>
             </p>
           </div>
@@ -293,14 +293,12 @@ const engagementRequires = [
         </div>
 
         <ul class="results-grid" role="list">
-          {
-            results.map((result) => (
-              <li>
-                <p class="result-figure">{result.figure}</p>
-                <p class="result-text">{result.text}</p>
-              </li>
-            ))
-          }
+          {results.map((result) => (
+            <li>
+              <p class="result-figure">{result.figure}</p>
+              <p class="result-text">{result.text}</p>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
@@ -317,25 +315,23 @@ const engagementRequires = [
         </div>
 
         <ul class="talk-list" role="list">
-          {
-            talks.map((talk) => (
-              <li class:list={{ "has-photo": talk.photo }}>
-                {talk.photo && (
-                  <Image
-                    src={talk.photo}
-                    alt={talk.alt}
-                    widths={[640, 960, 1280]}
-                    sizes="(min-width: 64rem) 40rem, 100vw"
-                  />
-                )}
-                <div class="talk-copy">
-                  <p class="talk-date">{talk.date}</p>
-                  <h3>{talk.event}</h3>
-                  <p>{talk.topic}</p>
-                </div>
-              </li>
-            ))
-          }
+          {talks.map((talk) => (
+            <li class:list={{ "has-photo": talk.photo }}>
+              {talk.photo && (
+                <Image
+                  src={talk.photo}
+                  alt={talk.alt}
+                  widths={[640, 960, 1280]}
+                  sizes="(min-width: 64rem) 40rem, 100vw"
+                />
+              )}
+              <div class="talk-copy">
+                <p class="talk-date">{talk.date}</p>
+                <h3>{talk.event}</h3>
+                <p>{talk.topic}</p>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </section>
@@ -407,21 +403,19 @@ const engagementRequires = [
         </div>
 
         <ol class="view-list">
-          {
-            pointsOfView.map((item) => (
-              <li>
-                <article>
-                  <p class="item-number" aria-hidden="true">
-                    {item.number}
-                  </p>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                </article>
-              </li>
-            ))
-          }
+          {pointsOfView.map((item) => (
+            <li>
+              <article>
+                <p class="item-number" aria-hidden="true">
+                  {item.number}
+                </p>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -445,19 +439,17 @@ const engagementRequires = [
         </div>
 
         <ol class="principle-grid">
-          {
-            workingPrinciples.map((principle) => (
-              <li>
-                <article>
-                  <p class="principle-number" aria-hidden="true">
-                    {principle.number}
-                  </p>
-                  <h3>{principle.title}</h3>
-                  <p>{principle.description}</p>
-                </article>
-              </li>
-            ))
-          }
+          {workingPrinciples.map((principle) => (
+            <li>
+              <article>
+                <p class="principle-number" aria-hidden="true">
+                  {principle.number}
+                </p>
+                <h3>{principle.title}</h3>
+                <p>{principle.description}</p>
+              </article>
+            </li>
+          ))}
         </ol>
       </div>
     </section>
@@ -487,7 +479,9 @@ const engagementRequires = [
             <p class="boundary-label">Cadence Lab brings</p>
             <h3>A clear way to turn a messy problem into a decision</h3>
             <ul role="list">
-              {cadenceLabBrings.map((item) => <li>{item}</li>)}
+              {cadenceLabBrings.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
           </article>
 
@@ -497,7 +491,9 @@ const engagementRequires = [
             </p>
             <h3>The access and authority to get to the truth</h3>
             <ul role="list">
-              {engagementRequires.map((item) => <li>{item}</li>)}
+              {engagementRequires.map((item) => (
+                <li>{item}</li>
+              ))}
             </ul>
           </article>
         </div>
@@ -1072,14 +1068,14 @@ const engagementRequires = [
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
     padding: 0;
-    border-top: 1px solid rgb(252 254 255 / 24%);
-    border-inline-start: 1px solid rgb(252 254 255 / 24%);
+    border-top: 1px solid var(--color-border-inverse);
+    border-inline-start: 1px solid var(--color-border-inverse);
     list-style: none;
   }
 
   .principle-grid li {
-    border-right: 1px solid rgb(252 254 255 / 24%);
-    border-bottom: 1px solid rgb(252 254 255 / 24%);
+    border-right: 1px solid var(--color-border-inverse);
+    border-bottom: 1px solid var(--color-border-inverse);
   }
 
   .principle-grid article {
@@ -1231,7 +1227,7 @@ const engagementRequires = [
     width: 0.4rem;
     height: 0.4rem;
     border-radius: 50%;
-    background: var(--color-green);
+    background: var(--color-text-subtle);
     content: "";
   }
 

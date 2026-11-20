@@ -174,15 +174,11 @@ const articleSchema = {
         </a>
 
         <div class="article-metadata">
-          <span class="article-category">
-            {post.data.category}
-          </span>
+          <span class="article-category">{post.data.category}</span>
 
           <span aria-hidden="true">·</span>
 
-          <time datetime={publishedDateISO}>
-            {publishedDateLabel}
-          </time>
+          <time datetime={publishedDateISO}>{publishedDateLabel}</time>
 
           <span aria-hidden="true">·</span>
 
@@ -191,43 +187,37 @@ const articleSchema = {
 
         <h1>{post.data.title}</h1>
 
-        <p class="article-subtitle">
-          {post.data.subtitle}
-        </p>
+        <p class="article-subtitle">{post.data.subtitle}</p>
 
         <div class="article-byline">
           <span>By {author}</span>
 
-          {
-            updatedDate && updatedDateISO && updatedDateLabel && (
-              <>
-                <span aria-hidden="true">·</span>
+          {updatedDate && updatedDateISO && updatedDateLabel && (
+            <>
+              <span aria-hidden="true">·</span>
 
-                <span>
-                  Updated{" "}
-                  <time datetime={updatedDateISO}>{updatedDateLabel}</time>
-                </span>
-              </>
-            )
-          }
+              <span>
+                Updated{" "}
+                <time datetime={updatedDateISO}>{updatedDateLabel}</time>
+              </span>
+            </>
+          )}
         </div>
       </header>
 
-      {
-        imageSource && (
-          <figure class="article-image">
-            <img
-              src={imageSource}
-              alt={imageAlt}
-              width="1600"
-              height="900"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-            />
-          </figure>
-        )
-      }
+      {imageSource && (
+        <figure class="article-image">
+          <img
+            src={imageSource}
+            alt={imageAlt}
+            width="1600"
+            height="900"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </figure>
+      )}
 
       <div class="article-content">
         <div class="article-body prose">
@@ -419,7 +409,7 @@ const articleSchema = {
   .article-body :global(p),
   .article-body :global(li) {
     color: var(--color-text);
-    font-family: var(--ff-serif);
+    font-family: var(--ff-sans);
     font-size: var(--fs-post-body);
     font-weight: var(--fw-regular);
     line-height: var(--lh-post-body);
@@ -444,10 +434,10 @@ const articleSchema = {
 
   .article-body :global(blockquote p) {
     margin: 0;
-    font-family: var(--ff-serif-display);
+    font-family: var(--ff-sans);
     font-size: var(--fs-pullquote);
     font-style: italic;
-    font-weight: var(--fw-display-light);
+    font-weight: var(--fw-semibold);
     line-height: 1.45;
   }
 
