@@ -241,7 +241,7 @@ const relatedPaths = [
             {diagnosticQuestions.map((item) => (
               <li>
                 <article class="question">
-                  <p class="item-number" aria-hidden="true">
+                  <p class="seq-number item-number" aria-hidden="true">
                     {item.number}
                   </p>
                   <div>
@@ -327,7 +327,7 @@ const relatedPaths = [
               <details class="disclosure" name="deliverable">
                 <summary>
                   <h3 class="disclosure-title">
-                    <span class="output-number" aria-hidden="true">
+                    <span class="seq-number output-number" aria-hidden="true">
                       {deliverable.number}
                     </span>
                     {deliverable.title}
@@ -724,19 +724,9 @@ const relatedPaths = [
 
   .question {
     display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: clamp(1rem, 3vw, 2rem);
     padding-block: clamp(1.5rem, 4vw, 2.5rem);
-  }
-
-  .item-number,
-  .output-number {
-    color: var(--color-text-muted);
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: var(--fw-medium);
-    line-height: var(--lh-small);
-    font-feature-settings: var(--fea-tabular);
   }
 
   .question h3 {
@@ -837,10 +827,6 @@ const relatedPaths = [
   .output-number {
     display: inline-block;
     min-width: 2.5rem;
-    color: var(--color-text-muted);
-    font-size: var(--fs-small);
-    font-weight: var(--fw-regular);
-    font-variant-numeric: tabular-nums;
   }
 
   .disclosure .output-body {
@@ -1069,11 +1055,6 @@ const relatedPaths = [
     .next-step-actions .button,
     .services-link {
       width: 100%;
-    }
-
-    .question {
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
     }
 
     .evidence-grid article,

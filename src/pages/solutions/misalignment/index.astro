@@ -378,14 +378,14 @@ const strongFit = [
               </p>
             </div>
 
-            <ol class="path-list">
+            <ol class="seq-list path-list">
               {decisionPath.map((stage, index) => (
                 <li>
-                  <div class="path-heading">
-                    <p class="path-number">
+                  <div class="seq-head path-heading">
+                    <p class="seq-number path-number">
                       {String(index + 1).padStart(2, "0")}
                     </p>
-                    <p class="path-phase">{stage.phase}</p>
+                    <p class="seq-label path-phase">{stage.phase}</p>
                   </div>
                   <h3>{stage.question}</h3>
                   <p>{stage.evidence}</p>
@@ -617,10 +617,7 @@ const strongFit = [
 
   .eyebrow,
   .note-label,
-  .item-number,
-  .condition-label,
-  .path-number,
-  .path-phase {
+  .condition-label {
     margin: 0;
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -629,6 +626,15 @@ const strongFit = [
     line-height: 1.4;
     letter-spacing: 0;
     font-feature-settings: var(--fea-eyebrow);
+  }
+
+  .path-phase {
+    margin: 0;
+  }
+
+  .item-number,
+  .path-number {
+    margin: 0;
   }
 
   .eyebrow-inverse {
@@ -850,10 +856,6 @@ const strongFit = [
     border-bottom: var(--border-width) solid var(--color-border-inverse);
   }
 
-  .signal-grid .item-number {
-    color: var(--color-text-muted);
-  }
-
   .signal-grid h3 {
     margin-top: 0;
     color: var(--color-light);
@@ -903,58 +905,6 @@ const strongFit = [
     max-width: var(--measure-ui);
     margin: 0.75rem 0 0;
     color: var(--color-text-muted);
-    font-size: var(--fs-small);
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-
-  .path-list {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin: 0;
-    padding: 0;
-    border-top: 2px solid var(--color-text);
-    list-style: none;
-  }
-
-  .path-list li {
-    min-width: 0;
-    padding: clamp(1.25rem, 3vw, 1.75rem);
-    border-inline-end: var(--border-width) solid var(--color-border-inverse);
-    border-bottom: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .path-list li:first-child {
-    border-inline-start: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .path-heading {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .path-number {
-    color: var(--color-text-inverse-muted);
-  }
-
-  .path-phase {
-    color: var(--color-green);
-  }
-
-  .path-list h3 {
-    min-height: 6.75rem;
-    margin-top: 2rem;
-    color: var(--color-light);
-    font-size: var(--fs-h4);
-    font-weight: var(--fw-medium);
-    line-height: 1.35;
-  }
-
-  .path-list li > p:last-child {
-    margin: 1rem 0 0;
-    color: var(--color-text-inverse-muted);
     font-size: var(--fs-small);
     line-height: 1.6;
     text-wrap: pretty;
@@ -1184,16 +1134,6 @@ const strongFit = [
     }
   }
 
-  @media (max-width: 70rem) {
-    .path-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .path-list h3 {
-      min-height: 0;
-    }
-  }
-
   @media (max-width: 64rem) {
     .hero-layout,
     .problem-layout,
@@ -1242,7 +1182,6 @@ const strongFit = [
 
     .signal-grid,
     .condition-list,
-    .path-list,
     .evidence-grid {
       grid-template-columns: 1fr;
     }

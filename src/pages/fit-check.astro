@@ -400,7 +400,7 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="1">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">
+            <span class="seq-number section-number" aria-hidden="true">
               01
             </span>
             Problem and outcome
@@ -476,7 +476,7 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="2">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">
+            <span class="seq-number section-number" aria-hidden="true">
               02
             </span>
             Your operating environment
@@ -597,7 +597,7 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="3">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">
+            <span class="seq-number section-number" aria-hidden="true">
               03
             </span>
             What it’s worth and who owns it
@@ -814,7 +814,7 @@ if (turnstileSiteKey) {
 
         <fieldset class="form-section" data-form-step="4">
           <legend tabindex="-1">
-            <span class="section-number" aria-hidden="true">
+            <span class="seq-number section-number" aria-hidden="true">
               04
             </span>
             Contact information
@@ -930,7 +930,7 @@ if (turnstileSiteKey) {
         >
           <div class="review-heading">
             <div>
-              <p class="section-number" aria-hidden="true">
+              <p class="seq-number section-number" aria-hidden="true">
                 05
               </p>
               <h3 id="review-title" tabindex="-1">
@@ -1593,16 +1593,6 @@ if (turnstileSiteKey) {
     letter-spacing: 0;
   }
 
-  .assurance-label::before,
-  .fit-check-eyebrow::before {
-    width: 0.45rem;
-    height: 0.45rem;
-    flex: 0 0 auto;
-    border-radius: 50%;
-    background: var(--color-yellow);
-    content: "";
-  }
-
   .fit-check-assurance dl {
     display: grid;
     gap: 0;
@@ -1815,13 +1805,6 @@ if (turnstileSiteKey) {
     font-size: var(--fs-small);
     line-height: 1.6;
     text-wrap: pretty;
-  }
-
-  .section-number {
-    color: var(--color-text-muted);
-    font-size: 0.75rem;
-    font-weight: var(--fw-medium);
-    font-feature-settings: var(--fea-tabular);
   }
 
   .input-group {
@@ -2469,12 +2452,6 @@ if (turnstileSiteKey) {
     .submit-button,
     .step-button {
       border-color: CanvasText;
-    }
-
-    .assurance-label::before,
-    .fit-check-eyebrow::before {
-      border: 1px solid CanvasText;
-      background: CanvasText;
     }
   }
 

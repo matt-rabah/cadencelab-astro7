@@ -67,7 +67,9 @@ const {
       >
         <div class="panel-heading">
           <div class="panel-meta">
-            {panel.number && <p class="panel-number">{panel.number}</p>}
+            {panel.number && (
+              <p class="seq-number panel-number">{panel.number}</p>
+            )}
             {panel.eyebrow && <p class="panel-eyebrow">{panel.eyebrow}</p>}
           </div>
           <h3>{panel.title}</h3>
@@ -247,8 +249,8 @@ const {
   }
 
   .tab-trigger > span:first-child:not(:last-child) {
-    color: var(--color-blue);
-    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: var(--fs-eyebrow);
     font-feature-settings: var(--fea-tabular);
   }
 
@@ -314,7 +316,6 @@ const {
     gap: 0.75rem 1rem;
   }
 
-  .panel-number,
   .panel-eyebrow,
   .panel-list > p {
     margin: 0;
@@ -323,6 +324,10 @@ const {
     font-weight: var(--fw-medium);
     line-height: 1.4;
     letter-spacing: 0;
+  }
+
+  .panel-number {
+    margin: 0;
   }
 
   .panel-eyebrow {
@@ -471,7 +476,7 @@ const {
   .content-tabs[data-theme="dark"]
     .tab-trigger
     > span:first-child:not(:last-child) {
-    color: var(--color-text-subtle);
+    color: var(--color-text-muted);
   }
 
   .content-tabs[data-theme="dark"] .tab-trigger[aria-selected="true"] {
@@ -486,7 +491,6 @@ const {
     background: var(--color-surface-pure);
   }
 
-  .content-tabs[data-theme="dark"] .panel-number,
   .content-tabs[data-theme="dark"] .panel-list > p {
     color: var(--color-text-muted);
   }

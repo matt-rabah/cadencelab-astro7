@@ -236,7 +236,7 @@ const evidenceStandards = [
           {workingStages.map((stage) => (
             <li>
               <article class="stage">
-                <p class="stage-number" aria-hidden="true">
+                <p class="seq-number stage-number" aria-hidden="true">
                   {stage.number}
                 </p>
                 <div class="stage-copy">
@@ -549,7 +549,6 @@ const evidenceStandards = [
   }
 
   .diagnostic-number,
-  .stage-number,
   .evidence-number {
     color: var(--color-text-muted);
     font-family: var(--font-sans);
@@ -664,7 +663,6 @@ const evidenceStandards = [
     background: var(--selection-signal);
   }
 
-  .selection-number,
   .selection-cue {
     margin: 0;
     font-family: var(--font-sans);
@@ -674,8 +672,7 @@ const evidenceStandards = [
   }
 
   .selection-number {
-    color: var(--color-text-muted);
-    font-feature-settings: var(--fea-tabular);
+    margin: 0;
   }
 
   .selection-cue {
@@ -766,7 +763,7 @@ const evidenceStandards = [
   }
 
   .stage-list {
-    border-top: var(--border-width) solid var(--color-border-strong);
+    border-top: var(--border-width) solid var(--color-border);
   }
 
   .stage-list > li {
@@ -775,13 +772,16 @@ const evidenceStandards = [
 
   .stage {
     display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 3rem minmax(0, 1fr);
     gap: clamp(1rem, 3vw, 2rem);
-    padding-block: clamp(1.5rem, 4vw, 2.5rem);
+    padding-block: 1.5rem;
   }
 
   .stage-copy h3 {
     max-width: 29ch;
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-medium);
+    line-height: 1.35;
   }
 
   .stage-copy > p:not(.stage-artifact) {
@@ -806,7 +806,7 @@ const evidenceStandards = [
   }
 
   .stage-artifact span {
-    color: var(--color-blue);
+    color: var(--color-text-muted);
     font-weight: var(--fw-medium);
   }
 
@@ -1015,11 +1015,6 @@ const evidenceStandards = [
 
     .selection-list {
       grid-auto-columns: minmax(17rem, 88%);
-    }
-
-    .stage {
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
     }
 
     .fit-check-layout {
