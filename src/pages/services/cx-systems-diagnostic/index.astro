@@ -337,22 +337,27 @@ const relatedPaths = [
           </p>
         </div>
 
-        <ol class="output-list" role="list">
+        <ol class="disclosure-list output-list" role="list">
           {deliverables.map((deliverable) => (
             <li>
-              <article class="output">
-                <div class="output-heading">
-                  <p class="output-number" aria-hidden="true">
-                    {deliverable.number}
+              <details class="disclosure" name="deliverable">
+                <summary>
+                  <h3 class="disclosure-title">
+                    <span class="output-number" aria-hidden="true">
+                      {deliverable.number}
+                    </span>
+                    {deliverable.title}
+                  </h3>
+                  <span class="disclosure-icon" aria-hidden="true" />
+                </summary>
+                <div class="disclosure-body output-body">
+                  <p class="output-description">{deliverable.description}</p>
+                  <p class="output-decision">
+                    <span>Supports the decision</span>
+                    {deliverable.decision}
                   </p>
-                  <h3>{deliverable.title}</h3>
                 </div>
-                <p class="output-description">{deliverable.description}</p>
-                <p class="output-decision">
-                  <span>Supports the decision</span>
-                  {deliverable.decision}
-                </p>
-              </article>
+              </details>
             </li>
           ))}
         </ol>
@@ -847,31 +852,22 @@ const relatedPaths = [
     text-wrap: pretty;
   }
 
-  .output-list {
-    border-top: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .output-list > li {
-    border-bottom: var(--border-width) solid var(--color-border-inverse);
-  }
-
-  .output {
-    display: grid;
-    grid-template-columns: minmax(12rem, 0.65fr) minmax(0, 0.9fr) minmax(
-        0,
-        1fr
-      );
-    gap: clamp(1.5rem, 5vw, 4rem);
-    padding-block: clamp(1.75rem, 4vw, 2.75rem);
-    align-items: start;
-  }
-
   .output-number {
+    display: inline-block;
+    min-width: 2.5rem;
     color: var(--color-text-muted);
+    font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
+    font-variant-numeric: tabular-nums;
   }
 
-  .output-heading h3 {
-    margin-top: 0.75rem;
+  .disclosure .output-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    max-width: none;
+    padding-inline-start: 2.5rem;
+    align-items: start;
   }
 
   .output-description,
@@ -1054,14 +1050,6 @@ const relatedPaths = [
     .trigger {
       max-width: 38rem;
     }
-
-    .output {
-      grid-template-columns: minmax(12rem, 0.65fr) minmax(0, 1.35fr);
-    }
-
-    .output-decision {
-      grid-column: 2;
-    }
   }
 
   @media (max-width: 54rem) {
@@ -1071,12 +1059,11 @@ const relatedPaths = [
     }
 
     .scope-note,
-    .output {
+    .disclosure .output-body {
       grid-template-columns: 1fr;
     }
 
     .output-decision {
-      grid-column: 1;
       padding-top: 1rem;
       padding-left: 0;
       border-top: var(--border-width) solid var(--color-border-inverse);
