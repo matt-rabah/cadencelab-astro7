@@ -402,18 +402,23 @@ const engagementRequires = [
           </p>
         </div>
 
-        <ol class="view-list">
+        <ol class="disclosure-list view-list" role="list">
           {pointsOfView.map((item) => (
             <li>
-              <article>
-                <p class="item-number" aria-hidden="true">
-                  {item.number}
-                </p>
-                <div>
-                  <h3>{item.title}</h3>
+              <details class="disclosure" name="point-of-view">
+                <summary>
+                  <h3 class="disclosure-title">
+                    <span class="row-number" aria-hidden="true">
+                      {item.number}
+                    </span>
+                    {item.title}
+                  </h3>
+                  <span class="disclosure-icon" aria-hidden="true" />
+                </summary>
+                <div class="disclosure-body">
                   <p>{item.description}</p>
                 </div>
-              </article>
+              </details>
             </li>
           ))}
         </ol>
@@ -438,16 +443,23 @@ const engagementRequires = [
           </p>
         </div>
 
-        <ol class="principle-grid">
+        <ol class="disclosure-list principle-list" role="list">
           {workingPrinciples.map((principle) => (
             <li>
-              <article>
-                <p class="principle-number" aria-hidden="true">
-                  {principle.number}
-                </p>
-                <h3>{principle.title}</h3>
-                <p>{principle.description}</p>
-              </article>
+              <details class="disclosure" name="working-principle">
+                <summary>
+                  <h3 class="disclosure-title">
+                    <span class="row-number" aria-hidden="true">
+                      {principle.number}
+                    </span>
+                    {principle.title}
+                  </h3>
+                  <span class="disclosure-icon" aria-hidden="true" />
+                </summary>
+                <div class="disclosure-body">
+                  <p>{principle.description}</p>
+                </div>
+              </details>
             </li>
           ))}
         </ol>
@@ -793,8 +805,6 @@ const engagementRequires = [
 
   .eyebrow,
   .note-label,
-  .item-number,
-  .principle-number,
   .sequence-number,
   .boundary-label {
     margin: 0;
@@ -852,8 +862,6 @@ const engagementRequires = [
   .section-intro-split > p,
   .standard-intro > p:not(.eyebrow),
   .system-intro > p:not(.eyebrow),
-  .view-list article p,
-  .principle-grid article > p:last-child,
   .system-sequence article p,
   .close-action p {
     margin: 0;
@@ -1003,36 +1011,6 @@ const engagementRequires = [
     font-size: var(--fs-body-ui);
   }
 
-  .view-list {
-    display: grid;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--color-border-strong);
-    list-style: none;
-  }
-
-  .view-list li {
-    padding-block: clamp(1.75rem, 4vw, 3rem);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .view-list article {
-    display: grid;
-    grid-template-columns: minmax(3rem, 0.22fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 5vw, 4rem);
-  }
-
-  .view-list article > div {
-    display: grid;
-    grid-template-columns: minmax(14rem, 0.65fr) minmax(18rem, 1fr);
-    gap: clamp(1.5rem, 5vw, 4rem);
-  }
-
-  .view-list article p {
-    max-width: 64ch;
-    font-size: var(--fs-small);
-  }
-
   .working-standard {
     background: var(--color-surface-inverse);
     color: var(--color-text-inverse);
@@ -1063,40 +1041,18 @@ const engagementRequires = [
     color: var(--color-text-muted);
   }
 
-  .principle-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--color-border-inverse);
-    border-inline-start: 1px solid var(--color-border-inverse);
-    list-style: none;
-  }
-
-  .principle-grid li {
-    border-right: 1px solid var(--color-border-inverse);
-    border-bottom: 1px solid var(--color-border-inverse);
-  }
-
-  .principle-grid article {
-    display: flex;
-    min-height: 20rem;
-    flex-direction: column;
-    gap: 1.25rem;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-  }
-
-  .principle-grid h3 {
-    color: var(--color-text-inverse);
-  }
-
-  .principle-grid article > p:last-child {
-    color: var(--color-text-inverse-muted);
+  .row-number {
+    display: inline-block;
+    min-width: 2.5rem;
+    color: var(--color-text-muted);
     font-size: var(--fs-small);
+    font-weight: var(--fw-regular);
+    font-variant-numeric: tabular-nums;
   }
 
-  .principle-number {
-    color: var(--color-green);
+  .view-list .disclosure-body,
+  .principle-list .disclosure-body {
+    padding-inline-start: 2.5rem;
   }
 
   .system-view {
@@ -1259,12 +1215,6 @@ const engagementRequires = [
     font-size: var(--fs-body-ui);
   }
 
-  @media (max-width: 64rem) {
-    .view-list article > div {
-      grid-template-columns: 1fr;
-    }
-  }
-
   @media (max-width: 56rem) {
     .hero-layout,
     .section-intro-split,
@@ -1294,18 +1244,8 @@ const engagementRequires = [
   }
 
   @media (max-width: 42rem) {
-    .view-list article {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
-
-    .principle-grid,
     .boundary-grid {
       grid-template-columns: 1fr;
-    }
-
-    .principle-grid article {
-      min-height: 0;
     }
 
     .boundary-panel + .boundary-panel {
