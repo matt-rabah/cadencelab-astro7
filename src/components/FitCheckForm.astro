@@ -36,20 +36,18 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
       <h2 id="fit-check-title">{heading}</h2>
       <p class="description">{description}</p>
 
-      {
-        hasBenefits && (
-          <ul role="list">
-            {benefits.map((benefit) => (
-              <li>
-                <span class="benefit-marker" aria-hidden="true">
-                  &#10003;
-                </span>
-                <span>{benefit}</span>
-              </li>
-            ))}
-          </ul>
-        )
-      }
+      {hasBenefits && (
+        <ul role="list">
+          {benefits.map((benefit) => (
+            <li>
+              <span class="benefit-marker" aria-hidden="true">
+                &#10003;
+              </span>
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
 
     <aside class="fit-check-action" aria-labelledby="fit-check-action-title">
@@ -64,7 +62,10 @@ const hasBenefits = Array.isArray(benefits) && benefits.length > 0;
         </div>
         <div>
           <dt>Useful context</dt>
-          <dd>The customer problem, affected teams, systems, and sponsor</dd>
+          <dd>
+            The customer problem, the teams and systems involved, and who’s
+            sponsoring the work
+          </dd>
         </div>
         <div>
           <dt>What happens next</dt>

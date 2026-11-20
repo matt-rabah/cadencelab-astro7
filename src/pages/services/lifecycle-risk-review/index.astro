@@ -11,11 +11,11 @@ const diagnosticQuestions = [
     number: "01",
     question: "Where does risk show up first?",
     explanation:
-      "Find the early signs in onboarding, adoption, service activity, account behavior, and feedback. Before the renewal’s in danger, not after.",
+      "Find the early signs in how customers get started, how much they use the product, support requests, account activity, and feedback. Before the renewal’s in danger, not after.",
   },
   {
     number: "02",
-    question: "Which signals matter enough to act on?",
+    question: "Which warning signs matter enough to act on?",
     explanation:
       "Separate a real change in behavior from normal noise, missing data, and activity that looks busy but tells you nothing.",
   },
@@ -23,96 +23,96 @@ const diagnosticQuestions = [
     number: "03",
     question: "Who should respond, and when?",
     explanation:
-      "Set who owns it, what triggers a response, where it escalates, and what context each team needs while there’s still time to act.",
+      "Set who owns it, what triggers a response, who it goes to next, and what each team needs to know while there’s still time to act.",
   },
   {
     number: "04",
     question: "How will you know the response worked?",
     explanation:
-      "Name the business value up front (retention, expansion, or cost to serve). Then tie every response back to it, so you can prove it helped.",
+      "Name the result you want up front (keeping customers, growing accounts, or lowering the cost of serving them). Then tie every response back to it, so you can prove it helped.",
   },
 ];
 
 const evidenceAreas = [
   {
-    title: "Lifecycle stages and expectations",
+    title: "Customer stages and expectations",
     description:
-      "How your team defines onboarding, adoption, customer value, renewal readiness, and other important stages in the relationship.",
+      "How your team defines getting started, regular use, the value customers get, being ready to renew, and other important stages in the relationship.",
   },
   {
-    title: "Customer and account signals",
+    title: "Signs from customers and accounts",
     description:
       "Product or service use, shifts in engagement, support patterns, feedback, and who’s left or joined on the customer side.",
   },
   {
-    title: "Handoffs and intervention paths",
+    title: "Hand-offs and who steps in",
     description:
-      "How customer context moves across sales, onboarding, success, service, operations, and leadership when teams need to act together.",
+      "How what you know about a customer moves across sales, onboarding, customer success, service, operations, and leadership when teams need to act together.",
   },
   {
-    title: "Health measures and data quality",
+    title: "Account health scores and data quality",
     description:
-      "The inputs, assumptions, missing data, age, and real use of current health scores, dashboards, alerts, and account reviews.",
+      "What goes into your health scores, dashboards, alerts, and account reviews. What they assume, what’s missing or out of date, and whether anyone uses them.",
   },
   {
     title: "Ownership and escalation rules",
     description:
-      "Who watches for risk, makes sense of unclear signals, contacts the customer, removes blockers, and makes cross-team decisions.",
+      "Who watches for risk, makes sense of unclear signs, contacts the customer, removes blockers, and makes decisions that cross teams.",
   },
   {
-    title: "Outcomes and review cadence",
+    title: "Results and how often you review them",
     description:
-      "How your team reviews its response, learns from preventable losses, and updates signals or rules as customer behavior changes.",
+      "How your team reviews its response, learns from customers it could have kept, and updates warning signs or rules as customer behavior changes.",
   },
 ];
 
 const deliverables = [
   {
     number: "01",
-    title: "Lifecycle risk model",
+    title: "Map of when customers are at risk",
     description:
       "A shared definition of customer stages, risk conditions, and the points where earlier action can still change the outcome.",
     decision:
-      "Where to watch for risk and which lifecycle stages need clearer attention.",
+      "Where to watch for risk and which customer stages need closer attention.",
   },
   {
     number: "02",
-    title: "Signal inventory and assessment",
+    title: "Review of your warning signs",
     description:
-      "A review of available signals, the strength of their evidence, known gaps, age, ownership, and value for a specific decision.",
+      "A review of the warning signs you have: how reliable each one is, known gaps, how current it is, who owns it, and which decision it helps.",
     decision:
-      "Which signals you can act on today, which need work, and which you shouldn’t trust yet.",
+      "Which signs you can act on today, which need work, and which you shouldn’t trust yet.",
   },
   {
     number: "03",
-    title: "Intervention and ownership map",
+    title: "Who steps in, and when",
     description:
-      "A practical view of triggers, owners, escalation paths, needed context, and the response expected when risk appears.",
+      "A practical view of what triggers action, who owns it, who it goes to next, what they need to know, and the response expected when risk appears.",
     decision:
       "Who acts, when they act, what they need to know, and where teams must work together.",
   },
   {
     number: "04",
-    title: "Prioritized improvement plan",
+    title: "Improvement plan, in priority order",
     description:
-      "An ordered set of changes to lifecycle definitions, data, workflows, reviews, and measurement based on impact and dependencies.",
+      "The changes to make, in order: how you define customer stages, data, processes, reviews, and measurement. Ranked by impact and by what depends on what.",
     decision:
-      "What to improve first, and what has to be ready before you add automation or predictive tools.",
+      "What to improve first, and what has to be ready before you add automation or tools that predict risk.",
   },
 ];
 
 const strongFit = [
-  "Onboarding slips, adoption falls, accounts go quiet, or renewal risk appears too late for an effective response.",
-  "Customer context and risk signals are spread across teams, systems, or account reviews.",
-  "A sponsor can bring customer-facing, operations, data, and commercial owners together.",
-  "You’re willing to change lifecycle definitions, workflows, and who owns what.",
+  "New customers stall, use falls, accounts go quiet, or you spot renewal risk too late to respond well.",
+  "What you know about customers, and the warning signs, are spread across teams, systems, or account reviews.",
+  "A senior sponsor can bring customer-facing, operations, data, and sales owners together.",
+  "You’re willing to change how you define customer stages, how work gets done, and who owns what.",
 ];
 
 const limitedFit = [
-  "The goal is only to buy a predictive tool without changing how teams understand and respond to risk.",
+  "The goal is only to buy a tool that predicts risk, without changing how teams understand and respond to it.",
   "You need an urgent recovery plan for one known account.",
   "The customer, account, workflow, or outcome evidence just isn’t available.",
-  "Nobody accountable can change response rules, escalation paths, or how teams work together.",
+  "Nobody accountable can change response rules, who issues go to, or how teams work together.",
 ];
 
 const relatedPaths = [
@@ -170,10 +170,11 @@ const relatedPaths = [
           </h1>
           <p class="hero-lead">
             Most unhappy customers won’t tell you. They just go quiet, then
-            leave. This review finds the early warning signs across onboarding,
-            adoption, account health, feedback, and renewal, so you know which
-            signals matter, who should act, and what has to change while there’s
-            still time.
+            leave. This review covers the whole customer lifecycle: every stage
+            from getting started to renewing. It finds the early warning signs,
+            like slow starts, falling use, weak accounts, feedback, and renewal
+            worries. You’ll know which signs matter, who should act, and what
+            has to change while there’s still time.
           </p>
 
           <div class="hero-actions" aria-label="Lifecycle Risk Review actions">
@@ -191,13 +192,13 @@ const relatedPaths = [
             You may be seeing this
           </p>
           <p>
-            Onboarding slips. Adoption dips. Your main contact stops replying.
-            And nobody’s sure whose move it is.
+            New customers stall. Use of the product drops. Your main contact
+            stops replying. And nobody’s sure whose move it is.
           </p>
           <p>
             By the time the risk is obvious, the window’s nearly closed. The
-            signals, the ownership, and the customer context are scattered
-            across teams and systems.
+            warning signs, the ownership, and what you know about the customer
+            are scattered across teams and systems.
           </p>
         </aside>
       </div>
@@ -411,8 +412,8 @@ const relatedPaths = [
             <div>
               <dt>Useful context</dt>
               <dd>
-                Lifecycle concern, available signals, teams involved, and
-                accountable sponsor
+                The customer stage you’re worried about, the warning signs you
+                have, the teams involved, and who’s sponsoring the work
               </dd>
             </div>
             <div>

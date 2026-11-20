@@ -9,40 +9,40 @@ import Layout from "../../../layouts/Layout.astro";
 const diagnosticQuestions = [
   {
     number: "01",
-    question: "Where does customer friction start?",
+    question: "Where does the customer problem start?",
     explanation:
-      "Follow the problem across teams, systems, rules, and handoffs until you hit the source. Not the symptom. The source.",
+      "Follow the problem across teams, systems, rules, and hand-offs between teams until you hit the source. Not the symptom. The source.",
   },
   {
     number: "02",
     question: "Which breakdowns matter most?",
     explanation:
-      "Separate the one-off from the repeat offender. Then name what it’s costing you: revenue, retention, cost to serve, or risk.",
+      "Separate the one-off from the repeat offender. Then name what it’s costing you: revenue, lost customers, the cost of serving them, or risk.",
   },
   {
     number: "03",
     question: "Who owns the decision and the work?",
     explanation:
-      "Find the gaps in ownership, the fuzzy decision rights, and the handoffs where context or urgency gets dropped.",
+      "Find the gaps in ownership, the unclear calls about who decides, and the hand-offs where information or urgency gets dropped.",
   },
   {
     number: "04",
     question: "What should you change first, and how will you prove it worked?",
     explanation:
-      "Pick the business value you’re moving before you design anything. Then put the workflow, data, ownership, and system changes in order.",
+      "Decide what result you’re trying to move before you design anything. Then put the changes to the process, data, ownership, and systems in order.",
   },
 ];
 
 const evidenceAreas = [
   {
-    title: "Customer and service signals",
+    title: "What customers and service teams tell you",
     description:
-      "Complaints, escalations, contact reasons, feedback, service exceptions, renewal concerns, and other signs of repeated friction.",
+      "Complaints, escalations, feedback, and why customers contact you. Exceptions to the rules, renewal worries, and other signs the same problem keeps coming back.",
   },
   {
-    title: "Workflows and handoffs",
+    title: "How work moves between teams",
     description:
-      "How work moves across teams, including queues, approvals, transfers, workarounds, delays, and places where context gets lost.",
+      "How work passes from team to team, including queues, approvals, transfers, workarounds, delays, and places where information gets lost.",
   },
   {
     title: "Ownership and decisions",
@@ -52,10 +52,10 @@ const evidenceAreas = [
   {
     title: "CRM and system behavior",
     description:
-      "Fields, records, automation, routing, reports, knowledge sources, and the system signals teams use during customer work.",
+      "Fields, records, automatic rules, how work gets assigned, reports, help articles, and the system information teams rely on while helping customers.",
   },
   {
-    title: "Frontline operating reality",
+    title: "What frontline teams really do",
     description:
       "How people really use the tools, read the rules, handle exceptions, and work around processes that don’t fit the job.",
   },
@@ -69,42 +69,43 @@ const evidenceAreas = [
 const deliverables = [
   {
     number: "01",
-    title: "Cross-functional friction map",
+    title: "Map of where customers get stuck",
     description:
-      "A shared view of the customer problem across touchpoints, teams, systems, decisions, and dependencies.",
+      "One shared picture of the customer problem across every point of contact, team, system, decision, and dependency.",
     decision:
       "Where to focus, instead of treating every symptom like its own problem.",
   },
   {
     number: "02",
-    title: "Ownership and handoff analysis",
+    title: "Who owns what, and where hand-offs fail",
     description:
       "A clear view of where ownership is missing, duplicated, delayed, or separated from the power to act.",
-    decision: "Which roles, decision rights, and handoffs need to change.",
+    decision:
+      "Which roles, decision-making powers, and hand-offs need to change.",
   },
   {
     number: "03",
-    title: "Prioritized operating issues",
+    title: "Problems, in priority order",
     description:
-      "Findings ranked by customer impact, the business value at stake, how strong the evidence is, and what depends on what.",
+      "Findings ranked by the effect on customers, what’s at stake for the business, how strong the evidence is, and what depends on what.",
     decision:
       "Which issues need action now, which need more evidence, and which can wait.",
   },
   {
     number: "04",
-    title: "Practical improvement sequence",
+    title: "The order to make changes",
     description:
-      "The order to change workflows, ownership, data, measurement, and technology, with the business result each step should move.",
+      "The order to change the process, ownership, data, measurement, and technology, with the business result each step should move.",
     decision:
       "What to do next, who needs to be in the room, and what has to be true before you scale it.",
   },
 ];
 
 const strongFit = [
-  "Customer friction crosses teams, systems, or stages of the experience.",
+  "The customer problem crosses teams, systems, or stages of the experience.",
   "You keep seeing the same problems and nobody can say what’s causing them.",
-  "A sponsor can bring the right business, service, operations, and technical people together.",
-  "Your leaders are willing to change ownership or workflows when the evidence says so.",
+  "A senior sponsor can bring the right business, service, operations, and technical people together.",
+  "Your leaders are willing to change who owns what, or how work gets done, when the evidence says so.",
 ];
 
 const limitedFit = [
@@ -185,10 +186,10 @@ const relatedPaths = [
           <h1 id="diagnostic-title">Find what’s causing customer friction.</h1>
           <p class="hero-lead">
             Your customers don’t care which team dropped the ball. They just
-            feel it. This diagnostic follows a repeated problem across
-            workflows, ownership, CRM signals, service rules, and handoffs, so
-            you can see where it starts, why it keeps happening, and what to fix
-            first.
+            feel it. This diagnostic follows a problem that keeps coming back.
+            It crosses your processes, ownership, CRM data, service rules, and
+            the hand-offs between teams. You’ll see where it starts, why it
+            keeps happening, and what to fix first.
           </p>
 
           <div class="hero-actions" aria-label="CX Systems Diagnostic actions">
@@ -212,7 +213,7 @@ const relatedPaths = [
           </p>
           <p>
             You’ve got data, projects, and local fixes. What you don’t have is
-            one shared view of where the friction starts, or which problem is
+            one shared view of where the problem starts, or which problem is
             worth the most to fix.
           </p>
         </aside>
@@ -429,8 +430,8 @@ const relatedPaths = [
             <div>
               <dt>Useful context</dt>
               <dd>
-                Customer impact, teams and systems involved, and accountable
-                sponsor
+                How customers are affected, the teams and systems involved, and
+                who’s sponsoring the work
               </dd>
             </div>
             <div>
