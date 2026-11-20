@@ -282,7 +282,7 @@ FOLLOW-UP EVIDENCE
 ${plan.closureEvidence}
 
 METHOD AND LIMITS
-This plan uses only the information entered. It does not verify facts, assess law or policy, authorize compensation, determine fault, contact a customer, or replace safety, security, privacy, legal, regulatory, financial, or domain review. An authorized owner must approve commitments and customer-facing language.`;
+This plan uses only the information entered. It doesn't check facts, judge law or policy, approve compensation, decide who's at fault, or contact the customer. It also doesn't replace a safety, security, privacy, legal, regulatory, financial, or expert review. An authorized owner must approve commitments and customer-facing language.`;
 };
 
 form?.addEventListener("submit", (event) => {

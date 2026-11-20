@@ -12,7 +12,7 @@ const page = {
     breadcrumb: "Prompt injection controls",
     eyebrow: "AI tooling · Prompt injection controls",
     title: "Limit what a manipulated prompt can reach and do.",
-    lead: "Prompt injection can't be solved with one instruction or filter. The stronger approach limits the model's authority, separates trusted instructions from outside content, enforces policy in code, and requires approval before high-impact actions.",
+    lead: "Prompt injection is when text the AI reads (an email, a document, a web page) hides instructions that trick it into doing something it shouldn’t. One instruction or filter can’t stop it. What works: limit what the AI is allowed to do, keep your instructions separate from outside content, enforce the rules in code, and require a person’s approval before anything high-impact.",
     primaryCta: {
       label: "Review AI Service Readiness",
       href: "/services/ai-service-readiness-review/",
@@ -23,43 +23,44 @@ const page = {
     },
     trigger: {
       introduction:
-        "An AI workflow reads content it doesn't control and can reach data, tools, or actions with consequences beyond generating text.",
+        "Your AI tool reads content you don’t control, and it can reach data, tools, or actions that do more than write text.",
       items: [
         {
           label: "Threat",
-          value: "Direct or hidden instruction manipulation",
+          value: "Instructions slipped in, openly or hidden",
         },
         {
           label: "Exposure",
-          value: "Data, tools, decisions, and connected systems",
+          value: "Your data, tools, decisions, and connected systems",
         },
         {
           label: "Control",
-          value: "Limit authority, detect misuse, and contain impact",
+          value: "Limit what it can do, spot misuse, contain the damage",
         },
       ],
     },
   },
   signals: {
     eyebrow: "Visible signals",
-    title: "Prompt risk becomes business risk when the model has reach.",
+    title:
+      "The risk becomes a business risk when the AI can reach real systems.",
     introduction:
-      "Manipulated content matters most when it can cross a trust boundary, reveal protected context, misuse a tool, or trigger action without informed approval.",
+      "Tampered content matters most when it can get past your safeguards, reveal private information, misuse a tool, or trigger an action nobody approved.",
     items: [
       {
         title: "The system prompt carries the whole policy",
         description:
-          "Sensitive rules and permissions live in instructions the model can misunderstand, expose, or ignore.",
+          "Sensitive rules and permissions live only in the AI’s instructions, which it can misread, reveal, or ignore.",
       },
       {
         title: "Outside content looks like trusted instruction",
         description:
-          "Documents, websites, messages, and tool results enter the same context as authorized directions.",
+          "Documents, websites, messages, and tool results get mixed in with your real instructions.",
       },
       {
         title: "The model can reach too much",
         description:
-          "Broad data access, shared credentials, or powerful tools extend far beyond the task.",
+          "It has access to far more data, accounts, or tools than the task needs.",
       },
       {
         title: "Approval happens after the action",
@@ -69,100 +70,100 @@ const page = {
       {
         title: "Tests look for phrases, not outcomes",
         description:
-          "A filter catches known jailbreak language but misses hidden instructions, tool misuse, or data exposure.",
+          "A filter catches known trick phrases but misses hidden instructions, tool misuse, or leaked data.",
       },
       {
         title: "An incident can't be rebuilt",
         description:
-          "The organization lacks the source, model context, policy decision, tool calls, approval, and outcome.",
+          "Nobody kept a record of where the content came from, what the AI saw and did, who approved it, or what happened.",
       },
     ],
   },
   framework: {
     eyebrow: "Control layers",
-    title: "Put enforceable boundaries outside the model.",
+    title: "Put the hard limits outside the AI.",
     introduction:
-      "Model instructions can help, but they shouldn't carry the full security burden. Layer controls so one bad judgment can't create an unauthorized result.",
+      "Instructions to the AI help, but they shouldn’t carry all the security. Stack several safeguards, so one bad call can’t cause real harm.",
     items: [
       {
         label: "Trust",
         question: "Which sources and instructions are trusted?",
         title: "Trust boundaries",
         description:
-          "Classify sources and preserve provenance so outside content doesn't inherit system authority.",
+          "Label every source and track where it came from, so outside content never gets the same authority as your own instructions.",
       },
       {
         label: "Task",
         question: "What is the model allowed to decide?",
         title: "Task boundary",
         description:
-          "Define permitted inputs, expected outputs, prohibited behavior, refusal, and escalation.",
+          "Define what it may take in, what it should produce, what it must never do, and when to refuse or pass to a person.",
       },
       {
         label: "Access",
         question: "What is the least access this task needs?",
-        title: "Least privilege",
+        title: "Only the access it needs",
         description:
-          "Limit credentials, records, tools, actions, destinations, and access duration.",
+          "Limit its accounts, records, tools, actions, and where it can send things, and for how long.",
       },
       {
         label: "Policy",
         question: "Which rules must code enforce?",
-        title: "Deterministic controls",
+        title: "Rules enforced in code",
         description:
-          "Use application logic for authorization, validation, allowlists, data rules, and transaction limits.",
+          "Let your software, not the AI, check permissions, approved lists, data rules, and spending limits.",
       },
       {
         label: "Approval",
         question: "Which actions need informed human approval?",
         title: "Human authority",
         description:
-          "Require approval before high-impact actions and show the source, action, system, and uncertainty.",
+          "Require a person’s approval before high-impact actions, and show them the source, the action, the system, and what’s uncertain.",
       },
       {
         label: "Testing",
         question: "How will controls improve as the system changes?",
-        title: "Adversarial testing",
+        title: "Testing by trying to break it",
         description:
-          "Test direct, indirect, encoded, multimodal, and tool-based attacks against real consequences.",
+          "Try real attacks (open, hidden, disguised, in images, or through tools) and check what harm they could actually cause.",
       },
     ],
   },
   path: {
     eyebrow: "Control path",
-    title: "Trace authority from outside content to real consequence.",
+    title: "Follow outside content all the way to what it could cause.",
     introduction:
-      "Follow a real interaction from input through action. At each step, decide what the system trusts, what the model can do, and which rule runs outside it.",
+      "Follow one real interaction from what goes in to what happens. At each step, decide what the system trusts, what the AI can do, and which rule is enforced outside it.",
     items: [
       {
         phase: "Ingest",
         question: "Where did the content come from?",
         evidence:
-          "Source, trust level, provenance, format, transformation, retrieval path, and handling rules.",
+          "The source, how much to trust it, where it came from, and the rules for handling it.",
       },
       {
         phase: "Interpret",
         question: "Which instructions should affect the task?",
         evidence:
-          "Application intent, user authority, task boundary, outside content, conflicts, and escalation.",
+          "What the tool is for, what the user is allowed to ask, the limits of the task, outside content, conflicts, and when to pass to a person.",
       },
       {
         phase: "Decide",
         question: "Is the proposed output or action allowed?",
         evidence:
-          "Policy, authorization, schema, sensitive data, destination, limits, and validation.",
+          "Your rules, permissions, the expected format, sensitive data, where it’s going, limits, and checks.",
       },
       {
         phase: "Act",
         question: "What consequence can the system create?",
         evidence:
-          "Tool, permission, credential, transaction limit, human approval, reversibility, and effect.",
+          "The tool, its permissions and accounts, spending limits, a person’s approval, whether it can be undone, and the effect.",
       },
       {
         phase: "Review",
         question: "Can the team detect and learn from misuse?",
         evidence:
-          "Trace, blocked attempt, approval, outcome, incident response, test result, and updated control.",
+          "A record of what happened, blocked attempts, approvals, results, how incidents were handled, test results, and updated safeguards.",
       },
     ],
   },
@@ -170,55 +171,55 @@ const page = {
     eyebrow: "Evidence",
     title: "Review the whole application, not only the prompt.",
     introduction:
-      "The evidence includes every source of instruction, every system the model can reach, the code enforcing policy, the people approving action, and the final outcome.",
+      "I look at every source of instructions, every system the AI can reach, the code enforcing the rules, the people approving actions, and the final result.",
     items: [
       {
-        title: "Instruction assembly",
+        title: "How the instructions are put together",
         description:
-          "System directions, user input, templates, memory, retrieved context, tool results, and their order.",
+          "Your instructions, what users type, templates, memory, retrieved content, tool results, and the order they arrive in.",
       },
       {
         title: "Outside content",
         description:
-          "Web pages, files, messages, knowledge sources, images, metadata, and other untrusted material.",
+          "Web pages, files, messages, help content, images, and other material you don’t control.",
       },
       {
         title: "Tools and permissions",
         description:
-          "Functions, records, API scopes, destinations, limits, secrets, boundaries, and authorization code.",
+          "What it can call, which records, what each connection allows, where it can send data, limits, passwords and keys, and the code that checks permissions.",
       },
       {
         title: "Outputs and downstream use",
         description:
-          "Responses, structured data, links, code, routing, system updates, and the people or services that rely on them.",
+          "Answers, data, links, code, where requests get sent, system updates, and the people or systems that rely on them.",
       },
       {
         title: "Approval and recovery",
         description:
-          "Human checkpoints, displayed context, cancellation, rollback, escalation, and incident ownership.",
+          "Where people check its work, what they’re shown, how to cancel or undo, who it goes to next, and who owns incidents.",
       },
       {
         title: "Tests and outcomes",
         description:
-          "Attack simulations, blocked attempts, false alarms, tool calls, approvals, incidents, and customer effects.",
+          "Practice attacks, blocked attempts, false alarms, tool use, approvals, incidents, and the effect on customers.",
       },
     ],
     note: {
       label: "No foolproof prompt layer",
       description:
-        "The goal is to reduce exposure, enforce authority, detect unsafe behavior, and limit impact. One prompt or filter can't remove prompt injection risk.",
+        "The goal is to reduce exposure, enforce limits, spot unsafe behavior, and contain the damage. No single instruction or filter removes the risk.",
     },
   },
   failures: {
     eyebrow: "Common failure patterns",
-    title: "Controls fail when language is mistaken for authority.",
+    title: "Safeguards fail when wording is treated as permission.",
     introduction:
-      "The weakest designs ask the model to enforce rules that belong in identity, policy, application logic, permissions, approval, and incident response.",
+      "The weakest designs ask the AI to enforce rules that belong in login checks, policy, software, permissions, approvals, and incident response.",
     items: [
       {
-        title: "A classifier becomes the firewall",
+        title: "A filter becomes the only defense",
         description:
-          "Input filtering stands alone even though unsafe influence can arrive indirectly or through ordinary-looking output.",
+          "Filtering what comes in is the only protection, even though harmful instructions can arrive indirectly or look completely ordinary.",
       },
       {
         title: "Outside content is labeled but still followed",
@@ -228,7 +229,7 @@ const page = {
       {
         title: "The model judges its own authority",
         description:
-          "Natural-language rules replace identity checks, scoped permissions, and policy enforced in code.",
+          "Written rules in plain English replace login checks, limited permissions, and rules enforced in code.",
       },
       {
         title: "Human review becomes a confirmation click",
@@ -238,7 +239,7 @@ const page = {
       {
         title: "Testing stops at direct jailbreaks",
         description:
-          "Tests miss compromised documents, retrieved content, tool output, chained actions, and data theft.",
+          "Tests miss tampered documents, retrieved content, tool output, chains of actions, and data theft.",
       },
       {
         title: "Controls stay fixed while the workflow grows",
@@ -249,29 +250,29 @@ const page = {
   },
   outputs: {
     eyebrow: "Practical outputs",
-    title: "Turn prompt safety into an operating control model.",
+    title: "Turn AI safety into safeguards your team runs.",
     introduction:
-      "The result shows how the workflow limits authority, validates important behavior, involves people, records evidence, and changes as threats evolve.",
+      "You’ll see how the tool limits what the AI can do, checks important actions, involves people, keeps records, and adapts as threats change.",
     items: [
       {
-        title: "Trust boundary map",
+        title: "Map of what to trust",
         description:
-          "Instructions, outside content, model context, tools, data, people, systems, and unclear authority.",
+          "Your instructions, outside content, what the AI sees, tools, data, people, systems, and where authority is unclear.",
       },
       {
-        title: "Layered control design",
+        title: "Layers of safeguards",
         description:
-          "Task limits, source separation, least privilege, policy, validation, approval, and recovery.",
+          "Task limits, keeping sources separate, only the access it needs, rules, checks, approvals, and recovery.",
       },
       {
-        title: "Adversarial test plan",
+        title: "Plan for testing by attack",
         description:
-          "Scenarios tied to real consequences, including indirect injection, tool misuse, data exposure, and unsafe action chains.",
+          "Realistic attacks tied to real harm, including hidden instructions, tool misuse, leaked data, and dangerous chains of actions.",
       },
       {
-        title: "Monitoring and response model",
+        title: "Monitoring and response plan",
         description:
-          "Trace requirements, thresholds, owners, containment, rollback, evidence, and control updates.",
+          "What to record, when to raise an alarm, owners, how to contain and undo damage, evidence, and updates to safeguards.",
       },
     ],
   },
@@ -279,30 +280,30 @@ const page = {
     eyebrow: "Engagement fit",
     title: "Use these controls when AI can affect more than its own answer.",
     introduction:
-      "This work fits a defined AI use case that processes outside content and can reach sensitive data, tools, or important actions. It supports, but doesn't replace, application security, penetration testing, privacy, legal review, or incident response.",
+      "This fits a specific AI tool that reads outside content and can reach sensitive data, tools, or important actions. It supports, but doesn’t replace, your security testing, privacy and legal review, or incident response.",
     items: [
-      "The workflow receives user-controlled, retrieved, outside, or third-party content.",
+      "The tool reads content from users, outside sources, or other companies.",
       "The model can access sensitive data, call tools, change records, or influence important decisions.",
-      "High-risk actions need human approval and policy enforced outside the model.",
+      "High-risk actions need a person’s approval and rules enforced outside the AI.",
       "Security, product, operations, legal, data, and customer teams can shape the controls.",
-      "Leaders understand that one filter can't eliminate prompt injection risk.",
+      "Leaders understand that one filter can’t remove the risk.",
     ],
   },
   diagnostics: {
     eyebrow: "Related diagnostic paths",
-    title: "Start with the workflow and consequence the controls must protect.",
+    title: "Start with the process and the harm the safeguards must prevent.",
     items: [
       {
         title: "AI Service Readiness Review",
         href: "/services/ai-service-readiness-review/",
         useWhen:
-          "You need to define the AI role, oversight, data controls, measures, and responsible implementation path.",
+          "You need to define the AI’s job, human checks, data controls, measures, and a responsible way to roll it out.",
       },
       {
         title: "CX Systems Diagnostic",
         href: "/services/cx-systems-diagnostic/",
         useWhen:
-          "The interaction crosses customer workflows, service rules, systems, ownership, and handoffs.",
+          "The interaction crosses customer processes, service rules, systems, ownership, and handoffs.",
       },
       {
         title: "CRM Workflow Audit",

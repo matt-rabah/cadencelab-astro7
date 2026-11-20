@@ -12,7 +12,7 @@ const page = {
     breadcrumb: "AI variance testing",
     eyebrow: "AI tooling · AI variance testing",
     title: "Don't stop at a wrong answer. Find the conditions behind it.",
-    lead: "AI outputs change when the request, source material, retrieval, model, tools, or workflow changes. Variance testing connects a bad answer to those conditions so your team can decide what to fix, validate, escalate, or accept.",
+    lead: "A hallucination is when AI states something false as if it were true. AI answers shift when the question, the sources, how it finds information, the AI model, its tools, or the process around it changes. Variance testing traces a bad answer back to those conditions, so your team can decide what to fix, check, pass to a person, or accept.",
     primaryCta: {
       label: "Review AI Service Readiness",
       href: "/services/ai-service-readiness-review/",
@@ -23,7 +23,7 @@ const page = {
     },
     trigger: {
       introduction:
-        "The same task produces plausible answers that differ in facts, evidence, confidence, or the action they recommend.",
+        "The same task gives answers that all sound right but differ in facts, evidence, confidence, or the action they suggest.",
       items: [
         {
           label: "Symptom",
@@ -31,11 +31,12 @@ const page = {
         },
         {
           label: "Trace",
-          value: "Request, evidence, model, tools, output, outcome",
+          value:
+            "The question, the evidence, the AI, its tools, the answer, the result",
         },
         {
           label: "Decision",
-          value: "Which variation is acceptable and which needs control",
+          value: "Which differences are fine and which need fixing",
         },
       ],
     },
@@ -44,37 +45,37 @@ const page = {
     eyebrow: "Visible signals",
     title: "Calling it a hallucination doesn't explain the failure.",
     introduction:
-      "A wrong answer is the end of a path. The useful question is which source, context, model behavior, tool, or review decision allowed it to matter.",
+      "A wrong answer is the end of a chain. The useful question is which source, missing information, AI behavior, tool, or review step let it cause harm.",
     items: [
       {
         title: "Repeated runs change important facts",
         description:
-          "Names, dates, citations, totals, classifications, or recommendations move when the task appears unchanged.",
+          "Names, dates, sources, totals, categories, or suggestions change even though the task looks the same.",
       },
       {
-        title: "A grounded answer goes beyond the source",
+        title: "An answer goes beyond its source",
         description:
           "The response starts with evidence, then adds details or certainty the source doesn't support.",
       },
       {
         title: "A model update changes the result",
         description:
-          "A new model improves general quality but changes formatting, refusal, classification, or tool behavior.",
+          "A new AI version is better overall but changes formatting, what it refuses, how it sorts things, or how it uses tools.",
       },
       {
         title: "Reviewers fix errors without recording why",
         description:
-          "People correct facts, tone, or routing, but the reason never becomes evaluation data.",
+          "People correct facts, tone, or where requests go, but nobody records why, so testing never learns from it.",
       },
       {
         title: "One average score defines quality",
         description:
-          "A summary hides the customers, inputs, or important edge cases where performance fails.",
+          "A single score hides the customers, questions, or unusual cases where it fails.",
       },
       {
         title: "A bad result can't be replayed",
         description:
-          "The prompt remains, but the retrieved context, model version, tool results, and human action are missing.",
+          "The question is saved, but not the information it pulled in, the AI version, what its tools returned, or what people did.",
       },
     ],
   },
@@ -82,87 +83,87 @@ const page = {
     eyebrow: "Trace conditions",
     title: "Define the conditions before judging the answer.",
     introduction:
-      "Output quality depends on the task and evidence used to produce it. A useful trace shows where meaningful variation entered.",
+      "How good an answer is depends on the task and the evidence behind it. A useful trace shows where important differences crept in.",
     items: [
       {
         label: "Task",
         question: "What decision should the output support?",
         title: "Task",
         description:
-          "Define the user, purpose, expected form, unacceptable error, and where variation is allowed.",
+          "Define who it’s for, the purpose, the expected format, errors you can’t accept, and where differences are fine.",
       },
       {
         label: "Input",
         question: "What changed in the request or source?",
         title: "Input",
         description:
-          "Trace wording, ambiguity, missing facts, conflicting instructions, format, and provenance.",
+          "Check the wording, anything unclear, missing facts, conflicting instructions, format, and where it came from.",
       },
       {
         label: "Context",
         question: "Which evidence reached the model?",
         title: "Context",
         description:
-          "Record retrieval, ranking, truncation, history, templates, instructions, and excluded context.",
+          "Record what information it pulled in, what it ranked first, what got cut off, history, templates, instructions, and what was left out.",
       },
       {
         label: "Execution",
         question: "Which model and tools produced the result?",
         title: "Execution",
         description:
-          "Capture model version, settings, output rules, tool calls, retries, fallbacks, and transformations.",
+          "Record the AI version, settings, output rules, tool use, retries, backups, and any changes made along the way.",
       },
       {
         label: "Review",
         question: "How was the output judged or trusted?",
         title: "Review",
         description:
-          "Separate automated checks, model grading, expert review, user interpretation, and override.",
+          "Keep automatic checks, AI grading, expert review, how users read it, and overruled answers separate.",
       },
       {
         label: "Outcome",
         question: "What happened after the answer was used?",
         title: "Outcome",
         description:
-          "Connect the output to the customer, decision, correction, delay, risk, or other real consequence.",
+          "Connect the answer to the customer, the decision, corrections, delays, risk, or other real effects.",
       },
     ],
   },
   path: {
     eyebrow: "Trace path",
-    title: "Follow the variation from request to consequence.",
+    title: "Follow the difference from question to effect.",
     introduction:
-      "Rebuild real runs, compare their conditions, find where they split, and choose the right control.",
+      "Rebuild real runs, compare their conditions, find where they split, and choose the right fix.",
     items: [
       {
         phase: "Bound",
         question: "Which difference matters to the work?",
         evidence:
-          "Task, user, expected behavior, acceptable range, prohibited error, and consequence.",
+          "The task, the user, what should happen, what’s acceptable, errors that must never happen, and the consequence.",
       },
       {
         phase: "Capture",
         question: "Can the team rebuild each run?",
         evidence:
-          "Input, sources, retrieval, prompt, model, settings, tools, policy, output, and reviewer.",
+          "The question, sources, information pulled in, instructions, AI version, settings, tools, rules, answer, and reviewer.",
       },
       {
         phase: "Compare",
         question: "Which condition changed with the result?",
         evidence:
-          "Repeated runs, paired examples, model comparisons, edge cases, and failure groups.",
+          "Running it again, comparing similar examples and AI versions, unusual cases, and groups of failures.",
       },
       {
         phase: "Explain",
         question: "What evidence supports the likely cause?",
         evidence:
-          "Observed pattern, alternatives tested, uncertainty, repeatability, and limits of the trace.",
+          "The pattern seen, other explanations tested, what’s uncertain, whether it repeats, and what the trace can’t show.",
       },
       {
         phase: "Control",
         question: "What should the workflow do differently?",
         evidence:
-          "Source repair, retrieval changes, validation, fallback, human review, monitoring, and retesting.",
+          "Fixing sources, changing how it finds information, checks, backups, a person reviewing, monitoring, and testing again.",
       },
     ],
   },
@@ -170,80 +171,80 @@ const page = {
     eyebrow: "Evidence",
     title: "Keep enough context to explain the difference.",
     introduction:
-      "Prompts and answers aren't enough. A useful trace connects model behavior to source evidence, application state, human review, and the final outcome.",
+      "Questions and answers aren’t enough. A useful trace connects what the AI did to its sources, the state of the system, human review, and the final result.",
     items: [
       {
-        title: "Representative inputs",
+        title: "Realistic questions",
         description:
           "Routine cases, important edge cases, unclear requests, incomplete records, and past failures.",
       },
       {
-        title: "Source and retrieval evidence",
+        title: "Sources and what it pulled in",
         description:
-          "Document versions, provenance, ranking, retrieved passages, missing context, and conflicting sources.",
+          "Document versions, where they came from, what ranked first, the passages it used, missing information, and conflicting sources.",
       },
       {
-        title: "Execution settings",
+        title: "Settings",
         description:
-          "Model version, prompts, parameters, schemas, tools, retries, fallbacks, caches, and transformations.",
+          "The AI version, instructions, settings, expected formats, tools, retries, backups, saved answers, and changes along the way.",
       },
       {
-        title: "Evaluation rules",
+        title: "Testing rules",
         description:
-          "Reference evidence, rubrics, automated checks, reviewers, thresholds, and documented disagreement.",
+          "The correct answers to compare against, scoring guides, automatic checks, reviewers, pass marks, and recorded disagreements.",
       },
       {
         title: "Human review",
         description:
-          "Corrections, overrides, missed errors, review time, escalation, and the context shown to people.",
+          "Corrections, overruled answers, missed errors, review time, cases passed up, and what reviewers were shown.",
       },
       {
         title: "Operating outcomes",
         description:
-          "Customer effect, workflow result, downstream action, delay, rework, complaints, and recovery.",
+          "The effect on customers, the result, what happened next, delays, rework, complaints, and fixes.",
       },
     ],
     note: {
       label: "Trace before certainty",
       description:
-        "Testing can reveal repeatable conditions and likely causes. It shouldn't claim a precise internal explanation when the evidence supports only a pattern.",
+        "Testing can show repeatable conditions and likely causes. It shouldn’t claim to know exactly what happened inside the AI when the evidence only shows a pattern.",
     },
   },
   failures: {
     eyebrow: "Common failure patterns",
-    title: "Evaluation fails when it ignores the real consequence.",
+    title: "Testing fails when it ignores the real consequences.",
     introduction:
-      "A benchmark can look strong while hiding weak sources, poor review, and the cases where one wrong answer matters.",
+      "A test score can look strong while hiding weak sources, poor review, and the cases where one wrong answer really matters.",
     items: [
       {
         title: "One answer becomes the full standard",
         description:
-          "A rigid reference rejects useful variation without defining the facts and actions that can't vary.",
+          "A rigid model answer rejects useful differences, without saying which facts and actions must never change.",
       },
       {
         title: "The average hides the weak case",
         description:
-          "Overall performance looks good while one customer group, language, or important decision remains unreliable.",
+          "Overall results look good, while one customer group, language, or important decision is still unreliable.",
       },
       {
-        title: "A model grader becomes independent truth",
+        title: "An AI grader is treated as the final word",
         description:
-          "A second model scores output without expert review, calibration, or analysis of shared blind spots.",
+          "A second AI scores the answers with no expert review, no checks on its grading, and no look at blind spots they share.",
       },
       {
-        title: "Prompt tuning replaces system repair",
+        title: "Rewording instructions replaces real fixes",
         description:
-          "Teams rewrite instructions while leaving weak sources, retrieval gaps, permissions, and review unchanged.",
+          "Teams rewrite the AI’s instructions but leave weak sources, gaps in what it can find, permissions, and review unchanged.",
       },
       {
         title: "Corrections disappear after delivery",
         description:
-          "People fix the answer, but the failure, reason, context, and outcome never enter the test set.",
+          "People fix the answer, but the failure, the reason, and the result never make it into the tests.",
       },
       {
         title: "Evaluation ends at launch",
         description:
-          "Models, data, tools, and user behavior change while the test set and threshold stay frozen.",
+          "The AI, data, tools, and how people use it all change, while the tests and pass marks stay the same.",
       },
     ],
   },
@@ -251,41 +252,41 @@ const page = {
     eyebrow: "Practical outputs",
     title: "Turn inconsistent answers into a learning loop.",
     introduction:
-      "The result makes important variation visible, connects it to operating conditions, and defines what happens when an answer falls outside the safe range.",
+      "You’ll see the differences that matter, what causes them, and what happens when an answer falls outside the safe range.",
     items: [
       {
-        title: "End-to-end variance map",
+        title: "Map of where answers differ",
         description:
-          "The task, input, evidence, context, model, tools, validation, review, and outcome.",
+          "The task, the question, the evidence, the AI and its tools, the checks, review, and the result.",
       },
       {
-        title: "Evaluation set and scorecard",
+        title: "Test cases and scorecard",
         description:
-          "Representative cases, failure groups, evidence, rubrics, checks, thresholds, and disagreement.",
+          "Realistic cases, groups of failures, evidence, scoring guides, checks, pass marks, and disagreements.",
       },
       {
-        title: "Control and escalation rules",
+        title: "Rules for checks and handovers",
         description:
-          "Triggers for validation, source checks, fallback, human review, refusal, or correction.",
+          "When to check an answer, verify sources, use a backup, ask a person, refuse, or correct it.",
       },
       {
         title: "Monitoring and revision plan",
         description:
-          "Production signals, sampling, corrections, owners, model-change tests, and review cadence.",
+          "Warning signs in live use, spot checks, corrections, owners, tests when the AI changes, and how often you review.",
       },
     ],
   },
   fit: {
     eyebrow: "Engagement fit",
-    title: "Use variance testing when different answers change the work.",
+    title: "Use variance testing when different answers change the outcome.",
     introduction:
-      "This work fits a defined AI workflow with repeatable tasks, available evidence, visible corrections, and outcomes you can evaluate. It won't make a generative model perfectly predictable.",
+      "This fits a specific AI process with repeatable tasks, evidence you can share, corrections you can see, and results you can check. It won’t make AI perfectly predictable.",
     items: [
-      "A defined workflow produces recurring wrong, unsupported, or inconsistent answers.",
-      "The organization can provide inputs, sources, settings, outputs, corrections, and outcomes.",
+      "A specific process keeps producing wrong, unsupported, or inconsistent answers.",
+      "You can share the questions, sources, settings, answers, corrections, and results.",
       "Some errors carry much greater customer, operating, legal, or financial consequences.",
-      "Domain, product, data, technical, risk, and frontline owners can agree on acceptable behavior.",
-      "Leaders will narrow or remove the use case when controls don't reduce the risk enough.",
+      "Experts, product, data, technical, risk, and frontline owners can agree on what’s acceptable.",
+      "Leaders will shrink or drop the idea when safeguards don’t reduce the risk enough.",
     ],
   },
   diagnostics: {
@@ -296,19 +297,19 @@ const page = {
         title: "AI Service Readiness Review",
         href: "/services/ai-service-readiness-review/",
         useWhen:
-          "You need bounded outcomes, evidence, evaluation, human oversight, safeguards, and an implementation decision.",
+          "You need clear goals, evidence, testing, human checks, safeguards, and a decision on whether to build it.",
       },
       {
         title: "CX Systems Diagnostic",
         href: "/services/cx-systems-diagnostic/",
         useWhen:
-          "The unreliable output sits inside a customer workflow that crosses teams, systems, and handoffs.",
+          "The unreliable answers sit inside a customer process that crosses teams, systems, and handoffs.",
       },
       {
         title: "CRM Workflow Audit",
         href: "/services/crm-workflow-audit/",
         useWhen:
-          "The output depends on CRM records, lifecycle signals, fields, automation, reporting, or customer context.",
+          "The answers depend on CRM records, customer warning signs, fields, automation, reports, or what you know about the customer.",
       },
     ],
   },
