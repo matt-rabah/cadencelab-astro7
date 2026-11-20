@@ -1,5 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+// One converter for the pre-rendered files, the Pages middleware and the
+// worker, so agents get the same Markdown however they ask for it.
+// Node 22.18+ strips TypeScript types on import.
+import {
+  convertHtmlToMarkdown,
+  extractFrontmatter,
+} from "../src/lib/html-to-markdown.ts";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
@@ -8,43 +15,6 @@ const outDirs = [
   path.join(distDir, ".agent-md"),
   path.join(distDir, "markdown"),
 ];
-
-function cleanText(value) {
-  return value
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
-    .replace(/<header[\s\S]*?<\/header>/gi, " ")
-    .replace(/<footer[\s\S]*?<\/footer>/gi, " ")
-    .replace(/<nav[\s\S]*?<\/nav>/gi, " ")
-    .replace(/<aside[\s\S]*?<\/aside>/gi, " ")
-    .replace(/<form[\s\S]*?<\/form>/gi, " ")
-    .replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, "\n\n# $1\n\n")
-    .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, "\n\n## $1\n\n")
-    .replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, "\n\n### $1\n\n")
-    .replace(/<h4[^>]*>([\s\S]*?)<\/h4>/gi, "\n\n#### $1\n\n")
-    .replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, "\n\n$1\n\n")
-    .replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, "\n- $1")
-    .replace(
-      /<a\s+[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi,
-      "[$2]($1)",
-    )
-    .replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, "**$1**")
-    .replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, "**$1**")
-    .replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, "*$1*")
-    .replace(/<i[^>]*>([\s\S]*?)<\/i>/gi, "*$1*")
-    .replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, "`$1`")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&#39;/gi, "'")
-    .replace(/&quot;/gi, '"')
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 function writeMarkdownFile(targetDir, subPath, content) {
   const fullPath = path.join(targetDir, subPath);
@@ -68,32 +38,8 @@ function walk(dir) {
     const relative = path.relative(distDir, full).replace(/\\/g, "/");
 
     const html = fs.readFileSync(full, "utf8");
-    const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-    const descriptionMatch =
-      html.match(
-        /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["'][^>]*>/i,
-      ) ??
-      html.match(
-        /<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["'][^>]*>/i,
-      );
-
-    const markdownParts = [];
-    if (titleMatch?.[1]) {
-      const title = titleMatch[1]
-        .replace(/<[^>]+>/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
-      markdownParts.push(`---\ntitle: ${title}\n---\n\n`);
-    }
-    if (descriptionMatch?.[1]) {
-      markdownParts.push(
-        `${descriptionMatch[1].replace(/\s+/g, " ").trim()}\n\n`,
-      );
-    }
-
-    const body = cleanText(html);
-    markdownParts.push(body ? `${body}\n` : "");
-    const markdown = markdownParts.join("\n").trim() + "\n";
+    const markdown =
+      `${extractFrontmatter(html)}${convertHtmlToMarkdown(html)}`.trim() + "\n";
 
     // Write to all designated directories
     for (const targetDir of outDirs) {

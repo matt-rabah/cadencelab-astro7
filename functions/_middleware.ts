@@ -11,6 +11,7 @@ import {
   convertHtmlToMarkdown,
   estimateTokens,
   extractFrontmatter,
+  markdownHeaders,
 } from "../src/lib/html-to-markdown";
 
 interface Env {
@@ -59,8 +60,7 @@ export const onRequest = async (context: EventContext): Promise<Response> => {
         headers: { accept: "text/markdown" },
       });
       const candidateResponse = await next(mdRequest);
-      const candidateType =
-        candidateResponse.headers.get("content-type") ?? "";
+      const candidateType = candidateResponse.headers.get("content-type") ?? "";
       if (
         candidateResponse.ok &&
         !/text\/html|application\/xhtml\+xml/i.test(candidateType)
@@ -68,9 +68,7 @@ export const onRequest = async (context: EventContext): Promise<Response> => {
         const text = await candidateResponse.text();
         if (text.trim()) {
           const tokens = estimateTokens(text);
-          const headers = new Headers(candidateResponse.headers);
-          headers.set("content-type", "text/markdown; charset=utf-8");
-          headers.set("vary", "Accept");
+          const headers = markdownHeaders(candidateResponse.headers);
           headers.set("x-markdown-tokens", String(tokens));
           headers.set("content-signal", DEFAULT_CONTENT_SIGNAL);
           return new Response(request.method === "HEAD" ? null : text, {
@@ -101,9 +99,7 @@ export const onRequest = async (context: EventContext): Promise<Response> => {
   const markdown = `${frontmatter}${markdownBody}`.trim() + "\n";
   const tokens = estimateTokens(markdown);
 
-  const headers = new Headers(response.headers);
-  headers.set("content-type", "text/markdown; charset=utf-8");
-  headers.set("vary", "Accept");
+  const headers = markdownHeaders(response.headers);
   headers.set("x-markdown-tokens", String(tokens));
   headers.set("content-signal", DEFAULT_CONTENT_SIGNAL);
 

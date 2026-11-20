@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          # Full history so pull requests can diff against the base branch.
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -32,10 +35,25 @@ jobs:
       - name: Check MCP configuration sync
         run: npm run mcp:check
 
-      - name: Check formatting
-        run: npm run format:check
+      # Existing files predate the formatter, so pull requests are held to it
+      # for the files they change. `npm run format:check` covers everything.
+      - name: Check formatting of changed files
+        if: github.event_name == 'pull_request'
+        run: |
+          git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" > changed-files.txt
+          if [ -s changed-files.txt ]; then
+            xargs -d '\n' npx prettier --check --ignore-unknown < changed-files.txt
+          fi
+
+      # `npm run build` needs Tina Cloud credentials (Cloudflare Pages has
+      # them). CI builds Tina's local client instead, which needs none.
+      - name: Generate Tina client and admin (local, no credentials)
+        run: npx tinacms build --local --skip-indexing --skip-cloud-checks
+
+      - name: Type-check the site
+        run: npx tsc --noEmit
 
       # Note: `astro check` currently does not support TypeScript 7.0.
       # Re-enable `npm run check` once @astrojs/check or ts-content-mapper supports TS 7.
       - name: Build production site and agent Markdown
-        run: npm run build
+        run: npx astro build && node scripts/generate-agent-markdown.mjs
