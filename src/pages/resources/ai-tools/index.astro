@@ -268,7 +268,7 @@ const liveTools = [
         </div>
 
         <ul class="tool-list" role="list">
-          {liveTools.map((tool) => (
+          {liveTools.map((tool, index) => (
             <li class="tool-row">
               <div class="tool-row-main">
                 <h3>{tool.name}</h3>
@@ -277,10 +277,13 @@ const liveTools = [
               <a class="button button-primary tool-row-cta" href={tool.href}>
                 {tool.cta}
               </a>
-              <details class="disclosure tool-row-details" name="live-tool">
-                <summary>
+              <details
+                class="disclosure tool-row-details"
+                name="live-tool"
+                open={index === 0}
+              >
+                <summary class="disclosure-summary">
                   <span class="tool-row-toggle">What you provide and get</span>
-                  <span class="disclosure-icon" aria-hidden="true" />
                 </summary>
                 <dl class="disclosure-body tool-facts">
                   {tool.details.map((detail) => (
@@ -339,12 +342,15 @@ const liveTools = [
         </div>
 
         <ul class="disclosure-list standard-list" role="list">
-          {buildStandards.map((standard) => (
+          {buildStandards.map((standard, index) => (
             <li>
-              <details class="disclosure" name="build-standard">
-                <summary>
+              <details
+                class="disclosure"
+                name="build-standard"
+                open={index === 0}
+              >
+                <summary class="disclosure-summary">
                   <h3 class="disclosure-title">{standard.title}</h3>
-                  <span class="disclosure-icon" aria-hidden="true" />
                 </summary>
                 <div class="disclosure-body">
                   <p>{standard.description}</p>
@@ -732,23 +738,16 @@ const liveTools = [
   }
 
   .tool-row-details > summary {
+    --chevron-offset: calc((var(--fs-small) * 1.4 - 0.5rem) / 2);
+
     width: fit-content;
-    min-height: 2.75rem;
     padding-block: 0.75rem;
   }
 
   .tool-row-toggle {
-    color: var(--color-text);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
-    text-decoration: underline;
-    text-decoration-color: var(--color-border-strong);
-    text-underline-offset: 0.25em;
-  }
-
-  .tool-row-details .disclosure-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    line-height: 1.4;
   }
 
   .tool-facts {
@@ -1104,23 +1103,16 @@ const liveTools = [
   }
 
   .tool-row-details > summary {
+    --chevron-offset: calc((var(--fs-small) * 1.4 - 0.5rem) / 2);
+
     width: fit-content;
-    min-height: 2.75rem;
     padding-block: 0.75rem;
   }
 
   .tool-row-toggle {
-    color: var(--color-text);
     font-size: var(--fs-small);
     font-weight: var(--fw-medium);
-    text-decoration: underline;
-    text-decoration-color: var(--color-border-strong);
-    text-underline-offset: 0.25em;
-  }
-
-  .tool-row-details .disclosure-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    line-height: 1.4;
   }
 
   .tool-facts {

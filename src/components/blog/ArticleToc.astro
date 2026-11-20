@@ -9,14 +9,26 @@ const { headings } = Astro.props;
 const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
 ---
 
-{
-  items.length > 0 && (
-    <div class="article-toc">
-      <nav class="toc-desktop" aria-labelledby="article-toc-title">
-        <p id="article-toc-title" class="toc-label">
-          In this article
-        </p>
+{items.length > 0 && (
+  <div class="article-toc">
+    <nav class="toc-desktop" aria-labelledby="article-toc-title">
+      <p id="article-toc-title" class="toc-label">
+        In this article
+      </p>
 
+      <ol role="list">
+        {items.map((item) => (
+          <li class:list={{ "toc-subitem": item.depth === 3 }}>
+            <a href={`#${item.slug}`}>{item.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <details class="toc-mobile">
+      <summary class="disclosure-summary">In this article</summary>
+
+      <nav aria-label="In this article">
         <ol role="list">
           {items.map((item) => (
             <li class:list={{ "toc-subitem": item.depth === 3 }}>
@@ -25,23 +37,9 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
           ))}
         </ol>
       </nav>
-
-      <details class="toc-mobile">
-        <summary>In this article</summary>
-
-        <nav aria-label="In this article">
-          <ol role="list">
-            {items.map((item) => (
-              <li class:list={{ "toc-subitem": item.depth === 3 }}>
-                <a href={`#${item.slug}`}>{item.text}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      </details>
-    </div>
-  )
-}
+    </details>
+  </div>
+)}
 
 <style>
   .article-toc {
@@ -95,8 +93,7 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
     color: var(--color-blue);
   }
 
-  a:focus-visible,
-  .toc-mobile summary:focus-visible {
+  a:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus);
     outline-offset: var(--focus-ring-offset);
   }
@@ -108,7 +105,9 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
   }
 
   .toc-mobile summary {
-    cursor: pointer;
+    --chevron-offset: calc((var(--fs-eyebrow) * 1.4 - 0.5rem) / 2);
+
+    min-height: 0;
   }
 
   .toc-mobile nav {

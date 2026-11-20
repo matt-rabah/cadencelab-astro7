@@ -113,8 +113,8 @@
   --radius-inner: max(2px, calc(var(--radius-lg) - 0.25rem));
 
   /* Layout Containers & Generous Executive Whitespace */
-  --page-gutter: clamp(1.5rem, 5vw, 4.5rem);
-  --container-page: 84rem;
+  --page-gutter: clamp(1.25rem, 4vw, 2.5rem); /* 40px at desktop */
+  --container-page: 80rem; /* 1280px content width */
   --container-wide: 92rem;
   --container-header: 56rem;
   --container-copy: 68ch;
@@ -132,12 +132,8 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  --section-space: clamp(
-    5rem,
-    12vw,
-    10rem
-  ); /* Generous Deloitte-style padding */
-  --section-space-compact: clamp(3rem, 7vw, 6rem);
+  --section-space: clamp(4rem, 8vw, 6rem); /* 64 to 96px between bands */
+  --section-space-compact: clamp(2.5rem, 5vw, 4rem);
 
   /* Touch Ergonomics & Accessibility */
   --control-min-size: 3rem; /* 48px Mobile Touch Standard */
@@ -344,7 +340,7 @@ b {
 
   .apca-subtext {
     color: var(--color-text-muted);
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     line-height: 1.6;
     font-weight: 500;
     text-align: left;
@@ -430,7 +426,7 @@ summary:focus-visible,
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 0.875rem 1.75rem;
+  padding: 0.875rem 1.5rem;
   border: 0;
   border-radius: var(--radius-sm);
   font-family: var(--ff-sans);
@@ -873,8 +869,8 @@ select:focus-visible {
 
   <ul class="disclosure-list" role="list">
     <li><details class="disclosure" name="group">
-      <summary><span class="disclosure-title">Title</span>
-        <span class="disclosure-icon" aria-hidden="true"></span></summary>
+      <summary class="disclosure-summary">
+        <span class="disclosure-title">Title</span></summary>
       <div class="disclosure-body">…</div>
     </details></li>
   </ul>
@@ -891,75 +887,81 @@ select:focus-visible {
 }
 
 .disclosure > summary {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 1rem;
-  min-height: var(--control-min-size, 2.75rem);
   padding-block: 1.125rem;
   color: var(--color-text);
-  cursor: pointer;
-  list-style: none;
-}
-
-.disclosure > summary::-webkit-details-marker {
-  display: none;
 }
 
 /* Two classes deep so a component's bare h3/p rule (one class plus the
    scoping attribute) can't override the title or body colour, e.g. inside a
    band where --color-ink is the band's own background. */
 .disclosure .disclosure-title {
-  position: relative;
   margin: 0;
-  color: var(--color-text);
+  color: inherit;
   font-size: var(--fs-h4);
   font-weight: var(--fw-medium);
-  line-height: 1.35;
+  line-height: var(--lh-h4);
   text-wrap: balance;
 }
 
-/* The logo's dot marks the open row: the point under attention. */
-.disclosure[open] .disclosure-title::before {
-  position: absolute;
-  top: 0.55em;
-  left: -1.125rem;
+/*
+  The one expand/collapse control (SLDS 2 accordion pattern): a chevron on
+  the left that points right when closed and down when open. The title turns
+  action blue on hover and is underlined on keyboard focus. Every <details>
+  that expands content on the site uses `.disclosure-summary`, so FAQs,
+  section disclosures and row lists all look and behave the same.
+  --chevron-offset aligns the chevron with the first line of the title.
+*/
+.disclosure-summary {
+  --chevron-offset: calc((var(--fs-h4) * var(--lh-h4) - 0.5rem) / 2);
+
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  align-items: start;
+  column-gap: 0.875rem;
+  min-height: var(--control-min-size, 3rem);
+  cursor: pointer;
+  list-style: none;
+}
+
+.disclosure-summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure-summary::before {
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 50%;
-  background: var(--color-yellow);
-  box-shadow: var(--shadow-hairline);
+  margin-top: var(--chevron-offset);
+  margin-inline-start: 0.125rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   content: "";
-}
-
-.disclosure-icon {
-  position: relative;
-  width: 1.75rem;
-  height: 1.75rem;
-  flex: 0 0 auto;
-  border: var(--border-width) solid var(--color-border-strong);
-  border-radius: var(--radius-sm);
-}
-
-.disclosure-icon::before,
-.disclosure-icon::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0.75rem;
-  height: 1.5px;
-  background: var(--color-text);
-  content: "";
-  transform: translate(-50%, -50%);
+  transform: rotate(-45deg);
   transition: transform var(--transition-fast, 150ms ease);
 }
 
-.disclosure-icon::after {
-  transform: translate(-50%, -50%) rotate(90deg);
+details[open] > .disclosure-summary::before {
+  transform: rotate(45deg);
 }
 
-.disclosure[open] .disclosure-icon::after {
-  transform: translate(-50%, -50%) rotate(0deg);
+.disclosure-summary > * {
+  grid-column: 2;
+}
+
+.disclosure-summary:focus-visible {
+  outline: var(--focus-ring-width, 3px) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.disclosure-summary:focus-visible > :first-child {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media (hover: hover) {
+  .disclosure-summary:hover,
+  .disclosure-summary:hover > :first-child {
+    color: var(--color-blue);
+  }
 }
 
 .disclosure .disclosure-body,
@@ -969,10 +971,10 @@ select:focus-visible {
 
 .disclosure-body {
   max-width: 64ch;
-  padding: 0 0 1.5rem;
+  padding: 0 0 1.5rem calc(1rem + 0.875rem);
   color: var(--color-text-muted);
   font-size: var(--fs-body);
-  line-height: 1.65;
+  line-height: var(--lh-body);
   text-wrap: pretty;
 }
 
@@ -984,32 +986,9 @@ select:focus-visible {
   margin-bottom: 0;
 }
 
-.disclosure > summary:focus-visible {
-  outline: var(--focus-ring-width, 3px) solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-@media (hover: hover) {
-  .disclosure > summary:hover .disclosure-icon {
-    border-color: var(--color-text);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .disclosure-icon::before,
-  .disclosure-icon::after {
+  .disclosure-summary::before {
     transition: none;
-  }
-}
-
-@media (forced-colors: active) {
-  .disclosure-icon {
-    border-color: CanvasText;
-  }
-
-  .disclosure-icon::before,
-  .disclosure-icon::after {
-    background: CanvasText;
   }
 }
 

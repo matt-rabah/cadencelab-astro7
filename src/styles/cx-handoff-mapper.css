@@ -39,7 +39,7 @@
   list-style: none;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
 }
 
 .handoff-page .breadcrumb li:not(:last-child)::after {
@@ -308,7 +308,7 @@
   margin: 0;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0;
 }
@@ -508,7 +508,7 @@
   margin: 0;
   color: var(--color-text-muted);
   font-family: var(--ff-sans);
-  font-size: 1.075rem;
+  font-size: 1rem;
   line-height: 1.65;
 }
 
@@ -536,7 +536,7 @@
 
 .handoff-page .summary-metrics dt {
   color: var(--color-text-muted);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 
 .handoff-page .summary-metrics dd {

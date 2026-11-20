@@ -339,12 +339,11 @@ const {
           />
         ) : (
           <ul class="disclosure-list" role="list">
-            {evidence.items.map((item) => (
+            {evidence.items.map((item, index) => (
               <li>
-                <details class="disclosure" name="evidence">
-                  <summary>
+                <details class="disclosure" name="evidence" open={index === 0}>
+                  <summary class="disclosure-summary">
                     <h3 class="disclosure-title">{item.title}</h3>
-                    <span class="disclosure-icon" aria-hidden="true" />
                   </summary>
                   <div class="disclosure-body">
                     <p>{item.description}</p>
@@ -361,9 +360,9 @@ const {
         </div>
         {evidence.supportingDetails && (
           <div class="supporting-details">
-            {evidence.supportingDetails.map((item) => (
-              <details>
-                <summary>{item.title}</summary>
+            {evidence.supportingDetails.map((item, index) => (
+              <details name="supporting-detail" open={index === 0}>
+                <summary class="disclosure-summary">{item.title}</summary>
                 <p>{item.description}</p>
               </details>
             ))}
@@ -388,12 +387,11 @@ const {
             </div>
 
             <ul class="disclosure-list" role="list">
-              {failures.items.map((item) => (
+              {failures.items.map((item, index) => (
                 <li>
-                  <details class="disclosure" name="failure">
-                    <summary>
+                  <details class="disclosure" name="failure" open={index === 0}>
+                    <summary class="disclosure-summary">
                       <h3 class="disclosure-title">{item.title}</h3>
-                      <span class="disclosure-icon" aria-hidden="true" />
                     </summary>
                     <div class="disclosure-body">
                       <p>{item.description}</p>
@@ -422,12 +420,11 @@ const {
             </div>
 
             <ul class="disclosure-list" role="list">
-              {outputs.items.map((item) => (
+              {outputs.items.map((item, index) => (
                 <li>
-                  <details class="disclosure" name="output">
-                    <summary>
+                  <details class="disclosure" name="output" open={index === 0}>
+                    <summary class="disclosure-summary">
                       <h3 class="disclosure-title">{item.title}</h3>
-                      <span class="disclosure-icon" aria-hidden="true" />
                     </summary>
                     <div class="disclosure-body">
                       <p>{item.description}</p>
@@ -530,19 +527,17 @@ const {
     border-top: 1px solid var(--color-border);
   }
   .supporting-details summary {
+    --chevron-offset: calc((var(--fs-body) * var(--lh-ui) - 0.5rem) / 2);
+
     padding-block: 1.25rem;
-    cursor: pointer;
     font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
   }
   .supporting-details p {
     max-width: var(--measure-ui);
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.5rem calc(1rem + 0.875rem);
     line-height: var(--lh-ui);
     color: var(--color-text-muted);
-  }
-  .supporting-details summary:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus);
-    outline-offset: var(--focus-ring-offset);
   }
 
   .structured-page {

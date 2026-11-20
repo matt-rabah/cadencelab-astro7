@@ -244,7 +244,9 @@ if (turnstileSiteKey) {
         </p>
         <a href="#fit-check-form-title">Start your FitCheck™ ↓</a>
         <details>
-          <summary>What goes into your decision brief?</summary>
+          <summary class="disclosure-summary">
+            What goes into your decision brief?
+          </summary>
           <dl>
             <div>
               <dt>Problem clarity</dt>
@@ -279,7 +281,9 @@ if (turnstileSiteKey) {
           </p>
         </details>
         <details>
-          <summary>What might your result recommend?</summary>
+          <summary class="disclosure-summary">
+            What might your result recommend?
+          </summary>
           <dl>
             <div>
               <dt>Clarify first</dt>
@@ -1519,10 +1523,15 @@ if (turnstileSiteKey) {
     padding-block: 1rem;
   }
   .decision-overview summary {
-    cursor: pointer;
+    --chevron-offset: calc((var(--fs-body) * var(--lh-ui) - 0.5rem) / 2);
+
+    min-height: 0;
     font-weight: var(--fw-medium);
+    line-height: var(--lh-ui);
   }
-  .decision-overview summary:focus-visible,
+  .decision-overview details > :not(summary) {
+    margin-inline-start: calc(1rem + 0.875rem);
+  }
   .decision-overview a:focus-visible {
     outline: 2px solid var(--color-blue);
     outline-offset: 4px;
@@ -1817,7 +1826,7 @@ if (turnstileSiteKey) {
   .group-label {
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: var(--fw-medium);
     line-height: 1.45;
     letter-spacing: 0;
@@ -1979,7 +1988,7 @@ if (turnstileSiteKey) {
 
   .radio-option span {
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: var(--fw-regular);
     line-height: 1.5;
     letter-spacing: 0;

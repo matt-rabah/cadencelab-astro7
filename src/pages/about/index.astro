@@ -403,17 +403,20 @@ const engagementRequires = [
         </div>
 
         <ol class="disclosure-list view-list" role="list">
-          {pointsOfView.map((item) => (
+          {pointsOfView.map((item, index) => (
             <li>
-              <details class="disclosure" name="point-of-view">
-                <summary>
+              <details
+                class="disclosure"
+                name="point-of-view"
+                open={index === 0}
+              >
+                <summary class="disclosure-summary">
                   <h3 class="disclosure-title">
                     <span class="seq-number row-number" aria-hidden="true">
                       {item.number}
                     </span>
                     {item.title}
                   </h3>
-                  <span class="disclosure-icon" aria-hidden="true" />
                 </summary>
                 <div class="disclosure-body">
                   <p>{item.description}</p>
@@ -444,17 +447,20 @@ const engagementRequires = [
         </div>
 
         <ol class="disclosure-list principle-list" role="list">
-          {workingPrinciples.map((principle) => (
+          {workingPrinciples.map((principle, index) => (
             <li>
-              <details class="disclosure" name="working-principle">
-                <summary>
+              <details
+                class="disclosure"
+                name="working-principle"
+                open={index === 0}
+              >
+                <summary class="disclosure-summary">
                   <h3 class="disclosure-title">
                     <span class="seq-number row-number" aria-hidden="true">
                       {principle.number}
                     </span>
                     {principle.title}
                   </h3>
-                  <span class="disclosure-icon" aria-hidden="true" />
                 </summary>
                 <div class="disclosure-body">
                   <p>{principle.description}</p>
@@ -1048,7 +1054,7 @@ const engagementRequires = [
 
   .view-list .disclosure-body,
   .principle-list .disclosure-body {
-    padding-inline-start: 2.5rem;
+    padding-inline-start: calc(1rem + 0.875rem + 2.5rem);
   }
 
   .system-view {
@@ -1357,5 +1363,23 @@ const engagementRequires = [
     .testimonial {
       border-top-color: CanvasText;
     }
+  }
+
+  .view-list .disclosure-title {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .view-list .disclosure-title > .row-number {
+    flex: 0 0 2.5rem;
+  }
+
+  .principle-list .disclosure-title {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .principle-list .disclosure-title > .row-number {
+    flex: 0 0 2.5rem;
   }
 </style>
