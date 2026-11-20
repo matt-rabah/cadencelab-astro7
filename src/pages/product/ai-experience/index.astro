@@ -12,7 +12,7 @@ const page = {
     breadcrumb: "AI Experience",
     eyebrow: "Product · AI Experience",
     title: "A confident answer isn’t the same as a trustworthy experience.",
-    lead: "An AI assistant gives a polished answer based on an old policy. The customer acts on it, reaches a human, and has to explain everything again. The output looked good. The experience failed. And Medallia’s 2026 research found only 7% of consumers forgive AI more than they forgive a person. AI Experience designs what people should expect, what the system can do, where human judgment belongs, and how the organization recovers when AI gets it wrong.",
+    lead: "An AI assistant gives a polished answer based on an old policy. The customer acts on it, reaches a human, and has to explain everything again. The output looked good. The experience failed. And Medallia’s 2026 research found only 7% of consumers forgive AI more than they forgive a person. AI Experience designs what people should expect, what the AI can do, where a person needs to decide, and how you put things right when the AI gets it wrong.",
     primaryCta: {
       label: "Review AI Service Readiness",
       href: "/services/ai-service-readiness-review/",
@@ -23,7 +23,7 @@ const page = {
     },
     trigger: {
       introduction:
-        "An AI use case can answer a question or complete a task, but the organization hasn’t resolved what people should expect, which evidence they can trust, who remains accountable, or what happens when the result is wrong.",
+        "Your AI tool can answer a question or finish a task. But nobody has decided what people should expect, which answers they can trust, who’s accountable, or what happens when it’s wrong.",
       items: [
         {
           label: "Visible symptom",
@@ -31,30 +31,31 @@ const page = {
         },
         {
           label: "Experience",
-          value: "Expect, understand, control, act, recover",
+          value:
+            "Know what to expect, understand it, stay in control, act, recover from mistakes",
         },
         {
           label: "Decision",
-          value: "What role AI should play in the relationship",
+          value: "What job AI should do for your customers",
         },
       ],
     },
   },
   signals: {
     eyebrow: "Where it breaks",
-    title: "AI friction starts when people can’t judge the system.",
+    title: "Problems start when people can’t judge what the AI is doing.",
     introduction:
-      "People need more than a fast answer. They need to understand why AI is involved, what it knows, what it can do, and where accountable human help begins.",
+      "People need more than a fast answer. They need to know why AI is involved, what it knows, what it can do, and where they can reach a person who’ll take responsibility.",
     items: [
       {
         title: "People can’t tell when AI is involved",
         description:
-          "Generated responses, recommendations, summaries, routing, or automation shape the interaction without making the system’s role clear.",
+          "AI writes the answers, makes suggestions, or decides where requests go, but nobody tells the customer.",
       },
       {
         title: "The answer sounds more certain than the evidence",
         description:
-          "Fluent language hides old sources, missing context, conflicting records, inference, or uncertainty that could change the decision.",
+          "Smooth, confident wording hides out-of-date sources, missing information, records that disagree, or guesses that could change the decision.",
       },
       {
         title: "Personalization feels intrusive",
@@ -64,7 +65,7 @@ const page = {
       {
         title: "AI stands between the customer and real help",
         description:
-          "People must repeat themselves, prove the system failed, or navigate another loop before reaching someone who can take responsibility.",
+          "People have to repeat themselves, prove the AI failed, or go around in circles before they reach someone who can take responsibility.",
       },
       {
         title: "Employees clean up the mistakes in private",
@@ -130,15 +131,15 @@ const page = {
   },
   path: {
     eyebrow: "How the experience moves",
-    title: "Follow the person from first expectation through recovery.",
+    title: "Follow the person from what they expect to how mistakes get fixed.",
     introduction:
-      "Test the complete situation, not just the AI response. The experience includes what happens before, during, and after the model produces an output.",
+      "Test the whole situation, not just the AI’s answer. The experience includes what happens before, during, and after the AI responds.",
     items: [
       {
         phase: "Expect",
         question: "Does the person know what AI will do?",
         evidence:
-          "Need, channel, prior relationship, disclosure, AI role, expected benefit, alternatives, urgency, accessibility, and known limits.",
+          "What they need, whether they know AI is involved, what it will do for them, other ways to get help, and its known limits.",
       },
       {
         phase: "Inform",
@@ -150,7 +151,7 @@ const page = {
         phase: "Interact",
         question: "Can the person make sense of the result?",
         evidence:
-          "Response, choices, evidence, citations, uncertainty, correction, confirmation, refusal, accessibility, language, and interface behavior.",
+          "The answer, the options, where the information came from, how sure the AI is, and how to correct it or confirm it.",
       },
       {
         phase: "Act",
@@ -162,20 +163,20 @@ const page = {
         phase: "Recover",
         question: "What happens when AI is wrong?",
         evidence:
-          "Escalation, context transfer, complaint, correction, remediation, human support, incident response, customer outcome, and product learning.",
+          "Passing the case to a person with the full history, complaints, corrections, making it right for the customer, and learning from what went wrong.",
       },
     ],
   },
   evidence: {
     eyebrow: "What to examine",
-    title: "Measure what people experience and what the system causes.",
+    title: "Measure what people experience and what the AI causes.",
     introduction:
-      "A strong model score can’t prove the experience works. Evidence should connect the interaction to the data, workflow, human decisions, and real outcomes around it.",
+      "A good accuracy score can’t prove the experience works. I connect each conversation to the data, the process, the people’s decisions, and the real results around it.",
     items: [
       {
         title: "Human needs and expectations",
         description:
-          "Research, goals, context, mental models, trust, accessibility, language, prior experience, vulnerability, and the cost of misunderstanding.",
+          "What people are trying to do, what they expect, how much they trust it, their language and accessibility needs, and what a misunderstanding costs them.",
       },
       {
         title: "Interaction behavior",
@@ -183,9 +184,9 @@ const page = {
           "Task completion, comprehension, prompts, choices, corrections, abandonment, repeated effort, escalation, feedback, and workarounds.",
       },
       {
-        title: "Sources and model behavior",
+        title: "Sources and how the AI behaves",
         description:
-          "Data, retrieval, provenance, prompts, models, tools, variation, accuracy, groundedness, latency, refusals, limits, and prohibited outputs.",
+          "The data it uses and where it comes from, the instructions it gets, how accurate and consistent it is, how fast it responds, and what it must never say.",
       },
       {
         title: "Human judgment and oversight",
@@ -200,13 +201,13 @@ const page = {
       {
         title: "Customer and operating outcomes",
         description:
-          "Task success, effort, trust, access, fairness, service quality, resolution, capacity, rework, complaints, retention, risk, and unintended harm.",
+          "Whether people get the task done, how hard it was, trust, fairness, whether problems get solved, complaints, rework, risk, and harm nobody intended.",
       },
     ],
     note: {
       label: "Trust should match the evidence",
       description:
-        "The goal isn’t to make AI feel human or earn blind trust. People should have enough information and control to judge the system’s role, limits, evidence, and the accountable organization behind it.",
+        "The goal isn’t to make AI feel human or to win blind trust. People should know enough, and have enough control, to judge what the AI is doing, its limits, and who’s accountable for it.",
     },
   },
   failures: {
@@ -251,64 +252,65 @@ const page = {
     eyebrow: "What teams receive",
     title: "Leave with an AI experience teams can own.",
     introduction:
-      "The outputs define the intended human relationship, the complete service path, the required controls, and how the organization will evaluate real use.",
+      "What you get defines the AI’s job for customers, the full service path, the controls it needs, and how you’ll check it in real use.",
     items: [
       {
-        title: "AI role and experience rules",
+        title: "The AI’s job and its rules",
         description:
-          "The human need, intended benefit, AI role, exclusions, interaction rules, decision boundaries, accountable owner, and implications for delivery.",
+          "The need it serves, the benefit, what the AI does and doesn’t do, the rules it follows, which decisions stay with people, and who owns it.",
       },
       {
-        title: "End-to-end AI service blueprint",
+        title: "Map of the whole AI service",
         description:
-          "The visible journey connected to data, models, tools, workflows, employees, policies, handoffs, exceptions, recovery, and operating dependencies.",
+          "What customers see, connected to the data, AI tools, processes, staff, policies, handoffs to people, and how mistakes get fixed.",
       },
       {
-        title: "Interaction and handoff requirements",
+        title: "Requirements for conversations and handoffs",
         description:
-          "Disclosure, context, evidence, uncertainty, controls, confirmation, accessibility, escalation, human support, continuity, and recovery behavior.",
+          "Telling people it’s AI, showing sources and how sure it is, letting people confirm or correct it, accessibility, and passing to a person without starting over.",
       },
       {
-        title: "Evaluation and governance plan",
+        title: "Plan to test and oversee it",
         description:
-          "Representative cases, quality criteria, experience measures, outcomes, review behavior, monitoring, complaints, incident triggers, owners, and review cadence.",
+          "Real example cases, what good looks like, the measures, ongoing monitoring, complaints, what counts as an incident, owners, and how often you’ll review it.",
       },
     ],
   },
   fit: {
     eyebrow: "When it fits",
-    title: "Use AI Experience when AI changes a meaningful interaction.",
+    title:
+      "Use AI Experience when AI changes an important conversation or task.",
     introduction:
-      "This work fits when AI shapes how a customer, employee, patient, member, citizen, or partner gets information, makes a decision, completes a task, or receives support. It isn’t the right fit for a demo or an automation target that ignores accountability and recovery.",
+      "This fits when AI shapes how a customer, employee, patient, member, or partner gets information, makes a decision, finishes a task, or gets help. It isn’t the right fit for a demo, or an automation goal that ignores who’s accountable and how mistakes get fixed.",
     items: [
-      "A bounded AI use case changes a meaningful task, decision, or service interaction.",
-      "The experience depends on identifiable data, sources, models, tools, workflows, and human roles.",
-      "Trust, comprehension, accessibility, fairness, privacy, or escalation affects the outcome.",
+      "A specific AI idea changes an important task, decision, or service conversation.",
+      "You can name the data, sources, AI tools, processes, and people it depends on.",
+      "Trust, understanding, accessibility, fairness, privacy, or reaching a person affects the outcome.",
       "Product, design, operations, technical, risk, data, and frontline owners can decide together.",
-      "The organization will narrow or stop the experience when the evidence doesn’t support responsible use.",
+      "You’re willing to shrink or stop it when the evidence says it isn’t safe or useful.",
     ],
   },
   diagnostics: {
     eyebrow: "Related paths",
-    title: "Choose the next step based on what is still unresolved.",
+    title: "Choose the next step by what’s still unresolved.",
     items: [
       {
         title: "AI Service Readiness Review",
         href: "/services/ai-service-readiness-review/",
         useWhen:
-          "A use case needs a readiness decision across workflow, data, human oversight, safeguards, adoption, measurement, and implementation conditions.",
+          "You need a clear answer on whether an AI idea is ready: the process, data, human checks, safeguards, adoption, and measures.",
       },
       {
         title: "Experience Foundations",
         href: "/product/experience-foundations/",
         useWhen:
-          "Teams need shared customer, journey, ownership, service, and measurement decisions before defining AI’s role in the broader experience.",
+          "Teams need to agree on customers, the experience, ownership, and measures before deciding AI’s job.",
       },
       {
         title: "Agent Copilots",
         href: "/ai-tooling/co-pilot/",
         useWhen:
-          "The experience supports an employee or specialist with context, recommendations, bounded actions, and accountable human judgment.",
+          "The AI helps an employee with information, suggestions, and limited actions, while the person stays responsible for the decision.",
       },
     ],
   },

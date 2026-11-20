@@ -9,49 +9,49 @@ import "../../../styles/solution-depth.css";
 const traceStages = [
   {
     number: "01",
-    label: "Customer signal",
+    label: "Customer event",
     question: "What happened, and where did it enter?",
     description:
-      "Identify the request, risk, or service event and the channel, form, integration, or person that first recorded it.",
+      "Identify the request, risk, or service event, and the channel, form, connected system, or person that first recorded it.",
   },
   {
     number: "02",
     label: "Record behavior",
     question: "How did Salesforce represent the work?",
     description:
-      "Trace the record, fields, history, related records, and context available to the people expected to act.",
+      "Trace the record, its fields and history, related records, and the information available to the people expected to act.",
   },
   {
     number: "03",
-    label: "Routing and action",
+    label: "Assignment and action",
     question: "Who or what decided what happened next?",
     description:
-      "Follow assignments, queues, automation, approvals, notifications, ownership changes, and manual decisions.",
+      "Follow assignments, queues, automation, approvals, alerts, changes of owner, and decisions people made by hand.",
   },
   {
     number: "04",
-    label: "Handoff and exception",
-    question: "Where did context or ownership weaken?",
+    label: "Handoffs and exceptions",
+    question: "Where did information or ownership get lost?",
     description:
-      "Examine transfers, exceptions, stalled records, workarounds, and recovery paths.",
+      "Look at transfers, exceptions, stuck records, workarounds, and how problems got fixed.",
   },
   {
     number: "05",
     label: "Outcome and evidence",
     question: "Can you tell whether the work succeeded?",
     description:
-      "Connect the customer and operating outcome to the records, measures, and review process.",
+      "Connect the result for the customer and the business to the records, measures, and reviews.",
   },
 ];
 
 const evidenceSources = [
   {
-    title: "Objects, records, and fields",
+    title: "Records and fields",
     description:
-      "How Salesforce is meant to hold customer, account, case, opportunity, task, and lifecycle context.",
+      "How Salesforce is meant to store information about customers, accounts, cases, deals, tasks, and customer stages.",
   },
   {
-    title: "Flows, rules, and automation",
+    title: "Rules and automation",
     description:
       "The logic that assigns work, changes status, creates tasks, notifies teams, and moves records.",
   },
@@ -61,19 +61,19 @@ const evidenceSources = [
       "Who receives, decides, acts, approves, and recovers the work.",
   },
   {
-    title: "Reports and operating measures",
+    title: "Reports and measures",
     description:
       "The dashboards, definitions, filters, and reviews leaders use to read activity and outcomes.",
   },
   {
-    title: "Integrations and system boundaries",
+    title: "Connections to other systems",
     description:
-      "The handoffs between Salesforce and service, marketing, billing, product, data, or knowledge systems.",
+      "The handoffs between Salesforce and your service, marketing, billing, product, data, or help-content systems.",
   },
   {
     title: "Frontline behavior and workarounds",
     description:
-      "The spreadsheets, messages, duplicate entry, reminders, and informal coordination that complete the real workflow.",
+      "The spreadsheets, messages, double data entry, reminders, and informal coordination that get the real work done.",
   },
 ];
 
@@ -91,7 +91,7 @@ const failureModes = [
   {
     cue: "Every team has a different version of the workflow",
     consequence:
-      "Salesforce shows the formal process while teams rely on local rules and tools to handle real cases.",
+      "Salesforce shows the official process, while teams rely on their own rules and tools to handle real cases.",
   },
   {
     cue: "Reporting explains activity after the useful window",
@@ -103,13 +103,13 @@ const failureModes = [
 const traceOutputs = [
   {
     number: "01",
-    title: "Observed workflow trace",
+    title: "Trace of how the work really moved",
     description:
-      "A shared view of the event as it moves through records, rules, roles, systems, decisions, and exceptions.",
+      "One shared view of the event as it moves through records, rules, roles, systems, decisions, and exceptions.",
   },
   {
     number: "02",
-    title: "Signal and context gaps",
+    title: "Missing information",
     description:
       "The information that’s missing, late, unreliable, duplicated, or unavailable when a decision is made.",
   },
@@ -123,7 +123,7 @@ const traceOutputs = [
     number: "04",
     title: "Repair sequence",
     description:
-      "A practical order for workflow, ownership, data, reporting, adoption, and configuration changes.",
+      "A practical order for changes to the process, ownership, data, reports, training, and setup.",
   },
 ];
 
@@ -131,8 +131,8 @@ const usefulWhen = [
   "Teams don’t trust Salesforce to tell them what requires attention.",
   "Customer work crosses sales, success, service, operations, or technical teams.",
   "Important cases depend on spreadsheets, messages, or individual memory.",
-  "Automation exists, but exceptions and handoffs still require manual recovery.",
-  "Leaders see activity reports without a reliable view of customer or operating outcomes.",
+  "Automation exists, but exceptions and handoffs still have to be fixed by hand.",
+  "Leaders see activity reports, but no reliable view of results for customers or the business.",
 ];
 ---
 
@@ -163,10 +163,10 @@ const usefulWhen = [
             Find where Salesforce stops helping the work.
           </h1>
           <p class="hero-lead">
-            Start with a real customer event and follow it through records,
-            rules, owners, integrations, and decisions. The trace shows where
-            Salesforce supports the work and where context or accountability
-            gets lost.
+            I take one real customer event and follow it through Salesforce: the
+            records, the automatic rules, the owners, the connections to other
+            systems, and the decisions. That shows where Salesforce helps the
+            work and where information or responsibility gets lost.
           </p>
 
           <div class="hero-actions" aria-label="Salesforce tracing actions">
@@ -188,18 +188,21 @@ const usefulWhen = [
             Recognizable trigger
           </p>
           <p>
-            Salesforce is full of records and dashboards, but people still
-            rebuild the customer story through messages, spreadsheets, meetings,
+            Salesforce is full of records and dashboards, but people still piece
+            together the customer’s story from messages, spreadsheets, meetings,
             and memory.
           </p>
           <dl>
             <div>
               <dt>Visible symptom</dt>
-              <dd>CRM distrust and manual workarounds</dd>
+              <dd>Nobody trusts the CRM, so people work around it by hand</dd>
             </div>
             <div>
               <dt>Trace</dt>
-              <dd>Signal, record, rule, owner, action, outcome</dd>
+              <dd>
+                The event, the record, the rules, the owner, the action, the
+                result
+              </dd>
             </div>
             <div>
               <dt>Decision</dt>
@@ -228,20 +231,22 @@ const usefulWhen = [
         <div>
           <p class="eyebrow">What tracing does</p>
           <h2 id="tracing-purpose-title">
-            Start with a real event, not the configuration.
+            Start with a real event, not the setup.
           </h2>
         </div>
 
         <div class="purpose-copy">
           <p>
-            Choose an escalation, renewal risk, onboarding delay, service
-            exception, lead handoff, or account change. Then follow what people
-            and systems did from entry to outcome.
+            Pick an escalation, a renewal at risk, a slow customer start, a
+            service exception, a lead passed from marketing to sales, or an
+            account change. Then follow what people and systems did from start
+            to finish.
           </p>
           <p>
-            Configuration matters, but it isn't the starting assumption. A
-            technically correct flow can still hide context, create duplicate
-            work, support the wrong decision, or leave nobody accountable.
+            How Salesforce is set up matters, but it isn’t where I start. An
+            automation can be technically correct and still hide information,
+            create duplicate work, support the wrong decision, or leave nobody
+            responsible.
           </p>
         </div>
       </div>
@@ -252,8 +257,8 @@ const usefulWhen = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">How the trace works</span>
           <span class="solution-depth-description">
-            Follow one customer signal through records, routing, handoffs, and
-            outcomes.
+            Follow one customer event through records, assignments, handoffs,
+            and results.
           </span>
         </summary>
         <section
@@ -266,11 +271,11 @@ const usefulWhen = [
             <div class="section-intro section-intro-inverse">
               <p class="eyebrow eyebrow-inverse">Trace stages</p>
               <h2 id="trace-stages-title">
-                Follow the signal from entry to outcome.
+                Follow the event from start to finish.
               </h2>
               <p>
                 At each stage, ask whether the next person or system has enough
-                context, authority, and evidence to act.
+                information, authority, and evidence to act.
               </p>
             </div>
 
@@ -296,8 +301,8 @@ const usefulWhen = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">What evidence matters</span>
           <span class="solution-depth-description">
-            Compare Salesforce configuration with real records, team behavior,
-            and operating outcomes.
+            Compare how Salesforce is set up with real records, what teams do,
+            and the results.
           </span>
         </summary>
         <section
@@ -310,13 +315,13 @@ const usefulWhen = [
               <div>
                 <p class="eyebrow">Evidence</p>
                 <h2 id="evidence-title">
-                  Compare the intended workflow with the real one.
+                  Compare the planned process with the real one.
                 </h2>
               </div>
               <p>
-                Combine Salesforce structure and automation with real records,
-                measures, system handoffs, and the experience of the people
-                doing the work.
+                Put Salesforce’s setup and automation next to real records,
+                measures, handoffs to other systems, and the experience of the
+                people doing the work.
               </p>
             </div>
 
@@ -332,9 +337,9 @@ const usefulWhen = [
             <div class="evidence-note">
               <p class="note-label">Evidence before certainty</p>
               <p>
-                Separate observed system behavior from team explanations and
-                working assumptions. State where missing records, configuration,
-                or outcome data limit confidence.
+                Keep what the system actually did separate from what teams think
+                happened. Say where missing records or data limit what you can
+                conclude.
               </p>
             </div>
           </div>
@@ -345,7 +350,7 @@ const usefulWhen = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">Where workflows fail</span>
           <span class="solution-depth-description">
-            See how complete records and correct automation can still hide
+            See how complete records and working automation can still hide
             broken work.
           </span>
         </summary>
@@ -359,11 +364,11 @@ const usefulWhen = [
             <div class="failure-intro">
               <p class="eyebrow eyebrow-inverse">Common failure modes</p>
               <h2 id="failure-modes-title">
-                A clean record can hide a broken workflow.
+                A clean record can hide a broken process.
               </h2>
               <p>
-                Salesforce can look orderly while the work around it remains
-                fragmented. These patterns show where to look more closely.
+                Salesforce can look tidy while the work around it is in pieces.
+                These patterns show where to look more closely.
               </p>
             </div>
 
@@ -390,8 +395,8 @@ const usefulWhen = [
           <p class="eyebrow">Outputs</p>
           <h2 id="outputs-title">Turn the trace into a repair plan.</h2>
           <p>
-            Make the current workflow clear enough for leaders to decide what
-            needs to change first.
+            Make today’s process clear enough for leaders to decide what to
+            change first.
           </p>
         </div>
 
@@ -416,9 +421,9 @@ const usefulWhen = [
             Use tracing when Salesforce records the work but doesn't guide it.
           </h2>
           <p>
-            This work fits problems that cross records, roles, automation,
-            integrations, and customer-facing teams. It isn't routine admin
-            support or a predetermined configuration project.
+            This fits problems that cross records, roles, automation, connected
+            systems, and customer-facing teams. It isn’t routine admin support
+            or a setup project that’s already been decided.
           </p>
 
           <a class="button button-primary" href="/fit-check/">
