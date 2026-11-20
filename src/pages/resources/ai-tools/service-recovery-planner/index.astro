@@ -29,8 +29,12 @@ import "../../../../styles/service-recovery-planner.css";
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
-              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/resources/ai-tools/">Free tools</a>
+              </li>
               <li aria-current="page">Service Recovery Planner</li>
             </ol>
           </nav>
@@ -39,8 +43,8 @@ import "../../../../styles/service-recovery-planner.css";
           <h1 id="tool-title">Give the customer a next step they can trust.</h1>
           <p class="hero-lead">
             Turn a customer failure into a clear response, owner, timeline,
-            recovery checklist, and follow-up plan, without pretending the tool
-            can authorize promises your team can’t keep.
+            recovery checklist, and follow-up plan. The tool can’t approve
+            promises for your team, and it won’t pretend to.
           </p>
           <a class="button button-primary" href="#recovery-form">
             Build a recovery plan
@@ -52,16 +56,30 @@ import "../../../../styles/service-recovery-planner.css";
           class="privacy-card"
           aria-labelledby="privacy-card-title"
         >
-          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p id="privacy-card-title" class="note-label">
+            Private by default
+          </p>
           <p>
             Your answers stay in this browser. Cadence Lab doesn’t receive,
             store, or analyze them.
           </p>
           <dl>
-            <div><dt>Cost</dt><dd>Free</dd></div>
-            <div><dt>Signup</dt><dd>None</dd></div>
-            <div><dt>Processing</dt><dd>On your device</dd></div>
-            <div><dt>Customer contact</dt><dd>None</dd></div>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free</dd>
+            </div>
+            <div>
+              <dt>Signup</dt>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Processing</dt>
+              <dd>On your device</dd>
+            </div>
+            <div>
+              <dt>Customer contact</dt>
+              <dd>None</dd>
+            </div>
           </dl>
         </aside>
       </div>
@@ -113,7 +131,9 @@ import "../../../../styles/service-recovery-planner.css";
           tooldescription="Plan operational recovery workflows for customer experience and service failures"
         >
           <fieldset>
-            <legend><span>01</span>Describe the failure</legend>
+            <legend>
+              <span>01</span>Describe the failure
+            </legend>
 
             <div class="field">
               <label for="plan-name">
@@ -147,7 +167,8 @@ import "../../../../styles/service-recovery-planner.css";
                 minlength="20"
                 maxlength="800"
                 aria-describedby="failure-hint privacy-hint"
-                required></textarea>
+                required
+              ></textarea>
               <p id="privacy-hint" class="privacy-hint">
                 Keep personal, confidential, regulated, and identifying
                 information out of this form.
@@ -167,7 +188,8 @@ import "../../../../styles/service-recovery-planner.css";
                 rows="3"
                 maxlength="400"
                 aria-describedby="affected-hint"
-                required></textarea>
+                required
+              ></textarea>
             </div>
 
             <fieldset class="choice-group">
@@ -185,28 +207,28 @@ import "../../../../styles/service-recovery-planner.css";
                   />
                   <span>
                     <strong>Inconvenience</strong>
-                    <small
-                      >Limited interruption that should be easy to correct.</small
-                    >
+                    <small>
+                      Limited interruption that should be easy to correct.
+                    </small>
                   </span>
                 </label>
                 <label>
                   <input type="radio" name="severity" value="material" />
                   <span>
                     <strong>Material</strong>
-                    <small
-                      >Lost access, delay, rework, or a missed commitment.</small
-                    >
+                    <small>
+                      Lost access, delay, rework, or a missed commitment.
+                    </small>
                   </span>
                 </label>
                 <label>
                   <input type="radio" name="severity" value="serious" />
                   <span>
                     <strong>Serious</strong>
-                    <small
-                      >Possible financial, safety, rights, regulatory, or
-                      reputational harm.</small
-                    >
+                    <small>
+                      Possible financial, safety, rights, regulatory, or
+                      reputational harm.
+                    </small>
                   </span>
                 </label>
               </div>
@@ -214,7 +236,9 @@ import "../../../../styles/service-recovery-planner.css";
           </fieldset>
 
           <fieldset>
-            <legend><span>02</span>Separate facts from unknowns</legend>
+            <legend>
+              <span>02</span>Separate facts from unknowns
+            </legend>
 
             <div class="field">
               <label for="confirmed">
@@ -229,7 +253,8 @@ import "../../../../styles/service-recovery-planner.css";
                 rows="4"
                 maxlength="700"
                 aria-describedby="confirmed-hint"
-                required></textarea>
+                required
+              ></textarea>
             </div>
 
             <div class="field">
@@ -244,7 +269,8 @@ import "../../../../styles/service-recovery-planner.css";
                 name="unknowns"
                 rows="3"
                 maxlength="600"
-                aria-describedby="unknowns-hint"></textarea>
+                aria-describedby="unknowns-hint"
+              ></textarea>
             </div>
 
             <div class="field">
@@ -262,12 +288,15 @@ import "../../../../styles/service-recovery-planner.css";
                 rows="3"
                 maxlength="500"
                 aria-describedby="customer-need-hint"
-                required></textarea>
+                required
+              ></textarea>
             </div>
           </fieldset>
 
           <fieldset>
-            <legend><span>03</span>Assign ownership and timing</legend>
+            <legend>
+              <span>03</span>Assign ownership and timing
+            </legend>
 
             <div class="field">
               <label for="recovery-owner">
@@ -314,7 +343,9 @@ import "../../../../styles/service-recovery-planner.css";
                     value="Within 1 hour"
                     required
                   />
-                  <span><strong>Within 1 hour</strong></span>
+                  <span>
+                    <strong>Within 1 hour</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -322,7 +353,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="response-time"
                     value="Same business day"
                   />
-                  <span><strong>Same business day</strong></span>
+                  <span>
+                    <strong>Same business day</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -330,7 +363,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="response-time"
                     value="Within 24 hours"
                   />
-                  <span><strong>Within 24 hours</strong></span>
+                  <span>
+                    <strong>Within 24 hours</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -338,7 +373,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="response-time"
                     value="Not yet confirmed"
                   />
-                  <span><strong>Not yet confirmed</strong></span>
+                  <span>
+                    <strong>Not yet confirmed</strong>
+                  </span>
                 </label>
               </div>
             </fieldset>
@@ -364,7 +401,9 @@ import "../../../../styles/service-recovery-planner.css";
           </fieldset>
 
           <fieldset>
-            <legend><span>04</span>Define the recovery boundary</legend>
+            <legend>
+              <span>04</span>Define the recovery boundary
+            </legend>
 
             <fieldset class="choice-group">
               <legend>
@@ -385,7 +424,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="remedies"
                     value="A clear explanation or status update"
                   />
-                  <span><strong>Explanation or status</strong></span>
+                  <span>
+                    <strong>Explanation or status</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -393,7 +434,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="remedies"
                     value="Correction or rework"
                   />
-                  <span><strong>Correction or rework</strong></span>
+                  <span>
+                    <strong>Correction or rework</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -401,7 +444,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="remedies"
                     value="Restored access or service"
                   />
-                  <span><strong>Restored access or service</strong></span>
+                  <span>
+                    <strong>Restored access or service</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -409,11 +454,15 @@ import "../../../../styles/service-recovery-planner.css";
                     name="remedies"
                     value="Refund or credit"
                   />
-                  <span><strong>Refund or credit</strong></span>
+                  <span>
+                    <strong>Refund or credit</strong>
+                  </span>
                 </label>
                 <label>
                   <input type="checkbox" name="remedies" value="Replacement" />
-                  <span><strong>Replacement</strong></span>
+                  <span>
+                    <strong>Replacement</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -421,7 +470,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="remedies"
                     value="Specialist or leadership escalation"
                   />
-                  <span><strong>Specialist escalation</strong></span>
+                  <span>
+                    <strong>Specialist escalation</strong>
+                  </span>
                 </label>
                 <label>
                   <input
@@ -430,7 +481,9 @@ import "../../../../styles/service-recovery-planner.css";
                     name="remedies"
                     value="No remedy is confirmed yet"
                   />
-                  <span><strong>None confirmed yet</strong></span>
+                  <span>
+                    <strong>None confirmed yet</strong>
+                  </span>
                 </label>
               </div>
             </fieldset>
@@ -450,7 +503,8 @@ import "../../../../styles/service-recovery-planner.css";
                 rows="4"
                 maxlength="700"
                 aria-describedby="constraints-hint"
-                required></textarea>
+                required
+              ></textarea>
             </div>
 
             <div class="field">
@@ -467,14 +521,15 @@ import "../../../../styles/service-recovery-planner.css";
                 name="closure-evidence"
                 rows="3"
                 maxlength="500"
-                aria-describedby="closure-evidence-hint"></textarea>
+                aria-describedby="closure-evidence-hint"
+              ></textarea>
             </div>
           </fieldset>
 
           <div class="form-footer">
             <p>
-              <strong>No customer is contacted.</strong> Review the output with the
-              people authorized to approve commitments before using it.
+              <strong>No customer is contacted.</strong> Review the output with
+              the people authorized to approve commitments before using it.
             </p>
             <button class="button button-primary" type="submit">
               Build recovery plan
@@ -535,19 +590,28 @@ import "../../../../styles/service-recovery-planner.css";
           class="feedback-status"
           role="status"
           aria-live="polite"
-        >
-        </p>
+        ></p>
 
         <article class="summary-sheet recovery-sheet">
           <header>
             <p class="summary-label">Situation</p>
             <h3>What the plan is responding to</h3>
             <dl class="recovery-facts">
-              <div><dt>Failure</dt><dd data-output="failure"></dd></div>
-              <div><dt>Affected group</dt><dd data-output="affected"></dd></div>
-              <div><dt>Impact</dt><dd data-output="severity"></dd></div>
               <div>
-                <dt>Customer need</dt><dd data-output="customer-need"></dd>
+                <dt>Failure</dt>
+                <dd data-output="failure"></dd>
+              </div>
+              <div>
+                <dt>Affected group</dt>
+                <dd data-output="affected"></dd>
+              </div>
+              <div>
+                <dt>Impact</dt>
+                <dd data-output="severity"></dd>
+              </div>
+              <div>
+                <dt>Customer need</dt>
+                <dd data-output="customer-need"></dd>
               </div>
             </dl>
           </header>
@@ -565,18 +629,21 @@ import "../../../../styles/service-recovery-planner.css";
             </h3>
             <dl class="recovery-facts">
               <div>
-                <dt>Recovery owner</dt><dd data-output="recovery-owner"></dd>
+                <dt>Recovery owner</dt>
+                <dd data-output="recovery-owner"></dd>
               </div>
               <div>
-                <dt>Communication owner</dt><dd
-                  data-output="communication-owner"
-                >
-                </dd>
+                <dt>Communication owner</dt>
+                <dd data-output="communication-owner"></dd>
               </div>
               <div>
-                <dt>First response</dt><dd data-output="response-time"></dd>
+                <dt>First response</dt>
+                <dd data-output="response-time"></dd>
               </div>
-              <div><dt>Next update</dt><dd data-output="follow-up"></dd></div>
+              <div>
+                <dt>Next update</dt>
+                <dd data-output="follow-up"></dd>
+              </div>
             </dl>
           </section>
 
@@ -639,11 +706,12 @@ import "../../../../styles/service-recovery-planner.css";
           <footer>
             <p class="summary-label">Method and limits</p>
             <p>
-              This plan uses only the information entered. It doesn’t verify
-              facts, assess law or policy, authorize compensation, determine
-              fault, contact a customer, or replace safety, security, privacy,
-              legal, regulatory, financial, or domain review. An authorized
-              owner must approve commitments and customer-facing language.
+              This plan uses only the information entered. It doesn’t check
+              facts, judge law or policy, approve compensation, decide who’s at
+              fault, or contact the customer. It also doesn’t replace a safety,
+              security, privacy, legal, regulatory, financial, or expert review.
+              An authorized owner must approve commitments and customer-facing
+              language.
             </p>
           </footer>
         </article>
@@ -664,24 +732,31 @@ import "../../../../styles/service-recovery-planner.css";
         </div>
         <ol>
           <li>
-            <span>01</span><p>
-              <strong>Truth</strong> What is confirmed, and what remains unknown?
+            <span>01</span>
+            <p>
+              <strong>Truth</strong> What is confirmed, and what remains
+              unknown?
             </p>
           </li>
           <li>
-            <span>02</span><p>
-              <strong>Ownership</strong> Who fixes the failure and keeps the customer
-              informed?
+            <span>02</span>
+            <p>
+              <strong>Ownership</strong> Who fixes the failure and keeps the
+              customer informed?
             </p>
           </li>
           <li>
-            <span>03</span><p>
-              <strong>Boundaries</strong> What may be offered, and what can’t be promised?
+            <span>03</span>
+            <p>
+              <strong>Boundaries</strong> What may be offered, and what can’t be
+              promised?
             </p>
           </li>
           <li>
-            <span>04</span><p>
-              <strong>Evidence</strong> What will show the recovery actually worked?
+            <span>04</span>
+            <p>
+              <strong>Evidence</strong> What will show the recovery actually
+              worked?
             </p>
           </li>
         </ol>

@@ -623,7 +623,7 @@ select:focus-visible {
 
   --color-surface-inverse: #f2f2f2;
 
-  --color-surface-anchor: #0e0e0e;
+  --color-surface-anchor: #181818; /* soft graphite, never pure black (eye strain) */
 
   --color-text: #f2f2f2;
 
@@ -695,7 +695,7 @@ select:focus-visible {
 
     --color-surface-inverse: #f2f2f2;
 
-    --color-surface-anchor: #0e0e0e;
+    --color-surface-anchor: #181818; /* soft graphite, never pure black (eye strain) */
 
     --color-text: #f2f2f2;
 

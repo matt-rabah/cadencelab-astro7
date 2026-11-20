@@ -12,7 +12,7 @@ const page = {
     breadcrumb: "PII scrubbing",
     eyebrow: "AI tooling · PII scrubbing",
     title: "Don't send personal data the task doesn't need.",
-    lead: "A personally identifiable information (PII) scrubbing control removes, masks, or replaces personal data before it crosses an AI boundary. The goal isn't to erase every detail. It's to keep the information the task needs and reduce the exposure it doesn't.",
+    lead: "Personally identifiable information (PII) is anything that can identify a person, like a name, email, or account number. PII scrubbing removes, hides, or replaces that information before it reaches an AI tool. The goal isn't to erase every detail. It's to keep the information the task needs and reduce the exposure it doesn't.",
     primaryCta: {
       label: "Review AI Service Readiness",
       href: "/services/ai-service-readiness-review/",
@@ -23,15 +23,15 @@ const page = {
     },
     trigger: {
       introduction:
-        "An AI workflow receives customer, employee, patient, financial, or account data that includes more identity than the task requires.",
+        "Your AI tool receives customer, employee, patient, financial, or account data that identifies people more than the task needs.",
       items: [
         {
           label: "Risk",
-          value: "Personal data crosses an unnecessary boundary",
+          value: "Personal data goes somewhere it doesn’t need to",
         },
         {
           label: "Control",
-          value: "Detect, reduce, transform, test, and trace",
+          value: "Find it, reduce it, change it, test it, track it",
         },
         {
           label: "Decision",
@@ -44,37 +44,37 @@ const page = {
     eyebrow: "Visible signals",
     title: "Personal data often travels farther than the work requires.",
     introduction:
-      "Risk grows when a narrow AI task receives a full record, conversation, or document instead of the few facts it needs.",
+      "Risk grows when a small AI task gets a whole record, conversation, or document instead of the few facts it needs.",
     items: [
       {
         title: "A narrow task receives the whole record",
         description:
-          "Names, contact details, notes, history, and attachments move together when the model needs only one fact.",
+          "Names, contact details, notes, history, and attachments all get sent when the AI needs only one fact.",
       },
       {
-        title: "Free text bypasses field rules",
+        title: "Notes and messages slip past the rules",
         description:
-          "People place sensitive details in notes, messages, documents, and prompts that structured controls never inspect.",
+          "People type sensitive details into notes, messages, documents, and AI questions that your data rules never check.",
       },
       {
-        title: "Redaction happens after processing",
+        title: "Data is hidden only after the AI has seen it",
         description:
-          "The visible answer is clean, but personal data remains in prompts, retrieved context, logs, traces, or tool calls.",
+          "The answer looks clean, but personal data is still in the AI’s input, the information it pulled in, system logs, or tool records.",
       },
       {
-        title: "One masking rule covers every use case",
+        title: "One hiding rule covers every use",
         description:
-          "A global rule removes useful context, misses identity in context, and creates false confidence.",
+          "One rule for everything removes useful information, misses details that identify people in context, and gives false confidence.",
       },
       {
         title: "No one knows where originals remain",
         description:
-          "Teams can't explain which systems, vendors, logs, or people can still access the source value.",
+          "Teams can’t say which systems, vendors, logs, or people can still see the original data.",
       },
       {
         title: "A tool setting becomes proof of compliance",
         description:
-          "The organization enables detection without proving purpose, accuracy, access, retention, or review.",
+          "You turn on a detection feature without showing why the data is used, how accurate it is, who can see it, how long it’s kept, or who checks it.",
       },
     ],
   },
@@ -82,49 +82,49 @@ const page = {
     eyebrow: "Control design",
     title: "Build each control around a clear purpose.",
     introduction:
-      "A scrubbing control works only when you understand the data, the task, the change, and the systems on both sides.",
+      "Scrubbing works only when you understand the data, the task, what gets changed, and the systems on both sides.",
     items: [
       {
         label: "Purpose",
         question: "What decision needs this data?",
         title: "Purpose",
         description:
-          "Define the use case, people affected, intended outcome, and minimum information needed.",
+          "Define what the AI is for, who’s affected, the result you want, and the least information it needs.",
       },
       {
         label: "Classification",
         question: "What sensitive information may appear?",
         title: "Classification",
         description:
-          "Identify direct identifiers, linked details, free text, credentials, and financial or health data.",
+          "Identify names and ID numbers, details that identify people when combined, notes, passwords, and financial or health data.",
       },
       {
         label: "Transformation",
         question: "What should happen to each data type?",
-        title: "Transformation",
+        title: "How data is changed",
         description:
-          "Choose removal, masking, tokenization, generalization, blocking, or approved retention.",
+          "Choose to remove it, hide it, swap it for a code, make it less specific, block it, or keep it with approval.",
       },
       {
         label: "Placement",
         question: "Where should the control run?",
         title: "Placement",
         description:
-          "Place it before model input, retrieval, logging, tool calls, transfer, display, analytics, or storage.",
+          "Put it before data reaches the AI, its search, logs, tools, other systems, screens, reports, or storage.",
       },
       {
         label: "Testing",
         question: "How will you know it works?",
         title: "Testing",
         description:
-          "Test missed data, false matches, task usefulness, downstream behavior, and re-identification risk.",
+          "Test for data it misses, things it wrongly flags, whether the task still works, and the risk someone could work out who it is.",
       },
       {
         label: "Ownership",
         question: "Who handles exceptions and change?",
         title: "Ownership",
         description:
-          "Assign policy, review, incident response, retention, vendor oversight, and control updates.",
+          "Assign owners for the rules, reviews, incidents, how long data is kept, vendors, and updates.",
       },
     ],
   },
@@ -132,37 +132,37 @@ const page = {
     eyebrow: "Data path",
     title: "Trace personal data from collection to deletion.",
     introduction:
-      "Follow real data through the workflow. At each boundary, ask whether it’s still needed, who can access it, and whether the change preserves the task.",
+      "Follow real data through the process. At each step, ask whether it’s still needed, who can see it, and whether the task still works after the change.",
     items: [
       {
         phase: "Collect",
         question: "Why did the workflow receive this information?",
         evidence:
-          "Source, purpose, notice, permission, sensitivity, expected use, and owner.",
+          "Where it came from, why you collect it, what people were told, their permission, how sensitive it is, how it’s used, and who owns it.",
       },
       {
         phase: "Prepare",
         question: "What should change before AI processing?",
         evidence:
-          "Data inventory, necessity, transformation rule, model context, and remaining meaning.",
+          "What data there is, whether it’s needed, how it gets changed, what the AI sees, and what meaning is left.",
       },
       {
         phase: "Process",
         question: "Who can see or rebuild the original?",
         evidence:
-          "Provider, application, tools, logs, caches, keys, mappings, permissions, and vendors.",
+          "The AI provider, your software, tools, logs, stored copies, keys and code lists, permissions, and vendors.",
       },
       {
         phase: "Return",
         question: "Could the output reveal sensitive information?",
         evidence:
-          "Response, inference, downstream action, display, export, sharing, and human review.",
+          "The answer, what the AI works out about a person, what happens next, display, exports, sharing, and human review.",
       },
       {
         phase: "Retain",
         question: "What remains, and for how long?",
         evidence:
-          "Originals, tokens, mappings, prompts, outputs, logs, backups, deletion, and access history.",
+          "The original data, the codes and the list that links them back, AI inputs and outputs, logs, backups, deletion, and who looked at what.",
       },
     ],
   },
@@ -170,145 +170,145 @@ const page = {
     eyebrow: "Evidence",
     title: "Test the full data path, not only the detector.",
     introduction:
-      "Accuracy matters, but it isn't enough. You also need to show why data is used, what remains useful, where copies persist, and how exceptions are handled.",
+      "Accuracy matters, but it isn’t enough. You also need to show why data is used, what stays useful, where copies remain, and how exceptions are handled.",
     items: [
       {
         title: "Data inventory",
         description:
-          "Fields, free text, files, images, metadata, sources, owners, sensitivity, and people represented.",
+          "Fields, notes, files, images, hidden file details, sources, owners, sensitivity, and whose data it is.",
       },
       {
         title: "Purpose and need",
         description:
-          "The decision, minimum data required, policy context, alternatives, and effect of processing.",
+          "The decision, the least data needed, relevant policies, other options, and the effect of using the data.",
       },
       {
         title: "Transformation behavior",
         description:
-          "Detection rules, confidence, masking, tokens, mappings, context preservation, and failure handling.",
+          "How data is found and how sure the tool is, how it’s hidden or swapped for codes, what meaning is kept, and what happens when it fails.",
       },
       {
         title: "System and vendor boundaries",
         description:
-          "Applications, models, tools, stores, logs, vendors, regions, contracts, and data-use settings.",
+          "Software, AI models, tools, storage, logs, vendors, countries, contracts, and data-use settings.",
       },
       {
         title: "Access and retention",
         description:
-          "Roles, permissions, audit history, deletion schedules, backups, exceptions, and removal evidence.",
+          "Roles, permissions, records of who accessed what, deletion schedules, backups, exceptions, and proof of deletion.",
       },
       {
         title: "Testing and impact",
         description:
-          "Missed data, false matches, language differences, re-identification, task quality, incidents, and corrections.",
+          "Missed data, wrong flags, differences across languages, the risk of identifying people, task quality, incidents, and corrections.",
       },
     ],
     note: {
       label: "A control, not a compliance claim",
       description:
-        "PII scrubbing can reduce exposure. It doesn't prove legal compliance or remove every privacy risk. The full data lifecycle still matters.",
+        "PII scrubbing can reduce exposure. It doesn’t prove legal compliance or remove every privacy risk. What happens to the data from start to finish still matters.",
     },
   },
   failures: {
     eyebrow: "Common failure patterns",
-    title: "Redaction fails when the rest of the data path stays hidden.",
+    title: "Hiding data fails when the rest of its path goes unchecked.",
     introduction:
-      "Clean-looking text can hide originals, mappings, logs, and inferences that remain exposed elsewhere.",
+      "Clean-looking text can hide originals, code lists, logs, and guesses about people that are still exposed elsewhere.",
     items: [
       {
-        title: "Pattern matching becomes the privacy program",
+        title: "Pattern matching becomes the whole privacy plan",
         description:
-          "Rules catch familiar formats but miss identity that depends on context or several linked fields.",
+          "Rules catch familiar formats, like phone numbers, but miss details that identify someone only in context or when combined.",
       },
       {
-        title: "The token is safe, but the mapping isn't",
+        title: "The code is safe, but the list behind it isn’t",
         description:
-          "A shared lookup table, key, or stable identifier makes re-identification easy.",
+          "A shared lookup list, key, or permanent ID makes it easy to work out who someone is.",
       },
       {
         title: "Useful context disappears",
         description:
-          "Aggressive scrubbing changes meaning needed for service, safety, fairness, fraud, or accessibility.",
+          "Removing too much changes the meaning needed for service, safety, fairness, fraud checks, or accessibility.",
       },
       {
         title: "Logs keep what the prompt removed",
         description:
-          "Raw content reaches analytics, error tracking, or support tools before the model input is cleaned.",
+          "The raw data reaches reporting, error tracking, or support tools before it’s cleaned for the AI.",
       },
       {
         title: "An exception becomes a permanent bypass",
         description:
-          "A valid override has no scope, end date, owner, review, or removal record.",
+          "A legitimate exception has no limits, end date, owner, review, or record of removal.",
       },
       {
         title: "A vendor setting becomes end-to-end proof",
         description:
-          "Provider controls are reviewed while collection, integrations, human access, and outputs remain untested.",
+          "The AI provider’s settings get checked, while data collection, connected systems, staff access, and outputs go untested.",
       },
     ],
   },
   outputs: {
     eyebrow: "Practical outputs",
-    title: "Turn data minimization into a working control.",
+    title: "Turn “use less personal data” into something you run.",
     introduction:
-      "The result shows where personal data appears, why it’s needed, how it changes, how the control is tested, and who owns the remaining risk.",
+      "You’ll see where personal data shows up, why it’s needed, how it’s changed, how that’s tested, and who owns the remaining risk.",
     items: [
       {
-        title: "Sensitive data flow map",
+        title: "Map of where sensitive data goes",
         description:
-          "Collection, records, retrieval, prompts, models, tools, outputs, logs, vendors, access, and deletion.",
+          "From collection through records, the AI and its tools, outputs, logs, vendors, and access, to deletion.",
       },
       {
-        title: "Control specification",
+        title: "How the scrubbing works",
         description:
-          "Placement, data classes, purpose, method, transformation, exceptions, permissions, and failure response.",
+          "Where it sits, which kinds of data, why, the method, exceptions, permissions, and what happens when it fails.",
       },
       {
         title: "Test and exception plan",
         description:
-          "Representative tests, missed data, false matches, approvals, owners, escalation, and time-limited overrides.",
+          "Realistic tests, missed data, wrong flags, approvals, owners, who issues go to, and exceptions with an end date.",
       },
       {
-        title: "Lifecycle ownership model",
+        title: "Who owns the data from start to finish",
         description:
-          "Roles, vendor requirements, access review, retention, deletion evidence, incidents, and reassessment.",
+          "Roles, vendor requirements, access reviews, how long data is kept, proof of deletion, incidents, and regular rechecks.",
       },
     ],
   },
   fit: {
     eyebrow: "Engagement fit",
-    title: "Use PII scrubbing when personal data crosses an AI boundary.",
+    title: "Use PII scrubbing when personal data reaches an AI tool.",
     introduction:
-      "This work fits a defined workflow with known data sources, processing steps, and accountable owners. It supports, but doesn't replace, legal advice, security testing, vendor review, or a privacy program.",
+      "This fits a specific process with known data sources, steps, and owners. It supports, but doesn’t replace, legal advice, security testing, vendor review, or your privacy program.",
     items: [
-      "The use case processes personal, financial, health, account, or credential data.",
-      "The task can work with less identity or detail than it receives today.",
-      "The organization can inspect models, tools, logs, vendors, access, and retention.",
+      "The AI handles personal, financial, health, account, or login data.",
+      "The task could work with less personal detail than it gets today.",
+      "You can look at the AI models, tools, logs, vendors, access, and how long data is kept.",
       "Privacy, security, legal, data, product, and operations can define the control.",
       "Leaders will stop or narrow processing when exposure can't be controlled.",
     ],
   },
   diagnostics: {
     eyebrow: "Related diagnostic paths",
-    title: "Start with the workflow creating the exposure.",
+    title: "Start with the process that exposes the data.",
     items: [
       {
         title: "AI Service Readiness Review",
         href: "/services/ai-service-readiness-review/",
         useWhen:
-          "You need to define the use case, data needs, human oversight, safeguards, and implementation decision.",
+          "You need to define the AI idea, what data it needs, human checks, safeguards, and whether to build it.",
       },
       {
         title: "CRM Workflow Audit",
         href: "/services/crm-workflow-audit/",
         useWhen:
-          "Personal data starts in CRM records, notes, cases, integrations, reporting, or customer workflows.",
+          "Personal data starts in CRM records, notes, cases, connected systems, reports, or customer processes.",
       },
       {
         title: "CX Systems Diagnostic",
         href: "/services/cx-systems-diagnostic/",
         useWhen:
-          "The exposure crosses teams, systems, service rules, handoffs, ownership, or customer touchpoints.",
+          "The exposure crosses teams, systems, service rules, handoffs, ownership, or places customers contact you.",
       },
     ],
   },

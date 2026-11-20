@@ -9,72 +9,72 @@ import "../../../styles/solution-depth.css";
 const routingConditions = [
   {
     number: "01",
-    title: "Material consequence",
+    title: "Serious consequences",
     description:
-      "Route decisions that could affect a customer, commitment, payment, access, safety, or another hard-to-reverse outcome.",
+      "Send a decision to a person if it could affect a customer, a promise, a payment, access, safety, or anything hard to undo.",
   },
   {
     number: "02",
-    title: "Insufficient evidence",
+    title: "Not enough information",
     description:
-      "Pause when required context is missing, conflicting, stale, inaccessible, or outside the system's approved data.",
+      "Stop when needed information is missing, contradictory, out of date, unavailable, or outside the data the AI is allowed to use.",
   },
   {
     number: "03",
-    title: "Unresolved uncertainty",
+    title: "Doubt it can’t resolve",
     description:
-      "Transfer when the system can't resolve a meaningful ambiguity or support its next action with evidence.",
+      "Hand over when the AI can’t clear up something important, or can’t back up its next step with evidence.",
   },
   {
     number: "04",
-    title: "Policy or workflow exception",
+    title: "An exception to the rules",
     description:
-      "Stop the system from inventing authority when a request falls outside approved rules or known conditions.",
+      "Stop the AI from making up permission when a request falls outside the approved rules.",
   },
   {
     number: "05",
     title: "Customer request or distress",
     description:
-      "Respect a request for a person and recognize signs of urgency, vulnerability, frustration, or lost trust.",
+      "Respect a request for a person, and recognize signs of urgency, vulnerability, frustration, or lost trust.",
   },
   {
     number: "06",
     title: "System or tool failure",
     description:
-      "Provide a recovery path when a dependency fails, an action can't be confirmed, or the response may break down.",
+      "Have a way to recover when something it relies on fails, an action can’t be confirmed, or the response may break down.",
   },
 ];
 
 const routingPath = [
   {
     phase: "Recognize",
-    question: "What condition exceeds the system's intended role?",
+    question: "What’s happening that the AI isn’t meant to handle?",
     evidence:
-      "Consequence, uncertainty, missing context, exception, request, or failure.",
+      "A serious consequence, doubt, missing information, an exception, a request for a person, or a failure.",
   },
   {
     phase: "Pause",
     question: "What must stop while a person takes responsibility?",
     evidence:
-      "Pending action, customer promise, automated follow-up, tool use, and safe state.",
+      "Actions about to happen, promises to the customer, automatic follow-ups, and anything the AI was about to do.",
   },
   {
     phase: "Transfer",
-    question: "What context and priority must travel with the work?",
+    question: "What information and urgency must go with the case?",
     evidence:
-      "Customer intent, conversation, evidence, actions taken, uncertainty, and deadline.",
+      "What the customer wants, the conversation, the evidence, what’s been done, what’s unclear, and the deadline.",
   },
   {
     phase: "Decide",
-    question: "Who can judge the case and act with appropriate authority?",
+    question: "Who can judge the case and has the authority to act?",
     evidence:
-      "Receiving role, decision rights, expertise, response, and communication.",
+      "Who receives it, what they can decide, their expertise, how they respond, and how they update the customer.",
   },
   {
     phase: "Return",
     question: "How does the outcome update the customer and the system?",
     evidence:
-      "Resolution, reasoning, records, follow-up, feedback, and changed routing rules.",
+      "The resolution, the reasons, updated records, follow-up, feedback, and any changes to the handover rules.",
   },
 ];
 
@@ -87,27 +87,27 @@ const contextRequirements = [
   {
     label: "Conversation and prior action",
     description:
-      "Relevant history, promises, tool calls, changed records, content shown, and actions already tried.",
+      "Relevant history, promises made, what the AI did or changed, what it showed the customer, and what’s already been tried.",
   },
   {
     label: "Reason for routing",
     description:
-      "The boundary, uncertainty, exception, failure, or request that caused the system to stop.",
+      "The limit, doubt, exception, failure, or request that made the AI stop.",
   },
   {
     label: "Consequence and timing",
     description:
-      "Customer or operating impact, urgency, elapsed time, commitments, and the next useful response window.",
+      "The impact, urgency, how long it’s been, what was promised, and how soon someone needs to respond.",
   },
   {
     label: "Evidence and uncertainty",
     description:
-      "Sources used, missing information, conflicts, confidence limits, and questions that still need judgment.",
+      "The sources used, missing or conflicting information, how sure the AI was, and questions that still need a person’s judgment.",
   },
   {
     label: "Ownership and next action",
     description:
-      "The receiving role, expected acknowledgement, authority, customer update, and fallback path.",
+      "Who receives it, how fast they should confirm, what they can do, the customer update, and a backup if they can’t act.",
   },
 ];
 
@@ -115,12 +115,12 @@ const failurePatterns = [
   {
     cue: "The conversation transfers but the reasoning doesn’t",
     description:
-      "A person gets a transcript without the customer intent, prior actions, evidence, or open question.",
+      "A person gets a chat log, but not what the customer wants, what’s been tried, the evidence, or the open question.",
   },
   {
     cue: "Uncertainty is hidden behind a confident response",
     description:
-      "The system continues because the workflow can't recognize ambiguity, missing evidence, or a case outside its scope.",
+      "The AI keeps going because the process can’t spot doubt, missing evidence, or a case it shouldn’t handle.",
   },
   {
     cue: "The route reaches a person without decision authority",
@@ -130,12 +130,12 @@ const failurePatterns = [
   {
     cue: "The human queue loses the consequence",
     description:
-      "The work arrives with a generic priority that hides the impact, elapsed time, or commitment behind the route.",
+      "The case arrives with a generic priority that hides the impact, how long it’s waited, or what was promised.",
   },
   {
     cue: "Automation continues while the case waits",
     description:
-      "Messages or actions keep firing after routing, creating contradictions, duplicate work, or more customer harm.",
+      "Messages or actions keep going out after the handover, causing contradictions, duplicate work, or more harm.",
   },
   {
     cue: "Human decisions never improve the route",
@@ -148,68 +148,68 @@ const evidenceSources = [
   {
     title: "Conversations and customer signals",
     description:
-      "Requests, language, repeated effort, routing requests, outcome history, and the customer context around the event.",
+      "What customers asked, the words they used, how often they repeated themselves, requests for a person, and what happened next.",
   },
   {
     title: "System decisions and tool activity",
     description:
-      "Instructions, classifications, sources, responses, tool calls, changed records, and actions attempted or completed.",
+      "The AI’s instructions, how it sorted requests, its sources and answers, and every record or action it changed or tried.",
   },
   {
     title: "Routing triggers and boundaries",
     description:
-      "Approved conditions, stop rules, prohibited actions, known exceptions, fallbacks, and the reason for each transfer.",
+      "The approved conditions, rules for stopping, actions it must never take, known exceptions, backups, and why each case was handed over.",
   },
   {
-    title: "Human queue and response behavior",
+    title: "How people pick up and respond",
     description:
-      "Assignment, priority, acknowledgement, capacity, authority, elapsed time, collaboration, and communication.",
+      "Who gets the case, its priority, how fast they confirm, workload, authority, waiting time, teamwork, and customer updates.",
   },
   {
     title: "Corrections and overrides",
     description:
-      "What people changed, rejected, approved, or recovered and whether the cause was data, instructions, workflow, or policy.",
+      "What people changed, rejected, approved, or fixed, and whether the cause was data, the AI’s instructions, the process, or policy.",
   },
   {
     title: "Customer and operating outcomes",
     description:
-      "Resolution quality, repeat contact, rework, delay, trust, cost, safety, and whether routing improved the result.",
+      "How well problems were solved, repeat contacts, rework, delays, trust, cost, safety, and whether the handover improved the result.",
   },
 ];
 
 const routingOutputs = [
   {
     number: "01",
-    title: "Decision boundary map",
+    title: "Map of what AI may decide",
     description:
-      "A shared view of what the system may handle, what needs human judgment, and which actions require approval.",
+      "One shared view of what the AI may handle, what needs a person’s judgment, and which actions need approval.",
   },
   {
     number: "02",
-    title: "Routing and priority rules",
+    title: "Handover and priority rules",
     description:
-      "Clear triggers, stop conditions, service expectations, receiving roles, authority, fallbacks, and communication rules.",
+      "Clear triggers, when to stop, response expectations, who receives each case, what they can do, backups, and how to update customers.",
   },
   {
     number: "03",
-    title: "Human context packet",
+    title: "What the person receives",
     description:
-      "The customer intent, history, evidence, prior action, uncertainty, impact, and next question that must travel.",
+      "What the customer wants, the history, the evidence, what’s been tried, what’s unclear, the impact, and the next question.",
   },
   {
     number: "04",
     title: "Review and improvement loop",
     description:
-      "Measures and reviews that connect routes, overrides, failures, human decisions, outcomes, and system changes.",
+      "Measures and reviews that link handovers, overruled decisions, failures, people’s decisions, results, and changes to the system.",
   },
 ];
 
 const strongFit = [
-  "An AI-supported workflow can communicate with customers or take consequential action.",
-  "Human escalation exists, but routed cases arrive without enough context or priority.",
-  "Teams can’t explain when the system should stop, defer, ask, or transfer control.",
-  "Exceptions, corrections, and overrides recur without changing the workflow.",
-  "A sponsor can align process owners, frontline teams, governance partners, and technical owners.",
+  "An AI tool can talk to customers or take actions that matter.",
+  "Cases can go to a person, but they arrive without enough information or urgency.",
+  "Teams can’t explain when the AI should stop, wait, ask, or hand over.",
+  "The same exceptions, corrections, and overruled decisions keep happening, and nothing changes.",
+  "A senior sponsor can bring process owners, frontline teams, risk and compliance partners, and technical owners together.",
 ];
 ---
 
@@ -240,9 +240,9 @@ const strongFit = [
             Human oversight only works when the person can act.
           </h1>
           <p class="hero-lead">
-            Define when AI must pause, what evidence and customer context travel
-            with the work, who has authority to decide, and how the outcome
-            returns to the system.
+            Decide when AI must stop and hand over to a person, and what that
+            person needs to know. Then decide who has the authority to act, and
+            how the result gets back into your systems.
           </p>
 
           <div class="hero-actions" aria-label="AI-to-human routing actions">
@@ -264,21 +264,24 @@ const strongFit = [
             Recognizable trigger
           </p>
           <p>
-            AI can answer, classify, recommend, or act, but nobody can clearly
-            say when it must stop, who takes over, or what that person needs.
+            AI can answer, sort, suggest, or act. But nobody can clearly say
+            when it must stop, who takes over, or what that person needs.
           </p>
           <dl>
             <div>
               <dt>Boundary</dt>
-              <dd>Where machine authority ends</dd>
+              <dd>Where the AI has to stop</dd>
             </div>
             <div>
               <dt>Transfer</dt>
-              <dd>Intent, evidence, action, uncertainty, consequence</dd>
+              <dd>
+                What the customer wants, the evidence, what’s been done, what’s
+                unclear, the impact
+              </dd>
             </div>
             <div>
               <dt>Outcome</dt>
-              <dd>Human judgment and accountable closure</dd>
+              <dd>A person decides and closes the case</dd>
             </div>
           </dl>
         </aside>
@@ -303,20 +306,21 @@ const strongFit = [
         <div>
           <p class="eyebrow">What routing does</p>
           <h2 id="routing-purpose-title">
-            Turn the limit of automation into a working route.
+            Plan exactly where automation stops and a person takes over.
           </h2>
         </div>
 
         <div class="purpose-copy">
           <p>
-            Oversight becomes useful when the workflow can recognize a need for
-            judgment, stop safely, and transfer the work to someone who can
-            change the outcome.
+            Human checks only help if the process can spot when judgment is
+            needed, stop safely, and pass the work to someone who can change the
+            outcome.
           </p>
           <p>
-            A routing map connects that condition to impact, evidence, priority,
-            ownership, authority, communication, recovery, and review. The human
-            response becomes part of the workflow, not a generic fallback.
+            A routing map covers each of those moments: the impact, the
+            evidence, the urgency, and who owns it. It also covers what they can
+            do, how you update the customer, and how you fix and review it. The
+            person becomes part of the process, not a last resort.
           </p>
         </div>
       </div>
@@ -327,8 +331,8 @@ const strongFit = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">When AI should hand off</span>
           <span class="solution-depth-description">
-            Define the risk, uncertainty, customer request, policy, and
-            exception conditions that require a person.
+            Define the risks, doubts, customer requests, policies, and
+            exceptions that need a person.
           </span>
         </summary>
         <section
@@ -344,8 +348,8 @@ const strongFit = [
                 Define when a person must take control.
               </h2>
               <p>
-                The rules depend on the use case. These six conditions are a
-                practical starting point for human control.
+                The rules depend on what the AI does. These six are a practical
+                place to start.
               </p>
             </div>
 
@@ -365,8 +369,8 @@ const strongFit = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">How the route works</span>
           <span class="solution-depth-description">
-            Move from a safe pause through priority, acceptance, human action,
-            and accountable closure.
+            Go from a safe stop, through urgency and handover, to a person
+            acting and closing the case.
           </span>
         </summary>
         <section
@@ -379,13 +383,13 @@ const strongFit = [
               <div>
                 <p class="eyebrow">Routing path</p>
                 <h2 id="routing-path-title">
-                  Move from a clear boundary to accountable closure.
+                  Go from a clear stopping point to a case someone closes.
                 </h2>
               </div>
               <p>
-                At each stage, check whether the workflow preserves context,
-                stops the wrong action, and gives the decision to someone who
-                can act.
+                At each stage, check that the information stays with the case,
+                the wrong action stops, and the decision goes to someone who can
+                act.
               </p>
             </div>
 
@@ -411,8 +415,8 @@ const strongFit = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">What context must travel</span>
           <span class="solution-depth-description">
-            Give the person customer intent, history, prior action, uncertainty,
-            impact, and the decision required.
+            Give the person what the customer wants, the history, what’s been
+            tried, what’s unclear, the impact, and the decision needed.
           </span>
         </summary>
         <section
@@ -454,7 +458,7 @@ const strongFit = [
         <summary class="disclosure-summary">
           <span class="solution-depth-title">Where routing fails</span>
           <span class="solution-depth-description">
-            Find transfers that preserve a transcript but lose priority,
+            Find handovers that pass along a chat log but lose urgency,
             authority, or responsibility.
           </span>
         </summary>
@@ -468,11 +472,11 @@ const strongFit = [
             <div class="failure-intro">
               <p class="eyebrow eyebrow-inverse">Common failure patterns</p>
               <h2 id="failure-patterns-title">
-                A human in the loop isn't always in control.
+                Having a person involved doesn’t mean they’re in control.
               </h2>
               <p>
-                These patterns show where an escalation feature fails to create
-                a safe and accountable response.
+                These patterns show where a handover feature fails to make the
+                response safe and owned.
               </p>
             </div>
 
@@ -501,9 +505,9 @@ const strongFit = [
             <h2 id="evidence-title">Inspect the whole decision path.</h2>
           </div>
           <p>
-            Compare the intended rules with real conversations, system behavior,
-            human response, corrections, and outcomes. Separate observed facts
-            from assumptions about what AI or people did.
+            Compare the rules you meant to follow with real conversations, what
+            the system did, how people responded, corrections, and results. Keep
+            what you saw separate from guesses about what the AI or people did.
           </p>
         </div>
 
@@ -544,10 +548,10 @@ const strongFit = [
             Use routing design when AI can affect the customer outcome.
           </h2>
           <p>
-            This work fits when AI can answer, recommend, classify, or act while
-            people remain accountable for the result. It isn't a chatbot
-            installation, a staffing forecast, or a substitute for a broader AI
-            readiness decision.
+            This fits when AI can answer, suggest, sort, or act while people
+            stay accountable for the result. It isn’t setting up a chatbot, a
+            staffing forecast, or a replacement for a wider decision on AI
+            readiness.
           </p>
 
           <a class="button button-primary" href="/fit-check/">

@@ -40,7 +40,7 @@ These are the values in `src/styles/global.css`. Where a historical value later 
 | Level 1 · inset, bands (`--color-surface-subtle`)       | `#F0F0F0`                    | `#2A2A2A`                                           |
 | Stronger separation (`--color-surface-muted`)           | `#E6E6E6`                    | `#333333`                                           |
 | Level 2 · paper, panels, forms (`--color-surface-pure`) | `#FFFFFF`                    | `#333333`                                           |
-| Header and footer anchor (`--color-surface-anchor`)     | `#1F1F1F` graphite           | `#0E0E0E`                                           |
+| Header and footer anchor (`--color-surface-anchor`)     | `#1F1F1F` graphite           | `#181818` soft graphite (never pure black)          |
 | Text (`--color-text`)                                   | `#1F1F1F`                    | `#F2F2F2`                                           |
 | Muted text                                              | `#555555`                    | `#BBBBBB`                                           |
 | Rules                                                   | `#DEDEDE` / strong `#B5B5B5` | `#3D3D3D` / strong `#545454`                        |
