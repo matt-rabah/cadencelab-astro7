@@ -11,7 +11,7 @@ const diagnosticQuestions = [
     number: "01",
     question: "Where does the CRM stop helping?",
     explanation:
-      "Follow the real customer workflow through records, fields, queues, handoffs, approvals, and the side tools people use. Find exactly where the system gets in the way.",
+      "Follow how customer work really moves through records, fields, queues, hand-offs between teams, approvals, and the side tools people use. Find exactly where the system gets in the way.",
   },
   {
     number: "02",
@@ -23,13 +23,13 @@ const diagnosticQuestions = [
     number: "03",
     question: "What creates extra work?",
     explanation:
-      "Find the routing gaps, the double handling, the unclear owners, and the rules that quietly push people out of the CRM.",
+      "Find the work that goes to the wrong person, the work done twice, the unclear owners, and the rules that quietly push people out of the CRM.",
   },
   {
     number: "04",
     question: "What should you fix first, and what’s it worth?",
     explanation:
-      "Tie every fix to the business value it moves (revenue, retention, cost to serve, or risk). Then put the fixes in order, without adding complexity.",
+      "Tie every fix to what it’s worth to the business (revenue, keeping customers, the cost of serving them, or risk). Then put the fixes in order, without adding complexity.",
   },
 ];
 
@@ -42,22 +42,22 @@ const evidenceAreas = [
   {
     title: "Fields, records, and data quality",
     description:
-      "A CRM data audit of required fields, definitions, missing or duplicate information, record ownership, data age, and whether teams have enough context to decide.",
+      "A check of required fields and what each one means. Missing or duplicate information, who owns each record, and how old the data is. And whether teams have what they need to decide.",
   },
   {
     title: "Automation and routing",
     description:
-      "Assignment rules, alerts, tasks, approvals, integrations, and sequences that shape who acts, when they act, and what context follows the work.",
+      "The rules that assign work, plus alerts, tasks, approvals, connections to other tools, and automated emails. Together they decide who acts, when, and what information goes with the work.",
   },
   {
     title: "Ownership and handoffs",
     description:
-      "Who owns each step, how queues and escalations work, and where work becomes visible without anyone taking responsibility.",
+      "Who owns each step, how work waits in line and gets escalated, and where everyone can see a problem but nobody takes responsibility.",
   },
   {
     title: "Reporting and measurement",
     description:
-      "Dashboards, pipeline and service measures, lifecycle reports, and whether current metrics show decisions and outcomes or only activity.",
+      "Dashboards, sales and service measures, customer reports, and whether your numbers show results or just activity.",
   },
   {
     title: "Adoption and workarounds",
@@ -69,9 +69,9 @@ const evidenceAreas = [
 const deliverables = [
   {
     number: "01",
-    title: "Current-state workflow map",
+    title: "Map of how work moves today",
     description:
-      "A shared view of the real customer workflow across roles, records, automation, systems, decisions, handoffs, and known workarounds.",
+      "One shared picture of how customer work really moves: the roles, records, automatic rules, systems, decisions, hand-offs, and known workarounds.",
     decision:
       "Where the CRM supports the work and where it causes breakdowns, duplicate effort, or lost ownership.",
   },
@@ -79,37 +79,37 @@ const deliverables = [
     number: "02",
     title: "Data and adoption findings",
     description:
-      "An evidence-based review of field use, data quality, signal reliability, user behavior, reporting gaps, and why teams work around the system.",
+      "A review, backed by evidence, of how fields are used, how good the data is, which numbers you can rely on, how people use the system, what reports miss, and why teams work around it.",
     decision:
-      "Which problems come from configuration, process, ownership, training, incentives, or missing context.",
+      "Which problems come from how the system is set up, the process, ownership, training, incentives, or missing information.",
   },
   {
     number: "03",
-    title: "Prioritized remediation plan",
+    title: "Repair plan, in priority order",
     description:
-      "Workflow, data, automation, reporting, and governance changes, ranked by the business value they move and what depends on what.",
+      "Changes to the process, data, automatic rules, reports, and decision rules, ranked by what they’re worth and what depends on what.",
     decision:
       "What to fix first, what can wait, what to remove, and how you’ll prove it worked.",
   },
   {
     number: "04",
-    title: "Target workflow requirements",
+    title: "Requirements for the new process",
     description:
-      "Clear requirements for the next useful workflow, including owners, decisions, signals, system behavior, and adoption needs.",
+      "Clear requirements for the new process: owners, decisions, and the information each step needs. Plus what the system should do, and what people need to adopt it.",
     decision:
-      "What the CRM must support before implementation, automation, or platform investment grows.",
+      "What the CRM must do before you build more, automate more, or spend more on the platform.",
   },
 ];
 
 const strongFit = [
   "Your CRM records activity, but it doesn’t help teams coordinate customer work.",
   "Teams depend on spreadsheets, messages, manual checks, or memory to complete important workflows.",
-  "A sponsor can bring business, customer-facing, operations, data, and technical owners together.",
+  "A senior sponsor can bring business, customer-facing, operations, data, and technical owners together.",
   "You’re willing to change the process and who owns it, not just fields, dashboards, or automation.",
 ];
 
 const limitedFit = [
-  "You only need a planned configuration built and don’t want to look at the workflow behind it.",
+  "You only need a planned setup change built and don’t want to look at the process behind it.",
   "The issue is one technical defect with a known owner and a tested fix.",
   "Frontline users, process owners, CRM administrators, or needed records cannot be part of the review.",
   "Success is measured only by features, completed fields, or logins, not by useful work and customer outcomes.",
@@ -167,10 +167,12 @@ const relatedPaths = [
           <p class="eyebrow">Diagnostic 03</p>
           <h1 id="diagnostic-title">Make your CRM support the work.</h1>
           <p class="hero-lead">
-            Most CRM audits look at the configuration. This one looks at the
-            work. You’ll see where workflows, data, automation, handoffs, and
-            ownership break down, why your team works around the system, and
-            what to fix first so the CRM finally earns its keep.
+            Your CRM is the system your teams use to track customers, like
+            Salesforce or HubSpot. Most CRM audits check how it’s set up. This
+            one looks at the work. You’ll see where the process, data, automatic
+            rules, hand-offs, and ownership break down, and why your team works
+            around the system. Then you’ll know what to fix first, so the CRM
+            finally earns its keep.
           </p>
 
           <div class="hero-actions" aria-label="CRM Workflow Audit actions">
@@ -288,9 +290,9 @@ const relatedPaths = [
           <aside class="scope-note" aria-labelledby="scope-note-title">
             <h3 id="scope-note-title">Workflow before configuration</h3>
             <p>
-              A perfectly valid configuration can still support the wrong
-              process. The audit separates what the work needs from what the
-              platform got used to, so every change earns its place.
+              A CRM can be set up correctly and still support the wrong process.
+              The audit separates what the work needs from habits the system
+              picked up along the way, so every change earns its place.
             </p>
           </aside>
         </details>
@@ -410,8 +412,8 @@ const relatedPaths = [
             <div>
               <dt>Useful context</dt>
               <dd>
-                Workflow problem, teams involved, CRM context, and accountable
-                sponsor
+                The problem, the teams involved, which CRM you use, and who’s
+                sponsoring the work
               </dd>
             </div>
             <div>

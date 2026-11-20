@@ -11,58 +11,58 @@ const diagnosticQuestions = [
     number: "01",
     question: "Is AI right for this problem?",
     explanation:
-      "Name the decision AI should support, who it affects, and the business value it should move. Then ask the honest question: is AI even the right tool?",
+      "Name the decision AI should help with, who it affects, and the business result it should improve. Then ask the honest question: is AI even the right tool?",
   },
   {
     number: "02",
-    question: "Is the workflow ready?",
+    question: "Is the way the work gets done ready?",
     explanation:
-      "Look at the current work, owners, exceptions, data, and rules. If people can’t describe the process clearly, AI won’t either.",
+      "Look at the current work, owners, unusual cases, data, and rules. If people can’t describe the process clearly, AI won’t either.",
   },
   {
     number: "03",
     question: "Where do people stay in control?",
     explanation:
-      "Decide where people review, approve, correct, override, or escalate, and who’s still accountable when it goes wrong.",
+      "Decide where people review, approve, correct, overrule, or pass things up, and who’s still accountable when it goes wrong.",
   },
   {
     number: "04",
     question: "How will you know it works?",
     explanation:
-      "Set the measures, adoption needs, risk signals, and review points before launch, so you can prove the value before you scale it.",
+      "Before launch, set the measures, what people need to start using it, the warning signs to watch, and when you’ll review it. Then you can prove it works before you roll it out further.",
   },
 ];
 
 const evidenceAreas = [
   {
-    title: "Use-case and decision fit",
+    title: "Whether AI fits the problem",
     description:
-      "The customer problem, business decision, intended users, expected value, other options, and whether AI fits the level of risk.",
+      "The customer problem, the business decision, who would use it, the value you expect, other options, and whether AI suits the level of risk.",
   },
   {
-    title: "Workflow and process readiness",
+    title: "Whether the process is ready",
     description:
-      "Current steps, handoffs, decision rights, exceptions, service rules, recovery paths, and places where the work is still unclear or inconsistent.",
+      "The current steps, hand-offs between teams, and who can decide what. Unusual cases, service rules, and how mistakes get fixed. And where the work is still unclear or inconsistent.",
   },
   {
-    title: "Data and knowledge dependencies",
+    title: "The data and knowledge it needs",
     description:
-      "Required records, knowledge sources, data quality, access, age, source, privacy limits, and the context people use to judge a response.",
+      "The records and help content it needs, and how good and current that data is. Who can access it and where it comes from. Privacy limits, and what people check to judge an answer.",
   },
   {
-    title: "Human oversight and exceptions",
+    title: "Where people stay in control",
     description:
-      "Review points, approval limits, escalation paths, override authority, quality checks, and the work people still own.",
+      "Where people review its work, what needs approval, and who issues go to next. Who can overrule it, quality checks, and the work people still own.",
   },
   {
-    title: "Governance, risk, and trust",
+    title: "Rules, risk, and trust",
     description:
-      "Acceptable-use limits, security and privacy needs, customer disclosure, audit records, accountability, failure impact, and stakeholder concerns.",
+      "Limits on what it may be used for, plus security and privacy needs. Telling customers they’re dealing with AI, and keeping records for audits. Who’s accountable, what happens if it fails, and concerns from the people affected.",
   },
   {
-    title: "Adoption and measurement",
+    title: "Getting people to use it, and measuring it",
     description:
-      "User readiness, training, workflow fit, success measures, risk indicators, feedback paths, and the evidence needed to continue, change, or stop.",
+      "Whether people are ready, and the training they need. How well it fits the work, success measures, warning signs, and ways to give feedback. And the evidence you’ll need to continue, change, or stop.",
   },
 ];
 
@@ -71,47 +71,47 @@ const deliverables = [
     number: "01",
     title: "Readiness decision",
     description:
-      "A straight answer backed by evidence: ready, fix the operation first, narrow it, or stop.",
+      "A straight answer backed by evidence: ready, fix how the work runs first, make it smaller, or stop.",
     decision:
-      "Whether to proceed, fix the missing conditions, reshape the use case, or choose another approach.",
+      "Whether to go ahead, fix what’s missing, reshape the idea, or choose another approach.",
   },
   {
     number: "02",
-    title: "Human-in-the-loop map",
+    title: "Map of where people stay involved",
     description:
-      "A clear view of where AI can help, where human judgment is essential, how exceptions move, and who has authority and accountability.",
+      "A clear view of where AI can help, where a person’s judgment is essential, how unusual cases are handled, and who has authority and accountability.",
     decision:
       "Which decisions AI can support, which need approval, and how people respond when the system is unsure or wrong.",
   },
   {
     number: "03",
-    title: "Operating constraints and guardrails",
+    title: "Limits and safety rules",
     description:
-      "Documented workflow, data, knowledge, governance, privacy, quality, and trust needs that must shape the implementation.",
+      "The written-down needs for the process, data, knowledge, rules, privacy, quality, and trust that must shape how it’s built.",
     decision:
-      "Which boundaries and controls must be in place before the use case can operate responsibly.",
+      "Which limits and checks must be in place before it can run responsibly.",
   },
   {
     number: "04",
-    title: "Sequenced implementation priorities",
+    title: "The order to roll it out",
     description:
-      "A practical order for operating changes, a focused pilot, adoption support, measurement, review, and any justified expansion.",
+      "A practical order: changes to how work runs, a small first test, and support to get people using it. Then measurement, review, and any expansion the results justify.",
     decision:
       "What to change first, what the first release should include, and the evidence that earns the next round of investment.",
   },
 ];
 
 const strongFit = [
-  "An AI proposal has support, but the workflow, governance, adoption needs, or success measures are still unclear.",
-  "The use case affects customer service, success, or operations across teams, systems, or decisions.",
-  "A sponsor can involve process owners, frontline users, data and knowledge owners, risk partners, and technical teams.",
+  "An AI idea has support. But the process, the rules, the plan to get people using it, or the success measures are still unclear.",
+  "The idea affects customer service, customer success, or operations across teams, systems, or decisions.",
+  "A senior sponsor can involve process owners, frontline users, data and content owners, risk and compliance partners, and technical teams.",
   "You’re willing to delay, narrow, or reshape the idea when something important is missing.",
 ];
 
 const limitedFit = [
   "You only need a vendor picked or a chosen tool implemented, with no readiness decision.",
-  "AI is expected to cover for a broken workflow without changing ownership, process, or decision rules.",
-  "The process owners, frontline users, data owners, risk partners, or accountable leaders can’t take part.",
+  "AI is expected to cover for a broken process without changing who owns it, how it runs, or the rules for deciding.",
+  "The process owners, frontline users, data owners, risk and compliance partners, or accountable leaders can’t take part.",
   "Success means launching, usage, or automation volume, not better work and better customer outcomes.",
 ];
 
@@ -184,14 +184,15 @@ const relatedPaths = [
 
           <p class="eyebrow">Diagnostic 04</p>
           <h1 id="diagnostic-title">
-            Know if your AI use case is ready before you build it.
+            Know if your AI idea is ready before you build it.
           </h1>
           <p class="hero-lead">
             Only 7% of consumers forgive AI more than they forgive a person. So
             getting it wrong costs more than you think. This review tests the
-            use case, workflow, data, human oversight, governance, adoption, and
-            how you’ll measure success. You’ll get a clear call: go, fix the
-            gaps first, narrow it, or stop.
+            idea and the process it would run in. It checks the data, where
+            people stay in control, and the rules around it. It also checks
+            whether your team will use it and how you’ll measure success. You’ll
+            get a clear call: go, fix the gaps first, narrow it, or stop.
           </p>
 
           <div
@@ -212,13 +213,13 @@ const relatedPaths = [
             You may be seeing this
           </p>
           <p>
-            Someone’s excited about an AI idea. But the workflow, data,
-            oversight, governance, adoption plan, or success measures are still
-            fuzzy.
+            Someone’s excited about an AI idea. But the process, the data, who
+            checks the AI, the rules, the plan to get people using it, or how
+            you’ll measure success are still fuzzy.
           </p>
           <p>
-            Leadership needs a clear answer before a pilot turns into a big bet
-            of money, time, and customer trust.
+            Leadership needs a clear answer before a small test turns into a big
+            bet of money, time, and customer trust.
           </p>
         </aside>
       </div>
@@ -433,8 +434,8 @@ const relatedPaths = [
             <div>
               <dt>Useful context</dt>
               <dd>
-                Proposed use case, workflow involved, known risks, and
-                accountable sponsor
+                The AI idea, the process it would run in, known risks, and who’s
+                sponsoring the work
               </dd>
             </div>
             <div>
