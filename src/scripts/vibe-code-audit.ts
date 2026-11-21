@@ -49,17 +49,78 @@ function setOut(name: string, value: string) {
     });
 }
 
+// Each button's resting label and pending "Copied" reset, so a label can be
+// changed (the dialog switches scope) without an old timer restoring it.
+const copyLabels = new WeakMap<HTMLButtonElement, string>();
+const copyTimers = new WeakMap<HTMLButtonElement, number>();
+
+function setButtonLabel(button: HTMLButtonElement, label: string) {
+  window.clearTimeout(copyTimers.get(button));
+  copyTimers.delete(button);
+  copyLabels.set(button, label);
+  button.textContent = label;
+}
+
 async function copyText(text: string, button: HTMLButtonElement) {
-  const original = button.textContent;
+  if (!copyLabels.has(button)) copyLabels.set(button, button.textContent ?? "");
+  window.clearTimeout(copyTimers.get(button));
   try {
     await navigator.clipboard.writeText(text);
     button.textContent = "Copied";
   } catch {
     button.textContent = "Select the text and copy it";
   }
-  window.setTimeout(() => {
-    button.textContent = original;
-  }, 2200);
+  copyTimers.set(
+    button,
+    window.setTimeout(() => {
+      button.textContent = copyLabels.get(button) ?? "";
+    }, 2200),
+  );
+}
+
+// ---------- Prompt preview dialog (shared by all issues and one issue) ----------
+
+type PromptScope =
+  | { kind: "all"; result: AuditResult }
+  | { kind: "one"; result: AuditResult; finding: Finding };
+
+const ALL_LEAD =
+  "Copy these instructions and paste them into the AI coding tool you use (Claude Code, Cursor, Windsurf, Copilot, ChatGPT, or another). It works through the fixes in order, most serious first.";
+
+let dialogOpener: HTMLElement | null = null;
+
+function openPromptDialog(scope: PromptScope, opener: HTMLElement) {
+  if (!dialog) return;
+  const title = dialog.querySelector<HTMLElement>("[data-dialog-title]");
+  const lead = dialog.querySelector<HTMLElement>("[data-dialog-lead]");
+  const prompt = dialog.querySelector<HTMLElement>("[data-dialog-prompt]");
+  const meta = dialog.querySelector<HTMLElement>("[data-dialog-meta]");
+  const copy = dialog.querySelector<HTMLButtonElement>("[data-copy-dialog]");
+
+  if (scope.kind === "all") {
+    const count = scope.result.findings.filter((f) => !f.passed).length;
+    if (title) title.textContent = "How to improve your score";
+    if (lead) lead.textContent = ALL_LEAD;
+    if (prompt) prompt.textContent = allIssuesPrompt(scope.result);
+    if (meta)
+      meta.textContent = `${count} ${count === 1 ? "issue" : "issues"} found`;
+    if (copy) setButtonLabel(copy, "Copy all instructions");
+  } else {
+    const f = scope.finding;
+    // Check titles describe the passing state, e.g. "Page language is declared".
+    if (title) title.textContent = `How to pass: ${f.title}`;
+    if (lead)
+      lead.textContent =
+        "Copy this prompt and paste it into the AI coding tool you use. It covers this one issue only.";
+    // Same text the row's "Copy prompt" button puts on the clipboard.
+    if (prompt) prompt.textContent = issuePrompt(f, scope.result.url);
+    if (meta) meta.textContent = SEVERITY_LABEL[f.severity];
+    if (copy) setButtonLabel(copy, "Copy this prompt");
+  }
+
+  if (prompt) prompt.scrollTop = 0;
+  dialogOpener = opener;
+  if (!dialog.open) dialog.showModal();
 }
 
 function hostLabel(url: string): string {
@@ -137,6 +198,7 @@ function renderIssues(result: AuditResult, failed: Finding[]) {
       if (index === 0) details.open = true;
       const summary = el("summary", "disclosure-summary");
       const title = el("span", "disclosure-title", f.title);
+      title.id = `vibe-issue-${f.id}`;
       summary.append(
         title,
         el(
@@ -171,16 +233,30 @@ function renderIssues(result: AuditResult, failed: Finding[]) {
         });
         body.append(docs);
       }
+      const actions = el("div", "vibe-issue-actions");
+      const view = el(
+        "button",
+        "button button-secondary vibe-view",
+        "View prompt",
+      );
+      view.type = "button";
+      view.setAttribute("aria-haspopup", "dialog");
+      view.setAttribute("aria-describedby", title.id);
+      view.addEventListener("click", () =>
+        openPromptDialog({ kind: "one", result, finding: f }, view),
+      );
       const copy = el(
         "button",
         "button button-secondary vibe-copy",
         "Copy prompt",
       );
       copy.type = "button";
+      copy.setAttribute("aria-describedby", title.id);
       copy.addEventListener("click", () =>
         copyText(issuePrompt(f, result.url), copy),
       );
-      body.append(copy);
+      actions.append(view, copy);
+      body.append(actions);
       details.append(summary, body);
       li.append(details);
       list.append(li);
@@ -190,7 +266,10 @@ function renderIssues(result: AuditResult, failed: Finding[]) {
   }
 }
 
+let currentResult: AuditResult | null = null;
+
 function render(result: AuditResult) {
+  currentResult = result;
   const failed = result.findings.filter((f) => !f.passed);
   const passed = result.findings.filter((f) => f.passed);
 
@@ -200,7 +279,6 @@ function render(result: AuditResult) {
   setOut("likelihood", result.likelihood);
   setOut("likelihood-reason", result.likelihoodReason);
   setOut("issue-count", String(failed.length));
-  setOut("dialog-count", String(failed.length));
   setOut("passed-count", String(passed.length));
 
   const scoreBox = document.querySelector<HTMLElement>(".vibe-score");
@@ -217,8 +295,6 @@ function render(result: AuditResult) {
 
   const improve = document.querySelector<HTMLButtonElement>("[data-improve]");
   if (improve) improve.hidden = failed.length === 0;
-  const allPrompt = document.querySelector<HTMLElement>("[data-all-prompt]");
-  if (allPrompt) allPrompt.textContent = allIssuesPrompt(result);
 
   renderCategories(result);
   renderIssues(result, failed);
@@ -321,16 +397,27 @@ if (form) {
 
 const improveButton =
   document.querySelector<HTMLButtonElement>("[data-improve]");
-improveButton?.addEventListener("click", () => dialog?.showModal());
+improveButton?.addEventListener("click", () => {
+  if (currentResult)
+    openPromptDialog({ kind: "all", result: currentResult }, improveButton);
+});
 document
   .querySelector("[data-close-dialog]")
   ?.addEventListener("click", () => dialog?.close());
 dialog?.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();
 });
-const copyAll = document.querySelector<HTMLButtonElement>("[data-copy-all]");
-copyAll?.addEventListener("click", () => {
+// Escape closes a modal <dialog> natively; either way, focus goes back to
+// the button that opened it.
+dialog?.addEventListener("close", () => {
+  if (dialogOpener?.isConnected) dialogOpener.focus();
+  dialogOpener = null;
+});
+const copyDialog =
+  document.querySelector<HTMLButtonElement>("[data-copy-dialog]");
+copyDialog?.addEventListener("click", () => {
   const text =
-    document.querySelector<HTMLElement>("[data-all-prompt]")?.textContent ?? "";
-  if (text) copyText(text, copyAll);
+    dialog?.querySelector<HTMLElement>("[data-dialog-prompt]")?.textContent ??
+    "";
+  if (text) copyText(text, copyDialog);
 });

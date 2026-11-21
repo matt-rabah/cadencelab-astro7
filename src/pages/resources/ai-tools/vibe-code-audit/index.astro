@@ -246,7 +246,12 @@ if (turnstileSiteKey) {
               . <span data-out="likelihood-reason"></span>
             </p>
             <div class="vibe-summary-actions">
-              <button class="button button-primary" type="button" data-improve>
+              <button
+                class="button button-primary"
+                type="button"
+                aria-haspopup="dialog"
+                data-improve
+              >
                 Improve the score{" "}
                 <span class="vibe-count" data-out="issue-count">
                   0
@@ -292,7 +297,9 @@ if (turnstileSiteKey) {
       data-improve-dialog
     >
       <div class="vibe-dialog-header">
-        <h2 id="improve-title">How to improve your score</h2>
+        <h2 id="improve-title" data-dialog-title>
+          How to improve your score
+        </h2>
         <button
           class="vibe-dialog-close"
           type="button"
@@ -302,19 +309,22 @@ if (turnstileSiteKey) {
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <p class="vibe-dialog-lead">
+      <p class="vibe-dialog-lead" data-dialog-lead>
         Copy these instructions and paste them into the AI coding tool you use
         (Claude Code, Cursor, Windsurf, Copilot, ChatGPT, or another). It works
         through the fixes in order, most serious first.
       </p>
-      <pre class="vibe-prompt" tabindex="0" data-all-prompt></pre>
+      <pre
+        class="vibe-prompt"
+        tabindex="0"
+        aria-label="Prompt text"
+        data-dialog-prompt
+      ></pre>
       <div class="vibe-dialog-footer">
-        <button class="button button-primary" type="button" data-copy-all>
+        <button class="button button-primary" type="button" data-copy-dialog>
           Copy all instructions
         </button>
-        <p class="vibe-dialog-meta">
-          <span data-out="dialog-count">0</span> issues found
-        </p>
+        <p class="vibe-dialog-meta" data-dialog-meta></p>
       </div>
     </dialog>
 
