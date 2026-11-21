@@ -379,6 +379,15 @@ const relatedPaths = [
                 <li>{criterion}</li>
               ))}
             </ul>
+            <p class="fit-alt">
+              Not ready for an audit? Check a small export of your own data with
+              the free{" "}
+              <a href="/resources/ai-tools/crm-data-health-sampler/">
+                CRM Data Health Sampler
+              </a>
+              . It flags blank fields, repeated rows, and mixed formats, and it
+              runs entirely in your browser.
+            </p>
           </article>
         </div>
       </div>
@@ -894,6 +903,17 @@ const relatedPaths = [
     border-radius: 50%;
     background: var(--color-border-strong);
     content: "";
+  }
+
+  .fit-alt {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: var(--border-width) solid var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    text-wrap: pretty;
   }
 
   .fit-panel-strong li::before {

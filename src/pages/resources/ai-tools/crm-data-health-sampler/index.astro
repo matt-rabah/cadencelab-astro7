@@ -29,8 +29,12 @@ import "../../../../styles/crm-data-health-sampler.css";
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
-              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/resources/ai-tools/">Free tools</a>
+              </li>
               <li aria-current="page">CRM Data Health Sampler</li>
             </ol>
           </nav>
@@ -54,16 +58,30 @@ import "../../../../styles/crm-data-health-sampler.css";
           class="privacy-card"
           aria-labelledby="privacy-card-title"
         >
-          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p id="privacy-card-title" class="note-label">
+            Private by default
+          </p>
           <p>
             Your CSV stays in this browser. Cadence Lab doesn’t receive, store,
             or analyze it.
           </p>
           <dl>
-            <div><dt>Cost</dt><dd>Free</dd></div>
-            <div><dt>Signup</dt><dd>None</dd></div>
-            <div><dt>Processing</dt><dd>On your device</dd></div>
-            <div><dt>Sample limit</dt><dd>500 rows</dd></div>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free</dd>
+            </div>
+            <div>
+              <dt>Signup</dt>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Processing</dt>
+              <dd>On your device</dd>
+            </div>
+            <div>
+              <dt>Sample limit</dt>
+              <dd>500 rows</dd>
+            </div>
           </dl>
         </aside>
       </div>
@@ -114,7 +132,9 @@ import "../../../../styles/crm-data-health-sampler.css";
           tooldescription="Sample and assess CRM data quality, consistency, and field completion"
         >
           <fieldset>
-            <legend><span>01</span>Add the sample</legend>
+            <legend>
+              <span>01</span>Add the sample
+            </legend>
 
             <div class="field">
               <label for="analysis-name">
@@ -159,7 +179,9 @@ import "../../../../styles/crm-data-health-sampler.css";
               </p>
             </div>
 
-            <div class="source-divider" aria-hidden="true"><span>or</span></div>
+            <div class="source-divider" aria-hidden="true">
+              <span>or</span>
+            </div>
 
             <div class="field">
               <label for="csv-text">
@@ -175,7 +197,8 @@ import "../../../../styles/crm-data-health-sampler.css";
                 rows="10"
                 maxlength="200000"
                 spellcheck="false"
-                aria-describedby="csv-text-hint csv-privacy-hint"></textarea>
+                aria-describedby="csv-text-hint csv-privacy-hint"
+              ></textarea>
               <p id="csv-privacy-hint" class="privacy-hint">
                 Don’t include personal, confidential, regulated, or proprietary
                 information.
@@ -184,12 +207,14 @@ import "../../../../styles/crm-data-health-sampler.css";
           </fieldset>
 
           <fieldset>
-            <legend><span>02</span>Set the review rules</legend>
+            <legend>
+              <span>02</span>Set the review rules
+            </legend>
 
             <div class="field">
               <label for="missing-values">
-                Values that mean “missing” <span class="optional">Optional</span
-                >
+                Values that mean “missing”{" "}
+                <span class="optional">Optional</span>
               </label>
               <p id="missing-values-hint" class="field-hint">
                 Separate values with commas. Blank cells are always treated as
@@ -237,8 +262,8 @@ import "../../../../styles/crm-data-health-sampler.css";
 
           <div class="form-footer">
             <p>
-              <strong>Nothing is uploaded.</strong> The report is generated locally
-              and disappears when you leave or refresh this page.
+              <strong>Nothing is uploaded.</strong> The report is generated
+              locally and disappears when you leave or refresh this page.
             </p>
             <button class="button button-primary" type="submit">
               Review data health
@@ -299,19 +324,28 @@ import "../../../../styles/crm-data-health-sampler.css";
           class="feedback-status report-status"
           role="status"
           aria-live="polite"
-        >
-        </p>
+        ></p>
 
         <article class="summary-sheet report-sheet">
           <header class="sample-summary">
             <p class="summary-label report-label">Sample snapshot</p>
             <h3>What the sampler reviewed</h3>
             <dl>
-              <div><dt>Rows</dt><dd data-output="row-count"></dd></div>
-              <div><dt>Columns</dt><dd data-output="column-count"></dd></div>
-              <div><dt>Findings</dt><dd data-output="finding-count"></dd></div>
               <div>
-                <dt>Duplicate rows</dt><dd data-output="duplicate-count"></dd>
+                <dt>Rows</dt>
+                <dd data-output="row-count"></dd>
+              </div>
+              <div>
+                <dt>Columns</dt>
+                <dd data-output="column-count"></dd>
+              </div>
+              <div>
+                <dt>Findings</dt>
+                <dd data-output="finding-count"></dd>
+              </div>
+              <div>
+                <dt>Duplicate rows</dt>
+                <dd data-output="duplicate-count"></dd>
               </div>
             </dl>
           </header>
@@ -391,27 +425,102 @@ import "../../../../styles/crm-data-health-sampler.css";
         </div>
         <ol>
           <li>
-            <span>01</span><p>
+            <span>01</span>
+            <p>
               <strong>Completeness</strong> Which fields are often blank?
             </p>
           </li>
           <li>
-            <span>02</span><p>
+            <span>02</span>
+            <p>
               <strong>Duplication</strong> Which rows repeat exactly?
             </p>
           </li>
           <li>
-            <span>03</span><p>
+            <span>03</span>
+            <p>
               <strong>Consistency</strong> Which fields mix formats or casing?
             </p>
           </li>
           <li>
-            <span>04</span><p>
-              <strong>Workflow fit</strong> Which fields need ownership or business-rule
-              review?
+            <span>04</span>
+            <p>
+              <strong>Workflow fit</strong> Which fields need ownership or
+              business-rule review?
             </p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section class="tool-guide" aria-labelledby="guide-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">When to use it</p>
+          <h2 id="guide-title">Check a sample before you build on the data.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            Use it before you build a report, an automation, or an AI feature on
+            CRM data, or before you move records into a new system. A small
+            export shows early whether the fields you plan to rely on are filled
+            in and consistent.
+          </p>
+
+          <h3>What you get</h3>
+          <ul class="guide-list" role="list">
+            <li>
+              <strong>A profile of every column.</strong> How many values are
+              filled, missing, and distinct, and the format each field mostly
+              uses: email, URL, yes or no, number, date, or text.
+            </li>
+            <li>
+              <strong>Findings ranked by priority.</strong> Each one is marked
+              High, Review, or Note, with the rule that triggered it and the
+              evidence behind it. A field is flagged when at least a fifth of
+              its values are missing, and marked high priority when half or more
+              are.
+            </li>
+            <li>
+              <strong>Repeated rows and weak identifiers.</strong> Exact
+              duplicate rows, with their row numbers, and ID, key, or email
+              columns that have blanks or repeats.
+            </li>
+            <li>
+              <strong>Small inconsistencies that break matching.</strong> Extra
+              spaces around values, and the same value written with different
+              capitalization.
+            </li>
+            <li>
+              <strong>Questions for the people who own the data.</strong> Which
+              fields control routing and reporting, who owns them, which
+              duplicates are really the same customer, and whether definitions
+              and consent still fit the planned use.
+            </li>
+          </ul>
+
+          <p>
+            It reviews up to 500 rows and 75 columns from a CSV of 2 MB or less.
+            You can copy, download, or print the report.
+          </p>
+
+          <h3>When the sample points to a bigger problem</h3>
+          <p>
+            Blank or inconsistent fields usually start in the work around the
+            CRM, not in the data itself. If the same gaps keep coming back, read
+            about{" "}
+            <a href="/solutions/dirty-data/">
+              dirty CRM data and siloed pipelines
+            </a>
+            , or see what a{" "}
+            <a href="/services/crm-workflow-audit/">CRM Workflow Audit</a>{" "}
+            covers. For a handoff between teams, try the free{" "}
+            <a href="/resources/ai-tools/cx-handoff-mapper/">
+              CX Handoff Mapper
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </section>
   </main>

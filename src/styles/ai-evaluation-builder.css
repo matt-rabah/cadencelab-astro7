@@ -10,6 +10,7 @@
 
 .evaluation-page .tool-hero,
 .evaluation-page .tool-intro,
+.evaluation-page .tool-guide,
 .evaluation-page .workspace,
 .evaluation-page .evaluation-results,
 .evaluation-page .method {
@@ -129,6 +130,7 @@
 }
 
 .evaluation-page .tool-intro h2,
+.evaluation-page .tool-guide h2,
 .evaluation-page .workspace-heading h2,
 .evaluation-page .method h2 {
   max-width: 18ch;
@@ -153,6 +155,36 @@
 
 .evaluation-page .intro-copy p + p {
   margin-top: 1rem;
+}
+
+/* "When to use it" section after the method list. It keeps the page
+   background so it differs from the shaded method section above it. */
+.evaluation-page .tool-guide .intro-copy h3 {
+  margin: 2.5rem 0 0;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h4);
+}
+
+.evaluation-page .tool-guide .intro-copy h3 + p {
+  margin-top: 0.75rem;
+}
+
+.evaluation-page .guide-list {
+  margin: 1rem 0 2rem;
+  padding: 0;
+  border-bottom: 1px solid var(--color-border);
+  list-style: none;
+}
+
+.evaluation-page .guide-list li {
+  padding-block: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.evaluation-page .guide-list strong {
+  font-weight: var(--fw-semibold);
 }
 
 .evaluation-page .workspace-heading {
@@ -617,6 +649,7 @@
 @media print {
   .evaluation-page .tool-hero,
   .evaluation-page .tool-intro,
+  .evaluation-page .tool-guide,
   .evaluation-page .workspace,
   .evaluation-page .method,
   .evaluation-page .results-actions,
