@@ -105,23 +105,22 @@ When Tina displays **local mode**, content changes are written directly to the M
 
 The repository defines its MCP servers once, in `mcp_config.json`. That file uses the Windsurf / Antigravity format, where each remote server has a `serverUrl`.
 
-| Server | Use it for |
-| --- | --- |
-| `cloudflare`, `cloudflare-docs`, `cloudflare-bindings`, `cloudflare-builds`, `cloudflare-observability` | Cloudflare account, docs, bindings, builds, and logs |
-| `astro-docs` | Searching the current Astro documentation |
-| `mdn` | MDN web docs and browser compatibility (Baseline) data. MDN describes this server as experimental. |
+| Server                                                                                                  | Use it for                                                                                         |
+| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `cloudflare`, `cloudflare-docs`, `cloudflare-bindings`, `cloudflare-builds`, `cloudflare-observability` | Cloudflare account, docs, bindings, builds, and logs                                               |
+| `astro-docs`                                                                                            | Searching the current Astro documentation                                                          |
+| `mdn`                                                                                                   | MDN web docs and browser compatibility (Baseline) data. MDN describes this server as experimental. |
 
 `AGENTS.md` ("Reference sources") tells coding agents which server to use for which question.
 
-Editor-specific copies are generated from it. Do not edit them by hand:
+The VS Code copy is generated from it. Do not edit it by hand:
 
-| File | Editor | Format |
-| --- | --- | --- |
-| `mcp_config.json` | Windsurf, Antigravity (source of truth) | `mcpServers` → `serverUrl` |
-| `.vscode/mcp.json` | VS Code | `servers` → `type: "http"`, `url` |
-| `.cursor/mcp.json` | Cursor | `mcpServers` → `url` |
+| File               | Editor                                  | Format                            |
+| ------------------ | --------------------------------------- | --------------------------------- |
+| `mcp_config.json`  | Windsurf, Antigravity (source of truth) | `mcpServers` → `serverUrl`        |
+| `.vscode/mcp.json` | VS Code                                 | `servers` → `type: "http"`, `url` |
 
-VS Code and Cursor load their file from the workspace automatically. Windsurf and Antigravity read a global config rather than the repository, so copy the servers from `mcp_config.json` into that file (for Windsurf, `~/.codeium/windsurf/mcp_config.json`).
+VS Code loads its file from the workspace automatically. Windsurf and Antigravity read a global config rather than the repository, so copy the servers from `mcp_config.json` into that file (for Windsurf, `~/.codeium/windsurf/mcp_config.json`).
 
 Claude Code and Codex keep MCP servers in your user settings, not in this repository. Add the documentation servers once per machine.
 
@@ -237,14 +236,14 @@ tina/__generated__/.cache/
 
 Their purposes are:
 
-| Directory | Purpose |
-| --- | --- |
-| `.astro/` | Astro-generated metadata and types |
-| `dist/` | Production build output |
-| `node_modules/` | Installed npm packages |
-| `tina/__generated__/` | Tina GraphQL client and TypeScript types |
-| `tina/__generated__/.cache/` | Temporary Tina build cache |
-| `public/admin/` | Generated TinaCMS admin application |
+| Directory                    | Purpose                                  |
+| ---------------------------- | ---------------------------------------- |
+| `.astro/`                    | Astro-generated metadata and types       |
+| `dist/`                      | Production build output                  |
+| `node_modules/`              | Installed npm packages                   |
+| `tina/__generated__/`        | Tina GraphQL client and TypeScript types |
+| `tina/__generated__/.cache/` | Temporary Tina build cache               |
+| `public/admin/`              | Generated TinaCMS admin application      |
 
 Do not manually edit generated cache files.
 
@@ -402,13 +401,13 @@ Cloud-connected saves can create commits in the linked GitHub repository.
 
 The project uses these environment variables:
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_TINA_CLIENT_ID` | Connects the Tina admin to the TinaCloud project |
-| `TINA_READ_ONLY_TOKEN` | Provides read-only TinaCloud access during server-side builds |
-| `TINA_SEARCH_TOKEN` | Provides Tina search indexing access |
-| `PUBLIC_TURNSTILE_SITE_KEY` | Renders the public Turnstile widget on the Fit Check form |
-| `TURNSTILE_SECRET_KEY` | Verifies Fit Check Turnstile tokens in the Pages Function |
+| Variable                     | Purpose                                                       |
+| ---------------------------- | ------------------------------------------------------------- |
+| `NEXT_PUBLIC_TINA_CLIENT_ID` | Connects the Tina admin to the TinaCloud project              |
+| `TINA_READ_ONLY_TOKEN`       | Provides read-only TinaCloud access during server-side builds |
+| `TINA_SEARCH_TOKEN`          | Provides Tina search indexing access                          |
+| `PUBLIC_TURNSTILE_SITE_KEY`  | Renders the public Turnstile widget on the Fit Check form     |
+| `TURNSTILE_SECRET_KEY`       | Verifies Fit Check Turnstile tokens in the Pages Function     |
 
 Example:
 
@@ -458,15 +457,15 @@ src/pages/
 
 Key routes include:
 
-| Source file | URL |
-| --- | --- |
-| `src/pages/index.astro` | `/` |
-| `src/pages/blog/index.astro` | `/blog/` |
+| Source file                                  | URL                   |
+| -------------------------------------------- | --------------------- |
+| `src/pages/index.astro`                      | `/`                   |
+| `src/pages/blog/index.astro`                 | `/blog/`              |
 | `src/pages/blog/[year]/[month]/[slug].astro` | `/blog/YYYY/MM/slug/` |
-| `src/pages/fit-check.astro` | `/fit-check/` |
-| `src/pages/thanks.astro` | `/thanks/` |
-| `src/pages/[...slug].astro` | Dynamic page routes |
-| `src/pages/tina-island/[name].ts` | Tina island endpoint |
+| `src/pages/fit-check.astro`                  | `/fit-check/`         |
+| `src/pages/thanks.astro`                     | `/thanks/`            |
+| `src/pages/[...slug].astro`                  | Dynamic page routes   |
+| `src/pages/tina-island/[name].ts`            | Tina island endpoint  |
 
 ## Styling
 
@@ -538,21 +537,21 @@ A successful build should:
 
 All commands are run from the project root.
 
-| Command | Action |
-| --- | --- |
-| `npm install` | Install dependencies |
-| `npm run dev` | Start TinaCMS and Astro locally |
-| `npm run build` | Build TinaCMS and the Astro site |
-| `npm run preview` | Preview the production build locally |
-| `npx tsc --noEmit` | Run TypeScript validation |
-| `npm run format -- <path>` | Format an explicit file or directory with Prettier |
+| Command                          | Action                                                  |
+| -------------------------------- | ------------------------------------------------------- |
+| `npm install`                    | Install dependencies                                    |
+| `npm run dev`                    | Start TinaCMS and Astro locally                         |
+| `npm run build`                  | Build TinaCMS and the Astro site                        |
+| `npm run preview`                | Preview the production build locally                    |
+| `npx tsc --noEmit`               | Run TypeScript validation                               |
+| `npm run format -- <path>`       | Format an explicit file or directory with Prettier      |
 | `npm run format:check -- <path>` | Check an explicit file or directory without changing it |
-| `npm run mcp:sync` | Regenerate editor MCP configs from `mcp_config.json` |
-| `npm run mcp:check` | Fail if generated editor MCP configs are out of date |
-| `npm run astro -- --help` | Display Astro CLI help |
-| `git status` | Show repository changes |
-| `git diff` | Review unstaged changes |
-| `git diff --cached` | Review staged changes |
+| `npm run mcp:sync`               | Regenerate editor MCP configs from `mcp_config.json`    |
+| `npm run mcp:check`              | Fail if generated editor MCP configs are out of date    |
+| `npm run astro -- --help`        | Display Astro CLI help                                  |
+| `git status`                     | Show repository changes                                 |
+| `git diff`                       | Review unstaged changes                                 |
+| `git diff --cached`              | Review staged changes                                   |
 
 ## Git workflow
 

@@ -28,12 +28,6 @@ const targets = {
       servers.map(([name, url]) => [name, { type: "http", url }]),
     ),
   },
-  // Cursor: https://docs.cursor.com/context/model-context-protocol
-  ".cursor/mcp.json": {
-    mcpServers: Object.fromEntries(
-      servers.map(([name, url]) => [name, { url }]),
-    ),
-  },
 };
 
 let stale = false;
