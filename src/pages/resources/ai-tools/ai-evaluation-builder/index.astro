@@ -71,8 +71,12 @@ const failureModes = [
         <div class="hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol>
-              <li><a href="/">Home</a></li>
-              <li><a href="/resources/ai-tools/">Free tools</a></li>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/resources/ai-tools/">Free tools</a>
+              </li>
               <li aria-current="page">AI Evaluation Builder</li>
             </ol>
           </nav>
@@ -96,7 +100,9 @@ const failureModes = [
           class="privacy-card"
           aria-labelledby="privacy-card-title"
         >
-          <p id="privacy-card-title" class="note-label">Private by default</p>
+          <p id="privacy-card-title" class="note-label">
+            Private by default
+          </p>
           <p>
             Your answers stay in this browser. Cadence Lab doesn’t receive,
             store, or analyze them.
@@ -209,9 +215,8 @@ const failureModes = [
 
             <div class="field">
               <label for="task">
-                What task should the AI perform? <span aria-hidden="true"
-                  >*</span
-                >
+                What task should the AI perform?{" "}
+                <span aria-hidden="true">*</span>
               </label>
               <p id="task-hint" class="field-hint">
                 Include the starting information and the action expected.
@@ -222,7 +227,8 @@ const failureModes = [
                 rows="4"
                 maxlength="800"
                 aria-describedby="task-hint"
-                required></textarea>
+                required
+              ></textarea>
             </div>
 
             <div class="field">
@@ -239,7 +245,8 @@ const failureModes = [
                 rows="4"
                 maxlength="800"
                 aria-describedby="desired-result-hint"
-                required></textarea>
+                required
+              ></textarea>
             </div>
 
             <div class="field">
@@ -256,7 +263,8 @@ const failureModes = [
                 name="reference-source"
                 rows="3"
                 maxlength="600"
-                aria-describedby="reference-source-hint"></textarea>
+                aria-describedby="reference-source-hint"
+              ></textarea>
             </div>
           </fieldset>
 
@@ -273,21 +281,19 @@ const failureModes = [
                 are selected, the plan will include general quality checks.
               </p>
               <div class="failure-grid" aria-describedby="failure-modes-hint">
-                {
-                  failureModes.map((mode) => (
-                    <label>
-                      <input
-                        type="checkbox"
-                        name="failure-mode"
-                        value={mode.value}
-                      />
-                      <span>
-                        <strong>{mode.title}</strong>
-                        <small>{mode.description}</small>
-                      </span>
-                    </label>
-                  ))
-                }
+                {failureModes.map((mode) => (
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="failure-mode"
+                      value={mode.value}
+                    />
+                    <span>
+                      <strong>{mode.title}</strong>
+                      <small>{mode.description}</small>
+                    </span>
+                  </label>
+                ))}
               </div>
             </fieldset>
 
@@ -337,7 +343,8 @@ const failureModes = [
                 name="known-edge-cases"
                 rows="5"
                 maxlength="1200"
-                aria-describedby="known-edge-cases-hint"></textarea>
+                aria-describedby="known-edge-cases-hint"
+              ></textarea>
             </div>
           </fieldset>
 
@@ -373,9 +380,9 @@ const failureModes = [
                 <option value="">Choose a review pattern</option>
                 <option value="every">Every output before use</option>
                 <option value="sample">A defined sample of outputs</option>
-                <option value="exceptions"
-                  >Exceptions and flagged outputs</option
-                >
+                <option value="exceptions">
+                  Exceptions and flagged outputs
+                </option>
               </select>
             </div>
 
@@ -393,14 +400,15 @@ const failureModes = [
                 name="success-evidence"
                 rows="4"
                 maxlength="800"
-                aria-describedby="success-evidence-hint"></textarea>
+                aria-describedby="success-evidence-hint"
+              ></textarea>
             </div>
           </fieldset>
 
           <div data-band class="form-footer">
             <p>
-              <strong>Nothing is submitted.</strong> Your plan is generated locally
-              and disappears when you leave or refresh this page.
+              <strong>Nothing is submitted.</strong> Your plan is generated
+              locally and disappears when you leave or refresh this page.
             </p>
             <button class="button button-primary" type="submit">
               Build my evaluation plan
@@ -462,8 +470,7 @@ const failureModes = [
           class="plan-status"
           role="status"
           aria-live="polite"
-        >
-        </p>
+        ></p>
 
         <article class="plan-sheet">
           <header class="plan-summary">
@@ -559,32 +566,105 @@ const failureModes = [
         </div>
         <ol>
           <li>
-            <span>01</span><p>
+            <span>01</span>
+            <p>
               <strong>Task</strong> What real work must the output support?
             </p>
           </li>
           <li>
-            <span>02</span><p>
+            <span>02</span>
+            <p>
               <strong>Evidence</strong> What can a reviewer verify?
             </p>
           </li>
           <li>
-            <span>03</span><p>
+            <span>03</span>
+            <p>
               <strong>Failure</strong> Which errors matter and to whom?
             </p>
           </li>
           <li>
-            <span>04</span><p>
-              <strong>Coverage</strong> Which ordinary and difficult cases must be
-              tested?
+            <span>04</span>
+            <p>
+              <strong>Coverage</strong> Which ordinary and difficult cases must
+              be tested?
             </p>
           </li>
           <li>
-            <span>05</span><p>
-              <strong>Decision</strong> What permits continued use or requires a stop?
+            <span>05</span>
+            <p>
+              <strong>Decision</strong> What permits continued use or requires a
+              stop?
             </p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section class="tool-guide" aria-labelledby="guide-title">
+      <div class="page-container intro-layout">
+        <div>
+          <p class="eyebrow">When to use it</p>
+          <h2 id="guide-title">Write the test before the pilot starts.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            Use it before you pilot an AI assistant, summary, or routing step,
+            or when a vendor demo looks good and you need to decide what to
+            check next. Agreeing on what “good” means first stops a pilot from
+            being judged on whichever examples happen to look best.
+          </p>
+
+          <h3>What you get</h3>
+          <ul class="guide-list" role="list">
+            <li>
+              <strong>A rubric for the failures you choose.</strong> Pass,
+              review, and fail definitions for each one: incorrect, incomplete,
+              unsupported, unsafe or inappropriate, privacy failure, unclear or
+              off-brand, and wrong action or routing.
+            </li>
+            <li>
+              <strong>Test cases beyond the easy ones.</strong> A typical
+              request, one with missing information, an ambiguous one,
+              conflicting sources, a request just outside the approved scope,
+              and any edge cases you already know about.
+            </li>
+            <li>
+              <strong>Review rules.</strong> Who judges disputed results, how
+              outputs are sampled, and what to keep together for each test: the
+              prompt, reference answer, system version and settings, the
+              decision, and the reason for it.
+            </li>
+            <li>
+              <strong>Stop conditions.</strong> The situations where use should
+              pause or stop, set out before anyone is invested in the result.
+            </li>
+          </ul>
+
+          <p>
+            Everything stays in your browser. You can copy, download, or print
+            the plan and share it with the people who will run the test.
+          </p>
+
+          <h3>Before and after the evaluation</h3>
+          <p>
+            If you haven’t decided whether the use case is worth testing, start
+            with the free{" "}
+            <a href="/resources/ai-tools/use-case-stress-test/">
+              AI Use Case Stress Test
+            </a>
+            . For a full check of the workflow, data, oversight, and adoption
+            plan, see the{" "}
+            <a href="/services/ai-service-readiness-review/">
+              AI Service Readiness Review
+            </a>
+            . If outputs are already inconsistent, read about{" "}
+            <a href="/ai-tooling/hallucination/">
+              AI hallucination and variance testing
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </section>
   </main>
