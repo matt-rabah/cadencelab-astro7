@@ -305,6 +305,12 @@
   color: var(--color-blue);
 }
 
+.vibe-issue-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .vibe-all-clear {
   margin-top: 2rem;
   font-size: var(--fs-h4);
@@ -346,6 +352,8 @@
 .vibe-dialog {
   width: min(48rem, calc(100% - 2rem));
   max-height: min(90dvh, 52rem);
+  /* The global reset zeroes margins; auto restores the native centring. */
+  margin: auto;
   padding: 0;
   overflow: hidden;
   border: var(--border-width) solid var(--color-border-strong);
@@ -416,6 +424,7 @@
 
 .vibe-dialog-footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
   align-items: center;
